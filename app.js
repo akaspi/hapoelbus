@@ -1,6 +1,8 @@
 var express = require('express');
 var path = require('path');
-var port = 1234;
+var config = require('./config.js')
+
+var port = config.port;
 var app = express();
 
 app.use('/', express.static(path.join(__dirname, 'public')));
