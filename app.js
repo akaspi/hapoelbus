@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var config = require('./config.json')
+var config = require('./config.js')
 
 var port = config.port;
 var app = express();
