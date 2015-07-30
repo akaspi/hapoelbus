@@ -2,11 +2,15 @@ requirejs.config({
     baseUrl: "src",
     paths: {
       react: "https://fb.me/react-0.13.3",
-      JSXTransformer: "https://fb.me/JSXTransformer-0.13.3"
+      lodash: "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash"
+    },
+    shim: {
+      react: { exports: 'React' },
+      lodash: { exports: '_' }
     }
 });
 
-requirejs(['react', 'components/helloWorld'], function(React, HelloWorld) {
+requirejs(['react', 'components/helloWorld', 'lodash'], function(React, HelloWorld, _) {
   var element = React.createElement(HelloWorld);
   React.render(element, document.getElementById('view'));
 });
