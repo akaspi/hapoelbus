@@ -12,7 +12,7 @@ requirejs.config({
     }
 });
 
-requirejs(['react', 'components/helloWorld'], function(React, HelloWorld) {
+requirejs(['react', 'components/HelloWorld/helloWorld'], function(React, HelloWorld) {
   var element = React.createElement(HelloWorld);
   React.render(element, document.getElementById('view'));
 });

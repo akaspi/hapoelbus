@@ -1,8 +1,23 @@
 var gulp = require('gulp');
 
+var bases = {
+ app: 'app/',
+ dist: 'dist/',
+};
+
+var paths = {
+ scripts: ['scripts/**/*.js', '!scripts/libs/**/*.js'],
+ libs: ['scripts/libs/jquery/dist/jquery.js', 'scripts/libs/underscore/underscore.js', 'scripts/backbone/backbone.js'],
+ styles: ['styles/**/*.css'],
+ html: ['index.html', '404.html'],
+ images: ['images/**/*.png'],
+ extras: ['crossdomain.xml', 'humans.txt', 'manifest.appcache', 'robots.txt', 'favicon.ico'],
+};
+
+
 gulp.task('sass', function () {
   var sass = require('gulp-sass');
-  gulp.src('./public/main.scss')
+  gulp.src('./public/app.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/'));
 });
