@@ -28,6 +28,9 @@ define(['lodash', 'api/store'], function(_, store) {
     loginWithFacebook: function(onSuccess, onError) {
       store.authWithOAuthPopup('facebook', onAuthActionComplete.bind(null, onSuccess, onError), { scope: 'email' });
     },
+    loginWithGoogle: function(onSuccess, onError) {
+      store.authWithOAuthPopup('google', onAuthActionComplete.bind(null, onSuccess, onError), { scope: 'email' });
+    },
     isLoggedIn: function() {
       return !!store.getAuth();
     },
