@@ -6,8 +6,10 @@ define(['lodash', 'api/store'], function(_, store) {
 
   function onAuthActionComplete(onSuccess, onError, errorData, authData) {
       if (errorData) {
+        console.log(errorData);
         onError();
       } else {
+        console.log(authData);
         onSuccess();
       }
   }
@@ -36,6 +38,16 @@ define(['lodash', 'api/store'], function(_, store) {
     },
     logut: function() {
       store.unauth();
+    },
+    resetPasswordRequest: function(email, onSuccess, onError) {
+      store.resetPassword(email, onAuthActionComplete.bind(null, onSuccess, onError));
+    },
+    changePassword: function(email, oldOrTempPassword, newPassword, onSuccess, onError) {
+      store.changePassword({
+        email: email,
+        oldPassword: oldOrTempPassword,
+        newPassword: newPassword
+      }, onAuthActionComplete.bind(null, onSuccess, onError));
     }
   };
 });
