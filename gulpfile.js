@@ -26,6 +26,19 @@ gulp.task('sass:watch', function () {
   gulp.watch('./**/*.scss', ['sass']);
 });
 
+var rt = require('gulp-react-templates');
+
+gulp.task('rt', function() {
+    gulp.src('./public/src/**/*.rt')
+        .pipe(rt({modules: 'amd'}))
+        .pipe(gulp.dest('./public/src'));
+});
+
+gulp.task('dev', function() {
+  gulp.watch('./**/*.scss', ['sass']);
+  gulp.watch('./**/*.rt', ['rt']);
+});
+
 // var react = require('gulp-react');
 // gulp.task('transformJSX', function (x) {
 //     return gulp.src('**/*.jsx', { cwd: './public/src' })
