@@ -1,4 +1,4 @@
-@import "./src/components/HelloWorld/helloWorld";
+@import "./src/components/app/main";
 
 body, html {
   height: 100%;
@@ -8,4 +8,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
+}
+
+#view{
+  width: 100vw;
+  height: 100vh;
+
 }

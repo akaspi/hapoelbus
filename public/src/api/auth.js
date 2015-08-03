@@ -6,10 +6,8 @@ define(['lodash', 'api/store'], function(_, store) {
 
   function onAuthActionComplete(onSuccess, onError, errorData, authData) {
       if (errorData) {
-        console.log(errorData);
         onError();
       } else {
-        console.log(authData);
         onSuccess();
       }
   }
@@ -27,16 +25,13 @@ define(['lodash', 'api/store'], function(_, store) {
         password: password
       }, onAuthActionComplete.bind(null, onSuccess, onError));
     },
-    loginWithFacebook: function(onSuccess, onError) {
-      store.authWithOAuthPopup('facebook', onAuthActionComplete.bind(null, onSuccess, onError), { scope: 'email' });
-    },
-    loginWithGoogle: function(onSuccess, onError) {
-      store.authWithOAuthPopup('google', onAuthActionComplete.bind(null, onSuccess, onError), { scope: 'email' });
+    socialLogin: function(provider, onSuccess, onError) {
+      store.authWithOAuthPopup(provider, onAuthActionComplete.bind(null, onSuccess, onError), { scope: 'email' });
     },
     isLoggedIn: function() {
       return !!store.getAuth();
     },
-    logut: function() {
+    logOut: function() {
       store.unauth();
     },
     resetPasswordRequest: function(email, onSuccess, onError) {

@@ -1,0 +1,44 @@
+.section{
+  background: gray;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  
+}
+.login-container{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+.facebook-button{
+  background: navy;
+  color: white;
+}
+
+.google-button{
+  background: red;
+  color: white;
+}
+
+.login-container * {
+  margin: 5px 0;
+  height: 30px;
+}
+.separator-container{
+  display: flex;
+}
+.separator-container .flex {
+  flex: 1;
+}
+
+.separator-container .border {
+  border-bottom: 1px solid black;
+  display: block;
+  height: 5px;
+}
+
+.separator-container .text{
+ flex: 2;
+}
