@@ -1,26 +1,27 @@
+<rt-require dependency="../userData/userData" as="userData"/>
 <div>
-<div rt-if="this.state.isLoggedIn">Hello Shraga
-<button onClick={this.logOut}>log out</button>
-</div>
-<div rt-if="!this.state.isLoggedIn">
-<section class="section" >
-<div class="login-container">
-<div class="google-button" onClick="()=>this.socialLogin('google')">
-  google
-</div>
-<div class="facebook-button" onClick="()=>this.socialLogin('facebook')">
-  facebook
-</div>
-<div class="separator-container">
-  <div class="flex"><span class="border"></span></div>
-  <div class="text">או באמצעות דואל</div>
-  <div class="flex"><span class="border"></span></div>
-</div>
-<input type="text" valueLink={this.linkState('user')} placeholder="Username" />
-<input type="password" valueLink={this.linkState('password')} placeholder="Password" />
-<button onClick={this.registerUser}>התחבר</button>
-</div>
+    <div rt-if="this.state.isLoggedIn">
+        <userData></userData>
+    </div>
+    <div rt-if="!this.state.isLoggedIn">
+        <section class="section">
+            <div class="login-container">
+                <div class="google-button" onClick="()=>this.socialLogin('google')">
+                    google
+                </div>
+                <div class="facebook-button" onClick="()=>this.socialLogin('facebook')">
+                    facebook
+                </div>
+                <div class="separator-container">
+                    <div class="flex"><span class="border"></span></div>
+                    <div class="text">או באמצעות דואל</div>
+                    <div class="flex"><span class="border"></span></div>
+                </div>
+                <input type="text" valueLink={this.linkState('user')} placeholder="Username"/>
+                <input type="password" valueLink={this.linkState('password')} placeholder="Password"/>
+                <button onClick={this.registerUser}>התחבר</button>
+            </div>
 
-</section>
-</div>
+        </section>
+    </div>
 </div>

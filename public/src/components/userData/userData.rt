@@ -1,0 +1,4 @@
+<div>
+               Hello shraga2
+    <button onClick="{this.logOut}">logOut</button>
+</div>
