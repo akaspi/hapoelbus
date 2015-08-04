@@ -3,7 +3,7 @@ define(['react', '../../stores/authStore', '../../actions/authAction', './main.r
         mixins: [ React.addons.LinkedStateMixin ],
         getInitialState: function () {
             return {
-                isLoggedIn: auth.isLoggedIn(),
+                isLoggedIn: false,
                 user: '',
                 password: ''
             };
