@@ -64,6 +64,9 @@ define(['lodash', '../dispatcher/dispatcher', '../api/auth'], function (_, dispa
     }
 
     return {
+        getAll: function() {
+          return storeData;
+        },
         registerToChange: function (fn) {
             listeners.push(fn);
         }
