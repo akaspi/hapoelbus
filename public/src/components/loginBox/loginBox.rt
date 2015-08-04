@@ -1,0 +1,15 @@
+<div class="login-box">
+    <div class="login-input social-button facebook-button has-click-action" onClick="()=>this.onSocialLogin('facebook')">
+        <span>התחבר באמצעות פייסבוק</span>
+    </div>
+    <div class="login-input social-button google-button has-click-action" onClick="()=>this.onSocialLogin('google')">
+        <span>התחבר באמצעות גוגל</span>
+    </div>
+    <div class="login-input login-or-separator">
+        <span>או באמצעות דוא״ל</span>
+        <hr/>
+    </div>
+    <input type="text" class="login-input" valueLink={this.linkState('email')} placeholder="אימייל"/>
+    <input type="password" class="login-input" valueLink={this.linkState('password')} placeholder="ססמא"/>
+    <div class="login-input login-button has-click-action" onClick="{this.onLogin}">התחבר</div>
+</div>

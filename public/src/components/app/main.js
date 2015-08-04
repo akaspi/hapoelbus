@@ -1,11 +1,9 @@
-define(['react', '../../stores/authStore', '../../actions/authAction', './main.rt'], function (React, authStore, authAction, template) {
+define(['react', '../../stores/authStore', './main.rt'], function (React, authStore, template) {
     return React.createClass({
         mixins: [ React.addons.LinkedStateMixin ],
         getInitialState: function () {
             return {
-                isLoggedIn: authStore.getAll().isLoggedIn,
-                user: '',
-                password: ''
+                isLoggedIn: authStore.getAll().isLoggedIn
             };
         },
         componentDidMount: function () {
@@ -14,12 +12,6 @@ define(['react', '../../stores/authStore', '../../actions/authAction', './main.r
                     isLoggedIn: data.isLoggedIn
                 });
             }.bind(this))
-        },
-        registerUser: function () {
-            authAction.createUser(this.state.user, this.state.password);
-        },
-        socialLogin: function (provider) {
-            authAction.socialLogin(provider);
         },
         render: template
     });
