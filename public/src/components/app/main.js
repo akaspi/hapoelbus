@@ -8,9 +8,8 @@ define(['react', '../../stores/authStore', './main.rt'], function (React, authSt
         },
         componentDidMount: function () {
             authStore.registerToChange(function (data) {
-                this.setState({
-                    isLoggedIn: data.isLoggedIn
-                });
+                var newState = _.pick(data, ['isLoggedIn', 'userData']);
+                this.setState(newState);
             }.bind(this))
         },
         render: template

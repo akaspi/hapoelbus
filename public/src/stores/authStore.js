@@ -9,7 +9,7 @@ define(['lodash', '../dispatcher/dispatcher', '../api/auth'], function (_, dispa
     }
 
     var storeData = {
-        isLoggedIn: false
+        isLoggedIn: auth.isLoggedIn()
     };
 
     dispatcher.register(function(actionData) {
