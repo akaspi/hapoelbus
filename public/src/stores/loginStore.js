@@ -71,6 +71,11 @@ define(['lodash', '../dispatcher/dispatcher', '../api/auth', '../actions/account
         },
         registerToChange: function (fn) {
             listeners.push(fn);
+        },
+        removeChangeListener: function(fn) {
+            listeners = _.reject(listeners, function(listener) {
+                return _.isEqual(listener, fn);
+            });
         }
     };
 });

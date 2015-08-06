@@ -5,27 +5,15 @@ define(['../dispatcher/dispatcher'], function (dispatcher) {
     }
 
     return {
-        createUser: function (email, password) {
+        fetchAccountData: function (){
             dispatchAction({
-                type: 'CREATE_USER',
-                email: email,
-                password: password
+                type: 'FETCH_ACCOUNT_DATA'
             });
         },
         createAccount: function (accountData) {
             dispatchAction({
                 type: 'CREATE_ACCOUNT',
                 accountData: accountData
-            });
-        },
-        logOut: function() {
-            dispatchAction({
-                type: 'LOGOUT_USER'
-            });
-        },
-        fetchAccountData: function (){
-            dispatchAction({
-               type: 'FETCH_ACCOUNT_DATA'
             });
         }
     };

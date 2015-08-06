@@ -1,11 +1,11 @@
 <rt-require dependency="../accountData/accountData" as="accountData"/>
 
 <div>
-    <div rt-if="this.state.isFetchingInitialData">Loading....</div>
-    <div rt-if="!this.state.isFetchingInitialData && !this.hasAccount()" class="create-account">
+    <div rt-if="this.state.isFetchingData">Loading....</div>
+    <div rt-if="!this.state.isFetchingData && !this.hasAccount()" class="create-account">
         <accountData />
     </div>
-    <div rt-if="!this.state.isFetchingInitialData && this.hasAccount()" class="dashboard">Dashboard!!!!!!! :)
+    <div rt-if="!this.state.isFetchingData && this.hasAccount()" class="dashboard">Dashboard!!!!!!! :)
         <button onClick="{this.logout}">Logout</button>
     </div>
 </div>

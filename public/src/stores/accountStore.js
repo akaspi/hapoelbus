@@ -9,29 +9,23 @@ define(['lodash', '../dispatcher/dispatcher', '../api/accounts', '../api/auth'],
     }
 
     var storeData = {
-        isFetchingInitialData: false,
+        isFetchingData: false,
         accountData: null
-    };
-
-    function fetchAccountData() {
-        notifyChange({isFetchingInitialData: true});
-        accounts.getAccountData(auth.getUserId(), function (accountData) {
-            if (accountData) {
-                notifyChange({isFetchingInitialData: false, accountData: accountData});
-            }
-        });
     };
 
     dispatcher.register(function (actionData) {
         switch (actionData.type) {
+            case 'FETCH_ACCOUNT_DATA':
+                handleFetchAccountData();
+                break;
             case 'CREATE_ACCOUNT':
                 handleCreateAccount(actionData);
                 break;
-            case 'FETCH_ACCOUNT_DATA':
-                fetchAccountData();
+            case 'UPDATE_ACCOUNT':
+                handleUpdateAccount(actionData);
                 break;
             case 'USER_LOGOUT':
-                notifyChange({isFetchingInitialData: false, accountData: null});
+                notifyChange({accountData: null});
                 break;
         }
     });
@@ -41,11 +35,22 @@ define(['lodash', '../dispatcher/dispatcher', '../api/accounts', '../api/auth'],
         notifyAll();
     }
 
+    function handleFetchAccountData() {
+        notifyChange({isFetchingData: true});
+        accounts.getAccountData(auth.getUserId(), function (accountData) {
+            notifyChange({isFetchingData: false, accountData: accountData});
+        });
+    }
+
     function handleCreateAccount(actionData) {
         var accountData = actionData.accountData;
         accounts.createAccount(auth.getUserId(), accountData, function () {
             notifyChange({accountData: accountData});
         });
+    }
+
+    function handleUpdateAccount(actionData) {
+
     }
 
     return {
@@ -54,6 +59,11 @@ define(['lodash', '../dispatcher/dispatcher', '../api/accounts', '../api/auth'],
         },
         registerToChange: function (fn) {
             listeners.push(fn);
+        },
+        removeChangeListener: function(fn) {
+            listeners = _.reject(listeners, function(listener) {
+                return _.isEqual(listener, fn);
+            });
         }
     };
 });

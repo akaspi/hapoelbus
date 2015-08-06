@@ -2,21 +2,20 @@ define(['react', '../../stores/loginStore', '../../actions/accountAction', './ro
     return React.createClass({
         mixins: [React.addons.LinkedStateMixin],
         getInitialState: function () {
+            var loginStoreData = loginStore.getAll();
             return {
-                isLoggedIn: loginStore.getAll().isLoggedIn
+                isLoggedIn: loginStoreData.isLoggedIn
             };
         },
         componentDidMount: function () {
-            if (this.state.isLoggedIn) {
-                accountAction.fetchAccountData();
-            }
-            loginStore.registerToChange(function (data) {
-                var newState = _.pick(data, ['isLoggedIn']);
-                if (!this.state.isLoggedIn && newState.isLoggedIn) {
-                    accountAction.fetchAccountData();
-                }
-                this.setState(newState);
-            }.bind(this))
+            loginStore.registerToChange(this.onLoginStoreDataChanged);
+        },
+        onLoginStoreDataChanged: function(loginStoreData) {
+            var newState = _.pick(loginStoreData, _.keys(this.state));
+            this.setState(newState);
+        },
+        componentWillUnmount: function() {
+            loginStore.removeChangeListener(this.onLoginStoreDataChanged);
         },
         render: template
     });
