@@ -17,7 +17,7 @@ requirejs.config({
     }
 });
 
-requirejs(['react', 'components/app/main'], function(React, main) {
+requirejs(['react', 'components/root/root'], function(React, main) {
   var element = React.createElement(main);
   React.render(element, document.getElementById('view'));
 });

@@ -1,0 +1,11 @@
+<div>
+    <input type="text" class="login-input" valueLink={this.linkState('email')} placeholder="אימייל"/>
+
+    <input type="text" class="login-input" valueLink={this.linkState('displayName')} placeholder="שם מלא"/>
+
+    <input type="text" class="login-input" valueLink={this.linkState('phone')} placeholder="טלפון"/>
+
+    <input type="text" class="login-input" valueLink={this.linkState('maxSeats')} placeholder="מס׳ מקומות"/>
+
+    <button onClick="{this.handleCreateAccount}">צור חשבון</button>
+</div>

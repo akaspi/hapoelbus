@@ -1,9 +1,9 @@
-<rt-require dependency="../userData/userData" as="userData"/>
+<rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../loginBox/loginBox" as="loginBox"/>
 
 <div>
     <div rt-if="this.state.isLoggedIn">
-        <userData></userData>
+        <myAccount/>
     </div>
     <div rt-if="!this.state.isLoggedIn">
         <loginBox />

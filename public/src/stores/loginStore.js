@@ -1,4 +1,4 @@
-define(['lodash', '../dispatcher/dispatcher', '../api/auth'], function (_, dispatcher, auth) {
+define(['lodash', '../dispatcher/dispatcher', '../api/auth', '../actions/accountAction'], function (_, dispatcher, auth, accountAction) {
 
     var listeners = [];
 
@@ -35,7 +35,7 @@ define(['lodash', '../dispatcher/dispatcher', '../api/auth'], function (_, dispa
     }
 
     function handleCreateUser(actionData) {
-        auth.createUser(actionData.username, actionData.password, function () {
+        auth.createUser(actionData.email, actionData.password, function () {
             handleLogin(actionData);
         }, function() {
 
@@ -43,8 +43,9 @@ define(['lodash', '../dispatcher/dispatcher', '../api/auth'], function (_, dispa
     }
 
     function handleLogin(actionData) {
-        auth.login(actionData.username, actionData.password, function () {
+        auth.login(actionData.email, actionData.password, function () {
             notifyChange({ isLoggedIn: true });
+           // accountAction.fetchAccountData();
         }, function() {
 
         })
@@ -53,6 +54,7 @@ define(['lodash', '../dispatcher/dispatcher', '../api/auth'], function (_, dispa
     function handleSocialLogin(actionData) {
         auth.socialLogin(actionData.provider, function () {
             notifyChange({ isLoggedIn: true });
+        //    accountAction.fetchAccountData();
         }, function() {
 
         })

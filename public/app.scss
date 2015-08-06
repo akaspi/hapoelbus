@@ -1,4 +1,4 @@
-@import "./src/components/app/main";
+@import "./src/components/root/root";
 @import "./src/components/loginBox/loginBox";
 @import url(http://fonts.googleapis.com/css?family=Arimo:400,700&subset=hebrew);
 
@@ -27,6 +27,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('./src/sources/landing_background.jpg');
-  background-size: cover;
+  //background-image: url('./src/sources/landing_background.jpg');
+  //background-size: cover;
 }

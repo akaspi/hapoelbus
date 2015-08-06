@@ -5,13 +5,6 @@ define(['../dispatcher/dispatcher'], function(dispatcher) {
     }
 
     return {
-        createUser: function(username, password) {
-            dispatchAction({
-                type: 'CREATE_USER',
-                username: username,
-                password: password
-            });
-        },
       login: function(username, password) {
           dispatchAction({
               type: 'LOGIN_USER',
@@ -24,11 +17,7 @@ define(['../dispatcher/dispatcher'], function(dispatcher) {
                 type: 'SOCIAL_LOGIN',
                 provider: provider
             });
-        },
-        logOut: function() {
-            dispatchAction({
-                type: 'LOGOUT_USER'
-            });
         }
+
     };
 });

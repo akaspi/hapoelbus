@@ -1,4 +1,4 @@
-define(['react', '../../actions/authAction', './loginBox.rt'], function(React, authAction, template) {
+define(['react', '../../actions/loginAction', '../../actions/accountAction', './loginBox.rt'], function(React, loginAction, accountAction, template) {
     'use strict';
 
     return React.createClass({
@@ -10,10 +10,13 @@ define(['react', '../../actions/authAction', './loginBox.rt'], function(React, a
           };
         },
         onLogin: function() {
-            authAction.login(this.state.email, this.state.password);
+            loginAction.login(this.state.email, this.state.password);
+        },
+        onCreateUser: function() {
+            accountAction.createUser(this.state.email, this.state.password);
         },
         onSocialLogin: function(provider) {
-            authAction.socialLogin(provider);
+            loginAction.socialLogin(provider);
         },
         render: template
     });

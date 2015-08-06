@@ -11,5 +11,5 @@
     </div>
     <input type="text" class="login-input" valueLink={this.linkState('email')} placeholder="אימייל"/>
     <input type="password" class="login-input" valueLink={this.linkState('password')} placeholder="ססמא"/>
-    <div class="login-input login-button has-click-action" onClick="{this.onLogin}">התחבר</div>
+    <div class="login-input login-button has-click-action" onClick="{this.onCreateUser}">צור משתמש</div>
 </div>
