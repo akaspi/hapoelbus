@@ -3,7 +3,12 @@
 var _ = require('lodash');
 
 var defaults = {
-    port: 1234
+    port: 1234,
+    services: {
+        mail: {
+            key: 1234
+        }
+    }
 };
 
 var config = {};

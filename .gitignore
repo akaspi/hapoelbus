@@ -1,6 +1,7 @@
 node_modules/
+.idea/
 config.json
 npm-debug.log
-.idea/
-public/app.css
+client/dist/
 *.rt.js
+*.css

@@ -2,10 +2,10 @@
 <rt-require dependency="../loginBox/loginBox" as="loginBox"/>
 
 <div>
-    <div rt-if="this.state.isLoggedIn">
+    <div rt-if="this.state.isLoggedIn" key="key-my-account">
         <myAccount/>
     </div>
-    <div rt-if="!this.state.isLoggedIn">
+    <div rt-if="!this.state.isLoggedIn" key="key-login-box">
         <loginBox />
     </div>
 </div>

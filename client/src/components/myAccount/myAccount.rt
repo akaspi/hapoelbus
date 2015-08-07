@@ -1,0 +1,11 @@
+<rt-require dependency="../accountData/accountData" as="accountData"/>
+
+<div>
+    <div rt-if="this.state.isFetchingData" key="key-loading-my-account">Loading....</div>
+    <div rt-if="!this.state.isFetchingData && !this.hasAccount()"  key="key-account-data" class="create-account">
+        <accountData />
+    </div>
+    <div rt-if="!this.state.isFetchingData && this.hasAccount()" key="key-dashboard" class="dashboard">Dashboard!!!!!!! :)
+        <button onClick="{this.logout}">Logout</button>
+    </div>
+</div>
