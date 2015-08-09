@@ -48,7 +48,8 @@ gulp.task('webpack', function (done) {
         },
         output: {
             path: paths.dist,
-            filename: "bundle.js"
+            filename: "bundle.js",
+            pathinfo: true
         },
         plugins: [
             new webpack.optimize.CommonsChunkPlugin("vendor", 'vendor.bundle.js', Infinity)
