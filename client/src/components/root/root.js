@@ -1,12 +1,12 @@
 'use strict';
 
 var React = require('react/addons');
-
+var muiMixin = require('../mixins/mui-mixin');
 var template = require('./root.rt.js');
 var loginStore = require('../../stores/loginStore');
 
 var Root = React.createClass({
-    mixins: [React.addons.LinkedStateMixin],
+    mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function () {
         var loginStoreData = loginStore.getAll();
         return {
@@ -22,6 +22,12 @@ var Root = React.createClass({
     },
     componentWillUnmount: function() {
         loginStore.removeChangeListener(this.onLoginStoreDataChanged);
+    },
+    handleOpenLoginDialog: function (){
+        this.refs.loginDialog.show();
+    },
+    handleCloseLoginDialog: function (){
+      this.refs.loginDialog.dismiss();
     },
     render: template
 });

@@ -1,24 +1,10 @@
 .login-box {
-  width: 350px;
-  padding: 20px 35px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  border: 10px solid rgba(0, 0, 0, 0.6);
-  border-radius: 5px;
 
   .login-input {
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-family: 'Arimo', sans-serif;
-    margin-top: 8px;
-    box-sizing: border-box;
-
-    &:first-child {
-      margin-top: 0;
-    }
 
     &.has-click-action {
       cursor: pointer;
@@ -41,6 +27,17 @@
     }
   }
 
+  .centre-line {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+
+    span{
+      background:#fff; padding:0 10px;
+    }
+  }
   .login-or-separator {
     span {
       background-color: #ffffff;

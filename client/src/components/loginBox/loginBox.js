@@ -2,11 +2,11 @@
 
 var React = require('react/addons');
 var template = require('./loginBox.rt.js');
-
+var muiMixin = require('../mixins/mui-mixin');
 var loginAction = require('../../actions/loginAction');
 
 var LoginBox =  React.createClass({
-    mixins: [ React.addons.LinkedStateMixin ],
+    mixins: [ React.addons.LinkedStateMixin, muiMixin ],
     getInitialState: function() {
         return {
             email: '',

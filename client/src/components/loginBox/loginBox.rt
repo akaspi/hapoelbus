@@ -1,15 +1,19 @@
+<rt-require dependency="material-ui" as="mui"/>
+
 <div class="login-box">
-    <div class="login-input social-button facebook-button has-click-action" onClick="()=>this.onSocialLogin('facebook')">
-        <span>התחבר באמצעות פייסבוק</span>
+    <mui.FlatButton fullWidth="{true}" backgroundColor="#3F51B5" label="התחבר באמצעות Facebook"
+                    onClick="()=>this.onSocialLogin('facebook')"/>
+
+    <mui.FlatButton fullWidth="{true}" label="התחבר באמצעות Google" onClick="()=>this.onSocialLogin('google')"/>
+
+    <div>
+        <h4 class="centre-line"><span>או באמצעות דוא״ל</span></h4>
     </div>
-    <div class="login-input social-button google-button has-click-action" onClick="()=>this.onSocialLogin('google')">
-        <span>התחבר באמצעות גוגל</span>
-    </div>
-    <div class="login-input login-or-separator">
-        <span>או באמצעות דוא״ל</span>
-        <hr/>
-    </div>
-    <input type="text" class="login-input" valueLink={this.linkState('email')} placeholder="אימייל"/>
-    <input type="password" class="login-input" valueLink={this.linkState('password')} placeholder="ססמא"/>
-    <div class="login-input login-button has-click-action" onClick="{this.onCreateUser}">צור משתמש</div>
+    <mui.TextField type="text" hintText="דואר אלקטרוני" fullWidth="{true}"
+                   valueLink="{this.linkState('email')}"/>
+    <mui.TextField type="password" hintText="סיסמא" fullWidth="{true}"
+                   valueLink="{this.linkState('password')}"/>
+
+    <mui.FlatButton fullWidth="{true}" label="צור משתמש" onClick="{this.onCreateUser}"/>
+
 </div>

@@ -4,5 +4,5 @@
 
     window.React = React;
 
-    React.render(React.createElement(RootComponent), document.getElementById('view'));
+    React.render(React.createElement(RootComponent), document.body);
 })();

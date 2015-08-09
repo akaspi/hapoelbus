@@ -1,44 +1,24 @@
-.section{
-  background: gray;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  direction: rtl;
-  
-}
-.login-container{
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-}
-.facebook-button{
-  background: navy;
-  color: white;
-}
-
-.google-button{
+.root-container {
   background: red;
-  color: white;
+  height: 100%;
 }
 
-.login-container * {
-  margin: 5px 0;
-  height: 30px;
-}
-.separator-container{
+header {
+  background: #000;
   display: flex;
-}
-.separator-container .flex {
-  flex: 1;
-}
+  flex-direction: row-reverse;
+  height: 90px;
+  align-items: center;
 
-.separator-container .border {
-  border-bottom: 1px solid black;
-  display: block;
-  height: 5px;
-}
-
-.separator-container .text{
- flex: 2;
+  .title {
+    flex: 1;
+    color: #fff;
+    font-size: 45px;
+    text-align: center;
+  }
+  .header-button-container {
+    position: absolute;
+    top: 35px;
+    right: 20px;
+  }
 }

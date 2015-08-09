@@ -1,11 +1,23 @@
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../loginBox/loginBox" as="loginBox"/>
+<rt-require dependency="material-ui" as="mui"/>
 
-<div>
-    <div rt-if="this.state.isLoggedIn" key="key-my-account">
-        <myAccount/>
-    </div>
-    <div rt-if="!this.state.isLoggedIn" key="key-login-box">
-        <loginBox />
+<div rt-class="{'root-container': !this.state.isLoggedIn}">
+    <header>
+        <div class="title">
+            <span>hapoelBus</span>
+        </div>
+        <div class="header-button-container">
+            <mui.RaisedButton label="login" onClick="{this.handleOpenLoginDialog}"/>
+        </div>
+    </header>
+
+    <div>
+        <div rt-if="this.state.isLoggedIn" key="key-my-account">
+            <myAccount/>
+        </div>
+        <mui.Dialog ref="loginDialog" contentStyle="{{'width':'360'}}" actions="{this.dialogActions}">
+            <loginBox/>
+        </mui.Dialog>
     </div>
 </div>
