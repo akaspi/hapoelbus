@@ -44,7 +44,7 @@ gulp.task('webpack', function (done) {
     webpack({
         entry: {
             app: paths.src + "/main.js",
-            vendor: ['react/addons', 'lodash', 'firebase']
+            vendor: ['react/addons', 'lodash', 'firebase', 'material-ui']
         },
         output: {
             path: paths.dist,
