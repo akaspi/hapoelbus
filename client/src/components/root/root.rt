@@ -16,7 +16,7 @@
         <div rt-if="this.state.isLoggedIn" key="key-my-account">
             <myAccount/>
         </div>
-        <mui.Dialog ref="loginDialog" contentStyle="{{'width':'360'}}" actions="{this.dialogActions}">
+        <mui.Dialog ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
             <loginBox/>
         </mui.Dialog>
     </div>

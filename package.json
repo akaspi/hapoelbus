@@ -8,6 +8,7 @@
     "material-ui": "^0.10.4",
     "path": "^0.11.14",
     "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7",
     "sendgrid": "^1.9.2"
   },
   "scripts": {
