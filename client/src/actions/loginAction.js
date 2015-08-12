@@ -14,10 +14,10 @@ module.exports = {
             password: password
         });
     },
-    login: function (username, password) {
+    login: function (email, password) {
         dispatchAction({
             type: 'LOGIN_USER',
-            username: username,
+            email: email,
             password: password
         });
     },
