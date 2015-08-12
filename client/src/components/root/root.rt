@@ -1,5 +1,5 @@
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
-<rt-require dependency="../loginBox/loginBox" as="loginBox"/>
+<rt-require dependency="../authBox/authBox" as="authBox"/>
 <rt-require dependency="material-ui" as="mui"/>
 
 <div rt-class="{'root-container': !this.state.isLoggedIn}">
@@ -17,7 +17,7 @@
             <myAccount/>
         </div>
         <mui.Dialog ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
-            <loginBox/>
+            <authBox/>
         </mui.Dialog>
     </div>
 </div>

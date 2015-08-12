@@ -1,52 +1,16 @@
 .login-box {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-
-  .login-input {
-
-    &.has-click-action {
-      cursor: pointer;
-    }
-
-    &.social-button {
-      color: #ffffff;
-
-      &.facebook-button {
-        background-color: #45619D;
-      }
-
-      &.google-button {
-        background-color: #ff5a5f;
-      }
-    }
-
-    &.login-button {
-      border: 1px solid;
-    }
-  }
 
   .centre-line {
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #2c3e50;
     line-height: 0.1em;
-    margin: 10px 0 20px;
+    margin: 20px 0 0px;
+    color: #2c3e50;
 
-    span{
-      background:#fff; padding:0 10px;
-    }
-  }
-  .login-or-separator {
     span {
-      background-color: #ffffff;
-      padding: 8px;
-    }
-
-    hr {
-      margin: -20px auto 10px auto;
-      width: 90%;
+      background: #fff;
+      padding: 0 10px;
     }
   }
 }

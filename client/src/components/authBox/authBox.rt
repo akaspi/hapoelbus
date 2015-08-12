@@ -1,0 +1,10 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="../loginBox/loginBox" as="loginBox"/>
+<rt-require dependency="../createAccountBox/createAccountBox" as="createAccountBox"/>
+<rt-require dependency="../forgotPasswordBox/forgotPasswordBox" as="forgotPasswordBox"/>
+
+<div class="auth-box">
+    <loginBox rt-if="this.state.showLogin"/>
+    <createAccountBox rt-if="this.state.showCreateAccount"/>
+    <forgotPasswordBox rt-if="this.state.showForgotPasswordBox" />
+</div>

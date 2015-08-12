@@ -1,0 +1,43 @@
+.auth-box {
+
+  .row {
+    margin: 15px 0;
+    display: flex;
+
+    &.full-width-item {
+      flex: 1;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .error-msg {
+    background-color: #e74c3c;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: default;
+  }
+
+  .navigation-text {
+    color: #2c3e50;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: default;
+
+    a {
+      color: #2980b9;
+      margin-right: 5px;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}
