@@ -16,6 +16,9 @@ var LoginBox =  React.createClass({
     onCreateUser: function() {
         loginAction.createUser(this.state.email, this.state.password);
     },
+    handleHasAccount: function (){
+        loginAction.navigation.showLoginBox();
+    },
     render: template
 });
 

@@ -19,6 +19,12 @@ var LoginBox =  React.createClass({
     onSocialLogin: function(provider) {
         loginAction.socialLogin(provider);
     },
+    handleCreateAccountNav: function (){
+      loginAction.navigation.showCreateAccountBox();
+    },
+    handleForgotPassword: function (){
+        loginAction.navigation.showForgotPasswordBox();
+    },
     render: template
 });
 

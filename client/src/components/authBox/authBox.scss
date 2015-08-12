@@ -39,5 +39,9 @@
         cursor: pointer;
       }
     }
+
+    &.reverse-text{
+      justify-content: flex-end;
+    }
   }
 }

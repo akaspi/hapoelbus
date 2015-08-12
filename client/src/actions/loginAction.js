@@ -27,9 +27,31 @@ module.exports = {
             provider: provider
         });
     },
-    logOut: function() {
+    logOut: function () {
         dispatchAction({
             type: 'LOGOUT_USER'
         });
+    },
+    navigation: {
+        showLoginBox: function () {
+            dispatchAction({
+                type: 'SHOW_LOGIN_BOX'
+            });
+        },
+        showForgotPasswordBox: function () {
+            dispatchAction({
+                type: 'SHOW_FORGOT_PASSWORD_BOX'
+            });
+        },
+        showCreateAccountBox: function () {
+            dispatchAction({
+                type: 'SHOW_CREATE_ACCOUNT_BOX'
+            });
+        },
+        showResetPasswordBox: function () {
+            dispatchAction({
+                type: 'SHOW_RESET_PASSWORD_BOX'
+            });
+        }
     }
 };

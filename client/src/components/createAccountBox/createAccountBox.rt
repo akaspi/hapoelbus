@@ -15,6 +15,6 @@
                           onClick="{this.onCreateUser}"/>
     </div>
     <div class="row navigation-text">
-        <span>יש לך חשבון?</span><a>לחץ כאן</a>
+        <span>יש לך חשבון?</span><a onClick="{this.handleHasAccount}">לחץ כאן</a>
     </div>
 </div>
