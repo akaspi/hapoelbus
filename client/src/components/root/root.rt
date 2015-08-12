@@ -1,5 +1,6 @@
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../authBox/authBox" as="authBox"/>
+<rt-require dependency="../homePage/homePage" as="homePage"/>
 <rt-require dependency="material-ui" as="mui"/>
 
 <div rt-class="{'root-container': !this.state.isLoggedIn}">
@@ -8,7 +9,7 @@
             <span>hapoelBus</span>
         </div>
         <div class="header-button-container">
-            <mui.RaisedButton label="login" onClick="{this.handleOpenLoginDialog}"/>
+            <mui.RaisedButton label="התחבר" onClick="{this.handleOpenLoginDialog}"/>
         </div>
     </header>
 
@@ -16,8 +17,12 @@
         <div rt-if="this.state.isLoggedIn" key="key-my-account">
             <myAccount/>
         </div>
-        <mui.Dialog rt-if="!this.state.isLoggedIn" ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
-            <authBox/>
-        </mui.Dialog>
+        <div rt-if="!this.state.isLoggedIn" key="key-home-page">
+            <homePage />
+        </div>
     </div>
+
+    <mui.Dialog rt-if="!this.state.isLoggedIn" ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
+        <authBox/>
+    </mui.Dialog>
 </div>
