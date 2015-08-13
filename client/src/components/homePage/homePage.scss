@@ -1,3 +1,71 @@
 .home-page {
 
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+
+  .bg-strip {
+    flex: 2;
+    background: url("../../images/home-page-bg.jpg") no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 45px;
+
+    h1 {
+      color: #fff;
+      font-size: 100px;
+      margin: 0;
+    }
+
+    h3 {
+      color: #fff;
+      font-size: 45px;
+      margin: 0;
+    }
+  }
+
+  footer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .text-strip {
+      font-size: 18px;
+    }
+
+    .logos-strip {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .lion {
+        background: url("../../images/lion.png") no-repeat;
+        width: 150px;
+        height: 150px;
+        background-size: contain;
+        margin: 0 30px;
+      }
+
+      .hapoel {
+        background: url("../../images/hapoel_logo.png") no-repeat;
+        width: 150px;
+        height: 150px;
+        background-size: contain;
+        margin: 0 30px;
+      }
+
+      .outside {
+        background: url("../../images/outside-logo.jpg") no-repeat;
+        width: 150px;
+        height: 150px;
+        background-size: contain;
+        margin: 0 30px;
+      }
+    }
+  }
+
 }

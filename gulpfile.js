@@ -30,6 +30,12 @@ gulp.task('copy-index-html', function (done) {
         .on('end', done)
 });
 
+gulp.task('copy-images-folder', function (done) {
+    gulp.src(paths.src + '/images/**/*')
+        .pipe(gulp.dest(paths.dist + '/images'))
+        .on('end', done)
+});
+
 gulp.task('rt', function (done) {
     gulp.src(paths.src + '/**/*.rt')
         .pipe(rt({modules: 'amd'}))
@@ -67,6 +73,6 @@ gulp.task('sass', function (done) {
         .on('end', done)
 });
 
-gulp.task('build', gulpsync.sync(['clean', 'copy-index-html', 'rt', 'webpack', 'sass']));
+gulp.task('build', gulpsync.sync(['clean', 'copy-index-html', 'copy-images-folder', 'rt', 'webpack', 'sass']));
 
 gulp.task('default', ['rt', 'sass']);

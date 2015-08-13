@@ -1,3 +1,18 @@
-<div>
-    <div>HOME PAGE</div>
+<div class="home-page">
+    <div class="bg-strip">
+        <h1>מחוץ לחומות</h1>
+
+        <h3>שירות ההסעות תל אביב - ארנה</h3>
+    </div>
+    <footer>
+        <div class="text-strip">
+            <span>טקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוך</span>
+        </div>
+
+        <div class="logos-strip">
+            <div class="lion"></div>
+            <div class="hapoel"></div>
+            <div class="outside"></div>
+        </div>
+    </footer>
 </div>

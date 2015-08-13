@@ -6,7 +6,7 @@
 <div rt-class="{'root-container': !this.state.isLoggedIn}">
     <header>
         <div class="title">
-            <span>hapoelBus</span>
+            <span>HapoelBus</span>
         </div>
         <div class="header-button-container">
             <mui.RaisedButton label="התחבר" onClick="{this.handleOpenLoginDialog}"/>
