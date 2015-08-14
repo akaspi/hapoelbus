@@ -11,8 +11,7 @@ function notifyAll() {
 }
 
 var storeData = {
-    isLoggedIn: auth.isLoggedIn(),
-    boxToShow: null
+    isLoggedIn: auth.isLoggedIn()
 };
 
 dispatcher.register(function (actionData) {
@@ -28,18 +27,6 @@ dispatcher.register(function (actionData) {
             break;
         case 'LOGOUT_USER':
             handleLogOut();
-            break;
-        case 'SHOW_LOGIN_BOX':
-            handleAuthNavigation('login');
-            break;
-        case 'SHOW_FORGOT_PASSWORD_BOX':
-            handleAuthNavigation('forgotPassword');
-            break;
-        case 'SHOW_CREATE_ACCOUNT_BOX':
-            handleAuthNavigation('createAccount');
-            break;
-        case 'SHOW_RESET_PASSWORD_BOX':
-            handleAuthNavigation('resetPassword');
             break;
     }
 
@@ -79,10 +66,6 @@ function handleSocialLogin(actionData) {
 function handleLogOut() {
     auth.logOut();
     notifyChange({isLoggedIn: false});
-}
-
-function handleAuthNavigation(boxToShow){
-    notifyChange({boxToShow: boxToShow});
 }
 
 module.exports = {

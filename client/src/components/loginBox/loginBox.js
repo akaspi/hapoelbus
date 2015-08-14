@@ -4,6 +4,7 @@ var React = require('react/addons');
 var template = require('./loginBox.rt.js');
 var muiMixin = require('../mixins/mui-mixin');
 var loginAction = require('../../actions/loginAction');
+var authNavigationActions = require('../../actions/authNavigationActions');
 
 var LoginBox =  React.createClass({
     mixins: [ React.addons.LinkedStateMixin, muiMixin ],
@@ -20,10 +21,10 @@ var LoginBox =  React.createClass({
         loginAction.socialLogin(provider);
     },
     handleCreateAccountNav: function (){
-      loginAction.navigation.showCreateAccountBox();
+        authNavigationActions.showCreateAccountBox();
     },
     handleForgotPassword: function (){
-        loginAction.navigation.showForgotPasswordBox();
+        authNavigationActions.showForgotPasswordBox();
     },
     render: template
 });

@@ -4,7 +4,7 @@
 <rt-require dependency="../forgotPasswordBox/forgotPasswordBox" as="forgotPasswordBox"/>
 
 <div class="auth-box">
-    <loginBox rt-if="this.state.showLoginBox"/>
-    <createAccountBox rt-if="this.state.showCreateAccountBox"/>
-    <forgotPasswordBox rt-if="this.state.showForgotPasswordBox" />
+    <loginBox rt-if="this.state.showLoginBox" key="key-login-box"/>
+    <createAccountBox rt-if="this.state.showCreateAccountBox" key="key-create-account-box"/>
+    <forgotPasswordBox rt-if="this.state.showForgotPasswordBox" key="key-forgot-password-box"/>
 </div>

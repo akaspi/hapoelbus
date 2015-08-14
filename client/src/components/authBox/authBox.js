@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var template = require('./authBox.rt.js');
-var loginStore = require('../../stores/loginStore');
+var authNavigationStore = require('../../stores/authNavigationStore');
 
 var LoginBox = React.createClass({
     getInitialState: function () {
@@ -14,31 +14,14 @@ var LoginBox = React.createClass({
         };
     },
     componentDidMount: function () {
-        loginStore.registerToChange(this.onLoginStoreDataChanged);
+        authNavigationStore.registerToChange(this.onAuthNavigationStoreDataChanged);
     },
-    onLoginStoreDataChanged: function (loginStoreData) {
-        var newState = _.clone(this.state);
-        _.forEach(newState, function (val, key) {
-            newState[key] = false;
-        });
-        switch (loginStoreData.boxToShow) {
-            case 'login':
-                newState.showLoginBox = true;
-                break;
-            case 'forgotPassword':
-                newState.showForgotPasswordBox = true;
-                break;
-            case 'createAccount':
-                newState.showCreateAccountBox = true;
-                break;
-            case 'resetPassword':
-                newState.showResetPasswordBox = true;
-                break;
-        }
+    onAuthNavigationStoreDataChanged: function (authNavigationStoreData) {
+        var newState = _.pick(authNavigationStoreData, _.keys(this.state));
         this.setState(newState);
     },
     componentWillUnmount: function () {
-        loginStore.removeChangeListener(this.onLoginStoreDataChanged);
+        authNavigationStore.removeChangeListener(this.onAuthNavigationStoreDataChanged);
     },
     render: template
 });
