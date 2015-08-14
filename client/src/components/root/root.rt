@@ -17,7 +17,7 @@
 
     <div>
         <div rt-if="this.state.isLoggedIn" key="key-my-account">
-            <myAccount/>
+            <myAccount isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
         </div>
         <div rt-if="!this.state.isLoggedIn" key="key-home-page">
             <homePage />

@@ -3,7 +3,7 @@
 var React = require('react/addons');
 
 var template = require('./accountData.rt.js');
-var accountAction = require('../../actions/accountAction');
+var userActions = require('../../actions/userActions');
 
 var AccountData = React.createClass({
     mixins: [ React.addons.LinkedStateMixin ],
@@ -16,8 +16,8 @@ var AccountData = React.createClass({
         }
     },
     handleCreateAccount: function () {
-        var accountData = this.state;
-        accountAction.createAccount(accountData);
+        var userData = this.state;
+        userActions.createUserData(userData);
     },
     render: template
 });

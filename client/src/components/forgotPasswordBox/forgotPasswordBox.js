@@ -3,7 +3,6 @@
 var React = require('react/addons');
 var template = require('./forgotPasswordBox.rt.js');
 var muiMixin = require('../mixins/mui-mixin');
-var loginAction = require('../../actions/loginAction');
 
 
 var LoginBox =  React.createClass({

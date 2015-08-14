@@ -14,6 +14,17 @@ module.exports = {
             password: password
         });
     },
+    createUserData: function (userData) {
+        dispatchAction({
+            type: 'CREATE_USER_DATA',
+            userData: userData
+        });
+    },
+    fetchUserData: function () {
+        dispatchAction({
+            type: 'FETCH_USER_DATA'
+        });
+    },
     login: function (email, password) {
         dispatchAction({
             type: 'LOGIN_USER',
@@ -31,27 +42,5 @@ module.exports = {
         dispatchAction({
             type: 'LOGOUT_USER'
         });
-    },
-    navigation: {
-        showLoginBox: function () {
-            dispatchAction({
-                type: 'SHOW_LOGIN_BOX'
-            });
-        },
-        showForgotPasswordBox: function () {
-            dispatchAction({
-                type: 'SHOW_FORGOT_PASSWORD_BOX'
-            });
-        },
-        showCreateAccountBox: function () {
-            dispatchAction({
-                type: 'SHOW_CREATE_ACCOUNT_BOX'
-            });
-        },
-        showResetPasswordBox: function () {
-            dispatchAction({
-                type: 'SHOW_RESET_PASSWORD_BOX'
-            });
-        }
     }
 };
