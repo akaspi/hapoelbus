@@ -1,24 +1,37 @@
 .root-container {
   height: 100%;
+  //min-width: 360px;
   min-height: 600px;
-}
 
-header {
-  background: #000;
-  display: flex;
-  flex-direction: row-reverse;
-  height: 90px;
-  align-items: center;
+  header {
+    background-color: #fff;
+    display: flex;
+    height: 60px;
 
-  .title {
-    flex: 1;
-    color: #fff;
-    font-size: 45px;
-    text-align: center;
+    .logo-container {
+      flex: 0 0 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .logo {
+        width: 100px;
+        height: 50px;
+        background: url("../../images/outside-text.png") no-repeat;
+        background-size: cover;
+      }
+    }
+
+    .content {
+      flex: 1 1 40px;
+    }
+
+    .login-btn-container {
+      flex: 0 0 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
-  .header-button-container {
-    position: absolute;
-    top: 35px;
-    right: 20px;
-  }
+
 }

@@ -3,13 +3,15 @@
 <rt-require dependency="../homePage/homePage" as="homePage"/>
 <rt-require dependency="material-ui" as="mui"/>
 
-<div rt-class="{'root-container': !this.state.isLoggedIn}">
+<div class="root-container">
     <header>
-        <div class="title">
-            <span>HapoelBus</span>
+        <div class="logo-container">
+            <div class="logo"></div>
         </div>
-        <div class="header-button-container">
-            <mui.RaisedButton label="התחבר" onClick="{this.handleOpenLoginDialog}"/>
+        <div class="content">
+        </div>
+        <div class="login-btn-container">
+            <mui.RaisedButton label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
         </div>
     </header>
 

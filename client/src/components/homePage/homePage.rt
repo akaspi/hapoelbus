@@ -5,14 +5,14 @@
         <h3>שירות ההסעות תל אביב - ארנה</h3>
     </div>
     <footer>
-        <div class="text-strip">
-            <span>טקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוך</span>
-        </div>
+            <!--<div class="text-strip">-->
+                <!--<span>טקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוךטקסט ארוך</span>-->
+            <!--</div>-->
 
-        <div class="logos-strip">
-            <div class="lion"></div>
-            <div class="outside"></div>
-            <div class="hapoel"></div>
-        </div>
+            <!--<div class="logos-strip">-->
+                <!--<div class="lion"></div>-->
+                <!--<div class="outside"></div>-->
+                <!--<div class="hapoel"></div>-->
+            <!--</div>-->
     </footer>
 </div>
