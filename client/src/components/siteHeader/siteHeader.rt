@@ -1,0 +1,29 @@
+<rt-require dependency="../authBox/authBox" as="authBox"/>
+<rt-require dependency="material-ui" as="mui"/>
+
+<header class="site-header">
+    <div class="logo-container">
+        <div class="logo"></div>
+    </div>
+    <div class="content"></div>
+    <div class="login-btn-container">
+        <div rt-if="!this.props.isLoggedIn" key="key-login-button">
+            <mui.RaisedButton label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
+        </div>
+        <div rt-if="this.props.userData" key="key-user-data-avatar" class="user-data-avatar-wrapper">
+            <mui.Avatar>
+                <i class="fa fa-user" />
+            </mui.Avatar>
+            <div class="welcome-text">
+                <div>שלום,</div>
+                <div class="user-display-name">{this.props.userData.displayName}</div>
+            </div>
+            <div class="logout"><a onClick="{this.logOut}">התנתק</a></div>
+        </div>
+    </div>
+
+    <mui.Dialog rt-if="!this.props.isLoggedIn" key="key-auth-dialog" ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
+        <authBox/>
+    </mui.Dialog>
+
+</header>

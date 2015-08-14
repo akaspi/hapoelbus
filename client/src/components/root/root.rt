@@ -1,19 +1,10 @@
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
-<rt-require dependency="../authBox/authBox" as="authBox"/>
+<rt-require dependency="../siteHeader/siteHeader" as="siteHeader"/>
 <rt-require dependency="../homePage/homePage" as="homePage"/>
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="root-container">
-    <header>
-        <div class="logo-container">
-            <div class="logo"></div>
-        </div>
-        <div class="content">
-        </div>
-        <div class="login-btn-container">
-            <mui.RaisedButton label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
-        </div>
-    </header>
+    <siteHeader isLoggedIn="{this.state.isLoggedIn}" isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
 
     <div>
         <div rt-if="this.state.isLoggedIn" key="key-my-account">
@@ -23,8 +14,4 @@
             <homePage />
         </div>
     </div>
-
-    <mui.Dialog rt-if="!this.state.isLoggedIn" key="key-auth-dialog" ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
-        <authBox/>
-    </mui.Dialog>
 </div>

@@ -2,36 +2,4 @@
   height: 100%;
   //min-width: 360px;
   min-height: 600px;
-
-  header {
-    background-color: #fff;
-    display: flex;
-    height: 60px;
-
-    .logo-container {
-      flex: 0 0 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .logo {
-        width: 100px;
-        height: 50px;
-        background: url("../../images/outside-text.png") no-repeat;
-        background-size: cover;
-      }
-    }
-
-    .content {
-      flex: 1 1 40px;
-    }
-
-    .login-btn-container {
-      flex: 0 0 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
 }

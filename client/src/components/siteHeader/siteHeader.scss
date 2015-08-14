@@ -1,0 +1,56 @@
+.site-header {
+    background-color: #fff;
+    display: flex;
+    height: 60px;
+
+    .logo-container {
+      flex: 0 0 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .logo {
+        width: 100px;
+        height: 50px;
+        background: url("../../images/outside-text.png") no-repeat;
+        background-size: cover;
+      }
+    }
+
+    .content {
+      flex: 1 1 40px;
+    }
+
+    .login-btn-container {
+      flex: 0 0 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  .user-data-avatar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .welcome-text {
+      flex: 1;
+      margin: 0 15px;
+    }
+
+    .user-display-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    a {
+      color: #2980b9;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+}

@@ -3,11 +3,11 @@
 var React = require('react/addons');
 
 var template = require('./myAccount.rt.js');
-var loginAction = require('../../actions/userActions');
+var userActions = require('../../actions/userActions');
 
 var MyAccount = React.createClass({
     logout: function () {
-        loginAction.logOut();
+        userActions.logOut();
     },
     render: template
 });
