@@ -2,7 +2,10 @@
 
 <div class="account-data-container">
     <div class="row">
-        <mui.TextField type="text" hintText="דואר אלקטרוני" fullWidth="{true}"
+        <h2>טקסט טקסט טקסט טקסט טקסט</h2>
+    </div>
+    <div class="row">
+        <mui.TextField type="text" hintText="דואר אלקטרוני לעדכונים" fullWidth="{true}"
                        underlineStyle="{{borderColor: '#2c3e50'}}"
                        valueLink="{this.linkState('email')}"/>
     </div>
@@ -20,6 +23,13 @@
         <mui.TextField type="text" hintText="כמות מקומות בהסעה" fullWidth="{true}"
                        underlineStyle="{{borderColor: '#2c3e50'}}"
                        valueLink="{this.linkState('maxSeats')}"/>
+    </div>
+    <div class="row">
+        <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'none', fontSize: '16px'}}"
+                    defaultToggled="{this.state.isPremium}"
+                    onCheck="(e,val)=>this.handlePremiumChange(e,val)"
+                label="מעוניין לרכוש מנוי להסעה"
+                labelPosition="right"/>
     </div>
     <div class="row">
         <mui.RaisedButton  backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" fullWidth="{true}" label="עדכן פרטים"
