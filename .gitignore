@@ -1,7 +1,16 @@
+# Envs:
 node_modules/
 .idea/
-config.json
 npm-debug.log
-client/dist/
+
+# Private:
+config.json
+
+# Generated:
+bundle.js
+vendor.bundle.js
 *.rt.js
 *.css
+
+# Deprecated:
+client/dist/
