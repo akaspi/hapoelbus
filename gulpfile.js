@@ -1,11 +1,10 @@
 var gulp = require('gulp');
 var gulpsync = require('gulp-sync')(gulp);
-// var watch = require('gulp-watch');
+var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var rt = require('gulp-react-templates');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
-// var del = require('del');
 var serve = require('gulp-serve');
 
 var paths = {
@@ -18,29 +17,14 @@ gulp.task('serve', serve({
   port: 3000
 }));
 
-//gulp.task('dev', function() {
-//    gulp.watch('./**/*.scss', ['sass']);
-//    watch('./**/*.rt', function() {
-//        gulp.run('rt');
-//    });
-//});
-
-gulp.task('clean', function(done) {
-  // del.sync([paths.dist + '/**/*']);
-  done();
+gulp.task('watch', function() {
+  watch('./**/*.rt', function() {
+    gulp.run('webpack');
+  });
+  watch('./**/*.scss', function() {
+    gulp.run('sass');
+  });
 });
-
-// gulp.task('copy-index-html', function(done) {
-//   gulp.src(paths.src + '/index.html')
-//       .pipe(gulp.dest(paths.dist))
-//       .on('end', done)
-// });
-//
-// gulp.task('copy-images-folder', function(done) {
-//   gulp.src(paths.src + '/images/**/*')
-//       .pipe(gulp.dest(paths.dist + '/images'))
-//       .on('end', done)
-// });
 
 gulp.task('rt', function(done) {
   gulp.src(paths.src + '/**/*.rt')
@@ -81,4 +65,4 @@ gulp.task('sass', function(done) {
 
 gulp.task('build', ['webpack', 'sass']);
 
-gulp.task('default', gulpsync.sync(['clean', 'build']));
+gulp.task('default', gulpsync.sync(['build']));
