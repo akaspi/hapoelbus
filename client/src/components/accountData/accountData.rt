@@ -1,11 +1,28 @@
-<div>
-    <input type="text" class="login-input" valueLink={this.linkState('email')} placeholder="אימייל"/>
+<rt-require dependency="material-ui" as="mui"/>
 
-    <input type="text" class="login-input" valueLink={this.linkState('displayName')} placeholder="שם מלא"/>
-
-    <input type="text" class="login-input" valueLink={this.linkState('phone')} placeholder="טלפון"/>
-
-    <input type="text" class="login-input" valueLink={this.linkState('maxSeats')} placeholder="מס׳ מקומות"/>
-
-    <button onClick="{this.handleCreateAccount}">צור חשבון</button>
+<div class="account-data-container">
+    <div class="row">
+        <mui.TextField type="text" hintText="דואר אלקטרוני" fullWidth="{true}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}"
+                       valueLink="{this.linkState('email')}"/>
+    </div>
+    <div class="row">
+        <mui.TextField type="text" hintText="שם מלא" fullWidth="{true}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}"
+                       valueLink="{this.linkState('displayName')}"/>
+    </div>
+    <div class="row">
+        <mui.TextField type="text" hintText="טלפון" fullWidth="{true}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}"
+                       valueLink="{this.linkState('phone')}"/>
+    </div>
+    <div class="row">
+        <mui.TextField type="text" hintText="כמות מקומות בהסעה" fullWidth="{true}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}"
+                       valueLink="{this.linkState('maxSeats')}"/>
+    </div>
+    <div class="row">
+        <mui.RaisedButton  backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" fullWidth="{true}" label="עדכן פרטים"
+                          onClick="{this.handleCreateAccount}"/>
+    </div>
 </div>
