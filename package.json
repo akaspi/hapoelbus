@@ -12,7 +12,7 @@
     "sendgrid": "^1.9.2"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "gulp serve"
   },
   "devDependencies": {
     "del": "^1.2.0",
@@ -23,6 +23,7 @@
     "gulp-clean-dest": "^0.1.0",
     "gulp-react-templates": "0.0.7",
     "gulp-sass": "^2.0.4",
+    "gulp-serve": "^1.0.0",
     "gulp-sync": "^0.1.4",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.4",

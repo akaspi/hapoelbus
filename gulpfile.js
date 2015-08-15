@@ -6,11 +6,17 @@ var rt = require('gulp-react-templates');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 // var del = require('del');
+var serve = require('gulp-serve');
 
 var paths = {
   src: './client/src',
   dist: './client/src/public'
 };
+
+gulp.task('serve', serve({
+  root: paths.dist,
+  port: 3000
+}));
 
 //gulp.task('dev', function() {
 //    gulp.watch('./**/*.scss', ['sass']);
