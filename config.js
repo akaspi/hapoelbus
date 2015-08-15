@@ -4,11 +4,8 @@ var _ = require('lodash');
 
 var defaults = {
     port: 1234,
-    services: {
-        mail: {
-            key: 1234
-        }
-    }
+    firebase_secret: "",
+    sendgrid_key: ""
 };
 
 var config = {};
