@@ -1,0 +1,8 @@
+{
+    "extends": "standard",
+    "rules": {
+        "space-before-function-paren": [2, "never"],
+        "spaced-comment": 0,
+        "semi": [0, "always"]
+    }
+}
