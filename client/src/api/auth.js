@@ -12,35 +12,49 @@ function onAuthActionComplete(onSuccess, onError, errorData, authData) {
     }
 }
 
+function getAuthData(authData) {
+    switch (authData.provider) {
+        case 'password':
+            return authData.password;
+        case 'google':
+            return authData.google;
+        case 'facebook':
+            return authData.facebook;
+    }
+}
+
 module.exports = {
-    createUser: function(email, password, onSuccess, onError) {
+    createUser: function (email, password, onSuccess, onError) {
         db.createUser({
             email: email,
             password: password
         }, onAuthActionComplete.bind(null, onSuccess, onError));
     },
-    login: function(email, password, onSuccess, onError) {
+    login: function (email, password, onSuccess, onError) {
         db.authWithPassword({
             email: email,
             password: password
         }, onAuthActionComplete.bind(null, onSuccess, onError));
     },
-    socialLogin: function(provider, onSuccess, onError) {
+    socialLogin: function (provider, onSuccess, onError) {
         db.authWithOAuthPopup(provider, onAuthActionComplete.bind(null, onSuccess, onError), {scope: 'email'});
     },
-    isLoggedIn: function() {
+    isLoggedIn: function () {
         return !!db.getAuth();
     },
-    getUserId: function() {
+    getUserId: function () {
         return this.isLoggedIn() ? db.getAuth().uid : null;
     },
-    logOut: function() {
+    getAuthData: function () {
+        return this.isLoggedIn() ? getAuthData(db.getAuth()) : null;
+    },
+    logOut: function () {
         db.unauth();
     },
-    resetPasswordRequest:function(email, onSuccess, onError) {
+    resetPasswordRequest: function (email, onSuccess, onError) {
         db.resetPassword(email, onAuthActionComplete.bind(null, onSuccess, onError));
     },
-    changePassword: function(email, oldOrTempPassword, newPassword, onSuccess, onError) {
+    changePassword: function (email, oldOrTempPassword, newPassword, onSuccess, onError) {
         db.changePassword({
             email: email,
             oldPassword: oldOrTempPassword,

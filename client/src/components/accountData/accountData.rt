@@ -26,7 +26,7 @@
     </div>
     <div class="row">
         <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'none', fontSize: '16px'}}"
-                    defaultToggled="{this.state.isPremium}"
+                      defaultChecked="{this.state.isPremium}"
                     onCheck="(e,val)=>this.handlePremiumChange(e,val)"
                 label="מעוניין לרכוש מנוי להסעה"
                 labelPosition="right"/>

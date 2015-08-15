@@ -16,6 +16,11 @@ module.exports =  {
             cb()
         });
     },
+    updateUserData: function (uid, accountData, cb){
+        usersDataRef.child(uid).update(accountData, function(error) {
+            cb()
+        });
+    },
     updateUser: function (uid, dataToUpdate) {
         usersDataRef.child(uid).update(dataToUpdate);
     }

@@ -1,0 +1,46 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="account-data-edit-container">
+    <div>
+        <h3>פרטי המשתמש:</h3>
+    </div>
+    <div class="edit-item">
+        <mui.TextField type="text" disabled="{!this.state.isEditMode}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="דואר אלקטרוני"
+                       valueLink="{this.linkState('email')}"/>
+    </div>
+    <div class="edit-item">
+        <mui.TextField type="text" disabled="{!this.state.isEditMode}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="שם מלא"
+                       valueLink="{this.linkState('displayName')}"/>
+    </div>
+    <div class="edit-item">
+        <mui.TextField type="text" disabled="{!this.state.isEditMode}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="טלפון"
+                       valueLink="{this.linkState('phone')}"/>
+    </div>
+    <div class="edit-item">
+        <mui.TextField type="text" disabled="{!this.state.isEditMode}"
+                       underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="כמות מקומות בהסעה"
+                       valueLink="{this.linkState('maxSeats')}"/>
+    </div>
+    <div class="edit-item">
+        <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'none', fontSize: '16px'}}"
+                      defaultChecked="{this.state.isPremium}" disabled="{!this.state.isEditMode}"
+                      onCheck="(e,val)=>this.handlePremiumChange(e,val)"
+                      label="מעוניין לרכוש מנוי להסעה"
+                      labelPosition="right"/>
+    </div>
+    <div>
+        <div class="edit-item" rt-if="!this.state.isEditMode">
+            <mui.RaisedButton backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" label="ערוך"
+                              onClick="{this.handleEditClick}"/>
+        </div>
+
+        <div class="edit-item" rt-if="this.state.isEditMode">
+            <mui.RaisedButton backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}"
+                              label="עדכון פרטים"
+                              onClick="{this.handleSaveUserDataClick}"/>
+        </div>
+    </div>
+</div>

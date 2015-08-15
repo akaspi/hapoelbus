@@ -37,6 +37,9 @@ dispatcher.register(function (actionData) {
         case 'CREATE_USER_DATA':
             handleCreateUserData(actionData);
             break;
+        case 'UPDATE_USER_DATA':
+            handleUpdateUserData(actionData);
+            break;
     }
 });
 
@@ -86,6 +89,13 @@ function handleFetchUserData() {
 function handleCreateUserData(actionData) {
     var userData = actionData.userData;
     usersData.createUserData(auth.getUserId(), userData, function () {
+        notifyChange({userData: userData});
+    });
+}
+
+function handleUpdateUserData(actionData){
+    var userData = actionData.userData;
+    usersData.updateUserData(auth.getUserId(), userData, function () {
         notifyChange({userData: userData});
     });
 }
