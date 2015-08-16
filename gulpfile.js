@@ -9,7 +9,7 @@ var serve = require('gulp-serve');
 
 var paths = {
   src: './client/src',
-  dist: './client/src/public'
+  dist: './client/public'
 };
 
 gulp.task('serve', serve({
