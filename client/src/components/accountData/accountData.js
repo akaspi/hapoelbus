@@ -11,13 +11,11 @@ var AccountData = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function () {
 
-        var authData = auth.getAuthData();
-
         return {
-            email: authData.email,
-            displayName: authData.displayName,
+            email: auth.getUserAuthEmail() || '',
+            displayName: '',
             phone: '',
-            maxSeats: '',
+            maxSeats: 1,
             isPremium: false
         }
     },

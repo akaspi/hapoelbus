@@ -1,38 +1,41 @@
 <rt-require dependency="material-ui" as="mui"/>
 
-<div class="account-data-container">
+<div class="account-data-page">
     <div class="row">
         <h2>טקסט טקסט טקסט טקסט טקסט</h2>
     </div>
-    <div class="row">
-        <mui.TextField type="text" hintText="דואר אלקטרוני לעדכונים" fullWidth="{true}"
-                       underlineStyle="{{borderColor: '#2c3e50'}}"
-                       valueLink="{this.linkState('email')}"/>
-    </div>
-    <div class="row">
-        <mui.TextField type="text" hintText="שם מלא" fullWidth="{true}"
-                       underlineStyle="{{borderColor: '#2c3e50'}}"
-                       valueLink="{this.linkState('displayName')}"/>
-    </div>
-    <div class="row">
-        <mui.TextField type="text" hintText="טלפון" fullWidth="{true}"
-                       underlineStyle="{{borderColor: '#2c3e50'}}"
-                       valueLink="{this.linkState('phone')}"/>
-    </div>
-    <div class="row">
-        <mui.TextField type="text" hintText="כמות מקומות בהסעה" fullWidth="{true}"
-                       underlineStyle="{{borderColor: '#2c3e50'}}"
-                       valueLink="{this.linkState('maxSeats')}"/>
-    </div>
-    <div class="row">
-        <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'none', fontSize: '16px'}}"
-                      defaultChecked="{this.state.isPremium}"
-                    onCheck="(e,val)=>this.handlePremiumChange(e,val)"
-                label="מעוניין לרכוש מנוי להסעה"
-                labelPosition="right"/>
-    </div>
-    <div class="row">
-        <mui.RaisedButton  backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" fullWidth="{true}" label="עדכן פרטים"
-                          onClick="{this.handleCreateAccount}"/>
+    <div class="account-data-container">
+        <div class="row">
+            <mui.TextField type="text" fullWidth="{true}" floatingLabelText="דוא׳׳ל לעדכונים"
+                           underlineStyle="{{borderColor: '#2c3e50'}}"
+                           valueLink="{this.linkState('email')}"/>
+        </div>
+        <div class="row">
+            <mui.TextField type="text" fullWidth="{true}" floatingLabelText="שם מלא"
+                           underlineStyle="{{borderColor: '#2c3e50'}}"
+                           valueLink="{this.linkState('displayName')}"/>
+        </div>
+        <div class="row">
+            <mui.TextField type="text" fullWidth="{true}" floatingLabelText="טלפון"
+                           underlineStyle="{{borderColor: '#2c3e50'}}"
+                           valueLink="{this.linkState('phone')}"/>
+        </div>
+        <div class="row">
+            <mui.TextField type="text" min="{1}" max="{10}" fullWidth="{true}" floatingLabelText="מס׳ מקומות"
+                           underlineStyle="{{borderColor: '#2c3e50'}}"
+                           valueLink="{this.linkState('maxSeats')}"/>
+        </div>
+        <div class="row big-margin">
+            <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'none', fontSize: '16px'}}"
+                          defaultChecked="{this.state.isPremium}"
+                          onCheck="(e,val)=>this.handlePremiumChange(e,val)"
+                          label="מעוניין לרכוש מנוי שנתי להסעה? (300 ש׳׳ח)"
+                          labelPosition="right"/>
+        </div>
+        <div class="row big-margin">
+            <mui.RaisedButton backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" fullWidth="{true}"
+                              label="עדכן פרטים"
+                              onClick="{this.handleCreateAccount}"/>
+        </div>
     </div>
 </div>

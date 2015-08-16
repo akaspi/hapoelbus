@@ -12,14 +12,14 @@ function onAuthActionComplete(onSuccess, onError, errorData, authData) {
     }
 }
 
-function getAuthData(authData) {
+function getUserAuthEmail(authData) {
     switch (authData.provider) {
         case 'password':
-            return authData.password;
+            return authData.password.email;
         case 'google':
-            return authData.google;
+            return authData.google.email;
         case 'facebook':
-            return authData.facebook;
+            return authData.facebook.email;
     }
 }
 
@@ -45,8 +45,8 @@ module.exports = {
     getUserId: function () {
         return this.isLoggedIn() ? db.getAuth().uid : null;
     },
-    getAuthData: function () {
-        return this.isLoggedIn() ? getAuthData(db.getAuth()) : null;
+    getUserAuthEmail: function () {
+        return this.isLoggedIn() ? getUserAuthEmail(db.getAuth()) : null;
     },
     logOut: function () {
         db.unauth();

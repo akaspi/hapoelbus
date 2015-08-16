@@ -1,8 +1,29 @@
-.account-data-container{
-  width: 400px;
-  margin: 0 auto;
 
+.account-data-page{
+  background-color: #2A2A2A;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #ffffff;
+
+  h2{
+    font-size: 36px;
+  }
+
+
+  .account-data-container{
+    background: #ffffff;
+    width: 400px;
+    border-radius: 15px;
+    padding: 30px;
+  }
   .row{
     margin: 15px 0;
+
+    &.big-margin{
+      margin: 40px 0;
+    }
   }
 }
