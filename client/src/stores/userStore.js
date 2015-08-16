@@ -2,6 +2,7 @@ var _ = require('lodash');
 var dispatcher = require('../dispatcher/dispatcher');
 var auth = require('../api/auth');
 var usersData = require('../api/usersData');
+var constants = require('./constants');
 
 var listeners = [];
 
@@ -14,7 +15,8 @@ function notifyAll() {
 var storeData = {
     isLoggedIn: auth.isLoggedIn(),
     isFetchingUserData: false,
-    userData: null
+    userData: null,
+    errorMsg: ''
 };
 
 dispatcher.register(function (actionData) {
@@ -52,7 +54,7 @@ function handleCreateUser(actionData) {
     auth.createUser(actionData.email, actionData.password, function () {
         handleLogin(actionData);
     }, function () {
-
+        notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
     })
 }
 
@@ -61,7 +63,7 @@ function handleLogin(actionData) {
         notifyChange({isLoggedIn: true});
         handleFetchUserData();
     }, function () {
-
+        notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
     })
 }
 
