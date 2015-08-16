@@ -12,7 +12,8 @@
     "sendgrid": "^1.9.2"
   },
   "scripts": {
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "mail": "node jobs/mail/mail.js"
   },
   "devDependencies": {
     "del": "^1.2.0",
