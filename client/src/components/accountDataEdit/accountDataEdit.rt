@@ -1,6 +1,6 @@
 <rt-require dependency="material-ui" as="mui"/>
 
-<div class="account-data-edit-container">
+<div class="dashboard">
     <div>
         <h3>פרטי המשתמש:</h3>
     </div>

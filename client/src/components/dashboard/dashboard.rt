@@ -1,0 +1,16 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="../accountDataEdit/accountDataEdit" as="accountDataEdit"/>
+
+<div class="dashboard-page-container">
+    <div class="dashboard-tabs">
+        <div rt-repeat="tab in this.getTabOptions()" class="tab-option" rt-class="{'selected': this.state.selectedTabIndex === tabIndex}" onClick="()=>this.handleTabChange(tabIndex)">{tab}</div>
+    </div>
+    <div class="dashboard-content">
+        <div rt-if="this.state.selectedTabIndex === 0">
+            גלשדגךלדשלךגשדךלגחדשךלגח
+        </div>
+        <div rt-if="this.state.selectedTabIndex === 1">
+            <accountDataEdit userData="this.props.userData"/>
+        </div>
+    </div>
+</div>
