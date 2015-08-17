@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "gulp serve",
-    "mail": "node jobs/mail/mail.js"
+    "mail": "node services/mail/mail.js"
   },
   "devDependencies": {
     "del": "^1.2.0",
