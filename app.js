@@ -2,7 +2,7 @@
 
 var express = require('express');
 var path = require('path');
-var config = require('./config.js');
+var config = require('./client/src/config.js');
 
 var port = config.port;
 var app = express();
