@@ -2,9 +2,11 @@
 <rt-require dependency="../loginBox/loginBox" as="loginBox"/>
 <rt-require dependency="../createAccountBox/createAccountBox" as="createAccountBox"/>
 <rt-require dependency="../forgotPasswordBox/forgotPasswordBox" as="forgotPasswordBox"/>
+<rt-require dependency="../resetPasswordBox/resetPasswordBox" as="resetPasswordBox"/>
 
 <div class="auth-box">
     <loginBox rt-if="this.state.showLoginBox" key="key-login-box" errorMsg="{this.state.errorMsg}"/>
     <createAccountBox rt-if="this.state.showCreateAccountBox" key="key-create-account-box"/>
     <forgotPasswordBox rt-if="this.state.showForgotPasswordBox" key="key-forgot-password-box"/>
+    <resetPasswordBox rt-if="this.state.showResetPasswordBox" key="key-reset-password-box"/>
 </div>

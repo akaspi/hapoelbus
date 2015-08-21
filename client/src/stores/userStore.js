@@ -42,6 +42,12 @@ dispatcher.register(function (actionData) {
         case 'UPDATE_USER_DATA':
             handleUpdateUserData(actionData);
             break;
+        case 'RESET_PASSWORD_REQUEST':
+            handleResetPasswordRequest(actionData);
+            break;
+        case 'CHANGE_PASSWORD':
+            handleChangePassword(actionData);
+            break;
     }
 });
 
@@ -99,6 +105,23 @@ function handleUpdateUserData(actionData){
     var userData = actionData.userData;
     usersData.updateUserData(auth.getUserId(), userData, function () {
         notifyChange({userData: userData});
+    });
+}
+
+function handleResetPasswordRequest(actionData) {
+    auth.resetPasswordRequest(actionData.email, function() {
+        //TODO: Needs to notify somehow
+        console.log('reset password email was sent');
+    }, function() {
+
+    });
+}
+
+function handleChangePassword(actionData) {
+    auth.changePassword(actionData.email, actionData.oldOrTempPassword, actionData.newPassword, function() {
+        handleLogin({email: actionData.email, password: actionData.newPassword});
+    }, function() {
+        notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
     });
 }
 
