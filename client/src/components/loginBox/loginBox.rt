@@ -1,4 +1,5 @@
 <rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="../../commonStyles/variables" as="styleVariables"/>
 
 <div class="login-box">
     <div class="row full-width-item">
@@ -30,12 +31,12 @@
         <mui.TextField type="password" hintText="סיסמא" fullWidth="{true}" underlineStyle="{{borderColor: '#2c3e50'}}"
                        valueLink="{this.linkState('password')}"/>
     </div>
-    <div class="row navigation-text reverse-text">
-        <a onClick="{this.handleForgotPassword}">שכחתי סיסמא</a>
-    </div>
+    <!--<div class="row navigation-text reverse-text">-->
+        <!--<a onClick="{this.handleForgotPassword}">שכחתי סיסמא</a>-->
+    <!--</div>-->
     <div rt-if="this.props.errorMsg" class="row error-msg full-width-item">{this.props.errorMsg}</div>
     <div class="row">
-        <mui.RaisedButton backgroundColor="#2c3e50" labelColor="#ffffff" fullWidth="{true}" label="התחבר"
+        <mui.RaisedButton backgroundColor="{styleVariables.COLORS.OK_BUTTON}" labelColor="#fff" fullWidth="{true}" label="התחבר"
                           onClick="{this.onLogin}"/>
     </div>
     <div class="row navigation-text">
