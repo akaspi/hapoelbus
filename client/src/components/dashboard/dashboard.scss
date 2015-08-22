@@ -10,13 +10,18 @@
     display: flex;
 
     .tab-option{
-      background: red;
+      background: #e74c3c;
       flex: 1;
       cursor: pointer;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
 
       &.selected{
         background: #ffffff;
-        color: red;
+        color: #e74c3c;
       }
     }
   }

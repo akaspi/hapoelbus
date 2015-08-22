@@ -1,7 +1,6 @@
 
 .account-data-page{
   background-color: #2A2A2A;
-  height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +8,8 @@
   color: #ffffff;
 
   h2{
-    font-size: 36px;
+    font-size: 32px;
+    margin: 0;
   }
 
 
@@ -17,7 +17,7 @@
     background: #ffffff;
     width: 400px;
     border-radius: 15px;
-    padding: 30px;
+    padding: 0px 30px;
   }
   .row{
     margin: 15px 0;

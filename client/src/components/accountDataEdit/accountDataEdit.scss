@@ -1,8 +1,39 @@
-.account-data-edit-container{
-  width: 600px;
-  
-  .edit-item{
-    display: inline-block;
-    margin: 5px 15px;
+.edit-account-data-container {
+  max-width: 920px;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 25px;
+
+  h3 {
+    color: #000000;
+    margin: 0;
+  }
+
+  .fields-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+
+    .edit-item {
+      margin: 5px 10px;
+      display: flex;
+
+      &.button {
+        flex: 1;
+        min-width: 40px;
+      }
+
+      &.field {
+        flex: 3;
+        min-width: 105px;
+      }
+
+      &.long-field {
+        flex: 5;
+        min-width: 175px;
+      }
+    }
   }
 }

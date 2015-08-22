@@ -10,7 +10,7 @@
             גלשדגךלדשלךגשדךלגחדשךלגח
         </div>
         <div rt-if="this.state.selectedTabIndex === 1">
-            <accountDataEdit userData="this.props.userData"/>
+            <accountDataEdit userData="{this.props.userData}"/>
         </div>
     </div>
 </div>
