@@ -26,7 +26,7 @@
                            valueLink="{this.linkState('maxSeats')}"/>
         </div>
         <div class="edit-item field">
-            <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'left', fontSize: '16px'}}"
+            <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'left', fontSize: '14px'}}"
                           defaultChecked="{this.state.isPremium}" disabled="{!this.state.isEditMode}"
                           onCheck="(e,val)=>this.handlePremiumChange(e,val)"
                           label="מנוי להסעה"
