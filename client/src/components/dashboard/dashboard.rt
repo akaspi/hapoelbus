@@ -9,7 +9,7 @@
         </h1>
         <h3>הרשמתך התקבלה.</h3>
         <h3 rt-if="this.props.userData.isPremium" key="key-is-premium-text">נציג הקבוצה יצור עמך קשר בקרוב לגבי החיוב למנוי ההסעות השנתי.</h3>
-        <h3>!נתראה בתחילת העונה</h3>
+        <h3>נתראה בתחילת העונה!</h3>
     </div>
     <div class="outside-logo" />
 </div>
