@@ -9,24 +9,28 @@
     width: 400px;
     display: flex;
 
-    .tab-option{
-      background: #e74c3c;
+    .tab-option {
+      background: #ffffff;
+      color: #e74c3c;
       flex: 1;
       cursor: pointer;
       height: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 14px;
+      padding-bottom: 4px;
 
-
-      &.selected{
-        background: #ffffff;
-        color: #e74c3c;
+      &.selected {
+        color: #ffffff;
+        background: #e74c3c;
+        border-bottom: 4px solid #ffffff;
+        padding-bottom: 0px;
       }
     }
   }
 
-  .dashboard-content{
+  .dashboard-content {
     display: flex;
     justify-content: center;
     align-items: center;

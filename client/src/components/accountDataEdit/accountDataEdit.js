@@ -25,6 +25,7 @@ var AccountData = React.createClass({
     handleSaveUserDataClick: function () {
         var userData = _.pick(this.state, ['email', 'displayName', 'phone', 'maxSeats', 'isPremium']);
         userActions.updateUserData(userData);
+        this.setState({isEditMode: false});
     },
     handlePremiumChange: function (e, value) {
         this.setState({isPremium: value});
