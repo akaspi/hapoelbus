@@ -5,11 +5,6 @@
 <div class="account-data">
     <h2 class="title">{constants.TEXT.USER_DATA.TITLE}</h2>
     <div class="account-data-fields">
-        <!--<div class="row">-->
-            <!--<mui.TextField type="text" fullWidth="{true}" floatingLabelText="דואר אלקטרוני"-->
-                           <!--underlineStyle="{{borderColor: '#2c3e50'}}" disabled="{true}"-->
-                           <!--valueLink="{this.linkState('email')}"/>-->
-        <!--</div>-->
         <div class="row">
             <mui.TextField type="text" fullWidth="{true}" floatingLabelText="שם מלא"
                            underlineStyle="{{borderColor: '#2c3e50'}}"
@@ -20,22 +15,10 @@
                            underlineStyle="{{borderColor: '#2c3e50'}}"
                            valueLink="{this.linkState('phone')}"/>
         </div>
-        <!--<div class="row big-margin max-seats-container" style="display: flex">-->
-            <!--<mui.Checkbox name="multipleMembers" labelStyle="{{float: 'right', fontSize: '14px'}}" style="{{width: '90px'}}"-->
-                          <!--defaultChecked="{this.state.multipleMembers}"-->
-                          <!--onCheck="(e,val)=>this.switchMultipleMembersMode(val)"-->
-                          <!--label="משפחה?"-->
-                          <!--labelPosition="right"/>-->
-
-            <!--<mui.TextField type="number" class="max-seats-input" min="{1}" max="{10}" fullWidth="{true}" floatingLabelText="מס׳ מקומות"-->
-                           <!--underlineStyle="{{borderColor: '#2c3e50'}}"-->
-                           <!--rt-if="this.state.multipleMembers" key="key-max-seats-input"-->
-                           <!--valueLink="{this.linkState('maxSeats')}"/>-->
-        <!--</div>-->
         <div class="row big-margin">
                 <mui.Toggle name="premiumToggle" labelStyle="{{float: 'none', fontSize: '14px'}}"
                         defaultToggled="{this.state.isPremium}"
-                          onCheck="(e,val)=>this.handlePremiumChange(e,val)"
+                          onToggle="(e,val)=>this.handlePremiumChange(e,val)"
                           label="מעוניין לרכוש מנוי שנתי להסעה? (300 ש׳׳ח)"
                           labelPosition="right"/>
         </div>

@@ -10,25 +10,18 @@ var auth = require('../../api/auth');
 var AccountData = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function () {
-
         return {
             email: auth.getUserAuthEmail() || '',
             displayName: '',
             phone: '',
-            maxSeats: 1,
-            isPremium: false,
-            multipleMembers: false
+            isPremium: false
         }
     },
     handleCreateAccount: function () {
-        var userData = _.omit(this.state, ['multipleMembers']);
-        userActions.createUserData(userData);
+        userActions.createUserData(this.state);
     },
     handlePremiumChange: function (e, value) {
         this.setState({isPremium: value});
-    },
-    switchMultipleMembersMode: function(value) {
-      this.setState({multipleMembers: value});
     },
     render: template
 });
