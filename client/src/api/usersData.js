@@ -11,9 +11,14 @@ module.exports =  {
             cb(snapshot.val());
         });
     },
-    createUserData: function(uid, accountData, cb) {
+    createUserData: function(uid, accountData, onSuccess, onError) {
         usersDataRef.child(uid).set(accountData, function(error) {
-            cb()
+            if (error) {
+                console.log(error);
+                onError();
+            } else {
+                onSuccess();
+            }
         });
     },
     updateUserData: function (uid, accountData, cb){

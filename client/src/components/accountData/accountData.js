@@ -6,6 +6,7 @@ var muiMixin = require('../mixins/mui-mixin');
 var template = require('./accountData.rt.js');
 var userActions = require('../../actions/userActions');
 var auth = require('../../api/auth');
+var userStore = require('../../stores/userStore');
 
 var AccountData = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
@@ -14,11 +15,22 @@ var AccountData = React.createClass({
             email: auth.getUserAuthEmail() || '',
             displayName: '',
             phone: '',
-            isPremium: false
+            isPremium: false,
+            errorMsg: ''
         }
     },
+    componentDidMount: function () {
+        userStore.registerToChange(this.onUserStoreDataChanged);
+    },
+    onUserStoreDataChanged: function (userStoreData) {
+        var newState = _.pick(userStoreData, ['errorMsg']);
+        this.setState(newState);
+    },
+    componentWillUnmount: function () {
+        userStore.removeChangeListener(this.onUserStoreDataChanged);
+    },
     handleCreateAccount: function () {
-        userActions.createUserData(this.state);
+        userActions.createUserData(_.omit(this.state), ['errorMsg']);
     },
     handlePremiumChange: function (e, value) {
         this.setState({isPremium: value});

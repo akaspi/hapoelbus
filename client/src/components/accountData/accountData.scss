@@ -31,6 +31,13 @@
     }
   }
 
+  .error-msg {
+    color: #e74c3c;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: default;
+  }
+
   @media all and (max-width: 500px) {
     .account-data-container {
       width: 250px;

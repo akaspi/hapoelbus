@@ -98,6 +98,8 @@ function handleCreateUserData(actionData) {
     var userData = actionData.userData;
     usersData.createUserData(auth.getUserId(), userData, function () {
         notifyChange({userData: userData});
+    }, function() {
+        notifyChange({errorMsg: constants.userStore.ERR_MSG.USER_DATA_CREATION_FAILURE});
     });
 }
 
