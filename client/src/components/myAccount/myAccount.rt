@@ -1,12 +1,10 @@
 <rt-require dependency="../accountData/accountData" as="accountData"/>
 <rt-require dependency="../dashboard/dashboard" as="dashboard"/>
 
-<div>
-    <div rt-if="this.props.isFetchingUserData" key="key-loading-my-account">Loading....</div>
-    <div rt-if="!this.props.isFetchingUserData && !this.props.userData"  key="key-account-data" class="create-account">
-        <accountData />
-    </div>
-    <div rt-if="!this.props.isFetchingUserData && this.props.userData" key="key-dashboard" class="dashboard">
-        <dashboard userData="{this.props.userData}"/>
+<div class="my-account">
+    <div class="my-account-content-wrapper">
+        <div rt-if="this.props.isFetchingUserData" key="key-loading-my-account">Loading....</div>
+        <accountData rt-if="!this.props.isFetchingUserData && !this.props.userData"  key="key-account-data"/>
+        <dashboard rt-if="!this.props.isFetchingUserData && this.props.userData" key="key-dashboard" userData="{this.props.userData}">
     </div>
 </div>

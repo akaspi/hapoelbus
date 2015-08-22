@@ -11,4 +11,7 @@
         <myAccount rt-if="this.state.isLoggedIn" key="key-my-account" isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
         <homePage rt-if="!this.state.isLoggedIn" key="key-home-page" />
     </div>
+    <footer>
+
+    </footer>
 </div>

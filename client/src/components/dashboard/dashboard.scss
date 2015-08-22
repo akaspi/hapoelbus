@@ -1,39 +1,37 @@
-.dashboard-page-container {
-  background-color: #2A2A2A;
-  color: #ffffff;
-  padding: 30px;
+.dashboard {
+  display: flex;
+  align-items: center;
 
-  .dashboard-tabs {
-    margin: 10px auto;
-    width: 400px;
-    display: flex;
+  .status-text {
+    flex: 1;
 
-    .tab-option {
-      background: #ffffff;
-      color: #e74c3c;
-      flex: 1;
-      cursor: pointer;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 14px;
-      padding-bottom: 4px;
-
-      &.selected {
-        color: #ffffff;
-        background: #e74c3c;
-        border-bottom: 4px solid #ffffff;
-        padding-bottom: 0px;
-      }
+    h1 {
+      font-size: 36px;
     }
+
+    h3 {
+      font-size: 22px;
+    }
+
   }
 
-  .dashboard-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
+  .outside-logo {
+    height: 300px;
+    width: 300px;
+    margin-right: 20px;
+    background: url("../../images/outside-logo.png") no-repeat;
+    background-size: cover;
   }
 
 }
+
+@media all and (max-width: 800px) {
+  .dashboard {
+    flex-direction: column;
+
+    .status-text {
+      text-align: center;
+    }
+  }
+}
+

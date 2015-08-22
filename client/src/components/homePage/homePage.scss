@@ -1,98 +1,46 @@
 .home-page {
-
   display: flex;
   flex-direction: column;
-  height: 100%;
+  justify-content: center;
+  height: 70vh;
+  padding: 0 45px;
+  color: #fff;
+  text-shadow: 5px 5px 5px #000;
 
-  .bg-strip {
-    background: url("../../images/home-page-bg.jpg") no-repeat;
-    background-size: cover;
-    height: 600px;
+  h1 {
+    font-size: 100px;
+    margin: 0;
+  }
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 45px;
+  h3 {
+    font-size: 43px;
+    margin: 0;
+  }
 
-    color: #fff;
-    text-shadow: 5px 5px 5px #000;
+}
 
+@media all and (max-width: 700px) {
+  .home-page {
     h1 {
-      font-size: 100px;
-      margin: 0;
+      font-size: 65px;
     }
-
     h3 {
-      font-size: 43px;
-      margin: 0;
-    }
-
-  }
-
-  footer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-
-    .text-strip {
-      font-size: 18px;
-    }
-
-    .logos-strip {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-
-      .lion {
-        background: url("../../images/lion.png") no-repeat;
-        width: 150px;
-        height: 150px;
-        background-size: contain;
-        margin: 0 30px;
-      }
-
-      .hapoel {
-        background: url("../../images/hapoel_logo.png") no-repeat;
-        width: 150px;
-        height: 150px;
-        background-size: contain;
-        margin: 0 30px;
-      }
-
-      .outside {
-        background: url("../../images/outside-logo.jpg") no-repeat;
-        width: 150px;
-        height: 150px;
-        background-size: contain;
-        margin: 0 30px;
-      }
-    }
-  }
-
-  @media all and (max-width: 700px) {
-    .bg-strip {
-      h1 {
-        font-size: 65px;
-      }
-      h3 {
-        font-size: 24px;
-      }
-    }
-  }
-
-  @media all and (max-width: 500px) {
-    .bg-strip {
-      padding: 0;
-      text-align: center;
-
-      h1 {
-        font-size: 45px;
-      }
-      h3 {
-        font-size: 16px;
-      }
+      font-size: 24px;
     }
   }
 }
+
+@media all and (max-width: 500px) {
+  .home-page {
+    padding: 0;
+    text-align: center;
+
+    h1 {
+      font-size: 45px;
+    }
+    h3 {
+      font-size: 16px;
+    }
+  }
+}
+
