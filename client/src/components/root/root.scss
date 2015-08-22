@@ -15,7 +15,36 @@
 
   footer {
     height: $site-footer-height;
-    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .contact-us {
+      display: flex;
+      justify-content: center;
+      color: #000;
+      max-width: 300px;
+      font-size: 14px;
+
+      a {
+        color: #000;
+      }
+
+      .text {
+        flex: 3;
+        flex-basis: 200px;
+      }
+
+      .icon {
+        flex: 1;
+        flex-basis: 20px;
+        padding: 0 10px;
+
+        &.first {
+          border-left: 1px solid #000;
+        }
+      }
+    }
   }
 
 }
