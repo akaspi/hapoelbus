@@ -4,7 +4,9 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="root">
-    <siteHeader class="site-header" isLoggedIn="{this.state.isLoggedIn}" isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
+    <header>
+        <siteHeader class="site-header" isLoggedIn="{this.state.isLoggedIn}" isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
+    </header>
     <div class="site-content">
         <myAccount rt-if="this.state.isLoggedIn" key="key-my-account" isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
         <homePage rt-if="!this.state.isLoggedIn" key="key-home-page" />

@@ -16,15 +16,19 @@ var AccountData = React.createClass({
             displayName: '',
             phone: '',
             maxSeats: 1,
-            isPremium: false
+            isPremium: false,
+            multipleMembers: false
         }
     },
     handleCreateAccount: function () {
-        var userData = this.state;
+        var userData = _.omit(this.state, ['multipleMembers']);
         userActions.createUserData(userData);
     },
     handlePremiumChange: function (e, value) {
         this.setState({isPremium: value});
+    },
+    switchMultipleMembersMode: function(value) {
+      this.setState({multipleMembers: value});
     },
     render: template
 });
