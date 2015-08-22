@@ -11,9 +11,10 @@
             <mui.RaisedButton label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
         </div>
         <div rt-if="this.props.userData" key="key-user-data-avatar" class="user-data-avatar-wrapper">
-            <mui.Avatar>
+            <mui.Avatar rt-if="!this.hasProfilePicture()">
                 <i class="fa fa-user" />
             </mui.Avatar>
+            <mui.Avatar rt-if="this.hasProfilePicture()" src="{this.getProfilePictureURL()}"/>
             <div class="welcome-text">
                 <div>שלום,</div>
                 <div class="user-display-name">{this.props.userData.displayName}</div>

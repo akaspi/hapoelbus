@@ -12,14 +12,14 @@ function onAuthActionComplete(onSuccess, onError, errorData, authData) {
     }
 }
 
-function getUserAuthEmail(authData) {
+function getUserAuthData(authData) {
     switch (authData.provider) {
         case 'password':
-            return authData.password.email;
+            return authData.password;
         case 'google':
-            return authData.google.email;
+            return authData.google;
         case 'facebook':
-            return authData.facebook.email;
+            return authData.facebook;
     }
 }
 
@@ -46,14 +46,20 @@ module.exports = {
         return this.isLoggedIn() ? db.getAuth().uid : null;
     },
     getUserAuthEmail: function () {
-        return this.isLoggedIn() ? getUserAuthEmail(db.getAuth()) : null;
+        return this.isLoggedIn() ? getUserAuthData(db.getAuth()).email : null;
+    },
+    getUserAuthPicture: function () {
+        return this.isLoggedIn() ? getUserAuthData(db.getAuth()).profileImageURL : null;
+    },
+    hasProfilePicture: function () {
+        return this.isLoggedIn() && (db.getAuth().provider === "google" || db.getAuth().provider === "facebook");
     },
     logOut: function () {
         db.unauth();
     },
     resetPasswordRequest: function (email, onSuccess, onError) {
         db.resetPassword({
-          email: email
+            email: email
         }, onAuthActionComplete.bind(null, onSuccess, onError));
     },
     changePassword: function (email, oldOrTempPassword, newPassword, onSuccess, onError) {
