@@ -1,45 +1,42 @@
 <rt-require dependency="material-ui" as="mui"/>
 
-<div class="edit-account-data-container">
-    <div>
-        <h3>פרטי המשתמש:</h3>
-    </div>
-    <div class="fields-container">
-        <div class="edit-item long-field">
+<div class="edit-account-data">
+    <div class="account-data">
+        <div class="edit-item">
             <mui.TextField type="text" disabled="{!this.state.isEditMode}" floatingLabelText="דוא׳׳ל לעדכונים"
                            underlineStyle="{{borderColor: '#2c3e50'}}"
                            valueLink="{this.linkState('email')}"/>
         </div>
-        <div class="edit-item long-field">
+        <div class="edit-item">
             <mui.TextField type="text" disabled="{!this.state.isEditMode}"
                            underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="שם מלא"
                            valueLink="{this.linkState('displayName')}"/>
         </div>
-        <div class="edit-item long-field">
+        <div class="edit-item">
             <mui.TextField type="text" disabled="{!this.state.isEditMode}"
                            underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="טלפון"
                            valueLink="{this.linkState('phone')}"/>
         </div>
-        <div class="edit-item field">
+        <div class="edit-item">
             <mui.TextField type="text" disabled="{!this.state.isEditMode}"
                            underlineStyle="{{borderColor: '#2c3e50'}}" floatingLabelText="מס׳ מקומות"
                            valueLink="{this.linkState('maxSeats')}"/>
         </div>
-        <div class="edit-item field">
-            <mui.Checkbox name="premiumToggle" labelStyle="{{float: 'left', fontSize: '14px'}}"
-                          defaultChecked="{this.state.isPremium}" disabled="{!this.state.isEditMode}"
-                          onCheck="(e,val)=>this.handlePremiumChange(e,val)"
-                          label="מנוי להסעה"
-                          labelPosition="left"/>
+        <div class="edit-item full-width-item">
+            <mui.Toggle name="premiumToggle" labelStyle="{{float: 'none', fontSize: '14px'}}"
+                        defaultToggled="{this.state.isPremium}" disabled="{!this.state.isEditMode}"
+                        onToggle="(e,val)=>this.handlePremiumChange(e,val)"
+                        label="מנוי להסעה"
+                        labelPosition="right"/>
         </div>
-        <div class="edit-item button">
-            <mui.FloatingActionButton mini={true} backgroundColor="#e74c3c" rt-if="!this.state.isEditMode" onClick="{this.handleEditClick}" key="">
-                <i class="fa fa-pencil"></i>
-            </mui.FloatingActionButton>
+    </div>
+    <div class="button">
+        <mui.FloatingActionButton mini={false} backgroundColor="#e74c3c" rt-if="!this.state.isEditMode" key="key-edit-account-data-btn" onClick="{this.handleEditClick}">
+            <i class="fa fa-pencil"></i>
+        </mui.FloatingActionButton>
 
-            <mui.FloatingActionButton mini={true} backgroundColor="#e74c3c" rt-if="this.state.isEditMode" onClick="{this.handleSaveUserDataClick}">
-                <i class="fa fa-floppy-o"></i>
-            </mui.FloatingActionButton>
-        </div>
+        <mui.FloatingActionButton mini={false} backgroundColor="#e74c3c" rt-if="this.state.isEditMode" key="key-save-account-data-btn" onClick="{this.handleSaveUserDataClick}">
+            <i class="fa fa-floppy-o"></i>
+        </mui.FloatingActionButton>
     </div>
 </div>

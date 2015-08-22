@@ -1,39 +1,37 @@
-.edit-account-data-container {
-  max-width: 920px;
-  background: #fff;
-  border-radius: 8px;
-  font-size: 12px;
-  padding: 25px;
+.edit-account-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  h3 {
-    color: #000000;
-    margin: 0;
-  }
-
-  .fields-container {
+  .account-data {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-flow: row wrap;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
 
     .edit-item {
-      margin: 5px 10px;
-      display: flex;
+      margin: 20px;
+      flex: 1;
 
-      &.button {
-        flex: 1;
-        min-width: 40px;
+      &:first-child {
+        margin-top: 0;
       }
 
-      &.field {
-        flex: 3;
-        min-width: 105px;
+      &:last-child {
+        margin-bottom: 0;
       }
 
-      &.long-field {
-        flex: 5;
-        min-width: 175px;
+      &.full-width-item {
+        width: 100%;
       }
     }
+  }
+
+  .button {
+    margin-top: 25px;
+    font-size: 22px;
   }
 }

@@ -1,6 +1,5 @@
 .dashboard-page-container {
   background-color: #2A2A2A;
-  height: calc(100vh - 120px);
   color: #ffffff;
   padding: 30px;
 
@@ -34,6 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 30px;
   }
 
 }
