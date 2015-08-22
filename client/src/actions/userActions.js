@@ -48,5 +48,19 @@ module.exports = {
         dispatchAction({
             type: 'LOGOUT_USER'
         });
+    },
+    resetPasswordRequest: function(email) {
+        dispatchAction({
+            type: 'RESET_PASSWORD_REQUEST',
+            email: email
+        });
+    },
+    changePassword: function(email, oldOrTempPassword, newPassword) {
+        dispatchAction({
+            type: 'CHANGE_PASSWORD',
+            email: email,
+            oldOrTempPassword: oldOrTempPassword,
+            newPassword: newPassword
+        });
     }
 };

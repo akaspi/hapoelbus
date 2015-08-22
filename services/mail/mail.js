@@ -36,8 +36,19 @@ function sendWelcomeMail(userData, onSuccess, onError) {
     var subject = 'ברוכים הבאים ל-מחוץ לחומות!';
     var content = welcomeEmailTemplate.replace('USER', userData.displayName);
 
-    send(userData.email, subject, emailContent, onSuccess, onError);
+    send(userData.email, subject, content, onSuccess, onError);
 }
+
+function sendWelcomeMailTest() {
+    var welcomeEmailTemplate = fs.readFileSync(templatesPath + '/welcomeMail.html').toString();
+
+    var subject = 'ברוכים הבאים ל-מחוץ לחומות!';
+    var content = welcomeEmailTemplate.replace('USER', 'עמית כספי');
+
+    send('kaspi.amit@gmail.com', subject, content, _.noop, _.noop);
+}
+
+sendWelcomeMailTest();
 
 function listenToAddedUsers() {
     console.log('listening to usersData:child_added\n');
@@ -62,11 +73,11 @@ function isWelcomeEmailSentToUser(userData, onComplete) {
   });
 }
 
-firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
-  if (error) {
-    console.log("Authentication Failed!\n", error);
-    process.exit();
-  }
-  console.log('Admin authentication success!\n');
-  listenToAddedUsers();
-});
+// firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
+//   if (error) {
+//     console.log("Authentication Failed!\n", error);
+//     process.exit();
+//   }
+//   console.log('Admin authentication success!\n');
+//   listenToAddedUsers();
+// });

@@ -52,7 +52,9 @@ module.exports = {
         db.unauth();
     },
     resetPasswordRequest: function (email, onSuccess, onError) {
-        db.resetPassword(email, onAuthActionComplete.bind(null, onSuccess, onError));
+        db.resetPassword({
+          email: email
+        }, onAuthActionComplete.bind(null, onSuccess, onError));
     },
     changePassword: function (email, oldOrTempPassword, newPassword, onSuccess, onError) {
         db.changePassword({
