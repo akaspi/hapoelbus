@@ -1,7 +1,9 @@
+@import "../../commonStyles/variables";
+
 .site-header {
     background-color: #fff;
     display: flex;
-    height: 60px;
+    height: 100%;
 
     .logo-container {
       flex: 0 0 180px;

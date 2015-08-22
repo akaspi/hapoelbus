@@ -6,6 +6,7 @@ var rt = require('gulp-react-templates');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var serve = require('gulp-serve');
+var autoprefixer = require('gulp-autoprefixer');
 
 var paths = {
   src: './client/src',
@@ -59,6 +60,7 @@ gulp.task('webpack', ['rt'], function(done) {
 gulp.task('sass', function(done) {
   gulp.src(paths.src + '/main.scss')
       .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer())
       .pipe(gulp.dest(paths.dist))
       .on('end', done)
 });

@@ -1,10 +1,16 @@
+@import "../../commonStyles/variables";
+
 .root {
   height: 100%;
-  //min-width: 360px;
   min-height: 600px;
 
+  header {
+    height: $site-header-height;
+  }
+
   .site-content {
-    height: calc(100vh - 60px);
+    height: calc(100vh - #{$site-header-height});
+    background-color: #2A2A2A;
   }
 
 }

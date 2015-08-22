@@ -1,7 +1,7 @@
 <rt-require dependency="../authBox/authBox" as="authBox"/>
 <rt-require dependency="material-ui" as="mui"/>
 
-<header class="site-header">
+<div class="site-header">
     <div class="logo-container">
         <div class="logo"></div>
     </div>
@@ -27,4 +27,4 @@
         <authBox/>
     </mui.Dialog>
 
-</header>
+</div>
