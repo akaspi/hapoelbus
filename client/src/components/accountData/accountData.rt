@@ -29,7 +29,7 @@
 
             <mui.TextField type="number" class="max-seats-input" min="{1}" max="{10}" fullWidth="{true}" floatingLabelText="מס׳ מקומות"
                            underlineStyle="{{borderColor: '#2c3e50'}}"
-                           rt-if="this.state.multipleMembers"
+                           rt-if="this.state.multipleMembers" key="key-max-seats-input"
                            valueLink="{this.linkState('maxSeats')}"/>
         </div>
         <div class="row big-margin">
