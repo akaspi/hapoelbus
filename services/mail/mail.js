@@ -39,17 +39,6 @@ function sendWelcomeMail(userData, onSuccess, onError) {
     send(userData.email, subject, content, onSuccess, onError);
 }
 
-function sendWelcomeMailTest() {
-    var welcomeEmailTemplate = fs.readFileSync(templatesPath + '/welcomeMail.html').toString();
-
-    var subject = 'ברוכים הבאים ל-מחוץ לחומות!';
-    var content = welcomeEmailTemplate.replace('USER', 'עמית כספי');
-
-    send('kaspi.amit@gmail.com', subject, content, _.noop, _.noop);
-}
-
-sendWelcomeMailTest();
-
 function listenToAddedUsers() {
     console.log('listening to usersData:child_added\n');
     firebaseRoot.child('usersData').on('child_added', function(snapshot) {
@@ -57,11 +46,11 @@ function listenToAddedUsers() {
         isWelcomeEmailSentToUser(userData, function(result) {
           if (!result) {
             console.log('sending welcome mail to ' + userData.email);
-            sendWelcomeMail(usersData, function() {
+            sendWelcomeMail(userData, function() {
               firebaseRoot.child(welcomeMailDBPath).push(userData.email);
             }, _.noop);
           } else {
-            console.log('welcome mail was sent to ' + userData.email + '. Skipping...');
+            console.log('welcome mail was already sent to ' + userData.email + '. Skipping...');
           }
         })
     });
@@ -73,11 +62,11 @@ function isWelcomeEmailSentToUser(userData, onComplete) {
   });
 }
 
-// firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
-//   if (error) {
-//     console.log("Authentication Failed!\n", error);
-//     process.exit();
-//   }
-//   console.log('Admin authentication success!\n');
-//   listenToAddedUsers();
-// });
+ firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
+   if (error) {
+     console.log("Authentication Failed!\n", error);
+     process.exit();
+   }
+   console.log('Admin authentication success!\n');
+   listenToAddedUsers();
+ });
