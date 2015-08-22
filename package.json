@@ -21,6 +21,7 @@
     "eslint-config-standard": "^4.1.0",
     "eslint-plugin-standard": "^1.2.0",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
     "gulp-clean-dest": "^0.1.0",
     "gulp-react-templates": "0.0.7",
     "gulp-sass": "^2.0.4",
