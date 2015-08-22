@@ -21,6 +21,7 @@ var LoginBox = React.createClass({
     },
     onAuthNavigationStoreDataChanged: function (authNavigationStoreData) {
         var newState = _.pick(authNavigationStoreData, _.keys(this.state));
+        newState.errorMsg = '';
         this.setState(newState);
     },
     onUserStoreDataChanged: function (userStoreData) {
