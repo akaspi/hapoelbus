@@ -21,10 +21,9 @@ function send(to, subject, body, onSuccess, onError) {
     });
     sendgrid.send(email, function(err, json) {
         if (err) {
-          onError();
-          return console.error(err);
+          onError(err);
+          return;
         }
-        console.log(json);
         onSuccess();
     });
 }
@@ -47,8 +46,12 @@ function listenToAddedUsers() {
           if (!result) {
             console.log('sending welcome mail to ' + userData.email);
             sendWelcomeMail(userData, function() {
+              console.log('mail was successfully sent to ' + userData.email);
               firebaseRoot.child(welcomeMailDBPath).push(userData.email);
-            }, _.noop);
+            }, function(err) {
+              console.log('failed to send email to ' + userData.email + '.')
+              console.log(err);
+            });
           } else {
             console.log('welcome mail was already sent to ' + userData.email + '. Skipping...');
           }
