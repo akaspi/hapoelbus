@@ -1,10 +1,10 @@
 'use strict';
 
-var firebaseSecretKey = 'dU1eXra0oMlXtzxawLFRYp2k67hZoTTC2hcubN1x';
+var firebaseSecretKey = 'FquBx5bqTtH5sfvocXJAZlLEIDRIqiVptwhMiJ3u';
 var sendgridSecretKey = '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';
 
 var sendgrid  = require('sendgrid')(sendgridSecretKey);
-var firebaseRoot = new (require('firebase'))('https://hapoelbus-testapp.firebaseio.com/');
+var firebaseRoot = new (require('firebase'))('https://hapoelbus-prod.firebaseio.com/');
 var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
