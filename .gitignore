@@ -2,6 +2,8 @@
 node_modules/
 .idea/
 npm-debug.log
+Gemfile
+Gemfile.lock
 
 # Private:
 config.json
