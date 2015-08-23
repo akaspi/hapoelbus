@@ -21,16 +21,6 @@
     }
   }
 
-  .max-seats-container {
-    display: flex;
-
-    .max-seats-input {
-      flex: 1;
-      margin-top: -36px;
-      margin-right: 30px;
-    }
-  }
-
   .error-msg {
     color: #e74c3c;
     padding: 5px 10px;
@@ -39,7 +29,11 @@
   }
 
   @media all and (max-width: 500px) {
-    .account-data-container {
+    .title {
+      font-size: 20px;
+    }
+
+    .account-data-fields {
       width: 250px;
     }
   }

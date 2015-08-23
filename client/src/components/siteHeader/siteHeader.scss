@@ -1,34 +1,25 @@
 @import "../../commonStyles/variables";
 
 .site-header {
-    background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  height: 100%;
+
+  .logo {
+    width: 100px;
+    height: 50px;
+    background: url("../../images/outside-text.png") no-repeat;
+    background-size: cover;
+  }
+
+  .login-btn-container {
     display: flex;
-    height: 100%;
-
-    .logo-container {
-      flex: 0 0 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .logo {
-        width: 100px;
-        height: 50px;
-        background: url("../../images/outside-text.png") no-repeat;
-        background-size: cover;
-      }
-    }
-
-    .content {
-      flex: 1 1 40px;
-    }
-
-    .login-btn-container {
-      flex: 0 0 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  }
 
   .user-data-avatar-wrapper {
     display: flex;
@@ -36,8 +27,9 @@
     justify-content: center;
 
     .welcome-text {
+      max-width: 80px;
       flex: 1;
-      margin: 0 15px;
+      margin: 0 10px;
     }
 
     .user-display-name {
@@ -54,5 +46,10 @@
       }
     }
   }
+}
 
+@media all and (max-width: 500px) {
+  .site-header {
+    padding: 0 5px;
+  }
 }

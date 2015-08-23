@@ -1,8 +1,13 @@
 .home-page {
+  flex: 1; // Since site-root is a flex-column, a page that would like to be 100% needs to use flex:1 instead
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 70vh;
+
+  background: url("../../images/home-page-bg.jpg") no-repeat;
+  background-size: cover;
+
   padding: 0 45px;
   color: #fff;
   text-shadow: 5px 5px 5px #000;

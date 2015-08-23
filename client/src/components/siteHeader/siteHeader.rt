@@ -2,14 +2,10 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="site-header">
-    <div class="logo-container">
-        <div class="logo"></div>
-    </div>
-    <div class="content"></div>
+    <div class="logo"></div>
+    <!--<div class="content"></div>-->
     <div class="login-btn-container">
-        <div rt-if="!this.props.isLoggedIn" key="key-login-button">
-            <mui.RaisedButton label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
-        </div>
+        <mui.RaisedButton rt-if="!this.props.isLoggedIn" key="key-login-button" label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
         <div rt-if="this.props.userData" key="key-user-data-avatar" class="user-data-avatar-wrapper">
             <mui.Avatar rt-if="!this.hasProfilePicture()">
                 <i class="fa fa-user" />
