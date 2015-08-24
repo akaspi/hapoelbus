@@ -27,7 +27,6 @@
     justify-content: center;
 
     .welcome-text {
-      max-width: 80px;
       flex: 1;
       margin: 0 10px;
     }
@@ -51,5 +50,13 @@
 @media all and (max-width: 500px) {
   .site-header {
     padding: 0 5px;
+
+    .user-data-avatar-wrapper {
+
+      .welcome-text {
+        max-width: 80px;
+      }
+
+    }
   }
 }
