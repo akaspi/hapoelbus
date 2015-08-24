@@ -2,16 +2,18 @@
 
 @import "components/root/root";
 @import "components/siteHeader/siteHeader";
-@import "components/myAccount/myAccount";
 
+@import "components/homePage/homePage";
+@import "components/myAccount/myAccount";
+@import "components/userData/userData";
 
 
 @import "components/loginBox/loginBox";
 @import "components/createAccountBox/createAccountBox";
 @import "components/forgotPasswordBox/forgotPasswordBox";
-@import "components/homePage/homePage";
+
 @import "components/authBox/authBox";
-@import "components/accountData/accountData";
+
 @import "components/accountDataEdit/accountDataEdit";
 @import "components/dashboard/dashboard";
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
