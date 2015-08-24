@@ -1,10 +1,15 @@
 'use strict';
 
-var firebaseSecretKey = 'FquBx5bqTtH5sfvocXJAZlLEIDRIqiVptwhMiJ3u';
+var isDevMode = !!(process.argv.slice(2)[0] !== "prod");
+
+console.log('Running mail service in ' + (isDevMode ? 'DEV' : 'PRODUCTION') + ' mode.');
+
+var firebaseSecretKey = isDevMode ? 'dU1eXra0oMlXtzxawLFRYp2k67hZoTTC2hcubN1x' : 'FquBx5bqTtH5sfvocXJAZlLEIDRIqiVptwhMiJ3u';
+var firebaseApp = isDevMode ? 'hapoelbus-testapp' : 'hapoelbus-prod';
 var sendgridSecretKey = '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';
 
 var sendgrid  = require('sendgrid')(sendgridSecretKey);
-var firebaseRoot = new (require('firebase'))('https://hapoelbus-prod.firebaseio.com/');
+var firebaseRoot = new (require('firebase'))('https://' + firebaseApp + '.firebaseio.com/');
 var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
@@ -21,13 +26,13 @@ function send(to, subject, body, onSuccess, onError) {
     });
     sendgrid.send(email, function(err, json) {
         if (err) {
-          onError(err);
+          console.log('failed to send email to ' + to);
           return;
         }
+        console.log('mail was successfully sent to ' + to);
         onSuccess();
     });
 }
-
 
 function sendWelcomeMail(userData, onSuccess, onError) {
     var welcomeEmailTemplate = fs.readFileSync(templatesPath + '/welcomeMail.html').toString();
@@ -44,16 +49,15 @@ function listenToAddedUsers() {
         var userData = snapshot.val();
         isWelcomeEmailSentToUser(userData, function(result) {
           if (!result) {
-            console.log('sending welcome mail to ' + userData.email);
-            sendWelcomeMail(userData, function() {
-              console.log('mail was successfully sent to ' + userData.email);
-              firebaseRoot.child(welcomeMailDBPath).push(userData.email);
-            }, function(err) {
-              console.log('failed to send email to ' + userData.email + '.')
-              console.log(err);
-            });
+            if (!isDevMode || _.contains(['kaspi.amit@gmail.com'], userData.email)) {
+              sendWelcomeMail(userData, function() {
+                firebaseRoot.child(welcomeMailDBPath).push(userData.email);
+              }, _.noop);
+            } else {
+              console.log('email was not sent since ' + userData.email + ' is not in the whitelist');
+            }
           } else {
-            console.log('welcome mail was already sent to ' + userData.email + '. Skipping...');
+            console.log('welcome mail was already sent to ' + userData.email + ' - Skipping...');
           }
         })
     });
@@ -65,11 +69,11 @@ function isWelcomeEmailSentToUser(userData, onComplete) {
   });
 }
 
- firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
-   if (error) {
-     console.log("Authentication Failed!\n", error);
-     process.exit();
-   }
-   console.log('Admin authentication success!\n');
-   listenToAddedUsers();
- });
+firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
+  if (error) {
+    console.log("Authentication Failed!\n", error);
+    process.exit();
+  }
+  console.log('Admin authentication success!\n');
+  listenToAddedUsers();
+});
