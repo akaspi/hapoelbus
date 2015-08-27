@@ -1,15 +1,8 @@
 'use strict';
 
-var isDevMode = !!(process.argv.slice(2)[0] !== "prod");
-
-console.log('Running mail service in ' + (isDevMode ? 'DEV' : 'PRODUCTION') + ' mode.');
-
-var firebaseSecretKey = isDevMode ? 'dU1eXra0oMlXtzxawLFRYp2k67hZoTTC2hcubN1x' : 'FquBx5bqTtH5sfvocXJAZlLEIDRIqiVptwhMiJ3u';
-var firebaseApp = isDevMode ? 'hapoelbus-testapp' : 'hapoelbus-prod';
-var sendgridSecretKey = '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';
-
+var utils = require('../utils.js');
 var sendgrid  = require('sendgrid')(sendgridSecretKey);
-var firebaseRoot = new (require('firebase'))('https://' + firebaseApp + '.firebaseio.com/');
+var ref = utils.getFirebaseRef();
 var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
@@ -45,13 +38,13 @@ function sendWelcomeMail(userData, onSuccess, onError) {
 
 function listenToAddedUsers() {
     console.log('listening to usersData:child_added\n');
-    firebaseRoot.child('usersData').on('child_added', function(snapshot) {
+    ref.child('usersData').on('child_added', function(snapshot) {
         var userData = snapshot.val();
         isWelcomeEmailSentToUser(userData, function(result) {
           if (!result) {
-            if (!isDevMode || _.contains(['kaspi.amit@gmail.com'], userData.email)) {
+            if (!utils.isDevMode() || _.contains(['kaspi.amit@gmail.com'], userData.email)) {
               sendWelcomeMail(userData, function() {
-                firebaseRoot.child(welcomeMailDBPath).push(userData.email);
+                ref.child(welcomeMailDBPath).push(userData.email);
               }, _.noop);
             } else {
               console.log('email was not sent since ' + userData.email + ' is not in the whitelist');
@@ -64,16 +57,15 @@ function listenToAddedUsers() {
 }
 
 function isWelcomeEmailSentToUser(userData, onComplete) {
-  firebaseRoot.child(welcomeMailDBPath).once('value', function(snapshot) {
+  ref.child(welcomeMailDBPath).once('value', function(snapshot) {
     onComplete(_.any(snapshot.val(), function(val) { return val === userData.email }));
   });
 }
 
-firebaseRoot.authWithCustomToken(firebaseSecretKey, function(error) {
-  if (error) {
+utils.loginAsAdmin(ref, function() {
+    console.log('Admin authentication success!\n');
+    listenToAddedUsers();
+}, function() {
     console.log("Authentication Failed!\n", error);
     process.exit();
-  }
-  console.log('Admin authentication success!\n');
-  listenToAddedUsers();
 });
