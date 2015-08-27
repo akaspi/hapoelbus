@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var gulpsync = require('gulp-sync')(gulp);
-var watch = require('gulp-watch');
+// var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var rt = require('gulp-react-templates');
 var gutil = require('gulp-util');
@@ -18,14 +18,14 @@ gulp.task('serve', serve({
   port: 3000
 }));
 
-gulp.task('watch', function() {
-  watch('./**/*.rt', function() {
-    gulp.run('webpack');
-  });
-  watch('./**/*.scss', function() {
-    gulp.run('sass');
-  });
-});
+// gulp.task('watch', function() {
+//   watch('./**/*.rt', function() {
+//     gulp.run('webpack');
+//   });
+//   watch('./**/*.scss', function() {
+//     gulp.run('sass');
+//   });
+// });
 
 gulp.task('rt', function(done) {
   gulp.src(paths.src + '/**/*.rt')
@@ -59,7 +59,7 @@ gulp.task('webpack', ['rt'], function(done) {
 
 gulp.task('sass', function(done) {
   gulp.src(paths.src + '/main.scss')
-      .pipe(sass().on('error', sass.logError))
+      .pipe(sass({ style: 'expanded' }).on('error', sass.logError))
       .pipe(autoprefixer())
       .pipe(gulp.dest(paths.dist))
       .on('end', done)
