@@ -1,8 +1,9 @@
+<rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../userData/userData" as="userData"/>
 <rt-require dependency="../dashboard/dashboard" as="dashboard"/>
 
 <div class="my-account">
-    <div rt-if="this.props.isFetchingUserData" key="key-loading-my-account">Loading....</div>
+    <mui.CircularProgress rt-if="this.props.isFetchingUserData" key="key-loading-my-account"/>
     <userData rt-if="!this.props.isFetchingUserData && !this.props.userData"  key="key-account-data"/>
     <dashboard rt-if="!this.props.isFetchingUserData && this.props.userData" key="key-dashboard" userData="{this.props.userData}"/>
 </div>
