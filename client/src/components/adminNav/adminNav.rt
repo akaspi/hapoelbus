@@ -1,9 +1,9 @@
 <div class="admin-nav">
     <div class="admin-nav-buttons-wrapper">
-        <div rt-class="{'admin-nav-btn': true, selected: !this.state.adminViewActive}" onClick="{this.switchToUserView}">
+        <div rt-class="{'admin-nav-btn': true, selected: this.props.activeView === 'admin'}" onClick="{this.switchToUserView}">
             <i class="fa fa-user"/>
         </div>
-        <div rt-class="{'admin-nav-btn': true, selected: this.state.adminViewActive}" onClick="{this.switchToAdminView}">
+        <div rt-class="{'admin-nav-btn': true, selected: this.props.activeView === 'user'}" onClick="{this.switchToAdminView}">
             <i class="fa fa-cogs"/>
         </div>
     </div>

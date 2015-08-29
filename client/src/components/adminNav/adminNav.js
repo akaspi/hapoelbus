@@ -2,18 +2,15 @@
 
 var React = require('react/addons');
 var template = require('./adminNav.rt.js');
+var accountActions = require('../../actions/accountActions');
 
 var AdminDashboard = React.createClass({
-    getInitialState: function() {
-      return {
-          adminViewActive: false
-      }
-    },
     switchToAdminView: function() {
-        this.setState({adminViewActive: true});
+        accountActions.showAdminView();
     },
     switchToUserView: function() {
-        this.setState({adminViewActive: false});
+        accountActions.showUserView();
+
     },
     render: template
 });

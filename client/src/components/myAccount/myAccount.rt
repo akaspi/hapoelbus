@@ -5,9 +5,9 @@
 <rt-require dependency="../adminDashboard/adminDashboard" as="adminDashboard"/>
 
 <div class="my-account">
-    <adminNav rt-if="this.props.isAdmin" key="key-admin-nav"></adminNav>
+    <adminNav rt-if="this.props.isAdmin" key="key-admin-nav" activeView="{this.state.activeView}"></adminNav>
     <mui.CircularProgress rt-if="this.props.isFetchingUserData" key="key-loading-my-account"/>
     <userData rt-if="!this.props.isFetchingUserData && !this.props.userData"  key="key-account-data"/>
-    <dashboard rt-if="!this.props.isFetchingUserData && this.props.userData && !this.props.isAdmin" key="key-dashboard" userData="{this.props.userData}"/>
-    <adminDashboard rt-if="!this.props.isFetchingUserData && this.props.userData && this.props.isAdmin" key="key-admin-dashboard" userData="{this.props.userData}"/>
+    <dashboard rt-if="!this.props.isFetchingUserData && this.props.userData && this.state.activeView === 'user'" key="key-dashboard" userData="{this.props.userData}"/>
+    <adminDashboard rt-if="!this.props.isFetchingUserData && this.props.userData && this.props.isAdmin && this.state.activeView === 'admin'" key="key-admin-dashboard" userData="{this.props.userData}"/>
 </div>
