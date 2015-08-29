@@ -4,7 +4,7 @@ var React = require('react/addons');
 var template = require('./adminNav.rt.js');
 var accountActions = require('../../actions/accountActions');
 
-var AdminDashboard = React.createClass({
+var AdminNav = React.createClass({
     switchToAdminView: function() {
         accountActions.showAdminView();
     },
@@ -15,4 +15,4 @@ var AdminDashboard = React.createClass({
     render: template
 });
 
-module.exports = AdminDashboard;
+module.exports = AdminNav;

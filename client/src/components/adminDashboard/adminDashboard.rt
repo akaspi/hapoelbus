@@ -1,4 +1,5 @@
 <rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="lodash" as="_"/>
 
 <div class="admin-dashboard">
 
@@ -19,7 +20,7 @@
                 deselectOnClickaway={true}
                 showRowHover={false}
                 stripedRows={false}>
-            <mui.TableRow rt-repeat="row in this.state.usersData">
+            <mui.TableRow rt-repeat="row in _.values(this.state.usersData)">
                 <mui.TableRowColumn>{row.displayName}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden2">{row.email}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden">{row.phone}</mui.TableRowColumn>
