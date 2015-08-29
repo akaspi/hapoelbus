@@ -2,14 +2,25 @@
 <rt-require dependency="lodash" as="_"/>
 
 <div class="admin-dashboard">
-
+    <div class="filters-wrapper">
+        <div class="filter-box">
+            <mui.DropDownMenu menuItems="{this.getUsersDataFilterItems()}" onChange="{this.filterUsersData}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: 'initial'}}"></mui.DropDownMenu>
+        </div>
+    </div>
     <mui.Table
             height="{'300px'}"
             fixedHeader="{true}"
             fixedFooter="{false}"
             selectable="{true}"
-            multiSelectable="{false}">
+            multiSelectable="{false}"
+            rt-scope="this.getFilteredUsersData() as filteredData">
         <mui.TableHeader enableSelectAll={false}>
+            <mui.TableRow>
+                <mui.TableHeaderColumn colSpan="{3}" style="{{textAlign: 'center'}}">
+                    <span>מס׳ רשומות</span>
+                    <span class="users-data-count">{_.size(filteredData)}</span>
+                </mui.TableHeaderColumn>
+            </mui.TableRow>
             <mui.TableRow>
                 <mui.TableHeaderColumn>שם מלא</mui.TableHeaderColumn>
                 <mui.TableHeaderColumn class="hidden2">דוא״ל</mui.TableHeaderColumn>
@@ -20,7 +31,7 @@
                 deselectOnClickaway={true}
                 showRowHover={false}
                 stripedRows={false}>
-            <mui.TableRow rt-repeat="row in _.values(this.state.usersData)">
+            <mui.TableRow rt-repeat="row in _.values(filteredData)">
                 <mui.TableRowColumn>{row.displayName}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden2">{row.email}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden">{row.phone}</mui.TableRowColumn>
