@@ -67,10 +67,7 @@ function handleCreateUser(actionData) {
 
 function handleLogin(actionData) {
     auth.login(actionData.email, actionData.password, function () {
-        auth.isAdmin(function(isAdmin) {
-            notifyChange({isLoggedIn: true, isAdmin: isAdmin});
-            handleFetchUserData();
-        });
+        handleFetchUserData();
     }, function () {
         notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
     })
@@ -78,10 +75,7 @@ function handleLogin(actionData) {
 
 function handleSocialLogin(actionData) {
     auth.socialLogin(actionData.provider, function () {
-        auth.isAdmin(function(isAdmin) {
-            notifyChange({isLoggedIn: true, isAdmin: isAdmin});
-            handleFetchUserData();
-        });
+        handleFetchUserData();
     }, function () {
 
     })
@@ -95,7 +89,9 @@ function handleLogOut() {
 function handleFetchUserData() {
     notifyChange({isFetchingUserData: true});
     usersData.getUserData(auth.getUserId(), function (userData) {
-        notifyChange({isFetchingUserData: false, userData: userData});
+        auth.isAdmin(function(isAdmin) {
+            notifyChange({isFetchingUserData: false, userData: userData, isAdmin: isAdmin});
+        });
     });
 }
 
