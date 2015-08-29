@@ -13,12 +13,12 @@
             fixedFooter="{false}"
             selectable="{true}"
             multiSelectable="{false}"
-            rt-scope="this.getFilteredUsersData() as filteredData">
+            onRowSelection="{this.onRowSelection}">
         <mui.TableHeader enableSelectAll={false}>
             <mui.TableRow>
                 <mui.TableHeaderColumn colSpan="{3}" style="{{textAlign: 'center'}}">
                     <span>מס׳ רשומות</span>
-                    <span class="users-data-count">{_.size(filteredData)}</span>
+                    <span class="users-data-count">{_.size(this.state.filteredUserData)}</span>
                 </mui.TableHeaderColumn>
             </mui.TableRow>
             <mui.TableRow>
@@ -31,7 +31,7 @@
                 deselectOnClickaway={true}
                 showRowHover={false}
                 stripedRows={false}>
-            <mui.TableRow rt-repeat="row in _.values(filteredData)">
+            <mui.TableRow selected="{_.contains(this.state.selectedUserDataIndex, rowIndex)}" rt-repeat="row in _.values(this.state.filteredUserData)">
                 <mui.TableRowColumn>{row.displayName}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden2">{row.email}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden">{row.phone}</mui.TableRowColumn>

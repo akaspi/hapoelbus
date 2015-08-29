@@ -12,12 +12,28 @@ var USERS_DATA_FILTER_OPTIONS = {
     FREE: 'free'
 };
 
+function filterData(filter, usersData, paymentsData) {
+    switch (filter) {
+        case USERS_DATA_FILTER_OPTIONS.ALL:
+            return usersData;
+        case USERS_DATA_FILTER_OPTIONS.PAID:
+            return _.pick(usersData, function(userData, uid) {
+                return _.contains(_.keys(paymentsData), uid)
+            }, this);
+        case USERS_DATA_FILTER_OPTIONS.FREE:
+            return _.pick(usersData, function(userData, uid) {
+                return !_.contains(_.keys(paymentsData), uid)
+            }, this);
+    }
+}
+
 var AdminDashboard = React.createClass({
     mixins: [ muiMixin ],
     getInitialState: function () {
-        return _.merge({
-            usersDataFilter: USERS_DATA_FILTER_OPTIONS.ALL
-        }, adminStore.getAll());
+        var initialState = adminStore.getAll();
+        initialState.filteredUserData = filterData(USERS_DATA_FILTER_OPTIONS.ALL, initialState.usersData, initialState.payments);
+        initialState.selectedUserData = [];
+        return initialState;
     },
     componentDidMount: function () {
         adminStore.registerToChange(this.onAdminStoreDataChanged);
@@ -38,21 +54,15 @@ var AdminDashboard = React.createClass({
       ];
     },
     filterUsersData: function(e, index, filterItem) {
-        this.setState({usersDataFilter: filterItem.payload});
+        this.setState({
+            filteredUserData: filterData(filterItem.payload, this.state.usersData, this.state.payments)
+        });
     },
-    getFilteredUsersData: function() {
-        switch (this.state.usersDataFilter) {
-            case USERS_DATA_FILTER_OPTIONS.ALL:
-                return this.state.usersData;
-            case USERS_DATA_FILTER_OPTIONS.PAID:
-                return _.pick(this.state.usersData, function(userData, uid) {
-                    return _.contains(_.keys(this.state.payments), uid)
-                }, this);
-            case USERS_DATA_FILTER_OPTIONS.FREE:
-                return _.pick(this.state.usersData, function(userData, uid) {
-                    return !_.contains(_.keys(this.state.payments), uid)
-                }, this);
-        }
+    onRowSelection: function(selectedRow) {
+        this.setState({
+            selectedUserDataIndex: selectedRow
+        });
+        //console.log(_.pick(this.state.filteredUserData, _.keys(this.state.filteredUserData)[selectedRow]));
     },
     render: template
 });
