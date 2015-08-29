@@ -1,0 +1,29 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="admin-dashboard">
+
+    <mui.Table
+            height="{'300px'}"
+            fixedHeader="{true}"
+            fixedFooter="{false}"
+            selectable="{true}"
+            multiSelectable="{false}">
+        <mui.TableHeader enableSelectAll={false}>
+            <mui.TableRow>
+                <mui.TableHeaderColumn>שם מלא</mui.TableHeaderColumn>
+                <mui.TableHeaderColumn class="hidden2">דוא״ל</mui.TableHeaderColumn>
+                <mui.TableHeaderColumn class="hidden">טלפון</mui.TableHeaderColumn>
+            </mui.TableRow>
+        </mui.TableHeader>
+        <mui.TableBody
+                deselectOnClickaway={true}
+                showRowHover={false}
+                stripedRows={false}>
+            <mui.TableRow rt-repeat="row in this.state.usersData">
+                <mui.TableRowColumn>{row.displayName}</mui.TableRowColumn>
+                <mui.TableRowColumn class="hidden2">{row.email}</mui.TableRowColumn>
+                <mui.TableRowColumn class="hidden">{row.phone}</mui.TableRowColumn>
+            </mui.TableRow>
+        </mui.TableBody>
+    </mui.Table>
+</div>
