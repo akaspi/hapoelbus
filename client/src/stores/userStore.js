@@ -67,6 +67,7 @@ function handleCreateUser(actionData) {
 
 function handleLogin(actionData) {
     auth.login(actionData.email, actionData.password, function () {
+        notifyChange({isLoggedIn: true});
         handleFetchUserData();
     }, function () {
         notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
@@ -75,6 +76,7 @@ function handleLogin(actionData) {
 
 function handleSocialLogin(actionData) {
     auth.socialLogin(actionData.provider, function () {
+        notifyChange({isLoggedIn: true});
         handleFetchUserData();
     }, function () {
 
