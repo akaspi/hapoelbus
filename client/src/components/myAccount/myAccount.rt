@@ -1,17 +1,11 @@
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../userData/userData" as="userData"/>
+<rt-require dependency="../adminNav/adminNav" as="adminNav"/>
 <rt-require dependency="../dashboard/dashboard" as="dashboard"/>
 <rt-require dependency="../adminDashboard/adminDashboard" as="adminDashboard"/>
 
 <div class="my-account">
-    <div rt-if="this.props.isAdmin" key="dsasd" class="admin-nav">
-        <div class="admin-nav-btn admin-dashboard-btn">
-            <i class="fa fa-cogs"/>
-        </div>
-        <div class="admin-nav-btn user-dashboard-btn">
-            <i class="fa fa-user"/>
-        </div>
-    </div>
+    <adminNav rt-if="this.props.isAdmin" key="key-admin-nav"></adminNav>
     <mui.CircularProgress rt-if="this.props.isFetchingUserData" key="key-loading-my-account"/>
     <userData rt-if="!this.props.isFetchingUserData && !this.props.userData"  key="key-account-data"/>
     <dashboard rt-if="!this.props.isFetchingUserData && this.props.userData && !this.props.isAdmin" key="key-dashboard" userData="{this.props.userData}"/>
