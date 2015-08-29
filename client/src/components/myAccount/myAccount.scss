@@ -1,7 +1,20 @@
 .my-account {
   flex: 1;
-  padding: 30px;
 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+
+  .admin-nav {
+    height: 30px;
+    display: flex;
+
+    .admin-nav-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      width: 40px;
+      background-color: #000;
+    }
+  }
 }

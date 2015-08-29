@@ -14,6 +14,7 @@ function notifyAll() {
 
 var storeData = {
     isLoggedIn: auth.isLoggedIn(),
+    isAdmin: false,
     isFetchingUserData: false,
     userData: null,
     errorMsg: ''
@@ -66,8 +67,10 @@ function handleCreateUser(actionData) {
 
 function handleLogin(actionData) {
     auth.login(actionData.email, actionData.password, function () {
-        notifyChange({isLoggedIn: true});
-        handleFetchUserData();
+        auth.isAdmin(function(isAdmin) {
+            notifyChange({isLoggedIn: true, isAdmin: isAdmin});
+            handleFetchUserData();
+        });
     }, function () {
         notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
     })
@@ -75,8 +78,10 @@ function handleLogin(actionData) {
 
 function handleSocialLogin(actionData) {
     auth.socialLogin(actionData.provider, function () {
-        notifyChange({isLoggedIn: true});
-        handleFetchUserData();
+        auth.isAdmin(function(isAdmin) {
+            notifyChange({isLoggedIn: true, isAdmin: isAdmin});
+            handleFetchUserData();
+        });
     }, function () {
 
     })
@@ -84,7 +89,7 @@ function handleSocialLogin(actionData) {
 
 function handleLogOut() {
     auth.logOut();
-    notifyChange({isLoggedIn: false, userData: null});
+    notifyChange({isLoggedIn: false, isAdmin: false, userData: null});
 }
 
 function handleFetchUserData() {

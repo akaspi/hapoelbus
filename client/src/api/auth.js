@@ -42,6 +42,14 @@ module.exports = {
     isLoggedIn: function () {
         return !!db.getAuth();
     },
+    isAdmin: function(onComplete) {
+        if (!this.isLoggedIn()) {
+            return onComplete(false);
+        }
+        db.child('admins').child(db.getAuth().uid).once('value', function(snapshot) {
+            onComplete(!!snapshot.val());
+        });
+    },
     getUserId: function () {
         return this.isLoggedIn() ? db.getAuth().uid : null;
     },

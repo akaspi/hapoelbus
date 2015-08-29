@@ -10,7 +10,7 @@
     </header>
     <div class="site-content">
         <myAccount rt-if="this.state.isLoggedIn" key="key-my-account"
-                   isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
+                   isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}" isAdmin="{this.state.isAdmin}"/>
         <homePage rt-if="!this.state.isLoggedIn" key="key-home-page"/>
     </div>
     <footer>

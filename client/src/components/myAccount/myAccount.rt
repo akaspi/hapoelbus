@@ -3,6 +3,14 @@
 <rt-require dependency="../dashboard/dashboard" as="dashboard"/>
 
 <div class="my-account">
+    <div rt-if="this.props.isAdmin" key="dsasd" class="admin-nav">
+        <div class="admin-nav-btn admin-dashboard-btn">
+            <i class="fa fa-cogs"/>
+        </div>
+        <div class="admin-nav-btn user-dashboard-btn">
+            <i class="fa fa-user"/>
+        </div>
+    </div>
     <mui.CircularProgress rt-if="this.props.isFetchingUserData" key="key-loading-my-account"/>
     <userData rt-if="!this.props.isFetchingUserData && !this.props.userData"  key="key-account-data"/>
     <dashboard rt-if="!this.props.isFetchingUserData && this.props.userData" key="key-dashboard" userData="{this.props.userData}"/>
