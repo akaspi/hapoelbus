@@ -3,9 +3,10 @@
 
 <div class="admin-dashboard">
     <div class="filters-wrapper">
-        <div class="filter-box">
-            <mui.DropDownMenu menuItems="{this.getUsersDataFilterItems()}" onChange="{this.filterUsersData}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: 'initial'}}"></mui.DropDownMenu>
-        </div>
+        <mui.DropDownMenu menuItems="{this.getUsersDataFilterItems()}" onChange="{this.filterUsersData}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: 'initial'}}"></mui.DropDownMenu>
+        <mui.FloatingActionButton mini={true} backgroundColor="#e74c3c">
+            <i class="fa fa-pencil"></i>
+        </mui.FloatingActionButton>
     </div>
     <mui.Table
             height="{'300px'}"
