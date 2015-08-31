@@ -11,12 +11,20 @@ var USERS_DATA_FILTER_OPTIONS = {
     FREE: 'free'
 };
 
+var tableMetadata = [
+    { key: 'displayName', title: 'שם מלא' },
+    { key: 'email', title: 'דוא״ל', hideInSmallScreen: true },
+    { key: 'phone', title: 'טלפון', hideInSmallScreen: true },
+    { key: 'phone', title: 'טלפון', hideInSmallScreen: true },
+    { key: 'maxSeats', title: 'מס׳ מנויים', hideInSmallScreen: true }
+];
+
 var MyAccount = React.createClass({
     mixins: [ muiMixin ],
     getInitialState: function () {
         return {
             filter: USERS_DATA_FILTER_OPTIONS.ALL,
-            selectedUserDataIndex: []
+            selectedDataRows: {}
         }
     },
     getUsersDataFilterItems: function() {
@@ -36,18 +44,14 @@ var MyAccount = React.createClass({
                 return _.pick(this.props.usersData, function(val) { return !val.maxSeats});
         }
     },
+    getTableMetadata: function() {
+      return tableMetadata;
+    },
     filterUsersData: function(e, index, filterItem) {
         this.setState({ filter: filterItem.payload });
     },
-    onRowSelection: function(selectedRow) {
-        this.setState({ selectedUserDataIndex: selectedRow });
-    },
-    getSelectedRowData: function() {
-        var selectedRowIndex = _.first(this.state.selectedUserDataIndex);
-        if (!_.isNumber(selectedRowIndex)) {
-            return {};
-        }
-        return _.values(this.state.dataToDisplay)[selectedRowIndex];
+    onRowSelection: function(selectedRows) {
+        this.setState({ selectedDataRows: selectedRows });
     },
     openEditingPanel: function() {
         this.refs.editUserData.show();

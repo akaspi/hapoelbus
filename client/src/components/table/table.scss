@@ -1,0 +1,18 @@
+.custom-table {
+
+  .rows-count {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .mui-table-row-column, .mui-table-header-column {
+    text-align: right !important;
+  }
+
+}
+
+@media all and (max-width: 500px) {
+  .hidden {
+    display: none;
+  }
+}

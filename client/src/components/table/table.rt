@@ -1,0 +1,31 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="lodash" as="_"/>
+
+<mui.Table
+        class="custom-table"
+        height="{'300px'}"
+        fixedHeader="{true}"
+        fixedFooter="{false}"
+        selectable="{true}"
+        multiSelectable="{false}"
+        onRowSelection="{this.onRowSelection}">
+    <mui.TableHeader enableSelectAll={false}>
+        <mui.TableRow>
+            <mui.TableHeaderColumn colSpan="{_.size(this.props.metadata)}" style="{{textAlign: 'center'}}">
+                <span>מס׳ רשומות</span>
+                <span class="rows-count">{_.size(this.props.data)}</span>
+            </mui.TableHeaderColumn>
+        </mui.TableRow>
+        <mui.TableRow>
+            <mui.TableHeaderColumn rt-repeat="metadataItem in this.props.metadata" rt-class="{hidden: metadataItem.hideInSmallScreen}">{metadataItem.title}</mui.TableHeaderColumn>
+        </mui.TableRow>
+    </mui.TableHeader>
+    <mui.TableBody
+            deselectOnClickaway={false}
+            showRowHover={false}
+            stripedRows={false}>
+        <mui.TableRow selected="{_.contains(this.selectedUserDataIndex, rowIndex)}" rt-repeat="row in _.values(this.props.data)">
+            <mui.TableRowColumn rt-repeat="metadataItem in this.props.metadata" rt-class="{hidden: metadataItem.hideInSmallScreen}">{row[metadataItem.key]}</mui.TableRowColumn>
+        </mui.TableRow>
+    </mui.TableBody>
+</mui.Table>
