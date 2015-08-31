@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var dispatcher = require('../dispatcher/dispatcher');
-var auth = require('../api/auth');
-var usersData = require('../api/usersData');
+var auth = require('../DAL/auth');
+var usersData = require('../DAL/usersData');
 var constants = require('./constants');
 
 var listeners = [];

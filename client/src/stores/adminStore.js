@@ -3,8 +3,8 @@
 var _ = require('lodash');
 
 var dispatcher = require('../dispatcher/dispatcher');
-var admin = require('../api/admin');
-var auth = require('../api/auth');
+var admin = require('../DAL/admin');
+var auth = require('../DAL/auth');
 
 var listeners = [];
 

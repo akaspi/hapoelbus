@@ -5,7 +5,7 @@ var muiMixin = require('../mixins/mui-mixin');
 
 var template = require('./userData.rt.js');
 var userActions = require('../../actions/userActions');
-var auth = require('../../api/auth');
+var auth = require('../../DAL/auth');
 var userStore = require('../../stores/userStore');
 
 var AccountData = React.createClass({
