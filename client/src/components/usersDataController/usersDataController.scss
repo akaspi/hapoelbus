@@ -1,0 +1,31 @@
+.users-data-controller {
+
+  flex: 1;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  .table-header {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .users-data-count {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .mui-table-row-column, .mui-table-header-column {
+    text-align: right !important;
+  }
+
+}
+
+@media all and (max-width: 500px) {
+  .hidden {
+    display: none;
+  }
+}
