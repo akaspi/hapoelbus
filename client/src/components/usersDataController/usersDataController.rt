@@ -9,6 +9,7 @@
         </mui.FloatingActionButton>
     </div>
     <mui.Table
+            rt-scope="this.getDataToDisplay() as dataToDisplay"
             height="{'300px'}"
             fixedHeader="{true}"
             fixedFooter="{false}"
@@ -19,7 +20,7 @@
             <mui.TableRow>
                 <mui.TableHeaderColumn colSpan="{3}" style="{{textAlign: 'center'}}">
                     <span>מס׳ רשומות</span>
-                    <span class="users-data-count">{_.size(this.state.dataToDisplay)}</span>
+                    <span class="users-data-count">{_.size(dataToDisplay)}</span>
                 </mui.TableHeaderColumn>
             </mui.TableRow>
             <mui.TableRow>
@@ -32,7 +33,7 @@
                 deselectOnClickaway={false}
                 showRowHover={false}
                 stripedRows={false}>
-            <mui.TableRow selected="{_.contains(this.state.selectedUserDataIndex, rowIndex)}" rt-repeat="row in _.values(this.state.dataToDisplay)">
+            <mui.TableRow selected="{_.contains(this.state.selectedUserDataIndex, rowIndex)}" rt-repeat="row in _.values(dataToDisplay)">
                 <mui.TableRowColumn>{row.displayName}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden2">{row.email}</mui.TableRowColumn>
                 <mui.TableRowColumn class="hidden">{row.phone}</mui.TableRowColumn>

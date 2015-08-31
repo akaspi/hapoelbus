@@ -11,32 +11,13 @@ var USERS_DATA_FILTER_OPTIONS = {
     FREE: 'free'
 };
 
-var USERS_DATA_KEYS = ['displayName', 'email', 'phone'];
-var PAYMENTS_KEYS = ['maxSeats'];
-
-function prepareDataToDisplay(usersData, payments) {
-    return _.reduce(usersData, function(accum, val, key) {
-        accum[key] = _.pick(val, USERS_DATA_KEYS);
-        if (_.contains(_.keys(payments), key)) {
-            _.merge(accum[key], _.pick(payments[key], PAYMENTS_KEYS));
-        }
-        return accum;
-    }, {});
-}
-
 var MyAccount = React.createClass({
     mixins: [ muiMixin ],
     getInitialState: function () {
         return {
-            dataToDisplay: prepareDataToDisplay(this.props.usersData, this.props.payments),
+            filter: USERS_DATA_FILTER_OPTIONS.ALL,
             selectedUserDataIndex: []
         }
-    },
-    componentWillReceiveProps: function(nextProps) {
-      this.setState({
-          dataToDisplay: prepareDataToDisplay(nextProps.usersData, nextProps.payments),
-          selectedUserDataIndex: []
-      })
     },
     getUsersDataFilterItems: function() {
         return [
@@ -45,26 +26,21 @@ var MyAccount = React.createClass({
             { payload: USERS_DATA_FILTER_OPTIONS.FREE, text: 'חד פעמיים' }
         ];
     },
-    filterUsersData: function(e, index, filterItem) {
-        var dataToDisplay = prepareDataToDisplay(this.props.usersData, this.props.payments);
-        switch (filterItem.payload) {
+    getDataToDisplay: function() {
+        switch (this.state.filter) {
             case USERS_DATA_FILTER_OPTIONS.ALL:
-                this.setState({dataToDisplay: dataToDisplay});
-                break;
+                return this.props.usersData;
             case USERS_DATA_FILTER_OPTIONS.PAID:
-                var paidUsersData = _.pick(dataToDisplay, function(val) { return val.maxSeats > 0});
-                this.setState({dataToDisplay: paidUsersData});
-                break;
+                return _.pick(this.props.usersData, function(val) { return val.maxSeats > 0});
             case USERS_DATA_FILTER_OPTIONS.FREE:
-                var freeUsersData = _.pick(dataToDisplay, function(val) { return !val.maxSeats });
-                this.setState({dataToDisplay: freeUsersData});
-                break;
+                return _.pick(this.props.usersData, function(val) { return !val.maxSeats});
         }
     },
+    filterUsersData: function(e, index, filterItem) {
+        this.setState({ filter: filterItem.payload });
+    },
     onRowSelection: function(selectedRow) {
-        this.setState({
-            selectedUserDataIndex: selectedRow
-        });
+        this.setState({ selectedUserDataIndex: selectedRow });
     },
     getSelectedRowData: function() {
         var selectedRowIndex = _.first(this.state.selectedUserDataIndex);

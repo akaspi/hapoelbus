@@ -15,8 +15,7 @@ function notifyAll() {
 }
 
 var storeData = {
-    usersData: {},
-    payments: {}
+    usersData: {}
 };
 
 dispatcher.register(function (actionData) {
