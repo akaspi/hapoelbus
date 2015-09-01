@@ -13,10 +13,10 @@ var USERS_DATA_FILTER_OPTIONS = {
 
 var tableMetadata = [
     { key: 'displayName', title: 'שם מלא' },
-    { key: 'email', title: 'דוא״ל', hideInSmallScreen: true },
-    { key: 'phone', title: 'טלפון', hideInSmallScreen: true },
-    { key: 'phone', title: 'טלפון', hideInSmallScreen: true },
-    { key: 'maxSeats', title: 'מס׳ מנויים', hideInSmallScreen: true }
+    { key: 'email', title: 'דוא״ל' },
+    { key: 'phone', title: 'טלפון' },
+    { key: 'isPremium', title: 'מעוניין במנוי' },
+    { key: 'maxSeats', title: 'מס׳ מנויים' }
 ];
 
 var MyAccount = React.createClass({

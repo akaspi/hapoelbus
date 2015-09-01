@@ -17,7 +17,7 @@
             </mui.TableHeaderColumn>
         </mui.TableRow>
         <mui.TableRow>
-            <mui.TableHeaderColumn rt-repeat="metadataItem in this.props.metadata" rt-class="{hidden: metadataItem.hideInSmallScreen}">{metadataItem.title}</mui.TableHeaderColumn>
+            <mui.TableHeaderColumn rt-repeat="metadataItem in this.props.metadata" rt-class="{hidden: metadataItemIndex !== 0}">{metadataItem.title}</mui.TableHeaderColumn>
         </mui.TableRow>
     </mui.TableHeader>
     <mui.TableBody
@@ -25,7 +25,12 @@
             showRowHover={false}
             stripedRows={false}>
         <mui.TableRow selected="{_.contains(this.selectedUserDataIndex, rowIndex)}" rt-repeat="row in _.values(this.props.data)">
-            <mui.TableRowColumn rt-repeat="metadataItem in this.props.metadata" rt-class="{hidden: metadataItem.hideInSmallScreen}">{row[metadataItem.key]}</mui.TableRowColumn>
+            <mui.TableRowColumn rt-repeat="metadataItem in this.props.metadata" rt-class="{hidden: metadataItemIndex !== 0}">
+                <div rt-scope="row[metadataItem.key] as cellData">
+                    <i rt-if="_.isBoolean(cellData)" key="key-boolean-data" rt-class="{'fa': true, 'fa-plus': cellData, 'fa-minus': !cellData}"></i>
+                    <span rt-if="_.isString(cellData) || _.isNumber(cellData)">{cellData}</span>
+                </div>
+            </mui.TableRowColumn>
         </mui.TableRow>
     </mui.TableBody>
 </mui.Table>
