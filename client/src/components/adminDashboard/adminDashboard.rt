@@ -1,5 +1,0 @@
-<rt-require dependency="../usersDataController/usersDataController" as="usersDataController"/>
-
-<div class="admin-dashboard">
-    <usersDataController usersData="{this.state.usersData}"/>
-</div>

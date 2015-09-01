@@ -1,5 +1,4 @@
-.users-data-controller {
-
+.users-data-dashboard {
   flex: 1;
   padding: 30px;
 
@@ -13,13 +12,16 @@
     align-items: center;
   }
 
-  .users-data-count {
-    font-weight: bold;
-    margin-right: 5px;
-  }
+  .users-data-table {
 
-  .mui-table-row-column, .mui-table-header-column {
-    text-align: right !important;
+    .users-data-count {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .mui-table-row-column, .mui-table-header-column {
+      text-align: right !important;
+    }
   }
 
 }

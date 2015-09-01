@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var template = require('./adminNav.rt.js');
-var accountActions = require('../../actions/accountActions');
+var accountActions = require('../../../actions/accountActions');
 
 var AdminNav = React.createClass({
     switchToAdminView: function() {

@@ -2,9 +2,9 @@
 
 var React = require('react/addons');
 var template = require('./adminDashboard.rt.js');
-var muiMixin = require('../mixins/mui-mixin');
-var adminStore = require('../../stores/adminStore');
-var adminActions = require('../../actions/adminActions');
+var muiMixin = require('../../mixins/mui-mixin');
+var adminStore = require('../../../stores/adminStore');
+var adminActions = require('../../../actions/adminActions');
 
 
 var AdminDashboard = React.createClass({

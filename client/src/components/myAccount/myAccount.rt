@@ -1,8 +1,8 @@
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../userData/userData" as="userData"/>
-<rt-require dependency="../adminNav/adminNav" as="adminNav"/>
+<rt-require dependency="../admin/adminNav/adminNav" as="adminNav"/>
 <rt-require dependency="../dashboard/dashboard" as="dashboard"/>
-<rt-require dependency="../adminDashboard/adminDashboard" as="adminDashboard"/>
+<rt-require dependency="../admin/adminDashboard/adminDashboard" as="adminDashboard"/>
 
 <div class="my-account">
     <adminNav rt-if="this.props.isAdmin" key="key-admin-nav" activeView="{this.state.activeView}"></adminNav>

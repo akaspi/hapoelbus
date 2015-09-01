@@ -2,8 +2,8 @@
 
 var React = require('react/addons');
 
-var template = require('./usersDataController.rt.js');
-var muiMixin = require('../mixins/mui-mixin');
+var template = require('./usersDataDashboard.rt.js');
+var muiMixin = require('../../mixins/mui-mixin');
 
 var USERS_DATA_FILTER_OPTIONS = {
     ALL: 'all',
@@ -11,7 +11,7 @@ var USERS_DATA_FILTER_OPTIONS = {
     FREE: 'free'
 };
 
-var tableMetadata = [
+var tableColumnMetadata = [
     { key: 'displayName', title: 'שם מלא' },
     { key: 'email', title: 'דוא״ל' },
     { key: 'phone', title: 'טלפון' },
@@ -19,7 +19,7 @@ var tableMetadata = [
     { key: 'maxSeats', title: 'מס׳ מנויים' }
 ];
 
-var MyAccount = React.createClass({
+var UsersDataDashboard = React.createClass({
     mixins: [ muiMixin ],
     getInitialState: function () {
         return {
@@ -44,14 +44,19 @@ var MyAccount = React.createClass({
                 return _.pick(this.props.usersData, function(val) { return !val.maxSeats});
         }
     },
-    getTableMetadata: function() {
-      return tableMetadata;
+    getColumnMetadata: function() {
+        return tableColumnMetadata;
     },
     filterUsersData: function(e, index, filterItem) {
         this.setState({ filter: filterItem.payload });
     },
     onRowSelection: function(selectedRows) {
-        this.setState({ selectedDataRows: selectedRows });
+        var currentData = this.getDataToDisplay();
+        var dataKeys = _.keys(currentData);
+        var keysOfSelectedRows = _.map(selectedRows, function (rowIndex) {
+            return dataKeys[rowIndex]
+        });
+        this.setState({selectedDataRows: _.pick(this.props.usersData, keysOfSelectedRows)});
     },
     openEditingPanel: function() {
         this.refs.editUserData.show();
@@ -59,4 +64,4 @@ var MyAccount = React.createClass({
     render: template
 });
 
-module.exports = MyAccount;
+module.exports = UsersDataDashboard;

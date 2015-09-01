@@ -1,0 +1,5 @@
+<rt-require dependency="../usersDataDashboard/usersDataDashboard" as="usersDataDashboard"/>
+
+<div class="admin-dashboard">
+    <usersDataDashboard usersData="{this.state.usersData}"/>
+</div>
