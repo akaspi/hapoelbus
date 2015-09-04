@@ -1,6 +1,7 @@
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../siteHeader/siteHeader" as="siteHeader"/>
 <rt-require dependency="../homePage/homePage" as="homePage"/>
+<rt-require dependency="../modals/modalLayer/modalLayer" as="modalLayer"/>
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="root">
@@ -28,4 +29,5 @@
             </span>
         </div>
     </footer>
+    <modalLayer/>
 </div>

@@ -1,0 +1,5 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<mui.Dialog ref="modal" onDismiss="{this.onDialogClose}" contentStyle="{{'width':'360'}}" modal="{false}">
+    <input type="text" placeholder="KUKU"/>
+</mui.Dialog>

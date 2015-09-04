@@ -5,6 +5,9 @@ var React = require('react/addons');
 var template = require('./usersDataDashboard.rt.js');
 var muiMixin = require('../../mixins/mui-mixin');
 
+var modalActions = require('../../../actions/modalActions');
+var ModalConstants = require('../../../constants/ModalConstants');
+
 var USERS_DATA_FILTER_OPTIONS = {
     ALL: 'all',
     PAID: 'paid',
@@ -59,7 +62,9 @@ var UsersDataDashboard = React.createClass({
         this.setState({selectedDataRows: _.pick(this.props.usersData, keysOfSelectedRows)});
     },
     openEditingPanel: function() {
-        this.refs.editUserData.show();
+        modalActions.showModal(ModalConstants.NAME.UPDATE_USER_DATA_MODAL, {
+            userData: this.state.selectedDataRows
+        });
     },
     render: template
 });
