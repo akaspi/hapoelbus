@@ -1,6 +1,7 @@
 'use strict';
 
 var dispatcher = require('../dispatcher/dispatcher');
+var adminConstants = require('../constants/adminConstants');
 
 function dispatchAction(actionData) {
     dispatcher.dispatch(actionData);
@@ -9,14 +10,14 @@ function dispatchAction(actionData) {
 module.exports = {
     fetchUsersData: function () {
         dispatchAction({
-            type: 'FETCH_ALL_USERS_DATA'
+            type: adminConstants.ACTIONS.FETCH_ALL_USERS_DATA
         });
     },
-    updatePayment: function(uid, maxSeats) {
+    updateUserData: function(uid, userData) {
         dispatchAction({
-            type: 'UPDATE_PAYMENT',
+            type: adminConstants.ACTIONS.UPDATE_USER_DATA,
             uid: uid,
-            maxSeats: maxSeats
+            userData: userData
         });
     }
 };

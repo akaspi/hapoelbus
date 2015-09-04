@@ -5,7 +5,7 @@ var _ = require('lodash');
 var dispatcher = require('../dispatcher/dispatcher');
 var admin = require('../DAL/admin');
 var auth = require('../DAL/auth');
-
+var adminConstants = require('../constants/adminConstants');
 var listeners = [];
 
 function notifyAll() {
@@ -29,14 +29,11 @@ var storeData = {
 
 dispatcher.register(function (actionData) {
     switch (actionData.type) {
-        case 'FETCH_ALL_USERS_DATA':
+        case adminConstants.ACTIONS.FETCH_ALL_USERS_DATA:
             fetchAllUserData();
             break;
-        case 'UPDATE_USER_DATA':
-            fetchAllUserData();
-            break;
-        case 'UPDATE_PAYMENT':
-            updatePayments(actionData);
+        case adminConstants.ACTIONS.UPDATE_USER_DATA:
+            handleUpdateUserData(actionData);
             break;
     }
 });
@@ -52,11 +49,11 @@ function fetchAllUserData() {
     });
 }
 
-function updatePayments(actionData) {
-    admin.updatePayments(actionData.uid, actionData.maxSeats, function() {
-        var updatedPayments = {};
-        updatedPayments[actionData.uid] = { maxSeats: actionData.maxSeats };
-        notifyChange({payments: updatedPayments});
+function handleUpdateUserData(actionData) {
+    admin.updateUserData(actionData.uid, actionData.userData, function() {
+        var updatedUserData = {};
+        updatedUserData[actionData.uid] = actionData.userData;
+        notifyChange({usersData: updatedUserData});
     }, function() {
 
     })

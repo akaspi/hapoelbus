@@ -6,7 +6,7 @@ var muiMixin = require('../../mixins/mui-mixin');
 var _ = require('lodash');
 
 var modalActions = require('../../../actions/modalActions');
-var userActions = require('../../../actions/userActions');
+var adminActions = require('../../../actions/adminActions');
 
 var ModalLayer =  React.createClass({
     mixins: [ muiMixin, React.addons.LinkedStateMixin ],
@@ -23,7 +23,7 @@ var ModalLayer =  React.createClass({
         this.setState({isPremium: val});
     },
     updateUserData: function() {
-        userActions.updateUserData(this.state, _.keys(this.props.userData)[0]);
+        adminActions.updateUserData(_.keys(this.props.userData)[0], this.state);
         modalActions.hideCurrentModal();
     },
     render: template

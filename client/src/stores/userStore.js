@@ -51,11 +51,6 @@ function handleUpdateUserData(actionData){
     var uid = actionData.uid || auth.getUserId();
     usersData.updateUserData(uid, userData, function () {
         notifyChange({userData: userData});
-        auth.isAdmin(function(isAdmin) {
-           if (isAdmin) {
-               adminActions.fetchUsersData();
-           }
-        });
     });
 }
 

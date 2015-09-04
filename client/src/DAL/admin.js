@@ -22,12 +22,20 @@ module.exports =  {
             }, onError);
         }, onError);
     },
-    updatePayments: function(uid, maxSeats, onSuccess, onError) {
-        var dataToUpdate = {
-            mexSeats: maxSeats
-        };
-        paymentsRef.child(uid).update(dataToUpdate, function() {
-            onSuccess();
-        }, onError);
+    updateUserData: function(uid, userData, onSuccess, onError) {
+        var dataToUpdate = _.pick(userData, ['displayName', 'email', 'phone', 'isPremium']);
+        var paymentsData = _.pick(userData, ['maxSeats']);
+
+        usersDataRef.child(uid).update(dataToUpdate, function(error) {
+            if (error) {
+                return onError();
+            }
+            paymentsRef.child(uid).update(paymentsData, function(error) {
+                if (error) {
+                    return onError();
+                }
+                onSuccess();
+            })
+        })
     }
 };
