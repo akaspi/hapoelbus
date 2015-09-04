@@ -1,16 +1,23 @@
 .update-user-data-modal {
 
-  .centre-line {
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #2c3e50;
-    line-height: 0.1em;
-    margin: 20px 0 0px;
-    color: #2c3e50;
+  .edit-item {
+    margin: 10px 0;
 
-    span {
-      background: #fff;
-      padding: 0 10px;
+    &:first-child {
+      margin-top: 0;
     }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.toggle-item {
+      margin: 20px 0;
+    }
+  }
+  .actions {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 16px;
   }
 }

@@ -43,12 +43,4 @@
             </mui.TableRow>
         </mui.TableBody>
     </mui.Table>
-
-    <!--<mui.Dialog ref="editUserData" contentStyle="{{'width':'360'}}" modal="{false}" rt-scope="this.getSelectedRowData() as selectedRowData">-->
-    <!--<mui.TextField type="text" floatingLabelText="דוא״ל" fullWidth="{true}" underlineStyle="{{borderColor: '#2c3e50'}}" defaultValue="{selectedRowData.email}"/>-->
-    <!--<mui.TextField type="text" floatingLabelText="טלפון" fullWidth="{true}" underlineStyle="{{borderColor: '#2c3e50'}}" defaultValue="{selectedRowData.phone}"/>-->
-    <!--<mui.FloatingActionButton mini={true} backgroundColor="#e74c3c" onClick="{this.openEditingPanel}">-->
-    <!--<i class="fa fa-floppy-o"></i>-->
-    <!--</mui.FloatingActionButton>-->
-    <!--</mui.Dialog>-->
 </div>
