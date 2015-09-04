@@ -4,6 +4,8 @@ var auth = require('../DAL/auth');
 var usersData = require('../DAL/usersData');
 var constants = require('./constants');
 
+var adminActions = require('../actions/adminActions');
+
 var listeners = [];
 
 function notifyAll() {
@@ -108,8 +110,14 @@ function handleCreateUserData(actionData) {
 
 function handleUpdateUserData(actionData){
     var userData = actionData.userData;
-    usersData.updateUserData(auth.getUserId(), userData, function () {
+    var uid = actionData.uid || auth.getUserId();
+    usersData.updateUserData(uid, userData, function () {
         notifyChange({userData: userData});
+        auth.isAdmin(function(isAdmin) {
+           if (isAdmin) {
+               adminActions.fetchUsersData();
+           }
+        });
     });
 }
 

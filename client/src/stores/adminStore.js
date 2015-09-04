@@ -31,6 +31,9 @@ dispatcher.register(function (actionData) {
         case 'FETCH_ALL_USERS_DATA':
             fetchAllUserData();
             break;
+        case 'UPDATE_USER_DATA':
+            fetchAllUserData();
+            break;
         case 'UPDATE_PAYMENT':
             updatePayments(actionData);
             break;

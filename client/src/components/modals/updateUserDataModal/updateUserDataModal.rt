@@ -12,7 +12,7 @@
                     labelPosition="right"/>
         <mui.TextField class="edit-item" type="number" min="{0}" floatingLabelText="מס׳ מנויים" fullWidth="{true}" valueLink="{this.linkState('maxSeats')}"/>
         <div class="actions">
-            <mui.FloatingActionButton mini={true} backgroundColor="#e74c3c">
+            <mui.FloatingActionButton mini={true} backgroundColor="#e74c3c" onClick="{this.updateUserData}">
                 <i class="fa fa-floppy-o"/>
             </mui.FloatingActionButton>
         </div>

@@ -20,10 +20,11 @@ module.exports = {
             userData: userData
         });
     },
-    updateUserData: function (userData) {
+    updateUserData: function (userData, uid) {
         dispatchAction({
             type: 'UPDATE_USER_DATA',
-            userData: userData
+            userData: userData,
+            uid: uid
         });
     },
     fetchUserData: function () {
