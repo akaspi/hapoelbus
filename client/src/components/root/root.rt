@@ -1,6 +1,8 @@
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../siteHeader/siteHeader" as="siteHeader"/>
 <rt-require dependency="../homePage/homePage" as="homePage"/>
+<rt-require dependency="../loading/loading" as="loading"/>
+<rt-require dependency="../userData/userData" as="userData"/>
 <rt-require dependency="../modals/modalLayer/modalLayer" as="modalLayer"/>
 <rt-require dependency="material-ui" as="mui"/>
 
@@ -10,9 +12,10 @@
                     isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
     </header>
     <div class="site-content">
-        <myAccount rt-if="this.state.isLoggedIn" key="key-my-account"
-                   isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}" isAdmin="{this.state.isAdmin}"/>
         <homePage rt-if="!this.state.isLoggedIn" key="key-home-page"/>
+        <loading rt-if="this.state.isLoggedIn && this.state.isFetchingUserData" key="key-fetching-user-data"/>
+        <userData rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && !this.state.userData" key="key-user-data"/>
+        <myAccount rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && this.state.userData" key="key-my-account" userData="{this.state.userData}" isAdmin="{this.state.isAdmin}"/>
     </div>
     <footer>
         <div class="contact-us">

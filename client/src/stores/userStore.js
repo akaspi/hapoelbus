@@ -2,7 +2,8 @@ var _ = require('lodash');
 var dispatcher = require('../dispatcher/dispatcher');
 var auth = require('../DAL/auth');
 var usersData = require('../DAL/usersData');
-var constants = require('./constants');
+var userDataConstants = require('../constants/userDataConstants');
+var authConstants = require('../constants/authConstants');
 
 var adminActions = require('../actions/adminActions');
 
@@ -15,41 +16,20 @@ function notifyAll() {
 }
 
 var storeData = {
-    isLoggedIn: auth.isLoggedIn(),
-    isAdmin: false,
     isFetchingUserData: false,
-    userData: null,
-    errorMsg: ''
+    userData: null
 };
 
 dispatcher.register(function (actionData) {
     switch (actionData.type) {
-        case 'CREATE_USER':
-            handleCreateUser(actionData);
-            break;
-        case 'LOGIN_USER':
-            handleLogin(actionData);
-            break;
-        case 'SOCIAL_LOGIN':
-            handleSocialLogin(actionData);
-            break;
-        case 'LOGOUT_USER':
-            handleLogOut();
-            break;
-        case 'FETCH_USER_DATA':
+        case userDataConstants.ACTIONS.FETCH_USER_DATA:
             handleFetchUserData();
             break;
-        case 'CREATE_USER_DATA':
-            handleCreateUserData(actionData);
-            break;
-        case 'UPDATE_USER_DATA':
+        case userDataConstants.ACTIONS.UPDATE_USER_DATA:
             handleUpdateUserData(actionData);
             break;
-        case 'RESET_PASSWORD_REQUEST':
-            handleResetPasswordRequest(actionData);
-            break;
-        case 'CHANGE_PASSWORD':
-            handleChangePassword(actionData);
+        case authConstants.ACTIONS.LOGOUT:
+            handleLogOut();
             break;
     }
 });
@@ -59,52 +39,10 @@ function notifyChange(currData) {
     notifyAll();
 }
 
-function handleCreateUser(actionData) {
-    auth.createUser(actionData.email, actionData.password, function () {
-        handleLogin(actionData);
-    }, function () {
-        notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
-    })
-}
-
-function handleLogin(actionData) {
-    auth.login(actionData.email, actionData.password, function () {
-        notifyChange({isLoggedIn: true});
-        handleFetchUserData();
-    }, function () {
-        notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
-    })
-}
-
-function handleSocialLogin(actionData) {
-    auth.socialLogin(actionData.provider, function () {
-        notifyChange({isLoggedIn: true});
-        handleFetchUserData();
-    }, function () {
-
-    })
-}
-
-function handleLogOut() {
-    auth.logOut();
-    notifyChange({isLoggedIn: false, isAdmin: false, userData: null});
-}
-
 function handleFetchUserData() {
     notifyChange({isFetchingUserData: true});
     usersData.getUserData(auth.getUserId(), function (userData) {
-        auth.isAdmin(function(isAdmin) {
-            notifyChange({isFetchingUserData: false, userData: userData, isAdmin: isAdmin});
-        });
-    });
-}
-
-function handleCreateUserData(actionData) {
-    var userData = actionData.userData;
-    usersData.createUserData(auth.getUserId(), userData, function () {
-        notifyChange({userData: userData});
-    }, function() {
-        notifyChange({errorMsg: constants.userStore.ERR_MSG.USER_DATA_CREATION_FAILURE});
+        notifyChange({isFetchingUserData: false, userData: userData});
     });
 }
 
@@ -121,21 +59,8 @@ function handleUpdateUserData(actionData){
     });
 }
 
-function handleResetPasswordRequest(actionData) {
-    auth.resetPasswordRequest(actionData.email, function() {
-        //TODO: Needs to notify somehow
-        console.log('reset password email was sent');
-    }, function() {
-
-    });
-}
-
-function handleChangePassword(actionData) {
-    auth.changePassword(actionData.email, actionData.oldOrTempPassword, actionData.newPassword, function() {
-        handleLogin({email: actionData.email, password: actionData.newPassword});
-    }, function() {
-        notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
-    });
+function handleLogOut() {
+    notifyChange({userData: null});
 }
 
 module.exports = {

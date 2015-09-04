@@ -30,7 +30,7 @@ var AccountData = React.createClass({
         userStore.removeChangeListener(this.onUserStoreDataChanged);
     },
     handleCreateAccount: function () {
-        userActions.createUserData(_.omit(this.state, ['errorMsg']));
+        userActions.updateUserData(_.omit(this.state, ['errorMsg']));
     },
     handlePremiumChange: function (e, value) {
         this.setState({isPremium: value});

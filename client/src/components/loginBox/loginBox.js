@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var template = require('./loginBox.rt.js');
 var muiMixin = require('../mixins/mui-mixin');
-var userActions = require('../../actions/userActions');
+var authActions = require('../../actions/authActions');
 var authNavigationActions = require('../../actions/authNavigationActions');
 
 var LoginBox =  React.createClass({
@@ -15,10 +15,10 @@ var LoginBox =  React.createClass({
         };
     },
     onLogin: function() {
-        userActions.login(this.state.email, this.state.password);
+        authActions.login(this.state.email, this.state.password);
     },
     onSocialLogin: function(provider) {
-        userActions.socialLogin(provider);
+        authActions.socialLogin(provider);
     },
     handleCreateAccountNav: function (){
         authNavigationActions.showCreateAccountBox();

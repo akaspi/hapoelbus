@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
 var template = require('./siteHeader.rt.js');
-var userActions = require('../../actions/userActions');
+var authActions = require('../../actions/authActions');
 var auth = require('../../DAL/auth');
 
 var Root = React.createClass({
@@ -18,7 +18,7 @@ var Root = React.createClass({
         return auth.hasProfilePicture();
     },
     logOut: function() {
-        userActions.logOut();
+        authActions.logOut();
     },
     render: template
 });
