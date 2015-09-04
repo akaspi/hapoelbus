@@ -14,6 +14,14 @@ function notifyAll() {
     });
 }
 
+var defaultUserData = {
+    displayName: '',
+    email: '',
+    phone: '',
+    isPremium: false,
+    maxSeats: 0
+};
+
 var storeData = {
     usersData: {}
 };
@@ -31,7 +39,9 @@ dispatcher.register(function (actionData) {
 
 function fetchAllUserData() {
     admin.getUsersData(function(usersData) {
-        notifyChange({usersData: usersData});
+        notifyChange({usersData: _.mapValues(usersData, function(val) {
+            return _.defaults(val, defaultUserData);
+        })});
     }, function() {
 
     });
