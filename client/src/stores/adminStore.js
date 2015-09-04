@@ -23,6 +23,7 @@ var defaultUserData = {
 };
 
 var storeData = {
+    fetchingData: false,
     usersData: {}
 };
 
@@ -41,10 +42,11 @@ dispatcher.register(function (actionData) {
 });
 
 function fetchAllUserData() {
+    notifyChange({fetchingData: true});
     admin.getUsersData(function(usersData) {
         notifyChange({usersData: _.mapValues(usersData, function(val) {
             return _.defaults(val, defaultUserData);
-        })});
+        }), fetchingData: false});
     }, function() {
 
     });

@@ -1,5 +1,7 @@
 <rt-require dependency="../usersDataDashboard/usersDataDashboard" as="usersDataDashboard"/>
+<rt-require dependency="../../loading/loading" as="loading"/>
 
 <div class="admin-dashboard">
-    <usersDataDashboard usersData="{this.state.usersData}"/>
+    <loading rt-if="this.state.fetchingData" key="key-admin-fetching-data"/>
+    <usersDataDashboard rt-if="!this.state.fetchingData" key="key-admin-has-data" usersData="{this.state.usersData}"/>
 </div>
