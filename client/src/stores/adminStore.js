@@ -50,6 +50,14 @@ function fetchAllUserData() {
 }
 
 function handleUpdateUserData(actionData) {
+    if (!_.isUndefined(actionData.userData.maxSeats)) {
+        var maxSeatsAsNumber = parseInt(actionData.userData.maxSeats);
+        if (maxSeatsAsNumber === 0) {
+            delete actionData.userData.maxSeats;
+        } else {
+            actionData.userData.maxSeats = maxSeatsAsNumber;
+        }
+    }
     admin.updateUserData(actionData.uid, actionData.userData, function() {
         var updatedUserData = {};
         updatedUserData[actionData.uid] = actionData.userData;
