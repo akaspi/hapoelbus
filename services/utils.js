@@ -31,8 +31,10 @@ module.exports = {
         var key = isDevMode() ? config.firebase.development.key : config.firebase.production.key;
         ref.authWithCustomToken(key, function(error) {
             if (error) {
+                console.log('Failed to login as Admin');
                 onError();
             } else {
+                console.log('Admin authentication success!\n');
                 onSuccess();
             }
         });
