@@ -11,7 +11,7 @@ function notifyAll() {
 }
 
 var storeData = {
-    isLoggedIn: false,
+    isLoggedIn: auth.isLoggedIn(),
     isAdmin: false,
     errorMsg: ''
 };
@@ -48,9 +48,8 @@ function notifyChange(currData) {
 }
 
 function handleFetchLoginState() {
-    var isLoggedIn = auth.isLoggedIn();
     auth.isAdmin(function(isAdmin) {
-        notifyChange({isLoggedIn: isLoggedIn, isAdmin: isAdmin});
+        notifyChange({isLoggedIn: auth.isLoggedIn(), isAdmin: isAdmin});
     });
 }
 

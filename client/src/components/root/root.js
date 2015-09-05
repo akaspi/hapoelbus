@@ -17,6 +17,9 @@ var Root = React.createClass({
         authStore.registerToChange(this.onAuthStoreDataChanged);
         userStore.registerToChange(this.onUserStoreDataChanged);
         authActions.fetchLoginState();
+        if (this.state.isLoggedIn) {
+            userActions.fetchUserData();
+        }
     },
     onAuthStoreDataChanged: function(authStoreData) {
         if (!this.state.isLoggedIn && authStoreData.isLoggedIn) {
