@@ -6,7 +6,7 @@ var db = require('./db');
 
 function onAuthActionComplete(onSuccess, onError, errorData, authData) {
     if (errorData) {
-        onError();
+        onError(errorData.code);
     } else {
         onSuccess();
     }

@@ -7,6 +7,10 @@ module.exports = {
         FETCH_LOGIN_STATE: 'fetchLoginState'
     },
     ERROR_MSG: {
-
+        GENERAL: 'אחד הפרטים שהוקשו שגוי. אנא נסה שנית...',
+        EMAIL_TAKEN: 'כתובת דוא״ל זו קיימת במערכת'
+    },
+    ERROR_CODE: {
+        EMAIL_TAKEN: 'EMAIL_TAKEN'
     }
 };

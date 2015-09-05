@@ -1,7 +1,7 @@
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../../commonStyles/variables" as="styleVariables"/>
 
-<div class="login-box">
+<div class="create-account-box">
     <div class="row full-width-item">
         <mui.TextField type="text" hintText="דואר אלקטרוני" fullWidth="{true}" underlineStyle="{{borderColor: '#2c3e50'}}"
                        valueLink="{this.linkState('email')}"/>

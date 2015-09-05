@@ -57,8 +57,14 @@ function handleFetchLoginState() {
 function handleCreateUser(actionData) {
     auth.createUser(actionData.email, actionData.password, function () {
         handleLogin(actionData);
-    }, function () {
-        //notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
+    }, function (errorCode) {
+        switch(errorCode) {
+            case authConstants.ERROR_CODE.EMAIL_TAKEN:
+                notifyChange({errorMsg: authConstants.ERROR_MSG.EMAIL_TAKEN});
+                break;
+            default:
+                notifyChange({errorMsg: authConstants.ERROR_MSG.GENERAL});
+        }
     })
 }
 
@@ -68,7 +74,7 @@ function handleLogin(actionData) {
             notifyChange({isLoggedIn: true, isAdmin: isAdmin});
         });
     }, function () {
-        //notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
+        notifyChange({errorMsg: authConstants.ERROR_MSG.GENERAL});
     })
 }
 
@@ -78,7 +84,7 @@ function handleSocialLogin(actionData) {
             notifyChange({isLoggedIn: true, isAdmin: isAdmin});
         });
     }, function () {
-        //notifyChange({errorMsg: constants.userStore.ERR_MSG.AUTH_FAILURE});
+        notifyChange({errorMsg: authConstants.ERROR_MSG.GENERAL});
     })
 }
 

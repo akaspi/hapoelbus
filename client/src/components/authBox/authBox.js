@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var template = require('./authBox.rt.js');
 var authNavigationStore = require('../../stores/authNavigationStore');
-var userStore = require('../../stores/userStore');
+var authStore = require('../../stores/authStore');
 
 var LoginBox = React.createClass({
     getInitialState: function () {
@@ -17,20 +17,20 @@ var LoginBox = React.createClass({
     },
     componentDidMount: function () {
         authNavigationStore.registerToChange(this.onAuthNavigationStoreDataChanged);
-        userStore.registerToChange(this.onUserStoreDataChanged);
+        authStore.registerToChange(this.onAuthStoreDataChanged);
     },
     onAuthNavigationStoreDataChanged: function (authNavigationStoreData) {
         var newState = _.pick(authNavigationStoreData, _.keys(this.state));
         newState.errorMsg = '';
         this.setState(newState);
     },
-    onUserStoreDataChanged: function (userStoreData) {
+    onAuthStoreDataChanged: function (userStoreData) {
         var newState = _.pick(userStoreData, ['errorMsg']);
         this.setState(newState);
     },
     componentWillUnmount: function () {
         authNavigationStore.removeChangeListener(this.onAuthNavigationStoreDataChanged);
-        userStore.removeChangeListener(this.onUserStoreDataChanged);
+        authStore.removeChangeListener(this.onAuthStoreDataChanged);
     },
     render: template
 });
