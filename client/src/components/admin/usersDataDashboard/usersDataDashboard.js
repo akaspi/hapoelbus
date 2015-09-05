@@ -4,6 +4,7 @@ var React = require('react/addons');
 
 var template = require('./usersDataDashboard.rt.js');
 var muiMixin = require('../../mixins/mui-mixin');
+var _ = require('lodash');
 
 var modalActions = require('../../../actions/modalActions');
 var ModalConstants = require('../../../constants/ModalConstants');
@@ -23,10 +24,11 @@ var tableColumnMetadata = [
 ];
 
 var UsersDataDashboard = React.createClass({
-    mixins: [ muiMixin ],
+    mixins: [ React.addons.LinkedStateMixin, muiMixin ],
     getInitialState: function () {
         return {
-            filter: USERS_DATA_FILTER_OPTIONS.ALL,
+            dropDownFilter: USERS_DATA_FILTER_OPTIONS.ALL,
+            textFilter: '',
             selectedDataRows: {}
         }
     },
@@ -38,20 +40,29 @@ var UsersDataDashboard = React.createClass({
         ];
     },
     getDataToDisplay: function() {
-        switch (this.state.filter) {
+        var filteredData = {};
+        switch (this.state.dropDownFilter) {
             case USERS_DATA_FILTER_OPTIONS.ALL:
-                return this.props.usersData;
+                filteredData =  this.props.usersData;
+                break;
             case USERS_DATA_FILTER_OPTIONS.PAID:
-                return _.pick(this.props.usersData, function(val) { return val.maxSeats > 0});
+                filteredData =  _.pick(this.props.usersData, function(val) { return val.maxSeats > 0});
+                break;
             case USERS_DATA_FILTER_OPTIONS.FREE:
-                return _.pick(this.props.usersData, function(val) { return !val.maxSeats});
+                filteredData = _.pick(this.props.usersData, function(val) { return !val.maxSeats});
+                break;
         }
+        filteredData = _.omit(filteredData, function(val) {
+           return !_.contains(val.displayName, this.state.textFilter);
+        }, this);
+
+        return filteredData;
     },
     getColumnMetadata: function() {
         return tableColumnMetadata;
     },
     filterUsersData: function(e, index, filterItem) {
-        this.setState({ filter: filterItem.payload });
+        this.setState({ dropDownFilter: filterItem.payload });
     },
     onRowSelection: function(selectedRows) {
         var currentData = this.getDataToDisplay();

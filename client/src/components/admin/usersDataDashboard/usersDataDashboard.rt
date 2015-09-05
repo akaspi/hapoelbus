@@ -3,10 +3,15 @@
 
 <div class="users-data-dashboard">
     <div class="table-header">
-        <mui.DropDownMenu menuItems="{this.getUsersDataFilterItems()}" onChange="{this.filterUsersData}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: 'initial'}}"></mui.DropDownMenu>
-        <mui.FloatingActionButton disabled="{_.isEmpty(this.state.selectedDataRows)}" mini={true} backgroundColor="#e74c3c" onClick="{this.openEditingPanel}">
-            <i class="fa fa-pencil"></i>
-        </mui.FloatingActionButton>
+        <div class="filters">
+            <mui.DropDownMenu style="{{'margin-top': '12px'}}" menuItems="{this.getUsersDataFilterItems()}" onChange="{this.filterUsersData}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: '-3px'}}"></mui.DropDownMenu>
+            <mui.TextField type="text" floatingLabelText="סינון לפי שם מלא" fullWidth="{false}" valueLink="{this.linkState('textFilter')}"/>
+        </div>
+        <div class="actions">
+            <mui.FloatingActionButton disabled="{_.isEmpty(this.state.selectedDataRows)}" mini={true} backgroundColor="#e74c3c" onClick="{this.openEditingPanel}">
+                <i class="fa fa-pencil"></i>
+            </mui.FloatingActionButton>
+        </div>
     </div>
 
     <mui.Table

@@ -7,9 +7,21 @@
 
   .table-header {
     display: flex;
-    height: 60px;
     justify-content: space-between;
     align-items: center;
+
+    .filters {
+      display: flex;
+      align-items: center;
+
+      > * {
+        margin: 0 20px;
+
+        &:first-child {
+          margin-right: 0;
+        }
+      }
+    }
   }
 
   .users-data-table {
@@ -27,7 +39,21 @@
 }
 
 @media all and (max-width: 500px) {
-  .hidden {
-    display: none;
+  .users-data-dashboard {
+    .hidden {
+      display: none;
+    }
+    .table-header {
+      .filters {
+        flex-direction: column;
+        align-items: flex-start;
+
+        > * {
+          margin: 0;
+        }
+      }
+    }
   }
+
+
 }
