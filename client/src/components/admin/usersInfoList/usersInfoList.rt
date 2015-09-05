@@ -1,0 +1,77 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="lodash" as="_"/>
+<rt-require dependency="../../../commonStyles/variables" as="styleVariables"/>
+
+<div class="users-info-list">
+    <div rt-if="!this.state.editMode" key="key-view-user-info" class="view-user-info">
+        <div class="table-header">
+            <div class="filters">
+                <mui.DropDownMenu style="{{'margin-top': '12px'}}" menuItems="{this.getUsersDataFilterItems()}" onChange="{this.filterUsersData}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: '-3px'}}"></mui.DropDownMenu>
+                <mui.TextField type="text" floatingLabelText="סינון לפי שם מלא" fullWidth="{false}" valueLink="{this.linkState('textFilter')}"/>
+            </div>
+            <div class="actions">
+                <mui.FloatingActionButton disabled="{_.isEmpty(this.state.selectedData)}" mini={true} backgroundColor="#e74c3c" onClick="{this.goToEditMode}">
+                    <i class="fa fa-pencil"></i>
+                </mui.FloatingActionButton>
+            </div>
+        </div>
+        <mui.Table
+                class="users-data-table"
+                height="{'300px'}"
+                fixedHeader="{true}"
+                fixedFooter="{false}"
+                selectable="{true}"
+                multiSelectable="{false}"
+                onRowSelection="{this.onRowSelection}"
+                rt-scope="this.getDataToDisplay() as dataToDisplay; this.getColumnMetadata() as columnMetadata">
+            <mui.TableHeader enableSelectAll={false}>
+                <mui.TableRow>
+                    <mui.TableHeaderColumn colSpan="{_.size(columnMetadata)}" style="{{textAlign: 'center'}}">
+                        <span>מס׳ רשומות</span>
+                        <span class="users-data-count">{_.size(dataToDisplay)}</span>
+                    </mui.TableHeaderColumn>
+                </mui.TableRow>
+                <mui.TableRow>
+                    <mui.TableHeaderColumn rt-repeat="columnMetadataItem in columnMetadata" rt-class="{hidden: columnMetadataItemIndex !== 0}">{columnMetadataItem.title}</mui.TableHeaderColumn>
+                </mui.TableRow>
+            </mui.TableHeader>
+            <mui.TableBody
+                    deselectOnClickaway={false}
+                    showRowHover={false}
+                    stripedRows={false}>
+                <mui.TableRow selected="{_.isEqual(dataRowIndex, this.state.selectedKey)}" rt-repeat="dataRow in dataToDisplay">
+                    <mui.TableRowColumn rt-repeat="columnMetadataItem in columnMetadata" rt-class="{hidden: columnMetadataItemIndex !== 0}">
+                        <div rt-scope="dataRow[columnMetadataItem.key] as cellData">
+                            <i rt-if="_.isBoolean(cellData)" key="key-boolean-data" rt-class="{'fa': true, 'fa-plus': cellData, 'fa-minus': !cellData}"></i>
+                            <span rt-if="_.isString(cellData) || _.isNumber(cellData)" key="key-string-number-data">{cellData}</span>
+                        </div>
+                    </mui.TableRowColumn>
+                </mui.TableRow>
+            </mui.TableBody>
+        </mui.Table>
+    </div>
+    <div rt-if="this.state.editMode" key="key-edit-user-info" class="edit-user-info">
+        <div class="title">
+            <h1>עריכת פרטי משתמש</h1>
+            <mui.FlatButton label="חזור" secondary="{true}" onClick="{this.goToViewMode}">
+                <i class="fa fa-arrow-left"></i>
+            </mui.FlatButton>
+        </div>
+
+        <mui.TextField type="text" floatingLabelText="שם מלא" fullWidth="{true}" valueLink="{this.linkState('selectedData.displayName')}"/>
+        <mui.TextField type="text" floatingLabelText="דוא״ל" fullWidth="{true}" valueLink="{this.linkState('selectedData.email')}"/>
+        <mui.TextField type="text" floatingLabelText="טלפון" fullWidth="{true}" valueLink="{this.linkState('selectedData.phone')}"/>
+        <mui.Toggle class="edit-item toggle-item" name="premiumToggle" labelStyle="{{float: 'none', fontSize: '14px'}}"
+                    defaultToggled="{this.state.selectedData.isPremium}"
+                    onToggle="{this.toggleIsPremium}"
+                    label="מעוניין במנוי?"
+                    labelPosition="right"/>
+        <mui.TextField type="number" min="{0}" floatingLabelText="מס׳ מנויים" fullWidth="{true}" valueLink="{this.linkState('selectedData.maxSeats')}"/>
+        <div class="actions">
+            <mui.RaisedButton backgroundColor="{styleVariables.COLORS.OK_BUTTON}" labelColor="#fff" fullWidth="{true}" label="שמור שינויים"
+                              onClick="{this.updateUserInfo}">
+                <i class="fa fa-floppy-o"/>
+            </mui.RaisedButton>
+        </div>
+    </div>
+</div>

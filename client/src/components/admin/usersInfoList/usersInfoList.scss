@@ -1,0 +1,85 @@
+.users-info-list {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .view-user-info {
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .filters {
+        display: flex;
+        align-items: center;
+
+        > * {
+          margin: 0 20px;
+
+          &:first-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .users-data-table {
+
+      .users-data-count {
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      .mui-table-row-column, .mui-table-header-column {
+        text-align: right !important;
+      }
+    }
+  }
+
+  .edit-user-info {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+
+    .toggle-item {
+      margin: 20px 0;
+    }
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      margin-top: 20px;
+      color: #fff;
+      font-size: 16px;
+    }
+  }
+
+}
+
+@media all and (max-width: 500px) {
+  .users-data-dashboard {
+    .hidden {
+      display: none;
+    }
+    .view-user-info {
+      .table-header {
+        .filters {
+          flex-direction: column;
+          align-items: flex-start;
+
+          > * {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+}

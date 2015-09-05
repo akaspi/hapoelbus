@@ -1,6 +1,0 @@
-<rt-require dependency="../updateUserDataModal/updateUserDataModal" as="updateUserDataModal"/>
-<rt-require dependency="../../../constants/ModalConstants" as="ModalConstants"/>
-
-<div class="modal-layer">
-    <updateUserDataModal rt-props="this.state.props" rt-if="this.state.name === ModalConstants.NAME.UPDATE_USER_DATA_MODAL" key="key-update-user-data-modal"/>
-</div>

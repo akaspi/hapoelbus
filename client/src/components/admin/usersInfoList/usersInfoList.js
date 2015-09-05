@@ -2,12 +2,12 @@
 
 var React = require('react/addons');
 
-var template = require('./usersDataDashboard.rt.js');
+var template = require('./usersInfoList.rt.js');
 var muiMixin = require('../../mixins/mui-mixin');
+var deepLinkStateMixin = require('../../mixins/deepLinkStateMixin');
 var _ = require('lodash');
 
-var modalActions = require('../../../actions/modalActions');
-var ModalConstants = require('../../../constants/ModalConstants');
+var adminActions = require('../../../actions/adminActions');
 
 var USERS_DATA_FILTER_OPTIONS = {
     ALL: 'all',
@@ -24,12 +24,14 @@ var tableColumnMetadata = [
 ];
 
 var UsersDataDashboard = React.createClass({
-    mixins: [ React.addons.LinkedStateMixin, muiMixin ],
+    mixins: [ deepLinkStateMixin, muiMixin ],
     getInitialState: function () {
         return {
             dropDownFilter: USERS_DATA_FILTER_OPTIONS.ALL,
             textFilter: '',
-            selectedDataRows: {}
+            selectedData: {},
+            selectedKey: null,
+            editMode: false
         }
     },
     getUsersDataFilterItems: function() {
@@ -66,16 +68,26 @@ var UsersDataDashboard = React.createClass({
     },
     onRowSelection: function(selectedRows) {
         var currentData = this.getDataToDisplay();
-        var dataKeys = _.keys(currentData);
-        var keysOfSelectedRows = _.map(selectedRows, function (rowIndex) {
-            return dataKeys[rowIndex]
+        var selectedKey = _.keys(currentData)[_.first(selectedRows)];
+        var selectedData = currentData[selectedKey];
+        this.setState({
+            selectedKey: selectedKey || null,
+            selectedData: _.clone(selectedData) || {}
         });
-        this.setState({selectedDataRows: _.pick(this.props.usersData, keysOfSelectedRows)});
     },
-    openEditingPanel: function() {
-        modalActions.showModal(ModalConstants.NAME.UPDATE_USER_DATA_MODAL, {
-            userData: this.state.selectedDataRows
-        });
+    goToEditMode: function() {
+        this.setState({editMode: true});
+    },
+    goToViewMode: function() {
+        this.setState({editMode: false});
+    },
+    toggleIsPremium: function(e, val) {
+        var newSelectedDataState = _.merge({}, this.state.selectedData, {isPremium: val});
+        this.setState({selectedData: newSelectedDataState});
+    },
+    updateUserInfo: function() {
+        adminActions.updateUserData(this.state.selectedKey, this.state.selectedData);
+        this.goToViewMode();
     },
     render: template
 });
