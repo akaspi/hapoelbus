@@ -6,7 +6,7 @@ Gemfile
 Gemfile.lock
 
 # Private:
-config.json
+client/src/config.json
 
 # Generated:
 bundle.js
