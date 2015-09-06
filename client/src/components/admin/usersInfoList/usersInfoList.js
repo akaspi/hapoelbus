@@ -12,7 +12,8 @@ var adminActions = require('../../../actions/adminActions');
 var USERS_DATA_FILTER_OPTIONS = {
     ALL: 'all',
     PAID: 'paid',
-    FREE: 'free'
+    FREE: 'free',
+    IS_PREMIUM: 'isPremium'
 };
 
 var tableColumnMetadata = [
@@ -38,7 +39,8 @@ var UsersDataDashboard = React.createClass({
         return [
             { payload: USERS_DATA_FILTER_OPTIONS.ALL, text: 'כל המשתמשים' },
             { payload: USERS_DATA_FILTER_OPTIONS.PAID, text: 'מנויים בלבד' },
-            { payload: USERS_DATA_FILTER_OPTIONS.FREE, text: 'חד פעמיים' }
+            { payload: USERS_DATA_FILTER_OPTIONS.FREE, text: 'חד פעמיים' },
+            { payload: USERS_DATA_FILTER_OPTIONS.IS_PREMIUM, text: 'מעוניינים במנוי' }
         ];
     },
     getDataToDisplay: function() {
@@ -52,6 +54,9 @@ var UsersDataDashboard = React.createClass({
                 break;
             case USERS_DATA_FILTER_OPTIONS.FREE:
                 filteredData = _.pick(this.props.usersData, function(val) { return !val.maxSeats});
+                break;
+            case USERS_DATA_FILTER_OPTIONS.IS_PREMIUM:
+                filteredData = _.pick(this.props.usersData, function(val) { return val.isPremium});
                 break;
         }
         filteredData = _.omit(filteredData, function(val) {
