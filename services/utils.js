@@ -11,25 +11,13 @@ try {
     process.exit();
 }
 
-function isDevMode() {
-    return process.argv.indexOf('-prod') === -1;
-}
-
-if (isDevMode()) {
-    console.log('Initializing with development config');
-} else {
-    console.log('Initializing with production config');
-}
-
 module.exports = {
     isDevMode: isDevMode,
     getFirebaseRef: function() {
-        var appName = isDevMode() ? config.firebase.development.appName : config.firebase.production.appName;
-        return new Firebase('https://' + appName + '.firebaseio.com/');
+        return new Firebase('https://' + config.FIREBASE_APP + '.firebaseio.com/');
     },
     loginAsAdmin: function(ref, onSuccess, onError) {
-        var key = isDevMode() ? config.firebase.development.key : config.firebase.production.key;
-        ref.authWithCustomToken(key, function(error) {
+        ref.authWithCustomToken(config.FIREBASE_SECRET, function(error) {
             if (error) {
                 console.log('Failed to login as Admin', error);
                 if (onError) {

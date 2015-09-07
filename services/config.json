@@ -1,12 +1,4 @@
 {
-  "firebase": {
-    "production": {
-      "key": "FquBx5bqTtH5sfvocXJAZlLEIDRIqiVptwhMiJ3u",
-      "appName": "hapoelbus-prod"
-    },
-    "development": {
-      "key": "dU1eXra0oMlXtzxawLFRYp2k67hZoTTC2hcubN1x",
-      "appName": "hapoelbus-testapp"
-    }
-  }
+  "FIREBASE_APP": "hapoelbus-testapp",
+  "FIREBASE_SECRET": "dU1eXra0oMlXtzxawLFRYp2k67hZoTTC2hcubN1x"
 }
