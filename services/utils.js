@@ -12,7 +12,6 @@ try {
 }
 
 module.exports = {
-    isDevMode: isDevMode,
     getFirebaseRef: function() {
         return new Firebase('https://' + config.FIREBASE_APP + '.firebaseio.com/');
     },
