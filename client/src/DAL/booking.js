@@ -6,7 +6,6 @@ var db = require('./db');
 var bookingRef = db.child("booking");
 var occupiedRef = db.child("occupied");
 
-
 module.exports = {
     updateBooking: function (uid, gameId, bookingData, onSuccess, onError) {
         bookingRef.child(uid).child(gameId).update(bookingData, function(error) {
@@ -24,6 +23,35 @@ module.exports = {
                     onSuccess();
                 });
             });
+        });
+    },
+    cancelBooking: function(uid, gameId, onSuccess, onError) {
+        bookingRef.child(uid).child(gameId).once('value', function(snapshot) {
+            var bookingData = snapshot.val();
+            if (bookingData) {
+                bookingRef.child(uid).remove(function() {
+                    var occupiedGameRef = occupiedRef.child(gameId);
+                    occupiedGameRef.once('value', function(snapshot) {
+                        var currSeatsOccupied = snapshot.val();
+                        var numOfSeats = bookingData.numOfSeats || 0;
+                        var newOccupiedSeats = currSeatsOccupied - numOfSeats;
+                        if (newOccupiedSeats === 0) {
+                            occupiedGameRef.remove(function() {
+                                onSuccess();
+                            })
+                        } else {
+                            occupiedGameRef.set(newOccupiedSeats, function(error) {
+                                if (error) {
+                                    return onError();
+                                }
+                                onSuccess()
+                            });
+                        }
+                    });
+                });
+            } else {
+                onError();
+            }
         });
     }
 };
