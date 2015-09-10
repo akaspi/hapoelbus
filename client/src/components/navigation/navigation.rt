@@ -2,8 +2,8 @@
     <nav class="flex-nav">
         <a href="#" class="toggle-nav" onClick="{this.toggleNav}">head</a>
         <ul rt-class="{open: this.state.toggleExpand}">
-            <li rt-repeat="item in this.props.items">
-                <a href="#" onClick="()=>this.onNavItemClick(item)" rt-class="{selected: _.isEqual(item, this.state.selectedItem)}">{item.title}</a>
+            <li rt-repeat="label in this.props.labels">
+                <a href="#" onClick="()=>this.onNavItemClick(labelIndex)" rt-class="{selected: labelIndex === this.state.selectedIndex}">{label}</a>
             </li>
         </ul>
     </nav>
