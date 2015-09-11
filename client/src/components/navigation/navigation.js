@@ -10,7 +10,7 @@ var AccountData = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     propTypes: {
         labels: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-        onLabelClick: React.PropTypes.func
+        onNavigation: React.PropTypes.func
     },
     getInitialState: function () {
         return {
@@ -20,8 +20,8 @@ var AccountData = React.createClass({
     },
     onNavItemClick: function (index) {
         this.setState({selectedIndex: index, toggleExpand: false});
-        if (_.isFunction(this.props.onLabelClick)) {
-            this.props.onLabelClick(index);
+        if (_.isFunction(this.props.onNavigation)) {
+            this.props.onNavigation(index);
         }
     },
     toggleNav: function() {
