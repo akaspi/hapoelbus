@@ -1,11 +1,13 @@
 var _ = require('lodash');
 var dispatcher = require('../dispatcher/dispatcher');
 var auth = require('../DAL/auth');
+
 var usersData = require('../DAL/usersData');
+var payments = require('../DAL/payments');
+var auth = require('../DAL/auth');
+
 var userDataConstants = require('../constants/userDataConstants');
 var authConstants = require('../constants/authConstants');
-
-var adminActions = require('../actions/adminActions');
 
 var listeners = [];
 
@@ -17,7 +19,9 @@ function notifyAll() {
 
 var storeData = {
     isFetchingUserData: false,
-    userData: null
+    isAdmin: false,
+    userData: null,
+    payments: null
 };
 
 dispatcher.register(function (actionData) {
@@ -41,8 +45,18 @@ function notifyChange(currData) {
 
 function handleFetchUserData() {
     notifyChange({isFetchingUserData: true});
-    usersData.getUserData(auth.getUserId(), function (userData) {
-        notifyChange({isFetchingUserData: false, userData: userData});
+    var uid = auth.getUserId();
+    usersData.getUserData(uid, function (userData) {
+        payments.getByUID(uid, function(paymentsData) {
+            auth.isAdmin(function(isAdmin) {
+                notifyChange({isFetchingUserData: false, userData: userData, payments: paymentsData, isAdmin: isAdmin});
+            });
+        }, function() {
+
+        });
+
+    }, function() {
+
     });
 }
 

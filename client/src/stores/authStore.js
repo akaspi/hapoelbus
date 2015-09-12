@@ -12,7 +12,6 @@ function notifyAll() {
 
 var storeData = {
     isLoggedIn: auth.isLoggedIn(),
-    isAdmin: false,
     errorMsg: ''
 };
 

@@ -14,7 +14,7 @@
         <homePage rt-if="!this.state.isLoggedIn" key="key-home-page"/>
         <loading rt-if="this.state.isLoggedIn && this.state.isFetchingUserData" key="key-fetching-user-data"/>
         <userData rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && !this.state.userData" key="key-user-data"/>
-        <myAccount rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && this.state.userData" key="key-my-account" userData="{this.state.userData}" isAdmin="{this.state.isAdmin}"/>
+        <myAccount rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && this.state.userData" key="key-my-account" userData="{this.state.userData}" isAdmin="{this.state.isAdmin}" payments="{this.state.payments}"/>
     </div>
     <footer>
         <div class="contact-us">
