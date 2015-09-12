@@ -1,0 +1,55 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="../../constants/gamesConstants" as="gamesConstants"/>
+
+<div class="card">
+    <div rt-if="!this.state.bookingMode" key="key-game-overview-mode" class="card-view overview">
+        <div class="header">
+            <div class="header-row">
+                <div class="header-item">
+                    <span class="desc">נגד:</span>
+                    <span class="info">מכבי ראשון-לציון</span>
+                </div>
+                <div class="header-item">
+                    <span class="desc">יציאה:</span>
+                    <span class="info">17:15</span>
+                </div>
+                <div class="header-item">
+                    <span class="desc">תאריך:</span>
+                    <span class="info">17/10</span>
+                </div>
+            </div>
+            <div class="header-row">
+                <div class="header-item">
+                    <span class="desc">מס׳ מקומות נותרים:</span>
+                    <span class="info">12</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="game-logo-container">
+            <div class="corner-ribbon">רשום להסעה</div>
+        </div>
+        <div class="footer" rt-scope="this.shouldEnableBooking() as shouldEnableBooking">
+            <mui.RaisedButton backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" label="הרשם" onClick="{this.goToBookingMode}"/>
+        </div>
+    </div>
+    <div rt-if="this.state.bookingMode" key="key-game-booking-mode" class="card-view booking">
+        <div class="booking-title">
+            <span>פרטי רישום</span>
+        </div>
+        <div class="booking-item">
+            <span class="field-desc">מס׳ נרשמים:</span>
+            <mui.TextField fullWidth="{false}" type="number" style="{{width: '100px', marginRight: '20px'}}"/>
+        </div>
+        <div class="booking-item">
+            <span class="field-desc">תחנת עלייה:</span>
+            <mui.DropDownMenu style="{{'margin-right': '20px'}}" menuItems="{this.getUsersDataFilterItems()}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: '-3px'}}"></mui.DropDownMenu>
+        </div>
+        <div class="booking-item">
+            <span class="field-desc">הערות:</span>
+            <mui.TextField fullWidth="{true}" type="text" style="{{marginRight: '20px'}}"/>
+        </div>
+        <mui.RaisedButton backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" label="בום" onClick="{this.updateBooking}"/>
+    </div>
+
+</div>

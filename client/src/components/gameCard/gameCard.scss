@@ -1,0 +1,124 @@
+.card {
+  $shadow-color: #aaa;
+  $border-color: #bdc3c7;
+  $header-height: 50px;
+  $footer-height: 50px;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 450px;
+  height: 450px;
+  box-sizing: border-box;
+  border: 1px solid $border-color;
+  border-radius: 3px;
+  box-shadow: 2px 5px 15px $shadow-color;
+  direction: rtl;
+
+  .card-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .overview {
+
+    .header {
+      height: $header-height;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 1px solid $border-color;
+      font-size: 16px;
+
+      .header-row {
+        width: 100%;
+        display: flex;
+        margin-top: 10px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      .header-item {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+        .desc {
+          color: $border-color;
+          font-size: 13px;
+        }
+
+        .info {
+          margin-right: 3px;
+        }
+      }
+    }
+    .game-logo-container {
+      flex: 1;
+
+      position: relative;
+      overflow: hidden;
+      background-image: url("https://upload.wikimedia.org/wikipedia/he/thumb/3/36/MaccbiRishon2.png/300px-MaccbiRishon2.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      .corner-ribbon{
+        width: 200px;
+        position: absolute;
+        top: 25px;
+        left: -50px;
+        text-align: center;
+        line-height: 50px;
+        letter-spacing: 1px;
+        color: #f0f0f0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+
+        box-shadow: 0 0 3px rgba(0,0,0,.3);
+
+        top: 25px;
+        right: -50px;
+        left: auto;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+
+        background: #2c7
+      }
+    }
+    .footer {
+      height: $footer-height;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid $border-color;
+    }
+  }
+
+  .booking {
+    padding: 30px;
+    justify-content: space-around;
+
+    .booking-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .booking-item {
+      display: flex;
+      align-items: center;
+    }
+
+
+
+
+
+  }
+}

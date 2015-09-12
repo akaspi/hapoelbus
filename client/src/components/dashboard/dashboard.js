@@ -11,7 +11,7 @@ var AccountData = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function() {
       return {
-          selectedTabIndex: 0
+          selectedTabIndex: 1
       }
     },
     getNavigationItems: function() {
