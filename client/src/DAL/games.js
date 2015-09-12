@@ -7,6 +7,11 @@ var gamesRef = db.child("games");
 
 
 module.exports = {
+    getGames: function(onSuccess, onError) {
+        gamesRef.once('value', function(snapshot) {
+            onSuccess(snapshot.val());
+        }, onError)
+    },
     updateGame: function (gameId, gameData, onSuccess, onError) {
         if (gameId) {
             gamesRef.child(gameId).update(gameData, function(error) {

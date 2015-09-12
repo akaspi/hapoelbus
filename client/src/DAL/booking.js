@@ -7,6 +7,11 @@ var bookingRef = db.child("booking");
 var occupiedRef = db.child("occupied");
 
 module.exports = {
+    getBooking: function(uid, onSuccess, onError) {
+        bookingRef.child(uid).once('value', function(snapshot) {
+            onSuccess(snapshot.val());
+        }, onError);
+    },
     updateBooking: function (uid, gameId, bookingData, onSuccess, onError) {
         bookingRef.child(uid).child(gameId).update(bookingData, function(error) {
             if (error) {
