@@ -11,12 +11,17 @@ module.exports =  {
             onSuccess(snapshot.val());
         }, onError);
     },
-    getByUID: function (uid, onSuccess, onError) {
+    getAllPayments: function(onSuccess, onError) {
+        paymentsRef.once('value', function(snapshot) {
+            onSuccess(snapshot.val());
+        }, onError);
+    },
+    getPaymentById: function (uid, onSuccess, onError) {
         paymentsRef.child(uid).once('value', function(snapshot) {
             onSuccess(snapshot.val());
         }, onError);
     },
-    updateByUID: function(uid, data, onSuccess, onError) {
+    updatePayment: function(uid, data, onSuccess, onError) {
         paymentsRef.child(uid).update(data, function(error) {
             if (error) {
                 return onError();

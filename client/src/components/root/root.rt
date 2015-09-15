@@ -3,18 +3,19 @@
 <rt-require dependency="../homePage/homePage" as="homePage"/>
 <rt-require dependency="../loading/loading" as="loading"/>
 <rt-require dependency="../userData/userData" as="userData"/>
-<rt-require dependency="material-ui" as="mui"/>
 
-<div class="root">
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="lodash" as="_"/>
+
+<div class="root" rt-scope="(this.state.isAuthStorePending || this.state.isUsersDataStorePending) as isPending">
     <header>
-        <siteHeader class="site-header" isLoggedIn="{this.state.isLoggedIn}"
-                    isFetchingUserData="{this.state.isFetchingUserData}" userData="{this.state.userData}"/>
+        <siteHeader class="site-header" uid="{this.state.uid}" usersData="{this.state.usersData}" isPending="{isPending}"/>
     </header>
     <div class="site-content">
-        <homePage rt-if="!this.state.isLoggedIn" key="key-home-page"/>
-        <loading rt-if="this.state.isLoggedIn && this.state.isFetchingUserData" key="key-fetching-user-data"/>
-        <userData rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && !this.state.userData" key="key-user-data"/>
-        <myAccount rt-if="this.state.isLoggedIn && !this.state.isFetchingUserData && this.state.userData" key="key-my-account" userData="{this.state.userData}" isAdmin="{this.state.isAdmin}" payments="{this.state.payments}"/>
+        <loading rt-if="isPending" key="key-fetching-user-data"/>
+        <homePage rt-if="!this.state.uid && !isPending" key="key-home-page"/>
+        <userData rt-if="this.state.uid && _.isEmpty(this.state.usersData) && !isPending" key="key-user-data" uid="{this.state.uid}"/>
+        <myAccount rt-if="this.state.uid && !_.isEmpty(this.state.usersData) && !isPending" key="key-my-account" uid="{this.state.uid}" usersData="{this.state.usersData}" isAdmin="{this.state.isAdmin}"/>
     </div>
     <footer>
         <div class="contact-us">

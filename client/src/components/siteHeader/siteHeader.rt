@@ -5,21 +5,21 @@
     <div class="logo"></div>
     <!--<div class="content"></div>-->
     <div class="login-btn-container">
-        <mui.RaisedButton rt-if="!this.props.isLoggedIn" key="key-login-button" label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
-        <div rt-if="this.props.userData" key="key-user-data-avatar" class="user-data-avatar-wrapper">
-            <mui.Avatar rt-if="!this.hasProfilePicture()">
+        <mui.RaisedButton rt-if="!this.props.uid || this.props.isPending" key="key-login-button" label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
+        <div rt-if="!_.isEmpty(this.props.usersData)" key="key-user-data-avatar" class="user-data-avatar-wrapper">
+            <mui.Avatar rt-if="!this.hasProfilePicture()" key="key-header-no-avatar">
                 <i class="fa fa-user" />
             </mui.Avatar>
-            <mui.Avatar rt-if="this.hasProfilePicture()" src="{this.getProfilePictureURL()}"/>
+            <mui.Avatar rt-if="this.hasProfilePicture()" key="key-header-avatar" src="{this.getProfilePictureURL()}"/>
             <div class="welcome-text">
                 <div>שלום,</div>
-                <div class="user-display-name">{this.props.userData.displayName}</div>
+                <div class="user-display-name">{this.props.usersData[this.props.uid].displayName}</div>
             </div>
             <div class="logout"><a onClick="{this.logOut}">התנתק</a></div>
         </div>
     </div>
 
-    <mui.Dialog rt-if="!this.props.isLoggedIn" key="key-auth-dialog" ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
+    <mui.Dialog rt-if="!this.props.uid" key="key-auth-dialog" ref="loginDialog" contentStyle="{{'width':'360'}}" modal="{false}">
         <authBox/>
     </mui.Dialog>
 

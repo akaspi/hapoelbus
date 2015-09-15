@@ -3,30 +3,25 @@
 var _ = require('lodash');
 var db = require('./db');
 
-var usersDataRef = db.child("usersData");
+var usersDataRef = db.child('usersData');
 
 module.exports =  {
-    getUserData: function (uid, cb) {
+    getAllUsersData: function(onSuccess, onError) {
+        usersDataRef.once('value', function(snapshot) {
+            onSuccess(snapshot.val());
+        }, onError);
+    },
+    getUserDataById: function (uid, onSuccess, onError) {
         usersDataRef.child(uid).once('value', function(snapshot) {
-            cb(snapshot.val());
-        });
+            onSuccess(snapshot.val());
+        }, onError);
     },
-    createUserData: function(uid, accountData, onSuccess, onError) {
-        usersDataRef.child(uid).set(accountData, function(error) {
+    updateUserData: function (uid, data, onSuccess, onError){
+        usersDataRef.child(uid).update(data, function(error) {
             if (error) {
-                console.log(error);
-                onError();
-            } else {
-                onSuccess();
+                return onError();
             }
+            onSuccess();
         });
-    },
-    updateUserData: function (uid, accountData, cb){
-        usersDataRef.child(uid).update(accountData, function(error) {
-            cb()
-        });
-    },
-    updateUser: function (uid, dataToUpdate) {
-        usersDataRef.child(uid).update(dataToUpdate);
     }
 };

@@ -1,5 +1,5 @@
 <rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="../dashboard/dashboard" as="dashboard"/>
+<rt-require dependency="../userDashboard/userDashboard" as="userDashboard"/>
 <rt-require dependency="../admin/adminDashboard/adminDashboard" as="adminDashboard"/>
 
 <div class="my-account">
@@ -12,6 +12,6 @@
                     labelPosition="right"/>
     </div>
 
-    <dashboard rt-if="!this.state.adminView" key="key-dashboard" userData="{this.props.userData}"/>
+    <userDashboard rt-if="!this.state.adminView" key="key-dashboard" uid="{this.props.uid}" userData="{this.props.userData}"/>
     <adminDashboard rt-if="this.props.isAdmin && this.state.adminView" key="key-admin-dashboard"/>
 </div>

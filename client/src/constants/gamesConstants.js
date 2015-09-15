@@ -4,8 +4,12 @@ module.exports = {
         UPDATE_GAME: 'updateGame'
     },
     STATUS: {
-        CLOSED: 'game_closed',
-        OPEN_FOR_MEMBERS: 'open_for_members',
-        OPEN_FOR_ALL: 'open_for_all'
+        CLOSED: 'CLOSED',
+        OPEN_FOR_MEMBERS: 'OPEN_FOR_MEMBERS',
+        OPEN_FOR_ALL: 'OPEN_FOR_ALL'
+    },
+    VSID: {
+        MTA: 'מכבי תל אביב',
+        HOLON: 'הפועל חולון'
     }
 };

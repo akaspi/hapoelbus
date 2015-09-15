@@ -1,10 +1,10 @@
 module.exports = {
     ACTIONS: {
+        FETCH_LOGIN_STATE: 'FETCH_LOGIN_STATE',
         CREATE_USER: 'createUser',
         LOGIN: 'login',
         SOCIAL_LOGIN: 'socialLogin',
-        LOGOUT: 'logout',
-        FETCH_LOGIN_STATE: 'fetchLoginState'
+        LOGOUT: 'logout'
     },
     ERROR_MSG: {
         GENERAL: 'אחד הפרטים שהוקשו שגוי. אנא נסה שנית...',

@@ -1,7 +1,7 @@
 .card {
   $shadow-color: #aaa;
   $border-color: #bdc3c7;
-  $header-height: 50px;
+  $overlay-height: 70px;
   $footer-height: 50px;
 
   display: flex;
@@ -23,42 +23,6 @@
 
   .overview {
 
-    .header {
-      height: $header-height;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border-bottom: 1px solid $border-color;
-      font-size: 16px;
-
-      .header-row {
-        width: 100%;
-        display: flex;
-        margin-top: 10px;
-
-        &:first-child {
-          margin-top: 0;
-        }
-      }
-
-      .header-item {
-        flex: 1;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-
-        .desc {
-          color: $border-color;
-          font-size: 13px;
-        }
-
-        .info {
-          margin-right: 3px;
-        }
-      }
-    }
     .game-logo-container {
       flex: 1;
 
@@ -89,7 +53,56 @@
         transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
 
-        background: #2c7
+        background: #27ae60;
+      }
+
+      .overlay {
+        height: $overlay-height;
+
+        box-sizing: border-box;
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 16px;
+
+        .game-info-row {
+          width: 100%;
+          display: flex;
+          margin-top: 10px;
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+
+        .game-info-item {
+          flex: 1;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+
+          .desc {
+            color: $border-color;
+            font-size: 13px;
+          }
+
+          .info {
+            color: #fff;
+            margin-right: 3px;
+          }
+        }
+
+
       }
     }
     .footer {
@@ -116,9 +129,12 @@
       align-items: center;
     }
 
+    .footer {
+      height: $footer-height;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
 
-
-
-
+    }
   }
 }

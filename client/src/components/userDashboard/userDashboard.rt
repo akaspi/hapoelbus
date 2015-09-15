@@ -1,0 +1,41 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="../gameCard/gameCard" as="gameCard"/>
+<rt-require dependency="../loading/loading" as="loading"/>
+<rt-require dependency="../../constants/gamesConstants" as="gamesConstants"/>
+
+<div class="dashboard"
+     rt-scope="(this.state.isGamesStorePending || this.state.isPaymentsStorePending || this.state.isBookingStorePending) as isPending">
+    <loading rt-if="isPending" key="key-fetching-user-data"/>
+    <div class="no-open-games" rt-if="!isPending && _.isEmpty(this.state.openGames)" key="key-no-open-games">
+        <span>אין משחקים פתוחים כעת</span>
+    </div>
+    <div class="games-wrapper" rt-if="!isPending && !_.isEmpty(this.state.openGames)" key="key-no-open-games">
+        <gameCard rt-repeat="game in this.state.openGames"
+                  uid="{this.props.uid}"
+                  gameId="{gameIndex}"
+                  gameData="{game}"
+                  booking="{this.state.booking[this.props.uid] && this.state.booking[this.props.uid][gameIndex]}"
+                  payments="{this.state.payments[this.props.uid]}"
+                  occupied="{this.state.occupied[gameIndex]}"/>
+    </div>
+    <!--<div class="content">-->
+    <!--<div rt-if="this.state.selectedTabIndex === 0" key="key-dashboard-content-0">-->
+    <!--<div class="status-text">-->
+    <!--<h1>-->
+    <!--<span>שלום </span>-->
+    <!--<span>{this.props.userData.displayName}</span>-->
+    <!--<span>,</span>-->
+    <!--</h1>-->
+    <!--<h3>הרשמתך התקבלה.</h3>-->
+    <!--<h3 rt-if="this.props.userData.isPremium" key="key-is-premium-text">נציג הקבוצה יצור עמך קשר בקרוב לגבי החיוב למנוי ההסעות השנתי.</h3>-->
+    <!--<h3>נתראה בתחילת העונה!</h3>-->
+    <!--</div>-->
+    <!--<div class="outside-logo" />-->
+    <!--</div>-->
+
+    <!--<div class="cards-tab" rt-if="this.state.selectedTabIndex === 1" key="key-dashboard-content-1">-->
+    <!--<gameCard status="{gamesConstants.STATUS.OPEN_FOR_ALL}"></gameCard>-->
+    <!--&lt;!&ndash;<gameCard></gameCard>&ndash;&gt;-->
+    <!--</div>-->
+</div>
+</div>

@@ -8,7 +8,7 @@ function dispatchAction(actionData) {
 }
 
 module.exports = {
-    getGames: function () {
+    fetchGames: function () {
         dispatchAction({
             type: gamesConstants.ACTIONS.FETCH_GAMES
         });

@@ -3,38 +3,50 @@
 var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
 var template = require('./root.rt.js');
+
 var authStore = require('../../stores/authStore');
-var userStore = require('../../stores/userStore');
+var usersDataStore = require('../../stores/usersDataStore');
 var userActions = require('../../actions/userActions');
 var authActions = require('../../actions/authActions');
 
 var Root = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function () {
-        return _.merge({}, authStore.getAll(), userStore.getAll());
+        var authStoreData = authStore.getAll();
+        var usersStoreData = usersDataStore.getAll();
+        return {
+            uid: authStoreData.uid,
+            isAdmin: authStoreData.isAdmin,
+            isAuthStorePending: authStoreData.pending,
+            usersData: usersStoreData.usersData,
+            isUsersDataStorePending: usersStoreData.pending
+        };
     },
     componentDidMount: function () {
         authStore.registerToChange(this.onAuthStoreDataChanged);
-        userStore.registerToChange(this.onUserStoreDataChanged);
+        usersDataStore.registerToChange(this.onUserStoreDataChanged);
         authActions.fetchLoginState();
-        if (this.state.isLoggedIn) {
-            userActions.fetchUserData();
-        }
     },
     onAuthStoreDataChanged: function(authStoreData) {
-        if (!this.state.isLoggedIn && authStoreData.isLoggedIn) {
-            userActions.fetchUserData();
+        if (authStoreData.pending) {
+            this.setState({ isAuthStorePending: true });
+        } else {
+            if (!this.state.uid && authStoreData.uid) {
+                userActions.fetchUserData(authStoreData.isAdmin ? null : authStoreData.uid);
+            }
+            this.setState({ uid: authStoreData.uid, isAdmin: authStoreData.isAdmin, isAuthStorePending: false });
         }
-        var newState = _.pick(authStoreData, _.keys(this.state));
-        this.setState(newState);
     },
     onUserStoreDataChanged: function(userStoreData) {
-        var newState = _.pick(userStoreData, _.keys(this.state));
-        this.setState(newState);
+        if (userStoreData.pending) {
+            this.setState({ isUsersDataStorePending: true });
+        } else {
+            this.setState({ usersData: userStoreData.usersData, isUsersDataStorePending: false})
+        }
     },
     componentWillUnmount: function() {
         authStore.removeChangeListener(this.onAuthStoreDataChanged);
-        userStore.removeChangeListener(this.onUserStoreDataChanged);
+        usersDataStore.removeChangeListener(this.onUserStoreDataChanged);
     },
     render: template
 });

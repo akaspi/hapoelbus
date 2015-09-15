@@ -3,7 +3,7 @@
 var _ = require('lodash');
 
 var dispatcher = require('../dispatcher/dispatcher');
-var booking = require('../DAL/booking');
+var bookingAPI = require('../DAL/booking');
 var auth = require('../DAL/auth');
 
 var bookingConstants = require('../constants/bookingConstants');
@@ -16,60 +16,66 @@ function notifyAll() {
 }
 
 var storeData = {
-    fetchingData: false,
+    pending: false,
     booking: {}
 };
 
 dispatcher.register(function (actionData) {
     switch (actionData.type) {
-        case bookingConstants.ACTIONS.FETCH_BOOKING_FOR_USER:
-            fetchBookingForUser();
+        case bookingConstants.ACTIONS.FETCH_BOOKING:
+            fetchBooking(actionData);
             break;
         case bookingConstants.ACTIONS.UPDATE_BOOKING:
-            handleUpdateBooking();
+            handleUpdateBooking(actionData);
             break;
         case bookingConstants.ACTIONS.CANCEL_BOOKING:
-            handleCancelBooking();
+            handleCancelBooking(actionData);
             break;
     }
 });
 
-function fetchBookingForUser() {
-    notifyChange({fetchingData: true});
-    booking.getBooking(auth.getUserId(), function(booking) {
-        notifyChange({booking: booking, fetchingData: false});
-    }, function() {
+function fetchBooking(actionData) {
+    storeData.pending = true;
+    notifyAll();
 
-    });
+    if (actionData.uid) {
+        bookingAPI.getBookingById(actionData.uid, function(booking) {
+            var currUserBooking = storeData.booking[actionData.uid];
+            if (booking) {
+                storeData.booking[actionData.uid] = booking;
+            } else if (currUserBooking) {
+                delete storeData.booking[actionData.uid];
+            }
+            storeData.pending = false;
+            notifyAll();
+        }, function() {
+
+        })
+    } else {
+        bookingAPI.getAllBooking(function(booking) {
+            storeData.booking = booking;
+            storeData.pending = false;
+            notifyAll();
+        }, function() {
+
+        })
+    }
 }
 
 function handleUpdateBooking(actionData) {
-    var uid = auth.getUserId();
-    var gameId = actionData.gameId;
-    var bookingData = actionData.bookingData;
-    booking.updateBooking(uid, gameId, bookingData, function() {
-        var updatedBooking = {};
-        updatedBooking[uid][gameId] = bookingData;
-        notifyChange({booking: updatedBooking});
+    bookingAPI.updateBooking(actionData.uid, actionData.gameId, actionData.data, function() {
+        fetchBooking(actionData)
     }, function() {
 
     });
 }
 
 function handleCancelBooking(actionData) {
-    var uid = auth.getUserId();
-    var gameId = actionData.gameId;
-    booking.updateBooking(uid, gameId, function() {
-        delete storeData.booking[uid][gameId];
-        notifyChange({});
+    bookingAPI.cancelBooking(actionData.uid, actionData.gameId, function() {
+        fetchBooking(actionData)
     }, function() {
 
     });
-}
-
-function notifyChange(currData) {
-    _.merge(storeData, currData);
-    notifyAll();
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
 module.exports = {
     ACTIONS: {
-        FETCH_USER_DATA: 'fetchUserData',
-        UPDATE_USER_DATA: 'updateUserData'
+        FETCH_USERS_DATA: 'FETCH_USERS_DATA',
+        UPDATE_USER_DATA: 'UPDATE_USER_DATA'
     },
     USER_TYPES: {
         ADMIN: 'adminUser',

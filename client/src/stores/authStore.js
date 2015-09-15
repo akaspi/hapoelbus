@@ -1,7 +1,11 @@
-var _ = require('lodash');
+'use strict';
+
 var dispatcher = require('../dispatcher/dispatcher');
-var auth = require('../DAL/auth');
+var _ = require('lodash');
+
+var authAPI = require('../DAL/auth');
 var authConstants = require('../constants/authConstants');
+
 var listeners = [];
 
 function notifyAll() {
@@ -11,14 +15,16 @@ function notifyAll() {
 }
 
 var storeData = {
-    isLoggedIn: auth.isLoggedIn(),
-    errorMsg: ''
+    pending: false,
+    errorMsg: '',
+    uid: null,
+    isAdmin: false
 };
 
 dispatcher.register(function (actionData) {
     switch (actionData.type) {
         case authConstants.ACTIONS.FETCH_LOGIN_STATE:
-            handleFetchLoginState(actionData);
+            fetchLoginState(actionData);
             break;
         case authConstants.ACTIONS.CREATE_USER:
             handleCreateUser(actionData);
@@ -41,54 +47,64 @@ dispatcher.register(function (actionData) {
     }
 });
 
-function notifyChange(currData) {
-    _.merge(storeData, currData);
+function fetchLoginState() {
+    storeData.pending = true;
     notifyAll();
-}
 
-function handleFetchLoginState() {
-    auth.isAdmin(function(isAdmin) {
-        notifyChange({isLoggedIn: auth.isLoggedIn(), isAdmin: isAdmin});
-    });
+    storeData.uid = authAPI.getUserId();
+    if (storeData.uid) {
+        authAPI.isAdmin(function(isAdmin) {
+            storeData.isAdmin = isAdmin;
+            storeData.pending = false;
+            notifyAll();
+        });
+    } else {
+        storeData.pending = false;
+        notifyAll();
+    }
 }
 
 function handleCreateUser(actionData) {
-    auth.createUser(actionData.email, actionData.password, function () {
+    authAPI.createUser(actionData.email, actionData.password, function () {
         handleLogin(actionData);
     }, function (errorCode) {
         switch(errorCode) {
             case authConstants.ERROR_CODE.EMAIL_TAKEN:
-                notifyChange({errorMsg: authConstants.ERROR_MSG.EMAIL_TAKEN});
+                storeData.errorMsg = authConstants.ERROR_MSG.EMAIL_TAKEN;
                 break;
             default:
-                notifyChange({errorMsg: authConstants.ERROR_MSG.GENERAL});
+                storeData.errorMsg = authConstants.ERROR_MSG.GENERAL;
         }
+        storeData.pending = false;
+        notifyAll();
     })
 }
 
 function handleLogin(actionData) {
-    auth.login(actionData.email, actionData.password, function () {
-        auth.isAdmin(function (isAdmin) {
-            notifyChange({isLoggedIn: true, isAdmin: isAdmin});
-        });
+    authAPI.login(actionData.email, actionData.password, function () {
+        fetchLoginState();
     }, function () {
-        notifyChange({errorMsg: authConstants.ERROR_MSG.GENERAL});
+        storeData.pending = false;
+        storeData.errorMsg = authConstants.ERROR_MSG.GENERAL;
+        notifyAll();
     })
 }
 
 function handleSocialLogin(actionData) {
-    auth.socialLogin(actionData.provider, function () {
-        auth.isAdmin(function (isAdmin) {
-            notifyChange({isLoggedIn: true, isAdmin: isAdmin});
-        });
+    authAPI.socialLogin(actionData.provider, function () {
+        fetchLoginState();
     }, function () {
-        notifyChange({errorMsg: authConstants.ERROR_MSG.GENERAL});
+        storeData.pending = false;
+        storeData.errorMsg = authConstants.ERROR_MSG.GENERAL;
+        notifyAll();
     })
 }
 
 function handleLogOut() {
-    auth.logOut();
-    notifyChange({isLoggedIn: false, isAdmin: false});
+    authAPI.logOut();
+    storeData.uid = null;
+    storeData.isAdmin = false;
+    notifyAll();
 }
 
 module.exports = {

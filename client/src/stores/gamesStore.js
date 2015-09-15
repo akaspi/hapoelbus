@@ -15,7 +15,7 @@ function notifyAll() {
 }
 
 var storeData = {
-    fetchingData: false,
+    pending: false,
     games: {}
 };
 
@@ -25,21 +25,25 @@ dispatcher.register(function (actionData) {
             fetchGames();
             break;
         case gamesConstants.ACTIONS.UPDATE_GAME:
-            handleUpdateGame();
+            updateGame();
             break;
     }
 });
 
 function fetchGames() {
-    notifyChange({fetchingData: true});
-    games.getGames(function(games){}, function() {
-       notifyChange({games: games, fetchingData: false});
+    storeData.pending = true;
+    notifyAll();
+
+    games.getGames(function(games) {
+        storeData.games = games || {};
+        storeData.pending = false;
+        notifyAll();
     }, function() {
 
     });
 }
 
-function handleUpdateGame(actionData) {
+function updateGame(actionData) {
     var gameId = actionData.gameId;
     var gameData = actionData.gameData;
     games.updateGame(gameId, gameData, function() {
@@ -49,11 +53,6 @@ function handleUpdateGame(actionData) {
     }, function() {
 
     });
-}
-
-function notifyChange(currData) {
-    _.merge(storeData, currData);
-    notifyAll();
 }
 
 module.exports = {
