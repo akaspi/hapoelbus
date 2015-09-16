@@ -1,17 +1,18 @@
 <rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="lodash" as="_"/>
 <rt-require dependency="../userDashboard/userDashboard" as="userDashboard"/>
 <rt-require dependency="../admin/adminDashboard/adminDashboard" as="adminDashboard"/>
 
 <div class="my-account">
-    <div class="admin-view-toggle" rt-if="this.props.isAdmin" key="key-admin-view-toggle">
-        <mui.Toggle style="{{'width': '150px'}}"
-                    labelStyle="{{float: 'none', fontSize: '14px'}}"
-                    defaultToggled="{this.state.adminView}"
-                    onToggle="{this.toggleAdminView}"
-                    label="תצוגת ניהול"
-                    labelPosition="right"/>
+    <div class="admin-view-toggle">
+        <div class="menu-btn-container">
+            <mui.RaisedButton label="תפריט" backgroundColor="#000" style="{{width: '100%'}}" labelStyle="{{padding: '0 10px', color: '#fff' }}" onClick="{this.toggleNav}">
+                <i class="fa fa-bars" style="{{padding: '0 10px', color: '#fff'}}"/>
+            </mui.RaisedButton>
+        </div>
+        <mui.LeftNav ref="nav" docked="{false}" selectedIndex="{_.findIndex(this.getNavItems(), this.state.selectedNavItem)}" menuItems="{this.getNavItems()}" onChange="{this.onNavChange}"/>
     </div>
 
-    <userDashboard rt-if="!this.state.adminView" key="key-dashboard" uid="{this.props.uid}" userData="{this.props.userData}"/>
-    <adminDashboard rt-if="this.props.isAdmin && this.state.adminView" key="key-admin-dashboard"/>
+    <userDashboard rt-if="this.isUserDashboardSelected()" key="key-dashboard" context="{this.state.selectedNavItem.context}" uid="{this.props.uid}" userData="{this.props.userData}"/>
+    <adminDashboard rt-if="this.isAdminDashboardSelected()" key="key-admin-dashboard" context="{this.state.selectedNavItem.context}"/>
 </div>

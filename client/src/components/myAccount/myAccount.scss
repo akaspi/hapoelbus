@@ -5,10 +5,19 @@
   flex-direction: column;
 
   .admin-view-toggle {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #bdc3c7;
+    padding: 10px 25px;
+
+    .menu-btn-container {
+      width: 100px;
+    }
   }
+
+  @media all and (max-width: 500px) {
+    .admin-view-toggle {
+      .menu-btn-container {
+        width: 100%;
+      }
+    }
+  }
+
 }
