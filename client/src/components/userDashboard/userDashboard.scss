@@ -1,4 +1,4 @@
-.dashboard {
+.user-dashboard {
   flex: 1;
   padding: 30px;
 
@@ -18,6 +18,21 @@
   .games-wrapper {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
+  }
+
+  @media all and (max-width: 900px) {
+    .games-wrapper {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .card-wrapper {
+        margin-top: 20px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
   }
 }
