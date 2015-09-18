@@ -25,7 +25,7 @@ dispatcher.register(function (actionData) {
             fetchPayments(actionData);
             break;
         case paymentsConstants.ACTIONS.UPDATE_PAYMENT:
-            updatePayment();
+            updatePayment(actionData);
             break;
     }
 });

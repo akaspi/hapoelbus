@@ -6,23 +6,51 @@ var template = require('./usersDataExplorer.rt.js');
 var muiMixin = require('../../mixins/mui-mixin');
 var _ = require('lodash');
 
+var paymentsStore = require('../../../stores/paymentsStore');
+
 var usersDataActions = require('../../../actions/userActions');
+var paymentsActions = require('../../../actions/paymentsActions');
 
 var dataConverterUtil = require('../../../utils/dataConverterUtil');
 var dataSchemas = require('../../../utils/dataSchemas');
 
 var GamesExplorer = React.createClass({
+    getInitialState: function () {
+        var paymentsState = paymentsStore.getAll();
+        return {
+            isPaymentsStorePending: paymentsState.pending,
+            payments: paymentsState.payments
+        };
+    },
+    componentDidMount: function () {
+        paymentsStore.registerToChange(this.onPaymentsStoreDataChanged);
+        paymentsActions.fetchPayments();
+    },
+    onPaymentsStoreDataChanged: function(paymentsStoreData) {
+        if (paymentsStoreData.pending) {
+            this.setState({ isPaymentsStorePending: true });
+        } else {
+            this.setState({ payments: paymentsStoreData.payments, isPaymentsStorePending: false})
+        }
+    },
+    componentWillUnmount: function() {
+        paymentsStore.removeChangeListener(this.onPaymentsStoreDataChanged);
+    },
     getTableSchema: function() {
-        return dataSchemas.UserData;
+        return _.merge({}, dataSchemas.UserData, dataSchemas.Payments);
     },
     getTableData: function() {
-        return this.props.usersData;
+        var clonesUsersData = _.cloneDeep(this.props.usersData);
+        return _.mapValues(clonesUsersData, function(userData, uid) {
+            userData.maxSeats = this.state.payments[uid] ? this.state.payments[uid].maxSeats : 0;
+            return userData;
+        }, this);
     },
-    onUpdateGame: function(uid, userData) {
+    onUpdateGame: function(uid, data) {
+        var userData = _.pick(data, _.keys(dataSchemas.UserData));
+        var paymentsData = _.pick(data, _.keys(dataSchemas.Payments));
+        paymentsActions.updatePayment(uid, paymentsData);
         usersDataActions.updateUserData(uid, userData);
-    },
-    onRemoveGame: function(uid) {
-        console.log('remove game');
     },
     render: template
 });

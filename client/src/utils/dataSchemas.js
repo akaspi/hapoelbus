@@ -101,9 +101,9 @@ module.exports = {
             "title": "מקומות תפוסים"
         }
     },
-    "payments": {
+    "Payments": {
         "maxSeats": {
-            "type": "string",
+            "type": "number",
             "title": "מס׳ מנויים"
         }
     }

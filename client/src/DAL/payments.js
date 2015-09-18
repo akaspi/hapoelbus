@@ -22,11 +22,20 @@ module.exports =  {
         }, onError);
     },
     updatePayment: function(uid, data, onSuccess, onError) {
-        paymentsRef.child(uid).update(data, function(error) {
-            if (error) {
-                return onError();
-            }
-            onSuccess();
-        });
+        if (data.maxSeats === 0) {
+            paymentsRef.child(uid).remove(function(error) {
+                if (error) {
+                    return onError();
+                }
+                onSuccess();
+            })
+        } else {
+            paymentsRef.child(uid).update(data, function(error) {
+                if (error) {
+                    return onError();
+                }
+                onSuccess();
+            });
+        }
     }
 };

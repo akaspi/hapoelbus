@@ -3,8 +3,9 @@
 
 <div>
     <customTable
+            rt-if="!this.state.isPaymentsStorePending"
+            key="key-users-data-explorer-table"
             schema="{this.getTableSchema()}"
             data="{this.getTableData()}"
-            onUpdate="{this.onUpdateGame}"
-            onRemove="{this.onRemoveGame}"/>
+            onUpdate="{this.onUpdateGame}"/>
 </div>

@@ -94,7 +94,7 @@
                                 labelPosition="right"/>
                 </div>
                 <div rt-if="schemaItem.type === 'number'" key="key-number-edit-item">
-                    <mui.TextField floatingLabelText="{schemaItem.title}" style="{{width: '256px', marginTop: '-24px'}}" valueLink="{this.linkState('editedData.' + schemaItemIndex, 'number')}" />
+                    <mui.TextField type="number" floatingLabelText="{schemaItem.title}" style="{{width: '256px', marginTop: '-24px'}}" valueLink="{this.linkState('editedData.' + schemaItemIndex, 'number')}" />
                 </div>
                 <div rt-if="schemaItem.type === 'string'" key="key-string-edit-item">
                     <mui.TextField floatingLabelText="{schemaItem.title}" style="{{width: '256px', marginTop: '-24px'}}" valueLink="{this.linkState('editedData.' + schemaItemIndex)}" />
