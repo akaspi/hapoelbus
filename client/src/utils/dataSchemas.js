@@ -11,7 +11,7 @@ module.exports = {
             "title": "דוא״ל"
         },
         "isPremium": {
-            "type": "string",
+            "type": "boolean",
             "title": "מעוניין במנוי"
         },
         "phone": {

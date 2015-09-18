@@ -1,0 +1,10 @@
+<rt-require dependency="../../loading/loading" as="loading"/>
+<rt-require dependency="../customTable/customTable" as="customTable"/>
+
+<div>
+    <customTable
+            schema="{this.getTableSchema()}"
+            data="{this.getTableData()}"
+            onUpdate="{this.onUpdateGame}"
+            onRemove="{this.onRemoveGame}"/>
+</div>

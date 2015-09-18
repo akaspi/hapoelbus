@@ -1,5 +1,6 @@
 <rt-require dependency="../usersInfoList/usersInfoList" as="usersInfoList"/>
 <rt-require dependency="../../dataExplorer/gamesExplorer/gamesExplorer" as="gamesExplorer"/>
+<rt-require dependency="../../dataExplorer/usersDataExplorer/usersDataExplorer" as="usersDataExplorer"/>
 <rt-require dependency="../../loading/loading" as="loading"/>
 <rt-require dependency="lodash" as="_"/>
 <rt-require dependency="../../../constants/navigationConstants" as="navigationConstants"/>
@@ -7,7 +8,7 @@
 <div class="admin-dashboard" rt-scope="this.props.tab as currentTab">
     <loading rt-if="this.state.fetchingData" key="key-admin-fetching-data"/>
 
-    <usersInfoList
+    <usersDataExplorer
             rt-if="_.isEqual(currentTab, navigationConstants.TABS.ADMIN.USERS_DATA_LIST)"
             key="key-show-users-data-explorer"
             usersData="{this.state.usersData}"/>
