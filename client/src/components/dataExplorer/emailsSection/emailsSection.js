@@ -14,7 +14,7 @@ var gamesStore = require('../../../stores/gamesStore');
 
 var emailsConstants = require('../../../constants/emailsConstants');
 
-var dataSchemas = require('../../../utils/dataSchemas');
+var dataSchemas = require('../../../../../common/dataSchemas');
 
 var GamesExplorer = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],

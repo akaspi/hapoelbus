@@ -1,5 +1,3 @@
-var gamesConstants = require('../constants/gamesConstants');
-
 module.exports = {
     "UserData": {
         "displayName": {
@@ -26,15 +24,15 @@ module.exports = {
             "options": [
                 {
                     "title": "מכבי תל-אביב",
-                    "value": gamesConstants.VSID.MTA
+                    "value": 'MTA'
                 },
                 {
                     "title": "הפועל תל-אביב",
-                    "value": gamesConstants.VSID.HTA
+                    "value": 'HTA'
                 },
                 {
                     "title": "הפועל חולון",
-                    "value": gamesConstants.VSID.HOLON
+                    "value": 'HOLON'
                 }
                 //...
             ]
@@ -57,15 +55,15 @@ module.exports = {
             "options": [
                 {
                     "title": "סגור",
-                    "value": gamesConstants.STATUS.CLOSED
+                    "value": 'CLOSED'
                 },
                 {
                     "title": "פתוח למנויים",
-                    "value": gamesConstants.STATUS.OPEN_FOR_MEMBERS
+                    "value": 'OPEN_FOR_MEMBERS'
                 },
                 {
                     "title": "פתוח לכולם",
-                    "value": gamesConstants.STATUS.OPEN_FOR_ALL
+                    "value": 'OPEN_FOR_ALL'
                 }
             ]
         }

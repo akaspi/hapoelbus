@@ -11,8 +11,7 @@ var paymentsStore = require('../../../stores/paymentsStore');
 var usersDataActions = require('../../../actions/userActions');
 var paymentsActions = require('../../../actions/paymentsActions');
 
-var dataConverterUtil = require('../../../utils/dataConverterUtil');
-var dataSchemas = require('../../../utils/dataSchemas');
+var dataSchemas = require('../../../../../common/dataSchemas');
 
 var GamesExplorer = React.createClass({
     getInitialState: function () {

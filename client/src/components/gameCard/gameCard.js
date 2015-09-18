@@ -4,15 +4,18 @@ var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
 var numericLinkState = require('../mixins/numericLinkState');
 var template = require('./gameCard.rt.js');
+
+var dataSchemas = require('../../../../common/dataSchemas');
+
 var gamesConstants = require('../../constants/gamesConstants');
 
 var bookingActions = require('../../actions/bookingActions');
 
-var dataConverterUtil = require('../../utils/dataConverterUtil');
+var dateUtils = require('../../../../common/dateUtils');
 
 var stations = [
-    { payload: 0, text: 'תל אביב' },
-    { payload: 1, text: 'מודיעין' }
+    {payload: 0, text: 'תל אביב'},
+    {payload: 1, text: 'מודיעין'}
 ];
 
 var GameCard = React.createClass({
@@ -21,7 +24,7 @@ var GameCard = React.createClass({
         return {
             bookingMode: false,
             numOfSeats: this.props.booking ? this.props.booking.numOfSeats : 1,
-            stationIndex: this.props.booking ? _.findIndex(stations, { text: this.props.booking.station }) : 0,
+            stationIndex: this.props.booking ? _.findIndex(stations, {text: this.props.booking.station}) : 0,
             comment: this.props.booking ? this.props.booking.comment : ''
         }
     },
@@ -33,10 +36,10 @@ var GameCard = React.createClass({
     goToBookingMode: function () {
         this.setState({bookingMode: true});
     },
-    goToOverviewMode: function() {
+    goToOverviewMode: function () {
         this.setState({bookingMode: false});
     },
-    updateBooking: function() {
+    updateBooking: function () {
         var bookingData = {
             numOfSeats: this.state.numOfSeats,
             station: stations[this.state.stationIndex].text,
@@ -44,23 +47,23 @@ var GameCard = React.createClass({
         };
         bookingActions.updateBooking(this.props.uid, this.props.gameId, bookingData);
     },
-    cancelBooking: function() {
+    cancelBooking: function () {
         bookingActions.cancelBooking(this.props.uid, this.props.gameId);
     },
-    translateVSID: function(vsid) {
-      return gamesConstants.VSID[vsid];
+    translateVSID: function (vsid) {
+        return _.find(dataSchemas.Game.vsid.options, {value: vsid}).title;
     },
-    getDepartureUTCTime: function(gameDeparture) {
-        return dataConverterUtil.convertTime(gameDeparture);
+    getDepartureUTCTime: function (gameDeparture) {
+        return dateUtils.convertTime(gameDeparture);
     },
-    getGameUTCDate: function(gameDate) {
-        return dataConverterUtil.convertDate(gameDate);
+    getGameUTCDate: function (gameDate) {
+        return dateUtils.convertDate(gameDate);
     },
-    getUsersDataFilterItems: function() {
+    getUsersDataFilterItems: function () {
         return stations;
     },
-    onStationChange: function(e, selectedIndex) {
-        this.setState({ stationIndex: selectedIndex });
+    onStationChange: function (e, selectedIndex) {
+        this.setState({stationIndex: selectedIndex});
     },
     render: template
 });

@@ -1,6 +1,6 @@
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="lodash" as="_"/>
-<rt-require dependency="../../../utils/dataConverterUtil" as="dataConverterUtil"/>
+<rt-require dependency="../../../../../common/dateUtils" as="dateUtils"/>
 
 <div class="custom-table">
     <div rt-if="!this.state.updateMode && !this.state.createMode" key="key-custom-table-show-display-view" class="display-view">
@@ -65,10 +65,10 @@
                             <i rt-if="!dataItem[schemaItemIndex]" key="key-boolean-value-false" class="fa fa-minus"/>
                         </div>
                         <div rt-if="schemaItem.type === 'date'" key="key-boolean-value">
-                            <span>{dataConverterUtil.convertDate(dataItem[schemaItemIndex])}</span>
+                            <span>{dateUtils.convertDate(dataItem[schemaItemIndex])}</span>
                         </div>
                         <div rt-if="schemaItem.type === 'time'" key="key-boolean-value">
-                            <span>{dataConverterUtil.convertTime(dataItem[schemaItemIndex])}</span>
+                            <span>{dateUtils.convertTime(dataItem[schemaItemIndex])}</span>
                         </div>
                         <div rt-if="schemaItem.type === 'enum'" key="key-boolean-value">
                             <span>{_.find(schemaItem.options, {value: dataItem[schemaItemIndex]}).title}</span>
@@ -105,7 +105,7 @@
                             hintText="{schemaItem.title}"
                             onChange="{this.onDateChange.bind(this, schemaItemIndex)}"
                             value="{value && new Date(value)}"
-                            formatDate="{dataConverterUtil.convertDate}"/>
+                            formatDate="{dateUtils.convertDate}"/>
                 </div>
                 <div rt-if="schemaItem.type === 'time'" key="key-time-edit-item">
                     <mui.TimePicker
@@ -113,7 +113,7 @@
                             format="24hr"
                             hintText="{schemaItem.title}"
                             onChange="{this.onTimeChange.bind(this, schemaItemIndex)}"
-                            value="{value && dataConverterUtil.convertTime(new Date(value))}"/>
+                            value="{value && dateUtils.convertTime(new Date(value))}"/>
                 </div>
                 <div rt-if="schemaItem.type === 'enum'" key="key-enum-edit-item">
                     <mui.SelectField

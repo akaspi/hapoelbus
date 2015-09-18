@@ -9,8 +9,7 @@ var _ = require('lodash');
 var gamesStore = require('../../../stores/gamesStore');
 var gamesActions = require('../../../actions/gamesActions');
 
-var dataConverterUtil = require('../../../utils/dataConverterUtil');
-var dataSchemas = require('../../../utils/dataSchemas');
+var dataSchemas = require('../../../../../common/dataSchemas');
 
 var GamesExplorer = React.createClass({
     mixins: [],

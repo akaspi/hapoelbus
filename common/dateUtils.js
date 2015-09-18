@@ -1,8 +1,5 @@
 'use strict';
 
-var gamesConstants = require('../constants/gamesConstants');
-var translationMap = require('./dataTranslationMap');
-
 module.exports = {
     convertDate: function (utcDate) {
         var date = new Date(utcDate);
@@ -19,11 +16,5 @@ module.exports = {
         var minutes = (date.getMinutes() === 0) ? '00' : date.getMinutes();
 
         return  hours + ':' + minutes;
-    },
-    convertGameStatus: function (gameStatus) {
-        return translationMap.GAMES.STATUS[gameStatus];
-    },
-    convertVSID: function (vsid) {
-        return translationMap.GAMES.VSID[vsid];
     }
 };
