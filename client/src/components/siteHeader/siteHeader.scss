@@ -1,62 +1,86 @@
-@import "../../commonStyles/variables";
-
 .site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 25px;
-  height: 100%;
+  padding: 5px 25px;
 
-  .logo {
-    width: 100px;
-    height: 50px;
-    background: url("../../images/outside-text.png") no-repeat;
-    background-size: cover;
+  .logo-section {
+
+    .logo {
+      width: 100px;
+      height: 50px;
+      background: url("../../images/outside-text.png") no-repeat;
+      background-size: cover;
+    }
+
   }
 
-  .login-btn-container {
+  .auth-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
-  }
 
-  .user-data-avatar-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .welcome-text {
-      flex: 1;
-      margin: 0 10px;
+    .login-btn-section {
     }
 
-    .user-display-name {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .user-data-section {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
 
-    a {
-      color: #2980b9;
-      &:hover {
-        text-decoration: underline;
-        cursor: pointer;
+      .navigation-wrapper {
+        margin-left: 10px;
       }
-    }
-  }
-}
 
-@media all and (max-width: 500px) {
-  .site-header {
-    padding: 0 5px;
-
-    .user-data-avatar-wrapper {
+      .avatar-wrapper {
+      }
 
       .welcome-text {
-        max-width: 80px;
-      }
+        max-width: 120px;
+        margin-left: 10px;
+        margin-right: 5px;
 
+        .user-display-name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .logout {
+        a {
+          color: #2980b9;
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
+
+  @media all and (max-width: 500px) {
+    padding-left: 0;
+    padding-right: 0;
+
+    &.logged-in {
+      flex-direction: column;
+
+      .auth-section {
+        .user-data-section {
+          margin-top: 10px;
+
+          .welcome-text {
+            display: flex;
+            max-width: 150px;
+
+            .user-display-name {
+              margin-right: 3px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
 }
