@@ -22,13 +22,13 @@ var GamesExplorer = React.createClass({
         };
     },
     componentDidMount: function() {
-        gamesStore.registerToChange(this.onUsersDataStoreDataChanged);
+        gamesStore.registerToChange(this.onGamesStoreDataChanged);
         gamesActions.fetchGames();
     },
     componentWillUnmount: function() {
-        gamesStore.removeChangeListener(this.onUsersDataStoreDataChanged);
+        gamesStore.removeChangeListener(this.onGamesStoreDataChanged);
     },
-    onUsersDataStoreDataChanged: function(gamesStoreData) {
+    onGamesStoreDataChanged: function(gamesStoreData) {
         if (gamesStoreData.pending) {
             this.setState({ isGamesStorePending: true });
         } else {

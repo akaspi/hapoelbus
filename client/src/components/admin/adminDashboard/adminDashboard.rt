@@ -1,6 +1,7 @@
 <rt-require dependency="../usersInfoList/usersInfoList" as="usersInfoList"/>
 <rt-require dependency="../../dataExplorer/gamesExplorer/gamesExplorer" as="gamesExplorer"/>
 <rt-require dependency="../../dataExplorer/usersDataExplorer/usersDataExplorer" as="usersDataExplorer"/>
+<rt-require dependency="../../dataExplorer/emailsSection/emailsSection" as="emailsSection"/>
 <rt-require dependency="../../loading/loading" as="loading"/>
 <rt-require dependency="lodash" as="_"/>
 <rt-require dependency="../../../constants/navigationConstants" as="navigationConstants"/>
@@ -16,4 +17,8 @@
     <gamesExplorer
             rt-if="_.isEqual(currentTab, navigationConstants.TABS.ADMIN.GAMES_LIST)"
             key="key-show-game-explorer"/>
+
+    <emailsSection
+            rt-if="_.isEqual(currentTab, navigationConstants.TABS.ADMIN.EMAILS_SECTION)"
+            key="key-show-emails-section"/>
 </div>

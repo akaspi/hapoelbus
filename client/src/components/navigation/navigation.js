@@ -14,7 +14,8 @@ var navItems = [
     { text: 'משחקים פתוחים', tabName: navigationConstants.TABS.USER.OPEN_GAMES },
     { text: 'ניהול', type: mui.MenuItem.Types.SUBHEADER },
     { text: 'טבלת משתמשים', tabName: navigationConstants.TABS.ADMIN.USERS_DATA_LIST },
-    { text: 'טבלת משחקים', tabName: navigationConstants.TABS.ADMIN.GAMES_LIST }
+    { text: 'טבלת משחקים', tabName: navigationConstants.TABS.ADMIN.GAMES_LIST },
+    { text: 'שליחת אימייל', tabName: navigationConstants.TABS.ADMIN.EMAILS_SECTION }
 ];
 
 var AccountData = React.createClass({

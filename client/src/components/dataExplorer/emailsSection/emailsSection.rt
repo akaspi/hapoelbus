@@ -1,0 +1,38 @@
+<rt-require dependency="../../loading/loading" as="loading"/>
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="emails-section">
+
+    <mui.SelectField
+            style="{{marginTop: '12px'}}"
+            menuItems="{this.buildTemplatesOptions()}"
+            valueMember="value"
+            displayMember="title"
+            valueLink="{this.linkState('template')}"
+            hintText="{'בחר תבנית'}"
+            iconStyle="{{right: 'initial', left: '16px'}}"
+            underlineStyle="{{margin: '-3px'}}"/>
+
+    <mui.SelectField
+            style="{{marginTop: '12px'}}"
+            menuItems="{this.getGamesOptions()}"
+            valueMember="value"
+            displayMember="title"
+            valueLink="{this.linkState('gameId')}"
+            hintText="{'בחר משחק'}"
+            iconStyle="{{right: 'initial', left: '16px'}}"
+            underlineStyle="{{margin: '-3px'}}"/>
+
+    <div class="send-button-wrapper">
+        <mui.RaisedButton label="Primary" fullWidth="{true}" primary="{true}" onClick="{this.openSendMailDialog}"/>
+    </div>
+
+    <mui.Dialog
+            ref="sendEmailDialog"
+            contentStyle="{{'width':'360'}}"
+            title="זהירות!"
+            actions="{this.getSendEmailDialogActions()}"
+            modal="{false}">
+        <span>האם אתה בטוח שברצונך לשלוח את תבנית המייל עבור המשחק שבחרת?</span>
+    </mui.Dialog>
+</div>

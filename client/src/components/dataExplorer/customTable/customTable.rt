@@ -117,7 +117,6 @@
                 </div>
                 <div rt-if="schemaItem.type === 'enum'" key="key-enum-edit-item">
                     <mui.SelectField
-                            rt-scope="(_.findIndex(schemaItem.options, {value: this.state.editedData[schemaItemIndex]}) + 1) as selectedEnumIndex"
                             style="{{width: '100%', marginTop: '12px'}}"
                             menuItems="{schemaItem.options}"
                             valueMember="value"

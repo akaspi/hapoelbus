@@ -8,7 +8,8 @@ module.exports = {
         },
         ADMIN: {
             USERS_DATA_LIST: 'USERS_DATA_LIST_TAB',
-            GAMES_LIST: 'GAMES_LIST_TAB'
+            GAMES_LIST: 'GAMES_LIST_TAB',
+            EMAILS_SECTION: 'EMAILS_SECTION'
         }
     }
 };
