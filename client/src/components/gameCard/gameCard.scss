@@ -4,6 +4,8 @@
   $overlay-height: 70px;
   $footer-height: 50px;
 
+  @import "teamLogos";
+
   display: flex;
   flex-direction: column;
 
@@ -28,7 +30,7 @@
 
       position: relative;
       overflow: hidden;
-      background-image: url("https://upload.wikimedia.org/wikipedia/he/thumb/3/36/MaccbiRishon2.png/300px-MaccbiRishon2.png");
+      //background-image: url("https://upload.wikimedia.org/wikipedia/he/thumb/3/36/MaccbiRishon2.png/300px-MaccbiRishon2.png");
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;

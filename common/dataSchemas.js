@@ -33,6 +33,38 @@ module.exports = {
                 {
                     "title": "הפועל חולון",
                     "value": 'HOLON'
+                },
+                {
+                    "title": "הפועל אילת",
+                    "value": 'EILAT'
+                },
+                {
+                    "title": "מכבי ראשון-לציון",
+                    "value": 'RISHON'
+                },
+                {
+                    "title": "מכבי חיפה",
+                    "value": 'HAIFA'
+                },
+                {
+                    "title": "עירוני נס ציונה",
+                    "value": 'NES_ZIONA'
+                },
+                {
+                    "title": "עירוני נהריה",
+                    "value": 'NAHARI'
+                },
+                {
+                    "title": "בני הרצליה",
+                    "value": 'BNEI_HASHARON'
+                },
+                {
+                    "title": "מכבי אשדוד",
+                    "value": 'ASHDOD'
+                },
+                {
+                    "title": "מכבי קרית גת",
+                    "value": 'KIRYAT_GAT'
                 }
                 //...
             ]

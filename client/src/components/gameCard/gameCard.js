@@ -33,6 +33,11 @@ var GameCard = React.createClass({
         var gameIsOpenForAll = (this.props.gameData.status === gamesConstants.STATUS.OPEN_FOR_ALL);
         return isPaidUser || gameIsOpenForAll;
     },
+    getLogoContainerClasses: function () {
+        var classes = {'game-logo-container': true};
+        classes['team-logo-' + this.props.gameData.vsid] = true;
+        return classes;
+    },
     goToBookingMode: function () {
         this.setState({bookingMode: true});
     },

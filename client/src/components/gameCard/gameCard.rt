@@ -3,7 +3,7 @@
 
 <div class="card" rt-scope="this.props.gameData as gameData">
     <div rt-if="!this.state.bookingMode" key="key-game-overview-mode" class="card-view overview">
-        <div class="game-logo-container">
+        <div rt-class="this.getLogoContainerClasses()" class="game-logo-container">
             <div rt-if="this.props.booking" key="key-booking-ribbon" class="corner-ribbon">רשום להסעה</div>
             <div class="overlay">
                 <div class="game-info-row">
