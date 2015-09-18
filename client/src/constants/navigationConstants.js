@@ -1,12 +1,14 @@
 module.exports = {
-    DASHBOARD_TYPE: {
-        USER: 'USER_DASHBOARD',
-        ADMIN: 'ADMIN_DASHBOARD'
+    ACTIONS: {
+        NAVIGATE_TO: 'NAVIGATE'
     },
-    CONTEXT: {
-        OPEN_GAMES: 'OPEN_GAMES_NAV_CONTEXT',
-        EDIT_USER_DATA: 'EDIT_USER_DATA_NAV_CONTEXT',
-        USERS_DATA_LIST: 'USERS_DATA_LIST_NAV_CONTEXT',
-        GAMES_LIST: 'GAMES_LIST_NAV_CONTEXT'
+    TABS: {
+        USER: {
+            OPEN_GAMES: 'OPEN_GAMES_TAB'
+        },
+        ADMIN: {
+            USERS_DATA_LIST: 'USERS_DATA_LIST_TAB',
+            GAMES_LIST: 'GAMES_LIST_TAB'
+        }
     }
 };

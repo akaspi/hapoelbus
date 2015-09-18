@@ -2,43 +2,32 @@
 
 var React = require('react/addons');
 var template = require('./myAccount.rt.js');
-var muiMixin = require('../mixins/mui-mixin');
-var mui = require('material-ui');
+var _ = require('lodash');
+var navigationStore = require('../../stores/navigationStore');
 
 var navigationConstants = require('../../constants/navigationConstants');
 
-var navItems = [
-    { text: 'משחקים פתוחים', dashboard: navigationConstants.DASHBOARD_TYPE.USER, context: navigationConstants.CONTEXT.OPEN_GAMES },
-    { text: 'פרטים אישיים', dashboard: navigationConstants.DASHBOARD_TYPE.USER, context: navigationConstants.CONTEXT.EDIT_USER_DATA },
-    { text: 'ניהול', type: mui.MenuItem.Types.SUBHEADER },
-    { text: 'טבלת משתמשים', dashboard: navigationConstants.DASHBOARD_TYPE.ADMIN, context: navigationConstants.CONTEXT.USERS_DATA_LIST },
-    { text: 'טבלת משחקים', dashboard: navigationConstants.DASHBOARD_TYPE.ADMIN, context: navigationConstants.CONTEXT.GAMES_LIST }
-];
-
 var MyAccount = React.createClass({
-    mixins: [muiMixin],
-    getInitialState: function () {
+    getInitialState: function() {
+      var navigationState = navigationStore.getAll();
         return {
-            selectedNavItem: navItems[4]
-        };
-    },
-    toggleNav: function () {
-        this.refs.nav.toggle();
-    },
-    getNavItems: function () {
-        if (this.props.isAdmin) {
-            return navItems;
+            tabToDisplay: navigationState.tabToDisplay
         }
-        return _.filter(navItems, {dashboard: navigationConstants.DASHBOARD_TYPE.USER})
     },
-    onNavChange: function(e, selectedIndex, selectedItem) {
-      this.setState({selectedNavItem: selectedItem});
+    componentDidMount: function() {
+        navigationStore.registerToChange(this.onNavigationStoreDataChanged);
     },
-    isUserDashboardSelected: function() {
-        return this.state.selectedNavItem.dashboard === navigationConstants.DASHBOARD_TYPE.USER;
+    onNavigationStoreDataChanged: function(navigationStoreData) {
+        this.setState({ tabToDisplay: navigationStoreData.tabToDisplay });
     },
-    isAdminDashboardSelected: function() {
-      return this.state.selectedNavItem.dashboard === navigationConstants.DASHBOARD_TYPE.ADMIN;
+    componentWillUnmount: function() {
+        navigationStore.removeChangeListener(this.onNavigationStoreDataChanged);
+    },
+    shouldShowUserDashboard: function() {
+        return _.contains(_.values(navigationConstants.TABS.USER), this.state.tabToDisplay);
+    },
+    shouldShowAdminDashboard: function() {
+        return _.contains(_.values(navigationConstants.TABS.ADMIN), this.state.tabToDisplay);
     },
     render: template
 });

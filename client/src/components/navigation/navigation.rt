@@ -1,10 +1,12 @@
+<rt-require dependency="material-ui" as="mui"/>
+
 <div class="navigation">
-    <nav class="flex-nav">
-        <a href="#" class="toggle-nav" onClick="{this.toggleNav}">head</a>
-        <ul rt-class="{open: this.state.toggleExpand}">
-            <li rt-repeat="label in this.props.labels">
-                <a href="#" onClick="()=>this.onNavItemClick(labelIndex)" rt-class="{selected: labelIndex === this.state.selectedIndex}">{label}</a>
-            </li>
-        </ul>
-    </nav>
+    <i class="fa fa-bars menu-icon" onClick="{this.toggleNav}"/>
+
+    <mui.LeftNav
+            ref="nav"
+            docked="{false}"
+            menuItems="{this.getNavItems()}"
+            onChange="{this.onNavChange}"
+            value="{this.state.selectedTab}"/>
 </div>

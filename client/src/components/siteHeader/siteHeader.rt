@@ -1,9 +1,10 @@
 <rt-require dependency="../authBox/authBox" as="authBox"/>
+<rt-require dependency="../navigation/navigation" as="navigation"/>
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="site-header">
     <div class="logo"></div>
-    <!--<div class="content"></div>-->
+    <navigation rt-if="this.props.isAdmin" key="key-navigation-menu"/>
     <div class="login-btn-container">
         <mui.RaisedButton rt-if="!this.props.uid || this.props.isPending" key="key-login-button" label="התחבר" backgroundColor="#e74c3c" labelStyle="{{color: '#fff'}}" onClick="{this.handleOpenLoginDialog}"/>
         <div rt-if="!_.isEmpty(this.props.usersData)" key="key-user-data-avatar" class="user-data-avatar-wrapper">

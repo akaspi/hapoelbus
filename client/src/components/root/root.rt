@@ -9,7 +9,7 @@
 
 <div class="root" rt-scope="(this.state.isAuthStorePending || this.state.isUsersDataStorePending) as isPending">
     <header>
-        <siteHeader class="site-header" uid="{this.state.uid}" usersData="{this.state.usersData}" isPending="{isPending}"/>
+        <siteHeader class="site-header" uid="{this.state.uid}" isAdmin="{this.state.isAdmin}" usersData="{this.state.usersData}" isPending="{isPending}"/>
     </header>
     <div class="site-content">
         <loading rt-if="isPending" key="key-fetching-user-data"/>
