@@ -25,7 +25,7 @@ dispatcher.register(function (actionData) {
             fetchGames();
             break;
         case gamesConstants.ACTIONS.UPDATE_GAME:
-            updateGame();
+            updateGame(actionData);
             break;
     }
 });
@@ -44,12 +44,8 @@ function fetchGames() {
 }
 
 function updateGame(actionData) {
-    var gameId = actionData.gameId;
-    var gameData = actionData.gameData;
-    games.updateGame(gameId, gameData, function() {
-        var updatedGames = {};
-        updatedGames[gameId] = gameData;
-        notifyChange({games: updatedGames});
+    games.updateGame(actionData.gameId, actionData.gameData, function() {
+        fetchGames(actionData);
     }, function() {
 
     });

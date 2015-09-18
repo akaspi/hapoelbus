@@ -1,0 +1,48 @@
+.custom-table {
+
+  .display-view {
+
+    .table-header {
+      display: flex;
+      justify-content: flex-end;
+
+      & > * {
+        margin-left: 10px;
+
+        &:last-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .users-data-count {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+  }
+
+  .edit-view {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .edit-item {
+      height: 72px;
+      margin: 15px 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+  }
+}

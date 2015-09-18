@@ -13,6 +13,6 @@
         <mui.LeftNav ref="nav" docked="{false}" selectedIndex="{_.findIndex(this.getNavItems(), this.state.selectedNavItem)}" menuItems="{this.getNavItems()}" onChange="{this.onNavChange}"/>
     </div>
 
-    <userDashboard rt-if="this.isUserDashboardSelected()" key="key-dashboard" context="{this.state.selectedNavItem.context}" uid="{this.props.uid}" userData="{this.props.userData}"/>
-    <adminDashboard rt-if="this.isAdminDashboardSelected()" key="key-admin-dashboard" context="{this.state.selectedNavItem.context}"/>
+    <userDashboard rt-if="this.isUserDashboardSelected()" key="key-dashboard" navContext="{this.state.selectedNavItem.context}" uid="{this.props.uid}" usersData="{this.props.usersData}"/>
+    <adminDashboard rt-if="this.isAdminDashboardSelected()" key="key-admin-dashboard" navContext="{this.state.selectedNavItem.context}" usersData="{this.props.usersData}"/>
 </div>

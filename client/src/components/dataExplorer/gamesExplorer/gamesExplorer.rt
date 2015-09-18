@@ -1,0 +1,14 @@
+<rt-require dependency="../../loading/loading" as="loading"/>
+<rt-require dependency="../customTable/customTable" as="customTable"/>
+
+<div>
+    <loading rt-if="this.state.isGamesStorePending" key="key-game-explorer-fetching-data"/>
+    <customTable
+            rt-if="!this.state.isGamesStorePending"
+            key="key-game-explorer-table"
+            schema="{this.getTableSchema()}"
+            data="{this.getTableData()}"
+            onCreate="{this.onCreateGame}"
+            onUpdate="{this.onUpdateGame}"
+            onRemove="{this.onRemoveGame}"/>
+</div>

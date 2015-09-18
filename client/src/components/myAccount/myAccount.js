@@ -19,7 +19,7 @@ var MyAccount = React.createClass({
     mixins: [muiMixin],
     getInitialState: function () {
         return {
-            selectedNavItem: navItems[0]
+            selectedNavItem: navItems[4]
         };
     },
     toggleNav: function () {

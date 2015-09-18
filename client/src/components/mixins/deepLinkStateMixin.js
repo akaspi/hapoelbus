@@ -1,5 +1,5 @@
 module.exports = {
-    linkState: function(path) {
+    linkState: function(path, type) {
         function setPath(obj, path, value) {
             var leaf = resolvePath(obj, path);
             leaf.obj[leaf.name] = value;
@@ -29,7 +29,8 @@ module.exports = {
         return {
             value: getPath(this.state, path),
             requestChange: function(newValue) {
-                setPath(this.state, path, newValue);
+                var val = type === 'number' ? parseInt(newValue) : newValue;
+                setPath(this.state, path, val);
                 this.forceUpdate();
             }.bind(this)
         }

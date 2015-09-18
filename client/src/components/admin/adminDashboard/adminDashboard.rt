@@ -1,7 +1,10 @@
 <rt-require dependency="../usersInfoList/usersInfoList" as="usersInfoList"/>
+<rt-require dependency="../../dataExplorer/gamesExplorer/gamesExplorer" as="gamesExplorer"/>
 <rt-require dependency="../../loading/loading" as="loading"/>
+<rt-require dependency="../../../constants/navigationConstants" as="navigationConstants"/>
 
 <div class="admin-dashboard">
     <loading rt-if="this.state.fetchingData" key="key-admin-fetching-data"/>
-    <usersInfoList rt-if="!this.state.fetchingData" key="key-admin-has-data" usersData="{this.state.usersData}"/>
+    <usersInfoList rt-if="this.props.navContext === navigationConstants.CONTEXT.EDIT_USER_DATA" key="key-show-users-data-explorer" usersData="{this.state.usersData}" />
+    <gamesExplorer rt-if="this.props.navContext === navigationConstants.CONTEXT.GAMES_LIST" key="key-show-game-explorer"/>
 </div>

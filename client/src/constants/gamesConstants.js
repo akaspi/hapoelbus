@@ -9,7 +9,8 @@ module.exports = {
         OPEN_FOR_ALL: 'OPEN_FOR_ALL'
     },
     VSID: {
-        MTA: 'מכבי תל אביב',
-        HOLON: 'הפועל חולון'
+        MTA: 'MTA',
+        HTA: 'HTA',
+        HOLON: 'HOLON'
     }
 };

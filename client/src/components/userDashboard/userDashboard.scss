@@ -6,7 +6,11 @@
   flex-direction: column;
 
   .no-open-games {
-    font-color: blue;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .games-wrapper {
@@ -15,44 +19,3 @@
     flex-wrap: wrap;
   }
 }
-
-//  .content {
-//    margin-top: 20px;
-//  }
-//
-//  .status-text {
-//    text-align: center;
-//
-//    h1 {
-//      font-size: 36px;
-//    }
-//
-//    h3 {
-//      font-size: 22px;
-//    }
-//  }
-//
-//  .outside-logo {
-//    height: 300px;
-//    width: 300px;
-//    margin-top: 30px;
-//    background: url("../../images/outside-logo.png") no-repeat;
-//    background-size: cover;
-//  }
-//
-//}
-//
-//@media all and (max-width: 500px) {
-//  .dashboard {
-//    .status-text {
-//      h1 {
-//        font-size: 28px;;
-//      }
-//
-//      h3 {
-//        font-size: 16px;;
-//      }
-//    }
-//  }
-//}
-

@@ -8,6 +8,8 @@ var gamesConstants = require('../../constants/gamesConstants');
 
 var bookingActions = require('../../actions/bookingActions');
 
+var dataConverterUtil = require('../../utils/dataConverterUtil');
+
 var stations = [
     { payload: 0, text: 'תל אביב' },
     { payload: 1, text: 'מודיעין' }
@@ -49,16 +51,10 @@ var GameCard = React.createClass({
       return gamesConstants.VSID[vsid];
     },
     getDepartureUTCTime: function(gameDeparture) {
-        var date = new Date(gameDeparture);
-        var hours = date.getUTCHours();
-        var minutes = (date.getUTCMinutes() === 0) ? '00' : date.getUTCMinutes();
-        return  hours + ':' + minutes;
+        return dataConverterUtil.convertTime(gameDeparture);
     },
     getGameUTCDate: function(gameDate) {
-        var date = new Date(gameDate);
-        var day = date.getUTCDate();
-        var month = (date.getUTCMonth() === 0) ? 12 : date.getUTCMonth();
-        return day + '/' + month;
+        return dataConverterUtil.convertDate(gameDate);
     },
     getUsersDataFilterItems: function() {
         return stations;
