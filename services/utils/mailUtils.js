@@ -24,15 +24,6 @@ function sendMail(to, subject, body, onSuccess, onError) {
     });
 }
 
-function getAllUsersEmails(ref, onComplete) {
-    ref.child('usersData').once('value', function (snapshot) {
-        var allUsersData = snapshot.val();
-        var allEmails = _.pluck(_.values(allUsersData), 'email');
-        onComplete(allEmails);
-    });
-}
-
 module.exports = {
-    sendMail: sendMail,
-    getAllUsersEmails: getAllUsersEmails
+    sendMail: sendMail
 };

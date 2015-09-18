@@ -13,6 +13,7 @@ var gamesActions = require('../../../actions/gamesActions');
 var gamesStore = require('../../../stores/gamesStore');
 
 var emailsConstants = require('../../../constants/emailsConstants');
+var mailTemplatesConstants = require('../../../../../common/mailTemplatesConstants');
 
 var dataSchemas = require('../../../../../common/dataSchemas');
 
@@ -58,9 +59,9 @@ var GamesExplorer = React.createClass({
     },
     buildTemplatesOptions: function() {
         return [
-            { value: emailsConstants.TEMPLATES.GAME_IS_OPEN_FOR_MEMBERS, title: 'פתיחת משחק למנויים' },
-            { value: emailsConstants.TEMPLATES.GAME_IS_OPEN_FOR_ALL, title: 'פתיחת משחק לכולם' },
-            { value: emailsConstants.TEMPLATES.UPDATE_GAME_DETAILS, title: 'עדכון נתוני משחק' }
+            { value: mailTemplatesConstants.GAME_IS_OPEN_FOR_MEMBERS, title: 'פתיחת משחק למנויים' },
+            { value: mailTemplatesConstants.GAME_IS_OPEN_FOR_ALL, title: 'פתיחת משחק לכולם' },
+            { value: mailTemplatesConstants.UPDATE_GAME_DETAILS, title: 'עדכון נתוני משחק' }
         ];
     },
     getGamesOptions: function () {

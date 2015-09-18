@@ -1,6 +1,6 @@
 'use strict';
 
-var utils = require('../utils.js');
+var utils = require('../utils/dbUtils.js');
 var sendgrid  = require('sendgrid')('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');
 var ref = utils.getFirebaseRef();
 var fs = require('fs');

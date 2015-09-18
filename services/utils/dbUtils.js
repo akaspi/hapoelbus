@@ -5,7 +5,7 @@ var Firebase = require('firebase');
 var config = {};
 
 try {
-    config = require('./config.json');
+    config = require('./../config.json');
 } catch (e) {
     console.log('Failed to load config file.');
     process.exit();

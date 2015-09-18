@@ -1,6 +1,6 @@
 'use strict';
 
-var utils = require('../utils.js');
+var utils = require('../utils/dbUtils.js');
 var _ = require('lodash');
 var ref = utils.getFirebaseRef();
 
