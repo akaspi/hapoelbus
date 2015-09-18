@@ -29,9 +29,12 @@
             </div>
         </div>
         <div class="footer" rt-scope="this.shouldEnableBooking() as shouldEnableBooking">
-            <mui.FlatButton rt-if="shouldEnableBooking && !this.props.booking" key="key-game-is-open-for-booking" style="{{paddingLeft: '16px'}}" secondary="{true}" label="הרשם" onClick="{this.goToBookingMode}">
-                <i class="fa fa-plus"/>
-            </mui.FlatButton>
+            <mui.RaisedButton
+                    rt-if="shouldEnableBooking && !this.props.booking" key="key-game-is-open-for-booking"
+                    backgroundColor="{mui.Styles.Colors.red400}"
+                    labelColor="#fff"
+                    label="הרשם"
+                    onClick="{this.goToBookingMode}"/>
             <mui.FlatButton rt-if="shouldEnableBooking && this.props.booking" key="key-game-is-open-for-booking" style="{{paddingLeft: '16px'}}" secondary="{true}" label="עדכן הרשמה" onClick="{this.goToBookingMode}">
                 <i class="fa fa-pencil"/>
             </mui.FlatButton>
