@@ -27,6 +27,9 @@ dispatcher.register(function (actionData) {
         case gamesConstants.ACTIONS.UPDATE_GAME:
             updateGame(actionData);
             break;
+        case gamesConstants.ACTIONS.REMOVE_GAME:
+            removeGame(actionData);
+            break;
     }
 });
 
@@ -45,6 +48,14 @@ function fetchGames() {
 
 function updateGame(actionData) {
     games.updateGame(actionData.gameId, actionData.gameData, function() {
+        fetchGames(actionData);
+    }, function() {
+
+    });
+}
+
+function removeGame(actionData) {
+    games.removeGame(actionData.gameId, function() {
         fetchGames(actionData);
     }, function() {
 

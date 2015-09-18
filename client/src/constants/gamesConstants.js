@@ -1,7 +1,8 @@
 module.exports = {
     ACTIONS: {
-        FETCH_GAMES: 'fetchGames',
-        UPDATE_GAME: 'updateGame'
+        FETCH_GAMES: 'FETCH_GAMES',
+        UPDATE_GAME: 'UPDATE_GAME',
+        REMOVE_GAME: 'REMOVE_GAME'
     },
     STATUS: {
         CLOSED: 'CLOSED',

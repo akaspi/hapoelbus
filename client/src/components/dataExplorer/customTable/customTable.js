@@ -80,12 +80,26 @@ var Table = React.createClass({
         }
     },
     onRemove: function() {
-        if (_.isFunction(this.props.onRemove)) {
-            this.props.onRemove(this.state.selectedKey);
-        }
+        this.refs.removeDialog.show();
     },
-    testClickRow: function() {
-      console.log('rowWasClicked');
+    getRemoveDialogActions: function() {
+      return [
+          {
+              text: 'מחק רשומה',
+              onTouchTap: function() {
+                  if (_.isFunction(this.props.onRemove)) {
+                      this.props.onRemove(this.state.selectedKey);
+                  }
+                  this.refs.removeDialog.dismiss();
+              }.bind(this)
+          },
+          {
+              text: 'בטל',
+              onTouchTap: function() {
+                  this.refs.removeDialog.dismiss();
+              }.bind(this)
+          }
+        ]
     },
     render: template
 });

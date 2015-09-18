@@ -19,5 +19,11 @@ module.exports = {
             gameId: gameId,
             gameData: gameData
         });
-    }
+    },
+    removeGame: function (gameId) {
+        dispatchAction({
+            type: gamesConstants.ACTIONS.REMOVE_GAME,
+            gameId: gameId
+        });
+    },
 };

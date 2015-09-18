@@ -51,7 +51,7 @@ var GamesExplorer = React.createClass({
         gamesActions.updateGame(gameId, gameData);
     },
     onRemoveGame: function(gameId) {
-        console.log('remove game');
+        gamesActions.removeGame(gameId);
     },
     render: template
 });

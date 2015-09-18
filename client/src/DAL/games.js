@@ -28,5 +28,13 @@ module.exports = {
                 return onSuccess();
             });
         }
+    },
+    removeGame: function(gameId, onSuccess, onError) {
+        gamesRef.child(gameId).remove(function(error) {
+            if (error) {
+                return onError();
+            }
+            return onSuccess();
+        })
     }
 };

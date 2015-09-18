@@ -7,7 +7,7 @@
         <div class="table-header">
             <mui.FloatingActionButton
                     rt-if="this.props.onRemove"
-                    onClick="{this.props.onRemove}"
+                    onClick="{this.onRemove}"
                     key="key-remove-record-btn"
                     disabled="{_.isEmpty(this.state.selectedData)}"
                     mini={true}
@@ -142,4 +142,13 @@
             </mui.FlatButton>
         </div>
     </div>
+
+    <mui.Dialog
+            ref="removeDialog"
+            contentStyle="{{'width':'360'}}"
+            title="זהירות!"
+            actions="{this.getRemoveDialogActions()}"
+            modal="{false}">
+        <span>האם אתה בטוח שברצונך למחוק את הרשומה?</span>
+    </mui.Dialog>
 </div>
