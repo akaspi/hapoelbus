@@ -65,6 +65,10 @@ function fetchLoginState() {
 }
 
 function handleCreateUser(actionData) {
+    if (storeData.errorMsg) {
+        storeData.errorMsg = '';
+        notifyAll();
+    }
     authAPI.createUser(actionData.email, actionData.password, function () {
         handleLogin(actionData);
     }, function (errorCode) {
@@ -81,6 +85,10 @@ function handleCreateUser(actionData) {
 }
 
 function handleLogin(actionData) {
+    if (storeData.errorMsg) {
+        storeData.errorMsg = '';
+        notifyAll();
+    }
     authAPI.login(actionData.email, actionData.password, function () {
         fetchLoginState();
     }, function () {
