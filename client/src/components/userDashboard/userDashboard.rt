@@ -4,7 +4,7 @@
 <rt-require dependency="../../constants/gamesConstants" as="gamesConstants"/>
 
 <div class="user-dashboard"
-     rt-scope="(this.state.isGamesStorePending || this.state.isPaymentsStorePending || this.state.isBookingStorePending) as isPending">
+     rt-scope="(this.state.isGamesStorePending || this.state.isPaymentsStorePending || this.state.isBookingStorePending || this.state.isOccupiedStorePending) as isPending">
 
     <loading rt-if="isPending" key="key-fetching-user-data"/>
 

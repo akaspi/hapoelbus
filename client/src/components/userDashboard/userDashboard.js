@@ -19,6 +19,12 @@ var occupiedActions = require('../../actions/occupiedActions');
 
 var gamesConstants = require('../../constants/gamesConstants');
 
+function filterOpenGames(games) {
+    return _.omit(games, function(game) {
+        return game.status === gamesConstants.STATUS.CLOSED;
+    })
+}
+
 var UserDashboard = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function () {
@@ -32,10 +38,10 @@ var UserDashboard = React.createClass({
             isPaymentsStorePending: paymentsState.pending,
             isBookingStorePending: bookingState.pending,
             isOccupiedStorePending: occupiedState.pending,
-            openGames: {},
-            payments: {},
-            booking: {},
-            occupied: {}
+            openGames: filterOpenGames(gamesState.games),
+            payments: paymentsState.payments,
+            booking: bookingState.booking,
+            occupied: occupiedState.occupied
         }
     },
     componentDidMount: function() {
