@@ -2,7 +2,6 @@
 <rt-require dependency="../customTable/customTable" as="customTable"/>
 
 <div>
-    <h1>טבלת משתמשים</h1>
     <customTable
             rt-if="!this.state.isPaymentsStorePending"
             key="key-users-data-explorer-table"

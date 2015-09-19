@@ -23,7 +23,7 @@ var GameCard = React.createClass({
     getInitialState: function () {
         return {
             bookingMode: false,
-            numOfSeats: this.props.booking ? this.props.booking.numOfSeats : 1,
+            numOfSeats: this.props.payments ? this.props.payments.maxSeats : 1,
             stationIndex: this.props.booking ? _.findIndex(stations, {text: this.props.booking.station}) : 0,
             comment: this.props.booking ? this.props.booking.comment : ''
         }

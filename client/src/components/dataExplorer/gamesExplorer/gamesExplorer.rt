@@ -2,7 +2,6 @@
 <rt-require dependency="../customTable/customTable" as="customTable"/>
 
 <div>
-    <h1>טבלת משחקים</h1>
     <customTable
             schema="{this.getTableSchema()}"
             data="{this.getTableData()}"

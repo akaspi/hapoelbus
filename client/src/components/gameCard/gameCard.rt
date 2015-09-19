@@ -50,7 +50,7 @@
         </div>
         <div class="booking-item">
             <span class="field-desc">מס׳ נרשמים:</span>
-            <mui.TextField fullWidth="{false}" type="number" min="{1}" style="{{width: '100px', marginRight: '20px'}}" valueLink="{this.numericLinkState('numOfSeats')}"/>
+            <mui.TextField fullWidth="{false}" type="number" min="{1}" max="{this.props.payments ? this.props.payments.maxSeats : 1}" style="{{width: '100px', marginRight: '20px'}}" valueLink="{this.numericLinkState('numOfSeats')}"/>
         </div>
         <div class="booking-item">
             <span class="field-desc">תחנת עלייה:</span>
