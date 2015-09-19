@@ -1,5 +1,6 @@
 <rt-require dependency="../../loading/loading" as="loading"/>
 <rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="lodash" as="_"/>
 
 <div class="emails-section">
     <h1>שליחת תבנית דוא״ל למשתמשים</h1>
@@ -10,6 +11,7 @@
             valueMember="value"
             displayMember="title"
             fullWidth="{true}"
+            disabled="{_.isEmpty(this.props.games)}"
             valueLink="{this.linkState('template')}"
             hintText="{'בחר תבנית'}"
             iconStyle="{{right: 'initial', left: '16px'}}"
@@ -21,6 +23,7 @@
             valueMember="value"
             displayMember="title"
             fullWidth="{true}"
+            disabled="{_.isEmpty(this.props.games)}"
             valueLink="{this.linkState('gameId')}"
             hintText="{'בחר משחק'}"
             iconStyle="{{right: 'initial', left: '16px'}}"
