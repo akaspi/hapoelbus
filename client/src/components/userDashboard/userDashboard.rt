@@ -21,15 +21,17 @@
             <span>אנא נסה/י שוב במועד מאוחר יותר :)</span>
         </h2>
     </div>
-
-    <div class="games-wrapper" rt-if="!isPending && !_.isEmpty(this.state.openGames)" key="key-no-open-games">
-        <div class="card-wrapper" rt-repeat="game in this.state.openGames">
-            <gameCard uid="{this.props.uid}"
-                      gameId="{gameIndex}"
-                      gameData="{game}"
-                      booking="{this.state.booking[this.props.uid] && this.state.booking[this.props.uid][gameIndex]}"
-                      payments="{this.state.payments[this.props.uid]}"
-                      occupied="{this.state.occupied[gameIndex]}"/>
+    <div class="open-games" rt-if="!isPending && !_.isEmpty(this.state.openGames)" key="key-open-games">
+        <h1 class="title">המשחקים הקרובים:</h1>
+        <div class="games-wrapper">
+            <div class="card-wrapper" rt-repeat="game in this.state.openGames">
+                <gameCard uid="{this.props.uid}"
+                          gameId="{gameIndex}"
+                          gameData="{game}"
+                          booking="{this.state.booking[this.props.uid] && this.state.booking[this.props.uid][gameIndex]}"
+                          payments="{this.state.payments[this.props.uid]}"
+                          occupied="{this.state.occupied[gameIndex]}"/>
+            </div>
         </div>
     </div>
 </div>

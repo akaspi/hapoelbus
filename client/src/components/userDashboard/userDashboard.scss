@@ -15,22 +15,36 @@
     text-align: center;
   }
 
-  .games-wrapper {
+  .open-games {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+
+    .title {
+      text-align: center;
+      font-size: 36px;
+    }
+
+    .games-wrapper {
+      flex: 1;
+
+      display: flex;
+      justify-content: space-around;
+    }
   }
 
   @media all and (max-width: 900px) {
-    .games-wrapper {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    .open-games {
+      .games-wrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-      .card-wrapper {
-        margin-top: 20px;
+        .card-wrapper {
+          margin-top: 20px;
 
-        &:first-child {
-          margin-top: 0;
+          &:first-child {
+            margin-top: 0;
+          }
         }
       }
     }
