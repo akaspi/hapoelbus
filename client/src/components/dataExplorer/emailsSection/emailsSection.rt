@@ -2,29 +2,39 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="emails-section">
+    <h1>שליחת תבנית דוא״ל למשתמשים</h1>
 
     <mui.SelectField
-            style="{{marginTop: '12px'}}"
+            style="{{margin: '15px 0'}}"
             menuItems="{this.buildTemplatesOptions()}"
             valueMember="value"
             displayMember="title"
+            fullWidth="{true}"
             valueLink="{this.linkState('template')}"
             hintText="{'בחר תבנית'}"
             iconStyle="{{right: 'initial', left: '16px'}}"
             underlineStyle="{{margin: '-3px'}}"/>
 
     <mui.SelectField
-            style="{{marginTop: '12px'}}"
+            style="{{margin: '15px 0'}}"
             menuItems="{this.getGamesOptions()}"
             valueMember="value"
             displayMember="title"
+            fullWidth="{true}"
             valueLink="{this.linkState('gameId')}"
             hintText="{'בחר משחק'}"
             iconStyle="{{right: 'initial', left: '16px'}}"
             underlineStyle="{{margin: '-3px'}}"/>
 
     <div class="send-button-wrapper">
-        <mui.RaisedButton label="שלח" fullWidth="{true}" primary="{true}" onClick="{this.openSendMailDialog}"/>
+        <mui.RaisedButton
+                disabled="{!this.state.template || !this.state.gameId}"
+                label="שלח"
+                backgroundColor="{mui.Styles.Colors.red400}"
+                labelColor="#fff"
+                fullWidth="{true}"
+                primary="{true}"
+                onClick="{this.openSendMailDialog}"/>
     </div>
 
     <mui.Dialog

@@ -38,7 +38,6 @@
             </mui.FloatingActionButton>
         </div>
         <mui.Table
-                height="{'500px'}"
                 fixedHeader="{true}"
                 fixedFooter="{false}"
                 selectable="{true}"

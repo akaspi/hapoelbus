@@ -8,24 +8,18 @@ var _ = require('lodash');
 
 var emailsStore = require('../../../stores/emailsStore');
 var emailsActions = require('../../../actions/emailsActions');
-var gamesActions = require('../../../actions/gamesActions');
 
-var gamesStore = require('../../../stores/gamesStore');
-
-var emailsConstants = require('../../../constants/emailsConstants');
 var mailTemplatesConstants = require('../../../../../common/mailTemplatesConstants');
 
 var dataSchemas = require('../../../../../common/dataSchemas');
+var dateUtils = require('../../../../../common/dateUtils');
 
 var GamesExplorer = React.createClass({
     mixins: [React.addons.LinkedStateMixin, muiMixin],
     getInitialState: function () {
         var emailsState = emailsStore.getAll();
-        var gamesState = gamesStore.getAll();
         return {
             isEmailsStorePending: emailsState.pending,
-            isGamesStorePending: gamesState.pending,
-            games: gamesState.games,
             errMsg: emailsState.errMsg,
             template: null,
             gameId: null
@@ -33,8 +27,6 @@ var GamesExplorer = React.createClass({
     },
     componentDidMount: function () {
         emailsStore.registerToChange(this.onEmailsStoreDataChanged);
-        gamesStore.registerToChange(this.onGamesDataStoreDataChanged);
-        gamesActions.fetchGames();
     },
     onEmailsStoreDataChanged: function (emailsStoreData) {
         if (emailsStoreData.pending) {
@@ -43,19 +35,8 @@ var GamesExplorer = React.createClass({
             this.setState({errMsg: emailsStoreData.errMsg, isEmailsStorePending: false})
         }
     },
-    onGamesDataStoreDataChanged: function (gamesStoreData) {
-        if (gamesStoreData.pending) {
-            this.setState({isGamesStorePending: true});
-        } else {
-            this.setState({
-                games: gamesStoreData.games,
-                isGamesStorePending: false
-            });
-        }
-    },
     componentWillUnmount: function () {
         emailsStore.removeChangeListener(this.onEmailsStoreDataChanged);
-        gamesStore.removeChangeListener(this.onGamesDataStoreDataChanged);
     },
     buildTemplatesOptions: function() {
         return [
@@ -65,19 +46,19 @@ var GamesExplorer = React.createClass({
         ];
     },
     getGamesOptions: function () {
-        var visdOptions = dataSchemas.Game.vsid.options;
-        var resp = _.reduce(this.state.games, function (accum, val, key) {
+        var gameVSIDOptions = dataSchemas.Game.vsid.options;
+        return _.reduce(this.props.games, function (accum, game, gameId) {
+            var VSIDTitle = _.find(gameVSIDOptions, { value: game.vsid }).title;
             accum.push({
-                title: _.find(visdOptions, {value: val.vsid}).title,
-                value: key
+                title: VSIDTitle + ' - ' + dateUtils.convertDate(game.date),
+                value: gameId
             });
             return accum;
         }, [], this);
-
-        return resp;
     },
     sendEmail: function () {
         emailsActions.sendTemplateEmail(this.state.template, this.state.gameId);
+        this.setState({template: null, gameId: null});
     },
     openSendMailDialog: function() {
         this.refs.sendEmailDialog.show();

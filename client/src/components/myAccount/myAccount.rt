@@ -1,6 +1,6 @@
 <rt-require dependency="lodash" as="_"/>
 <rt-require dependency="../userDashboard/userDashboard" as="userDashboard"/>
-<rt-require dependency="../admin/adminDashboard/adminDashboard" as="adminDashboard"/>
+<rt-require dependency="../adminDashboard/adminDashboard" as="adminDashboard"/>
 
 <div class="my-account">
     <userDashboard
