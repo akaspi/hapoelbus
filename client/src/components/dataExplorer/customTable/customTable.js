@@ -73,11 +73,13 @@ var Table = React.createClass({
         if (_.isFunction(this.props.onCreate)) {
             this.props.onCreate(this.state.editedData);
         }
+        this.goToViewMode();
     },
     onUpdate: function() {
         if (_.isFunction(this.props.onUpdate)) {
             this.props.onUpdate(this.state.selectedKey, this.state.editedData);
         }
+        this.goToViewMode();
     },
     onRemove: function() {
         this.refs.removeDialog.show();
