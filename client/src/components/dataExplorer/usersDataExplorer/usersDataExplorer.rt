@@ -1,11 +1,23 @@
+<rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../../loading/loading" as="loading"/>
 <rt-require dependency="../customTable/customTable" as="customTable"/>
 
 <div>
-    <customTable
-            rt-if="!this.state.isPaymentsStorePending"
-            key="key-users-data-explorer-table"
-            schema="{this.getTableSchema()}"
-            data="{this.getTableData()}"
-            onUpdate="{this.onUpdateGame}"/>
+    <loading rt-if="this.state.isPaymentsStorePending" key="key-user-data-explorer-loading"/>
+
+    <div rt-if="!this.state.isPaymentsStorePending" key="key-users-data-explorer">
+        <mui.SelectField
+                style="{{marginTop: '12px'}}"
+                menuItems="{this.getFilterOptions()}"
+                valueLink="{this.linkState('filter')}"
+                iconStyle="{{right: 'initial', left: '16px'}}"
+                underlineStyle="{{margin: '-3px'}}"/>
+
+        <customTable
+
+                schema="{this.getTableSchema()}"
+                data="{this.getTableData()}"
+                onUpdate="{this.onUpdateGame}"/>
+    </div>
+
 </div>
