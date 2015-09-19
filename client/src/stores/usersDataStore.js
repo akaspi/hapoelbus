@@ -60,6 +60,9 @@ function fetchUsersData(actionData) {
 function updateUserData(actionData){
     usersDataAPI.updateUserData(actionData.uid, actionData.data, function () {
         fetchUsersData(actionData);
+    }, function() {
+        storeData.errorMsg = userDataConstants.ERROR_MSG.GENERAL;
+        notifyAll();
     });
 }
 

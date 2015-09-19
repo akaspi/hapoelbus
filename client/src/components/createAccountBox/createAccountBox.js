@@ -22,7 +22,7 @@ var LoginBox =  React.createClass({
     },
     onCreateUser: function() {
         this.setState({isWaitingForCreateAccount: true});
-        //authActions.createUser(this.state.email, this.state.password);
+        authActions.createUser(this.state.email, this.state.password);
     },
     handleHasAccount: function (){
         authNavigationActions.showLoginBox();

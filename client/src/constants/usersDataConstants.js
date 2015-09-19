@@ -7,5 +7,8 @@ module.exports = {
         ADMIN: 'adminUser',
         MEMBER: 'memberUser',
         FREE: 'freeUser'
+    },
+    ERROR_MSG: {
+        GENERAL: 'אחד הערכים בשדות שהזנת שגויים. אנא נסה שנית.'
     }
 };

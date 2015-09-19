@@ -22,11 +22,11 @@
                           label="מעוניין לרכוש מנוי שנתי להסעה? (300 ש׳׳ח)"
                           labelPosition="right"/>
         </div>
-        <div rt-if="this.state.errorMsg" class="row error-msg">{this.state.errorMsg}</div>
-        <div class="row big-margin">
+        <div class="row">
             <mui.RaisedButton backgroundColor="{styleVariables.COLORS.OK_BUTTON}" labelStyle="{{color: '#fff'}}" fullWidth="{true}"
                               label="עדכן פרטים"
                               onClick="{this.handleCreateAccount}"/>
         </div>
+        <div rt-if="this.state.errorMsg" key="key-error-initial-user-data" class="row error-msg">{this.state.errorMsg}</div>
     </div>
 </div>
