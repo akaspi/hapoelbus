@@ -10,11 +10,18 @@ var LoginBox =  React.createClass({
     mixins: [ React.addons.LinkedStateMixin, muiMixin ],
     getInitialState: function() {
         return {
+            isWaitingForLogin: false,
             email: '',
             password: ''
         };
     },
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.errorMsg) {
+            this.setState({isWaitingForLogin: false});
+        }
+    },
     onLogin: function() {
+        this.setState({isWaitingForLogin: true});
         authActions.login(this.state.email, this.state.password);
     },
     onSocialLogin: function(provider) {

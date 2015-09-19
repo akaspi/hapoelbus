@@ -1,46 +1,62 @@
 <rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="../../commonStyles/variables" as="styleVariables"/>
+<rt-require dependency="../loading/loading" as="loading"/>
 
 <div class="login-box">
-    <div class="row full-width-item">
-        <mui.RaisedButton fullWidth="{true}" label="התחבר באמצעות" backgroundColor="#3B5998"
-                          labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
-                          onClick="()=>this.onSocialLogin('facebook')">
-            <i style="{{color: '#ffffff', fontSize: '20px', verticalAlign: 'middle'}}"
-               class="fa fa-facebook"></i>
-        </mui.RaisedButton>
-    </div>
-    <div class="row full-width-item">
-        <mui.RaisedButton fullWidth="{true}" label="התחבר באמצעות" labelStyle="{{padding: '0 10px', color: '#2c3e50' }}"
-                          onClick="()=>this.onSocialLogin('google')">
-            <i style="{{color: '#DD4B39', fontSize: '20px', verticalAlign: 'middle'}}"
-               class="fa fa-google-plus"></i>
-        </mui.RaisedButton>
-    </div>
-    <div class="row separator">
-        <h4 class="centre-line"><span>או</span></h4>
-    </div>
-    <div class="row full-width-item">
+    <div class="content">
+        <div class="row full-width-item first-row">
+            <mui.RaisedButton fullWidth="{true}" label="התחבר באמצעות" backgroundColor="#3B5998"
+                              labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
+                              onClick="()=>this.onSocialLogin('facebook')">
+                <i style="{{color: '#ffffff', fontSize: '20px', verticalAlign: 'middle'}}"
+                   class="fa fa-facebook"></i>
+            </mui.RaisedButton>
+        </div>
+        <div class="row full-width-item">
+            <mui.RaisedButton fullWidth="{true}" label="התחבר באמצעות" labelStyle="{{padding: '0 10px', color: '#2c3e50' }}"
+                              onClick="()=>this.onSocialLogin('google')">
+                <i style="{{color: '#DD4B39', fontSize: '20px', verticalAlign: 'middle'}}"
+                   class="fa fa-google-plus"></i>
+            </mui.RaisedButton>
+        </div>
+        <div class="row separator">
+            <h4 class="centre-line"><span>או</span></h4>
+        </div>
+        <div class="row full-width-item">
 
-        <mui.TextField type="text" hintText="דואר אלקטרוני" fullWidth="{true}"
-                       underlineStyle="{{borderColor: '#2c3e50'}}"
-                       valueLink="{this.linkState('email')}"/>
-    </div>
-    <div class="row full-width-item">
-
-        <mui.TextField type="password" hintText="סיסמא" fullWidth="{true}" underlineStyle="{{borderColor: '#2c3e50'}}" onEnterKeyDown="{this.onLogin}"
-                       valueLink="{this.linkState('password')}"/>
-    </div>
-    <!--<div class="row navigation-text reverse-text">-->
+            <mui.TextField type="text" hintText="דואר אלקטרוני" fullWidth="{true}"
+                           underlineStyle="{{borderColor: '#2c3e50'}}"
+                           valueLink="{this.linkState('email')}"/>
+        </div>
+        <div class="row full-width-item">
+            <mui.TextField
+                    type="password"
+                    hintText="סיסמא"
+                    fullWidth="{true}"
+                    underlineStyle="{{borderColor: '#2c3e50'}}"
+                    onEnterKeyDown="{this.onLogin}"
+                    valueLink="{this.linkState('password')}"/>
+        </div>
+        <!--<div class="row navigation-text reverse-text">-->
         <!--<a onClick="{this.handleForgotPassword}">שכחתי סיסמא</a>-->
-    <!--</div>-->
-    <div rt-if="this.props.errorMsg" class="row error-msg full-width-item">{this.props.errorMsg}</div>
-    <div class="row">
-        <mui.RaisedButton backgroundColor="{styleVariables.COLORS.OK_BUTTON}" labelColor="#fff" fullWidth="{true}" label="התחבר"
-                          onClick="{this.onLogin}"/>
-    </div>
-    <div class="row navigation-text">
-        <span>אין לך חשבון?</span><a onClick="{this.handleCreateAccountNav}">לחץ כאן</a>
-    </div>
+        <!--</div>-->
+        <div class="row last-row">
+            <mui.RaisedButton
+                    rt-if="!this.state.isWaitingForLogin"
+                    key="key-login-dialog-btn"
+                    backgroundColor="{mui.Styles.Colors.red400}"
+                    labelColor="#fff"
+                    fullWidth="{true}"
+                    label="התחבר"
+                    onClick="{this.onLogin}"/>
 
+            <loading rt-if="this.state.isWaitingForLogin" key="key-waiting-for-login"/>
+        </div>
+        <div rt-if="this.props.errorMsg" key="key-login-error-msg" class="error-msg full-width-item">{this.props.errorMsg}</div>
+    </div>
+    <div rt-if="!this.state.isWaitingForLogin" key="key-login-dialog-footer" class="footer">
+        <div class="navigation-text">
+            <span>אין לך חשבון?</span>
+            <a onClick="{this.handleCreateAccountNav}">לחץ כאן</a>
+        </div>
+    </div>
 </div>

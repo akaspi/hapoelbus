@@ -10,12 +10,19 @@ var LoginBox =  React.createClass({
     mixins: [ React.addons.LinkedStateMixin, muiMixin ],
     getInitialState: function() {
         return {
+            isWaitingForCreateAccount: false,
             email: '',
             password: ''
         };
     },
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.errorMsg) {
+            this.setState({isWaitingForCreateAccount: false});
+        }
+    },
     onCreateUser: function() {
-        authActions.createUser(this.state.email, this.state.password);
+        this.setState({isWaitingForCreateAccount: true});
+        //authActions.createUser(this.state.email, this.state.password);
     },
     handleHasAccount: function (){
         authNavigationActions.showLoginBox();

@@ -8,10 +8,11 @@
       flex: 1;
     }
 
-    &:first-child {
+    &.first-row {
       margin-top: 0;
     }
-    &:last-child {
+
+    &.last-row {
       margin-bottom: 0;
     }
   }

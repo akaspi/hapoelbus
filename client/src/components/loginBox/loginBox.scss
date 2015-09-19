@@ -1,5 +1,10 @@
 .login-box {
 
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   .centre-line {
     width: 100%;
     text-align: center;
