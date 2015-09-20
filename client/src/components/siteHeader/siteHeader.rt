@@ -2,8 +2,8 @@
 <rt-require dependency="../navigation/navigation" as="navigation"/>
 <rt-require dependency="material-ui" as="mui"/>
 
-<div rt-class="{'site-header': true, 'logged-in': this.props.uid}">
-    <div class="header-content">
+<div class="site-header">
+    <div rt-class="{'header-content': true, 'logged-in': this.props.uid}">
         <div class="logo-section">
             <div class="logo"/>
         </div>

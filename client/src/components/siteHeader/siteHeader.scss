@@ -66,8 +66,6 @@
 
   @media all and (max-width: 500px) {
     .header-content {
-      padding-left: 0;
-      padding-right: 0;
 
       &.logged-in {
         flex-direction: column;
