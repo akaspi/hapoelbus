@@ -56,7 +56,6 @@ function getGameTitle(vsid) {
 
 function sendTemplateToUsers(templateFileContent, template, gameData, usersData, onSuccess, onError) {
     var to = _.pluck(_.values(usersData), 'email');
-    to = ['kaspi.amit@gmail.com'];
     var subject = getTemplateSubject(template);
     var content = templateFileContent
         .replace('VSID', getGameTitle(gameData.vsid))
