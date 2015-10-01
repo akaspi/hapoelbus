@@ -36,13 +36,13 @@ var Table = React.createClass({
     },
     onDateChange: function(dataKey, nill, newDate) {
         var newState = _.clone(this.state);
-        var utcDate = Date.UTC(newDate.getUTCFullYear(), newDate.getUTCMonth(), newDate.getUTCDate(), newDate.getUTCHours(), newDate.getUTCMinutes());
+        var utcDate = Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), newDate.getMinutes());
         newState.editedData[dataKey] = utcDate;
         this.setState(newState);
     },
     onTimeChange: function(dataKey, nill, newDate) {
         var newState = _.clone(this.state);
-        var utcDate = Date.UTC(newDate.getUTCFullYear(), newDate.getUTCMonth(), newDate.getUTCDate(), newDate.getUTCHours(), newDate.getUTCMinutes());
+        var utcDate = Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), newDate.getMinutes());
         newState.editedData[dataKey] = utcDate;
         this.setState(newState);
     },
