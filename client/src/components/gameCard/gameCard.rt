@@ -20,7 +20,7 @@
                         <span class="info">{this.getGameUTCDate(gameData.date)}</span>
                     </div>
                 </div>
-                <div rt-if="this.props.occupied && gameData.capacity" key="key-game-number-of-left-seats" class="game-info-row">
+                <div rt-if="gameData.capacity" key="key-game-number-of-left-seats" class="game-info-row">
                     <div class="game-info-item">
                         <span class="desc">מס׳ מקומות נותרים:</span>
                         <span class="info">{gameData.capacity - (this.props.occupied || 0)}</span>
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer" rt-scope="this.shouldEnableBooking() as shouldEnableBooking">
+        <div class="footer" rt-scope="this.shouldEnableBooking() as shouldEnableBooking; this.isBookingForPaidUsersOnly() as isBookingForPaidUsersOnly">
             <mui.RaisedButton
                     rt-if="shouldEnableBooking && !this.props.booking" key="key-game-is-open-for-booking"
                     backgroundColor="{mui.Styles.Colors.red400}"
@@ -38,10 +38,11 @@
             <mui.FlatButton rt-if="shouldEnableBooking && this.props.booking" key="key-game-is-open-for-booking" style="{{paddingLeft: '16px'}}" secondary="{true}" label="עדכן הרשמה" onClick="{this.goToBookingMode}">
                 <i class="fa fa-pencil"/>
             </mui.FlatButton>
-            <mui.FlatButton rt-if="shouldEnableBooking && this.props.booking" key="dsasadsad" style="{{paddingLeft: '16px'}}" primary="{true}" label="בטל הרשמה" onClick="{this.cancelBooking}">
+            <mui.FlatButton rt-if="(shouldEnableBooking || (!isBookingForPaidUsersOnly && this.isFullyBooked())) && this.props.booking" key="dsasadsad" style="{{paddingLeft: '16px'}}" primary="{true}" label="בטל הרשמה" onClick="{this.cancelBooking}">
                 <i class="fa fa-trash-o"/>
             </mui.FlatButton>
-            <span rt-if="!shouldEnableBooking" key="key-game-is-not-open-for-booking">ההרשמה פתוחה כעת למנויי הסעות בלבד</span>
+            <span rt-if="!shouldEnableBooking && isBookingForPaidUsersOnly" key="key-game-is-not-open-for-booking">ההרשמה פתוחה כעת למנויי הסעות בלבד</span>
+            <span rt-if="!shouldEnableBooking && !isBookingForPaidUsersOnly && this.isFullyBooked()" key="key-game-is-fully-booked">כל המקומות על ההסעה תפוסים כעת</span>
         </div>
     </div>
     <div rt-if="this.state.bookingMode" key="key-game-booking-mode" class="card-view booking">

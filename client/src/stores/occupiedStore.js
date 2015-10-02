@@ -45,9 +45,7 @@ function fetchOccupied(actionData) {
         })
     } else {
         occupiedAPI.getAllOccupied(function(occupied) {
-            if (occupied) {
-                storeData.occupied = occupied;
-            }
+            storeData.occupied = occupied || {};
             storeData.pending = false;
             notifyAll();
         }, function() {
