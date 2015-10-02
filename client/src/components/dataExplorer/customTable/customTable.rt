@@ -57,7 +57,7 @@
             </mui.TableHeader>
 
             <mui.TableBody deselectOnClickaway="{false}" showRowHover="{false}" stripedRows="{false}">
-                <mui.TableRow rt-repeat="dataItem in this.props.data" selected="{_.isEqual(dataItemIndex, this.state.selectedKey)}" onClick="{this.testClickRow}">
+                <mui.TableRow rt-repeat="dataItem in this.props.data" selected="{_.isEqual(dataItem, this.state.selectedData)}" onClick="{this.testClickRow}">
                     <mui.TableRowColumn rt-repeat="schemaItem in this.props.schema">
                         <div rt-if="schemaItem.type === 'boolean'" key="key-boolean-value">
                             <i rt-if="dataItem[schemaItemIndex]" key="key-boolean-value-true" class="fa fa-plus"/>

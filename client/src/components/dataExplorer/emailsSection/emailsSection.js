@@ -26,9 +26,9 @@ var GamesExplorer = React.createClass({
         };
     },
     componentDidMount: function () {
-        emailsStore.registerToChange(this.onEmailsStoreDataChanged);
+        emailsStore.registerToChange(this.onBookingStoreDataChanged);
     },
-    onEmailsStoreDataChanged: function (emailsStoreData) {
+    onBookingStoreDataChanged: function (emailsStoreData) {
         if (emailsStoreData.pending) {
             this.setState({isEmailsStorePending: true});
         } else {
@@ -36,7 +36,7 @@ var GamesExplorer = React.createClass({
         }
     },
     componentWillUnmount: function () {
-        emailsStore.removeChangeListener(this.onEmailsStoreDataChanged);
+        emailsStore.removeChangeListener(this.onBookingStoreDataChanged);
     },
     buildTemplatesOptions: function() {
         return [

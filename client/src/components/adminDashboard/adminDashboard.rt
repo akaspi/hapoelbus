@@ -2,6 +2,7 @@
 <rt-require dependency="../dataExplorer/gamesExplorer/gamesExplorer" as="gamesExplorer"/>
 <rt-require dependency="../dataExplorer/usersDataExplorer/usersDataExplorer" as="usersDataExplorer"/>
 <rt-require dependency="../dataExplorer/emailsSection/emailsSection" as="emailsSection"/>
+<rt-require dependency="../dataExplorer/bookingDataExplorer/bookingDataExplorer" as="bookingDataExplorer"/>
 <rt-require dependency="../loading/loading" as="loading"/>
 <rt-require dependency="../../constants/navigationConstants" as="navigationConstants"/>
 
@@ -16,6 +17,12 @@
     <gamesExplorer
             rt-if="_.isEqual(currentTab, navigationConstants.TABS.ADMIN.GAMES_LIST)"
             key="key-show-game-explorer"
+            games="{this.state.games}"/>
+
+    <bookingDataExplorer
+            rt-if="_.isEqual(currentTab, navigationConstants.TABS.ADMIN.BOOKING_LIST)"
+            key="key-show-booking-explorer"
+            usersData="{this.props.usersData}"
             games="{this.state.games}"/>
 
     <emailsSection

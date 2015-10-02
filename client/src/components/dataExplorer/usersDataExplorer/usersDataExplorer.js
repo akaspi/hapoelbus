@@ -44,10 +44,10 @@ var GamesExplorer = React.createClass({
         };
     },
     componentDidMount: function () {
-        paymentsStore.registerToChange(this.onEmailsStoreDataChanged);
+        paymentsStore.registerToChange(this.onBookingStoreDataChanged);
         paymentsActions.fetchPayments();
     },
-    onEmailsStoreDataChanged: function(paymentsStoreData) {
+    onBookingStoreDataChanged: function(paymentsStoreData) {
         if (paymentsStoreData.pending) {
             this.setState({ isPaymentsStorePending: true });
         } else {
@@ -55,7 +55,7 @@ var GamesExplorer = React.createClass({
         }
     },
     componentWillUnmount: function() {
-        paymentsStore.removeChangeListener(this.onEmailsStoreDataChanged);
+        paymentsStore.removeChangeListener(this.onBookingStoreDataChanged);
     },
     getTableSchema: function() {
         return _.merge({}, dataSchemas.UserData, dataSchemas.Payments);

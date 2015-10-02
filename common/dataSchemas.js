@@ -110,11 +110,11 @@ module.exports = {
             "title": "תחנה",
             "options": [
                 {
-                    "title": "",
+                    "title": "תל אביב",
                     "value": "TEL-AVIV"
                 },
                 {
-                    "title": "",
+                    "title": "מודיעין",
                     "value": "MODIIN"
                 }
                 //...
