@@ -21,7 +21,7 @@ var GameCard = React.createClass({
         return {
             bookingMode: false,
             numOfSeats: this.props.payments ? (this.props.payments.maxSeats || 1) : 1,
-            stationIndex: this.props.booking ? _.findIndex(stations, {text: this.props.booking.station}) : 0,
+            stationIndex: this.props.booking ? _.findIndex(stations, {value: this.props.booking.station}) : 0,
             comment: this.props.booking ? this.props.booking.comment : ''
         }
     },
@@ -77,7 +77,7 @@ var GameCard = React.createClass({
     getGameUTCDate: function (gameDate) {
         return dateUtils.convertDate(gameDate);
     },
-    getUsersDataFilterItems: function () {
+    getStationsItems: function () {
         return stations;
     },
     onStationChange: function (e, selectedIndex) {

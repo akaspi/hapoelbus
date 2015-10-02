@@ -55,7 +55,8 @@
         </div>
         <div class="booking-item">
             <span class="field-desc">תחנת עלייה:</span>
-            <mui.DropDownMenu style="{{marginRight: '20px'}}" selectedIndex="{this.state.stationIndex}" onChange="{this.onStationChange}" menuItems="{this.getUsersDataFilterItems()}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: '-3px'}}"></mui.DropDownMenu>
+            <mui.DropDownMenu style="{{marginRight: '20px'}}" selectedIndex="{this.state.stationIndex}" valueMember="value"
+                              displayMember="title" onChange="{this.onStationChange}" menuItems="{this.getStationsItems()}" iconStyle="{{right: 'initial', left: '16px'}}" underlineStyle="{{margin: '-3px'}}"></mui.DropDownMenu>
         </div>
         <div class="booking-item">
             <span class="field-desc">הערות:</span>
