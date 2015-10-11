@@ -44,7 +44,7 @@ function sendWelcomeMail(userData, onSuccess) {
 function sendWelcomeMailIfNeeded(uid, userData) {
     var welcomeMailRef = ref.child('emails').child(uid).child('welcome');
     welcomeMailRef.once('value', function(welcomeMailSnapshot) {
-        var shouldSendMail = !welcomeMailSnapshot.val() && (utils.isDevMode() ? _.contains(devModeEmailsWhiteList, userData.email) : true);
+        var shouldSendMail = !welcomeMailSnapshot.val();
         if (shouldSendMail) {
             sendWelcomeMail(userData, function() {
                 welcomeMailRef.set(true);
