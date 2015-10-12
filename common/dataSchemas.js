@@ -52,7 +52,7 @@ module.exports = {
                 },
                 {
                     "title": "עירוני נהריה",
-                    "value": 'NAHARI'
+                    "value": 'NAHARIA'
                 },
                 {
                     "title": "בני הרצליה",
@@ -65,6 +65,26 @@ module.exports = {
                 {
                     "title": "מכבי קרית גת",
                     "value": 'KIRYAT_GAT'
+                },
+                {
+                    "title": "נפטונאס קלייפדה",
+                    "value": "NEPTUNAS"
+                },
+                {
+                    "title": "א.א.ק אתונה",
+                    "value": "AEK"
+                },
+                {
+                    "title": "וולגוגרד",
+                    "value": "VOLGOGRAD"
+                },
+                {
+                    "title": "גלאטסראיי",
+                    "value": "GALATASARAY"
+                },
+                {
+                    "title": "נובגורוד",
+                    "value": "NOVGOROD"
                 }
                 //...
             ]
