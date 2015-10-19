@@ -1,53 +1,57 @@
 'use strict';
 
 var React = require('react/addons');
-var muiMixin = require('../mixins/mui-mixin');
 var template = require('./root.rt.js');
+var _ = require('lodash');
 
-var authStore = require('../../stores/authStore');
-var usersDataStore = require('../../stores/usersDataStore');
-var userActions = require('../../actions/userActions');
-var authActions = require('../../actions/authActions');
+var userStore = require('../../stores/userStore');
+var gamesStore = require('../../stores/gamesStore');
+var pageNavigationStore = require('../../stores/pageNavigationStore');
+var dialogStore = require('../../stores/dialogStore');
+
+var actionsCreator = require('../../actions/actionsCreator');
+var actionsConstants = require('../../actions/actionsConstants');
+
+function getStateFromStores() {
+    return {
+        currentPage: pageNavigationStore.getCurrentPage(),
+        user: userStore.getUser(),
+        gamesData: gamesStore.getGamesData(),
+        dialogToDisplay: dialogStore.getDialogToDisplay()
+    };
+}
 
 var Root = React.createClass({
-    mixins: [React.addons.LinkedStateMixin, muiMixin],
+    mixins: [React.addons.LinkedStateMixin],
+
     getInitialState: function () {
-        var authStoreData = authStore.getAll();
-        var usersStoreData = usersDataStore.getAll();
-        return {
-            uid: authStoreData.uid,
-            isAdmin: authStoreData.isAdmin,
-            isAuthStorePending: authStoreData.pending,
-            usersData: usersStoreData.usersData,
-            isUsersDataStorePending: usersStoreData.pending
-        };
+        return _.merge({email: '', password: '', capacity: 0}, getStateFromStores());
     },
+
     componentDidMount: function () {
-        authStore.registerToChange(this.onAuthStoreDataChanged);
-        usersDataStore.registerToChange(this.onUserStoreDataChanged);
-        authActions.fetchLoginState();
+        userStore.addChangeListener(this.onStoreChange);
+        gamesStore.addChangeListener(this.onStoreChange);
+        pageNavigationStore.addChangeListener(this.onStoreChange);
+        dialogStore.addChangeListener(this.onStoreChange);
     },
-    onAuthStoreDataChanged: function(authStoreData) {
-        if (authStoreData.pending) {
-            this.setState({ isAuthStorePending: true });
-        } else {
-            if (!this.state.uid && authStoreData.uid) {
-                userActions.fetchUserData(authStoreData.isAdmin ? null : authStoreData.uid);
-            }
-            this.setState({ uid: authStoreData.uid, isAdmin: authStoreData.isAdmin, isAuthStorePending: false });
-        }
+
+    onStoreChange: function () {
+        this.setState(getStateFromStores());
     },
-    onUserStoreDataChanged: function(userStoreData) {
-        if (userStoreData.pending) {
-            this.setState({ isUsersDataStorePending: true });
-        } else {
-            this.setState({ usersData: userStoreData.usersData, isUsersDataStorePending: false})
-        }
+
+    login: function () {
+        actionsCreator.createAction(actionsConstants.LOGIN, {email: this.state.email, password: this.state.password});
     },
-    componentWillUnmount: function() {
-        authStore.removeChangeListener(this.onAuthStoreDataChanged);
-        usersDataStore.removeChangeListener(this.onUserStoreDataChanged);
+
+    logout: function () {
+        actionsCreator.createAction(actionsConstants.LOGOUT);
     },
+
+    openDialog: function() {
+        var dialogClass = require('../../components/dialogs/testDialog/testDialog');
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {dialogClass: dialogClass, data: {}});
+    },
+
     render: template
 });
 

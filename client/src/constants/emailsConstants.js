@@ -1,6 +1,0 @@
-module.exports = {
-    ACTIONS: {
-        GET_PENDING_EMAILS: 'GET_PENDING_EMAILS',
-        SEND_TEMPLATE_EMAIL: 'SEND_TEMPLATE_EMAIL'
-    }
-};

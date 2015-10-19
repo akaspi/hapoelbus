@@ -1,77 +1,106 @@
 'use strict';
 
-var _ = require('lodash');
-
 var dispatcher = require('../dispatcher/dispatcher');
-var games = require('../DAL/games');
+var gamesAPI = require('../API/gamesAPI');
+var actionsConstants = require('../actions/actionsConstants');
 
-var gamesConstants = require('../constants/gamesConstants');
 var listeners = [];
 
-function notifyAll() {
-    _.forEach(listeners, function (listener) {
-        listener(storeData);
-    });
-}
-
-var storeData = {
-    pending: false,
-    games: {}
+var gamesData = {
+    games: {},
+    isPending: false,
+    errorMsg: null
 };
 
-dispatcher.register(function (actionData) {
-    switch (actionData.type) {
-        case gamesConstants.ACTIONS.FETCH_GAMES:
-            fetchGames();
+dispatcher.register(function(action) {
+    switch(action.actionType) {
+        case actionsConstants.CREATE_GAME:
+            createGame(action.payload.gameData);
             break;
-        case gamesConstants.ACTIONS.UPDATE_GAME:
-            updateGame(actionData);
+        case actionsConstants.UPDATE_GAME:
+            updateGame(action.payload.gameId, action.payload.gameData);
             break;
-        case gamesConstants.ACTIONS.REMOVE_GAME:
-            removeGame(actionData);
+        case actionsConstants.REMOVE_GAME:
+            removeGame(action.payload.gameId);
+            break;
+        case actionsConstants.LOGOUT:
+            logout();
             break;
     }
 });
 
-function fetchGames() {
-    storeData.pending = true;
-    notifyAll();
+function init() {
+    gamesData.isPending = true;
+    emitChange();
 
-    games.getGames(function(games) {
-        storeData.games = games || {};
-        storeData.pending = false;
-        notifyAll();
-    }, function() {
+    gamesAPI.getGames(function(allGames) {
+        gamesData.games = _.clone(allGames);
+        gamesData.isPending = false;
+        emitChange();
+    }, function() {});
+}
 
+function createGame(gameData) {
+    gamesData.isPending = true;
+    emitChange();
+
+    gamesAPI.createGame(gameData, function(gameId) {
+        gameData.games[gameId] = _.clone(gameData);
+        gamesData.isPending = false;
+        emitChange();
+    }, function() {});
+}
+function updateGame(gameId, gameData) {
+    gamesData.isPending = true;
+    emitChange();
+
+    gamesAPI.updateGame(gameId, gameData, function() {
+        gamesData.isPending = false;
+        _.merge(gamesData.games[gameId], gameData);
+        emitChange();
+    }, function() {});
+}
+function removeGame(gameId) {
+    gamesData.isPending = true;
+    emitChange();
+
+    gamesAPI.removeGame(gameId, function() {
+        gamesData.isPending = false;
+        delete gamesData.games[gameId];
+        emitChange();
+    }, function() {})
+}
+
+function logout() {
+    gamesData.games = {};
+    errorMsg = null;
+
+    emitChange();
+}
+
+function getGamesData() {
+    return _.clone(gamesData);
+}
+
+function emitChange() {
+    _.forEach(listeners, function (listener) {
+        listener();
     });
 }
 
-function updateGame(actionData) {
-    games.updateGame(actionData.gameId, actionData.gameData, function() {
-        fetchGames(actionData);
-    }, function() {
-
-    });
+function addChangeListener(listener) {
+    listeners.push(listener);
 }
 
-function removeGame(actionData) {
-    games.removeGame(actionData.gameId, function() {
-        fetchGames(actionData);
-    }, function() {
-
+function removeChangeListener(listenerToRemove) {
+    listeners = _.reject(listeners, function (listener) {
+        return _.isEqual(listener, listenerToRemove);
     });
 }
 
 module.exports = {
-    getAll: function () {
-        return storeData;
-    },
-    registerToChange: function (fn) {
-        listeners.push(fn);
-    },
-    removeChangeListener: function (fn) {
-        listeners = _.reject(listeners, function (listener) {
-            return _.isEqual(listener, fn);
-        });
-    }
+    init: init,
+    getGamesData: getGamesData,
+    addChangeListener: addChangeListener,
+    removeChangeListener: removeChangeListener
 };

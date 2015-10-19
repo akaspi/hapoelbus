@@ -48,6 +48,9 @@ gulp.task('webpack', ['rt'], function(done) {
       filename: 'bundle.js',
       pathinfo: true
     },
+    externals: {
+        "_": 'lodash'
+    },
     plugins: [
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js', Infinity)
     ]

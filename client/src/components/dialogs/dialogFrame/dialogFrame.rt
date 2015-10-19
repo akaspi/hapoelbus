@@ -1,0 +1,5 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<mui.Dialog ref="dialog" onDismiss="{this.hideDialog}" contentStyle="{{'width':'360'}}" modal="{false}" >
+    {this.props.children}
+</mui.Dialog>

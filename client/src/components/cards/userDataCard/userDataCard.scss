@@ -1,0 +1,17 @@
+.card-frame {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+
+  .header {
+    height: 20px;
+    background-color: orange;
+  }
+
+  .content {
+    flex: 1;
+    background-color: #2980b9;
+  }
+}

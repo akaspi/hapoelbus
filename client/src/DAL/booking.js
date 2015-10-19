@@ -17,55 +17,5 @@ module.exports = {
             onSuccess(snapshot.val());
         }, onError);
     },
-    updateBooking: function (uid, gameId, bookingData, onSuccess, onError) {
-        bookingRef.child(uid).child(gameId).once('value', function (snapshot) {
-            var bookingDataBeforeUpdate = snapshot.val() || {};
-            bookingRef.child(uid).child(gameId).update(bookingData, function (error) {
-                if (error) {
-                    return onError();
-                }
-                var occupiedGameRef = occupiedRef.child(gameId);
-                occupiedGameRef.once('value', function (snapshot) {
-                    var currSeatsOccupied = snapshot.val() || 0;
-                    var updatedNumOfSeats = bookingData.numOfSeats || 0;
-                    var oldNumOfSeats = bookingDataBeforeUpdate.numOfSeats || 0;
-                    occupiedGameRef.set(currSeatsOccupied + (updatedNumOfSeats - oldNumOfSeats), function (error) {
-                        if (error) {
-                            return onError();
-                        }
-                        onSuccess();
-                    });
-                });
-            });
-        });
-    },
-    cancelBooking: function (uid, gameId, onSuccess, onError) {
-        bookingRef.child(uid).child(gameId).once('value', function (snapshot) {
-            var bookingData = snapshot.val();
-            if (bookingData) {
-                bookingRef.child(uid).remove(function () {
-                    var occupiedGameRef = occupiedRef.child(gameId);
-                    occupiedGameRef.once('value', function (snapshot) {
-                        var currSeatsOccupied = snapshot.val();
-                        var numOfSeats = bookingData.numOfSeats || 0;
-                        var newOccupiedSeats = currSeatsOccupied - numOfSeats;
-                        if (newOccupiedSeats === 0) {
-                            occupiedGameRef.remove(function () {
-                                onSuccess();
-                            })
-                        } else {
-                            occupiedGameRef.set(newOccupiedSeats, function (error) {
-                                if (error) {
-                                    return onError();
-                                }
-                                onSuccess()
-                            });
-                        }
-                    });
-                });
-            } else {
-                onError();
-            }
-        });
-    }
+
 };

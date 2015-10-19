@@ -1,20 +1,27 @@
-@import "../../commonStyles/variables";
-
 .root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden;
+  $header-height: 60px;
+  $footer-height: 60px;
 
-  header {
+  position: relative;
+  min-height: 100%;
+
+  .site-header {
+    height: $header-height;
+    box-sizing: border-box;
     background-color: #ecf0f1;
     border-bottom: 1px solid #bdc3c7;
   }
 
   .site-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  }
+
+  .site-footer {
+    height: $footer-height;
+    box-sizing: border-box;
+    background-color: #ecf0f1;
+    border-bottom: 1px solid #bdc3c7;
   }
 
   footer {

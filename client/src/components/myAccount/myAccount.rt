@@ -1,18 +1,20 @@
-<rt-require dependency="lodash" as="_"/>
-<rt-require dependency="../userDashboard/userDashboard" as="userDashboard"/>
-<rt-require dependency="../adminDashboard/adminDashboard" as="adminDashboard"/>
+<rt-require dependency="../../constants/pagesConstants" as="pagesConstants"/>
+<rt-require dependency="../pages/homePage/homePage" as="homePage"/>
+<rt-require dependency="../pages/gamesPage/gamesPage" as="gamesPage"/>
 
 <div class="my-account">
-    <userDashboard
-            rt-if="this.shouldShowUserDashboard()"
-            key="key-user-dashboard"
-            tab="{this.state.tabToDisplay}"
-            uid="{this.props.uid}"
-            usersData="{this.props.usersData}"/>
+    <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE"/>
+    <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE"/>
+    <!--<userDashboard-->
+            <!--rt-if="this.shouldShowUserDashboard()"-->
+            <!--key="key-user-dashboard"-->
+            <!--tab="{this.state.tabToDisplay}"-->
+            <!--uid="{this.props.uid}"-->
+            <!--usersData="{this.props.usersData}"/>-->
 
-    <adminDashboard
-            rt-if="this.shouldShowAdminDashboard()"
-            key="key-admin-dashboard"
-            tab="{this.state.tabToDisplay}"
-            usersData="{this.props.usersData}"/>
+    <!--<adminDashboard-->
+            <!--rt-if="this.shouldShowAdminDashboard()"-->
+            <!--key="key-admin-dashboard"-->
+            <!--tab="{this.state.tabToDisplay}"-->
+            <!--usersData="{this.props.usersData}"/>-->
 </div>

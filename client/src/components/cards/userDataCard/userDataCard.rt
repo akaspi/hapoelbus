@@ -1,0 +1,5 @@
+<rt-require dependency="../cardFrame/cardFrame" as="cardFrame"/>
+
+<cardFrame>
+    <h2>USER DATA CARD</h2>
+</cardFrame>

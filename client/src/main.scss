@@ -1,9 +1,18 @@
-@import "commonStyles/variables";
-
 @import "components/root/root";
+@import "components/cards/cardFrame/cardFrame";
+@import "components/cards/userDataCard/userDataCard";
+@import "components/cardsDisplayer/cardsDisplayer";
+@import "components/base/loading/loading";
+
+@import "components/pages/landingPage/landingPage";
+
+
+
+
+
 @import "components/siteHeader/siteHeader";
 
-@import "components/homePage/homePage";
+
 @import "components/myAccount/myAccount";
 @import "components/userData/userData";
 @import "components/loading/loading";
@@ -21,7 +30,6 @@
 
 @import "components/authBox/authBox";
 
-@import "components/accountDataEdit/accountDataEdit";
 @import "components/userDashboard/userDashboard";
 @import "components/adminDashboard/adminDashboard";
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);

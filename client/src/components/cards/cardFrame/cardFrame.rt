@@ -1,0 +1,9 @@
+<div class="card-frame">
+    <div class="header">
+        <i class="fa fa-times"/>
+        <i class="fa fa-pencil"/>
+    </div>
+    <div class="content">
+        {this.props.children}
+    </div>
+</div>

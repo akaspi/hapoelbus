@@ -2,32 +2,32 @@
 
 var React = require('react/addons');
 var template = require('./myAccount.rt.js');
-var _ = require('lodash');
-var navigationStore = require('../../stores/navigationStore');
 
-var navigationConstants = require('../../constants/navigationConstants');
+//var navigationStore = require('../../stores/navigationStore');
+
+//var navigationConstants = require('../../constants/navigationConstants');
 
 var MyAccount = React.createClass({
     getInitialState: function() {
-      var navigationState = navigationStore.getAll();
+      //var navigationState = navigationStore.getAll();
         return {
-            tabToDisplay: navigationState.tabToDisplay
+            //tabToDisplay: navigationState.tabToDisplay
         }
     },
     componentDidMount: function() {
-        navigationStore.registerToChange(this.onNavigationStoreDataChanged);
+        //navigationStore.registerToChange(this.onNavigationStoreDataChanged);
     },
     onNavigationStoreDataChanged: function(navigationStoreData) {
-        this.setState({ tabToDisplay: navigationStoreData.tabToDisplay });
+        //this.setState({ tabToDisplay: navigationStoreData.tabToDisplay });
     },
     componentWillUnmount: function() {
-        navigationStore.removeChangeListener(this.onNavigationStoreDataChanged);
+        //navigationStore.removeChangeListener(this.onNavigationStoreDataChanged);
     },
     shouldShowUserDashboard: function() {
-        return _.contains(_.values(navigationConstants.TABS.USER), this.state.tabToDisplay);
+        //return _.contains(_.values(navigationConstants.TABS.USER), this.state.tabToDisplay);
     },
     shouldShowAdminDashboard: function() {
-        return _.contains(_.values(navigationConstants.TABS.ADMIN), this.state.tabToDisplay);
+        //return _.contains(_.values(navigationConstants.TABS.ADMIN), this.state.tabToDisplay);
     },
     render: template
 });

@@ -7,7 +7,7 @@ var muiMixin = require('../mixins/mui-mixin');
 var mui = require('material-ui');
 var _ = require('lodash');
 
-var navigationConstants = require('../../constants/navigationConstants');
+var navigationConstants = require('../../constants/pagesConstants');
 var navigationActions = require('../../actions/navigationActions');
 
 var navItems = [
