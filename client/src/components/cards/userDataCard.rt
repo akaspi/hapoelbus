@@ -1,0 +1,16 @@
+<rt-require dependency="./cardFrame" as="cardFrame"/>
+<rt-require dependency="material-ui" as="mui"/>
+
+
+<cardFrame contentClass="user-data-card">
+    <div class="picture">
+        <mui.Avatar size="{60}">
+            <i class="fa fa-user"/>
+        </mui.Avatar>
+    </div>
+    <div class="info">
+        <div>{this.getDisplayName()}</div>
+        <div>{this.getEmail()}</div>
+        <div>{this.getPhone()}</div>
+    </div>
+</cardFrame>

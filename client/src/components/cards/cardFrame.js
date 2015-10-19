@@ -5,7 +5,10 @@ var template = require('./cardFrame.rt.js');
 
 var CardFrame =  React.createClass({
     mixins: [ ],
-    render: template
+    render: template,
+    getContentClass: function (){
+        return 'content ' + this.props.contentClass;
+    }
 });
 
 module.exports = CardFrame;

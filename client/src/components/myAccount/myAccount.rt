@@ -1,10 +1,12 @@
 <rt-require dependency="../../constants/pagesConstants" as="pagesConstants"/>
 <rt-require dependency="../pages/homePage/homePage" as="homePage"/>
 <rt-require dependency="../pages/gamesPage/gamesPage" as="gamesPage"/>
+<rt-require dependency="../pages/usersPage" as="usersPage"/>
 
 <div class="my-account">
     <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE"/>
     <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE"/>
+    <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
     <!--<userDashboard-->
             <!--rt-if="this.shouldShowUserDashboard()"-->
             <!--key="key-user-dashboard"-->

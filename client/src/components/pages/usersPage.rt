@@ -1,0 +1,7 @@
+<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
+<rt-require dependency="../cards/userDataCard" as="userDataCard"/>
+
+<div class="home-page">
+    THIS IS USERS PAGE
+    <cardsDisplayer comp="{userDataCard}" data="{this.props.usersData}"/>
+</div>

@@ -1,5 +1,4 @@
-<rt-require dependency="../cards/userDataCard/userDataCard" as="userDataCard"/>
-<rt-require dependency="../cardsDisplayer/cardsDisplayer" as="cardsDisplayer"/>
+
 <rt-require dependency="../pages/landingPage/landingPage" as="landingPage"/>
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../base/loading/loading" as="loading"/>
@@ -11,7 +10,7 @@
     <div class="site-content">
         <loading rt-if="isLoggedIn && !hasUsersData && waitingForUserData"/>
         <landingPage rt-if="!isLoggedIn"/>
-        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" user="{this.state.user}"/>
+        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{{ uid: this.state.user.uid, isAdmin: this.state.user.isAdmin }}" usersData="{this.state.user.usersData}"/>
     </div>
     <div class="site-footer">
         <button onClick="{this.openDialog}">Click Me</button>

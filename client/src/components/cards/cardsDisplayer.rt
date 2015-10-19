@@ -1,3 +1,3 @@
-<div class="cards-displayer" rt-scope="this.props.cardClass as card">
+<div class="cards-displayer" rt-scope="this.props.comp as card">
     <card rt-repeat="dataRow in this.props.data" key="{'card-' + dataRowIndex}" data="{dataRow}"/>
 </div>
