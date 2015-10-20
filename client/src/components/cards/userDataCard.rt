@@ -8,9 +8,7 @@
             <i class="fa fa-user"/>
         </mui.Avatar>
     </div>
-    <div class="info">
-        <div>{this.getDisplayName()}</div>
-        <div>{this.getEmail()}</div>
-        <div>{this.getPhone()}</div>
-    </div>
+    <span class="display-name">{this.getDisplayName()}</span>
+    <span class="email">{this.getEmail()}</span>
+    <span class="phone">{this.getPhone()}</span>
 </cardFrame>

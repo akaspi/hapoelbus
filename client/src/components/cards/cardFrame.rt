@@ -1,9 +1,9 @@
 <div class="card-frame">
+    <div class="header">
+        <i class="fa fa-trash-o remove"/>
+        <i class="fa fa-pencil edit"/>
+    </div>
     <div class="{this.getContentClass()}">
         {this.props.children}
-    </div>
-    <div class="header">
-        <i class="fa fa-times"/>
-        <i class="fa fa-pencil"/>
     </div>
 </div>
