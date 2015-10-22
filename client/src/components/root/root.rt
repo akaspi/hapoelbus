@@ -4,13 +4,13 @@
 <rt-require dependency="../base/loading/loading" as="loading"/>
 
 <div class="root"
-     rt-scope="this.state.user.uid as isLoggedIn; !_.isEmpty(this.state.user.usersData) as hasUsersData; this.state.user.isPending as waitingForUserData">
+     rt-scope="this.state.authData.uid as isLoggedIn; !_.isEmpty(this.state.usersData.data) as hasUsersData; this.state.usersData.isPending as waitingForUserData">
 
     <div class="site-header"/>
     <div class="site-content">
         <loading rt-if="isLoggedIn && !hasUsersData && waitingForUserData"/>
         <landingPage rt-if="!isLoggedIn"/>
-        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{{ uid: this.state.user.uid, isAdmin: this.state.user.isAdmin }}" usersData="{this.state.user.usersData}"/>
+        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}"/>
     </div>
     <div class="site-footer">
         <button onClick="{this.openDialog}">Click Me</button>

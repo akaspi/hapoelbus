@@ -10,7 +10,7 @@
     window.React = React;
 
     var stores = [
-        require('./stores/userStore'),
+        require('./stores/usersDataStore'),
         require('./stores/gamesStore')
     ];
 

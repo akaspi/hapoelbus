@@ -4,7 +4,8 @@ var React = require('react/addons');
 var template = require('./root.rt');
 var _ = require('lodash');
 
-var userStore = require('../../stores/userStore');
+var authStore = require('../../stores/authStore');
+var usersDataStore = require('../../stores/usersDataStore');
 var gamesStore = require('../../stores/gamesStore');
 var pageNavigationStore = require('../../stores/pageNavigationStore');
 var dialogStore = require('../../stores/dialogStore');
@@ -14,8 +15,9 @@ var actionsConstants = require('../../actions/actionsConstants');
 
 function getStateFromStores() {
     return {
+        authData: authStore.getAuthData(),
         currentPage: pageNavigationStore.getCurrentPage(),
-        user: userStore.getUser(),
+        usersData: usersDataStore.getUser(),
         gamesData: gamesStore.getGamesData(),
         dialogToDisplay: dialogStore.getDialogToDisplay()
     };
@@ -29,10 +31,21 @@ var Root = React.createClass({
     },
 
     componentDidMount: function () {
-        userStore.addChangeListener(this.onStoreChange);
+        authStore.addChangeListener(this.onStoreChange);
+        usersDataStore.addChangeListener(this.onStoreChange);
         gamesStore.addChangeListener(this.onStoreChange);
         pageNavigationStore.addChangeListener(this.onStoreChange);
         dialogStore.addChangeListener(this.onStoreChange);
+
+        if (this.state.authData.uid) {
+            actionsCreator.createAction(actionsConstants.LOAD_USERS_DATA, {});
+        }
+    },
+
+    componentDidUpdate: function(prevProps, prevState) {
+      if (!prevState.authData.uid && this.state.authData.uid) {
+          actionsCreator.createAction(actionsConstants.LOAD_USERS_DATA, {});
+      }
     },
 
     onStoreChange: function () {
