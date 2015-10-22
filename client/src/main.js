@@ -15,6 +15,7 @@
     ];
 
     window.authAPI = require('./API/authAPI');
+    window.usersDataAPI = require('./API/usersDataAPI');
 
     _.forEach(stores, function(store) {
         if (_.isFunction(store.init)) {

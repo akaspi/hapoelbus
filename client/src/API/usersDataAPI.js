@@ -8,6 +8,7 @@ var seasonTicketsRef = ref.child('seasonTickets');
 var contactRequestsRef = ref.child('contactRequests');
 var bookingRef = ref.child('booking');
 var occupiedRef = ref.child('occupied');
+var distributionRef = ref.child('distribution');
 
 function read(ref, onSuccess, onError) {
     ref.once('value', function(snapshot) {
@@ -35,12 +36,14 @@ function getDataForAllUsers(onSuccess, onError) {
         read(seasonTicketsRef, function(seasonTickets) {
             read(contactRequestsRef, function(contactRequests) {
                 read(bookingRef, function(booking) {
-                    var uidArr = _.keys(usersInfo);
-                    var dataForAllUsers = _.reduce(uidArr, function(accum, uid) {
-                        accum[uid] = { info: usersInfo[uid], seasonTicket: seasonTickets[uid], contactRequest: contactRequests[uid], booking: booking[uid] };
-                        return accum;
-                    }, {});
-                    onSuccess(dataForAllUsers);
+                    read(distributionRef, function(distributions) {
+                        var uidArr = _.keys(usersInfo);
+                        var dataForAllUsers = _.reduce(uidArr, function(accum, uid) {
+                            accum[uid] = { info: usersInfo[uid], seasonTicket: seasonTickets[uid], contactRequest: contactRequests[uid], booking: booking[uid], distribution: distributions[uid] };
+                            return accum;
+                        }, {});
+                        onSuccess(dataForAllUsers);
+                    }, onError);
                 });
             }, onError);
         }, onError);
@@ -52,9 +55,11 @@ function getDataForSingleUser(uid, onSuccess, onError) {
         read(seasonTicketsRef.child(uid), function(seasonTicket) {
             read(contactRequestsRef.child(uid), function(contactRequest) {
                 read(bookingRef.child(uid), function(booking) {
-                    var singleUserData = {};
-                    singleUserData[uid] = { info: userInfo, seasonTicket: seasonTicket, contactRequest: contactRequest, booking: booking };
-                    onSuccess(singleUserData);
+                    read(distributionRef.child(uid), function(distribution) {
+                        var singleUserData = {};
+                        singleUserData[uid] = { info: userInfo, seasonTicket: seasonTicket, contactRequest: contactRequest, booking: booking, distribution: distribution };
+                        onSuccess(singleUserData);
+                    });
                 });
             }, onError);
         }, onError);
@@ -64,6 +69,15 @@ function getDataForSingleUser(uid, onSuccess, onError) {
 
 function updateUserInfo(uid, userInfo, onSuccess, onError) {
     usersInfoRef.child(uid).update(userInfo, function(err) {
+        if (err) {
+            return onError(err);
+        }
+        onSuccess();
+    });
+}
+
+function updateDistribution(uid, distribution, onSuccess, onError) {
+    usersInfoRef.child(uid).update(distribution, function(err) {
         if (err) {
             return onError(err);
         }
@@ -171,6 +185,7 @@ function updateUserData(uid, userData, onSuccess, onError) {
 module.exports = {
     init: init,
     updateUserInfo: updateUserInfo,
+    updateDistribution: updateDistribution,
     updateSeasonTicket: updateSeasonTicket,
     setContactRequest: setContactRequest,
     updateBooking: updateBooking,
