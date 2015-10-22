@@ -172,16 +172,6 @@ function cancelBooking(uid, gameId, onSuccess, onError) {
 
 function init() {}
 
-function updateUserData(uid, userData, onSuccess, onError) {
-    updateRef(usersInfoRef.child(uid), userData.info || {}, function() {
-        updateRef(seasonTicketsRef.child(uid), userData.seasonTicket || {}, function() {
-            updateRef(contactRequestsRef.child(uid), userData.contactRequest || {}, function() {
-                onSuccess();
-            }, onError);
-        }, onError);
-    }, onError);
-}
-
 module.exports = {
     init: init,
     updateUserInfo: updateUserInfo,
@@ -190,6 +180,5 @@ module.exports = {
     setContactRequest: setContactRequest,
     updateBooking: updateBooking,
     cancelBooking: cancelBooking,
-    getUsersData: getUsersData,
-    updateUserData: updateUserData
+    getUsersData: getUsersData
 };
