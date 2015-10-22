@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./forgotPasswordBox.rt.js');
+var template = require('./forgotPasswordBox.rt');
 var muiMixin = require('../mixins/mui-mixin');
 var userActions = require('../../actions/userActions');
 var authNavigationActions = require('../../actions/authNavigationActions');

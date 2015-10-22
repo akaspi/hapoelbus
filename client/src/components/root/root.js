@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./root.rt.js');
+var template = require('./root.rt');
 var _ = require('lodash');
 
 var userStore = require('../../stores/userStore');

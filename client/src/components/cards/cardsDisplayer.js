@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./cardsDisplayer.rt.js');
+var template = require('./cardsDisplayer.rt');
 
 var CardsDisplayer =  React.createClass({
     mixins: [ ],

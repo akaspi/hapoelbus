@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./loginBox.rt.js');
+var template = require('./loginBox.rt');
 var muiMixin = require('../mixins/mui-mixin');
 var authActions = require('../../actions/authActions');
 var authNavigationActions = require('../../actions/authNavigationActions');

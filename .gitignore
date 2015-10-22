@@ -11,8 +11,7 @@ config.json
 # Generated:
 bundle.js
 vendor.bundle.js
-*.rt.js
 *.css
 
-# Deprecated:
-client/dist/
+# Dist
+client/public/

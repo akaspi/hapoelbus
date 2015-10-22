@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./adminDashboard.rt.js');
+var template = require('./adminDashboard.rt');
 var muiMixin = require('../mixins/mui-mixin');
 
 var gamesStore = require('../../stores/gamesStore');

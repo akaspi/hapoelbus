@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var template = require('./emailsSection.rt.js');
+var template = require('./emailsSection.rt');
 var muiMixin = require('../../mixins/mui-mixin');
 var _ = require('lodash');
 

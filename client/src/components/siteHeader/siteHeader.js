@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
-var template = require('./siteHeader.rt.js');
+var template = require('./siteHeader.rt');
 var authActions = require('../../actions/authActions');
 var auth = require('../../DAL/auth');
 

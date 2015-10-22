@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./dialogFrame.rt.js');
+var template = require('./dialogFrame.rt');
 var muiMixin = require('../../mixins/mui-mixin');
 
 var actionsCreator = require('../../../actions/actionsCreator');

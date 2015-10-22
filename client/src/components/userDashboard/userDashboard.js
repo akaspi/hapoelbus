@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
 
-var template = require('./userDashboard.rt.js');
+var template = require('./userDashboard.rt');
 
 var navigationLabels = ['המשחקים הבאים', 'היסטוריית הרשמות', 'פרטים אישיים'];
 

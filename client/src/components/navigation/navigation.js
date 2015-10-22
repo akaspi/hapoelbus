@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./navigation.rt.js');
+var template = require('./navigation.rt');
 
 var muiMixin = require('../mixins/mui-mixin');
 var mui = require('material-ui');

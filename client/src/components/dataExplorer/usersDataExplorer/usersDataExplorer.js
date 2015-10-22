@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var template = require('./usersDataExplorer.rt.js');
+var template = require('./usersDataExplorer.rt');
 var muiMixin = require('../../mixins/mui-mixin');
 var _ = require('lodash');
 

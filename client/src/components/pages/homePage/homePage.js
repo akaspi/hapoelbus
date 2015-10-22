@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./homePage.rt.js');
+var template = require('./homePage.rt');
 
 var HomePage = React.createClass({
     render: template

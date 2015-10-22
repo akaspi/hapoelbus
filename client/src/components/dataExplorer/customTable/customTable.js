@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var template = require('./customTable.rt.js');
+var template = require('./customTable.rt');
 var muiMixin = require('../../mixins/mui-mixin');
 var deepLinkStateMixin = require('../../mixins/deepLinkStateMixin');
 

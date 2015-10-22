@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
 
-var template = require('./userData.rt.js');
+var template = require('./userData.rt');
 var userActions = require('../../actions/userActions');
 var auth = require('../../DAL/auth');
 var userStore = require('../../stores/usersDataStore');

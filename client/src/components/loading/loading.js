@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var template = require('./loading.rt.js');
+var template = require('./loading.rt');
 var muiMixin = require('../mixins/mui-mixin');
 
 var MyAccount = React.createClass({

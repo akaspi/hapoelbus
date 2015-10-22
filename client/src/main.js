@@ -3,6 +3,8 @@
     var RootComponent = require('./components/root/root');
     var _ = require('lodash');
 
+    require('./main.scss');
+
     require("react-tap-event-plugin")();
 
     window.React = React;

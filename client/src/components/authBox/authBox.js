@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./authBox.rt.js');
+var template = require('./authBox.rt');
 var authNavigationStore = require('../../stores/authNavigationStore');
 var authStore = require('../../stores/authStore');
 

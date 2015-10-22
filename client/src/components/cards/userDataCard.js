@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./userDataCard.rt.js');
+var template = require('./userDataCard.rt');
 var muiMixin = require('../mixins/mui-mixin');
 
 

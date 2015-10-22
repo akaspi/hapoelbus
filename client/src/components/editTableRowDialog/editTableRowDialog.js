@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var template = require('./editTableRowDialog.rt.js');
+var template = require('./editTableRowDialog.rt');
 var muiMixin = require('../mixins/mui-mixin');
 
 var Table = React.createClass({

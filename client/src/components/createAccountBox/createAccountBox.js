@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./createAccountBox.rt.js');
+var template = require('./createAccountBox.rt');
 var muiMixin = require('../mixins/mui-mixin');
 var authActions = require('../../actions/authActions');
 var authNavigationActions = require('../../actions/authNavigationActions');

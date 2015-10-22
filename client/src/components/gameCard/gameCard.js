@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var muiMixin = require('../mixins/mui-mixin');
 var numericLinkState = require('../mixins/numericLinkState');
-var template = require('./gameCard.rt.js');
+var template = require('./gameCard.rt');
 
 var dataSchemas = require('../../../../common/dataSchemas');
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./testDialog.rt.js');
+var template = require('./testDialog.rt');
 
 var TestDialog =  React.createClass({
     mixins: [ ],

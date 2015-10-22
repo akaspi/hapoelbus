@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var template = require('./gamesExplorer.rt.js');
+var template = require('./gamesExplorer.rt');
 var muiMixin = require('../../mixins/mui-mixin');
 var _ = require('lodash');
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./myAccount.rt.js');
+var template = require('./myAccount.rt');
 
 //var navigationStore = require('../../stores/navigationStore');
 
