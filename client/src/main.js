@@ -1,5 +1,7 @@
 (function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var ReactDOM = require('react-dom');
+
     var RootComponent = require('./components/root/root');
     var _ = require('lodash');
 
@@ -23,6 +25,6 @@
         }
     });
 
-    React.render(React.createElement(RootComponent), document.body);
+    ReactDOM.render(React.createElement(RootComponent), document.getElementById('App'));
 
 })();

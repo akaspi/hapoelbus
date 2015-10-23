@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 var template = require('./root.rt');
 var _ = require('lodash');
 

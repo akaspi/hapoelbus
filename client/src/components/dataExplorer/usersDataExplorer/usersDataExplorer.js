@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 
 var template = require('./usersDataExplorer.rt');
 var muiMixin = require('../../mixins/mui-mixin');

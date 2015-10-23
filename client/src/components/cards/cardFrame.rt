@@ -1,7 +1,12 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="material-ui/lib/menus/menu-item" as="MenuItem"/>
+
 <div class="card-frame">
     <div class="header">
-        <i rt-if="this.props.onRemove" onClick="{this.props.onRemove}" class="fa fa-trash-o remove"/>
-        <i rt-if="this.props.onEdit" onClick="{this.props.onEdit}" class="fa fa-pencil edit"/>
+        <mui.IconMenu iconButtonElement="{this.getMenuIconButton()}">
+            <MenuItem rt-if="this.props.onEdit" onClick="{this.props.onEdit}" index="{0}" primaryText="{'Edit'}" leftIcon="{this.getEditMenuItemIcon()}"/>
+            <MenuItem rt-if="this.props.onRemove" onClick="{this.props.onRemove}" index="{1}" primaryText="{'Remove'}" leftIcon="{this.getRemoveMenuItemIcon()}"/>
+        </mui.IconMenu>
     </div>
     <div class="{this.getContentClass()}">
         {this.props.children}

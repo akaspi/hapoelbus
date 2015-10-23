@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 var muiMixin = require('../mixins/mui-mixin');
 var numericLinkState = require('../mixins/numericLinkState');
 var template = require('./gameCard.rt');

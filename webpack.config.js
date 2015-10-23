@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
     entry: {
         app: __dirname + '/client/src/main.js',
-        vendor: ['react/addons', 'lodash', 'firebase', 'material-ui']
+        vendor: ['react', 'lodash', 'firebase', 'material-ui']
     },
     output: {
         path: __dirname + '/client/public',

@@ -1,4 +1,3 @@
-
 <rt-require dependency="../pages/landingPage/landingPage" as="landingPage"/>
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../base/loading/loading" as="loading"/>

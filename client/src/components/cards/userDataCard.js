@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 var template = require('./userDataCard.rt');
 var muiMixin = require('../mixins/mui-mixin');
 
@@ -8,9 +8,6 @@ var muiMixin = require('../mixins/mui-mixin');
 var UserDataCard = React.createClass({
     mixins: [muiMixin],
     displayName: 'userDataCard',
-    componentDidMount: function () {
-        console.log(this.props);
-    },
     getDisplayName: function () {
         var userInfo = this.props.data.info;
         return (userInfo && userInfo.displayName) || '';

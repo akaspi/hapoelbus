@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 
 var template = require('./emailsSection.rt');
 var muiMixin = require('../../mixins/mui-mixin');

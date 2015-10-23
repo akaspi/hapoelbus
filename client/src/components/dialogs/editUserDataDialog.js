@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 var template = require('./editUserDataDialog.rt');
 
 var TestDialog =  React.createClass({
