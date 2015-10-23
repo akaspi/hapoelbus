@@ -1,7 +1,7 @@
 <div class="card-frame">
     <div class="header">
-        <i class="fa fa-trash-o remove"/>
-        <i class="fa fa-pencil edit"/>
+        <i rt-if="this.props.onRemove" onClick="{this.props.onRemove}" class="fa fa-trash-o remove"/>
+        <i rt-if="this.props.onEdit" onClick="{this.props.onEdit}" class="fa fa-pencil edit"/>
     </div>
     <div class="{this.getContentClass()}">
         {this.props.children}

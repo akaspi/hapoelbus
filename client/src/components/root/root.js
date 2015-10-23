@@ -61,7 +61,7 @@ var Root = React.createClass({
     },
 
     openDialog: function() {
-        var dialogClass = require('../../components/dialogs/testDialog/testDialog');
+        var dialogClass = require('../dialogs/editUserDataDialog');
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {dialogClass: dialogClass, data: {}});
     },
 

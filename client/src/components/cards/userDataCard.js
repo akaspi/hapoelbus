@@ -23,7 +23,12 @@ var UserDataCard = React.createClass({
         var userInfo = this.props.data.info;
         return (userInfo && userInfo.phone) || '050-1111111';
     },
-
+    onEditClick: function() {
+        if (_.isFunction(this.props.onEdit)) {
+            this.props.onEdit(this.props.id, this.props.data);
+        }
+    },
+    onRemoveClick: function() {},
     render: template
 });
 

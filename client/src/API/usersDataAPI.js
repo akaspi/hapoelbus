@@ -117,6 +117,8 @@ function getUsersData(onSuccess, onError) {
     });
 }
 
+function updateUserData(uid, userData, onSuccess, onError) {}
+
 function updateBooking(uid, gameId, bookingData, onSuccess, onError) {
     bookingRef.child(uid).child(gameId).once('value', function (snapshot) {
         var bookingDataBeforeUpdate = snapshot.val() || {};
@@ -180,5 +182,6 @@ module.exports = {
     setContactRequest: setContactRequest,
     updateBooking: updateBooking,
     cancelBooking: cancelBooking,
-    getUsersData: getUsersData
+    getUsersData: getUsersData,
+    updateUserData: updateUserData
 };

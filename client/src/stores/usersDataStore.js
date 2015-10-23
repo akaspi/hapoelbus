@@ -18,6 +18,9 @@ dispatcher.register(function(action) {
         case actionsConstants.LOAD_USERS_DATA:
             loadUsersData();
             break;
+        case actionsConstants.UPDATE_USER_DATA:
+            updateUserData(action.payload.uid, action.payload.userData);
+        break;
     }
 });
 
@@ -30,6 +33,15 @@ function loadUsersData() {
         usersData.isPending = false;
         emitChange();
     }, function() {});
+}
+
+function updateUserData(uid, userData) {
+    usersData.isPending = true;
+    emitChange();
+
+    usersDataAPI.updateUserData(uid, userData, function() {
+        loadUsersData();
+    }, function() {})
 }
 
 function logout() {

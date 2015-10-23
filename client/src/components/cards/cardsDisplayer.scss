@@ -1,5 +1,26 @@
 .cards-displayer {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid;
+  align-items: center;
+
+  .create-box {
+    width: 200px;
+    height: 200px;
+    border: 1px dashed #2c3e50;
+    box-sizing: border-box;
+    margin: 0 20px;
+    font-size: 22px;
+    color: #e74c3c;
+    transition: font-size .1s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      font-size: 30px;
+      background-color: aliceblue;
+      cursor: pointer;
+    }
+  }
 }

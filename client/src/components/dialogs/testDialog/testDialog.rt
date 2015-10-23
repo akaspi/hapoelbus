@@ -1,5 +1,0 @@
-<rt-require dependency="../dialogFrame/dialogFrame" as="dialogFrame"/>
-
-<dialogFrame>
-    <input type="text" placeholder="TEST INPUT"/>
-</dialogFrame>

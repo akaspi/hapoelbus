@@ -1,0 +1,8 @@
+<rt-require dependency="./dialogFrame/dialogFrame" as="dialogFrame"/>
+
+<dialogFrame>
+    <h3>THIS IS THE USER ID:</h3>
+    <div>{this.props.data.uid}</div>
+    <h3>THIS IS THE USER DATA</h3>
+    <div>{JSON.stringify(this.props.data.userData)}</div>
+</dialogFrame>

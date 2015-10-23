@@ -2,6 +2,10 @@
 <rt-require dependency="../cards/userDataCard" as="userDataCard"/>
 
 <div class="home-page">
-    THIS IS USERS PAGE
-    <cardsDisplayer comp="{userDataCard}" data="{this.props.usersData}"/>
+    <cardsDisplayer
+            comp="{userDataCard}"
+            data="{this.props.usersData}"
+            onCreate="{this.onCreateUserData}"
+            onEdit="{this.onEditUserData}"
+            onRemove="{this.onRemoveUserData}"/>
 </div>
