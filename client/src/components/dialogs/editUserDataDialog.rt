@@ -1,8 +1,29 @@
 <rt-require dependency="./dialogFrame/dialogFrame" as="dialogFrame"/>
+<rt-require dependency="material-ui" as="mui"/>
+
 
 <dialogFrame>
-    <h3>THIS IS THE USER ID:</h3>
-    <div>{this.props.data.uid}</div>
-    <h3>THIS IS THE USER DATA</h3>
-    <div>{JSON.stringify(this.props.data.userData)}</div>
+    <div class="edit-user-data-dialog">
+        <mui.List subheader="פרטי המשתמש" insetChildren="{true}" subheaderStyle="{{lineHeight: '20px', fontWeight: 'bold'}}">
+            <div class="field-row">
+                <label>
+                    <span>שם מלא</span>
+                    <input type="text" placeholder="שם מלא" valueLink="{this.linkState('displayName')}">
+                </label>
+            </div>
+            <div class="field-row">
+                <label>
+                    <span>טלפון</span>
+                    <input type="text" placeholder="טלפון" valueLink="{this.linkState('phone')}">
+                </label>
+            </div>
+            <div class="field-row">
+                <label>
+                    <span>דואר אלקטרוני</span>
+                    <input type="email" placeholder="דואר אלקטרוני" valueLink="{this.linkState('email')}">
+                </label>
+            </div>
+            <mui.ListDivider style="{{marginTop: '15px'}}"/>
+        </mui.List>
+    </div>
 </dialogFrame>
