@@ -1,8 +1,10 @@
 'use strict';
 
-var ref = require('./db');
+var db = require('./db');
+var ref = db.ref;
 
 var adminsRef = ref.child('admins');
+var Promise = require('bluebird');
 
 function createUser(email, password, onSuccess, onError) {
     ref.createUser({
@@ -50,11 +52,10 @@ function socialLogin(provider, onSuccess, onError) {
 
 }
 
-function isAdmin(uid, onSuccess, onError) {
-    adminsRef.once('value', function(snapshot) {
-        var admins = snapshot.val() || {};
-        onSuccess(!!admins[uid]);
-    }, onError);
+function isAdmin(uid) {
+    return db.read('admins').then(function(admins) {
+        return !!admins[uid]
+    });
 }
 
 function getUID() {

@@ -13,14 +13,11 @@ var usersData = {
     errorMsg: null
 };
 
-dispatcher.register(function(action) {
-    switch(action.actionType) {
+dispatcher.register(function (action) {
+    switch (action.actionType) {
         case actionsConstants.LOAD_USERS_DATA:
             loadUsersData();
             break;
-        case actionsConstants.UPDATE_USER_DATA:
-            updateUserData(action.payload.uid, action.payload.userData);
-        break;
     }
 });
 
@@ -28,20 +25,11 @@ function loadUsersData() {
     usersData.isPending = true;
     emitChange();
 
-    usersDataAPI.getUsersData(function(result) {
+    usersDataAPI.getUsersData().then(function (result) {
         usersData.data = _.clone(result);
         usersData.isPending = false;
         emitChange();
-    }, function() {});
-}
-
-function updateUserData(uid, userData) {
-    usersData.isPending = true;
-    emitChange();
-
-    usersDataAPI.updateUserData(uid, userData, function() {
-        loadUsersData();
-    }, function() {})
+    });
 }
 
 function logout() {
@@ -57,7 +45,7 @@ function emitChange() {
     });
 }
 
-function getUser() {
+function getUsersData() {
     return usersData;
 }
 
@@ -72,7 +60,7 @@ function removeChangeListener(listenerToRemove) {
 }
 
 module.exports = {
-    getUser: getUser,
+    getUsersData: getUsersData,
     addChangeListener: addChangeListener,
     removeChangeListener: removeChangeListener
 };

@@ -17,7 +17,7 @@ function getStateFromStores() {
     return {
         authData: authStore.getAuthData(),
         currentPage: pageNavigationStore.getCurrentPage(),
-        usersData: usersDataStore.getUser(),
+        usersData: usersDataStore.getUsersData(),
         gamesData: gamesStore.getGamesData(),
         dialogToDisplay: dialogStore.getDialogToDisplay()
     };
