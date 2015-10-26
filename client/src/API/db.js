@@ -47,7 +47,7 @@ function remove(path) {
 }
 
 function generateUniqueId() {
-    return ref.push();
+    return ref.push().key();
 }
 
 module.exports = {
