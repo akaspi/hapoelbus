@@ -8,7 +8,7 @@ var ref = new Firebase('https://' + config.FIREBASE_APP + '.firebaseio.com/');
 function read(path) {
     return new Promise(function(resolve, reject) {
         ref.child(path).once('value', function(snapshot) {
-            resolve(snapshot.val() || {});
+            resolve(snapshot.val());
         }, reject);
     });
 }
