@@ -8,7 +8,6 @@ var userDataPathsData = [
     { dataKey: 'info', path: 'usersInfo' },
     { dataKey: 'seasonTicket', path: 'seasonTickets' },
     { dataKey: 'contactRequest', path: 'contactRequests' },
-    { dataKey: 'booking', path: 'booking' },
     { dataKey: 'distribution', path: 'distribution' }
 ];
 
@@ -82,36 +81,10 @@ function getUsersData() {
     });
 }
 
-function updateBooking(uid, gameId, bookingData) {
-    var currentBookingDataPath = getPath('booking') + '/' + uid + '/' + gameId;
-    var occupiedDataPath = 'occupied/' + gameId;
-
-    return Promise.all([ db.read(currentBookingDataPath), db.read(occupiedDataPath) ])
-        .spread(function(currBookingData, occupiedSeats) {
-            var currSeatsOccupied = _.isNumber(occupiedSeats) ? occupiedSeats : 0;
-            var numOfSeatsDiff = bookingData.numOfSeats - (_.isNumber(currBookingData.numOfSeats) ? currBookingData.numOfSeats : 0);
-            var newNumOfSeats = currSeatsOccupied + numOfSeatsDiff;
-            return [ db.update(currentBookingDataPath, bookingData), db.set(occupiedDataPath, newNumOfSeats) ];
-        });
-}
-
-function cancelBooking(uid, gameId) {
-    var currentBookingDataPath = getPath('booking') + '/' + uid + '/' + gameId;
-    var occupiedDataPath = 'occupied/' + gameId;
-
-    return Promise.all([ db.read(currentBookingDataPath), db.read(occupiedDataPath) ])
-        .spread(function(currBookingData, occupiedSeats) {
-            var newNumOfSeats = occupiedSeats - currBookingData.numOfSeats;
-            return [ db.set(occupiedDataPath, newNumOfSeats), db.remove(currentBookingDataPath) ];
-        });
-}
-
 module.exports = {
     updateUserInfo: updateUserInfo,
     updateDistribution: updateDistribution,
     updateSeasonTicket: updateSeasonTicket,
     setContactRequest: setContactRequest,
-    updateBooking: updateBooking,
-    cancelBooking: cancelBooking,
     getUsersData: getUsersData
 };

@@ -19,6 +19,7 @@
     window.authAPI = require('./API/authAPI');
     window.usersDataAPI = require('./API/usersDataAPI');
     window.gamesAPI = require('./API/gamesAPI');
+    window.bookingAPI = require('./API/bookingAPI');
 
     _.forEach(stores, function(store) {
         if (_.isFunction(store.init)) {
