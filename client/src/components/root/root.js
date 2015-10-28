@@ -7,6 +7,7 @@ var _ = require('lodash');
 var authStore = require('../../stores/authStore');
 var usersDataStore = require('../../stores/usersDataStore');
 var gamesStore = require('../../stores/gamesStore');
+var bookingStore = require('../../stores/bookingStore');
 var pageNavigationStore = require('../../stores/pageNavigationStore');
 var dialogStore = require('../../stores/dialogStore');
 
@@ -16,9 +17,10 @@ var actionsConstants = require('../../actions/actionsConstants');
 function getStateFromStores() {
     return {
         authData: authStore.getAuthData(),
-        currentPage: pageNavigationStore.getCurrentPage(),
         usersData: usersDataStore.getUsersData(),
         gamesData: gamesStore.getGamesData(),
+        bookingData: bookingStore.getGamesData(),
+        currentPage: pageNavigationStore.getCurrentPage(),
         dialogToDisplay: dialogStore.getDialogToDisplay()
     };
 }
@@ -34,6 +36,7 @@ var Root = React.createClass({
         authStore.addChangeListener(this.onStoreChange);
         usersDataStore.addChangeListener(this.onStoreChange);
         gamesStore.addChangeListener(this.onStoreChange);
+        bookingStore.addChangeListener(this.onStoreChange);
         pageNavigationStore.addChangeListener(this.onStoreChange);
         dialogStore.addChangeListener(this.onStoreChange);
 

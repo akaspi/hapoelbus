@@ -9,7 +9,7 @@
     <div class="site-content">
         <loading rt-if="isLoggedIn && !hasUsersData && waitingForUserData"/>
         <landingPage rt-if="!isLoggedIn"/>
-        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}"/>
+        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}" games="{this.state.gamesData.games}" booking="{this.state.bookingData.booking}"/>
     </div>
     <div class="site-footer">
         <button onClick="{this.openDialog}">Click Me</button>
