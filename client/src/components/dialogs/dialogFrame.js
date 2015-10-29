@@ -2,10 +2,10 @@
 
 var React = require('react');
 var template = require('./dialogFrame.rt');
-var muiMixin = require('../../mixins/mui-mixin');
+var muiMixin = require('../mixins/mui-mixin');
 
-var actionsCreator = require('../../../actions/actionsCreator');
-var actionsConstants = require('../../../actions/actionsConstants');
+var actionsCreator = require('../../actions/actionsCreator');
+var actionsConstants = require('../../actions/actionsConstants');
 
 var DialogFrame =  React.createClass({
     mixins: [ muiMixin ],
