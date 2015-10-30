@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header"></div>
+    <div class="card-content">
+        <img src="http://dir.agosto.nl/dump/Sara.jpg" class="card-image" />
+        <h1 class="card-title">TITLE</h1>
+        <p class="card-sub-title">P1</p>
+        <p class="card-sub-title">P2</p>
+    </div>
+    <ul class="card-actions-wrapper">
+        <li class="card-actions-item">A</li>
+        <li class="card-actions-item">B</li>
+    </ul>
+    <div class="card-ribbon-wrapper">
+        <div class="card-ribbon">NEWS</div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-<div class="cards-displayer" rt-scope="this.props.comp as card">
+<rt-require dependency="./card" as="card"/>
+
+<div class="cards-displayer">
     <div rt-if="this.props.onCreate" onClick="{this.props.onCreate}" class="create-box">
         <i class="fa fa-plus"/>
     </div>

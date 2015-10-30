@@ -1,5 +1,5 @@
 @import "components/root/root";
-@import "components/cards/cardFrame";
+@import "components/cards/card";
 @import "components/cards/userDataCard";
 @import "components/cards/cardsDisplayer";
 
@@ -22,7 +22,7 @@
 @import "components/dataExplorer/customTable/customTable";
 @import "components/dataExplorer/emailsSection/emailsSection";
 @import "components/navigation/navigation";
-@import "components/gameCard/gameCard";
+//@import "components/gameCard/gameCard";
 
 
 @import "components/loginBox/loginBox";
