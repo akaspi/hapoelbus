@@ -23,11 +23,11 @@ var TestDialog =  React.createClass({
             errorMsg: ''
         };
     },
-    onSmsListChange: function (value){
+    onSmsListChange: function (e, value){
       this.setState({smsList: value});
     },
 
-    onEmailListChange: function (value){
+    onEmailListChange: function (e, value){
         this.setState({emailList: value});
     },
 

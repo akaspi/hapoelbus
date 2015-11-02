@@ -45,12 +45,12 @@
             <h2>רשימת תפוצה</h2>
             <div class="field-row">
                 <mui.Toggle
-                        toggled="{this.state.smsList}" onChange="(value)=>this.onSmsListChange(value)"
+                        toggled="{this.state.smsList}" onToggle="{this.onSmsListChange}"
                         label="SMS"/>
             </div>
             <div class="field-row">
                 <mui.Toggle
-                        toggled="{this.state.emailList}" onChange="(value)=>this.onEmailListChange(value)"
+                        toggled="{this.state.emailList}" onToggle="{this.onEmailListChange}"
                         label="אימייל"/>
             </div>
         </section>

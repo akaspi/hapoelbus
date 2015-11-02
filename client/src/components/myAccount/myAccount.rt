@@ -5,7 +5,7 @@
 
 <div class="my-account">
     <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE"/>
-    <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE"/>
+    <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" games="{this.props.games}"/>
     <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
     <!--<userDashboard-->
             <!--rt-if="this.shouldShowUserDashboard()"-->
