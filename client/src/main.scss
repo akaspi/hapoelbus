@@ -9,6 +9,7 @@
 
 
 @import "components/dialogs/editUserDataDialog";
+@import "components/dialogs/dialogFrame";
 
 
 @import "components/siteHeader/siteHeader";
@@ -35,6 +36,7 @@
 @import "components/adminDashboard/adminDashboard";
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import url(http://fonts.googleapis.com/css?family=Arimo:400,700&subset=hebrew,latin);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 body, html {
   height: 100%;

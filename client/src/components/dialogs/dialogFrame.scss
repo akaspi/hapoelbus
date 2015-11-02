@@ -1,1 +1,14 @@
-.dialog-frame {}
+.dialog-frame {
+  .dialog-actions {
+    text-align: center;
+  }
+
+  .cake-icon {
+    color: #fff !important;
+    display: inline-block !important;
+    height: 100%;
+    line-height: 36px;
+    padding-left: 12px;
+    vertical-align: middle;
+  }
+}

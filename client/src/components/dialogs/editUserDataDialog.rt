@@ -2,28 +2,58 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 
-<dialogFrame>
+<dialogFrame onSubmit="{this.updateUserData}" title="עריכת משתמש">
     <div class="edit-user-data-dialog">
-        <mui.List subheader="פרטי המשתמש" insetChildren="{true}" subheaderStyle="{{lineHeight: '20px', fontWeight: 'bold'}}">
+        <section>
+            <h2>פרטים אישיים</h2>
+
             <div class="field-row">
-                <label>
-                    <span>שם מלא</span>
-                    <input type="text" placeholder="שם מלא" valueLink="{this.linkState('displayName')}">
-                </label>
+                <mui.TextField
+                        valueLink="{this.linkState('displayName')}"
+                        floatingLabelText="שם מלא"/>
             </div>
             <div class="field-row">
-                <label>
-                    <span>טלפון</span>
-                    <input type="text" placeholder="טלפון" valueLink="{this.linkState('phone')}">
-                </label>
+                <mui.TextField
+                        valueLink="{this.linkState('phone')}"
+                        floatingLabelText="טלפון"/>
             </div>
             <div class="field-row">
-                <label>
-                    <span>דואר אלקטרוני</span>
-                    <input type="email" placeholder="דואר אלקטרוני" valueLink="{this.linkState('email')}">
-                </label>
+                <mui.TextField
+                        valueLink="{this.linkState('email')}"
+                        floatingLabelText="דואר אלקטרוני"/>
             </div>
-            <mui.ListDivider style="{{marginTop: '15px'}}"/>
-        </mui.List>
+        </section>
+
+
+        <section>
+            <h2>פרטי המנוי</h2>
+
+            <div class="field-row">
+                <mui.TextField type="number"
+                               valueLink="{this.linkState('maxSeats')}"
+                               floatingLabelText="כמות מנויים"/>
+            </div>
+            <div class="field-row">
+                <mui.TextField type="number"
+                               valueLink="{this.linkState('ticketId')}"
+                               floatingLabelText="מס׳ מנוי"/>
+            </div>
+        </section>
+
+
+        <section>
+            <h2>רשימת תפוצה</h2>
+            <div class="field-row">
+                <mui.Toggle
+                        toggled="{this.state.smsList}" onChange="(value)=>this.onSmsListChange(value)"
+                        label="SMS"/>
+            </div>
+            <div class="field-row">
+                <mui.Toggle
+                        toggled="{this.state.emailList}" onChange="(value)=>this.onEmailListChange(value)"
+                        label="אימייל"/>
+            </div>
+        </section>
+
     </div>
 </dialogFrame>

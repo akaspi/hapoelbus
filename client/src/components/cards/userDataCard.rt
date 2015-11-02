@@ -1,5 +1,5 @@
-<rt-require dependency="./cardFrame" as="cardFrame"/>
-<rt-require dependency="material-ui" as="mui"/>
+<!--<rt-require dependency="./cardFrame" as="cardFrame"/>-->
+<!--<rt-require dependency="material-ui" as="mui"/>-->
 
 <cardFrame contentClass="user-data-card" onEdit="{this.onEditClick}" onRemove="{this.onRemoveClick}">
     <div class="picture">
