@@ -18,6 +18,13 @@ var DialogFrame = React.createClass({
             actionsCreator.createAction(actionsConstants.CLOSE_DIALOG, {});
         }, 500);
     },
+    onSubmit: function () {
+        if (_.isFunction(this.props.onSubmit)) {
+            this.props.onSubmit();
+        }
+        this.refs.dialog.dismiss();
+        this.hideDialog();
+    },
     render: template
 });
 
