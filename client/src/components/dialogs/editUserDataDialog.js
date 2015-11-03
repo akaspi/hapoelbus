@@ -11,7 +11,7 @@ var actionsConstants = require('../../actions/actionsConstants');
 var TestDialog = React.createClass({
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
-        return _.clone(this.props.data.userData);
+        return _.cloneDeep(this.props.data.userData);
     },
     onSmsListChange: function (e, value) {
         var newState = _.merge({}, this.state, {
@@ -33,7 +33,7 @@ var TestDialog = React.createClass({
 
     updateUserData: function () {
         actionsCreator.createAction(actionsConstants.UPDATE_USER_DATA, {
-            uid: this.props.uid,
+            uid: this.props.data.uid,
             userData: this.state
         });
     },
