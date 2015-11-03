@@ -1,1 +1,44 @@
-.games-page {}
+.users-page {
+
+  .title-wrapper {
+    padding-right: 35px;
+    font-size: 26px;
+    color: #3d4e57;
+
+    .title {
+      display: inline-block;
+      font-size: 26px;
+    }
+
+    .face-icon {
+      line-height: 26px;
+      vertical-align: middle;
+      font-size: 34px;
+      padding-left: 10px;
+    }
+  }
+
+  .cards-displayer-wrapper {
+    margin-top: 30px;
+  }
+
+  .filter-wrapper {
+    list-style: none;
+    margin: 10px auto;
+    display: flex;
+    background: aliceblue;
+    padding: 10px 20px;
+    max-width: 1000px;
+    border-radius: 8px;
+
+    @media screen and (max-width: 680px) {
+      flex-direction: column;
+      width: 80%;
+    }
+  }
+
+  .filter-item {
+    flex: 1;
+  }
+
+}

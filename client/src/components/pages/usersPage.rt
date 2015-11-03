@@ -1,10 +1,53 @@
 <rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
-<rt-require dependency="../cards/userDataCard" as="userDataCard"/>
+<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
+<rt-require dependency="material-ui" as="mui"/>
 
-<div class="home-page">
-    <cardsDisplayer
-            data="{this.getCardDisplayerData()}"
-            onCreate="{this.onCreateUserData}"
-            onEdit="{this.onEditUserData}"
-            onRemove="{this.onRemoveUserData}"/>
+<div class="users-page">
+    <div class="title-wrapper">
+        <i class="material-icons face-icon">face</i>
+        <h1 class="title">משתמשים במערכת</h1></div>
+
+    <ul class="filter-wrapper">
+        <li class="filter-item">
+            <mui.Checkbox
+                    labelPosition="left"
+                    label="מנויים"
+                    value="{false}"
+                    name="dog1"
+                    defaultChecked="{true}"/>
+        </li>
+        <li class="filter-item">
+            <mui.Checkbox
+                    labelPosition="left"
+                    label="חד פעמיים"
+                    value="{false}"
+                    name="sakl"
+                    defaultChecked="{true}"/>
+        </li>
+        <li class="filter-item">
+            <mui.Checkbox
+                    labelPosition="left"
+                    label="נדרש ליצור קשר"
+                    value="{false}"
+                    name="fed"
+                    defaultChecked="{true}"/>
+        </li>
+        <li class="filter-item">
+            <mui.Checkbox
+                    labelPosition="left"
+                    label="עוד פילטר"
+                    value="{false}"
+                    name="1sakl"
+                    defaultChecked="{true}"/>
+        </li>
+
+    </ul>
+
+    <div class="cards-displayer-wrapper">
+        <cardsDisplayer
+                data="{this.getCardDisplayerData()}"
+                onCreate="{this.onCreateUserData}"
+                onEdit="{this.onEditUserData}"
+                onRemove="{this.onRemoveUserData}"/>
+    </div>
 </div>
