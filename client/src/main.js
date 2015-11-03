@@ -20,9 +20,6 @@
     window.usersDataAPI = require('./API/usersDataAPI');
     window.gamesAPI = require('./API/gamesAPI');
     window.bookingAPI = require('./API/bookingAPI');
-    window.actionsCreator = require('./actions/actionsCreator');
-    window.actionsConstants = require('./actions/actionsConstants');
-    window.editUserDataDialog = require('./components/dialogs/editUserDataDialog');
 
     _.forEach(stores, function(store) {
         if (_.isFunction(store.init)) {
