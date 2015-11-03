@@ -40,6 +40,8 @@ var Root = React.createClass({
         pageNavigationStore.addChangeListener(this.onStoreChange);
         dialogStore.addChangeListener(this.onStoreChange);
 
+        actionsCreator.createAction(actionsConstants.GET_GAMES, {});
+
         if (this.state.authData.uid) {
             actionsCreator.createAction(actionsConstants.LOAD_USERS_DATA, {});
         }

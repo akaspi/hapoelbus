@@ -14,6 +14,9 @@ var gamesData = {
 
 dispatcher.register(function(action) {
     switch(action.actionType) {
+        case actionsConstants.GET_GAMES:
+            getGames();
+            break;
         case actionsConstants.CREATE_GAME:
             createGame(action.payload.gameData);
             break;
@@ -29,12 +32,12 @@ dispatcher.register(function(action) {
     }
 });
 
-function init() {
+function getGames() {
     gamesData.isPending = true;
     emitChange();
 
-    gamesAPI.getGames(function(allGames) {
-        gamesData.games = _.clone(allGames);
+    return gamesAPI.getGames().then(function(allGames) {
+        gamesData.games = _.cloneDeep(allGames);
         gamesData.isPending = false;
         emitChange();
     }, function() {});
@@ -99,7 +102,6 @@ function removeChangeListener(listenerToRemove) {
 }
 
 module.exports = {
-    init: init,
     getGamesData: getGamesData,
     addChangeListener: addChangeListener,
     removeChangeListener: removeChangeListener

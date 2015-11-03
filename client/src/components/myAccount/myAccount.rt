@@ -1,6 +1,6 @@
 <rt-require dependency="../../constants/pagesConstants" as="pagesConstants"/>
 <rt-require dependency="../pages/homePage/homePage" as="homePage"/>
-<rt-require dependency="../pages/gamesPage/gamesPage" as="gamesPage"/>
+<rt-require dependency="../pages/gamesPage" as="gamesPage"/>
 <rt-require dependency="../pages/usersPage" as="usersPage"/>
 
 <div class="my-account">
