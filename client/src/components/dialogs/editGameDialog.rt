@@ -1,0 +1,71 @@
+<rt-require dependency="./dialogFrame" as="dialogFrame"/>
+<rt-require dependency="../../utils/dateUtils" as="dateUtils"/>
+<rt-require dependency="material-ui" as="mui"/>
+
+
+<dialogFrame onSubmit="{this.updateGame}" title="עריכת הסעה">
+    <div class="edit-game-dialog">
+        <section>
+            <div class="field-row">
+                <mui.SelectField
+                        menuItems="{this.getVSIDMenuItems()}"
+                        valueLink={this.linkState('vsid')}
+                        iconStyle="{{left: 0, right: 'initial'}}"
+                        floatingLabelText="קבוצה"/>
+            </div>
+            <div class="field-row">
+                <mui.DatePicker
+                        value="{new Date(this.state.date)}"
+                        onChange="{this.onDateChange}"
+                        formatDate="{dateUtils.convertDate}"
+                        floatingLabelText="תאריך"/>
+            </div>
+            <div class="field-row">
+                <mui.TimePicker
+                        format="24hr"
+                        value="{dateUtils.convertTime(new Date(this.state.departure))}"
+                        onChange="{this.onTimeChange}"
+                        floatingLabelText="שעת יציאה"/>
+            </div>
+            <div class="field-row">
+                <mui.SelectField
+                        menuItems="{this.getStatusMenuItems()}"
+                        valueLink={this.linkState('status')}
+                        iconStyle="{{left: 0, right: 'initial'}}"
+                        floatingLabelText="סטאטוס הרשמה"/>
+            </div>
+        </section>
+
+
+        <!--<section>-->
+            <!--<h2>פרטי המנוי</h2>-->
+
+            <!--<div class="field-row">-->
+                <!--<mui.TextField type="number"-->
+                               <!--valueLink="{this.linkState('seasonTicket.maxSeats')}"-->
+                               <!--floatingLabelText="כמות מנויים"/>-->
+            <!--</div>-->
+            <!--<div class="field-row">-->
+                <!--<mui.TextField type="number"-->
+                               <!--valueLink="{this.linkState('seasonTicket.ticketId')}"-->
+                               <!--floatingLabelText="מס׳ מנוי"/>-->
+            <!--</div>-->
+        <!--</section>-->
+
+
+        <!--<section>-->
+            <!--<h2>רשימת תפוצה</h2>-->
+            <!--<div class="field-row">-->
+                <!--<mui.Toggle-->
+                        <!--toggled="{this.state.distribution.sms}" onToggle="{this.onSmsListChange}"-->
+                        <!--label="SMS"/>-->
+            <!--</div>-->
+            <!--<div class="field-row">-->
+                <!--<mui.Toggle-->
+                        <!--toggled="{this.state.distribution.mail}" onToggle="{this.onEmailListChange}"-->
+                        <!--label="אימייל"/>-->
+            <!--</div>-->
+        <!--</section>-->
+
+    </div>
+</dialogFrame>

@@ -3,11 +3,13 @@
 var React = require('react');
 var template = require('./gamesPage.rt');
 var vsidMap = require('json!../../utils/vsidMap.json');
+var gameStatusMap = require('json!../../utils/gameStatusMap.json');
 var dateUtils = require('../../utils/dateUtils');
 
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
+var editGameDialog = require('../dialogs/editGameDialog');
 
 function getRibbonData(game) {
     switch (game.status) {
@@ -20,7 +22,6 @@ function getRibbonData(game) {
 
 var GamesPage = React.createClass({
     getFilteredUIDs: function () {
-        console.log(vsidMap);
         var gameIds = _.keys(this.props.games);
         return gameIds;
     },
@@ -37,7 +38,13 @@ var GamesPage = React.createClass({
     },
     onCreateGame: function () {
     },
-    onEditGame: function () {
+    onEditGame: function (index) {
+        var gameIds = this.getFilteredUIDs();
+        var gameId = gameIds[index];
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+            dialogClass: editGameDialog,
+            data: { gameId: gameId, gameData: this.props.games[gameId] }
+        });
     },
     onRemoveGame: function (index) {
         var gameIds = this.getFilteredUIDs();

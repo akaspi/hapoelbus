@@ -57,11 +57,9 @@ function updateGame(gameId, gameData) {
     gamesData.isPending = true;
     emitChange();
 
-    gamesAPI.updateGame(gameId, gameData, function() {
-        gamesData.isPending = false;
-        _.merge(gamesData.games[gameId], gameData);
-        emitChange();
-    }, function() {});
+    return gamesAPI.updateGame(gameId, gameData).then(function() {
+        return getGames();
+    });
 }
 function removeGame(gameId) {
     gamesData.isPending = true;
@@ -69,7 +67,7 @@ function removeGame(gameId) {
 
     return gamesAPI.removeGame(gameId).then(function() {
         return getGames();
-    }, function() {})
+    })
 }
 
 function logout() {
