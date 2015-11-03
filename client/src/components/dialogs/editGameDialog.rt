@@ -28,6 +28,11 @@
                         floatingLabelText="שעת יציאה"/>
             </div>
             <div class="field-row">
+                <mui.TextField type="number"
+                               valueLink="{this.linkState('capacity')}"
+                               floatingLabelText="מס׳ מקומות"/>
+            </div>
+            <div class="field-row">
                 <mui.SelectField
                         menuItems="{this.getStatusMenuItems()}"
                         valueLink={this.linkState('status')}
