@@ -14,6 +14,7 @@ var DialogFrame = React.createClass({
         this.refs.dialog.show();
     },
     hideDialog: function () {
+        this.refs.dialog.dismiss();
         setTimeout(function () {
             actionsCreator.createAction(actionsConstants.CLOSE_DIALOG, {});
         }, 500);
