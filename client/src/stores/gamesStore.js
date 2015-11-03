@@ -67,10 +67,8 @@ function removeGame(gameId) {
     gamesData.isPending = true;
     emitChange();
 
-    gamesAPI.removeGame(gameId, function() {
-        gamesData.isPending = false;
-        delete gamesData.games[gameId];
-        emitChange();
+    return gamesAPI.removeGame(gameId).then(function() {
+        return getGames();
     }, function() {})
 }
 

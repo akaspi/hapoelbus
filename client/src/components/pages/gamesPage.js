@@ -5,6 +5,10 @@ var template = require('./gamesPage.rt');
 var vsidMap = require('json!../../utils/vsidMap.json');
 var dateUtils = require('../../utils/dateUtils');
 
+var actionsCreator = require('../../actions/actionsCreator');
+var actionsConstants = require('../../actions/actionsConstants');
+
+
 function getRibbonData(game) {
     switch (game.status) {
         case 'OPEN_FOR_MEMBERS':
@@ -35,7 +39,9 @@ var GamesPage = React.createClass({
     },
     onEditGame: function () {
     },
-    onRemoveGame: function () {
+    onRemoveGame: function (index) {
+        var gameIds = this.getFilteredUIDs();
+        actionsCreator.createAction(actionsConstants.REMOVE_GAME, { gameId: gameIds[index] });
     },
     render: template
 });
