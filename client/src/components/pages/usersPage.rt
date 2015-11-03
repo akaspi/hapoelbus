@@ -12,35 +12,29 @@
             <mui.Checkbox
                     labelPosition="left"
                     label="מנויים"
-                    value="{false}"
                     name="dog1"
+                    checked="{this.state.filters.hasSeasonTicketsOnly}"
+                    onCheck="{(e, checked)=>this.onFilterChange('hasSeasonTicketsOnly', checked)}"
                     defaultChecked="{true}"/>
         </li>
         <li class="filter-item">
             <mui.Checkbox
                     labelPosition="left"
                     label="חד פעמיים"
-                    value="{false}"
                     name="sakl"
+                    checked="{this.state.filters.doNotHasSeasonTicketsOnly}"
+                    onCheck="{(e, checked)=>this.onFilterChange('doNotHasSeasonTicketsOnly', checked)}"
                     defaultChecked="{true}"/>
         </li>
         <li class="filter-item">
             <mui.Checkbox
                     labelPosition="left"
                     label="נדרש ליצור קשר"
-                    value="{false}"
                     name="fed"
+                    checked="{this.state.filters.requestedContact}"
+                    onCheck="{(e, checked)=>this.onFilterChange('requestedContact', checked)}"
                     defaultChecked="{true}"/>
         </li>
-        <li class="filter-item">
-            <mui.Checkbox
-                    labelPosition="left"
-                    label="עוד פילטר"
-                    value="{false}"
-                    name="1sakl"
-                    defaultChecked="{true}"/>
-        </li>
-
     </ul>
 
     <div class="cards-displayer-wrapper">

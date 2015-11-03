@@ -8,9 +8,51 @@ var actionsConstants = require('../../actions/actionsConstants');
 
 var editUserDataDialog = require('../dialogs/editUserDataDialog');
 
+function getUIDsWithSeasonTickets(UIDs, usersData) {
+    return _.filter(UIDs, function(uid) {
+        var userData = usersData[uid];
+        return userData.seasonTicket && userData.seasonTicket.maxSeats > 0;
+    });
+}
+
+function getUIDsWithoutSeasonTickets(UIDs, usersData) {
+    var uidsWithSeasonTickets = getUIDsWithSeasonTickets(UIDs, usersData);
+    return _.xor(UIDs, uidsWithSeasonTickets);
+}
+
+function getUIDsThatRequestForContact(UIDs, usersData) {
+    return _.filter(UIDs, function(uid) {
+        var userData = usersData[uid];
+        return !!userData.contactRequest;
+    });
+}
+
 var UsersPage = React.createClass({
-    getCardDisplayerData: function () {
+    getInitialState: function() {
+      return {
+          filters: {
+              hasSeasonTicketsOnly: true,
+              doNotHasSeasonTicketsOnly: true,
+              requestedContact: true
+          }
+      }
+    },
+    onFilterChange: function(filterName, val) {
+        var filters = this.state.filters;
+        filters[filterName] = val;
+        this.setState({filters: filters});
+    },
+    getFilteredUIDs: function() {
         var UIDs = _.keys(this.props.usersData);
+
+        var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? getUIDsWithSeasonTickets(UIDs, this.props.usersData) : [];
+        var uidsWithoutSeasonTickets = this.state.filters.doNotHasSeasonTicketsOnly ? getUIDsWithoutSeasonTickets(UIDs, this.props.usersData) : [];
+        var uidsThatRequestForContact = this.state.filters.requestedContact ? getUIDsThatRequestForContact(UIDs, this.props.usersData) : [];
+
+        return _.union(uidsWithSeasonTickets, uidsWithoutSeasonTickets, uidsThatRequestForContact);
+    },
+    getCardDisplayerData: function () {
+        var UIDs = this.getFilteredUIDs();
         return _.map(UIDs, function (uid) {
             var userData = this.props.usersData[uid];
             return {
@@ -23,7 +65,7 @@ var UsersPage = React.createClass({
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {dialogClass: editUserDataDialog, data: {}});
     },
     onEditUserData: function (index) {
-        var UIDs = _.keys(this.props.usersData);
+        var UIDs = this.getFilteredUIDs();
         var uidToEdit = UIDs[index];
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialogClass: editUserDataDialog,
