@@ -9,17 +9,17 @@
 
             <div class="field-row">
                 <mui.TextField
-                        valueLink="{this.linkState('displayName')}"
+                        valueLink="{this.linkState('info.displayName')}"
                         floatingLabelText="שם מלא"/>
             </div>
             <div class="field-row">
                 <mui.TextField
-                        valueLink="{this.linkState('phone')}"
+                        valueLink="{this.linkState('info.phone')}"
                         floatingLabelText="טלפון"/>
             </div>
             <div class="field-row">
                 <mui.TextField
-                        valueLink="{this.linkState('email')}"
+                        valueLink="{this.linkState('info.email')}"
                         floatingLabelText="דואר אלקטרוני"/>
             </div>
         </section>
@@ -30,12 +30,12 @@
 
             <div class="field-row">
                 <mui.TextField type="number"
-                               valueLink="{this.linkState('maxSeats')}"
+                               valueLink="{this.linkState('seasonTicket.maxSeats')}"
                                floatingLabelText="כמות מנויים"/>
             </div>
             <div class="field-row">
                 <mui.TextField type="number"
-                               valueLink="{this.linkState('ticketId')}"
+                               valueLink="{this.linkState('seasonTicket.ticketId')}"
                                floatingLabelText="מס׳ מנוי"/>
             </div>
         </section>
@@ -45,12 +45,12 @@
             <h2>רשימת תפוצה</h2>
             <div class="field-row">
                 <mui.Toggle
-                        toggled="{this.state.smsList}" onToggle="{this.onSmsListChange}"
+                        toggled="{this.state.distribution.sms}" onToggle="{this.onSmsListChange}"
                         label="SMS"/>
             </div>
             <div class="field-row">
                 <mui.Toggle
-                        toggled="{this.state.emailList}" onToggle="{this.onEmailListChange}"
+                        toggled="{this.state.distribution.mail}" onToggle="{this.onEmailListChange}"
                         label="אימייל"/>
             </div>
         </section>

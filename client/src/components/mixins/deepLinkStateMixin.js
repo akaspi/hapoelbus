@@ -29,8 +29,10 @@ module.exports = {
         return {
             value: getPath(this.state, path),
             requestChange: function(newValue) {
-                var val = type === 'number' ? parseInt(newValue) : newValue;
-                setPath(this.state, path, val);
+                if (_.isString(newValue) && !_.isNaN(newValue)) {
+                    newValue = parseInt(newValue);
+                }
+                setPath(this.state, path, newValue);
                 this.forceUpdate();
             }.bind(this)
         }

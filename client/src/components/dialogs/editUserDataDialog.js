@@ -3,36 +3,36 @@
 var React = require('react');
 var template = require('./editUserDataDialog.rt');
 var muiMixin = require('../mixins/mui-mixin');
+var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
-
-var TestDialog =  React.createClass({
-    mixins: [ muiMixin, React.addons.LinkedStateMixin],
-    getInitialState: function() {
-      console.log(this.props);
-        return {
-            displayName: this.props.data.userData.info.displayName,
-            phone: this.props.data.userData.info.phone,
-            email: this.props.data.userData.info.email,
-            maxSeats: this.props.data.userData.seasonTicket.maxSeats,
-            ticketId: this.props.data.userData.seasonTicket.ticketId,
-            smsList: !!this.props.data.userData.distribution.sms,
-            emailList: !!this.props.data.userData.distribution.email,
-            errorMsg: ''
-        };
+var TestDialog = React.createClass({
+    mixins: [muiMixin, deepLinkStateMixin],
+    getInitialState: function () {
+        return _.clone(this.props.data.userData);
     },
-    onSmsListChange: function (e, value){
-      this.setState({smsList: value});
+    onSmsListChange: function (e, value) {
+        var newState = _.merge({}, this.state, {
+            distribution: {
+                sms: value
+            }
+        });
+        this.setState(newState);
     },
 
-    onEmailListChange: function (e, value){
-        this.setState({emailList: value});
+    onEmailListChange: function (e, value) {
+        var newState = _.merge({}, this.state, {
+            distribution: {
+                mail: value
+            }
+        });
+        this.setState(newState);
     },
 
-    updateUserData: function (){
-        console.log('save')
+    updateUserData: function () {
+        console.log(this.state);
     },
 
     render: template
