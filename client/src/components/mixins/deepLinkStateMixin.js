@@ -29,7 +29,7 @@ module.exports = {
         return {
             value: getPath(this.state, path),
             requestChange: function(newValue) {
-                if (_.isString(newValue) && !_.isNaN(newValue)) {
+                if (_.isString(newValue) && !isNaN(newValue)) {
                     newValue = parseInt(newValue);
                 }
                 setPath(this.state, path, newValue);
