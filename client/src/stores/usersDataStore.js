@@ -28,7 +28,7 @@ function loadUsersData() {
     usersData.isPending = true;
     emitChange();
 
-    usersDataAPI.getUsersData().then(function (result) {
+    return usersDataAPI.getUsersData().then(function (result) {
         usersData.data = _.clone(result);
         usersData.isPending = false;
         emitChange();
@@ -39,8 +39,8 @@ function updateUserData(uid, userData) {
     usersData.isPending = true;
     emitChange();
 
-    usersDataAPI.updateUserData(uid, userData).then(function() {
-        loadUsersData();
+    return usersDataAPI.updateUserData(uid, userData).then(function() {
+        return loadUsersData();
     });
 }
 
