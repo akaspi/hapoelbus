@@ -32,7 +32,10 @@ var TestDialog = React.createClass({
     },
 
     updateUserData: function () {
-        console.log(this.state);
+        actionsCreator.createAction(actionsConstants.UPDATE_USER_DATA, {
+            uid: this.props.uid,
+            userData: this.state
+        });
     },
 
     render: template
