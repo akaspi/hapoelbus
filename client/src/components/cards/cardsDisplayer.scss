@@ -3,24 +3,39 @@
   flex-wrap: wrap;
   align-items: center;
 
-  .create-box {
-    width: 200px;
-    height: 200px;
-    border: 1px dashed #2c3e50;
-    box-sizing: border-box;
-    margin: 0 20px;
-    font-size: 22px;
-    color: #e74c3c;
-    transition: font-size .1s ease-in-out;
+  @media screen and (max-width: 680px) {
+    flex-direction: column;
+  }
 
+    .create-box {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 0 20px;
 
-    &:hover {
-      font-size: 30px;
-      background-color: aliceblue;
-      cursor: pointer;
+    .plus-btn {
+      width: 65px;
+      height: 65px;
+      box-sizing: border-box;
+      font-size: 22px;
+      transition: width .1s ease-in-out, height .1s ease-in-out, background-color .1s ease-in-out;
+      display: flex;
+      background-color: #c0392b;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      color: #fff;
+
+      &:hover {
+        width: 68px;
+        height: 68px;
+        background-color: #e74c3c;
+        cursor: pointer;
+      }
     }
   }
 }
+
+

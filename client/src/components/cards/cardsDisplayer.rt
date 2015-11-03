@@ -1,8 +1,10 @@
 <rt-require dependency="./card" as="card"/>
 
 <div class="cards-displayer">
-    <div rt-if="this.props.onCreate" onClick="{this.props.onCreate}" class="create-box">
-        <i class="fa fa-plus"/>
+    <div class="create-box">
+        <div rt-if="this.props.onCreate" onClick="{this.props.onCreate}" class="plus-btn">
+            <i class="fa fa-plus"/>
+        </div>
     </div>
     <card rt-repeat="dataRow in this.props.data" key="{'card-' + dataRowIndex}"
           title="{dataRow.title}"
