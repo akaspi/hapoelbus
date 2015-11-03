@@ -1,7 +1,7 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <mui.Dialog ref="dialog" onDismiss="{this.hideDialog}" title="{this.props.title}" contentStyle="{{width:'360'}}"
-            modal="{false}" contentClassName="dialog-frame">
+            modal="{false}" contentClassName="dialog-frame" autoScrollBodyContent="{true}">
     {this.props.children}
     <div class="dialog-actions">
         <mui.RaisedButton label="שמור" primary="{true}" onClick="{this.onSubmit}"/>
