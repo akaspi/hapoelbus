@@ -36,6 +36,11 @@ var Card = React.createClass({
             this.props.onEdit(this.props.id);
         }
     },
+    onCardRemove: function() {
+        if (_.isFunction(this.props.onRemove)) {
+            this.props.onRemove(this.props.id);
+        }
+    },
     render: template
 });
 

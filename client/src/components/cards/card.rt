@@ -10,7 +10,7 @@
             <span>ערוך</span>
             <!--<i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>-->
         </li>
-        <li rt-if="this.props.onRemove" onClick="{this.props.onEdit}" class="card-actions-item">
+        <li rt-if="this.props.onRemove" onClick="{this.onCardRemove}" class="card-actions-item">
             <span>מחק</span>
             <!--<i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>-->
         </li>
