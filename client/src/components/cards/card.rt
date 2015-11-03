@@ -20,6 +20,6 @@
         </li>
     </ul>
     <div rt-if="this.props.ribbon" class="card-ribbon-wrapper">
-        <div class="card-ribbon">{this.props.ribbon.label}</div>
+        <div rt-class="this.getRibbonClasses()">{this.props.ribbon.label}</div>
     </div>
 </div>

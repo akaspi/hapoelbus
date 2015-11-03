@@ -1,4 +1,15 @@
 .card {
+
+  @mixin ribbon-color($textColor, $darkColor, $lightColor) {
+    background-color: $darkColor;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($darkColor), to($lightColor));
+    background-image: linear-gradient(top, $darkColor, $lightColor);
+    background-image:    -moz-linear-gradient(top, $darkColor, $lightColor);
+    background-image:     -ms-linear-gradient(top, $darkColor, $lightColor);
+    background-image:      -o-linear-gradient(top, $darkColor, $lightColor);
+    color: $textColor;
+  }
+
   $card-image-size: 100px;
 
   width: 235px;
@@ -86,9 +97,9 @@
     left: -3px;
 
     .card-ribbon {
-      font: bold 15px Sans-Serif;
+      font-size: 10px;
+      font-weight: bold;
       text-align: center;
-      text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
       -webkit-transform: rotate(-45deg);
       -moz-transform:    rotate(45deg);
       -ms-transform:     rotate(45deg);
@@ -99,16 +110,19 @@
       top: 15px;
       width: 120px;
       float: right;
-      background-color: #BFDC7A;
-      background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
-      background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
-      background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45);
-      background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45);
-      background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45);
-      color: #6a6340;
-      -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-      -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
-      box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+      box-shadow: 0 0 3px rgba(0,0,0,0.3);
+
+      &.ribbon-green {
+        @include ribbon-color(#6a6340, #BFDC7A, #8EBF45);
+      }
+
+      &.ribbon-red {
+        @include ribbon-color(#fff, #e95748, #c83d2f);
+      }
+
+      &.ribbon-blue {
+        @include ribbon-color(#fff, #2980B9, #5C96BB);
+      }
     }
 
     &:before, &:after {
