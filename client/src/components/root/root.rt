@@ -1,18 +1,14 @@
-<rt-require dependency="../pages/landingPage/landingPage" as="landingPage"/>
+<rt-require dependency="../pages/landingPage" as="landingPage"/>
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
 <rt-require dependency="../loading/loading" as="loading"/>
 
 <div class="root"
      rt-scope="this.state.authData.uid as isLoggedIn; !_.isEmpty(this.state.usersData.data) as hasUsersData; this.state.usersData.isPending as waitingForUserData">
 
-    <div class="site-header"/>
-    <div class="site-content">
-        <loading rt-if="isLoggedIn && !hasUsersData && waitingForUserData"/>
-        <landingPage rt-if="!isLoggedIn"/>
-        <myAccount rt-if="isLoggedIn && hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}" games="{this.state.gamesData.games}" booking="{this.state.bookingData.booking}"/>
-    </div>
-    <div class="site-footer">
-        <button onClick="{this.openDialog}">Click Me</button>
+    <landingPage rt-if="!isLoggedIn"/>
+    <div rt-if="isLoggedIn" class="site-content">
+        <loading rt-if="!hasUsersData && waitingForUserData"/>
+        <myAccount rt-if="hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}" games="{this.state.gamesData.games}" booking="{this.state.bookingData.booking}"/>
     </div>
     <div class="dialog-layer" rt-if="this.state.dialogToDisplay">
         <div rt-scope="this.state.dialogToDisplay.dialogClass as dialog1">
