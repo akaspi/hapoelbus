@@ -1,8 +1,8 @@
 <rt-require dependency="./card" as="card"/>
 
 <div class="cards-displayer">
-    <div class="create-box">
-        <div rt-if="this.props.onCreate" onClick="{this.props.onCreate}" class="plus-btn">
+    <div rt-if="this.props.onCreate" class="create-box">
+        <div onClick="{this.props.onCreate}" class="plus-btn">
             <i class="fa fa-plus"/>
         </div>
     </div>
