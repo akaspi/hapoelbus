@@ -1,5 +1,6 @@
 <rt-require dependency="../../constants/pagesConstants" as="pagesConstants"/>
 <rt-require dependency="../pages/homePage/homePage" as="homePage"/>
+<rt-require dependency="../pages/bookingPage" as="bookingPage"/>
 <rt-require dependency="../pages/gamesPage" as="gamesPage"/>
 <rt-require dependency="../pages/usersPage" as="usersPage"/>
 
@@ -7,6 +8,7 @@
     <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE"/>
     <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" games="{this.props.games}"/>
     <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
+    <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" games="{this.props.games}" usersData="{this.props.usersData}" booking="{this.props.booking}"/>
     <!--<userDashboard-->
             <!--rt-if="this.shouldShowUserDashboard()"-->
             <!--key="key-user-dashboard"-->

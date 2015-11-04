@@ -1,0 +1,16 @@
+<rt-require dependency="./dialogFrame" as="dialogFrame"/>
+<rt-require dependency="../../utils/dateUtils" as="dateUtils"/>
+<rt-require dependency="material-ui" as="mui"/>
+
+
+<dialogFrame onSubmit="{this.updateBooking}" title="עריכת הרשמה">
+    <div class="edit-booking-dialog">
+        <section>
+            <div class="field-row">
+                <mui.TextField type="number"
+                               valueLink="{this.linkState('numOfSeats')}"
+                               floatingLabelText="מס׳ מקומות"/>
+            </div>
+        </section>
+    </div>
+</dialogFrame>

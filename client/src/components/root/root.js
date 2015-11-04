@@ -41,6 +41,7 @@ var Root = React.createClass({
         dialogStore.addChangeListener(this.onStoreChange);
 
         actionsCreator.createAction(actionsConstants.GET_GAMES, {});
+        actionsCreator.createAction(actionsConstants.LOAD_BOOKING, {});
 
         if (this.state.authData.uid) {
             actionsCreator.createAction(actionsConstants.LOAD_USERS_DATA, {});

@@ -12,8 +12,8 @@ var bookingData = {
     errorMsg: null
 };
 
-dispatcher.register(function(action) {
-    switch(action.actionType) {
+dispatcher.register(function (action) {
+    switch (action.actionType) {
         case actionsConstants.LOAD_BOOKING:
             loadBooking();
             break;
@@ -30,31 +30,28 @@ function loadBooking() {
     bookingData.isPending = true;
     emitChange();
 
-    bookingAPI.getBooking()
-        .then(function(booking) {
-            bookingData.booking = _.clone(booking);
-            bookingData.isPending = false;
-            emitChange();
-        });
+    return bookingAPI.getBooking().then(function (booking) {
+        bookingData.booking = _.clone(booking);
+        bookingData.isPending = false;
+        emitChange();
+    });
 }
 
 function updateBooking(uid, gameId, data) {
     bookingData.isPending = true;
     emitChange();
 
-    bookingAPI.updateBooking(uid, gameId, data)
-        .then(function() {
-            loadBooking();
-        });
+    return bookingAPI.updateBooking(uid, gameId, data).then(function () {
+        return loadBooking();
+    });
 }
 function cancelBooking(uid, gameId) {
     bookingData.isPending = true;
     emitChange();
 
-    bookingAPI.cancelBooking(uid, gameId)
-        .then(function() {
-            loadBooking();
-        });
+    bookingAPI.cancelBooking(uid, gameId).then(function () {
+        return loadBooking();
+    });
 }
 
 function getBookingData() {
