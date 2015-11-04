@@ -1,8 +1,0 @@
-<rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="lodash" as="_"/>
-
-<mui.Dialog
-        openImmediately="{true}"
-        contentStyle="{{'width':'360'}}"
-        modal="{false}">
-</mui.Dialog>

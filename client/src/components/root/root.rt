@@ -1,6 +1,6 @@
 <rt-require dependency="../pages/landingPage/landingPage" as="landingPage"/>
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
-<rt-require dependency="../base/loading/loading" as="loading"/>
+<rt-require dependency="../loading/loading" as="loading"/>
 
 <div class="root"
      rt-scope="this.state.authData.uid as isLoggedIn; !_.isEmpty(this.state.usersData.data) as hasUsersData; this.state.usersData.isPending as waitingForUserData">
@@ -19,34 +19,4 @@
             <dialog1 data="{this.state.dialogToDisplay.data}"/>
         </div>
     </div>
-    <!--<div rt-if="isPending">-->
-        <!--<h1>LOADING</h1>-->
-    <!--</div>-->
-    <!--<div rt-if="!isPending">-->
-        <!--<cardsDisplayer cardClass="{userDataCard}" data="{this.state.user.usersData}"/>-->
-
-        <!--&lt;!&ndash;<userDataCard rt-repeat="userData in this.state.usersData" key="{'userDataCard-' + userDataIndex}" userData="{userData}"/>&ndash;&gt;-->
-
-        <!--<div>-->
-            <!--UID: {this.state.user.uid}-->
-        <!--</div>-->
-        <!--<input type="text" placeholder="email" valueLink="{this.linkState('email')}"/>-->
-        <!--<input type="text" placeholder="password" valueLink="{this.linkState('password')}"/>-->
-        <!--<button onClick="{this.login}">LOGIN</button>-->
-        <!--<button onClick="{this.logout}">LOGOUT</button>-->
-
-        <!--&lt;!&ndash;<p>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div>USERS DATA LENGTH: {_.size(this.state.usersData)}</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div>{JSON.stringify(this.state.usersData)}</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</p>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<p>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div>GAMES LENGTH: {_.size(this.state.games)}</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div>{JSON.stringify(this.state.games)}</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="number" placeholder="capacity" valueLink="{this.linkState('capacity')}"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button onClick="{this.updateTest}">update</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;</p>&ndash;&gt;-->
-
-    <!--</div>-->
-
 </div>

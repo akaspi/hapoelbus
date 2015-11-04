@@ -1,12 +1,11 @@
 @import "components/root/root";
 @import "components/cards/card";
-@import "components/cards/userDataCard";
 @import "components/cards/cardsDisplayer";
 @import "components/pages/usersPage";
 @import "components/pages/gamesPage";
 @import "components/pages/bookingPage";
 
-@import "components/base/loading/loading";
+@import "components/loading/loading";
 
 @import "components/pages/landingPage/landingPage";
 
@@ -16,17 +15,10 @@
 @import "components/dialogs/dialogFrame";
 
 
-@import "components/siteHeader/siteHeader";
 
 
 @import "components/myAccount/myAccount";
-@import "components/userData/userData";
 @import "components/loading/loading";
-@import "components/adminDashboard/adminDashboard";
-@import "components/editTableRowDialog/editTableRowDialog";
-@import "components/dataExplorer/customTable/customTable";
-@import "components/dataExplorer/emailsSection/emailsSection";
-@import "components/navigation/navigation";
 //@import "components/gameCard/gameCard";
 
 
@@ -36,8 +28,6 @@
 
 @import "components/authBox/authBox";
 
-@import "components/userDashboard/userDashboard";
-@import "components/adminDashboard/adminDashboard";
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import url(http://fonts.googleapis.com/css?family=Arimo:400,700&subset=hebrew,latin);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
