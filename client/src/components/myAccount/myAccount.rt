@@ -9,16 +9,4 @@
     <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" games="{this.props.games}"/>
     <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
     <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" games="{this.props.games}" usersData="{this.props.usersData}" booking="{this.props.booking}"/>
-    <!--<userDashboard-->
-            <!--rt-if="this.shouldShowUserDashboard()"-->
-            <!--key="key-user-dashboard"-->
-            <!--tab="{this.state.tabToDisplay}"-->
-            <!--uid="{this.props.uid}"-->
-            <!--usersData="{this.props.usersData}"/>-->
-
-    <!--<adminDashboard-->
-            <!--rt-if="this.shouldShowAdminDashboard()"-->
-            <!--key="key-admin-dashboard"-->
-            <!--tab="{this.state.tabToDisplay}"-->
-            <!--usersData="{this.props.usersData}"/>-->
 </div>
