@@ -43,21 +43,22 @@ var UsersPage = React.createClass({
         this.setState({filters: filters});
     },
     getFilteredUIDs: function() {
-        var UIDs = _.keys(this.props.usersData);
+        var users = this.props.usersData.users;
+        var UIDs = _.keys(users);
 
-        var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? getUIDsWithSeasonTickets(UIDs, this.props.usersData) : [];
-        var uidsWithoutSeasonTickets = this.state.filters.doNotHasSeasonTicketsOnly ? getUIDsWithoutSeasonTickets(UIDs, this.props.usersData) : [];
-        var uidsThatRequestForContact = this.state.filters.requestedContact ? getUIDsThatRequestForContact(UIDs, this.props.usersData) : [];
+        var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? getUIDsWithSeasonTickets(UIDs, users) : [];
+        var uidsWithoutSeasonTickets = this.state.filters.doNotHasSeasonTicketsOnly ? getUIDsWithoutSeasonTickets(UIDs, users) : [];
+        var uidsThatRequestForContact = this.state.filters.requestedContact ? getUIDsThatRequestForContact(UIDs, users) : [];
 
         return _.union(uidsWithSeasonTickets, uidsWithoutSeasonTickets, uidsThatRequestForContact);
     },
     getCardDisplayerData: function () {
         var UIDs = this.getFilteredUIDs();
         return _.map(UIDs, function (uid) {
-            var userData = this.props.usersData[uid];
+            var user = this.props.usersData.users[uid];
             return {
-                title: userData.info.displayName,
-                subtitles: [userData.info.email, userData.info.phone]
+                title: user.info.displayName,
+                subtitles: [user.info.email, user.info.phone]
             }
         }, this);
     },
@@ -66,10 +67,11 @@ var UsersPage = React.createClass({
     },
     onEditUserData: function (index) {
         var UIDs = this.getFilteredUIDs();
-        var uidToEdit = UIDs[index];
+        var uid = UIDs[index];
+        var user = this.props.usersData.users[uid];
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialogClass: editUserDataDialog,
-            data: {uid: uidToEdit, userData: this.props.usersData[uidToEdit]}
+            data: {uid: uid, user: user}
         });
     },
     onRemoveUserData: function () {

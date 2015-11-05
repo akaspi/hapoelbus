@@ -6,9 +6,9 @@
     </div>
     <span class="title">מחוץ לחומות</span>
     <span class="subtitle">שירות ההסעות תל אביב - ארנה</span>
-    <div class="click-to-login">
+    <a class="click-to-login" onClick="{this.login}">
         <span>התחבר</span>
-    </div>
+    </a>
     <div class="divider-wrapper">
         <div class="divider-line"/>
     </div>

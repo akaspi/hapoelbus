@@ -25,16 +25,16 @@ var BookingPage = React.createClass({
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
-            gameIdFilter: _.keys(this.props.games)[0]
+            gameIdFilter: _.keys(this.props.gamesData)[0]
         };
     },
     getGamesFilterMenuItems: function () {
-        return _.map(this.props.games, function (gameData, gameId) {
+        return _.map(this.props.gamesData, function (gameData, gameId) {
             return {payload: gameId, text: vsidMap[gameData.vsid]};
         });
     },
     getCardDisplayerData: function () {
-        var bookingForGame = getBookingForAGame(this.props.booking, this.state.gameIdFilter);
+        var bookingForGame = getBookingForAGame(this.props.bookingsData, this.state.gameIdFilter);
         return _.map(bookingForGame, function (data) {
             return {
                 title: this.props.usersData[data.uid].info.displayName,
@@ -46,7 +46,7 @@ var BookingPage = React.createClass({
         }, this);
     },
     onEditBooking: function (index) {
-        var bookingForGame = getBookingForAGame(this.props.booking, this.state.gameIdFilter);
+        var bookingForGame = getBookingForAGame(this.props.bookingsData, this.state.gameIdFilter);
         var bookingToEdit = bookingForGame[index];
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialogClass: editBookingDialog,
@@ -54,7 +54,7 @@ var BookingPage = React.createClass({
         });
     },
     onCancelBooking: function (index) {
-        var bookingForGame = getBookingForAGame(this.props.booking, this.state.gameIdFilter);
+        var bookingForGame = getBookingForAGame(this.props.bookingsData, this.state.gameIdFilter);
         var bookingToCancel = bookingForGame[index];
         actionsCreator.createAction(actionsConstants.CANCEL_BOOKING, {
             uid: bookingToCancel.uid,

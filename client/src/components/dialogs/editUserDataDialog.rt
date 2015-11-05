@@ -2,7 +2,7 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 
-<dialogFrame onSubmit="{this.updateUserData}" showCancelButton="{this.props.data.showCancelButton}" isModal="{this.props.data.isModal}" title="{this.getDialogTitle()}">
+<dialogFrame onSubmit="{this.updateUser}" showCancelButton="{this.props.data.showCancelButton}" isModal="{this.props.data.isModal}" title="{this.getDialogTitle()}">
     <div class="edit-user-data-dialog">
         <section>
             <h2>פרטים אישיים</h2>

@@ -5,7 +5,7 @@ var authAPI = require('./authAPI');
 
 var BOOKING_ROOT_PATH = 'booking';
 
-function getBookingForSingleUser(uid) {
+function getBookingsForUser(uid) {
     return db.read(BOOKING_ROOT_PATH + '/' + uid)
         .then(function (booking) {
             var bookingForUser = {};
@@ -16,14 +16,14 @@ function getBookingForSingleUser(uid) {
         });
 }
 
-function getBookingForAllUsers() {
+function getAllBookings() {
     return db.read(BOOKING_ROOT_PATH);
 }
 
-function getBooking() {
+function getBookings() {
     var uid = authAPI.getUID();
     return authAPI.isAdmin(uid).then(function (isAdmin) {
-        return isAdmin ? getBookingForAllUsers() : getBookingForSingleUser(uid);
+        return isAdmin ? getAllBookings() : getBookingsForUser(uid);
     });
 }
 
@@ -36,7 +36,7 @@ function cancelBooking(uid, gameId) {
 }
 
 module.exports = {
-    getBooking: getBooking,
+    getBookings: getBookings,
     updateBooking: updateBooking,
     cancelBooking: cancelBooking
 };

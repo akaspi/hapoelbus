@@ -5,9 +5,9 @@ var template = require('./root.rt');
 var _ = require('lodash');
 
 var authStore = require('../../stores/authStore');
-var usersDataStore = require('../../stores/usersDataStore');
+var usersDataStore = require('../../stores/usersStore');
 var gamesStore = require('../../stores/gamesStore');
-var bookingStore = require('../../stores/bookingStore');
+var bookingStore = require('../../stores/bookingsStore');
 var pageNavigationStore = require('../../stores/pageNavigationStore');
 var dialogStore = require('../../stores/dialogStore');
 
@@ -19,7 +19,7 @@ function getStateFromStores() {
         authData: authStore.getAuthData(),
         usersData: usersDataStore.getUsersData(),
         gamesData: gamesStore.getGamesData(),
-        bookingData: bookingStore.getGamesData(),
+        bookingsData: bookingStore.getBookingData(),
         currentPage: pageNavigationStore.getCurrentPage(),
         dialogToDisplay: dialogStore.getDialogToDisplay()
     };
@@ -29,7 +29,11 @@ var Root = React.createClass({
     mixins: [React.addons.LinkedStateMixin],
 
     getInitialState: function () {
-        return _.merge({email: '', password: '', capacity: 0}, getStateFromStores());
+        return getStateFromStores();
+    },
+
+    componentWillReceiveProps: function() {
+        console.log('dada');
     },
 
     componentDidMount: function () {
@@ -39,19 +43,6 @@ var Root = React.createClass({
         bookingStore.addChangeListener(this.onStoreChange);
         pageNavigationStore.addChangeListener(this.onStoreChange);
         dialogStore.addChangeListener(this.onStoreChange);
-
-        actionsCreator.createAction(actionsConstants.GET_GAMES, {});
-        actionsCreator.createAction(actionsConstants.LOAD_BOOKING, {});
-
-        if (this.state.authData.uid) {
-            actionsCreator.createAction(actionsConstants.LOAD_USERS_DATA, {});
-        }
-    },
-
-    componentDidUpdate: function(prevProps, prevState) {
-      if (!prevState.authData.uid && this.state.authData.uid) {
-          actionsCreator.createAction(actionsConstants.LOAD_USERS_DATA, {});
-      }
     },
 
     onStoreChange: function () {

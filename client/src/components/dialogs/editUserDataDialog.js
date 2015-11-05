@@ -8,10 +8,20 @@ var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
+var defaultUser = {
+    info: {},
+    seasonTicket: {},
+    contactRequest: true,
+    distribution: {
+        mail: true,
+        sms: true
+    }
+};
+
 var TestDialog = React.createClass({
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
-        return _.defaults(_.cloneDeep(this.props.data.userData), {info: {}, seasonTicket: {}, contactRequest: true, distribution: {mail: true, sms: true}});
+        return _.defaults(_.cloneDeep(this.props.data.user), defaultUser);
     },
     onSmsListChange: function (e, value) {
         var newState = _.merge({}, this.state, {
@@ -45,10 +55,10 @@ var TestDialog = React.createClass({
         return 'עריכת פרטי משתמע';
     },
 
-    updateUserData: function () {
-        actionsCreator.createAction(actionsConstants.UPDATE_USER_DATA, {
+    updateUser: function () {
+        actionsCreator.createAction(actionsConstants.UPDATE_USER, {
             uid: this.props.data.uid,
-            userData: this.state
+            user: this.state
         });
     },
 

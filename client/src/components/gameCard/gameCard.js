@@ -21,8 +21,8 @@ var GameCard = React.createClass({
         return {
             bookingMode: false,
             numOfSeats: this.props.payments ? (this.props.payments.maxSeats || 1) : 1,
-            stationIndex: this.props.booking ? _.findIndex(stations, {value: this.props.booking.station}) : 0,
-            comment: this.props.booking ? this.props.booking.comment : ''
+            stationIndex: this.props.bookingsData ? _.findIndex(stations, {value: this.props.bookingsData.station}) : 0,
+            comment: this.props.bookingsData ? this.props.bookingsData.comment : ''
         }
     },
     shouldEnableBooking: function () {

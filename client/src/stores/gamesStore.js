@@ -14,8 +14,8 @@ var gamesData = {
 
 dispatcher.register(function(action) {
     switch(action.actionType) {
-        case actionsConstants.GET_GAMES:
-            getGames();
+        case actionsConstants.LOAD_GAMES:
+            loadGames();
             break;
         case actionsConstants.CREATE_GAME:
             createGame(action.payload.gameData);
@@ -32,7 +32,7 @@ dispatcher.register(function(action) {
     }
 });
 
-function getGames() {
+function loadGames() {
     gamesData.isPending = true;
     emitChange();
 
@@ -47,10 +47,8 @@ function createGame(gameData) {
     gamesData.isPending = true;
     emitChange();
 
-    gamesAPI.createGame(gameData, function(gameId) {
-        gameData.games[gameId] = _.clone(gameData);
-        gamesData.isPending = false;
-        emitChange();
+    gamesAPI.createGame(gameData, function() {
+        return loadGames();
     }, function() {});
 }
 function updateGame(gameId, gameData) {
@@ -58,7 +56,7 @@ function updateGame(gameId, gameData) {
     emitChange();
 
     return gamesAPI.updateGame(gameId, gameData).then(function() {
-        return getGames();
+        return loadGames();
     });
 }
 function removeGame(gameId) {
@@ -66,12 +64,12 @@ function removeGame(gameId) {
     emitChange();
 
     return gamesAPI.removeGame(gameId).then(function() {
-        return getGames();
+        return loadGames();
     })
 }
 
 function logout() {
-    gamesData.games = {};
+    gamesData.gamesData = {};
     errorMsg = null;
 
     emitChange();

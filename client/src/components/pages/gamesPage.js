@@ -22,13 +22,13 @@ function getRibbonData(game) {
 
 var GamesPage = React.createClass({
     getFilteredUIDs: function () {
-        var gameIds = _.keys(this.props.games);
+        var gameIds = _.keys(this.props.gamesData);
         return gameIds;
     },
     getCardDisplayerData: function () {
         var gameIds = this.getFilteredUIDs();
         return _.map(gameIds, function (gameId) {
-            var game = this.props.games[gameId];
+            var game = this.props.gamesData[gameId];
             return {
                 title: vsidMap[game.vsid],
                 subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure)],
@@ -43,7 +43,7 @@ var GamesPage = React.createClass({
         var gameId = gameIds[index];
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialogClass: editGameDialog,
-            data: { gameId: gameId, gameData: this.props.games[gameId] }
+            data: { gameId: gameId, gameData: this.props.gamesData[gameId] }
         });
     },
     onRemoveGame: function (index) {

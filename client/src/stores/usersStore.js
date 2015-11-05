@@ -1,51 +1,54 @@
 'use strict';
 
 var dispatcher = require('../dispatcher/dispatcher');
-var usersDataAPI = require('../API/usersDataAPI');
+var usersAPI = require('../API/usersAPI');
 
 var actionsConstants = require('../actions/actionsConstants');
 
 var listeners = [];
 
 var usersData = {
-    data: {},
+    users: {},
     isPending: false,
     errorMsg: null
 };
 
 dispatcher.register(function (action) {
     switch (action.actionType) {
-        case actionsConstants.LOAD_USERS_DATA:
-            loadUsersData();
+        case actionsConstants.LOAD_USERS:
+            loadUsers();
             break;
-        case actionsConstants.UPDATE_USER_DATA:
-            updateUserData(action.payload.uid, action.payload.userData);
+        case actionsConstants.UPDATE_USER:
+            updateUser(action.payload.uid, action.payload.user);
+            break;
+        case actionsConstants.LOGOUT:
+            logout();
             break;
     }
 });
 
-function loadUsersData() {
+function loadUsers() {
     usersData.isPending = true;
     emitChange();
 
-    return usersDataAPI.getUsersData().then(function (result) {
-        usersData.data = _.clone(result);
+    return usersAPI.getUsersData().then(function (users) {
+        usersData.users = _.clone(users);
         usersData.isPending = false;
         emitChange();
     });
 }
 
-function updateUserData(uid, userData) {
+function updateUser(uid, user) {
     usersData.isPending = true;
     emitChange();
 
-    return usersDataAPI.updateUserData(uid, userData).then(function() {
-        return loadUsersData();
+    return usersAPI.updateUser(uid, user).then(function() {
+        return loadUsers();
     });
 }
 
 function logout() {
-    usersData.data = {};
+    usersData.users = {};
     usersData.isPending = false;
     usersData.errorMsg = null;
     emitChange();

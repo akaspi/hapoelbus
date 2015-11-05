@@ -1,21 +1,21 @@
 'use strict';
 
 var dispatcher = require('../dispatcher/dispatcher');
-var bookingAPI = require('../API/bookingAPI');
+var bookingAPI = require('../API/bookingsAPI');
 var actionsConstants = require('../actions/actionsConstants');
 
 var listeners = [];
 
-var bookingData = {
-    booking: {},
+var bookingsData = {
+    bookings: {},
     isPending: false,
     errorMsg: null
 };
 
 dispatcher.register(function (action) {
     switch (action.actionType) {
-        case actionsConstants.LOAD_BOOKING:
-            loadBooking();
+        case actionsConstants.LOAD_BOOKINGS:
+            loadBookings();
             break;
         case actionsConstants.UPDATE_BOOKING:
             updateBooking(action.payload.uid, action.payload.gameId, action.payload.bookingData);
@@ -26,36 +26,36 @@ dispatcher.register(function (action) {
     }
 });
 
-function loadBooking() {
-    bookingData.isPending = true;
+function loadBookings() {
+    bookingsData.isPending = true;
     emitChange();
 
-    return bookingAPI.getBooking().then(function (booking) {
-        bookingData.booking = _.clone(booking);
-        bookingData.isPending = false;
+    return bookingAPI.getBookings().then(function (booking) {
+        bookingsData.bookings = _.cloneDeep(booking);
+        bookingsData.isPending = false;
         emitChange();
     });
 }
 
 function updateBooking(uid, gameId, data) {
-    bookingData.isPending = true;
+    bookingsData.isPending = true;
     emitChange();
 
     return bookingAPI.updateBooking(uid, gameId, data).then(function () {
-        return loadBooking();
+        return loadBookings();
     });
 }
 function cancelBooking(uid, gameId) {
-    bookingData.isPending = true;
+    bookingsData.isPending = true;
     emitChange();
 
     bookingAPI.cancelBooking(uid, gameId).then(function () {
-        return loadBooking();
+        return loadBookings();
     });
 }
 
 function getBookingData() {
-    return bookingData;
+    return bookingsData;
 }
 
 function emitChange() {
@@ -75,7 +75,7 @@ function removeChangeListener(listenerToRemove) {
 }
 
 module.exports = {
-    getGamesData: getBookingData,
+    getBookingData: getBookingData,
     addChangeListener: addChangeListener,
     removeChangeListener: removeChangeListener
 };

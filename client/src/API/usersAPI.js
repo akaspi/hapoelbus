@@ -4,15 +4,15 @@ var db = require('./db');
 var Promise = require('bluebird');
 var authAPI = require('./authAPI');
 
-var userDataPathsData = [
+var userPathsData = [
     { dataKey: 'info', path: 'usersInfo' },
     { dataKey: 'seasonTicket', path: 'seasonTickets' },
     { dataKey: 'contactRequest', path: 'contactRequests' },
     { dataKey: 'distribution', path: 'distribution' }
 ];
 
-function getDataForAllUsers() {
-    var readPromises = _.map(userDataPathsData, function (pathData) {
+function getAllUsers() {
+    var readPromises = _.map(userPathsData, function (pathData) {
         return db.read(pathData.path);
     });
 
@@ -20,7 +20,7 @@ function getDataForAllUsers() {
         .then(function (results) {
             var UIDs = _.keys(results[0]);
             return _.reduce(UIDs, function (accum, uid) {
-                accum[uid] = _.reduce(userDataPathsData, function (accum, pathData, index) {
+                accum[uid] = _.reduce(userPathsData, function (accum, pathData, index) {
                     if (results[index]) {
                         accum[pathData.dataKey] = results[index][uid];
                     }
@@ -31,14 +31,14 @@ function getDataForAllUsers() {
         });
 }
 
-function getDataForSingleUser(uid) {
-    var readPromises = _.map(userDataPathsData, function (pathData) {
+function getUser(uid) {
+    var readPromises = _.map(userPathsData, function (pathData) {
         return db.read(pathData.path + '/' + uid);
     });
 
     return Promise.all(readPromises)
         .then(function (results) {
-            return _.reduce(userDataPathsData, function (accum, pathData, index) {
+            return _.reduce(userPathsData, function (accum, pathData, index) {
                 accum[pathData.dataKey] = results[index];
                 return accum;
             }, {})
@@ -50,18 +50,18 @@ function getDataForSingleUser(uid) {
         });
 }
 
-function getUsersData() {
+function getUsers() {
     var uid = authAPI.getUID();
     return authAPI.isAdmin(uid).then(function (isAdmin) {
-        return isAdmin ? getDataForAllUsers() : getDataForSingleUser(uid);
+        return isAdmin ? getAllUsers() : getUser(uid);
     });
 }
 
-function updateUserData(uid, userData) {
-    var updatePromises = _.map(userDataPathsData, function(pathData) {
-        if (userData[pathData.dataKey]) {
+function updateUser(uid, user) {
+    var updatePromises = _.map(userPathsData, function(pathData) {
+        if (user[pathData.dataKey]) {
             var path =  pathData.path + '/' + uid;
-            var dataToUpdate = userData[pathData.dataKey];
+            var dataToUpdate = user[pathData.dataKey];
             return db.update(path, dataToUpdate);
         }
     });
@@ -70,6 +70,6 @@ function updateUserData(uid, userData) {
 }
 
 module.exports = {
-    getUsersData: getUsersData,
-    updateUserData: updateUserData
+    getUsersData: getUsers,
+    updateUser: updateUser
 };

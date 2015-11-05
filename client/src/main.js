@@ -12,14 +12,14 @@
     window.React = React;
 
     var stores = [
-        require('./stores/usersDataStore'),
+        require('./stores/usersStore'),
         require('./stores/gamesStore')
     ];
 
     window.authAPI = require('./API/authAPI');
-    window.usersDataAPI = require('./API/usersDataAPI');
+    window.usersDataAPI = require('./API/usersAPI');
     window.gamesAPI = require('./API/gamesAPI');
-    window.bookingAPI = require('./API/bookingAPI');
+    window.bookingAPI = require('./API/bookingsAPI');
 
     _.forEach(stores, function(store) {
         if (_.isFunction(store.init)) {
