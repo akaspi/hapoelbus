@@ -1,11 +1,11 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <mui.Dialog ref="dialog" onDismiss="{this.hideDialog}" title="{this.props.title}" contentStyle="{{width:'360'}}"
-            modal="{false}" contentClassName="dialog-frame" autoScrollBodyContent="{true}">
+            contentClassName="dialog-frame" autoScrollBodyContent="{true}" modal="{this.props.isModal}">
     {this.props.children}
     <div class="dialog-actions">
-        <mui.RaisedButton label="שמור" primary="{true}" onClick="{this.onSubmit}"/>
-        <mui.RaisedButton label="בטל" secondary="{true}" onClick="{this.hideDialog}" style="{{marginRight: '15px'}}">
+        <mui.RaisedButton rt-if="this.props.onSubmit" label="שמור" primary="{true}" onClick="{this.onSubmit}"/>
+        <mui.RaisedButton rt-if="this.props.showCancelButton" label="בטל" secondary="{true}" onClick="{this.hideDialog}" style="{{marginRight: '15px'}}">
             <mui.FontIcon className="material-icons cake-icon">cake</mui.FontIcon>
         </mui.RaisedButton>
     </div>

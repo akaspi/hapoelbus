@@ -11,7 +11,7 @@ var actionsConstants = require('../../actions/actionsConstants');
 var TestDialog = React.createClass({
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
-        return _.cloneDeep(this.props.data.userData);
+        return _.defaults(_.cloneDeep(this.props.data.userData), {info: {}, seasonTicket: {}, contactRequest: true, distribution: {mail: true, sms: true}});
     },
     onSmsListChange: function (e, value) {
         var newState = _.merge({}, this.state, {
@@ -29,6 +29,20 @@ var TestDialog = React.createClass({
             }
         });
         this.setState(newState);
+    },
+
+    onContactRequestChange: function (e, val) {
+        var newState = _.merge({}, this.state, {
+            contactRequest: val
+        });
+        this.setState(newState);
+    },
+
+    getDialogTitle: function() {
+        if (this.props.data.createMode) {
+            return 'אאא';
+        }
+        return 'עריכת פרטי משתמע';
     },
 
     updateUserData: function () {

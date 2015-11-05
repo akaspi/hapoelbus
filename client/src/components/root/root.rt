@@ -8,7 +8,7 @@
     <landingPage rt-if="!isLoggedIn"/>
     <div rt-if="isLoggedIn" class="site-content">
         <loading rt-if="!hasUsersData && waitingForUserData"/>
-        <myAccount rt-if="hasUsersData && !waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}" games="{this.state.gamesData.games}" booking="{this.state.bookingData.booking}"/>
+        <myAccount rt-if="!waitingForUserData" currentPage="{this.state.currentPage}" authData="{this.state.authData}" usersData="{this.state.usersData.data}" games="{this.state.gamesData.games}" booking="{this.state.bookingData.booking}"/>
     </div>
     <div class="dialog-layer" rt-if="this.state.dialogToDisplay">
         <div rt-scope="this.state.dialogToDisplay.dialogClass as dialog1">

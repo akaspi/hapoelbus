@@ -67,11 +67,17 @@ function logout() {
     ref.unauth();
 }
 
+function getUserEmail() {
+    return 'aaa@bbb.com';
+}
+
 module.exports = {
     createUser: createUser,
     login: login,
     socialLogin: socialLogin,
     getUID: getUID,
     isAdmin: isAdmin,
-    logout: logout
+    logout: logout,
+    //getUserProfileImageURL: getUserProfileImageURL,
+    getUserEmail: getUserEmail
 };
