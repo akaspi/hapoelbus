@@ -62,7 +62,11 @@ function updateUser(uid, user) {
         if (user[pathData.dataKey]) {
             var path =  pathData.path + '/' + uid;
             var dataToUpdate = user[pathData.dataKey];
-            return db.update(path, dataToUpdate);
+            if (_.isPlainObject(dataToUpdate)) {
+                return db.update(path, dataToUpdate);
+            } else if (_.isBoolean(dataToUpdate)) {
+                return db.set(path, dataToUpdate);
+            }
         }
     });
 
