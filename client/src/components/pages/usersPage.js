@@ -9,7 +9,7 @@ var actionsConstants = require('../../actions/actionsConstants');
 var editUserDataDialog = require('../dialogs/editUserDataDialog');
 
 function getUIDsWithSeasonTickets(UIDs, usersData) {
-    return _.filter(UIDs, function(uid) {
+    return _.filter(UIDs, function (uid) {
         var userData = usersData[uid];
         return userData.seasonTicket && userData.seasonTicket.maxSeats > 0;
     });
@@ -21,28 +21,38 @@ function getUIDsWithoutSeasonTickets(UIDs, usersData) {
 }
 
 function getUIDsThatRequestForContact(UIDs, usersData) {
-    return _.filter(UIDs, function(uid) {
+    return _.filter(UIDs, function (uid) {
         var userData = usersData[uid];
         return !!userData.contactRequest;
     });
 }
 
+function getUserColor(user) {
+    if (user.contactRequest) {
+        return 'Blue'
+    }
+    if (user.seasonTicket) {
+        return 'Green'
+    }
+    return '';
+}
+
 var UsersPage = React.createClass({
-    getInitialState: function() {
-      return {
-          filters: {
-              hasSeasonTicketsOnly: true,
-              doNotHasSeasonTicketsOnly: true,
-              requestedContact: true
-          }
-      }
+    getInitialState: function () {
+        return {
+            filters: {
+                hasSeasonTicketsOnly: true,
+                doNotHasSeasonTicketsOnly: true,
+                requestedContact: true
+            }
+        }
     },
-    onFilterChange: function(filterName, val) {
+    onFilterChange: function (filterName, val) {
         var filters = this.state.filters;
         filters[filterName] = val;
         this.setState({filters: filters});
     },
-    getFilteredUIDs: function() {
+    getFilteredUIDs: function () {
         var users = this.props.usersData.users;
         var UIDs = _.keys(users);
 
@@ -58,7 +68,8 @@ var UsersPage = React.createClass({
             var user = this.props.usersData.users[uid];
             return {
                 title: user.info.displayName,
-                subtitles: [user.info.email, user.info.phone]
+                subtitles: [user.info.email, user.info.phone],
+                color: getUserColor(user)
             }
         }, this);
     },

@@ -10,7 +10,7 @@
           title="{dataRow.title}"
           subtitles="{dataRow.subtitles}"
           customActions="{dataRow.customActions}"
-          ribbon="{dataRow.ribbon}"
+          color="{dataRow.color}"
           id="{dataRowIndex}"
           onEdit="{this.props.onEdit}"
           onRemove="{this.props.onRemove}"/>

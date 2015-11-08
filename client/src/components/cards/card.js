@@ -15,28 +15,25 @@ var Card = React.createClass({
             iconClass: React.PropTypes.string
         })),
         imageUrl: React.PropTypes.string,
-        ribbon: React.PropTypes.shape({
-            color: React.PropTypes.oneOf(['Green', 'Red', 'Blue']),
-            label: React.PropTypes.string.isRequired
-        })
+        color: React.PropTypes.string
     },
     getInitialState: function () {
         return {};
     },
-    getRibbonClasses: function () {
-        return {
-            "card-ribbon": true,
-            "ribbon-green": this.props.ribbon.color === 'Green',
-            "ribbon-red": this.props.ribbon.color === 'Red',
-            "ribbon-blue": this.props.ribbon.color === 'Blue'
-        };
+    getCardColor: function () {
+        switch (this.props.color) {
+            case 'Green':
+                return 'card-green';
+            case 'Blue':
+                return 'card-blue';
+        }
     },
     onCardEdit: function () {
         if (_.isFunction(this.props.onEdit)) {
             this.props.onEdit(this.props.id);
         }
     },
-    onCardRemove: function() {
+    onCardRemove: function () {
         if (_.isFunction(this.props.onRemove)) {
             this.props.onRemove(this.props.id);
         }

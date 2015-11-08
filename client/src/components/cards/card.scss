@@ -1,15 +1,5 @@
 .card {
 
-  @mixin ribbon-color($textColor, $darkColor, $lightColor) {
-    background-color: $darkColor;
-    background-image: -webkit-gradient(linear, left top, left bottom, from($darkColor), to($lightColor));
-    background-image: linear-gradient(top, $darkColor, $lightColor);
-    background-image: -moz-linear-gradient(top, $darkColor, $lightColor);
-    background-image: -ms-linear-gradient(top, $darkColor, $lightColor);
-    background-image: -o-linear-gradient(top, $darkColor, $lightColor);
-    color: $textColor;
-  }
-
   $card-image-size: 100px;
 
   width: 235px;
@@ -21,6 +11,20 @@
     height: 140px;
     text-align: center;
     background: #ef5350;
+
+    &.card-blue {
+      background: #42A5F5;
+      .card-image {
+        border-color: #90CAF9;
+      }
+    }
+
+    &.card-green {
+      background: #66BB6A;
+      .card-image {
+        border-color: #A5D6A7;
+      }
+    }
 
     .card-image {
       margin-top: 10px;
@@ -76,61 +80,6 @@
 
       & + .card-actions-item {
       }
-    }
-  }
-
-  .card-ribbon-wrapper {
-    width: 85px;
-    height: 88px;
-    overflow: hidden;
-    position: absolute;
-    top: -3px;
-    left: -3px;
-
-    .card-ribbon {
-      font-size: 10px;
-      font-weight: bold;
-      text-align: center;
-      -webkit-transform: rotate(-45deg);
-      -moz-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
-      position: relative;
-      padding: 7px 0;
-      right: -5px;
-      top: 15px;
-      width: 120px;
-      float: right;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-
-      &.ribbon-green {
-        @include ribbon-color(#6a6340, #BFDC7A, #8EBF45);
-      }
-
-      &.ribbon-red {
-        @include ribbon-color(#fff, #e95748, #c83d2f);
-      }
-
-      &.ribbon-blue {
-        @include ribbon-color(#fff, #2980B9, #5C96BB);
-      }
-    }
-
-    &:before, &:after {
-      content: "";
-      border-top: 3px solid #6e8900;
-      border-left: 3px solid transparent;
-      border-right: 3px solid transparent;
-      position: absolute;
-      bottom: -3px;
-    }
-
-    &:before {
-      left: 0;
-    }
-
-    &:after {
-      right: 0;
     }
   }
 }

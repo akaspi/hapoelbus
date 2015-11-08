@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header {this.getCardColor()}">
         <img src="http://dir.agosto.nl/dump/Sara.jpg" class="card-image" />
     </div>
     <div class="card-content">
@@ -20,7 +20,4 @@
             <i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>
         </li>
     </ul>
-    <div rt-if="this.props.ribbon" class="card-ribbon-wrapper">
-        <div rt-class="this.getRibbonClasses()">{this.props.ribbon.label}</div>
-    </div>
 </div>
