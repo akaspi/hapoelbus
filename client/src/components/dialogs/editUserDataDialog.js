@@ -18,10 +18,17 @@ var defaultUser = {
     }
 };
 
-var TestDialog = React.createClass({
+var EditUserDataDialog = React.createClass({
+    displayName: 'EditUserDataDialog',
+    propTypes: {
+        user: React.PropTypes.object.isRequired,
+        uid: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string,
+        isModal: React.PropTypes.bool
+    },
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
-        return _.defaults(_.cloneDeep(this.props.data.user), defaultUser);
+        return _.defaultsDeep(_.cloneDeep(this.props.user), defaultUser);
     },
     onSmsListChange: function (e, value) {
         var newState = _.merge({}, this.state, {
@@ -48,21 +55,23 @@ var TestDialog = React.createClass({
         this.setState(newState);
     },
 
-    getDialogTitle: function() {
-        if (this.props.data.createMode) {
-            return 'אאא';
-        }
-        return 'עריכת פרטי משתמע';
-    },
-
     updateUser: function () {
         actionsCreator.createAction(actionsConstants.UPDATE_USER, {
-            uid: this.props.data.uid,
+            uid: this.props.uid,
             user: this.state
         });
+        this.hideDialog();
+    },
+
+    showDialog: function() {
+        this.refs.dialog.show();
+    },
+
+    hideDialog: function () {
+        this.refs.dialog.dismiss();
     },
 
     render: template
 });
 
-module.exports = TestDialog;
+module.exports = EditUserDataDialog;

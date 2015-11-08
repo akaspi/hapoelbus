@@ -55,7 +55,13 @@ function logout() {
 }
 
 function getUserEmail() {
-    return 'aaa@bbb.com';
+    var authData = ref.getAuth();
+    return authData[authData.provider].email;
+}
+
+function getUserProfileImageURL() {
+    var authData = ref.getAuth();
+    return authData[authData.provider].profileImageURL;
 }
 
 module.exports = {
@@ -65,6 +71,6 @@ module.exports = {
     getUID: getUID,
     isAdmin: isAdmin,
     logout: logout,
-    //getUserProfileImageURL: getUserProfileImageURL,
+    getUserProfileImageURL: getUserProfileImageURL,
     getUserEmail: getUserEmail
 };

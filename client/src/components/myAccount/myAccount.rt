@@ -5,8 +5,9 @@
 <rt-require dependency="../pages/usersPage" as="usersPage"/>
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../loading/loading" as="loading"/>
+<rt-require dependency="../dialogs/editUserDataDialog" as="editUserDataDialog"/>
 
-<div class="my-account" rt-scope="this.isLoadingInitialData() as initialLoading">
+<div class="my-account" rt-scope="this.isDataInitialized() as initialized">
     <header>
         <div class="logo"/>
         <div class="auth-data-box">
@@ -18,13 +19,21 @@
             <a class="logout-link" onClick="{this.logout}">התנתק</a>
         </div>
     </header>
-    <div rt-if="initialLoading" class="loading-wrapper">
+    <div rt-if="!initialized" class="loading-wrapper">
         <loading/>
     </div>
-    <div rt-if="!initialLoading">
+    <div rt-if="initialized && !this.isUserMissingData()">
         <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE"/>
         <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" games="{this.props.games}"/>
         <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
         <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" games="{this.props.games}" usersData="{this.props.usersData}" booking="{this.props.booking}"/>
     </div>
+
+    <editUserDataDialog rt-if="initialized && this.isUserMissingData()"
+                        ref="editUserDataDialog"
+                        user="{this.getSkeletonUserForInitialization()}"
+                        uid="{this.props.authData.uid}"
+                        createMode="{true}"
+                        isModal="{true}"
+                        title="כותרת"/>
 </div>

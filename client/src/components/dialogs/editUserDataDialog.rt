@@ -2,8 +2,13 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 
-<dialogFrame onSubmit="{this.updateUser}" showCancelButton="{this.props.data.showCancelButton}" isModal="{this.props.data.isModal}" title="{this.getDialogTitle()}">
-    <div class="edit-user-data-dialog">
+<mui.Dialog ref="dialog"
+            title="{this.props.title}"
+            contentStyle="{{width:'360'}}"
+            contentClassName="edit-user-data-dialog"
+            autoScrollBodyContent="{true}"
+            modal="{this.props.isModal}">
+
         <section>
             <h2>פרטים אישיים</h2>
 
@@ -24,8 +29,7 @@
             </div>
         </section>
 
-
-        <section rt-if="!this.props.data.createMode">
+        <section rt-if="!this.props.createMode">
             <h2>פרטי המנוי</h2>
 
             <div class="field-row">
@@ -63,5 +67,15 @@
             </div>
         </section>
 
+    <div class="actions">
+        <mui.RaisedButton label="שמור"
+                          primary="{true}"
+                          onClick="{this.updateUser}"/>
+
+        <mui.RaisedButton rt-if="!this.props.isModal"
+                          label="בטל"
+                          secondary="{true}"
+                          onClick="{this.hideDialog}">
+        </mui.RaisedButton>
     </div>
-</dialogFrame>
+</mui.Dialog>

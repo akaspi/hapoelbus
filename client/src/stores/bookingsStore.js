@@ -7,6 +7,7 @@ var actionsConstants = require('../actions/actionsConstants');
 var listeners = [];
 
 var bookingsData = {
+    initialized: false,
     bookings: {},
     isPending: false,
     errorMsg: null
@@ -27,18 +28,19 @@ dispatcher.register(function (action) {
 });
 
 function loadBookings() {
-    bookingsData.isPending = true;
+    bookingsData.loading = true;
     emitChange();
 
     return bookingAPI.getBookings().then(function (booking) {
         bookingsData.bookings = _.cloneDeep(booking);
-        bookingsData.isPending = false;
+        bookingsData.loading = false;
+        bookingsData.initialized = true;
         emitChange();
     });
 }
 
 function updateBooking(uid, gameId, data) {
-    bookingsData.isPending = true;
+    bookingsData.loading = true;
     emitChange();
 
     return bookingAPI.updateBooking(uid, gameId, data).then(function () {
@@ -46,7 +48,7 @@ function updateBooking(uid, gameId, data) {
     });
 }
 function cancelBooking(uid, gameId) {
-    bookingsData.isPending = true;
+    bookingsData.loading = true;
     emitChange();
 
     bookingAPI.cancelBooking(uid, gameId).then(function () {
@@ -55,7 +57,7 @@ function cancelBooking(uid, gameId) {
 }
 
 function getBookingData() {
-    return bookingsData;
+    return _.cloneDeep(bookingsData);
 }
 
 function emitChange() {

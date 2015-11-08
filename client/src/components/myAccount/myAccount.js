@@ -6,28 +6,43 @@ var template = require('./myAccount.rt');
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
-//var authAPI = require('../../API/authAPI');
+var authAPI = require('../../API/authAPI');
 
-//var editUserDataDialog = require('../dialogs/editUserDataDialog');
+var editUserDataDialog = require('../dialogs/editUserDataDialog');
 
 var MyAccount = React.createClass({
     displayName: 'MyAccount',
-    isLoadingInitialData: function () {
-        var isLoadingUsers = _.isEmpty(this.props.usersData.users);
-        var isLoadingGames = _.isEmpty(this.props.gamesData.games);
-        var isLoadingBookings = _.isEmpty(this.props.bookingsData.bookings);
-        return isLoadingUsers || isLoadingGames || isLoadingBookings;
+    isDataInitialized: function (props) {
+        var propsToCheck = props || this.props;
+        return propsToCheck.usersData.initialized && propsToCheck.gamesData.initialized && propsToCheck.bookingsData.initialized;
     },
     componentDidMount: function () {
         actionsCreator.createAction(actionsConstants.LOAD_USERS, {});
         actionsCreator.createAction(actionsConstants.LOAD_GAMES, {});
         actionsCreator.createAction(actionsConstants.LOAD_BOOKINGS, {});
-        //if (_.isEmpty(this.props.usersData)) {
-        //    actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
-        //        dialogClass: editUserDataDialog,
-        //        data: {showCancelButton: false, isModal: true, createMode: true, uid: authAPI.getUID(), userData: {info: {email: authAPI.getUserEmail()}}}
-        //    });
-        //}
+    },
+    isUserMissingData: function() {
+        var uid = this.props.authData.uid;
+        var user = this.props.usersData.users && this.props.usersData.users[uid];
+
+        return user &&  _.isNull(user.info);
+    },
+    componentDidUpdate: function(prevProps) {
+        if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props) && this.isUserMissingData()) {
+            this.refs.editUserDataDialog.showDialog();
+        }
+    },
+    getSkeletonUserForInitialization: function() {
+        return {
+            info: {
+                email: authAPI.getUserEmail()
+            },
+            contactRequest: true,
+            distribution: {
+                mail: true,
+                sms: true
+            }
+        };
     },
     logout: function() {
         actionsCreator.createAction(actionsConstants.LOGOUT, {});

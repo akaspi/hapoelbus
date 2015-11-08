@@ -10,7 +10,7 @@ var listeners = [];
 var authData = {
     uid: authAPI.getUID(),
     isAdmin: false,
-    isPending: false,
+    loading: false,
     errorMsg: null
 };
 
@@ -33,7 +33,7 @@ dispatcher.register(function (action) {
 });
 
 function createUser(email, password) {
-    authData.isPending = true;
+    authData.loading = true;
     emitChange();
 
     return authAPI.createUser(email, password)
@@ -44,7 +44,7 @@ function createUser(email, password) {
 }
 
 function login(email, password) {
-    authData.isPending = true;
+    authData.loading = true;
     emitChange();
 
     return authAPI.login(email, password)
@@ -56,7 +56,7 @@ function login(email, password) {
             authData.isAdmin = isAdmin;
         })
         .then(function () {
-            authData.isPending = false;
+            authData.loading = false;
             emitChange();
         });
 }
@@ -74,7 +74,7 @@ function socialLogin(provider) {
             authData.isAdmin = isAdmin;
         })
         .then(function () {
-            authData.isPending = false;
+            authData.loading = false;
             emitChange();
         });
 }
@@ -83,7 +83,7 @@ function logout() {
     authAPI.logout();
     authData.uid = null;
     authData.isAdmin = false;
-    authData.isPending = false;
+    authData.loading = false;
     authData.errorMsg = null;
     emitChange();
 }

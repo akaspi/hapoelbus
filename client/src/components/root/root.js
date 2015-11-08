@@ -15,7 +15,7 @@ var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
 function getStateFromStores() {
-    return {
+    var res =  {
         authData: authStore.getAuthData(),
         usersData: usersDataStore.getUsersData(),
         gamesData: gamesStore.getGamesData(),
@@ -23,6 +23,7 @@ function getStateFromStores() {
         currentPage: pageNavigationStore.getCurrentPage(),
         dialogToDisplay: dialogStore.getDialogToDisplay()
     };
+    return res;
 }
 
 var Root = React.createClass({
@@ -30,10 +31,6 @@ var Root = React.createClass({
 
     getInitialState: function () {
         return getStateFromStores();
-    },
-
-    componentWillReceiveProps: function() {
-        console.log('dada');
     },
 
     componentDidMount: function () {

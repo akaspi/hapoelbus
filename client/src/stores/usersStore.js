@@ -8,8 +8,9 @@ var actionsConstants = require('../actions/actionsConstants');
 var listeners = [];
 
 var usersData = {
+    initialized: false,
     users: {},
-    isPending: false,
+    loading: false,
     errorMsg: null
 };
 
@@ -28,18 +29,19 @@ dispatcher.register(function (action) {
 });
 
 function loadUsers() {
-    usersData.isPending = true;
+    usersData.loading = true;
     emitChange();
 
     return usersAPI.getUsersData().then(function (users) {
-        usersData.users = _.clone(users);
-        usersData.isPending = false;
+        usersData.users = _.cloneDeep(users);
+        usersData.loading = false;
+        usersData.initialized = true;
         emitChange();
     });
 }
 
 function updateUser(uid, user) {
-    usersData.isPending = true;
+    usersData.loading = true;
     emitChange();
 
     return usersAPI.updateUser(uid, user).then(function() {
@@ -49,7 +51,7 @@ function updateUser(uid, user) {
 
 function logout() {
     usersData.users = {};
-    usersData.isPending = false;
+    usersData.loading = false;
     usersData.errorMsg = null;
     emitChange();
 }
@@ -61,7 +63,7 @@ function emitChange() {
 }
 
 function getUsersData() {
-    return usersData;
+    return _.cloneDeep(usersData);
 }
 
 function addChangeListener(listener) {

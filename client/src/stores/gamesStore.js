@@ -7,8 +7,9 @@ var actionsConstants = require('../actions/actionsConstants');
 var listeners = [];
 
 var gamesData = {
-    games: {},
-    isPending: false,
+    initialized: false,
+    games: null,
+    loading: false,
     errorMsg: null
 };
 
@@ -33,18 +34,19 @@ dispatcher.register(function(action) {
 });
 
 function loadGames() {
-    gamesData.isPending = true;
+    gamesData.loading = true;
     emitChange();
 
     return gamesAPI.getGames().then(function(allGames) {
         gamesData.games = _.cloneDeep(allGames);
-        gamesData.isPending = false;
+        gamesData.loading = false;
+        gamesData.initialized = true;
         emitChange();
     }, function() {});
 }
 
 function createGame(gameData) {
-    gamesData.isPending = true;
+    gamesData.loading = true;
     emitChange();
 
     gamesAPI.createGame(gameData, function() {
@@ -52,7 +54,7 @@ function createGame(gameData) {
     }, function() {});
 }
 function updateGame(gameId, gameData) {
-    gamesData.isPending = true;
+    gamesData.loading = true;
     emitChange();
 
     return gamesAPI.updateGame(gameId, gameData).then(function() {
@@ -60,7 +62,7 @@ function updateGame(gameId, gameData) {
     });
 }
 function removeGame(gameId) {
-    gamesData.isPending = true;
+    gamesData.loading = true;
     emitChange();
 
     return gamesAPI.removeGame(gameId).then(function() {
@@ -70,13 +72,13 @@ function removeGame(gameId) {
 
 function logout() {
     gamesData.gamesData = {};
-    errorMsg = null;
+    gamesData.errorMsg = null;
 
     emitChange();
 }
 
 function getGamesData() {
-    return _.clone(gamesData);
+    return _.cloneDeep(gamesData);
 }
 
 function emitChange() {

@@ -1,6 +1,6 @@
 <rt-require dependency="material-ui" as="mui"/>
 
-<mui.Dialog ref="dialog" onDismiss="{this.hideDialog}" title="{this.props.title}" contentStyle="{{width:'360'}}"
+<mui.Dialog ref="dialog" onDismiss="{this.closeDialog}" title="{this.props.title}" contentStyle="{{width:'360'}}"
             contentClassName="dialog-frame" autoScrollBodyContent="{true}" modal="{this.props.isModal}">
     {this.props.children}
     <div class="dialog-actions">

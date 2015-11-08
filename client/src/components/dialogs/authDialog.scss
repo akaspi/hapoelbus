@@ -1,0 +1,63 @@
+.auth-dialog {
+
+  .login-content {
+    .social-login-section {
+
+      .social-button-wrapper {
+        margin-top: 20px;
+
+        &:first-child{
+          margin-top: 0;
+        }
+      }
+
+    }
+
+    .login-divider-section {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+
+      .divider-line {
+        height: 1px;
+        background-color: #000;
+        flex: 1;
+      }
+
+      .text {
+        margin: 0 10px;
+      }
+    }
+
+    .user-password-section {
+      margin-top: 5px;
+
+      .user-password-login-button-wrapper {
+        margin-top: 15px;
+      }
+    }
+
+  }
+
+  .create-user-content {
+
+    .create-user-button-wrapper {
+      margin-top: 15px;
+    }
+  }
+
+  .nav-links-wrapper {
+    margin-top: 20px;
+    text-align: center;
+
+    .nav-link {
+      margin: 0 5px;
+      text-decoration: underline;
+      color: #2c3e50;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

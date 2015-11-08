@@ -1,3 +1,5 @@
+<rt-require dependency="../dialogs/authDialog" as="authDialog"/>
+
 <div class="landing-page">
     <div class="divider-wrapper">
         <div class="divider-line"/>
@@ -12,4 +14,6 @@
     <div class="divider-wrapper">
         <div class="divider-line"/>
     </div>
+
+    <authDialog ref="authDialog" authData="{this.props.authData}"/>
 </div>
