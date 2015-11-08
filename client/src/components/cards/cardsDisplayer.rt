@@ -9,9 +9,7 @@
     <card rt-repeat="dataRow in this.props.data" key="{'card-' + dataRowIndex}"
           title="{dataRow.title}"
           subtitles="{dataRow.subtitles}"
-          customActions="{dataRow.customActions}"
+          actions="{this.getCardActions(dataRowIndex)}"
           color="{dataRow.color}"
-          id="{dataRowIndex}"
-          onEdit="{this.props.onEdit}"
-          onRemove="{this.props.onRemove}"/>
+          id="{dataRowIndex}"/>
 </div>

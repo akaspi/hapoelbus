@@ -7,15 +7,7 @@
         <p rt-repeat="subtitle in this.props.subtitles" class="card-sub-title">{subtitle}</p>
     </div>
     <ul class="card-actions-wrapper">
-        <li rt-if="this.props.onEdit" onClick="{this.onCardEdit}" class="card-actions-item">
-            <span>ערוך</span>
-            <!--<i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>-->
-        </li>
-        <li rt-if="this.props.onRemove" onClick="{this.onCardRemove}" class="card-actions-item">
-            <span>מחק</span>
-            <!--<i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>-->
-        </li>
-        <li rt-repeat="action in this.props.customActions" onClick="{action.onClick}" class="card-actions-item">
+        <li rt-repeat="action in this.props.actions" onClick="{action.onClick}" class="card-actions-item">
             <span rt-if="action.label">{action.label}</span>
             <i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>
         </li>

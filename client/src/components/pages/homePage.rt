@@ -1,0 +1,11 @@
+<rt-require dependency="../cards/card" as="gameCard"/>
+
+
+<div class="home-page">
+    <div class="title-wrapper">
+        <i class="material-icons icon">directions_bus</i>
+        <h1 class="title">ההסעות הבאות</h1></div>
+    <section class="games-section">
+        <gameCard title="chen"/>
+    </section>
+</div>
