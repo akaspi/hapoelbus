@@ -11,7 +11,7 @@ var actionsConstants = require('../../actions/actionsConstants');
 var defaultUser = {
     info: {},
     seasonTicket: {},
-    contactRequest: true,
+    contactRequest: false,
     distribution: {
         mail: true,
         sms: true

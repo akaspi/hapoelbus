@@ -1,5 +1,5 @@
 <rt-require dependency="../../constants/pagesConstants" as="pagesConstants"/>
-<rt-require dependency="../pages/homePage/homePage" as="homePage"/>
+<rt-require dependency="../pages/homePage" as="homePage"/>
 <rt-require dependency="../pages/bookingPage" as="bookingPage"/>
 <rt-require dependency="../pages/gamesPage" as="gamesPage"/>
 <rt-require dependency="../pages/usersPage" as="usersPage"/>

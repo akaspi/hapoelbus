@@ -1,25 +1,15 @@
 <div class="card">
-    <div class="card-header"></div>
-    <div class="card-content">
+    <div class="card-header {this.getCardColor()}">
         <img src="http://dir.agosto.nl/dump/Sara.jpg" class="card-image" />
+    </div>
+    <div class="card-content">
         <h1 class="card-title">{this.props.title}</h1>
         <p rt-repeat="subtitle in this.props.subtitles" class="card-sub-title">{subtitle}</p>
     </div>
     <ul class="card-actions-wrapper">
-        <li rt-if="this.props.onEdit" onClick="{this.onCardEdit}" class="card-actions-item">
-            <span>ערוך</span>
-            <!--<i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>-->
-        </li>
-        <li rt-if="this.props.onRemove" onClick="{this.onCardRemove}" class="card-actions-item">
-            <span>מחק</span>
-            <!--<i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>-->
-        </li>
-        <li rt-repeat="action in this.props.customActions" onClick="{action.onClick}" class="card-actions-item">
+        <li rt-repeat="action in this.props.actions" onClick="{action.onClick}" class="card-actions-item">
             <span rt-if="action.label">{action.label}</span>
             <i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>
         </li>
     </ul>
-    <div rt-if="this.props.ribbon" class="card-ribbon-wrapper">
-        <div rt-class="this.getRibbonClasses()">{this.props.ribbon.label}</div>
-    </div>
 </div>

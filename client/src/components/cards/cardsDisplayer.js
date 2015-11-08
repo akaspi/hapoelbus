@@ -3,7 +3,15 @@
 var React = require('react');
 var template = require('./cardsDisplayer.rt');
 
-var CardsDisplayer =  React.createClass({
+var CardsDisplayer = React.createClass({
+    getCardActions: function (index) {
+        var self = this;
+        return [
+            { label: 'Edit', onClick: function() { self.props.onEdit(index) } },
+            { label: 'Remove', onClick: function() { self.props.onRemove(index) } }
+        ];
+
+    },
     render: template
 });
 
