@@ -4,41 +4,39 @@
     background-color: $darkColor;
     background-image: -webkit-gradient(linear, left top, left bottom, from($darkColor), to($lightColor));
     background-image: linear-gradient(top, $darkColor, $lightColor);
-    background-image:    -moz-linear-gradient(top, $darkColor, $lightColor);
-    background-image:     -ms-linear-gradient(top, $darkColor, $lightColor);
-    background-image:      -o-linear-gradient(top, $darkColor, $lightColor);
+    background-image: -moz-linear-gradient(top, $darkColor, $lightColor);
+    background-image: -ms-linear-gradient(top, $darkColor, $lightColor);
+    background-image: -o-linear-gradient(top, $darkColor, $lightColor);
     color: $textColor;
   }
 
   $card-image-size: 100px;
 
   width: 235px;
-  border: 1px solid #171a1f;
-  border-radius: 8px;
   position: relative;
   margin: 5px 10px;
+  box-shadow: 0 0 18px 0 rgba(22, 45, 61, 0.27);
 
   .card-header {
-    height: 80px;
-    background: #ecf0f1;
-    border-radius: 8px 8px 0 0;
+    height: 140px;
+    text-align: center;
+    background: #ef5350;
+
+    .card-image {
+      margin-top: 10px;
+      width: $card-image-size;
+      height: $card-image-size;
+      border: 8px solid #ffcdd2;
+      border-radius: 50%;
+    }
   }
 
   .card-content {
-    padding: 0 20px 20px;
+    padding: 10px 0;
     text-align: center;
-    background: #BDC2C7;
-
-    .card-image {
-      margin-top: (0 - ($card-image-size / 2));
-      width: $card-image-size;
-      height: $card-image-size;
-      border: 5px solid #ecf0f1;
-      border-radius: 50%;
-    }
+    background: #ffffff;
 
     .card-title {
-      margin: 12px 0 0;
       font-size: 18px;
       font-weight: 400;
       letter-spacing: 0.05em;
@@ -56,19 +54,14 @@
     display: flex;
     margin: 0;
     padding: 0;
-    border-top: 1px solid #7f8c8d;
     list-style: none;
-    background: #bdc3c7;
     overflow: hidden;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
 
     .card-actions-item {
       display: flex;
       flex: 1;
       justify-content: center;
       align-items: center;
-      border-top: 1px solid #eee;
       padding: 12px;
       color: #3D4E57;
       font-weight: 600;
@@ -82,8 +75,6 @@
       }
 
       & + .card-actions-item {
-        border-right: 1px solid #eee;
-        box-shadow: 1px 0 0 #7f8c8d;
       }
     }
   }
@@ -101,16 +92,16 @@
       font-weight: bold;
       text-align: center;
       -webkit-transform: rotate(-45deg);
-      -moz-transform:    rotate(45deg);
-      -ms-transform:     rotate(45deg);
-      -o-transform:      rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
       position: relative;
       padding: 7px 0;
       right: -5px;
       top: 15px;
       width: 120px;
       float: right;
-      box-shadow: 0 0 3px rgba(0,0,0,0.3);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 
       &.ribbon-green {
         @include ribbon-color(#6a6340, #BFDC7A, #8EBF45);
@@ -127,10 +118,10 @@
 
     &:before, &:after {
       content: "";
-      border-top:   3px solid #6e8900;
-      border-left:  3px solid transparent;
+      border-top: 3px solid #6e8900;
+      border-left: 3px solid transparent;
       border-right: 3px solid transparent;
-      position:absolute;
+      position: absolute;
       bottom: -3px;
     }
 

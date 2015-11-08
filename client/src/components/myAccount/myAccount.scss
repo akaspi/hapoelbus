@@ -1,7 +1,7 @@
 .my-account {
   header {
     display: flex;
-    background: #f44336;
+    background: #ffebee;
     height: 60px;
     box-sizing: border-box;
     justify-content: space-between;
@@ -31,6 +31,7 @@
       }
 
       .logout-link {
+        text-decoration: underline;
 
         &:hover {
           cursor: pointer;
