@@ -6,50 +6,37 @@ var ref = db.ref;
 var adminsRef = ref.child('admins');
 var Promise = require('bluebird');
 
-function createUser(email, password, onSuccess, onError) {
-    ref.createUser({
-        email: email,
-        password: password
-    }, function (error) {
-        if (error) {
-            switch (error.code) {
-                case "EMAIL_TAKEN":
-                    onError("The new user account cannot be created because the email is already in use.");
-                    break;
-                case "INVALID_EMAIL":
-                    onError("The specified email is not a valid email.");
-                    break;
-                default:
-                    onError("Error creating user:", error);
+function createUser(email, password) {
+    return new Promise(function(resolve, reject) {
+        ref.createUser({email: email, password: password}, function(err) {
+           if (err) {
+               return reject();
+           }
+            resolve();
+        });
+    });
+}
+
+function login(email, password) {
+    return new Promise(function(resolve, reject) {
+        ref.authWithPassword({email: email, password: password}, function(err, authData) {
+            if (err) {
+                return reject();
             }
-        } else {
-            onSuccess();
-        }
+            resolve(authData.uid);
+        });
     });
 }
 
-function login(email, password, onSuccess, onError) {
-    ref.authWithPassword({
-        email: email,
-        password: password
-    }, function (error, authData) {
-        if (error) {
-            onError("Login Failed!", error);
-        } else {
-            onSuccess(authData.uid);
-        }
+function socialLogin(provider) {
+    return new Promise(function(resolve, reject) {
+        ref.authWithOAuthPopup(provider, function(err, authData) {
+            if (err) {
+                return reject();
+            }
+            resolve(authData.uid);
+        });
     });
-}
-
-function socialLogin(provider, onSuccess, onError) {
-    ref.authWithOAuthPopup(provider, function (error, authData) {
-        if (error) {
-            onError("Authentication Failed!", error);
-        } else {
-            onSuccess(authData.uid);
-        }
-    });
-
 }
 
 function isAdmin(uid) {

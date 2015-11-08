@@ -15,8 +15,8 @@ var authData = {
 };
 
 
-dispatcher.register(function(action) {
-    switch(action.actionType) {
+dispatcher.register(function (action) {
+    switch (action.actionType) {
         case actionsConstants.CREATE_USER:
             createUser(action.payload.email, action.payload.password);
             break;
@@ -36,9 +36,10 @@ function createUser(email, password) {
     authData.isPending = true;
     emitChange();
 
-    authAPI.createUser(email, password, function() {
-        login(email, password);
-    }, function() {});
+    return authAPI.createUser(email, password)
+        .then(function () {
+            return login(email, password);
+        });
 
 }
 
@@ -46,26 +47,36 @@ function login(email, password) {
     authData.isPending = true;
     emitChange();
 
-    authAPI.login(email, password, function(uid) {
-        authAPI.isAdmin(uid, function(isAdmin) {
+    return authAPI.login(email, password)
+        .then(function (uid) {
             authData.uid = uid;
+            return authAPI.isAdmin(uid);
+        })
+        .then(function (isAdmin) {
             authData.isAdmin = isAdmin;
+        })
+        .then(function () {
+            authData.isPending = false;
             emitChange();
-        }, function() {});
-    }, function() {});
+        });
 }
 
 function socialLogin(provider) {
     authData.isPending = true;
     emitChange();
 
-    authAPI.socialLogin(provider, function(uid) {
-        authAPI.isAdmin(uid, function(isAdmin) {
+    authAPI.socialLogin(provider)
+        .then(function (uid) {
             authData.uid = uid;
+            return authAPI.isAdmin(uid);
+        })
+        .then(function (isAdmin) {
             authData.isAdmin = isAdmin;
+        })
+        .then(function () {
+            authData.isPending = false;
             emitChange();
-        }, function() {});
-    }, function() {});
+        });
 }
 
 function logout() {
