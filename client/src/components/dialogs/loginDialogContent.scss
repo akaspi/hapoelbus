@@ -1,0 +1,48 @@
+.login-dialog-content {
+
+  $divider-line-color: #000;
+  $divider-text-color: $divider-line-color;
+  $nav-link-text-color: #2c3e50;
+
+  .social-buttons-wrapper {
+
+  }
+
+  .login-divider-wrapper {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background-color: $divider-line-color;
+    }
+
+    .text {
+      margin: 0 10px;
+    }
+  }
+
+  .user-password-wrapper{
+    margin-top: 5px;
+  }
+
+  .links-wrapper{
+    margin-top: 20px;
+    text-align: center;
+
+    .nav-link {
+      text-decoration: underline;
+      color: $nav-link-text-color;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .nav-separator {
+      margin: 0 5px;
+    }
+  }
+}

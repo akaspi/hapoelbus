@@ -39,6 +39,28 @@ function socialLogin(provider) {
     });
 }
 
+function resetPassword(email) {
+    return new Promise(function(resolve, reject) {
+        ref.resetPassword({email: email}, function(err) {
+            if (err) {
+                return reject();
+            }
+            resolve();
+        });
+    });
+}
+
+function changePassword(email, oldPassword, newPassword) {
+    return new Promise(function(resolve, reject) {
+        ref.changePassword({email: email, oldPassword: oldPassword, newPassword: newPassword}, function(err) {
+            if (err) {
+                return reject();
+            }
+            resolve();
+        });
+    });
+}
+
 function isAdmin(uid) {
     return db.read('admins').then(function(admins) {
         return !!admins[uid]
@@ -68,6 +90,8 @@ module.exports = {
     createUser: createUser,
     login: login,
     socialLogin: socialLogin,
+    resetPassword: resetPassword,
+    changePassword: changePassword,
     getUID: getUID,
     isAdmin: isAdmin,
     logout: logout,

@@ -1,98 +1,36 @@
-<rt-require dependency="./dialogFrame" as="dialogFrame"/>
-<rt-require dependency="../../utils/dateUtils" as="dateUtils"/>
 <rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="./loginDialogContent" as="loginDialogContent"/>
+<rt-require dependency="./createAccountDialogContent" as="createAccountDialogContent"/>
+<rt-require dependency="./resetPasswordDialogContent" as="resetPasswordDialogContent"/>
+<rt-require dependency="./changePasswordDialogContent" as="changePasswordDialogContent"/>
 
-<mui.Dialog ref="dialog" onDismiss="{this.onDismiss}" contentStyle="{{width:'360'}}" autoScrollBodyContent="{true}" contentClassName="auth-dialog" rt-scope="this.getDialogModes() as MODES">
-    <section rt-if="this.state.mode === MODES.LOGIN" class="login-content">
+<mui.Dialog ref="dialog"
+            onDismiss="{this.onDismiss}"
+            contentStyle="{{width:'360'}}"
+            autoScrollBodyContent="{true}"
+            contentClassName="auth-dialog"
+            rt-scope="this.getDialogModes() as MODES">
 
-        <section class="social-login-section">
-            <div class="social-button-wrapper">
-                <mui.RaisedButton fullWidth="{true}"
-                                  label="התחבר בעזרת"
-                                  backgroundColor="#3B5998"
-                                  labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
-                                  onClick="{this.loginWithFacebook}">
-                    <i style="{{color: '#ffffff', fontSize: '20px', verticalAlign: 'middle'}}" class="fa fa-facebook"/>
-                </mui.RaisedButton>
-            </div>
-            <div class="social-button-wrapper">
-                <mui.RaisedButton fullWidth="{true}"
-                                  label="התחבר בעזרת"
-                                  backgroundColor="#FFF"
-                                  labelStyle="{{padding: '0 10px', color: '#000' }}"
-                                  onClick="{this.loginWithGoogle}">
-                    <i style="{{color: '#DD4B39', fontSize: '20px', verticalAlign: 'middle'}}" class="fa fa-google"/>
-                </mui.RaisedButton>
-            </div>
-        </section>
+    <loginDialogContent rt-if="this.state.mode === MODES.LOGIN"
+                        switchToCreateAccount="{this.switchToCreateAccount}"
+                        switchToForgotPassword="{this.switchToForgotPassword}"
+                        loading="{this.props.authData.loading}"
+                        error="{this.props.authData.error}"/>
 
-        <section class="login-divider-section">
-            <div class="divider-line"/>
-            <span class="text">או</span>
+    <createAccountDialogContent rt-if="this.state.mode === MODES.CREATE_USER"
+                                switchToLogin="{this.switchToLogin}"
+                                loading="{this.props.authData.loading}"
+                                error="{this.props.authData.error}"/>
 
-            <div class="divider-line"/>
-        </section>
+    <resetPasswordDialogContent rt-if="this.state.mode === MODES.RESET_PASSWORD"
+                                switchToLogin="{this.switchToLogin}"
+                                switchToChangePassword="{this.switchToChangePassword}"
+                                loading="{this.props.authData.loading}"
+                                error="{this.props.authData.error}"/>
 
-        <section class="user-password-section">
-            <mui.TextField floatingLabelText="דואר אלקטרוני"
-                           fullWidth="{true}"
-                           valueLink="{this.linkState('email')}"/>
+    <changePasswordDialogContent rt-if="this.state.mode === MODES.CHANGE_PASSWORD"
+                                switchToLogin="{this.switchToLogin}"
+                                loading="{this.props.authData.loading}"
+                                error="{this.props.authData.error}"/>
 
-            <mui.TextField type="password"
-                           fullWidth="{true}"
-                           floatingLabelText="סיסמא"
-                           valueLink="{this.linkState('password')}"/>
-
-            <div class="user-password-login-button-wrapper">
-                <mui.RaisedButton rt-scope="this.props.authData.loading as loggingIn"
-                                  disabled="{loggingIn}"
-                                  fullWidth="{true}"
-                                  label="{loggingIn ? 'מתחבר...' : 'התחבר'}"
-                                  backgroundColor="#DD4B39"
-                                  labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
-                                  onClick="{this.login}">
-                </mui.RaisedButton>
-            </div>
-
-            <div class="nav-links-wrapper">
-                <span class="nav-link" onClick="{()=>this.setState({mode: MODES.CREATE_USER})}">צור חשבון</span>
-                <span>|</span>
-                <span class="nav-link" onClick="{()=>this.setState({mode: MODES.RESET_PASSWORD})}">שכחת סיסמא?</span>
-            </div>
-        </section>
-
-        <div rt-if="this.props.authData.error" class="error-msg-section">
-            <span>שם המשתמש או הסיסמא שגויים. אנא נסה שנית.</span>
-        </div>
-
-    </section>
-
-    <section rt-if="this.state.mode === MODES.CREATE_USER" class="create-user-content">
-        <section class="user-password-section">
-            <mui.TextField floatingLabelText="דואר אלקטרוני"
-                           fullWidth="{true}"
-                           valueLink="{this.linkState('email')}"/>
-
-            <mui.TextField type="password"
-                           fullWidth="{true}"
-                           floatingLabelText="סיסמא"
-                           valueLink="{this.linkState('password')}"/>
-
-            <div class="create-user-button-wrapper">
-                <mui.RaisedButton rt-scope="this.props.authData.loading as loggingIn"
-                                  disabled="{loggingIn}"
-                                  fullWidth="{true}"
-                                  label="{loggingIn ? 'יוצר חשבון...' : 'צור חשבון'}"
-                                  backgroundColor="#DD4B39"
-                                  labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
-                                  onClick="{this.createUser}">
-                </mui.RaisedButton>
-            </div>
-
-            <div class="nav-links-wrapper">
-                <span>יש לך סיסמא?</span>
-                <span class="nav-link" onClick="{()=>this.setState({mode: MODES.LOGIN})}">התחבר</span>
-            </div>
-        </section>
-    </section>
 </mui.Dialog>

@@ -20,9 +20,10 @@
 @import "components/dialogs/authDialog";
 @import "components/dialogs/dialogFrame";
 @import "components/dialogs/dialogActions";
-
-
-
+@import "components/dialogs/loginDialogContent";
+@import "components/dialogs/createAccountDialogContent";
+@import "components/dialogs/resetPasswordDialogContent";
+@import "components/dialogs/changePasswordDialogContent";
 
 @import "components/myAccount/myAccount";
 @import "components/loading/loading";

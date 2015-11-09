@@ -1,0 +1,60 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="login-dialog-content">
+
+    <div class="social-buttons-wrapper">
+        <mui.RaisedButton fullWidth="{true}"
+                          label="התחבר באמצעות"
+                          backgroundColor="#3B5998"
+                          labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
+                          onClick="{this.loginWithFacebook}">
+            <i style="{{color: '#ffffff', fontSize: '20px', verticalAlign: 'middle'}}" class="fa fa-facebook"/>
+        </mui.RaisedButton>
+
+        <mui.RaisedButton fullWidth="{true}"
+                          label="התחבר באמצעות"
+                          backgroundColor="#FFF"
+                          style="{{marginTop: '20px'}}"
+                          labelStyle="{{padding: '0 10px', color: '#000' }}"
+                          onClick="{this.loginWithGoogle}">
+            <i style="{{color: '#DD4B39', fontSize: '20px', verticalAlign: 'middle'}}" class="fa fa-google"/>
+        </mui.RaisedButton>
+    </div>
+
+    <div class="login-divider-wrapper">
+        <div class="divider-line"/>
+        <span class="text">או</span>
+        <div class="divider-line"/>
+    </div>
+
+    <div class="user-password-wrapper">
+        <mui.TextField floatingLabelText="דואר אלקטרוני"
+                       fullWidth="{true}"
+                       valueLink="{this.linkState('email')}"/>
+
+        <mui.TextField type="password"
+                       fullWidth="{true}"
+                       floatingLabelText="סיסמא"
+                       valueLink="{this.linkState('password')}"/>
+
+        <mui.RaisedButton disabled="{this.props.loading}"
+                          fullWidth="{true}"
+                          label="{this.getLoginButtonLabel()}"
+                          backgroundColor="#DD4B39"
+                          style="{{marginTop: '15px'}}"
+                          labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
+                          onClick="{this.login}">
+        </mui.RaisedButton>
+    </div>
+
+    <div class="links-wrapper">
+        <span class="nav-link" onClick="{this.props.switchToCreateAccount}">צור חשבון</span>
+        <span class="nav-separator">|</span>
+        <span class="nav-link" onClick="{this.props.switchToForgotPassword}">שכחת סיסמא?</span>
+    </div>
+
+    <div rt-if="this.state.error" class="error-message">
+        <span>שם המשתמש או הסיסמא שגויים. אנא נסה שנית.</span>
+    </div>
+
+</div>

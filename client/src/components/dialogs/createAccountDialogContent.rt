@@ -1,0 +1,34 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="create-account-dialog-content">
+
+    <div class="user-password-wrapper">
+        <mui.TextField floatingLabelText="דואר אלקטרוני"
+                       fullWidth="{true}"
+                       valueLink="{this.linkState('email')}"/>
+
+        <mui.TextField type="password"
+                       fullWidth="{true}"
+                       floatingLabelText="סיסמא"
+                       valueLink="{this.linkState('password')}"/>
+
+        <mui.RaisedButton disabled="{this.props.loading}"
+                          fullWidth="{true}"
+                          label="{this.getCreateAccountButtonLabel()}"
+                          backgroundColor="#DD4B39"
+                          style="{{marginTop: '15px'}}"
+                          labelStyle="{{padding: '0 10px', color: '#ffffff' }}"
+                          onClick="{this.createUser}">
+        </mui.RaisedButton>
+    </div>
+
+    <div class="links-wrapper">
+        <span class="nav-text">יש לך חשבון?</span>
+        <span class="nav-link" onClick="{this.props.switchToLogin}">התחבר</span>
+    </div>
+
+    <div rt-if="this.state.error" class="error-message">
+        <span>יצירת החשבון נכשלה. אנא נסה שנית.</span>
+    </div>
+
+</div>

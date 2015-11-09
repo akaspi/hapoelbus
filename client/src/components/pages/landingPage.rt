@@ -11,7 +11,7 @@
     <a class="click-to-login" onClick="{this.login}">
         <span>התחבר</span>
     </a>
-    <div class="divider-wrapper">
+    <div class="landing-divider-wrapper">
         <div class="divider-line"/>
     </div>
 

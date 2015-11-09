@@ -26,6 +26,12 @@ dispatcher.register(function (action) {
         case actionsConstants.SOCIAL_LOGIN:
             socialLogin(action.payload.provider);
             break;
+        case actionsConstants.RESET_PASSWORD:
+            resetPassword(action.payload.email);
+            break;
+        case actionsConstants.CHANGE_PASSWORD:
+            changePassword(action.payload.email, action.payload.oldPassword, action.payload.newPassword);
+            break;
         case actionsConstants.LOGOUT:
             logout();
             break;
@@ -76,7 +82,7 @@ function login(email, password) {
 }
 
 function socialLogin(provider) {
-    authData.isPending = true;
+    authData.loading = true;
     authData.error = false;
     emitChange();
 
@@ -87,6 +93,41 @@ function socialLogin(provider) {
         })
         .then(function (isAdmin) {
             authData.isAdmin = isAdmin;
+        })
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        });
+}
+
+function resetPassword(email) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    authAPI.resetPassword(email)
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        });
+}
+
+function changePassword(email, oldPassword, newPassword) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    authAPI.changePassword(email, oldPassword, newPassword)
+        .then(function() {
+            return login(email, newPassword);
         })
         .catch(function() {
             authData.error = true;
