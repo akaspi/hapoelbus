@@ -3,7 +3,12 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 
-<dialogFrame onSubmit="{this.updateBooking}" title="עריכת הרשמה">
+<mui.Dialog ref="dialog"
+            title="ערוך הרשמה להסעה"
+            contentStyle="{{width:'360'}}"
+            contentClassName="edit-booking-dialog"
+            autoScrollBodyContent="{true}"
+            modal="{false}">
     <div class="edit-booking-dialog">
         <section>
             <mui.SelectField
@@ -13,9 +18,21 @@
                     floatingLabelText="תחנה"/>
             <div class="field-row">
                 <mui.TextField type="number"
+                               min="{1}"
                                valueLink="{this.linkState('numOfSeats')}"
                                floatingLabelText="מס׳ מקומות"/>
             </div>
         </section>
+
+        <div class="actions">
+            <mui.RaisedButton label="הרשם"
+                              primary="{true}"
+                              onClick="{this.updateBooking}"/>
+
+            <mui.RaisedButton rt-if="!this.props.isModal"
+                              label="בטל"
+                              secondary="{true}"
+                              onClick="{this.hideDialog}"/>
+        </div>
     </div>
-</dialogFrame>
+</mui.Dialog>

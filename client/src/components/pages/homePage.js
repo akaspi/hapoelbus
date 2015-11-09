@@ -19,8 +19,20 @@ function getAllOpenGames(games) {
     });
 }
 
+function getBooking(uid, gameId, bookings) {
+    if (!bookings || !bookings[uid] || !bookings[uid][gameId]) {
+        return {};
+    }
+    return bookings[uid][gameId];
+}
+
 var HomePage = React.createClass({
     render: template,
+    getInitialState: function() {
+      return {
+          editBookingDialogProps: null
+      }
+    },
     getOpenGamesCardData: function () {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
         return _.map(openGameIds, function (gameId) {
@@ -29,7 +41,7 @@ var HomePage = React.createClass({
                 title: vsidMap[game.vsid],
                 subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure)]
             };
-            var isBooked = (this.props.bookingsData.bookings && this.props.bookingsData.bookings[this.props.uid][gameId]);
+            var isBooked = !_.isEmpty(getBooking(this.props.uid, gameId, this.props.bookingsData.bookings));
             if (isBooked) {
                 cardData.ribbon = {label: 'רשום', color: 'Green'};
             }
@@ -46,6 +58,16 @@ var HomePage = React.createClass({
     updateBooking: function(index) {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
         var gameId = openGameIds[index];
+        this.setState({
+            editBookingDialogProps: {
+                uid: this.props.uid,
+                gameId: gameId,
+                booking: getBooking(this.props.uid, gameId, this.props.bookingsData.bookings)
+            }
+        }, function() {
+            this.refs.dialog.showDialog();
+        })
+
     },
     cancelBooking: function(index) {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
