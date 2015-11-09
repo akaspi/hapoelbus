@@ -15,7 +15,11 @@ var Card = React.createClass({
             iconClass: React.PropTypes.string
         })),
         imageUrl: React.PropTypes.string,
-        color: React.PropTypes.string
+        color: React.PropTypes.string,
+        ribbon: React.PropTypes.shape({
+            color: React.PropTypes.oneOf(['Green', 'Red', 'Blue']),
+            label: React.PropTypes.string.isRequired
+        })
     },
     getInitialState: function () {
         return {};

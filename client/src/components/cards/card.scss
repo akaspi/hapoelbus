@@ -2,6 +2,11 @@
 
   $card-image-size: 100px;
 
+  @mixin ribbon-color($textColor, $backgroundColor) {
+    background-color: $backgroundColor;
+    color: $textColor;
+  }
+
   width: 235px;
   position: relative;
   margin: 5px 10px;
@@ -80,6 +85,60 @@
 
       & + .card-actions-item {
       }
+    }
+  }
+  .card-ribbon-wrapper {
+    width: 85px;
+    height: 88px;
+    overflow: hidden;
+    position: absolute;
+    top: -3px;
+    left: -3px;
+
+    .card-ribbon {
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      position: relative;
+      padding: 7px 0;
+      right: -5px;
+      top: 15px;
+      width: 120px;
+      float: right;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+      &.ribbon-Green {
+        @include ribbon-color(#6a6340, #8EBF45);
+      }
+
+      &.ribbon-Red {
+        @include ribbon-color(#fff, #c83d2f);
+      }
+
+      &.ribbon-Blue {
+        @include ribbon-color(#fff, #5C96BB);
+      }
+    }
+
+    &:before, &:after {
+      content: "";
+      border-top: 3px solid #6e8900;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      position: absolute;
+      bottom: -3px;
+    }
+
+    &:before {
+      left: 0;
+    }
+
+    &:after {
+      right: 0;
     }
   }
 }

@@ -1,4 +1,4 @@
-<rt-require dependency="../cards/card" as="gameCard"/>
+<rt-require dependency="../cards/card" as="card"/>
 
 
 <div class="home-page">
@@ -6,6 +6,10 @@
         <i class="material-icons icon">directions_bus</i>
         <h1 class="title">ההסעות הבאות</h1></div>
     <section class="games-section">
-        <gameCard title="chen"/>
+        <card rt-repeat="openGameCard in this.getOpenGamesCardData()"
+                title="{openGameCard.title}"
+                subtitles="{openGameCard.subtitles}"
+                ribbon="{openGameCard.ribbon}"
+              actions="{this.getCustomActions(openGameCardIndex)}"/>
     </section>
 </div>

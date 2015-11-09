@@ -23,10 +23,10 @@
         <loading/>
     </div>
     <div rt-if="initialized && !this.isUserMissingData()">
-        <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE"/>
-        <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" games="{this.props.games}"/>
+        <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE" gamesData="{this.props.gamesData}" uid="{this.props.authData.uid}" bookingsData="{this.props.bookingsData}" usersData="{this.props.usersData}"/>
+        <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" gamesData="{this.props.gamesData}"/>
         <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
-        <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" games="{this.props.games}" usersData="{this.props.usersData}" booking="{this.props.booking}"/>
+        <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" gamesData="{this.props.gamesData}" usersData="{this.props.usersData}" bookingsData="{this.props.bookingsData}"/>
     </div>
 
     <editUserDataDialog rt-if="initialized && this.isUserMissingData()"
