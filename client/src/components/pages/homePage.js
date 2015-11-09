@@ -9,9 +9,6 @@ var dateUtils = require('../../utils/dateUtils');
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
-function getOpenStatus() {
-    return _.without(_.keys(gameStatusMap), 'CLOSED');
-}
 
 function getAllOpenGames(games) {
     return _.omit(games, function (game) {
@@ -42,6 +39,7 @@ function isUserPaid(uid, users) {
 function getGameStatusLabel(game) {
     return 'סטאטוס: ' + gameStatusMap[game.status];
 }
+
 
 var HomePage = React.createClass({
     render: template,
@@ -75,7 +73,7 @@ var HomePage = React.createClass({
         var gameIsOpenForMembersOnly = isGameOpenForMembersOnly(game);
         var gameIsOpenForAll = isGameOpenForAll(game);
         var isFullyBooked = false;
-        var booking = getBooking(uid, gameId, this.props.bookingsData.bookings);
+        var isBooked = !_.isEmpty(getBooking(uid, gameId, this.props.bookingsData.bookings));
 
         if (isFullyBooked) {
             if (_.isEmpty(booking)) {
@@ -90,7 +88,7 @@ var HomePage = React.createClass({
             if (!isPaidUser) {
                 return [];
             }
-            if (!_.isEmpty(booking)) {
+            if (isBooked) {
                 return [
                     {label: 'ערוך', onClick: this.updateBooking.bind(this, index) },
                     {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
@@ -102,7 +100,7 @@ var HomePage = React.createClass({
         }
 
         if (gameIsOpenForAll) {
-            if (!_.isEmpty(booking)) {
+            if (isBooked) {
                 return [
                     {label: 'ערוך', onClick: this.updateBooking.bind(this, index) },
                     {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
@@ -120,12 +118,12 @@ var HomePage = React.createClass({
             editBookingDialogProps: {
                 uid: this.props.uid,
                 gameId: gameId,
+                user: this.props.usersData.users[this.props.uid],
                 booking: getBooking(this.props.uid, gameId, this.props.bookingsData.bookings)
             }
         }, function() {
             this.refs.dialog.showDialog();
         })
-
     },
     cancelBooking: function(index) {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
