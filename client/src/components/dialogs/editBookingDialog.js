@@ -25,6 +25,12 @@ var EditBookingDialog = React.createClass({
             return {payload: key, text: val};
         });
     },
+    getNumOfSeatsMenuItems: function() {
+        var maxSeats = (this.props.user.seasonTicket && this.props.user.seasonTicket.maxSeats) || 1;
+        return _.times(maxSeats, function(n) {
+           return {payload: n+1, text: n+1};
+        });
+    },
     updateBooking: function () {
         actionsCreator.createAction(actionsConstants.UPDATE_BOOKING, {
             uid: this.props.uid,

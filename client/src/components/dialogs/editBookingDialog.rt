@@ -16,12 +16,12 @@
                     valueLink={this.linkState('station')}
                     iconStyle="{{left: 0, right: 'initial'}}"
                     floatingLabelText="תחנה"/>
-            <div class="field-row">
-                <mui.TextField type="number"
-                               min="{1}"
-                               valueLink="{this.linkState('numOfSeats')}"
-                               floatingLabelText="מס׳ מקומות"/>
-            </div>
+
+            <mui.SelectField
+                    menuItems="{this.getNumOfSeatsMenuItems()}"
+                    valueLink={this.linkState('numOfSeats')}
+                    iconStyle="{{left: 0, right: 'initial'}}"
+                    floatingLabelText="מס׳ מקומות"/>
         </section>
 
         <div class="actions">
