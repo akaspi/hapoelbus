@@ -4,6 +4,7 @@
 
 <mui.Dialog ref="dialog" onDismiss="{this.onDismiss}" contentStyle="{{width:'360'}}" autoScrollBodyContent="{true}" contentClassName="auth-dialog" rt-scope="this.getDialogModes() as MODES">
     <section rt-if="this.state.mode === MODES.LOGIN" class="login-content">
+
         <section class="social-login-section">
             <div class="social-button-wrapper">
                 <mui.RaisedButton fullWidth="{true}"
@@ -24,12 +25,14 @@
                 </mui.RaisedButton>
             </div>
         </section>
+
         <section class="login-divider-section">
             <div class="divider-line"/>
             <span class="text">או</span>
 
             <div class="divider-line"/>
         </section>
+
         <section class="user-password-section">
             <mui.TextField floatingLabelText="דואר אלקטרוני"
                            fullWidth="{true}"
@@ -56,9 +59,14 @@
                 <span>|</span>
                 <span class="nav-link" onClick="{()=>this.setState({mode: MODES.RESET_PASSWORD})}">שכחת סיסמא?</span>
             </div>
-
         </section>
+
+        <div rt-if="this.props.authData.error" class="error-msg-section">
+            <span>שם המשתמש או הסיסמא שגויים. אנא נסה שנית.</span>
+        </div>
+
     </section>
+
     <section rt-if="this.state.mode === MODES.CREATE_USER" class="create-user-content">
         <section class="user-password-section">
             <mui.TextField floatingLabelText="דואר אלקטרוני"

@@ -11,7 +11,7 @@ var authData = {
     uid: authAPI.getUID(),
     isAdmin: false,
     loading: false,
-    errorMsg: null
+    error: false
 };
 
 
@@ -34,17 +34,27 @@ dispatcher.register(function (action) {
 
 function createUser(email, password) {
     authData.loading = true;
+    authData.error = false;
     emitChange();
 
     return authAPI.createUser(email, password)
         .then(function () {
             return login(email, password);
+        })
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
         });
 
 }
 
 function login(email, password) {
     authData.loading = true;
+    authData.error = false;
     emitChange();
 
     return authAPI.login(email, password)
@@ -52,17 +62,22 @@ function login(email, password) {
             authData.uid = uid;
             return authAPI.isAdmin(uid);
         })
-        .then(function (isAdmin) {
+        .then(function(isAdmin) {
             authData.isAdmin = isAdmin;
         })
-        .then(function () {
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
             authData.loading = false;
             emitChange();
-        });
+        })
 }
 
 function socialLogin(provider) {
     authData.isPending = true;
+    authData.error = false;
     emitChange();
 
     authAPI.socialLogin(provider)
@@ -73,7 +88,11 @@ function socialLogin(provider) {
         .then(function (isAdmin) {
             authData.isAdmin = isAdmin;
         })
-        .then(function () {
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
             authData.loading = false;
             emitChange();
         });
@@ -84,7 +103,7 @@ function logout() {
     authData.uid = null;
     authData.isAdmin = false;
     authData.loading = false;
-    authData.errorMsg = null;
+    authData.error = false;
     emitChange();
 }
 
