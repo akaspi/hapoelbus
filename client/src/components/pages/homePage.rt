@@ -9,6 +9,7 @@
         <h1 class="title">ההסעות הבאות</h1></div>
     <section class="games-section">
         <card rt-repeat="openGameCard in this.getOpenGamesCardData()"
+              key="openGameCard-{openGameCardIndex}"
               title="{openGameCard.title}"
               subtitles="{openGameCard.subtitles}"
               ribbon="{openGameCard.ribbon}"

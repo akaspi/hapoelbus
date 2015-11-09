@@ -4,10 +4,10 @@
     </div>
     <div class="card-content">
         <h1 class="card-title">{this.props.title}</h1>
-        <p rt-repeat="subtitle in this.props.subtitles" class="card-sub-title">{subtitle}</p>
+        <p rt-repeat="subtitle in this.props.subtitles" key="card-subtitle-{subtitleIndex}" class="card-sub-title">{subtitle}</p>
     </div>
     <ul class="card-actions-wrapper">
-        <li rt-repeat="action in this.props.actions" onClick="{action.onClick}" class="card-actions-item">
+        <li rt-repeat="action in this.props.actions" key="card-action-{actionIndex}" onClick="{action.onClick}" class="card-actions-item">
             <span rt-if="action.label">{action.label}</span>
             <i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>
         </li>
