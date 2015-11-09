@@ -15,7 +15,7 @@ function getOpenStatus() {
 
 function getAllOpenGames(games) {
     return _.omit(games, function (game) {
-        return _.contains(game.status, getOpenStatus())
+        return !(isGameOpenForMembersOnly(game) || isGameOpenForAll(game));
     });
 }
 
@@ -24,6 +24,23 @@ function getBooking(uid, gameId, bookings) {
         return {};
     }
     return bookings[uid][gameId];
+}
+
+function isGameOpenForAll(game) {
+    return gameStatusMap[game.status] === gameStatusMap.OPEN_FOR_ALL;
+}
+
+function isGameOpenForMembersOnly(game) {
+    return gameStatusMap[game.status] === gameStatusMap.OPEN_FOR_MEMBERS;
+}
+
+function isUserPaid(uid, users) {
+    var user = users[uid];
+    return !!user.seasonTicket && user.seasonTicket.maxSeats > 0;
+}
+
+function getGameStatusLabel(game) {
+    return 'סטאטוס: ' + gameStatusMap[game.status];
 }
 
 var HomePage = React.createClass({
@@ -39,7 +56,7 @@ var HomePage = React.createClass({
             var game = this.props.gamesData.games[gameId];
             var cardData = {
                 title: vsidMap[game.vsid],
-                subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure)]
+                subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure), getGameStatusLabel(game)]
             };
             var isBooked = !_.isEmpty(getBooking(this.props.uid, gameId, this.props.bookingsData.bookings));
             if (isBooked) {
@@ -50,10 +67,51 @@ var HomePage = React.createClass({
         }, this);
     },
     getCustomActions: function(index) {
-        return [
-            {label: 'הרשם', onClick: this.updateBooking.bind(this, index) },
-            {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
-        ];
+        var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
+        var gameId = openGameIds[index];
+        var game = this.props.gamesData.games[gameId];
+        var uid = this.props.uid;
+        var isPaidUser = isUserPaid(uid, this.props.usersData.users);
+        var gameIsOpenForMembersOnly = isGameOpenForMembersOnly(game);
+        var gameIsOpenForAll = isGameOpenForAll(game);
+        var isFullyBooked = false;
+        var booking = getBooking(uid, gameId, this.props.bookingsData.bookings);
+
+        if (isFullyBooked) {
+            if (_.isEmpty(booking)) {
+                return [];
+            }
+            return [
+                {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+            ];
+        }
+
+        if (gameIsOpenForMembersOnly) {
+            if (!isPaidUser) {
+                return [];
+            }
+            if (!_.isEmpty(booking)) {
+                return [
+                    {label: 'ערוך', onClick: this.updateBooking.bind(this, index) },
+                    {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+                ];
+            }
+            return [
+                {label: 'הרשם', onClick: this.updateBooking.bind(this, index) }
+            ];
+        }
+
+        if (gameIsOpenForAll) {
+            if (!_.isEmpty(booking)) {
+                return [
+                    {label: 'ערוך', onClick: this.updateBooking.bind(this, index) },
+                    {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+                ];
+            }
+            return [
+                {label: 'הרשם', onClick: this.updateBooking.bind(this, index) }
+            ];
+        }
     },
     updateBooking: function(index) {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
