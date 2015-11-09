@@ -1,6 +1,5 @@
-<rt-require dependency="./dialogFrame" as="dialogFrame"/>
 <rt-require dependency="material-ui" as="mui"/>
-
+<rt-require dependency="./dialogActions" as="dialogActions"/>
 
 <mui.Dialog ref="dialog"
             title="{this.props.title}"
@@ -67,15 +66,5 @@
             </div>
         </section>
 
-    <div class="actions">
-        <mui.RaisedButton label="שמור"
-                          primary="{true}"
-                          onClick="{this.updateUser}"/>
-
-        <mui.RaisedButton rt-if="!this.props.isModal"
-                          label="בטל"
-                          secondary="{true}"
-                          onClick="{this.hideDialog}">
-        </mui.RaisedButton>
-    </div>
+    <dialogActions rt-props="this.getActionButtons()"/>
 </mui.Dialog>

@@ -39,6 +39,18 @@ var EditBookingDialog = React.createClass({
         });
         this.hideDialog();
     },
+    getActionButtons: function() {
+      return {
+          okButton: {
+              label: 'עדכן',
+              onClick: this.updateBooking
+          },
+          cancelButton: {
+              label: 'בטל',
+              onClick: this.hideDialog
+          }
+      }
+    },
     showDialog: function () {
         this.refs.dialog.show();
     },

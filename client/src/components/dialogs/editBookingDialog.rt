@@ -1,7 +1,5 @@
-<rt-require dependency="./dialogFrame" as="dialogFrame"/>
-<rt-require dependency="../../utils/dateUtils" as="dateUtils"/>
 <rt-require dependency="material-ui" as="mui"/>
-
+<rt-require dependency="./dialogActions" as="dialogActions"/>
 
 <mui.Dialog ref="dialog"
             title="ערוך הרשמה להסעה"
@@ -9,6 +7,7 @@
             contentClassName="edit-booking-dialog"
             autoScrollBodyContent="{true}"
             modal="{false}">
+
     <div class="edit-booking-dialog">
         <section>
             <mui.SelectField
@@ -24,15 +23,7 @@
                     floatingLabelText="מס׳ מקומות"/>
         </section>
 
-        <div class="actions">
-            <mui.RaisedButton label="הרשם"
-                              primary="{true}"
-                              onClick="{this.updateBooking}"/>
+        <dialogActions rt-props="this.getActionButtons()"/>
 
-            <mui.RaisedButton rt-if="!this.props.isModal"
-                              label="בטל"
-                              secondary="{true}"
-                              onClick="{this.hideDialog}"/>
-        </div>
     </div>
 </mui.Dialog>

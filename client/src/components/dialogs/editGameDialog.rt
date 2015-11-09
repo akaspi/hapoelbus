@@ -2,7 +2,6 @@
 <rt-require dependency="../../utils/dateUtils" as="dateUtils"/>
 <rt-require dependency="material-ui" as="mui"/>
 
-
 <dialogFrame onSubmit="{this.updateGame}" title="עריכת הסעה">
     <div class="edit-game-dialog">
         <section>
@@ -41,36 +40,6 @@
             </div>
         </section>
 
-
-        <!--<section>-->
-            <!--<h2>פרטי המנוי</h2>-->
-
-            <!--<div class="field-row">-->
-                <!--<mui.TextField type="number"-->
-                               <!--valueLink="{this.linkState('seasonTicket.maxSeats')}"-->
-                               <!--floatingLabelText="כמות מנויים"/>-->
-            <!--</div>-->
-            <!--<div class="field-row">-->
-                <!--<mui.TextField type="number"-->
-                               <!--valueLink="{this.linkState('seasonTicket.ticketId')}"-->
-                               <!--floatingLabelText="מס׳ מנוי"/>-->
-            <!--</div>-->
-        <!--</section>-->
-
-
-        <!--<section>-->
-            <!--<h2>רשימת תפוצה</h2>-->
-            <!--<div class="field-row">-->
-                <!--<mui.Toggle-->
-                        <!--toggled="{this.state.distribution.sms}" onToggle="{this.onSmsListChange}"-->
-                        <!--label="SMS"/>-->
-            <!--</div>-->
-            <!--<div class="field-row">-->
-                <!--<mui.Toggle-->
-                        <!--toggled="{this.state.distribution.mail}" onToggle="{this.onEmailListChange}"-->
-                        <!--label="אימייל"/>-->
-            <!--</div>-->
-        <!--</section>-->
 
     </div>
 </dialogFrame>

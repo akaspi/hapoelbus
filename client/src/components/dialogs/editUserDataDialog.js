@@ -63,6 +63,19 @@ var EditUserDataDialog = React.createClass({
         this.hideDialog();
     },
 
+    getActionButtons: function() {
+        return {
+            okButton: {
+                label: 'שמור',
+                onClick: this.updateUser
+            },
+            cancelButton: {
+                label: 'בטל',
+                onClick: this.hideDialog
+            }
+        }
+    },
+
     showDialog: function() {
         this.refs.dialog.show();
     },
