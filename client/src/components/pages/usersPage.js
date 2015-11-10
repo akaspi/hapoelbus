@@ -38,6 +38,7 @@ function getUserColor(user) {
 }
 
 var UsersPage = React.createClass({
+    displayName: 'UsersPage',
     getInitialState: function () {
         return {
             filters: {

@@ -4,6 +4,7 @@ var React = require('react');
 var template = require('./cardsDisplayer.rt');
 
 var CardsDisplayer = React.createClass({
+    displayName: 'CardsDisplayer',
     getCardActions: function (index) {
         var self = this;
         return [

@@ -9,10 +9,9 @@ var actionsConstants = require('../../actions/actionsConstants');
 var authDialog = require('../dialogs/authDialog');
 
 var LandingPage = React.createClass({
+    displayName: 'LandingPage',
     login: function() {
         this.refs.authDialog.showDialog();
-        //actionsCreator.createAction(actionsConstants.LOGIN, {email: 'user1@gmail.com', password: '1234'});
-        //actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {dialogClass: authDialog});
     },
     render: template
 });

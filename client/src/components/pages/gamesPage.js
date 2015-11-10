@@ -21,6 +21,7 @@ function getRibbonData(game) {
 }
 
 var GamesPage = React.createClass({
+    displayName: 'GamesPage',
     getFilteredUIDs: function () {
         var gameIds = _.keys(this.props.gamesData);
         return gameIds;

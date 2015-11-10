@@ -22,6 +22,7 @@ function getBookingForAGame(booking, gameId) {
 }
 
 var BookingPage = React.createClass({
+    displayName: 'BookingPage',
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {

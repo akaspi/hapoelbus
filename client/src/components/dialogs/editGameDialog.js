@@ -12,6 +12,7 @@ var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
 var EditGameDialog = React.createClass({
+    displayName: 'EditGameDialog',
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
         return _.cloneDeep(this.props.data.gameData);

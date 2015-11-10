@@ -42,7 +42,7 @@ function getGameStatusLabel(game) {
 
 
 var HomePage = React.createClass({
-    render: template,
+    displayName: 'HomePage',
     getInitialState: function() {
       return {
           editBookingDialogProps: null
@@ -129,7 +129,8 @@ var HomePage = React.createClass({
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
         var gameId = openGameIds[index];
         actionsCreator.createAction(actionsConstants.CANCEL_BOOKING, {uid: this.props.uid, gameId: gameId});
-    }
+    },
+    render: template
 });
 
 module.exports = HomePage;

@@ -27,8 +27,8 @@ function getStateFromStores() {
 }
 
 var Root = React.createClass({
+    displayName: 'Root',
     mixins: [React.addons.LinkedStateMixin],
-
     getInitialState: function () {
         return getStateFromStores();
     },

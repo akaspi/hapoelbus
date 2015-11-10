@@ -4,6 +4,7 @@ var React = require('react');
 var template = require('./card.rt');
 
 var Card = React.createClass({
+    displayName: 'Card',
     propTypes: {
         title: React.PropTypes.string.isRequired,
         subtitles: React.PropTypes.arrayOf(React.PropTypes.string, React.PropTypes.number),
