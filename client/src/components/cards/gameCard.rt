@@ -1,6 +1,0 @@
-<rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="lodash" as="_"/>
-
-<div class="game-card">
-    i'm game card
-</div>
