@@ -33,12 +33,12 @@
 
             <div class="field-row">
                 <mui.TextField type="number"
-                               valueLink="{this.linkState('seasonTicket.maxSeats')}"
+                               valueLink="{this.linkNumericState('seasonTicket.maxSeats')}"
                                floatingLabelText="כמות מנויים"/>
             </div>
             <div class="field-row">
                 <mui.TextField type="number"
-                               valueLink="{this.linkState('seasonTicket.ticketId')}"
+                               valueLink="{this.linkNumericState('seasonTicket.ticketId')}"
                                floatingLabelText="מס׳ מנוי"/>
             </div>
         </section>

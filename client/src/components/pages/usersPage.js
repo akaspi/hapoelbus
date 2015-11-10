@@ -45,7 +45,8 @@ var UsersPage = React.createClass({
                 hasSeasonTicketsOnly: true,
                 doNotHasSeasonTicketsOnly: true,
                 requestedContact: true
-            }
+            },
+            selectedUID: null
         }
     },
     onFilterChange: function (filterName, val) {
@@ -74,17 +75,12 @@ var UsersPage = React.createClass({
             }
         }, this);
     },
-    onCreateUserData: function () {
-        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {dialogClass: editUserDataDialog, data: {}});
-    },
     onEditUserData: function (index) {
         var UIDs = this.getFilteredUIDs();
         var uid = UIDs[index];
-        var user = this.props.usersData.users[uid];
-        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
-            dialogClass: editUserDataDialog,
-            data: {uid: uid, user: user}
-        });
+        this.setState({selectedUID: uid}, function() {
+            this.refs.dialog.showDialog();
+        }.bind(this));
     },
     onRemoveUserData: function () {
     },

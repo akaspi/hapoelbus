@@ -30,6 +30,9 @@ var EditUserDataDialog = React.createClass({
     getInitialState: function () {
         return _.defaultsDeep(_.cloneDeep(this.props.user), defaultUser);
     },
+    componentWillReceiveProps: function(nextProps) {
+        this.setState(_.defaultsDeep(_.cloneDeep(nextProps.user), defaultUser))
+    },
     onSmsListChange: function (e, value) {
         var newState = _.merge({}, this.state, {
             distribution: {

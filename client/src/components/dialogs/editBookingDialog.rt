@@ -18,7 +18,7 @@
 
             <mui.SelectField
                     menuItems="{this.getNumOfSeatsMenuItems()}"
-                    valueLink={this.linkState('numOfSeats')}
+                    valueLink={this.linkNumericState('numOfSeats')}
                     iconStyle="{{left: 0, right: 'initial'}}"
                     floatingLabelText="מס׳ מקומות"/>
         </section>

@@ -1,6 +1,6 @@
-<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
-<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
 <rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
+<rt-require dependency="../dialogs/editUserDataDialog" as="editUserDataDialog"/>
 
 <div class="users-page">
     <div class="title-wrapper">
@@ -40,8 +40,12 @@
     <div class="cards-displayer-wrapper">
         <cardsDisplayer
                 data="{this.getCardDisplayerData()}"
-                onCreate="{this.onCreateUserData}"
-                onEdit="{this.onEditUserData}"
-                onRemove="{this.onRemoveUserData}"/>
+                onEdit="{this.onEditUserData}"/>
     </div>
+
+    <editUserDataDialog rt-if="this.state.selectedUID" key="someKey" ref='dialog'
+                        uid="{this.state.selectedUID}"
+                        user="{this.props.usersData.users[this.state.selectedUID]}"
+                        isModal="{false}"
+                        title="עדכון פרטי משתמש"/>
 </div>

@@ -3,8 +3,6 @@
 var React = require('react');
 var template = require('./authDialog.rt');
 var muiMixin = require('../mixins/mui-mixin');
-var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
-var stationsMap = require('json!../../utils/stationsMap.json');
 
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
@@ -18,7 +16,7 @@ var MODES = {
 
 var AuthDialog = React.createClass({
     displayName: 'AuthDialog',
-    mixins: [muiMixin, deepLinkStateMixin],
+    mixins: [muiMixin],
     getInitialState: function() {
       return {
           mode: MODES.LOGIN,

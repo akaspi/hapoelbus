@@ -59,7 +59,7 @@ function getUsers() {
 
 function updateUser(uid, user) {
     var updatePromises = _.map(userPathsData, function(pathData) {
-        if (user[pathData.dataKey]) {
+        if (!_.isUndefined(user[pathData.dataKey])) {
             var path =  pathData.path + '/' + uid;
             var dataToUpdate = user[pathData.dataKey];
             if (_.isPlainObject(dataToUpdate)) {

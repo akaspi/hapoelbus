@@ -28,7 +28,7 @@
             </div>
             <div class="field-row">
                 <mui.TextField type="number"
-                               valueLink="{this.linkState('capacity')}"
+                               valueLink="{this.linkNumericState('capacity')}"
                                floatingLabelText="מס׳ מקומות"/>
             </div>
             <div class="field-row">
