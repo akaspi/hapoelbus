@@ -12,13 +12,16 @@ var actionsConstants = require('../../actions/actionsConstants');
 var defaultBooking = {
     numOfSeats: 1,
     station: _.keys(stationsMap)[0],
-    comments: ""
+    comment: ""
 };
 
 var EditBookingDialog = React.createClass({
+    displayName: 'EditBookingDialog',
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
-        return _.defaults(_.cloneDeep(this.props.booking), defaultBooking);
+        return {
+            booking: _.defaults(_.cloneDeep(this.props.booking), defaultBooking)
+        };
     },
     getStationsMenuItems: function () {
         return _.map(stationsMap, function (val, key) {
@@ -35,27 +38,8 @@ var EditBookingDialog = React.createClass({
         actionsCreator.createAction(actionsConstants.UPDATE_BOOKING, {
             uid: this.props.uid,
             gameId: this.props.gameId,
-            bookingData: this.state
+            bookingData: _.omit(this.state.booking, _.isEmpty) // for empty comments
         });
-        this.hideDialog();
-    },
-    getActionButtons: function() {
-      return {
-          okButton: {
-              label: 'עדכן',
-              onClick: this.updateBooking
-          },
-          cancelButton: {
-              label: 'בטל',
-              onClick: this.hideDialog
-          }
-      }
-    },
-    showDialog: function () {
-        this.refs.dialog.show();
-    },
-    hideDialog: function () {
-        this.refs.dialog.dismiss();
     },
     render: template
 });

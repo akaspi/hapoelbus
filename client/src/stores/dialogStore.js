@@ -10,7 +10,10 @@ var dialogToDisplay = null;
 dispatcher.register(function(action) {
     switch(action.actionType) {
         case actionsConstants.SHOW_DIALOG:
-            showDialog(action.payload.dialogClass, action.payload.data);
+            showDialog(action.payload.dialog, action.payload.props);
+            break;
+        case actionsConstants.UPDATE_DIALOG_PROPS:
+            updateDialogProps(action.payload.props);
             break;
         case actionsConstants.CLOSE_DIALOG:
             closeDialog();
@@ -18,8 +21,13 @@ dispatcher.register(function(action) {
     }
 });
 
-function showDialog(dialogClass, data) {
-    dialogToDisplay = { dialogClass: dialogClass, data: data };
+function showDialog(dialogClass, dialogProps) {
+    dialogToDisplay = { dialog: dialogClass, props: dialogProps };
+    emitChange();
+}
+
+function updateDialogProps(props) {
+    _.merge(dialogToDisplay.props, props);
     emitChange();
 }
 

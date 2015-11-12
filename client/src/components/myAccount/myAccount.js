@@ -16,6 +16,9 @@ var MyAccount = React.createClass({
         var propsToCheck = props || this.props;
         return propsToCheck.usersData.initialized && propsToCheck.gamesData.initialized && propsToCheck.bookingsData.initialized;
     },
+    hasErrors: function() {
+        return this.props.authData.error || this.props.usersData.error || this.props.gamesData.error || this.props.bookingsData.error;
+    },
     componentDidMount: function () {
         actionsCreator.createAction(actionsConstants.LOAD_USERS, {});
         actionsCreator.createAction(actionsConstants.LOAD_GAMES, {});

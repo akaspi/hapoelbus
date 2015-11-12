@@ -14,8 +14,8 @@
 
 
     <div class="dialog-layer" rt-if="this.state.dialogToDisplay">
-        <div rt-scope="this.state.dialogToDisplay.dialogClass as dialog1">
-            <dialog1 data="{this.state.dialogToDisplay.data}"/>
+        <div rt-scope="this.state.dialogToDisplay.dialog as dialogComp">
+            <dialogComp rt-props="this.state.dialogToDisplay.props"/>
         </div>
     </div>
 </div>

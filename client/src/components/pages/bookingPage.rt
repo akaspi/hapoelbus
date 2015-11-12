@@ -1,5 +1,4 @@
 <rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
-<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
 <rt-require dependency="material-ui" as="mui"/>
 
 <div class="booking-page">

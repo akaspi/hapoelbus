@@ -5,6 +5,7 @@
 <rt-require dependency="../pages/usersPage" as="usersPage"/>
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../loading/loading" as="loading"/>
+<rt-require dependency="../notification/notification" as="notification"/>
 <rt-require dependency="../dialogs/editUserDataDialog" as="editUserDataDialog"/>
 
 <div class="my-account" rt-scope="this.isDataInitialized() as initialized">
@@ -23,10 +24,13 @@
         <loading/>
     </div>
     <div rt-if="initialized && !this.isUserMissingData()">
-        <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE" gamesData="{this.props.gamesData}" uid="{this.props.authData.uid}" bookingsData="{this.props.bookingsData}" usersData="{this.props.usersData}"/>
+        <homePage rt-if="this.props.currentPage === pagesConstants.HOME_PAGE" gamesData="{this.props.gamesData}"
+                  uid="{this.props.authData.uid}" bookingsData="{this.props.bookingsData}"
+                  usersData="{this.props.usersData}"/>
         <gamesPage rt-if="this.props.currentPage === pagesConstants.GAMES_PAGE" gamesData="{this.props.gamesData}"/>
         <usersPage rt-if="this.props.currentPage === pagesConstants.USERS_PAGE" usersData="{this.props.usersData}"/>
-        <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" gamesData="{this.props.gamesData}" usersData="{this.props.usersData}" bookingsData="{this.props.bookingsData}"/>
+        <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE" gamesData="{this.props.gamesData}"
+                     usersData="{this.props.usersData}" bookingsData="{this.props.bookingsData}"/>
     </div>
 
     <editUserDataDialog rt-if="initialized && this.isUserMissingData()"
@@ -36,4 +40,7 @@
                         createMode="{true}"
                         isModal="{true}"
                         title="כותרת"/>
+
+    <mui.Snackbar rt-if="this.hasErrors()" openOnMount="{true}" autoHideDuration="{5000}" message="אירעה שגיאה במערכת" />
+
 </div>

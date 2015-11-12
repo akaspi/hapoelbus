@@ -6,7 +6,7 @@ var pagesConstants = require('../constants/pagesConstants');
 
 var listeners = [];
 
-var currentPage = pagesConstants.USERS_PAGE;
+var currentPage = pagesConstants.BOOKING_PAGE;
 
 dispatcher.register(function(action) {
     switch(action.actionType) {

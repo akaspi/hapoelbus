@@ -10,7 +10,7 @@ var gamesData = {
     initialized: false,
     games: null,
     loading: false,
-    errorMsg: null
+    error: false
 };
 
 dispatcher.register(function(action) {
@@ -35,31 +35,49 @@ dispatcher.register(function(action) {
 
 function loadGames() {
     gamesData.loading = true;
+    gamesData.error = false;
     emitChange();
 
-    return gamesAPI.getGames().then(function(allGames) {
-        gamesData.games = _.cloneDeep(allGames);
-        gamesData.loading = false;
-        gamesData.initialized = true;
-        emitChange();
-    }, function() {});
+    return gamesAPI.getGames()
+        .then(function(allGames) {
+            gamesData.games = _.cloneDeep(allGames);
+            gamesData.initialized = true;
+        })
+        .catch(function() {
+           gamesData.error = true;
+        })
+        .finally(function() {
+            gamesData.loading = false;
+            emitChange();
+        })
 }
 
 function createGame(gameData) {
     gamesData.loading = true;
+    gamesData.error = false;
     emitChange();
 
     gamesAPI.createGame(gameData, function() {
         return loadGames();
     }, function() {});
 }
+
 function updateGame(gameId, gameData) {
     gamesData.loading = true;
+    gamesData.error = false;
     emitChange();
 
-    return gamesAPI.updateGame(gameId, gameData).then(function() {
-        return loadGames();
-    });
+    return gamesAPI.updateGame(gameId, gameData)
+        .then(function() {
+            return loadGames();
+        })
+        .catch(function() {
+            gamesData.error = true;
+        })
+        .finally(function() {
+            gamesData.loading = false;
+            emitChange();
+        });
 }
 function removeGame(gameId) {
     gamesData.loading = true;

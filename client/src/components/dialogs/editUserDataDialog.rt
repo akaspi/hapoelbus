@@ -1,70 +1,69 @@
 <rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="./dialogActions" as="dialogActions"/>
+<rt-require dependency="./frames/dialogFrame" as="dialogFrame"/>
 
-<mui.Dialog ref="dialog"
-            title="{this.props.title}"
-            contentStyle="{{width:'360'}}"
-            contentClassName="edit-user-data-dialog"
-            autoScrollBodyContent="{true}"
-            modal="{this.props.isModal}">
+<dialogFrame ref="dialog"
+             title="{this.props.title}"
+             contentClassName="edit-user-data-dialog"
+             modal="{this.props.isModal}"
+             onSubmit="{this.updateUser}">
 
-        <section>
-            <h2>פרטים אישיים</h2>
+    <section>
+        <h2>פרטים אישיים</h2>
 
-            <div class="field-row">
-                <mui.TextField
-                        valueLink="{this.linkState('info.displayName')}"
-                        floatingLabelText="שם מלא"/>
-            </div>
-            <div class="field-row">
-                <mui.TextField
-                        valueLink="{this.linkState('info.phone')}"
-                        floatingLabelText="טלפון"/>
-            </div>
-            <div class="field-row">
-                <mui.TextField
-                        valueLink="{this.linkState('info.email')}"
-                        floatingLabelText="דואר אלקטרוני"/>
-            </div>
-        </section>
+        <div class="field-row">
+            <mui.TextField
+                    valueLink="{this.linkState('user.info.displayName')}"
+                    floatingLabelText="שם מלא"/>
+        </div>
+        <div class="field-row">
+            <mui.TextField
+                    valueLink="{this.linkState('user.info.phone')}"
+                    floatingLabelText="טלפון"/>
+        </div>
+        <div class="field-row">
+            <mui.TextField
+                    valueLink="{this.linkState('user.info.email')}"
+                    floatingLabelText="דואר אלקטרוני"/>
+        </div>
+    </section>
 
-        <section rt-if="!this.props.createMode">
-            <h2>פרטי המנוי</h2>
+    <section rt-if="!this.props.createMode">
+        <h2>פרטי המנוי</h2>
 
-            <div class="field-row">
-                <mui.TextField type="number"
-                               valueLink="{this.linkNumericState('seasonTicket.maxSeats')}"
-                               floatingLabelText="כמות מנויים"/>
-            </div>
-            <div class="field-row">
-                <mui.TextField type="number"
-                               valueLink="{this.linkNumericState('seasonTicket.ticketId')}"
-                               floatingLabelText="מס׳ מנוי"/>
-            </div>
-        </section>
+        <div class="field-row">
+            <mui.TextField type="number"
+                           valueLink="{this.linkNumericState('user.seasonTicket.maxSeats')}"
+                           floatingLabelText="כמות מנויים"/>
+        </div>
+        <div class="field-row">
+            <mui.TextField type="number"
+                           valueLink="{this.linkNumericState('user.seasonTicket.ticketId')}"
+                           floatingLabelText="מס׳ מנוי"/>
+        </div>
+    </section>
 
-        <section>
-            <h2>יצירת קשר</h2>
-            <div class="field-row">
-                <mui.Toggle
-                        toggled="{this.state.contactRequest}" onToggle="{this.onContactRequestChange}"
-                        label="מעוניין ביצירת קשר לגבי רכישת מנוי"/>
-            </div>
-        </section>
+    <section>
+        <h2>יצירת קשר</h2>
 
-        <section>
-            <h2>רשימת תפוצה</h2>
-            <div class="field-row">
-                <mui.Toggle
-                        toggled="{this.state.distribution.sms}" onToggle="{this.onSmsListChange}"
-                        label="SMS"/>
-            </div>
-            <div class="field-row">
-                <mui.Toggle
-                        toggled="{this.state.distribution.mail}" onToggle="{this.onEmailListChange}"
-                        label="אימייל"/>
-            </div>
-        </section>
+        <div class="field-row">
+            <mui.Toggle
+                    toggled="{this.state.user.contactRequest}" onToggle="{this.onContactRequestChange}"
+                    label="מעוניין ביצירת קשר לגבי רכישת מנוי"/>
+        </div>
+    </section>
 
-    <dialogActions rt-props="this.getActionButtons()"/>
-</mui.Dialog>
+    <section>
+        <h2>רשימת תפוצה</h2>
+
+        <div class="field-row">
+            <mui.Toggle
+                    toggled="{this.state.user.distribution.sms}" onToggle="{this.onSmsListChange}"
+                    label="SMS"/>
+        </div>
+        <div class="field-row">
+            <mui.Toggle
+                    toggled="{this.state.user.distribution.mail}" onToggle="{this.onEmailListChange}"
+                    label="אימייל"/>
+        </div>
+    </section>
+</dialogFrame>

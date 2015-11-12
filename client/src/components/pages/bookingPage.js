@@ -11,14 +11,19 @@ var actionsConstants = require('../../actions/actionsConstants');
 
 var editBookingDialog = require('../dialogs/editBookingDialog');
 
-function getBookingForAGame(booking, gameId) {
-    return _.reduce(booking, function (accum, bookingList, uid) {
-        var bookingData = bookingList[gameId];
-        if (bookingData) {
-            accum.push({uid: uid, bookingData: bookingData});
-        }
-        return accum;
-    }, []);
+function getBookingForAGame(allBookings, gameId) {
+    return _(allBookings)
+        .map(function (bookingsOfAUser, uid) {
+            var bookingData = bookingsOfAUser[gameId];
+            if (bookingData) {
+                return {
+                    uid: uid,
+                    booking: bookingData
+                };
+            }
+        })
+        .compact()
+        .value();
 }
 
 var BookingPage = React.createClass({
@@ -26,36 +31,41 @@ var BookingPage = React.createClass({
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
-            gameIdFilter: _.keys(this.props.gamesData)[0]
+            gameIdFilter: _.keys(this.props.gamesData.games)[0]
         };
     },
     getGamesFilterMenuItems: function () {
-        return _.map(this.props.gamesData, function (gameData, gameId) {
+        return _.map(this.props.gamesData.games, function (gameData, gameId) {
             return {payload: gameId, text: vsidMap[gameData.vsid]};
         });
     },
     getCardDisplayerData: function () {
-        var bookingForGame = getBookingForAGame(this.props.bookingsData, this.state.gameIdFilter);
+        var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
         return _.map(bookingForGame, function (data) {
             return {
-                title: this.props.usersData[data.uid].info.displayName,
+                title: this.props.usersData.users[data.uid].info.displayName,
                 subtitles: [
-                    "מקומות: " + data.bookingData.numOfSeats,
-                    stationsMap[data.bookingData.station]
+                    "מקומות: " + data.booking.numOfSeats,
+                    stationsMap[data.booking.station]
                 ]
             }
         }, this);
     },
     onEditBooking: function (index) {
-        var bookingForGame = getBookingForAGame(this.props.bookingsData, this.state.gameIdFilter);
+        var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
         var bookingToEdit = bookingForGame[index];
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
-            dialogClass: editBookingDialog,
-            data: {uid: bookingToEdit.uid, gameId: this.state.gameIdFilter, bookingData: bookingToEdit.bookingData}
+            dialog: editBookingDialog,
+            props: {
+                uid: bookingToEdit.uid,
+                user: this.props.usersData.users[bookingToEdit.uid],
+                gameId: this.state.gameIdFilter,
+                booking: bookingToEdit.booking
+            }
         });
     },
     onCancelBooking: function (index) {
-        var bookingForGame = getBookingForAGame(this.props.bookingsData, this.state.gameIdFilter);
+        var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
         var bookingToCancel = bookingForGame[index];
         actionsCreator.createAction(actionsConstants.CANCEL_BOOKING, {
             uid: bookingToCancel.uid,

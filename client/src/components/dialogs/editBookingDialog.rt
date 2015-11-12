@@ -1,29 +1,28 @@
 <rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="./dialogActions" as="dialogActions"/>
+<rt-require dependency="./frames/dialogFrame" as="dialogFrame"/>
 
-<mui.Dialog ref="dialog"
-            title="ערוך הרשמה להסעה"
-            contentStyle="{{width:'360'}}"
+<dialogFrame title="ערוך הרשמה להסעה"
             contentClassName="edit-booking-dialog"
-            autoScrollBodyContent="{true}"
-            modal="{false}">
+            onSubmit="{this.updateBooking}">
 
-    <div class="edit-booking-dialog">
-        <section>
-            <mui.SelectField
-                    menuItems="{this.getStationsMenuItems()}"
-                    valueLink={this.linkState('station')}
-                    iconStyle="{{left: 0, right: 'initial'}}"
-                    floatingLabelText="תחנה"/>
+    <section>
+        <mui.SelectField
+                menuItems="{this.getStationsMenuItems()}"
+                valueLink={this.linkState('booking.station')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="תחנה"/>
 
-            <mui.SelectField
-                    menuItems="{this.getNumOfSeatsMenuItems()}"
-                    valueLink={this.linkNumericState('numOfSeats')}
-                    iconStyle="{{left: 0, right: 'initial'}}"
-                    floatingLabelText="מס׳ מקומות"/>
-        </section>
+        <mui.SelectField
+                menuItems="{this.getNumOfSeatsMenuItems()}"
+                valueLink={this.linkNumericState('booking.numOfSeats')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="מס׳ מקומות"/>
 
-        <dialogActions rt-props="this.getActionButtons()"/>
+        <mui.TextField
+                valueLink={this.linkState('booking.comment')}
+                multiLine="{true}"
+                rowsMax="{2}"
+                floatingLabelText="הערות"/>
+    </section>
 
-    </div>
-</mui.Dialog>
+</dialogFrame>

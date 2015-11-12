@@ -21,7 +21,7 @@ function getAllUsers() {
             var UIDs = _.keys(results[0]);
             return _.reduce(UIDs, function (accum, uid) {
                 accum[uid] = _.reduce(userPathsData, function (accum, pathData, index) {
-                    if (results[index]) {
+                    if (results[index] != null && !_.isUndefined(results[index][uid])) {
                         accum[pathData.dataKey] = results[index][uid];
                     }
                     return accum;
@@ -39,7 +39,9 @@ function getUser(uid) {
     return Promise.all(readPromises)
         .then(function (results) {
             return _.reduce(userPathsData, function (accum, pathData, index) {
-                accum[pathData.dataKey] = results[index];
+                if (results[index] !== null) {
+                    accum[pathData.dataKey] = results[index];
+                }
                 return accum;
             }, {})
         })

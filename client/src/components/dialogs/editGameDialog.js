@@ -13,33 +13,48 @@ var actionsConstants = require('../../actions/actionsConstants');
 
 var EditGameDialog = React.createClass({
     displayName: 'EditGameDialog',
+    propTypes: {
+        game: React.PropTypes.object.isRequired,
+        gameId: React.PropTypes.string,
+        error: React.PropTypes.bool
+    },
     mixins: [muiMixin, deepLinkStateMixin],
     getInitialState: function () {
-        return _.cloneDeep(this.props.data.gameData);
+        return {
+            game: _.clone(this.props.game)
+        };
     },
-    getVSIDMenuItems: function() {
-        return _.map(vsidMap, function(val, key) {
-           return { payload: key, text: val };
+    getVSIDMenuItems: function () {
+        return _.map(vsidMap, function (val, key) {
+            return {payload: key, text: val};
         });
     },
-    getStatusMenuItems: function() {
-        return _.map(gameStatusMap, function(val, key) {
-            return { payload: key, text: val };
+    getStatusMenuItems: function () {
+        return _.map(gameStatusMap, function (val, key) {
+            return {payload: key, text: val};
         });
     },
-    onDateChange: function(nill, newDate) {
+    onDateChange: function (nill, newDate) {
         var newUtcDate = Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), newDate.getMinutes());
-        this.setState({date: newUtcDate});
+        var newGameState = _.merge(this.state.game, {date: newUtcDate});
+        this.setState({game: newGameState});
     },
-    onTimeChange: function(nill, newDate) {
+    onTimeChange: function (nill, newDate) {
         var newUtcDate = Date.UTC(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), newDate.getMinutes());
-        this.setState({departure: newUtcDate});
+        var newGameState = _.merge(this.state.game, {departure: newUtcDate});
+        this.setState({game: newGameState});
     },
     updateGame: function () {
-        actionsCreator.createAction(actionsConstants.UPDATE_GAME, {
-            gameId: this.props.data.gameId,
-            gameData: this.state
-        });
+        if (this.props.gameId) {
+            actionsCreator.createAction(actionsConstants.UPDATE_GAME, {
+                gameId: this.props.gameId,
+                gameData: this.state.game
+            });
+        } else {
+            actionsCreator.createAction(actionsConstants.CREATE_GAME, {
+                gameData: this.state.game
+            });
+        }
     },
 
     render: template
