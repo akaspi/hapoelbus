@@ -35,7 +35,7 @@ function socialLogin(provider) {
                 return reject();
             }
             resolve(authData.uid);
-        });
+        }, {scope: 'email'});
     });
 }
 

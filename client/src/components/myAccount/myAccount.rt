@@ -6,17 +6,21 @@
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../loading/loading" as="loading"/>
 <rt-require dependency="../notification/notification" as="notification"/>
+<rt-require dependency="../navigation/navigation" as="navigation"/>
 <rt-require dependency="../dialogs/editUserDataDialog" as="editUserDataDialog"/>
 
 <div class="my-account" rt-scope="this.isDataInitialized() as initialized">
     <header>
         <div class="logo"/>
-        <div class="auth-data-box">
+        <div rt-if="initialized && !this.isUserMissingData()" class="auth-data-box">
+            <navigation rt-if="this.props.authData.isAdmin"/>
             <div>
-                <!--<mui.Avatar rt-if="{false}" src="images/uxceo-128.jpg" />-->
-                <mui.Avatar>A</mui.Avatar>
+                <mui.Avatar src="{this.getUserProfileUrl()}" />
             </div>
-            <span class="user-display-name">שם של היוזר</span>
+            <div class="user-display-name">
+                <span>שלום, </span>
+                <span>{this.getUserName()}</span>
+            </div>
             <a class="logout-link" onClick="{this.logout}">התנתק</a>
         </div>
     </header>

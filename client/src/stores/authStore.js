@@ -17,6 +17,9 @@ var authData = {
 
 dispatcher.register(function (action) {
     switch (action.actionType) {
+        case actionsConstants.LOAD_AUTH_DATA:
+            loadAuthData();
+            break;
         case actionsConstants.CREATE_USER:
             createUser(action.payload.email, action.payload.password);
             break;
@@ -37,6 +40,23 @@ dispatcher.register(function (action) {
             break;
     }
 });
+
+function loadAuthData() {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    var uid = authAPI.getUID();
+    authAPI.isAdmin(uid)
+        .then(function(isAdmin) {
+            authData.uid = uid;
+            authData.isAdmin = isAdmin;
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        })
+}
 
 function createUser(email, password) {
     authData.loading = true;

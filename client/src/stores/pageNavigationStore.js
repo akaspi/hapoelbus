@@ -6,18 +6,18 @@ var pagesConstants = require('../constants/pagesConstants');
 
 var listeners = [];
 
-var currentPage = pagesConstants.BOOKING_PAGE;
+var currentPage = pagesConstants.HOME_PAGE;
 
 dispatcher.register(function(action) {
     switch(action.actionType) {
         case actionsConstants.NAVIGATE_TO_PAGE:
-            navigateToPage(action.payload.pageId);
+            navigateToPage(action.payload.page);
             break;
     }
 });
 
-function navigateToPage(pageId) {
-    currentPage = pageId;
+function navigateToPage(page) {
+    currentPage = page;
     emitChange();
 }
 

@@ -16,21 +16,22 @@ var MyAccount = React.createClass({
         var propsToCheck = props || this.props;
         return propsToCheck.usersData.initialized && propsToCheck.gamesData.initialized && propsToCheck.bookingsData.initialized;
     },
-    hasErrors: function() {
+    hasErrors: function () {
         return this.props.authData.error || this.props.usersData.error || this.props.gamesData.error || this.props.bookingsData.error;
     },
     componentDidMount: function () {
+        actionsCreator.createAction(actionsConstants.LOAD_AUTH_DATA, {});
         actionsCreator.createAction(actionsConstants.LOAD_USERS, {});
         actionsCreator.createAction(actionsConstants.LOAD_GAMES, {});
         actionsCreator.createAction(actionsConstants.LOAD_BOOKINGS, {});
     },
-    isUserMissingData: function() {
+    isUserMissingData: function () {
         var uid = this.props.authData.uid;
         var user = this.props.usersData.users && this.props.usersData.users[uid];
 
         return _.isEmpty(user);
     },
-    componentDidUpdate: function(prevProps) {
+    componentDidUpdate: function (prevProps) {
         if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props) && this.isUserMissingData()) {
             actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
                 dialog: editUserDataDialog,
@@ -47,19 +48,14 @@ var MyAccount = React.createClass({
             });
         }
     },
-    getSkeletonUserForInitialization: function() {
-        return {
-            info: {
-                email: authAPI.getUserEmail()
-            },
-            contactRequest: true,
-            distribution: {
-                mail: true,
-                sms: true
-            }
-        };
+    getUserName: function () {
+        var user = this.props.usersData.users[this.props.authData.uid];
+        return user.info.displayName || 'משתמש';
     },
-    logout: function() {
+    getUserProfileUrl: function() {
+      return authAPI.getUserProfileImageURL();
+    },
+    logout: function () {
         actionsCreator.createAction(actionsConstants.LOGOUT, {});
     },
     render: template
