@@ -2,7 +2,6 @@
 
 var React = require('react');
 var template = require('./editGameDialog.rt');
-var muiMixin = require('../mixins/mui-mixin');
 var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 
 var vsidMap = require('json!../../utils/vsidMap.json');
@@ -18,7 +17,7 @@ var EditGameDialog = React.createClass({
         gameId: React.PropTypes.string,
         error: React.PropTypes.bool
     },
-    mixins: [muiMixin, deepLinkStateMixin],
+    mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
             game: _.clone(this.props.game)

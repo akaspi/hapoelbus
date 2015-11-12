@@ -46,6 +46,14 @@ function remove(path) {
     });
 }
 
+function push(path, val) {
+    var uniqueKey = ref.push().key();
+    return set(path + '/' + uniqueKey, val)
+        .then(function() {
+            return uniqueKey;
+        });
+}
+
 function generateUniqueId() {
     return ref.push().key();
 }
@@ -56,5 +64,6 @@ module.exports = {
     set: set,
     update: update,
     remove: remove,
+    push: push,
     generateUniqueId: generateUniqueId
 };

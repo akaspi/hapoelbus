@@ -11,7 +11,8 @@ var navItems = [
     { text: 'ניהול', type: mui.MenuItem.Types.SUBHEADER },
     { text: 'טבלת משתמשים', page: pagesConstants.USERS_PAGE },
     { text: 'טבלת משחקים', page: pagesConstants.GAMES_PAGE },
-    { text: 'טבלת רישומים', page: pagesConstants.BOOKINGS_PAGE }
+    { text: 'טבלת רישומים', page: pagesConstants.BOOKINGS_PAGE },
+    { text: 'אימיילים', page: pagesConstants.EMAILS_PAGE }
 ];
 
 var AccountData = React.createClass({

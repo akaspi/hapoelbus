@@ -2,12 +2,11 @@
 
 var React = require('react');
 var template = require('./loginBox.rt');
-var muiMixin = require('../mixins/mui-mixin');
 var authActions = require('../../actions/authActions');
 var authNavigationActions = require('../../actions/authNavigationActions');
 
 var LoginBox =  React.createClass({
-    mixins: [ React.addons.LinkedStateMixin, muiMixin ],
+    mixins: [ React.addons.LinkedStateMixin ],
     getInitialState: function() {
         return {
             isWaitingForLogin: false,

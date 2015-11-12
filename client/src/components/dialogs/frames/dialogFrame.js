@@ -3,7 +3,6 @@
 var React = require('react');
 var mui = require('material-ui');
 var template = require('./dialogFrame.rt');
-var muiMixin = require('../../mixins/mui-mixin');
 
 var actionsCreator = require('../../../actions/actionsCreator');
 var actionsConstants = require('../../../actions/actionsConstants');
@@ -16,7 +15,6 @@ var DialogFrame = React.createClass({
         onDismiss: React.PropTypes.func,
         contentClassName: React.PropTypes.string
     },
-    mixins: [muiMixin],
     getDefaultProps: function () {
         return {
             title: '',

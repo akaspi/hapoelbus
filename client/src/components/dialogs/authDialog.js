@@ -2,7 +2,6 @@
 
 var React = require('react');
 var template = require('./authDialog.rt');
-var muiMixin = require('../mixins/mui-mixin');
 
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
@@ -16,7 +15,6 @@ var MODES = {
 
 var AuthDialog = React.createClass({
     displayName: 'AuthDialog',
-    mixins: [muiMixin],
     getInitialState: function() {
       return {
           mode: MODES.LOGIN,

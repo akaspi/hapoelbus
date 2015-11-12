@@ -1,0 +1,44 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="emails-page">
+    <div class="recipients">
+        <mui.RadioButtonGroup defaultSelected="recipients-all" onChange="{this.onRecipientsChange}">
+            <mui.RadioButton value="recipients-all" labelStyle="{{float: 'initial'}}" label="כל המשתמשים"/>
+            <mui.RadioButton value="recipients-members" labelStyle="{{float: 'initial'}}" label="מנויים בלבד"/>
+            <mui.RadioButton value="recipients-not-members" labelStyle="{{float: 'initial'}}" label="חד פעמיים בלבד"/>
+        </mui.RadioButtonGroup>
+    </div>
+    <div class="email-type">
+        <mui.RadioButtonGroup defaultSelected="template" onChange="{this.onEmailTypeChange}">
+            <mui.RadioButton value="template" labelStyle="{{float: 'initial'}}" label="תבנית"/>
+            <mui.RadioButton value="custom" labelStyle="{{float: 'initial'}}" label="חופשי"/>
+        </mui.RadioButtonGroup>
+    </div>
+    <div rt-if="this.state.emailType === 'template'" class="template-mail">
+        <mui.SelectField
+                menuItems="{this.getTemplatesIdsMenuItems()}"
+                valueLink={this.linkState('templateId')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="תבנית"/>
+
+        <mui.SelectField
+                menuItems="{this.getOpenGamesMenuItems()}"
+                valueLink={this.linkState('gameId')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="משחק"/>
+    </div>
+    <div rt-if="this.state.emailType === 'custom'" class="custom-mail">
+        <mui.TextField
+                valueLink={this.linkState('subject')}
+                fullWidth="{true}"
+                floatingLabelText="כותרת"/>
+        <textarea class="custom-mail-content" cols="30" rows="15" valueLink="{this.linkState('customContent')}"/>
+    </div>
+
+    <div class="actions">
+        <mui.RaisedButton label="שלח"
+                          primary="{true}"
+                          onClick="{this.send}"/>
+    </div>
+
+</div>

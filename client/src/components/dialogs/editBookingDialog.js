@@ -2,7 +2,6 @@
 
 var React = require('react');
 var template = require('./editBookingDialog.rt');
-var muiMixin = require('../mixins/mui-mixin');
 var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 var stationsMap = require('json!../../utils/stationsMap.json');
 
@@ -17,7 +16,7 @@ var defaultBooking = {
 
 var EditBookingDialog = React.createClass({
     displayName: 'EditBookingDialog',
-    mixins: [muiMixin, deepLinkStateMixin],
+    mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
             booking: _.defaults(_.cloneDeep(this.props.booking), defaultBooking)

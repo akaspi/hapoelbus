@@ -2,7 +2,6 @@
 
 var React = require('react');
 var template = require('./editUserDataDialog.rt');
-var muiMixin = require('../mixins/mui-mixin');
 var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 
 var actionsCreator = require('../../actions/actionsCreator');
@@ -26,7 +25,7 @@ var EditUserDataDialog = React.createClass({
         title: React.PropTypes.string,
         isModal: React.PropTypes.bool
     },
-    mixins: [muiMixin, deepLinkStateMixin],
+    mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
             user: _.defaultsDeep(_.cloneDeep(this.props.user), defaultUser)
