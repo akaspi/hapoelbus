@@ -40,6 +40,16 @@ var LoginDialogContent = React.createClass({
             password: this.state.password.toString()
         });
     },
+    loginWithFacebook: function() {
+        actionsCreator.createAction(actionsConstants.SOCIAL_LOGIN, {
+            provider: 'facebook'
+        });
+    },
+    loginWithGoogle: function() {
+        actionsCreator.createAction(actionsConstants.SOCIAL_LOGIN, {
+            provider: 'google'
+        });
+    },
     render: template
 });
 

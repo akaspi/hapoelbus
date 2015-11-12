@@ -84,6 +84,7 @@ var UsersPage = React.createClass({
                 user: user,
                 uid: uid,
                 isModal: false,
+                isAdmin: true,
                 title: 'עריכת משתמש'
             }
         });

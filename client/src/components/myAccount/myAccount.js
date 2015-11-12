@@ -28,11 +28,23 @@ var MyAccount = React.createClass({
         var uid = this.props.authData.uid;
         var user = this.props.usersData.users && this.props.usersData.users[uid];
 
-        return user &&  _.isNull(user.info);
+        return _.isEmpty(user);
     },
     componentDidUpdate: function(prevProps) {
         if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props) && this.isUserMissingData()) {
-            this.refs.editUserDataDialog.showDialog();
+            actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+                dialog: editUserDataDialog,
+                props: {
+                    user: {
+                        info: {
+                            email: authAPI.getUserEmail()
+                        }
+                    },
+                    uid: this.props.authData.uid,
+                    isModal: true,
+                    title: 'פרטי משתמש ראשוניים'
+                }
+            });
         }
     },
     getSkeletonUserForInitialization: function() {

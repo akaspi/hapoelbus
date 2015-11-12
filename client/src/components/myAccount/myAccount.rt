@@ -33,14 +33,6 @@
                      usersData="{this.props.usersData}" bookingsData="{this.props.bookingsData}"/>
     </div>
 
-    <editUserDataDialog rt-if="initialized && this.isUserMissingData()"
-                        ref="editUserDataDialog"
-                        user="{this.getSkeletonUserForInitialization()}"
-                        uid="{this.props.authData.uid}"
-                        createMode="{true}"
-                        isModal="{true}"
-                        title="כותרת"/>
-
     <mui.Snackbar rt-if="this.hasErrors()" openOnMount="{true}" autoHideDuration="{5000}" message="אירעה שגיאה במערכת" />
 
 </div>

@@ -4,7 +4,7 @@
 <dialogFrame ref="dialog"
              title="{this.props.title}"
              contentClassName="edit-user-data-dialog"
-             modal="{this.props.isModal}"
+             isModal="{this.props.isModal}"
              onSubmit="{this.updateUser}">
 
     <section>
@@ -27,7 +27,7 @@
         </div>
     </section>
 
-    <section rt-if="!this.props.createMode">
+    <section rt-if="this.props.isAdmin">
         <h2>פרטי המנוי</h2>
 
         <div class="field-row">
