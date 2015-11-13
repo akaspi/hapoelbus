@@ -89,7 +89,7 @@ dbUtils.loginAsAdmin()
         return Promise.all(promises);
     })
     .then(function() {
-        console.log('All templates were sent successfully');
+        console.log('All mails were sent successfully');
     })
     .catch(function() {
         console.log('oh no... something went wrong :(');
