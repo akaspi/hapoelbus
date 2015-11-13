@@ -40,7 +40,8 @@
     <div class="cards-displayer-wrapper">
         <cardsDisplayer
                 data="{this.getCardDisplayerData()}"
-                onEdit="{this.onEditUserData}"/>
+                onEdit="{this.onEditUser}"
+                onRemove="{this.onRemoveUser}"/>
     </div>
 
     <editUserDataDialog rt-if="this.state.selectedUID" key="someKey" ref='dialog'

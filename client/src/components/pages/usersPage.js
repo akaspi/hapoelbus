@@ -74,7 +74,7 @@ var UsersPage = React.createClass({
             }
         }, this);
     },
-    onEditUserData: function (index) {
+    onEditUser: function (index) {
         var UIDs = this.getFilteredUIDs();
         var uid = UIDs[index];
         var user = this.props.usersData.users[uid];
@@ -89,7 +89,11 @@ var UsersPage = React.createClass({
             }
         });
     },
-    onRemoveUserData: function () {
+    onRemoveUser: function (index) {
+        var UIDs = this.getFilteredUIDs();
+        var uid = UIDs[index];
+
+        actionsCreator.createAction(actionsConstants.REMOVE_USER, { uid: uid });
     },
     render: template
 });

@@ -75,7 +75,16 @@ function updateUser(uid, user) {
     return Promise.all(updatePromises);
 }
 
+function removeUser(uid) {
+    var removePromises = _.map(userPathsData, function(pathData) {
+       return db.remove(pathData.path + '/' + uid);
+    });
+
+    return Promise.all(removePromises);
+}
+
 module.exports = {
     getUsersData: getUsers,
-    updateUser: updateUser
+    updateUser: updateUser,
+    removeUser: removeUser
 };

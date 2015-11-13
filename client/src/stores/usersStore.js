@@ -22,6 +22,9 @@ dispatcher.register(function (action) {
         case actionsConstants.UPDATE_USER:
             updateUser(action.payload.uid, action.payload.user);
             break;
+        case actionsConstants.REMOVE_USER:
+            removeUser(action.payload.uid);
+            break;
         case actionsConstants.LOGOUT:
             logout();
             break;
@@ -45,6 +48,15 @@ function updateUser(uid, user) {
     emitChange();
 
     return usersAPI.updateUser(uid, user).then(function() {
+        return loadUsers();
+    });
+}
+
+function removeUser(uid) {
+    usersData.loading = true;
+    emitChange();
+
+    return usersAPI.removeUser(uid).then(function() {
         return loadUsers();
     });
 }
