@@ -16,6 +16,12 @@ var defaultBooking = {
 
 var EditBookingDialog = React.createClass({
     displayName: 'EditBookingDialog',
+    propTypes: {
+        booking: React.PropTypes.object,
+        user: React.PropTypes.object,
+        uid: React.PropTypes.string,
+        gameId: React.PropTypes.string
+    },
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
