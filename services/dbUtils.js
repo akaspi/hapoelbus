@@ -33,13 +33,23 @@ function update(path, data) {
     });
 }
 
-function push(path, data) {
+function set(path, val) {
     return new Promise(function(resolve, reject) {
-        ref.child(path).push(data, function(error) {
-            if (error) { return reject() }
+        ref.child(path).set(val, function(error) {
+            if (error) {
+                return reject(error);
+            }
             resolve();
         });
     });
+}
+
+function push(path, val) {
+    var uniqueKey = ref.push().key();
+    return set(path + '/' + uniqueKey, val)
+        .then(function() {
+            return uniqueKey;
+        });
 }
 
 function remove(path) {
@@ -56,6 +66,7 @@ module.exports = {
     loginAsAdmin: loginAsAdmin,
     read: read,
     update: update,
+    set: set,
     push: push,
     remove: remove
 };

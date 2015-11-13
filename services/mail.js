@@ -8,31 +8,34 @@ var path = require('path');
 var _ = require('lodash');
 var templatesPath = path.join(__dirname, 'mailTemplates');
 
-var PENDING_MAILS_PATH = 'pendingMails';
+var PENDING_MAILS_PATH = 'pendingEmails';
 var templatesDataMap = {
     gameIsOpenForAll: { fileName: 'gameIsOpenForAll', subject: 'נפתחה הרשמה לכל המשתמשים!'},
     gameIsOpenForMembers: { fileName: 'gameIsOpenForMembers', subject: 'נפתחה הרשמה חדשה למנויים!'},
     updateGameDetails: { fileName: 'updateGameDetails', subject: 'שימו לב! עודכנו פרטי הסעה!'},
-    welcomeMail: { fileName: 'welcomeMail', subject: 'ברוכים הבאים ל-מחוץ לחומות!'}
+    welcomeMail: { fileName: 'welcomeMail', subject: 'ברוכים הבאים ל-מחוץ לחומות!'},
+    reportAdminsForNewUsers: { fileName: 'reportAdminsForNewUsers', subject: 'נוספו משתמשים חדשים באתר!'}
 };
 
-function sendMail(to, subject, content, mailId) {
+function sendMail(to, subject, content) {
     return new Promise(function(resolve, reject) {
-        var email = new sendgrid.Email();
-
-        var toAsArray = _.isArray(to) ? to : [ to ];
-        _.forEach(toAsArray, function(address) {
-            email.addTo(address);
-        });
-
-        email.setFrom('hapoelbus@gmail.com');
-        email.setSubject(subject);
-        email.setHtml(content);
-
-        sendgrid.send(email, function(err) {
-            if (err) { return reject(mailId) }
-            resolve(mailId);
-        });
+        console.log(to);
+        resolve();
+        //var email = new sendgrid.Email();
+        //
+        //var toAsArray = _.isArray(to) ? to : [ to ];
+        //_.forEach(toAsArray, function(address) {
+        //    email.addTo(address);
+        //});
+        //
+        //email.setFrom('hapoelbus@gmail.com');
+        //email.setSubject(subject);
+        //email.setHtml(content);
+        //
+        //sendgrid.send(email, function(err) {
+        //    if (err) { return reject(mailId) }
+        //    resolve(mailId);
+        //});
     });
 }
 
@@ -46,49 +49,51 @@ function getTemplateContent(templateId, substitutions) {
     return templateContent;
 }
 
-function sendPendingMail(mailRequest, mailId) {
-    var to = mailRequest.to || [];
-    var subject = mailRequest.subject || '';
-    var content = mailRequest.content || '';
+function sendPendingTemplate(pendingTemplate, mailId) {
+    var to = pendingTemplate.to || [];
+    var subject = templatesDataMap[pendingTemplate.templateId].subject;
+    var content = getTemplateContent(pendingTemplate.templateId, pendingTemplate.subs);
 
-    var templateId = mailRequest.templateId;
-    if (templateId) {
-        subject = templatesDataMap[templateId].subject;
-        content = getTemplateContent(templateId, mailRequest.substitutions)
-    }
-
-    return sendMail(to, subject, content, mailId);
-}
-
-function sendPendingMails() {
-    dbUtils.loginAsAdmin()
+    return sendMail(to, subject, content)
         .then(function() {
-            return dbUtils.read(PENDING_MAILS_PATH);
-        })
-        .then(function(pendingMails) {
-            var map =  _.map(pendingMails, function(mailRequest, mailId) {
-                return sendPendingMail(mailRequest, mailId);
-            });
-
-            return Promise.settle(map);
-        })
-        .then(function(inspections) {
-            _.forEach(inspections, function(inspection) {
-               if (inspection.isFulfilled()) {
-                   var mailId = inspection.value();
-                   dbUtils.remove(PENDING_MAILS_PATH + '/' + mailId);
-                   console.log(mailId + ' was sent successfully.');
-               } else if (inspection.isRejected()) {
-                   console.log('Failed to send pending mail. Reason: ' + inspection.reason());
-               }
-            });
-        })
-        .catch(function() {
-           console.log('oh no... something went wrong :(');
-        })
-        .finally(function() {
-            process.exit();
-        })
+            return dbUtils.remove(PENDING_MAILS_PATH + '/templates', mailId);
+        });
 }
 
-sendPendingMails();
+function sendPendingCustom(pendingCustom, mailId) {
+    var to = pendingCustom.to || [];
+    var subject = pendingCustom.subject || '';
+    var content = pendingCustom.content || '';
+
+    return sendMail(to, subject, content)
+        .then(function() {
+            dbUtils.remove(PENDING_MAILS_PATH + '/custom', mailId);
+        });
+}
+
+dbUtils.loginAsAdmin()
+    .then(function() {
+        return dbUtils.read(PENDING_MAILS_PATH);
+    })
+    .then(function(pendingMails) {
+        var promises = [];
+
+        _.forOwn(pendingMails.templates, function(pendingTemplate, mailId) {
+            promises.push(sendPendingTemplate(pendingTemplate, mailId));
+        });
+
+        _.forOwn(pendingMails.custom, function(pendingCustom, mailId) {
+            promises.push(sendPendingCustom(pendingCustom, mailId));
+        });
+
+        return Promise.all(promises);
+    })
+    .then(function() {
+        console.log('All templates were sent successfully');
+    })
+    .catch(function() {
+        console.log('oh no... something went wrong :(');
+    })
+    .finally(function() {
+        process.exit();
+    });
