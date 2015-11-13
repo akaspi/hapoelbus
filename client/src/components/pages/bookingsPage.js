@@ -10,6 +10,7 @@ var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
 var editBookingDialog = require('../dialogs/editBookingDialog');
+var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
 function getBookingForAGame(allBookings, gameId) {
     return _(allBookings)
@@ -67,9 +68,18 @@ var BookingPage = React.createClass({
     onCancelBooking: function (index) {
         var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
         var bookingToCancel = bookingForGame[index];
-        actionsCreator.createAction(actionsConstants.CANCEL_BOOKING, {
-            uid: bookingToCancel.uid,
-            gameId: this.state.gameIdFilter
+
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+            dialog: areYouSureDialog,
+            props: {
+                text: 'האם אתה בטוח שברצונך למחוק את ההרשמה?',
+                onConfirm: function() {
+                    actionsCreator.createAction(actionsConstants.CANCEL_BOOKING, {
+                        uid: bookingToCancel.uid,
+                        gameId: this.state.gameIdFilter
+                    });
+                }
+            }
         });
     },
     render: template

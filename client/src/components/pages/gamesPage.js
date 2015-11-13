@@ -9,6 +9,7 @@ var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
 var editGameDialog = require('../dialogs/editGameDialog');
+var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
 function getRibbonData(game) {
     switch (game.status) {
@@ -53,7 +54,15 @@ var GamesPage = React.createClass({
     },
     onRemoveGame: function (index) {
         var gameIds = this.getFilteredUIDs();
-        actionsCreator.createAction(actionsConstants.REMOVE_GAME, {gameId: gameIds[index]});
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+            dialog: areYouSureDialog,
+            props: {
+                text: 'האם אתה בטוח שברצונך למחוק את המשחק?',
+                onConfirm: function() {
+                    actionsCreator.createAction(actionsConstants.REMOVE_GAME, {gameId: gameIds[index]});
+                }
+            }
+        });
     },
     render: template
 });

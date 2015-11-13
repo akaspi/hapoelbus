@@ -7,6 +7,7 @@ var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
 var editUserDataDialog = require('../dialogs/editUserDataDialog');
+var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
 function getUIDsWithSeasonTickets(UIDs, usersData) {
     return _.filter(UIDs, function (uid) {
@@ -92,8 +93,15 @@ var UsersPage = React.createClass({
     onRemoveUser: function (index) {
         var UIDs = this.getFilteredUIDs();
         var uid = UIDs[index];
-
-        actionsCreator.createAction(actionsConstants.REMOVE_USER, { uid: uid });
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+            dialog: areYouSureDialog,
+            props: {
+                text: 'האם אתה בטוח שברצונך למחוק את פרטי המשתמש?',
+                onConfirm: function() {
+                    actionsCreator.createAction(actionsConstants.REMOVE_USER, { uid: uid });
+                }
+            }
+        });
     },
     render: template
 });

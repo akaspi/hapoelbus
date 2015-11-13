@@ -1,0 +1,22 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<mui.Dialog ref="dialog"
+            onDismiss="{this.closeDialog}"
+            contentStyle="{{width:'360'}}"
+            contentClassName="are-you-sure-dialog"
+            autoScrollBodyContent="{true}"
+            modal="{false}">
+
+    <div>{this.props.text}</div>
+
+    <div class="dialog-actions">
+        <mui.RaisedButton label="כן"
+                          primary="{true}"
+                          onClick="{this.onConfirm}"/>
+
+        <mui.RaisedButton label="לא"
+                          primary="{false}"
+                          style="{{marginRight: '25px'}}"
+                          onClick="{this.onCancel}"/>
+    </div>
+</mui.Dialog>

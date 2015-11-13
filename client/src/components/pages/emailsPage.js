@@ -8,6 +8,8 @@ var vsidMap = require('json!../../utils/vsidMap.json');
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
+var areYouSureDialog = require('../dialogs/areYouSureDialog');
+
 var emailsAPI = require('../../API/emailsAPI');
 
 var templatesMap = {
@@ -70,12 +72,20 @@ var EmailsPage = React.createClass({
       });
     },
     send: function() {
-        var recipients = filterRecipients(this.state.recipients, this.props.usersData.users)
-        if (this.state.emailType === 'template') {
-            emailsAPI.sendTemplate(this.state.templateId, {a: 1}, recipients);
-        } else {
-            emailsAPI.sendCustom(recipients, '', this.state.customContent);
-        }
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+            dialog: areYouSureDialog,
+            props: {
+                text: 'האם אתה בטוח שברצונך לשלוח את המייל?',
+                onConfirm: function() {
+                    var recipients = filterRecipients(this.state.recipients, this.props.usersData.users);
+                    if (this.state.emailType === 'template') {
+                        emailsAPI.sendTemplate(this.state.templateId, {a: 1}, recipients);
+                    } else {
+                        emailsAPI.sendCustom(recipients, '', this.state.customContent);
+                    }
+                }.bind(this)
+            }
+        });
     },
     render: template
 });
