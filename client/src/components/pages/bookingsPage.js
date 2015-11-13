@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var template = require('./bookingPage.rt');
+var template = require('./bookingsPage.rt');
 var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 var vsidMap = require('json!../../utils/vsidMap.json');
 var stationsMap = require('json!../../utils/stationsMap.json');

@@ -1,6 +1,6 @@
 <rt-require dependency="../../constants/pagesConstants" as="pagesConstants"/>
 <rt-require dependency="../pages/homePage" as="homePage"/>
-<rt-require dependency="../pages/bookingPage" as="bookingPage"/>
+<rt-require dependency="../pages/bookingsPage" as="bookingsPage"/>
 <rt-require dependency="../pages/gamesPage" as="gamesPage"/>
 <rt-require dependency="../pages/usersPage" as="usersPage"/>
 <rt-require dependency="../pages/emailsPage" as="emailsPage"/>
@@ -15,7 +15,7 @@
         <div rt-if="initialized && !this.isUserMissingData()" class="auth-data-box">
             <navigation rt-if="this.props.authData.isAdmin"/>
             <div>
-                <mui.Avatar src="{this.getUserProfileUrl()}" />
+                <mui.Avatar src="{this.getUserProfileUrl()}"/>
             </div>
             <div class="user-display-name">
                 <span>שלום, </span>
@@ -43,11 +43,11 @@
                    key="key-users-page"
                    usersData="{this.props.usersData}"/>
 
-        <bookingPage rt-if="this.props.currentPage === pagesConstants.BOOKING_PAGE"
-                     key="key-bookings-page"
-                     gamesData="{this.props.gamesData}"
-                     usersData="{this.props.usersData}"
-                     bookingsData="{this.props.bookingsData}"/>
+        <bookingsPage rt-if="this.props.currentPage === pagesConstants.BOOKINGS_PAGE"
+                      key="key-bookings-page"
+                      gamesData="{this.props.gamesData}"
+                      usersData="{this.props.usersData}"
+                      bookingsData="{this.props.bookingsData}"/>
 
         <emailsPage rt-if="this.props.currentPage === pagesConstants.EMAILS_PAGE"
                     key="key-emails-page"
@@ -55,6 +55,6 @@
                     usersData="{this.props.usersData}"/>
     </div>
 
-    <mui.Snackbar rt-if="this.hasErrors()" openOnMount="{true}" autoHideDuration="{5000}" message="אירעה שגיאה במערכת" />
+    <mui.Snackbar rt-if="this.hasErrors()" openOnMount="{true}" autoHideDuration="{5000}" message="אירעה שגיאה במערכת"/>
 
 </div>
