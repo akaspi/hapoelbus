@@ -90,8 +90,9 @@ function removeGame(gameId) {
 
 function logout() {
     gamesData.gamesData = {};
+    gamesData.loading = false;
     gamesData.errorMsg = null;
-
+    gamesData.initialized = false;
     emitChange();
 }
 

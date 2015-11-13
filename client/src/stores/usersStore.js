@@ -65,6 +65,7 @@ function logout() {
     usersData.users = {};
     usersData.loading = false;
     usersData.errorMsg = null;
+    usersData.initialized = false;
     emitChange();
 }
 

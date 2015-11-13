@@ -24,6 +24,9 @@ dispatcher.register(function (action) {
         case actionsConstants.CANCEL_BOOKING:
             cancelBooking(action.payload.uid, action.payload.gameId);
             break;
+        case actionsConstants.LOGOUT:
+            logout();
+            break;
     }
 });
 
@@ -54,6 +57,14 @@ function cancelBooking(uid, gameId) {
     bookingAPI.cancelBooking(uid, gameId).then(function () {
         return loadBookings();
     });
+}
+
+function logout() {
+    bookingsData.initialized = false;
+    bookingsData.bookings = {};
+    bookingsData.isPending = false;
+    bookingsData.errorMsg = null;
+    emitChange();
 }
 
 function getBookingData() {
