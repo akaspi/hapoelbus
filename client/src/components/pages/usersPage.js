@@ -9,6 +9,8 @@ var actionsConstants = require('../../actions/actionsConstants');
 var editUserDataDialog = require('../dialogs/editUserDataDialog');
 var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
+var authAPI = require('../../API/authAPI');
+
 function getUIDsWithSeasonTickets(UIDs, usersData) {
     return _.filter(UIDs, function (uid) {
         var userData = usersData[uid];
@@ -71,6 +73,7 @@ var UsersPage = React.createClass({
             return {
                 title: user.info.displayName,
                 subtitles: [user.info.email, user.info.phone],
+                imageUrl: authAPI.getUserProfileImageURL(),
                 color: getUserColor(user)
             }
         }, this);

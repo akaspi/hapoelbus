@@ -22,8 +22,10 @@ var Card = React.createClass({
             label: React.PropTypes.string.isRequired
         })
     },
-    getInitialState: function () {
-        return {};
+    getDefaultProps: function () {
+        return {
+            imageUrl: 'http://dir.agosto.nl/dump/Sara.jpg'
+        };
     },
     getCardColor: function () {
         switch (this.props.color) {

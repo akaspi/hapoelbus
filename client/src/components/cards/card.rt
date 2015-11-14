@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header {this.getCardColor()}">
-        <img src="http://dir.agosto.nl/dump/Sara.jpg" class="card-image" />
+        <img src="{this.props.imageUrl}" class="card-image" />
     </div>
     <div class="card-content">
         <h1 class="card-title">{this.props.title}</h1>

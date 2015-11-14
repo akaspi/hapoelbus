@@ -53,8 +53,9 @@ var HomePage = React.createClass({
         return _.map(openGameIds, function (gameId) {
             var game = this.props.gamesData.games[gameId];
             var cardData = {
-                title: vsidMap[game.vsid],
-                subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure), getGameStatusLabel(game)]
+                title: vsidMap[game.vsid].text,
+                subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure), getGameStatusLabel(game)],
+                imageUrl: vsidMap[game.vsid].img
             };
             var isBooked = !_.isEmpty(getBooking(this.props.uid, gameId, this.props.bookingsData.bookings));
             if (isBooked) {

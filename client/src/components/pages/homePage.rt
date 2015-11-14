@@ -11,6 +11,7 @@
         <card rt-repeat="openGameCard in this.getOpenGamesCardData()"
               key="openGameCard-{openGameCardIndex}"
               title="{openGameCard.title}"
+              imageUrl="{openGameCard.imageUrl}"
               subtitles="{openGameCard.subtitles}"
               ribbon="{openGameCard.ribbon}"
               actions="{this.getCustomActions(openGameCardIndex)}"/>

@@ -13,11 +13,19 @@ dispatcher.register(function(action) {
         case actionsConstants.NAVIGATE_TO_PAGE:
             navigateToPage(action.payload.page);
             break;
+        case actionsConstants.LOGOUT:
+            logout(action.payload.page);
+            break;
     }
 });
 
 function navigateToPage(page) {
     currentPage = page;
+    emitChange();
+}
+
+function logout() {
+    currentPage = pagesConstants.HOME_PAGE;
     emitChange();
 }
 

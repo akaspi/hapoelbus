@@ -31,8 +31,9 @@ var GamesPage = React.createClass({
         return _.map(gameIds, function (gameId) {
             var game = this.props.gamesData.games[gameId];
             return {
-                title: vsidMap[game.vsid],
+                title: vsidMap[game.vsid].text,
                 subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure)],
+                imageUrl: vsidMap[game.vsid].img,
                 ribbon: getRibbonData(game)
             }
         }, this);

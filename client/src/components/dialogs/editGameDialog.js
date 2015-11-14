@@ -25,7 +25,7 @@ var EditGameDialog = React.createClass({
     },
     getVSIDMenuItems: function () {
         return _.map(vsidMap, function (val, key) {
-            return {payload: key, text: val};
+            return {payload: key, text: val.text};
         });
     },
     getStatusMenuItems: function () {

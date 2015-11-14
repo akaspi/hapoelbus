@@ -37,7 +37,7 @@ var BookingPage = React.createClass({
     },
     getGamesFilterMenuItems: function () {
         return _.map(this.props.gamesData.games, function (gameData, gameId) {
-            return {payload: gameId, text: vsidMap[gameData.vsid]};
+            return {payload: gameId, text: vsidMap[gameData.vsid].text};
         });
     },
     getCardDisplayerData: function () {

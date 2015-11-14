@@ -68,7 +68,7 @@ var EmailsPage = React.createClass({
     },
     getOpenGamesMenuItems: function() {
       return _.map(this.props.gamesData.games, function(game, gameId) {
-         return {payload: gameId, text: vsidMap[game.vsid]};
+         return {payload: gameId, text: vsidMap[game.vsid].text};
       });
     },
     send: function() {

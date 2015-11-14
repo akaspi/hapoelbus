@@ -1,4 +1,10 @@
 {
-    "HAPOEL-TEL-AVIV": "הפועל תל אביב",
-    "HAPOEL-HOLON": "הפועל חולון"
+    "HAPOEL-TEL-AVIV": {
+        "text": "הפועל תל אביב",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_hapoelta.png"
+    },
+    "HAPOEL-HOLON": {
+        "text": "הפועל חולון",
+        "img": "http://www.basket.co.il/pics/2007/articles/logo_hh.png"
+    }
 }
