@@ -78,12 +78,12 @@ var HomePage = React.createClass({
         var isBooked = !_.isEmpty(getBooking(uid, gameId, this.props.bookingsData.bookings));
 
         if (isFullyBooked) {
-            if (_.isEmpty(booking)) {
-                return [];
+            if (isBooked) {
+                return [
+                    {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+                ];
             }
-            return [
-                {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
-            ];
+            return [];
         }
 
         if (gameIsOpenForMembersOnly) {
