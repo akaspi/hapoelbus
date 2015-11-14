@@ -24,6 +24,9 @@ function getBookingForAGame(allBookings, gameId) {
             }
         })
         .compact()
+        .sortBy(function(data) {
+            return data.booking.bookedAt;
+        })
         .value();
 }
 

@@ -40,10 +40,14 @@ var EditBookingDialog = React.createClass({
         });
     },
     updateBooking: function () {
+        var bookingData = _.merge({}, this.state.booking, {
+            bookedAt: Date.now()
+        });
+
         actionsCreator.createAction(actionsConstants.UPDATE_BOOKING, {
             uid: this.props.uid,
             gameId: this.props.gameId,
-            bookingData: _.omit(this.state.booking, _.isEmpty) // for empty comments
+            bookingData: bookingData
         });
     },
     render: template
