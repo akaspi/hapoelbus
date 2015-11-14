@@ -9,6 +9,7 @@ var dateUtils = require('../../utils/dateUtils');
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
+var editBookingDialog = require('../dialogs/editBookingDialog');
 
 function getAllOpenGames(games) {
     return _.omit(games, function (game) {
@@ -115,16 +116,15 @@ var HomePage = React.createClass({
     updateBooking: function(index) {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
         var gameId = openGameIds[index];
-        this.setState({
-            editBookingDialogProps: {
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+            dialog: editBookingDialog,
+            props: {
                 uid: this.props.uid,
-                gameId: gameId,
                 user: this.props.usersData.users[this.props.uid],
+                gameId: gameId,
                 booking: getBooking(this.props.uid, gameId, this.props.bookingsData.bookings)
             }
-        }, function() {
-            this.refs.dialog.showDialog();
-        })
+        });
     },
     cancelBooking: function(index) {
         var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
