@@ -35,6 +35,7 @@
         <mui.TextField type="password"
                        fullWidth="{true}"
                        floatingLabelText="סיסמא"
+                       onEnterKeyDown="{this.login}"
                        valueLink="{this.linkState('password')}"/>
 
         <mui.RaisedButton disabled="{this.props.loading}"
