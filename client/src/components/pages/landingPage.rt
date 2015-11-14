@@ -1,7 +1,7 @@
 <rt-require dependency="../dialogs/authDialog" as="authDialog"/>
 
 <div class="landing-page">
-    <div class="divider-wrapper">
+    <div class="landing-divider-wrapper">
         <div class="divider-line"/>
         <div class="logo"/>
         <div class="divider-line"/>
