@@ -1,0 +1,5 @@
+<div class="plus-button-wrapper" onClick="{this.props.onClick}">
+    <div class="plus-button">
+        <i class="fa fa-plus"/>
+    </div>
+</div>

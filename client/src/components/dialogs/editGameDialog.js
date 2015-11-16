@@ -13,14 +13,13 @@ var actionsConstants = require('../../actions/actionsConstants');
 var EditGameDialog = React.createClass({
     displayName: 'EditGameDialog',
     propTypes: {
-        game: React.PropTypes.object.isRequired,
-        gameId: React.PropTypes.string,
-        error: React.PropTypes.bool
+        game: React.PropTypes.object,
+        gameId: React.PropTypes.string
     },
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
-            game: _.clone(this.props.game)
+            game: this.props.game ? _.clone(this.props.game) : {}
         };
     },
     getVSIDMenuItems: function () {
