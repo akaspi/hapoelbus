@@ -40,10 +40,7 @@
     <div class="cards-displayer-wrapper">
         <card rt-repeat="user in this.getFilteredUsers()"
               key="user-card-{userIndex}"
-              color="{this.getUserCardColor(user)}"
-              title="{user.info.displayName}"
-              subtitles="{[user.info.email, user.info.phone]}"
-              actions="{this.getUserCardActions(userIndex)}"
+              rt-props="this.getUserCardProps(userIndex, user)"
         />
     </div>
 </div>

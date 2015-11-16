@@ -10,22 +10,32 @@ var editUserDataDialog = require('../dialogs/editUserDataDialog');
 var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
 function getUsersWithSeasonTickets(users) {
-    return _.pick(users, function(user) {
+    return _.pick(users, function (user) {
         return user.seasonTicket && user.seasonTicket.maxSeats > 0;
     });
 }
 
 function getUsersWithoutSeasonTickets(users) {
     var usersWithSeasonTickets = getUsersWithSeasonTickets(users);
-    return _.omit(users, function(user, uid) {
+    return _.omit(users, function (user, uid) {
         return _.has(usersWithSeasonTickets, uid);
     });
 }
 
 function getUsersThatRequestForContact(users) {
-    return _.pick(users, function(user) {
+    return _.pick(users, function (user) {
         return !!user.contactRequest;
     });
+}
+
+function getUserCardColor(user) {
+    if (user.contactRequest) {
+        return 'Blue'
+    }
+    if (user.seasonTicket) {
+        return 'Green'
+    }
+    return '';
 }
 
 var UsersPage = React.createClass({
@@ -44,7 +54,7 @@ var UsersPage = React.createClass({
         filters[filterName] = val;
         this.setState({filters: filters});
     },
-    getFilteredUsers: function() {
+    getFilteredUsers: function () {
         var users = this.props.usersData.users;
 
         var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? _.keys(getUsersWithSeasonTickets(users)) : [];
@@ -55,26 +65,22 @@ var UsersPage = React.createClass({
 
         return _.pick(users, filteredUIDs);
     },
-    getUserCardActions: function(uid) {
-        return [
-            { label: 'ערוך', onClick: this.onEditUser.bind(this, uid) },
-            { label: 'מחק', onClick: this.onRemoveUser.bind(this, uid) }
-        ];
+    getUserCardProps: function (uid, user) {
+        return {
+            title: user.info.displayName,
+            subtitles: [user.info.email, user.info.phone],
+            color: getUserCardColor(user),
+            actions: [
+                {label: 'ערוך', onClick: this.onEditUser.bind(this, uid, user)},
+                {label: 'מחק', onClick: this.onRemoveUser.bind(this, uid)}
+            ]
+        };
     },
-    getUserCardColor: function(user) {
-        if (user.contactRequest) {
-            return 'Blue'
-        }
-        if (user.seasonTicket) {
-            return 'Green'
-        }
-        return '';
-    },
-    onEditUser: function (uid) {
+    onEditUser: function (uid, user) {
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialog: editUserDataDialog,
             props: {
-                user: this.props.usersData.users[uid],
+                user: user,
                 uid: uid,
                 isModal: false,
                 isAdmin: true,
@@ -87,8 +93,8 @@ var UsersPage = React.createClass({
             dialog: areYouSureDialog,
             props: {
                 text: 'האם אתה בטוח שברצונך למחוק את פרטי המשתמש?',
-                onConfirm: function() {
-                    actionsCreator.createAction(actionsConstants.REMOVE_USER, { uid: uid });
+                onConfirm: function () {
+                    actionsCreator.createAction(actionsConstants.REMOVE_USER, {uid: uid});
                 }
             }
         });
