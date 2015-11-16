@@ -1,10 +1,10 @@
 <rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="../cards/cardsDisplayer" as="cardsDisplayer"/>
-<rt-require dependency="../dialogs/editUserDataDialog" as="editUserDataDialog"/>
+<rt-require dependency="../cards/card" as="card"/>
 
 <div class="users-page">
     <div class="title-wrapper">
         <i class="material-icons face-icon">face</i>
+
         <h1 class="title">משתמשים במערכת</h1></div>
 
     <ul class="filter-wrapper">
@@ -38,15 +38,12 @@
     </ul>
 
     <div class="cards-displayer-wrapper">
-        <cardsDisplayer
-                data="{this.getCardDisplayerData()}"
-                onEdit="{this.onEditUser}"
-                onRemove="{this.onRemoveUser}"/>
+        <card rt-repeat="user in this.getFilteredUsers()"
+              key="user-card-{userIndex}"
+              color="{this.getUserCardColor(user)}"
+              title="{user.info.displayName}"
+              subtitles="{[user.info.email, user.info.phone]}"
+              actions="{this.getUserCardActions(userIndex)}"
+        />
     </div>
-
-    <editUserDataDialog rt-if="this.state.selectedUID" key="someKey" ref='dialog'
-                        uid="{this.state.selectedUID}"
-                        user="{this.props.usersData.users[this.state.selectedUID]}"
-                        isModal="{false}"
-                        title="עדכון פרטי משתמש"/>
 </div>

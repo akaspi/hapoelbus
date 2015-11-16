@@ -9,35 +9,23 @@ var actionsConstants = require('../../actions/actionsConstants');
 var editUserDataDialog = require('../dialogs/editUserDataDialog');
 var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
-var authAPI = require('../../API/authAPI');
-
-function getUIDsWithSeasonTickets(UIDs, usersData) {
-    return _.filter(UIDs, function (uid) {
-        var userData = usersData[uid];
-        return userData.seasonTicket && userData.seasonTicket.maxSeats > 0;
+function getUsersWithSeasonTickets(users) {
+    return _.pick(users, function(user) {
+        return user.seasonTicket && user.seasonTicket.maxSeats > 0;
     });
 }
 
-function getUIDsWithoutSeasonTickets(UIDs, usersData) {
-    var uidsWithSeasonTickets = getUIDsWithSeasonTickets(UIDs, usersData);
-    return _.xor(UIDs, uidsWithSeasonTickets);
-}
-
-function getUIDsThatRequestForContact(UIDs, usersData) {
-    return _.filter(UIDs, function (uid) {
-        var userData = usersData[uid];
-        return !!userData.contactRequest;
+function getUsersWithoutSeasonTickets(users) {
+    var usersWithSeasonTickets = getUsersWithSeasonTickets(users);
+    return _.omit(users, function(user, uid) {
+        return _.has(usersWithSeasonTickets, uid);
     });
 }
 
-function getUserColor(user) {
-    if (user.contactRequest) {
-        return 'Blue'
-    }
-    if (user.seasonTicket) {
-        return 'Green'
-    }
-    return '';
+function getUsersThatRequestForContact(users) {
+    return _.pick(users, function(user) {
+        return !!user.contactRequest;
+    });
 }
 
 var UsersPage = React.createClass({
@@ -56,36 +44,37 @@ var UsersPage = React.createClass({
         filters[filterName] = val;
         this.setState({filters: filters});
     },
-    getFilteredUIDs: function () {
+    getFilteredUsers: function() {
         var users = this.props.usersData.users;
-        var UIDs = _.keys(users);
 
-        var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? getUIDsWithSeasonTickets(UIDs, users) : [];
-        var uidsWithoutSeasonTickets = this.state.filters.doNotHasSeasonTicketsOnly ? getUIDsWithoutSeasonTickets(UIDs, users) : [];
-        var uidsThatRequestForContact = this.state.filters.requestedContact ? getUIDsThatRequestForContact(UIDs, users) : [];
+        var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? _.keys(getUsersWithSeasonTickets(users)) : [];
+        var uidsWithoutSeasonTickets = this.state.filters.doNotHasSeasonTicketsOnly ? _.keys(getUsersWithoutSeasonTickets(users)) : [];
+        var uidsThatRequestForContact = this.state.filters.requestedContact ? _.keys(getUsersThatRequestForContact(users)) : [];
 
-        return _.union(uidsWithSeasonTickets, uidsWithoutSeasonTickets, uidsThatRequestForContact);
+        var filteredUIDs = _.union(uidsWithSeasonTickets, uidsWithoutSeasonTickets, uidsThatRequestForContact);
+
+        return _.pick(users, filteredUIDs);
     },
-    getCardDisplayerData: function () {
-        var UIDs = this.getFilteredUIDs();
-        return _.map(UIDs, function (uid) {
-            var user = this.props.usersData.users[uid];
-            return {
-                title: user.info.displayName,
-                subtitles: [user.info.email, user.info.phone],
-                imageUrl: authAPI.getUserProfileImageURL(),
-                color: getUserColor(user)
-            }
-        }, this);
+    getUserCardActions: function(uid) {
+        return [
+            { label: 'ערוך', onClick: this.onEditUser.bind(this, uid) },
+            { label: 'מחק', onClick: this.onRemoveUser.bind(this, uid) }
+        ];
     },
-    onEditUser: function (index) {
-        var UIDs = this.getFilteredUIDs();
-        var uid = UIDs[index];
-        var user = this.props.usersData.users[uid];
+    getUserCardColor: function(user) {
+        if (user.contactRequest) {
+            return 'Blue'
+        }
+        if (user.seasonTicket) {
+            return 'Green'
+        }
+        return '';
+    },
+    onEditUser: function (uid) {
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialog: editUserDataDialog,
             props: {
-                user: user,
+                user: this.props.usersData.users[uid],
                 uid: uid,
                 isModal: false,
                 isAdmin: true,
@@ -93,9 +82,7 @@ var UsersPage = React.createClass({
             }
         });
     },
-    onRemoveUser: function (index) {
-        var UIDs = this.getFilteredUIDs();
-        var uid = UIDs[index];
+    onRemoveUser: function (uid) {
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialog: areYouSureDialog,
             props: {
