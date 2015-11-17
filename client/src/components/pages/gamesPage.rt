@@ -1,5 +1,5 @@
 <rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="../cards/card" as="card"/>
+<rt-require dependency="../card/card" as="card"/>
 <rt-require dependency="../plusButton/plusButton" as="plusButton"/>
 
 <div class="games-page">

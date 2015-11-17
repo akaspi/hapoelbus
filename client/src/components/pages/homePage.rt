@@ -1,4 +1,4 @@
-<rt-require dependency="../cards/card" as="card"/>
+<rt-require dependency="../card/card" as="card"/>
 <rt-require dependency="../dialogs/editBookingDialog" as="editBookingDialog"/>
 
 
