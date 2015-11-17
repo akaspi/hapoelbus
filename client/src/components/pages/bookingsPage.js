@@ -12,22 +12,8 @@ var actionsConstants = require('../../actions/actionsConstants');
 var editBookingDialog = require('../dialogs/editBookingDialog');
 var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
-function getBookingForAGame(allBookings, gameId) {
-    return _(allBookings)
-        .map(function (bookingsOfAUser, uid) {
-            var bookingData = bookingsOfAUser[gameId];
-            if (bookingData) {
-                return {
-                    uid: uid,
-                    booking: bookingData
-                };
-            }
-        })
-        .compact()
-        .sortBy(function(data) {
-            return data.booking.bookedAt;
-        })
-        .value();
+function getNumOfSeatsSubtitle(booking) {
+    return 'מקומות: ' + booking.numOfSeats || 0;
 }
 
 var BookingPage = React.createClass({
@@ -43,45 +29,48 @@ var BookingPage = React.createClass({
             return {payload: gameId, text: vsidMap[gameData.vsid].text};
         });
     },
-    getCardDisplayerData: function () {
-        var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
-        return _.map(bookingForGame, function (data) {
-            return {
-                title: this.props.usersData.users[data.uid].info.displayName,
-                subtitles: [
-                    "מקומות: " + data.booking.numOfSeats,
-                    stationsMap[data.booking.station]
-                ]
-            }
-        }, this);
+    getBookingForAGame: function() {
+        var bookings = this.props.bookingsData.bookings;
+        var gameId = this.state.gameIdFilter;
+        return _(bookings)
+            .mapValues(function(userBookings) {
+                return userBookings[gameId]
+            })
+            .omit(_.isUndefined)
+            .value();
     },
-    onEditBooking: function (index) {
-        var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
-        var bookingToEdit = bookingForGame[index];
+    getBookingCardProps: function(uid, booking) {
+        return {
+            title: this.props.usersData.users[uid].info.displayName,
+            subtitles: [getNumOfSeatsSubtitle(booking), stationsMap[booking.station]],
+            actions: [
+                {label: 'ערוך', onClick: this.onEditBooking.bind(this, booking, uid, this.props.usersData.users[uid])},
+                {label: 'בטל', onClick: this.onCancelBooking.bind(this, uid)}
+            ]
+        }
+    },
+    onEditBooking: function (booking, uid, user) {
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialog: editBookingDialog,
             props: {
-                uid: bookingToEdit.uid,
-                user: this.props.usersData.users[bookingToEdit.uid],
+                uid: uid,
+                user: user,
                 gameId: this.state.gameIdFilter,
-                booking: bookingToEdit.booking
+                booking: booking
             }
         });
     },
-    onCancelBooking: function (index) {
-        var bookingForGame = getBookingForAGame(this.props.bookingsData.bookings, this.state.gameIdFilter);
-        var bookingToCancel = bookingForGame[index];
-
+    onCancelBooking: function (uid) {
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialog: areYouSureDialog,
             props: {
                 text: 'האם אתה בטוח שברצונך למחוק את ההרשמה?',
                 onConfirm: function() {
                     actionsCreator.createAction(actionsConstants.CANCEL_BOOKING, {
-                        uid: bookingToCancel.uid,
+                        uid: uid,
                         gameId: this.state.gameIdFilter
                     });
-                }
+                }.bind(this)
             }
         });
     },
