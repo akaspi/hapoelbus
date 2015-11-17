@@ -13,8 +13,8 @@ var gamesData = {
     error: false
 };
 
-dispatcher.register(function(action) {
-    switch(action.actionType) {
+dispatcher.register(function (action) {
+    switch (action.actionType) {
         case actionsConstants.LOAD_GAMES:
             loadGames();
             break;
@@ -39,14 +39,14 @@ function loadGames() {
     emitChange();
 
     return gamesAPI.getGames()
-        .then(function(allGames) {
+        .then(function (allGames) {
             gamesData.games = _.cloneDeep(allGames);
             gamesData.initialized = true;
         })
-        .catch(function() {
-           gamesData.error = true;
+        .catch(function () {
+            gamesData.error = true;
         })
-        .finally(function() {
+        .finally(function () {
             gamesData.loading = false;
             emitChange();
         })
@@ -57,9 +57,17 @@ function createGame(gameData) {
     gamesData.error = false;
     emitChange();
 
-    gamesAPI.createGame(gameData, function() {
-        return loadGames();
-    }, function() {});
+    return gamesAPI.createGame(gameData)
+        .then(function () {
+            return loadGames();
+        })
+        .catch(function () {
+            gamesData.error = true;
+        })
+        .finally(function () {
+            gamesData.loading = false;
+            emitChange();
+        });
 }
 
 function updateGame(gameId, gameData) {
@@ -68,13 +76,13 @@ function updateGame(gameId, gameData) {
     emitChange();
 
     return gamesAPI.updateGame(gameId, gameData)
-        .then(function() {
+        .then(function () {
             return loadGames();
         })
-        .catch(function() {
+        .catch(function () {
             gamesData.error = true;
         })
-        .finally(function() {
+        .finally(function () {
             gamesData.loading = false;
             emitChange();
         });
@@ -83,7 +91,7 @@ function removeGame(gameId) {
     gamesData.loading = true;
     emitChange();
 
-    return gamesAPI.removeGame(gameId).then(function() {
+    return gamesAPI.removeGame(gameId).then(function () {
         return loadGames();
     })
 }
