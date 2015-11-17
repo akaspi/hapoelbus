@@ -16,4 +16,18 @@
       padding-left: 10px;
     }
   }
+
+  .wrapper {
+    display: flex;
+
+    .honeycomb {
+      background: url('../../../resources/honeycomb-hapoel.png') no-repeat;
+      background-size: cover;
+      width: 400px;
+      height: 400px;
+    }
+
+  }
+
+
 }

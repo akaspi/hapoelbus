@@ -15,7 +15,7 @@
   .card-header {
     height: 140px;
     text-align: center;
-    background: #ef5350;
+    background: #3d4e57;
 
     &.card-blue {
       background: #42A5F5;
@@ -35,8 +35,9 @@
       margin-top: 10px;
       width: $card-image-size;
       height: $card-image-size;
-      border: 8px solid #ffcdd2;
+      border: 8px solid rgba(61, 78, 87, 0.78);
       border-radius: 50%;
+      background: #ffffff;
     }
   }
 
@@ -49,7 +50,7 @@
       font-size: 18px;
       font-weight: 400;
       letter-spacing: 0.05em;
-      color: #c0392b;
+      color: #e74c3c;
     }
 
     .card-sub-title {

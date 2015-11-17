@@ -7,14 +7,22 @@
         <i class="material-icons icon">directions_bus</i>
 
         <h1 class="title">ההסעות הבאות</h1></div>
-    <section class="games-section">
-        <card rt-repeat="openGameCard in this.getOpenGamesCardData()"
-              key="openGameCard-{openGameCardIndex}"
-              title="{openGameCard.title}"
-              imageUrl="{openGameCard.imageUrl}"
-              subtitles="{openGameCard.subtitles}"
-              ribbon="{openGameCard.ribbon}"
-              actions="{this.getCustomActions(openGameCardIndex)}"/>
-    </section>
+
+    <div class="wrapper">
+        <section class="games-section">
+            <card rt-repeat="openGameCard in this.getOpenGamesCardData()"
+                  key="openGameCard-{openGameCardIndex}"
+                  title="{openGameCard.title}"
+                  imageUrl="{openGameCard.imageUrl}"
+                  subtitles="{openGameCard.subtitles}"
+                  ribbon="{openGameCard.ribbon}"
+                  actions="{this.getCustomActions(openGameCardIndex)}"/>
+        </section>
+
+        <section>
+            <div class="honeycomb"></div>
+        </section>
+    </div>
+
     <editBookingDialog ref="dialog" rt-if="this.state.editBookingDialogProps" rt-props="this.state.editBookingDialogProps"/>
 </div>
