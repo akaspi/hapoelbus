@@ -10,6 +10,13 @@ var gameStatusMap = require('json!../../utils/gameStatusMap.json');
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
+var defaultGame = {
+    vsid: _.keys(vsidMap)[0],
+    date: Date.now(),
+    departure: Date.now(),
+    status: _.keys(gameStatusMap)[0]
+};
+
 var EditGameDialog = React.createClass({
     displayName: 'EditGameDialog',
     propTypes: {
@@ -19,7 +26,7 @@ var EditGameDialog = React.createClass({
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
-            game: this.props.game ? _.clone(this.props.game) : {}
+            game: _.cloneDeep(this.props.game) || defaultGame
         };
     },
     getVSIDMenuItems: function () {
