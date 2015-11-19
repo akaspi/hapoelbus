@@ -3,7 +3,7 @@
 <rt-require dependency="../pages/bookingsPage" as="bookingsPage"/>
 <rt-require dependency="../pages/gamesPage" as="gamesPage"/>
 <rt-require dependency="../pages/usersPage" as="usersPage"/>
-<rt-require dependency="../pages/emailsPage" as="emailsPage"/>
+<rt-require dependency="../pages/distributionPage" as="distributionPage"/>
 <rt-require dependency="material-ui" as="mui"/>
 <rt-require dependency="../loading/loading" as="loading"/>
 <rt-require dependency="../navigation/navigation" as="navigation"/>
@@ -49,10 +49,10 @@
                       usersData="{this.props.usersData}"
                       bookingsData="{this.props.bookingsData}"/>
 
-        <emailsPage rt-if="this.props.currentPage === pagesConstants.EMAILS_PAGE"
-                    key="key-emails-page"
-                    gamesData="{this.props.gamesData}"
-                    usersData="{this.props.usersData}"/>
+        <distributionPage rt-if="this.props.currentPage === pagesConstants.DISTRIBUTION_PAGE"
+                          key="key-emails-page"
+                          gamesData="{this.props.gamesData}"
+                          usersData="{this.props.usersData}"/>
     </div>
 
     <mui.Snackbar rt-if="this.hasErrors()" openOnMount="{true}" autoHideDuration="{5000}" message="אירעה שגיאה במערכת"/>

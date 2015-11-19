@@ -3,14 +3,21 @@
   flex-direction: column;
   align-items: center;
 
+  .distribution-section {
+    width: 200px;
+    border: 1px solid;
+    padding: 20px;
+    box-shadow: 3px 3px 5px 6px #ccc;
+  }
+  .distribution-method {
+    margin-top: 20px;
+  }
   .recipients {
     margin-top: 20px;
-    width: 200px;
   }
 
-  .email-type {
+  .distribution-type {
     margin-top: 20px;
-    width: 200px;
   }
 
   .template-mail {
@@ -38,6 +45,10 @@
       resize: none;
       outline: none;
     }
+  }
+
+  .oversize-custom-content {
+    color: red;
   }
 
   .actions {

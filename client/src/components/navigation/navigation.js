@@ -12,7 +12,7 @@ var navItems = [
     { text: 'טבלת משתמשים', page: pagesConstants.USERS_PAGE },
     { text: 'טבלת משחקים', page: pagesConstants.GAMES_PAGE },
     { text: 'טבלת רישומים', page: pagesConstants.BOOKINGS_PAGE },
-    { text: 'אימיילים', page: pagesConstants.EMAILS_PAGE }
+    { text: 'רשימת תפוצה', page: pagesConstants.DISTRIBUTION_PAGE }
 ];
 
 var AccountData = React.createClass({
