@@ -1,33 +1,85 @@
 .home-page {
-  .title-wrapper {
-    padding-right: 35px;
-    font-size: 26px;
-    color: #3d4e57;
+  $games-section-max-width: 550px;
 
-    .title {
-      display: inline-block;
-      font-size: 26px;
-    }
-
-    .icon {
-      line-height: 26px;
-      vertical-align: middle;
-      font-size: 34px;
-      padding-left: 10px;
-    }
+  @media screen and (max-width: 1200px) {
+    justify-content: center;
   }
 
-  .wrapper {
+  margin-top: 50px;
+
+  display: flex;
+  align-items: center;
+
+
+  .games-section {
+
+    max-width: $games-section-max-width;
+    margin-right: 100px;
+
+    @media screen and (max-width: 1200px) {
+      margin-right: 0;
+    }
+
+    .title-wrapper {
+      padding-right: 35px;
+      font-size: 26px;
+      color: #3d4e57;
+
+      @media screen and (max-width: 1200px) {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .title {
+        display: inline-block;
+        font-size: 26px;
+      }
+
+      .icon {
+        line-height: 26px;
+        vertical-align: middle;
+        font-size: 34px;
+        padding-left: 10px;
+      }
+    }
+
+    .games-cards-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 560px;
+
+      @media screen and (max-width: 1200px) {
+        & > * {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+  }
+
+  .gallery-section {
+
+    flex: 1;
     display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 1200px) {
+      display: none;
+    }
 
     .honeycomb {
+      width: 800px;
+      height: 600px;
       background: url('../../../resources/honeycomb-hapoel.png') no-repeat;
-      background-size: cover;
-      width: 400px;
-      height: 400px;
+      background-size: contain;
+
+      @media screen and (max-width: 1500px) {
+        width: 600px;
+        height: 400px;
+      }
     }
-
   }
-
 
 }

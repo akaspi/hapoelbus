@@ -1,15 +1,15 @@
 <rt-require dependency="../card/card" as="card"/>
-<rt-require dependency="../dialogs/editBookingDialog" as="editBookingDialog"/>
-
 
 <div class="home-page">
-    <div class="title-wrapper">
-        <i class="material-icons icon">directions_bus</i>
 
-        <h1 class="title">ההסעות הבאות</h1></div>
+    <div class="games-section">
 
-    <div class="wrapper">
-        <section class="games-section">
+        <div class="title-wrapper">
+            <i class="material-icons icon">directions_bus</i>
+            <h1 class="title">ההסעות הבאות</h1>
+        </div>
+
+        <div class="games-cards-wrapper">
             <card rt-repeat="openGameCard in this.getOpenGamesCardData()"
                   key="openGameCard-{openGameCardIndex}"
                   title="{openGameCard.title}"
@@ -17,12 +17,11 @@
                   subtitles="{openGameCard.subtitles}"
                   ribbon="{openGameCard.ribbon}"
                   actions="{this.getCustomActions(openGameCardIndex)}"/>
-        </section>
+        </div>
 
-        <section>
-            <div class="honeycomb"></div>
-        </section>
     </div>
 
-    <editBookingDialog ref="dialog" rt-if="this.state.editBookingDialogProps" rt-props="this.state.editBookingDialogProps"/>
+    <div class="gallery-section">
+        <div class="honeycomb"/>
+    </div>
 </div>
