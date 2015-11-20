@@ -69,6 +69,7 @@ var UsersPage = React.createClass({
         return {
             title: user.info.displayName,
             subtitles: [user.info.email, user.info.phone],
+            imageUrl: user.info.profileImage,
             color: getUserCardColor(user),
             actions: [
                 {label: 'ערוך', onClick: this.onEditUser.bind(this, uid, user)},

@@ -32,28 +32,40 @@ var MyAccount = React.createClass({
         return _.isEmpty(user);
     },
     componentDidUpdate: function (prevProps) {
-        if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props) && this.isUserMissingData()) {
-            actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
-                dialog: editUserDataDialog,
-                props: {
+        if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props)) {
+            if (this.isUserMissingData()) {
+                actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+                    dialog: editUserDataDialog,
+                    props: {
+                        user: {
+                            info: {
+                                email: authAPI.getUserEmail(),
+                                profileImage: this.getUserProfileUrl()
+                            }
+                        },
+                        uid: this.props.authData.uid,
+                        isModal: true,
+                        title: 'פרטי משתמש ראשוניים'
+                    }
+                });
+            } else {
+                actionsCreator.createAction(actionsConstants.UPDATE_USER, {
+                    uid: this.props.authData.uid,
                     user: {
                         info: {
-                            email: authAPI.getUserEmail()
+                            profileImage: this.getUserProfileUrl()
                         }
-                    },
-                    uid: this.props.authData.uid,
-                    isModal: true,
-                    title: 'פרטי משתמש ראשוניים'
-                }
-            });
+                    }
+                });
+            }
         }
     },
     getUserName: function () {
         var user = this.props.usersData.users[this.props.authData.uid];
         return user.info.displayName || 'משתמש';
     },
-    getUserProfileUrl: function() {
-      return authAPI.getUserProfileImageURL();
+    getUserProfileUrl: function () {
+        return authAPI.getUserProfileImageURL();
     },
     logout: function () {
         actionsCreator.createAction(actionsConstants.LOGOUT, {});

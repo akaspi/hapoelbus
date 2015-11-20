@@ -8,8 +8,6 @@ var Card = React.createClass({
     propTypes: {
         title: React.PropTypes.string.isRequired,
         subtitles: React.PropTypes.arrayOf(React.PropTypes.string, React.PropTypes.number),
-        //onEdit: React.PropTypes.func,
-        //onRemove: React.PropTypes.func,
         actions: React.PropTypes.arrayOf(React.PropTypes.shape({
             onClick: React.PropTypes.func,
             label: React.PropTypes.string,
@@ -24,7 +22,7 @@ var Card = React.createClass({
     },
     getDefaultProps: function () {
         return {
-            imageUrl: 'http://dir.agosto.nl/dump/Sara.jpg'
+            imageUrl: 'https://secure.gravatar.com/avatar/59029276955677351421b3ff6bf5ee4c?d=retro'
         };
     },
     getCardColor: function () {
