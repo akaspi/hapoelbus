@@ -3,27 +3,27 @@
 <div class="emails-page">
 
     <div class="distribution-section distribution-method">
-        <mui.RadioButtonGroup defaultSelected="email" onChange="{this.onDistributionMethodChange}">
-            <mui.RadioButton value="email" labelStyle="{{float: 'initial'}}" label="אימייל"/>
-            <mui.RadioButton value="sms" labelStyle="{{float: 'initial'}}" label="סמס"/>
+        <mui.RadioButtonGroup defaultSelected="{this.DISTRIBUTION_METHODS.EMAIL}" onChange="{this.onDistributionMethodChange}">
+            <mui.RadioButton value="{this.DISTRIBUTION_METHODS.EMAIL}" labelStyle="{{float: 'initial'}}" label="אימייל"/>
+            <mui.RadioButton value="{this.DISTRIBUTION_METHODS.SMS}" labelStyle="{{float: 'initial'}}" label="סמס"/>
         </mui.RadioButtonGroup>
     </div>
 
     <div class="distribution-section recipients">
-        <mui.RadioButtonGroup defaultSelected="recipients-all" onChange="{this.onRecipientsChange}">
-            <mui.RadioButton value="recipients-all" labelStyle="{{float: 'initial'}}" label="כל המשתמשים"/>
-            <mui.RadioButton value="recipients-members" labelStyle="{{float: 'initial'}}" label="מנויים בלבד"/>
-            <mui.RadioButton value="recipients-not-members" labelStyle="{{float: 'initial'}}" label="חד פעמיים בלבד"/>
+        <mui.RadioButtonGroup defaultSelected="{this.RECIPIENTS_TYPES.ALL}" onChange="{this.onRecipientsChange}">
+            <mui.RadioButton value="{this.RECIPIENTS_TYPES.ALL}" labelStyle="{{float: 'initial'}}" label="כל המשתמשים"/>
+            <mui.RadioButton value="{this.RECIPIENTS_TYPES.MEMBERS_ONLY}" labelStyle="{{float: 'initial'}}" label="מנויים בלבד"/>
+            <mui.RadioButton value="{this.RECIPIENTS_TYPES.NON_MEMBERS}" labelStyle="{{float: 'initial'}}" label="חד פעמיים בלבד"/>
         </mui.RadioButtonGroup>
     </div>
     <div class="distribution-section distribution-type">
-        <mui.RadioButtonGroup defaultSelected="template" onChange="{this.onDistributionTypeChange}">
-            <mui.RadioButton value="template" labelStyle="{{float: 'initial'}}" label="תבנית"/>
-            <mui.RadioButton value="custom" labelStyle="{{float: 'initial'}}" label="חופשי"/>
+        <mui.RadioButtonGroup defaultSelected="{this.DISTRIBUTION_TYPE.TEMPLATE}" onChange="{this.onDistributionTypeChange}">
+            <mui.RadioButton value="{this.DISTRIBUTION_TYPE.TEMPLATE}" labelStyle="{{float: 'initial'}}" label="תבנית"/>
+            <mui.RadioButton value="{this.DISTRIBUTION_TYPE.CUSTOM}" labelStyle="{{float: 'initial'}}" label="חופשי"/>
         </mui.RadioButtonGroup>
     </div>
 
-    <div rt-if="this.state.distributionType === 'template'" class="template-mail">
+    <div rt-if="this.state.distributionType === this.DISTRIBUTION_TYPE.TEMPLATE" class="template-mail">
         <mui.SelectField
                 menuItems="{this.getTemplatesIdsMenuItems()}"
                 valueLink={this.linkState('templateId')}
@@ -36,14 +36,14 @@
                 iconStyle="{{left: 0, right: 'initial'}}"
                 floatingLabelText="משחק"/>
     </div>
-    <div rt-if="this.state.distributionType === 'custom'" class="custom-mail">
+    <div rt-if="this.state.distributionType === this.DISTRIBUTION_TYPE.CUSTOM" class="custom-mail">
         <mui.TextField
-                rt-if="this.state.distributionMethod === 'email'"
+                rt-if="this.state.distributionMethod === this.DISTRIBUTION_METHODS.EMAIL"
                 valueLink={this.linkState('subject')}
                 fullWidth="{true}"
                 floatingLabelText="כותרת"/>
         <textarea class="custom-mail-content" cols="30" rows="15" valueLink="{this.linkState('customContent')}"/>
-        <span rt-if="this.state.distributionMethod === 'sms'" rt-class="{'oversize-custom-content': this.state.customContent.length > 80}">{this.state.customContent.length}/80</span>
+        <span rt-if="this.state.distributionMethod === this.DISTRIBUTION_METHODS.SMS" rt-class="{'oversize-custom-content': this.state.customContent.length > 80}">{this.state.customContent.length}/80</span>
     </div>
 
     <div class="actions">

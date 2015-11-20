@@ -29,27 +29,45 @@ function getSubsForGameTemplate(game) {
     };
 }
 
-function filterRecipients(recipients, users, path) {
-    switch (recipients) {
-        case 'recipients-all':
-            return _.pluck(users, path);
-        case 'recipients-members':
-            return _(users)
-                .omit(function (user) {
-                    return !(user.seasonTicket && user.seasonTicket.maxSeats > 0)
-                })
-                .values()
-                .pluck(path)
-                .value();
-        case 'recipients-not-members':
-            return _(users)
-                .omit(function (user) {
-                    return user.seasonTicket && user.seasonTicket.maxSeats > 0
-                })
-                .values()
-                .pluck(path)
-                .value();
+var RECIPIENTS_TYPES = {
+    'ALL': 'ALL',
+    'MEMBERS_ONLY': 'MEMBERS_ONLY',
+    'NON_MEMBERS': 'NON_MEMBERS'
+};
+
+var DISTRIBUTION_METHODS = {
+    'EMAIL': 'EMAIL',
+    'SMS': 'SMS'
+};
+
+var DISTRIBUTION_TYPE = {
+    'TEMPLATE': 'TEMPLATE',
+    'CUSTOM': 'CUSTOM'
+};
+
+function filterUsersByRecipientsType(recipientsType, users) {
+    switch (recipientsType) {
+        case RECIPIENTS_TYPES.ALL:
+            return users;
+        case RECIPIENTS_TYPES.MEMBERS_ONLY:
+            return _.omit(users, function (user) {
+                return !(user.seasonTicket && user.seasonTicket.maxSeats > 0)
+            });
+        case RECIPIENTS_TYPES.NON_MEMBERS:
+            return _.omit(users, function (user) {
+                return user.seasonTicket && user.seasonTicket.maxSeats > 0
+            });
     }
+}
+
+function getUsersEmails(users) {
+    return _.pluck(users, 'info.email');
+}
+
+function getUsersPhoneNumbers(users) {
+    return _.map(users, function (user) {
+        return '+972' + user.info.phone.replace(/-/g, '').slice(1);
+    });
 }
 
 function getOpenGames(games) {
@@ -67,7 +85,7 @@ function isGameOpenForAll(game) {
 }
 
 function prepareCustomMailContentForSend(content) {
-    return '<p dir=\'rtl\'>' +  content.replace(/(?:\r\n|\r|\n)/g, '<br/>') + '</p>';
+    return '<p dir=\'rtl\'>' + content.replace(/(?:\r\n|\r|\n)/g, '<br/>') + '</p>';
 }
 
 var EmailsPage = React.createClass({
@@ -75,20 +93,23 @@ var EmailsPage = React.createClass({
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
-            recipients: 'recipients-all',
-            distributionMethod: 'email',
-            distributionType: 'template',
+            recipientsType: RECIPIENTS_TYPES.ALL,
+            distributionMethod: DISTRIBUTION_METHODS.EMAIL,
+            distributionType: DISTRIBUTION_TYPE.TEMPLATE,
             gameId: _.keys(getOpenGames(this.props.gamesData.games))[0],
             templateId: _.keys(templatesMap)[0],
             subject: '',
             customContent: ''
         }
     },
+    RECIPIENTS_TYPES: RECIPIENTS_TYPES,
+    DISTRIBUTION_METHODS: DISTRIBUTION_METHODS,
+    DISTRIBUTION_TYPE: DISTRIBUTION_TYPE,
     onDistributionMethodChange: function (e, selected) {
         this.setState({distributionMethod: selected});
     },
     onRecipientsChange: function (e, selected) {
-        this.setState({recipients: selected});
+        this.setState({recipientsType: selected});
     },
     onDistributionTypeChange: function (e, selected) {
         this.setState({distributionType: selected});
@@ -109,19 +130,20 @@ var EmailsPage = React.createClass({
             props: {
                 text: 'האם אתה בטוח?',
                 onConfirm: function () {
-                    var recipients = filterRecipients(this.state.recipients, this.props.usersData.users, this.state.distributionMethod === 'email' ? 'info.email' : 'info.phone');
-                    var game = this.props.gamesData.games[this.state.gameId];
-                    if (this.state.distributionMethod === 'email') {
-                        if (this.state.distributionType === 'template') {
-                            distributionAPI.sendTemplateEmail(this.state.templateId, getSubsForGameTemplate(game), recipients);
+                    var recipientsUsers = filterUsersByRecipientsType(this.state.recipientsType, this.props.usersData.users);
+
+                    if (this.state.distributionType == DISTRIBUTION_TYPE.TEMPLATE) {
+                        var game = this.props.gamesData.games[this.state.gameId];
+                        if (this.state.distributionMethod === DISTRIBUTION_METHODS.MAIL) {
+                            distributionAPI.sendTemplateEmail(this.state.templateId, getSubsForGameTemplate(game), getUsersEmails(recipientsUsers));
                         } else {
-                            distributionAPI.sendCustomEmail(recipients, this.state.subject, prepareCustomMailContentForSend(this.state.customContent));
+                            distributionAPI.sendTemplateSMS(this.state.templateId, getSubsForGameTemplate(game), getUsersPhoneNumbers(recipientsUsers));
                         }
                     } else {
-                        if (this.state.distributionType === 'template') {
-                            distributionAPI.sendTemplateSMS(this.state.templateId, getSubsForGameTemplate(game), recipients);
+                        if (this.state.distributionMethod === DISTRIBUTION_METHODS.MAIL) {
+                            distributionAPI.sendCustomEmail(getUsersEmails(recipientsUsers), this.state.subject, prepareCustomMailContentForSend(this.state.customContent));
                         } else {
-                            distributionAPI.sendCustomSMS(recipients, this.state.customContent);
+                            distributionAPI.sendCustomSMS(getUsersPhoneNumbers(recipientsUsers), this.state.customContent);
                         }
                     }
                 }.bind(this)
