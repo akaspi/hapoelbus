@@ -19,23 +19,21 @@ var templatesDataMap = {
 
 function sendMail(to, subject, content) {
     return new Promise(function(resolve, reject) {
-        console.log(to);
-        resolve();
-        //var email = new sendgrid.Email();
-        //
-        //var toAsArray = _.isArray(to) ? to : [ to ];
-        //_.forEach(toAsArray, function(address) {
-        //    email.addTo(address);
-        //});
-        //
-        //email.setFrom('hapoelbus@gmail.com');
-        //email.setSubject(subject);
-        //email.setHtml(content);
-        //
-        //sendgrid.send(email, function(err) {
-        //    if (err) { return reject(mailId) }
-        //    resolve(mailId);
-        //});
+        var email = new sendgrid.Email();
+
+        var toAsArray = _.isArray(to) ? to : [ to ];
+        _.forEach(toAsArray, function(address) {
+            email.addTo(address);
+        });
+
+        email.setFrom('hapoelbus@gmail.com');
+        email.setSubject(subject);
+        email.setHtml(content);
+
+        sendgrid.send(email, function(err) {
+            if (err) { return reject() }
+            resolve();
+        });
     });
 }
 
@@ -61,7 +59,8 @@ function sendPendingTemplate(pendingTemplate, mailId) {
 }
 
 function sendPendingCustom(pendingCustom, mailId) {
-    var to = pendingCustom.to || [];
+    //var to = pendingCustom.to || [];
+    var to = ['kaspi.amit@gmail.com'];
     var subject = pendingCustom.subject || '';
     var content = pendingCustom.content || '';
 

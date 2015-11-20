@@ -66,6 +66,10 @@ function isGameOpenForAll(game) {
     return gameStatusMap[game.status] === gameStatusMap.OPEN_FOR_ALL;
 }
 
+function prepareCustomMailContentForSend(content) {
+    return '<p dir=\'rtl\'>' +  content.replace(/(?:\r\n|\r|\n)/g, '<br/>') + '</p>';
+}
+
 var EmailsPage = React.createClass({
     displayName: 'EmailsPage',
     mixins: [deepLinkStateMixin],
@@ -111,7 +115,7 @@ var EmailsPage = React.createClass({
                         if (this.state.distributionType === 'template') {
                             distributionAPI.sendTemplateEmail(this.state.templateId, getSubsForGameTemplate(game), recipients);
                         } else {
-                            distributionAPI.sendCustomEmail(recipients, this.state.subject, this.state.customContent);
+                            distributionAPI.sendCustomEmail(recipients, this.state.subject, prepareCustomMailContentForSend(this.state.customContent));
                         }
                     } else {
                         if (this.state.distributionType === 'template') {
