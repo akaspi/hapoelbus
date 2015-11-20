@@ -14,10 +14,10 @@
         <div class="logo"/>
         <div rt-if="initialized && !this.isUserMissingData()" class="auth-data-box">
             <navigation rt-if="this.props.authData.isAdmin"/>
-            <div>
+            <div class="avatar" onClick="{this.editUser}">
                 <mui.Avatar src="{this.getUserProfileUrl()}"/>
             </div>
-            <div class="user-display-name">
+            <div class="user-display-name" onClick="{this.editUser}">
                 <span>שלום, </span>
                 <span>{this.getUserName()}</span>
             </div>

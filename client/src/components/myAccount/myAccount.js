@@ -10,6 +10,18 @@ var authAPI = require('../../API/authAPI');
 
 var editUserDataDialog = require('../dialogs/editUserDataDialog');
 
+function openEditUserDialog(user, uid, isModal, title) {
+    actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+        dialog: editUserDataDialog,
+        props: {
+            user: user,
+            uid: uid,
+            title: title,
+            isModal: isModal
+        }
+    });
+}
+
 var MyAccount = React.createClass({
     displayName: 'MyAccount',
     isDataInitialized: function (props) {
@@ -34,20 +46,12 @@ var MyAccount = React.createClass({
     componentDidUpdate: function (prevProps) {
         if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props)) {
             if (this.isUserMissingData()) {
-                actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
-                    dialog: editUserDataDialog,
-                    props: {
-                        user: {
-                            info: {
-                                email: authAPI.getUserEmail(),
-                                profileImage: this.getUserProfileUrl()
-                            }
-                        },
-                        uid: this.props.authData.uid,
-                        isModal: true,
-                        title: 'פרטי משתמש ראשוניים'
+                openEditUserDialog({
+                    info: {
+                        email: authAPI.getUserEmail(),
+                        profileImage: this.getUserProfileUrl()
                     }
-                });
+                }, this.props.authData.uid, true, 'פרטי משתמש ראשוניים');
             } else {
                 actionsCreator.createAction(actionsConstants.UPDATE_USER, {
                     uid: this.props.authData.uid,
@@ -66,6 +70,11 @@ var MyAccount = React.createClass({
     },
     getUserProfileUrl: function () {
         return authAPI.getUserProfileImageURL();
+    },
+    editUser: function() {
+        var uid = this.props.authData.uid;
+        var user = this.props.usersData.users[uid];
+        openEditUserDialog(user, uid, false, 'עריכת פרטי משתמש');
     },
     logout: function () {
         actionsCreator.createAction(actionsConstants.LOGOUT, {});
