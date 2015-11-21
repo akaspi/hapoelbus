@@ -80,11 +80,9 @@
         cursor: pointer;
       }
 
-      &:active {
-        //background-color: #34495e;
-      }
-
-      & + .card-actions-item {
+      .action-icon {
+        font-size: 12px;
+        margin-left: 5px;
       }
     }
   }

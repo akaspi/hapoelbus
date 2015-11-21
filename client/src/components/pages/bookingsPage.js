@@ -44,8 +44,8 @@ var BookingPage = React.createClass({
             title: this.props.usersData.users[uid].info.displayName,
             subtitles: [getNumOfSeatsSubtitle(booking), stationsMap[booking.station]],
             actions: [
-                {label: 'ערוך', onClick: this.onEditBooking.bind(this, booking, uid, this.props.usersData.users[uid])},
-                {label: 'בטל', onClick: this.onCancelBooking.bind(this, uid)}
+                {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditBooking.bind(this, booking, uid, this.props.usersData.users[uid])},
+                {label: 'בטל', icon: 'delete', onClick: this.onCancelBooking.bind(this, uid)}
             ]
         }
     },

@@ -11,7 +11,7 @@ var Card = React.createClass({
         actions: React.PropTypes.arrayOf(React.PropTypes.shape({
             onClick: React.PropTypes.func,
             label: React.PropTypes.string,
-            iconClass: React.PropTypes.string
+            icon: React.PropTypes.string
         })),
         imageUrl: React.PropTypes.string,
         color: React.PropTypes.string,

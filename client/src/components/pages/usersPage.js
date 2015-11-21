@@ -70,8 +70,8 @@ var UsersPage = React.createClass({
             imageUrl: user.info.profileImage,
             color: getUserCardColor(user),
             actions: [
-                {label: 'ערוך', onClick: this.onEditUser.bind(this, uid, user)},
-                {label: 'מחק', onClick: this.onRemoveUser.bind(this, uid)}
+                {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditUser.bind(this, uid, user)},
+                {label: 'מחק', icon: 'delete', onClick: this.onRemoveUser.bind(this, uid)}
             ]
         };
     },

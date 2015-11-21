@@ -8,8 +8,8 @@
     </div>
     <ul class="card-actions-wrapper">
         <li rt-repeat="action in this.props.actions" key="card-action-{actionIndex}" onClick="{action.onClick}" class="card-actions-item">
+            <i rt-if="action.icon" class="material-icons action-icon">{action.icon}</i>
             <span rt-if="action.label">{action.label}</span>
-            <i rt-if="action.iconClass" class="{'fa' + action.iconClass}"/>
         </li>
     </ul>
     <div rt-if="this.props.ribbon" class="card-ribbon-wrapper">

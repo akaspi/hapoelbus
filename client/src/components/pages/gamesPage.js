@@ -20,8 +20,8 @@ var GamesPage = React.createClass({
             subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure), gameStatusMap[game.status]],
             imageUrl: vsidMap[game.vsid].img,
             actions: [
-                {label: 'ערוך', onClick: this.onEditGame.bind(this, gameId, game)},
-                {label: 'מחק', onClick: this.onRemoveGame.bind(this, gameId)}
+                {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditGame.bind(this, gameId, game)},
+                {label: 'מחק', icon: 'delete', onClick: this.onRemoveGame.bind(this, gameId)}
             ]
         }
     },

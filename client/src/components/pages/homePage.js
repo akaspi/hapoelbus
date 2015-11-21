@@ -96,7 +96,7 @@ var HomePage = React.createClass({
         if (isFullyBooked) {
             if (isBooked) {
                 return [
-                    {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+                    {label: 'בטל', icon: 'cancel', onClick: this.cancelBooking.bind(this, index) }
                 ];
             }
             return [];
@@ -108,24 +108,24 @@ var HomePage = React.createClass({
             }
             if (isBooked) {
                 return [
-                    {label: 'ערוך', onClick: this.updateBooking.bind(this, index) },
-                    {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+                    {label: 'ערוך', icon: 'mode_edit', onClick: this.updateBooking.bind(this, index) },
+                    {label: 'בטל', icon: 'cancel', onClick: this.cancelBooking.bind(this, index) }
                 ];
             }
             return [
-                {label: 'הרשם', onClick: this.updateBooking.bind(this, index) }
+                {label: 'הרשם', icon: 'event_available', onClick: this.updateBooking.bind(this, index) }
             ];
         }
 
         if (gameIsOpenForAll) {
             if (isBooked) {
                 return [
-                    {label: 'ערוך', onClick: this.updateBooking.bind(this, index) },
-                    {label: 'בטל', onClick: this.cancelBooking.bind(this, index) }
+                    {label: 'ערוך', icon: 'mode_edit', onClick: this.updateBooking.bind(this, index) },
+                    {label: 'בטל', icon: 'cancel', onClick: this.cancelBooking.bind(this, index) }
                 ];
             }
             return [
-                {label: 'הרשם', onClick: this.updateBooking.bind(this, index) }
+                {label: 'הרשם', icon: 'event_available', onClick: this.updateBooking.bind(this, index) }
             ];
         }
     },
