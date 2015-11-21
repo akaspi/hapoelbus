@@ -1,21 +1,12 @@
 'use strict';
 
+var _ = require('lodash');
 var Promise = require('bluebird');
 var dbUtils = require('./dbUtils');
 var sendgrid = require('sendgrid')('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');
-var fs = require('fs');
-var path = require('path');
-var _ = require('lodash');
-var templatesPath = path.join(__dirname, 'mailTemplates');
+var templateUtils = require('./templateUtils');
 
 var PENDING_MAILS_PATH = 'pendingEmails';
-var templatesDataMap = {
-    gameIsOpenForAll: { fileName: 'gameIsOpenForAll', subject: 'נפתחה הרשמה לכל המשתמשים!'},
-    gameIsOpenForMembers: { fileName: 'gameIsOpenForMembers', subject: 'נפתחה הרשמה חדשה למנויים!'},
-    updateGameDetails: { fileName: 'updateGameDetails', subject: 'שימו לב! עודכנו פרטי הסעה!'},
-    welcomeMail: { fileName: 'welcomeMail', subject: 'ברוכים הבאים ל-מחוץ לחומות!'},
-    reportAdminsForNewUsers: { fileName: 'reportAdminsForNewUsers', subject: 'נוספו משתמשים חדשים באתר!'}
-};
 
 function sendMail(to, subject, content) {
     return new Promise(function(resolve, reject) {
@@ -37,36 +28,26 @@ function sendMail(to, subject, content) {
     });
 }
 
-function getTemplateContent(templateId, substitutions) {
-    var templateContent = fs.readFileSync(templatesPath + '/' + templatesDataMap[templateId].fileName + '.html').toString();
-    if (substitutions) {
-        templateContent = _.reduce(substitutions, function(accum, subVal, subKey) {
-            return accum.replace(subKey, subVal);
-        }, templateContent);
-    }
-    return templateContent;
-}
 
 function sendPendingTemplate(pendingTemplate, mailId) {
     var to = pendingTemplate.to || [];
-    var subject = templatesDataMap[pendingTemplate.templateId].subject;
-    var content = getTemplateContent(pendingTemplate.templateId, pendingTemplate.subs);
+    var subject = templateUtils.getEmailSubject(pendingTemplate.templateId);
+    var content = templateUtils.getEmailContent(pendingTemplate.templateId, pendingTemplate.subs);
 
     return sendMail(to, subject, content)
         .then(function() {
-            return dbUtils.remove(PENDING_MAILS_PATH + '/templates', mailId);
+            return dbUtils.remove(PENDING_MAILS_PATH + '/templates/' + mailId);
         });
 }
 
 function sendPendingCustom(pendingCustom, mailId) {
-    //var to = pendingCustom.to || [];
-    var to = ['kaspi.amit@gmail.com'];
+    var to = pendingCustom.to || [];
     var subject = pendingCustom.subject || '';
     var content = pendingCustom.content || '';
 
     return sendMail(to, subject, content)
         .then(function() {
-            dbUtils.remove(PENDING_MAILS_PATH + '/custom', mailId);
+            dbUtils.remove(PENDING_MAILS_PATH + '/custom/' + mailId);
         });
 }
 

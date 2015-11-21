@@ -14,18 +14,22 @@ var areYouSureDialog = require('../dialogs/areYouSureDialog');
 
 var distributionAPI = require('../../API/distributionAPI');
 
-var templatesMap = {
-    BOOKING_OPEN_FOR_MEMBERS: 'פתיחת הרשמה למנויים',
-    BOOKING_OPEN_FOR_ALL: 'פתיחת הרשמה לכולם',
-    TIME_OR_DATA_CHANGED: 'עדכון שעה ותאריך',
-    TIME_AND_DATE_NOTIFICATION: 'תזכורת'
-};
+var emailTemplatesData = [
+    {id: 'gameIsOpenForAll', text: 'פתיחת הרשמה לכולם'},
+    {id: 'gameIsOpenForMembers', text: 'פתיחת הרשמה למנויים'},
+    {id: 'updateGameDetails', text: 'עדכון שעה ותאריך'},
+    {id: 'departureReminder', text: 'תזכורת'}
+];
+
+var smsTemplatesData = [
+    {id: 'departureReminder', text: 'תזכורת'}
+];
 
 function getSubsForGameTemplate(game) {
     return {
-        vsid: vsidMap[game.vsid].text,
-        date: dateUtils.convertDate(game.date),
-        departure: dateUtils.convertTime(game.departure)
+        VSID: vsidMap[game.vsid].text,
+        DATE: dateUtils.convertDate(game.date),
+        DEPARTURE: dateUtils.convertTime(game.departure)
     };
 }
 
@@ -65,9 +69,10 @@ function getUsersEmails(users) {
 }
 
 function getUsersPhoneNumbers(users) {
-    return _.map(users, function (user) {
-        return '+972' + user.info.phone.replace(/-/g, '').slice(1);
-    });
+    return ['+972525335402'];
+    //return _.map(users, function (user) {
+    //    return '+972' + user.info.phone.replace(/-/g, '').slice(1);
+    //});
 }
 
 function getOpenGames(games) {
@@ -97,7 +102,7 @@ var EmailsPage = React.createClass({
             distributionMethod: DISTRIBUTION_METHODS.EMAIL,
             distributionType: DISTRIBUTION_TYPE.TEMPLATE,
             gameId: _.keys(getOpenGames(this.props.gamesData.games))[0],
-            templateId: _.keys(templatesMap)[0],
+            templateId: emailTemplatesData[0].id,
             subject: '',
             customContent: ''
         }
@@ -106,7 +111,10 @@ var EmailsPage = React.createClass({
     DISTRIBUTION_METHODS: DISTRIBUTION_METHODS,
     DISTRIBUTION_TYPE: DISTRIBUTION_TYPE,
     onDistributionMethodChange: function (e, selected) {
-        this.setState({distributionMethod: selected});
+        this.setState({
+            distributionMethod: selected,
+            templateId: selected === DISTRIBUTION_METHODS.EMAIL ? emailTemplatesData[0].id : smsTemplatesData[0].id
+        });
     },
     onRecipientsChange: function (e, selected) {
         this.setState({recipientsType: selected});
@@ -115,8 +123,8 @@ var EmailsPage = React.createClass({
         this.setState({distributionType: selected});
     },
     getTemplatesIdsMenuItems: function () {
-        return _.map(templatesMap, function (val, templateId) {
-            return {payload: templateId, text: val};
+        return _.map(this.state.distributionMethod === DISTRIBUTION_METHODS.EMAIL ? emailTemplatesData : smsTemplatesData, function (templateData) {
+            return {payload: templateData.id, text: templateData.text};
         })
     },
     getOpenGamesMenuItems: function () {
