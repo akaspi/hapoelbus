@@ -37,7 +37,19 @@ function isUserPaid(uid, users) {
     return !!user.seasonTicket && user.seasonTicket.maxSeats > 0;
 }
 
-function getGameStatusLabel(game) {
+function isGameFullyBooked(bookings, game, gameId) {
+    var occupiedSeats =  _(bookings)
+        .pluck(gameId + '.numOfSeats')
+        .compact()
+        .sum();
+
+    return occupiedSeats >= game.capacity;
+}
+
+function getGameStatusLabel(bookings, game, gameId) {
+    if (isGameFullyBooked(bookings, game, gameId)) {
+        return 'הסעה מלאה';
+    }
     return 'סטאטוס: ' + gameStatusMap[game.status];
 }
 
@@ -55,7 +67,11 @@ var HomePage = React.createClass({
             var game = this.props.gamesData.games[gameId];
             var cardData = {
                 title: vsidMap[game.vsid].text,
-                subtitles: [dateUtils.convertDate(game.date), dateUtils.convertTime(game.departure), getGameStatusLabel(game)],
+                subtitles: [
+                    dateUtils.convertDate(game.date),
+                    dateUtils.convertTime(game.departure),
+                    getGameStatusLabel(this.props.bookingsData.bookings, game, gameId)
+                ],
                 imageUrl: vsidMap[game.vsid].img
             };
             var isBooked = !_.isEmpty(getBooking(this.props.uid, gameId, this.props.bookingsData.bookings));
@@ -74,7 +90,7 @@ var HomePage = React.createClass({
         var isPaidUser = isUserPaid(uid, this.props.usersData.users);
         var gameIsOpenForMembersOnly = isGameOpenForMembersOnly(game);
         var gameIsOpenForAll = isGameOpenForAll(game);
-        var isFullyBooked = false;
+        var isFullyBooked = isGameFullyBooked(this.props.bookingsData.bookings, game, gameId);
         var isBooked = !_.isEmpty(getBooking(uid, gameId, this.props.bookingsData.bookings));
 
         if (isFullyBooked) {

@@ -21,10 +21,11 @@ function getAllBookings() {
 }
 
 function getBookings() {
-    var uid = authAPI.getUID();
-    return authAPI.isAdmin(uid).then(function (isAdmin) {
-        return isAdmin ? getAllBookings() : getBookingsForUser(uid);
-    });
+    return getAllBookings();
+    //var uid = authAPI.getUID();
+    //return authAPI.isAdmin(uid).then(function (isAdmin) {
+    //    return isAdmin ? getAllBookings() : getBookingsForUser(uid);
+    //});
 }
 
 function updateBooking(uid, gameId, bookingData) {
