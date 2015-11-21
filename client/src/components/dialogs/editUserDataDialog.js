@@ -43,7 +43,7 @@ var EditUserDataDialog = React.createClass({
     onEmailListChange: function (e, value) {
         var newUserState = _.merge(this.state.user, {
             distribution: {
-                mail: value
+                email: value
             }
         });
         this.setState(newUserState);

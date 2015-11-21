@@ -65,14 +65,23 @@ function filterUsersByRecipientsType(recipientsType, users) {
 }
 
 function getUsersEmails(users) {
-    return _.pluck(users, 'info.email');
+    return _(users)
+        .omit(function(user) {
+            return !(user.distribution && user.distribution.email);
+        })
+        .pluck('info.email')
+        .value();
 }
 
 function getUsersPhoneNumbers(users) {
-    return ['+972525335402'];
-    //return _.map(users, function (user) {
-    //    return '+972' + user.info.phone.replace(/-/g, '').slice(1);
-    //});
+    return _(users)
+        .omit(function(user) {
+            return !(user.distribution && user.distribution.sms);
+        })
+        .map(function(user) {
+            return '+972' + user.info.phone.replace(/-/g, '').slice(1);
+        })
+        .value();
 }
 
 function getOpenGames(games) {

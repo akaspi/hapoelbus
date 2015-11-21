@@ -62,7 +62,7 @@
         </div>
         <div class="field-row">
             <mui.Toggle
-                    toggled="{this.state.user.distribution.mail}" onToggle="{this.onEmailListChange}"
+                    toggled="{this.state.user.distribution.email}" onToggle="{this.onEmailListChange}"
                     label="אימייל"/>
         </div>
     </section>
