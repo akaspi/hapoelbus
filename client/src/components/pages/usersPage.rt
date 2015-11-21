@@ -12,27 +12,24 @@
             <mui.Checkbox
                     labelPosition="left"
                     label="מנויים"
-                    name="dog1"
-                    checked="{this.state.filters.hasSeasonTicketsOnly}"
-                    onCheck="{(e, checked)=>this.onFilterChange('hasSeasonTicketsOnly', checked)}"
+                    name="checkbox-hasSeasonTicketsOnly"
+                    checkedLink="{this.linkState('filters.hasSeasonTicketsOnly')}"
                     defaultChecked="{true}"/>
         </li>
         <li class="filter-item">
             <mui.Checkbox
                     labelPosition="left"
                     label="חד פעמיים"
-                    name="sakl"
-                    checked="{this.state.filters.doNotHasSeasonTicketsOnly}"
-                    onCheck="{(e, checked)=>this.onFilterChange('doNotHasSeasonTicketsOnly', checked)}"
+                    name="checkbox-doNotHasSeasonTicketsOnly"
+                    checkedLink="{this.linkState('filters.doNotHasSeasonTicketsOnly')}"
                     defaultChecked="{true}"/>
         </li>
         <li class="filter-item">
             <mui.Checkbox
                     labelPosition="left"
                     label="נדרש ליצור קשר"
-                    name="fed"
-                    checked="{this.state.filters.requestedContact}"
-                    onCheck="{(e, checked)=>this.onFilterChange('requestedContact', checked)}"
+                    name="checkbox-requestedContact"
+                    checkedLink="{this.linkState('filters.requestedContact')}"
                     defaultChecked="{true}"/>
         </li>
     </ul>

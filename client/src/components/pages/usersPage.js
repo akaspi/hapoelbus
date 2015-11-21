@@ -3,6 +3,8 @@
 var React = require('react');
 var template = require('./usersPage.rt');
 
+var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
+
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
 
@@ -40,6 +42,7 @@ function getUserCardColor(user) {
 
 var UsersPage = React.createClass({
     displayName: 'UsersPage',
+    mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
             filters: {
@@ -48,11 +51,6 @@ var UsersPage = React.createClass({
                 requestedContact: true
             }
         }
-    },
-    onFilterChange: function (filterName, val) {
-        var filters = this.state.filters;
-        filters[filterName] = val;
-        this.setState({filters: filters});
     },
     getFilteredUsers: function () {
         var users = this.props.usersData.users;
