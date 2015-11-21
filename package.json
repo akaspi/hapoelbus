@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "serve --port 3000 ./client/public/",
-    "build": "webpack -d",
-    "watch": "webpack -d --watch"
+    "build": "bash copyResources.sh && webpack -d",
+    "watch": "bash copyResources.sh && webpack -d --watch"
   },
   "devDependencies": {
     "path": "^0.11.14",
