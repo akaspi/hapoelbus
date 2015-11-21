@@ -17,7 +17,7 @@
       padding-left: 10px;
     }
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 500px) {
       padding-right: 0;
       text-align: center;
     }
@@ -26,6 +26,8 @@
   .cards-displayer-wrapper {
     display: flex;
     margin-top: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .filter-wrapper {
