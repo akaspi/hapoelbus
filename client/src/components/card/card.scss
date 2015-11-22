@@ -15,7 +15,7 @@
   .card-header {
     height: 140px;
     text-align: center;
-    background: #3d4e57;
+    background: #171a1f;
 
     &.card-blue {
       background: #42A5F5;
@@ -35,7 +35,7 @@
       margin-top: 10px;
       width: $card-image-size;
       height: $card-image-size;
-      border: 8px solid rgba(61, 78, 87, 0.78);
+      border: 8px solid rgba(23, 26, 31, 0.63);
       border-radius: 50%;
       background: #ffffff;
     }
@@ -50,7 +50,7 @@
       font-size: 18px;
       font-weight: 400;
       letter-spacing: 0.05em;
-      color: #e74c3c;
+      color: #FF0F16;
     }
 
     .card-sub-title {
@@ -66,6 +66,7 @@
     padding: 0;
     list-style: none;
     overflow: hidden;
+    background: #FF0F16;
 
     .card-actions-item {
       display: flex;
@@ -73,7 +74,7 @@
       justify-content: center;
       align-items: center;
       padding: 12px;
-      color: #3D4E57;
+      color: #000000;
       font-weight: 600;
 
       &:hover {
@@ -111,7 +112,7 @@
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 
       &.ribbon-Green {
-        @include ribbon-color(#6a6340, #8EBF45);
+        @include ribbon-color(#171a1f, #66bb6a);
       }
 
       &.ribbon-Red {
