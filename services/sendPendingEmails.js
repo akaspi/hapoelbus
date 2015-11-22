@@ -51,6 +51,7 @@ function sendPendingCustom(pendingCustom, mailId) {
         });
 }
 
+console.log('\n\n****** RUNS AT ' + new Date() + ' ******');
 dbUtils.loginAsAdmin()
     .then(function() {
         return dbUtils.read(PENDING_MAILS_PATH);
@@ -71,8 +72,8 @@ dbUtils.loginAsAdmin()
     .then(function() {
         console.log('All mails were sent successfully');
     })
-    .catch(function() {
-        console.log('oh no... something went wrong :(');
+    .catch(function(e) {
+        console.log(e.stack);
     })
     .finally(function() {
         process.exit();

@@ -46,6 +46,8 @@ function reportAdminsForNewUsers(newUsersInfo, adminsInfo) {
     });
 }
 
+console.log('\n\n****** RUNS AT ' + new Date() + ' ******');
+
 dbUtils.loginAsAdmin()
     .then(function () {
         return [dbUtils.read(USERS_DATA_PATH), dbUtils.read(WELCOME_MAILS_PATH), dbUtils.read(ADMINS_PATH)]
@@ -68,5 +70,11 @@ dbUtils.loginAsAdmin()
         return [sendWelcomeMails(newUsersInfo), reportAdminsForNewUsers(newUsersInfo, adminsInfo)];
     })
     .spread(function () {
+        console.log('All users was handled successfully');
+    })
+    .catch(function(e) {
+        console.log(e.stack);
+    })
+    .finally(function() {
         process.exit();
     });

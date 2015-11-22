@@ -50,6 +50,7 @@ function sendPendingCustom(pendingCustom, smsId) {
     });
 }
 
+console.log('\n\n****** RUNS AT ' + new Date() + ' ******');
 dbUtils.loginAsAdmin()
     .then(function() {
         return dbUtils.read(PENDING_SMS_PATH)
@@ -72,7 +73,6 @@ dbUtils.loginAsAdmin()
     })
     .catch(function(e) {
         console.log(e.stack);
-        console.log('oh no... something went wrong :(');
     })
     .finally(function() {
         process.exit();
