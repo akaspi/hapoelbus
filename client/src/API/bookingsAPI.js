@@ -3,7 +3,7 @@
 var db = require('./db');
 var authAPI = require('./authAPI');
 
-var BOOKING_ROOT_PATH = 'booking';
+var BOOKING_ROOT_PATH = 'bookings';
 
 function getBookingsForUser(uid) {
     return db.read(BOOKING_ROOT_PATH + '/' + uid)
