@@ -35,9 +35,9 @@
     </ul>
 
     <div class="cards-displayer-wrapper">
-        <card rt-repeat="user in this.getFilteredUsers()"
-              key="user-card-{userIndex}"
-              rt-props="this.getUserCardProps(userIndex, user)"
+        <card rt-repeat="userData in this.getFilteredUsersDataArr()"
+              key="user-card-{userData.uid}"
+              rt-props="this.getUserCardProps(userData.uid, userData.user)"
         />
     </div>
 </div>

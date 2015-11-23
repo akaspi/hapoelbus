@@ -52,7 +52,7 @@ var UsersPage = React.createClass({
             }
         }
     },
-    getFilteredUsers: function () {
+    getFilteredUsersDataArr: function () {
         var users = this.props.usersData.users;
 
         var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? _.keys(getUsersWithSeasonTickets(users)) : [];
@@ -61,7 +61,16 @@ var UsersPage = React.createClass({
 
         var filteredUIDs = _.union(uidsWithSeasonTickets, uidsWithoutSeasonTickets, uidsThatRequestForContact);
 
-        return _.pick(users, filteredUIDs);
+        var filteredUsers = _.pick(users, filteredUIDs);
+
+        return _(filteredUsers)
+            .map(function(user, uid) {
+                return {uid: uid, user: user}
+            })
+            .sortBy(function(userData) {
+                return userData.user.info.displayName;
+            })
+            .value();
     },
     getUserCardProps: function (uid, user) {
         return {
