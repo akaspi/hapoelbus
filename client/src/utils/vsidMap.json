@@ -42,5 +42,26 @@
     "MACCABI-KIRYAT-GAT": {
         "text": "מכבי קריית גת",
         "img": "http://www.basket.co.il/Images/teams/bigGat.png"
+    },
+
+    "NEPTUNAS": {
+        "text": "נפטונאס",
+        "img": "https://upload.wikimedia.org/wikipedia/en/7/7f/BC_Neptunas_logo_2.png"
+    },
+    "AEK": {
+        "text": "א.א.ק אתונה",
+        "img": "http://kassiesa.nl/uefa/clubs/images/AEK-Athens.png"
+    },
+    "VOLGOGRAD": {
+        "text": "וולגוגרד",
+        "img": "http://hapoel.co.il/sites/default/files/images_1.jpg"
+    },
+    "GALATASARAY": {
+        "text": "גלאטאסריי",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Galatasaray_Sports_Club_Logo.png/822px-Galatasaray_Sports_Club_Logo.png"
+    },
+    "NOVGOROD": {
+        "text": "נפטונאס",
+        "img": "https://upload.wikimedia.org/wikipedia/en/9/97/BC_Nizhny_Novgorod_logo_2014.png"
     }
 }
