@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 var ADMINS_PATH = 'admins';
 var USERS_DATA_PATH = 'usersInfo';
-var WELCOME_MAILS_PATH = 'welcomeMail';
+var WELCOME_MAILS_PATH = 'welcomeEmails';
 var PENDING_MAILS_PATH = 'pendingEmails/templates';
 
 function sendWelcomeMail(uid, userInfo) {
