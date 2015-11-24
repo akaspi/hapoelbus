@@ -30,14 +30,14 @@ function getUsersThatRequestForContact(users) {
     });
 }
 
-function getUserCardColor(user) {
+function getUserCardRibbon(user) {
     if (user.contactRequest) {
-        return 'Blue'
+        return {label: 'ליצור קשר', color: 'Blue'}
     }
-    if (user.seasonTicket) {
-        return 'Green'
+    if (user.seasonTicket && user.seasonTicket.maxSeats > 0) {
+        return {label: 'מנוי', color: 'Green'}
     }
-    return '';
+    return null;
 }
 
 var UsersPage = React.createClass({
@@ -46,28 +46,40 @@ var UsersPage = React.createClass({
     getInitialState: function () {
         return {
             filters: {
-                hasSeasonTicketsOnly: true,
-                doNotHasSeasonTicketsOnly: true,
-                requestedContact: true
+                all: true,
+                hasSeasonTicketsOnly: false,
+                doNotHasSeasonTicketsOnly: false,
+                requestedContact: false
             }
         }
     },
-    getFilteredUsersDataArr: function () {
+    onFilterChanged: function (e, selected) {
+        var newFilters = _.mapValues(this.state.filters, function () {
+            return false;
+        });
+        newFilters[selected] = true;
+        this.setState({filters: newFilters});
+    },
+    getFilteredUsers: function () {
         var users = this.props.usersData.users;
 
-        var uidsWithSeasonTickets = this.state.filters.hasSeasonTicketsOnly ? _.keys(getUsersWithSeasonTickets(users)) : [];
-        var uidsWithoutSeasonTickets = this.state.filters.doNotHasSeasonTicketsOnly ? _.keys(getUsersWithoutSeasonTickets(users)) : [];
-        var uidsThatRequestForContact = this.state.filters.requestedContact ? _.keys(getUsersThatRequestForContact(users)) : [];
-
-        var filteredUIDs = _.union(uidsWithSeasonTickets, uidsWithoutSeasonTickets, uidsThatRequestForContact);
-
-        var filteredUsers = _.pick(users, filteredUIDs);
-
-        return _(filteredUsers)
-            .map(function(user, uid) {
+        switch (true) {
+            case this.state.filters.all:
+                return users;
+            case this.state.filters.hasSeasonTicketsOnly:
+                return getUsersWithSeasonTickets(users);
+            case this.state.filters.doNotHasSeasonTicketsOnly:
+                return getUsersWithoutSeasonTickets(users);
+            case this.state.filters.requestedContact:
+                return getUsersThatRequestForContact(users);
+        }
+    },
+    createUsersCardDataArr: function(users) {
+        return _(users)
+            .map(function (user, uid) {
                 return {uid: uid, user: user}
             })
-            .sortBy(function(userData) {
+            .sortBy(function (userData) {
                 return userData.user.info.displayName;
             })
             .value();
@@ -77,7 +89,7 @@ var UsersPage = React.createClass({
             title: user.info.displayName,
             subtitles: [user.info.email, user.info.phone],
             imageUrl: user.info.profileImage,
-            color: getUserCardColor(user),
+            ribbon: getUserCardRibbon(user),
             actions: [
                 {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditUser.bind(this, uid, user)},
                 {label: 'מחק', icon: 'delete', onClick: this.onRemoveUser.bind(this, uid)}

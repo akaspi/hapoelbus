@@ -16,21 +16,7 @@
     height: 140px;
     text-align: center;
     background: #171a1f;
-
-    &.card-blue {
-      background: #42A5F5;
-      .card-image {
-        border-color: #90CAF9;
-      }
-    }
-
-    &.card-green {
-      background: #66BB6A;
-      .card-image {
-        border-color: #A5D6A7;
-      }
-    }
-
+    
     .card-image {
       margin-top: 10px;
       width: $card-image-size;

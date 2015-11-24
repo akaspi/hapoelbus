@@ -3,7 +3,7 @@
   .title-wrapper {
     padding-right: 35px;
     font-size: 26px;
-    color: #3d4e57;
+    color: #171A1F;
 
     .title {
       display: inline-block;
@@ -31,23 +31,37 @@
     flex-wrap: wrap;
   }
 
-  .filter-wrapper {
-    list-style: none;
-    margin: 10px auto;
+  .filter-container {
+    padding: 15px;
+    width: 250px;
+    margin: 0 auto;
     display: flex;
-    background: aliceblue;
-    padding: 10px 20px;
-    max-width: 250px;
-    border-radius: 8px;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
 
-    @media screen and (max-width: 680px) {
-      flex-direction: column;
-      width: 80%;
+    .total-bookings-for-a-game {
+      font-size: 18px;
+
+      .total {
+        margin-right: 5px;
+        font-weight: bold;
+      }
     }
-  }
 
-  .filter-item {
-    flex: 1;
+    .filter {
+      list-style: none;
+      background: aliceblue;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 8px;
+
+      @media screen and (max-width: 680px) {
+        flex-direction: column;
+        width: 80%;
+      }
+    }
+
   }
 
 }

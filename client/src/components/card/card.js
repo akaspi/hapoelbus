@@ -14,7 +14,6 @@ var Card = React.createClass({
             icon: React.PropTypes.string
         })),
         imageUrl: React.PropTypes.string,
-        color: React.PropTypes.string,
         ribbon: React.PropTypes.shape({
             color: React.PropTypes.oneOf(['Green', 'Red', 'Blue']),
             label: React.PropTypes.string.isRequired
@@ -24,14 +23,6 @@ var Card = React.createClass({
         return {
             imageUrl: 'https://secure.gravatar.com/avatar/59029276955677351421b3ff6bf5ee4c?d=retro'
         };
-    },
-    getCardColor: function () {
-        switch (this.props.color) {
-            case 'Green':
-                return 'card-green';
-            case 'Blue':
-                return 'card-blue';
-        }
     },
     render: template
 });
