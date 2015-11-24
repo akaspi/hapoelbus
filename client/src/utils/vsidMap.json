@@ -1,0 +1,67 @@
+{
+    "MACCABI-TEL-AVIV": {
+        "text": "מכבי תל אביב",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_maccabi.png"
+    },
+    "HAPOEL-TEL-AVIV": {
+        "text": "הפועל תל אביב",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_hapoelta.png"
+    },
+    "HOLON": {
+        "text": "הפועל חולון",
+        "img": "http://www.basket.co.il/pics/2007/articles/logo_hh.png"
+    },
+    "EILAT": {
+        "text": "הפועל אילת",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_eilat.png"
+    },
+    "MACCABI-RISHON": {
+        "text": "מכבי ראשון לציון",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_rishon.png"
+    },
+    "MACCABI-HAIFA": {
+        "text": "מכבי חיפה",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_haifa.png"
+    },
+    "NES_ZIONA": {
+        "text": "עירוני נס ציונה",
+        "img": "http://www.basket.co.il/Images/teams/logo_ziona.png"
+    },
+    "NAHARIA": {
+        "text": "נהריה",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_naharia.png"
+    },
+    "BNEI-HASHARON": {
+        "text": "בני השרון",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_sharon.png"
+    },
+    "ASHDOD": {
+        "text": "מכבי אשדוד",
+        "img": "http://www.basket.co.il/pics/2007/logos/logo_ashdod.png"
+    },
+    "MACCABI-KIRYAT-GAT": {
+        "text": "מכבי קריית גת",
+        "img": "http://www.basket.co.il/Images/teams/bigGat.png"
+    },
+
+    "NEPTUNAS": {
+        "text": "נפטונאס",
+        "img": "https://upload.wikimedia.org/wikipedia/en/7/7f/BC_Neptunas_logo_2.png"
+    },
+    "AEK": {
+        "text": "א.א.ק אתונה",
+        "img": "http://kassiesa.nl/uefa/clubs/images/AEK-Athens.png"
+    },
+    "VOLGOGRAD": {
+        "text": "וולגוגרד",
+        "img": "http://hapoel.co.il/sites/default/files/images_1.jpg"
+    },
+    "GALATASARAY": {
+        "text": "גלאטאסריי",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Galatasaray_Sports_Club_Logo.png/822px-Galatasaray_Sports_Club_Logo.png"
+    },
+    "NOVGOROD": {
+        "text": "נפטונאס",
+        "img": "https://upload.wikimedia.org/wikipedia/en/9/97/BC_Nizhny_Novgorod_logo_2014.png"
+    }
+}

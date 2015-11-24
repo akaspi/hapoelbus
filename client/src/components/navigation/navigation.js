@@ -1,36 +1,34 @@
 'use strict';
 
 var React = require('react/addons');
-var template = require('./navigation.rt.js');
-
-var muiMixin = require('../mixins/mui-mixin');
+var template = require('./navigation.rt');
 var mui = require('material-ui');
-var _ = require('lodash');
 
-var navigationConstants = require('../../constants/navigationConstants');
-var navigationActions = require('../../actions/navigationActions');
+var pagesConstants = require('../../constants/pagesConstants');
 
 var navItems = [
-    { text: 'משחקים פתוחים', tabName: navigationConstants.TABS.USER.OPEN_GAMES },
+    { text: 'משחקים פתוחים', page: pagesConstants.HOME_PAGE },
     { text: 'ניהול', type: mui.MenuItem.Types.SUBHEADER },
-    { text: 'טבלת משתמשים', tabName: navigationConstants.TABS.ADMIN.USERS_DATA_LIST },
-    { text: 'טבלת משחקים', tabName: navigationConstants.TABS.ADMIN.GAMES_LIST },
-    { text: 'טבלת רישומים', tabName: navigationConstants.TABS.ADMIN.BOOKING_LIST },
-    { text: 'שליחת אימייל', tabName: navigationConstants.TABS.ADMIN.EMAILS_SECTION }
+    { text: 'טבלת משתמשים', page: pagesConstants.USERS_PAGE },
+    { text: 'טבלת משחקים', page: pagesConstants.GAMES_PAGE },
+    { text: 'טבלת רישומים', page: pagesConstants.BOOKINGS_PAGE },
+    { text: 'רשימת תפוצה', page: pagesConstants.DISTRIBUTION_PAGE }
 ];
 
 var AccountData = React.createClass({
-    mixins: [React.addons.LinkedStateMixin, muiMixin],
+    mixins: [React.addons.LinkedStateMixin],
     getInitialState: function () {
         return {
             selectedTab: navItems[0]
         }
     },
     getNavItems: function() {
-      return navItems;
+        return navItems;
     },
     onNavChange: function (e, navIndex, navItem) {
-        navigationActions.navigateTo(navItem.tabName);
+        var actionsCreator = require('../../actions/actionsCreator');
+        var actionsConstants = require('../../actions/actionsConstants');
+        actionsCreator.createAction(actionsConstants.NAVIGATE_TO_PAGE, {page: navItem.page});
         this.setState({ selectedTab: navItem });
     },
     toggleNav: function() {

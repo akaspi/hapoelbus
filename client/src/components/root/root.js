@@ -1,53 +1,64 @@
 'use strict';
 
-var React = require('react/addons');
-var muiMixin = require('../mixins/mui-mixin');
-var template = require('./root.rt.js');
+var React = require('react');
+var template = require('./root.rt');
+var _ = require('lodash');
 
 var authStore = require('../../stores/authStore');
-var usersDataStore = require('../../stores/usersDataStore');
-var userActions = require('../../actions/userActions');
-var authActions = require('../../actions/authActions');
+var usersDataStore = require('../../stores/usersStore');
+var gamesStore = require('../../stores/gamesStore');
+var bookingStore = require('../../stores/bookingsStore');
+var pageNavigationStore = require('../../stores/pageNavigationStore');
+var dialogStore = require('../../stores/dialogStore');
+
+var actionsCreator = require('../../actions/actionsCreator');
+var actionsConstants = require('../../actions/actionsConstants');
+
+function getStateFromStores() {
+    var res =  {
+        authData: authStore.getAuthData(),
+        usersData: usersDataStore.getUsersData(),
+        gamesData: gamesStore.getGamesData(),
+        bookingsData: bookingStore.getBookingData(),
+        currentPage: pageNavigationStore.getCurrentPage(),
+        dialogToDisplay: dialogStore.getDialogToDisplay()
+    };
+    return res;
+}
 
 var Root = React.createClass({
-    mixins: [React.addons.LinkedStateMixin, muiMixin],
+    displayName: 'Root',
+    mixins: [React.addons.LinkedStateMixin],
     getInitialState: function () {
-        var authStoreData = authStore.getAll();
-        var usersStoreData = usersDataStore.getAll();
-        return {
-            uid: authStoreData.uid,
-            isAdmin: authStoreData.isAdmin,
-            isAuthStorePending: authStoreData.pending,
-            usersData: usersStoreData.usersData,
-            isUsersDataStorePending: usersStoreData.pending
-        };
+        return getStateFromStores();
     },
+
     componentDidMount: function () {
-        authStore.registerToChange(this.onAuthStoreDataChanged);
-        usersDataStore.registerToChange(this.onUserStoreDataChanged);
-        authActions.fetchLoginState();
+        authStore.addChangeListener(this.onStoreChange);
+        usersDataStore.addChangeListener(this.onStoreChange);
+        gamesStore.addChangeListener(this.onStoreChange);
+        bookingStore.addChangeListener(this.onStoreChange);
+        pageNavigationStore.addChangeListener(this.onStoreChange);
+        dialogStore.addChangeListener(this.onStoreChange);
     },
-    onAuthStoreDataChanged: function(authStoreData) {
-        if (authStoreData.pending) {
-            this.setState({ isAuthStorePending: true });
-        } else {
-            if (!this.state.uid && authStoreData.uid) {
-                userActions.fetchUserData(authStoreData.isAdmin ? null : authStoreData.uid);
-            }
-            this.setState({ uid: authStoreData.uid, isAdmin: authStoreData.isAdmin, isAuthStorePending: false });
-        }
+
+    onStoreChange: function () {
+        this.setState(getStateFromStores());
     },
-    onUserStoreDataChanged: function(userStoreData) {
-        if (userStoreData.pending) {
-            this.setState({ isUsersDataStorePending: true });
-        } else {
-            this.setState({ usersData: userStoreData.usersData, isUsersDataStorePending: false})
-        }
+
+    login: function () {
+        actionsCreator.createAction(actionsConstants.LOGIN, {email: this.state.email, password: this.state.password});
     },
-    componentWillUnmount: function() {
-        authStore.removeChangeListener(this.onAuthStoreDataChanged);
-        usersDataStore.removeChangeListener(this.onUserStoreDataChanged);
+
+    logout: function () {
+        actionsCreator.createAction(actionsConstants.LOGOUT);
     },
+
+    openDialog: function() {
+        var dialogClass = require('../dialogs/editUserDataDialog');
+        actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {dialogClass: dialogClass, data: {}});
+    },
+
     render: template
 });
 

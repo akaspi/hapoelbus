@@ -1,31 +1,42 @@
-@import "commonStyles/variables";
-
 @import "components/root/root";
-@import "components/siteHeader/siteHeader";
+@import "components/card/card";
+@import "components/pages/usersPage";
+@import "components/pages/gamesPage";
+@import "components/pages/bookingsPage";
+@import "components/pages/homePage";
+@import "components/pages/landingPage";
+@import "components/pages/distributionPage";
 
-@import "components/homePage/homePage";
-@import "components/myAccount/myAccount";
-@import "components/userData/userData";
+
 @import "components/loading/loading";
-@import "components/adminDashboard/adminDashboard";
-@import "components/editTableRowDialog/editTableRowDialog";
-@import "components/dataExplorer/customTable/customTable";
-@import "components/dataExplorer/emailsSection/emailsSection";
 @import "components/navigation/navigation";
-@import "components/gameCard/gameCard";
+
+@import "components/plusButton/plusButton";
+
+
+
+
+@import "components/dialogs/editUserDataDialog";
+@import "components/dialogs/editGameDialog";
+@import "components/dialogs/editBookingDialog";
+@import "components/dialogs/authDialog";
+@import "components/dialogs/frames/dialogFrame";
+@import "components/dialogs/dialogActions";
+@import "components/dialogs/loginDialogContent";
+@import "components/dialogs/createAccountDialogContent";
+@import "components/dialogs/resetPasswordDialogContent";
+@import "components/dialogs/changePasswordDialogContent";
+@import "components/dialogs/areYouSureDialog";
+
+@import "components/myAccount/myAccount";
+@import "components/loading/loading";
 
 
 @import "components/loginBox/loginBox";
-@import "components/createAccountBox/createAccountBox";
-@import "components/forgotPasswordBox/forgotPasswordBox";
 
-@import "components/authBox/authBox";
-
-@import "components/accountDataEdit/accountDataEdit";
-@import "components/userDashboard/userDashboard";
-@import "components/adminDashboard/adminDashboard";
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import url(http://fonts.googleapis.com/css?family=Arimo:400,700&subset=hebrew,latin);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 body, html {
   height: 100%;

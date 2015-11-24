@@ -1,35 +1,21 @@
+<rt-require dependency="../pages/landingPage" as="landingPage"/>
 <rt-require dependency="../myAccount/myAccount" as="myAccount"/>
-<rt-require dependency="../siteHeader/siteHeader" as="siteHeader"/>
-<rt-require dependency="../homePage/homePage" as="homePage"/>
-<rt-require dependency="../loading/loading" as="loading"/>
-<rt-require dependency="../userData/userData" as="userData"/>
 
-<rt-require dependency="material-ui" as="mui"/>
-<rt-require dependency="lodash" as="_"/>
+<div class="root" rt-scope="this.state.authData.uid as isLoggedIn;">
+    <landingPage rt-if="!isLoggedIn" authData="{this.state.authData}"/>
 
-<div class="root" rt-scope="(this.state.isAuthStorePending || this.state.isUsersDataStorePending) as isPending">
-    <header>
-        <siteHeader class="site-header" uid="{this.state.uid}" isAdmin="{this.state.isAdmin}" usersData="{this.state.usersData}" isPending="{isPending}"/>
-    </header>
-    <div class="site-content">
-        <loading rt-if="isPending" key="key-fetching-user-data"/>
-        <homePage rt-if="!this.state.uid && !isPending" key="key-home-page"/>
-        <userData rt-if="this.state.uid && _.isEmpty(this.state.usersData) && !isPending" key="key-user-data" uid="{this.state.uid}"/>
-        <myAccount rt-if="this.state.uid && !_.isEmpty(this.state.usersData) && !isPending" key="key-my-account" uid="{this.state.uid}" usersData="{this.state.usersData}" isAdmin="{this.state.isAdmin}"/>
-    </div>
-    <footer>
-        <div class="contact-us">
-            <span class="item text">צרו איתנו קשר</span>
-            <span class="item icon first">
-                <a href="https://www.facebook.com/pages/%D7%90%D7%95%D7%94%D7%93%D7%99-%D7%94%D7%A4%D7%95%D7%A2%D7%9C-%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D-%D7%9E%D7%97%D7%95%D7%A5-%D7%9C%D7%97%D7%95%D7%9E%D7%95%D7%AA/501372283254801">
-                    <i class="fa fa-facebook-official"></i>
-                </a>
-            </span>
-            <span class="item icon">
-                <a href="mailto:hapoelbus@gmail.com">
-                    <i class="fa fa-envelope-o"></i>
-                </a>
-            </span>
+    <myAccount rt-if="isLoggedIn"
+               currentPage="{this.state.currentPage}"
+               authData="{this.state.authData}"
+               usersData="{this.state.usersData}"
+               gamesData="{this.state.gamesData}"
+               bookingsData="{this.state.bookingsData}"/>
+
+
+
+    <div class="dialog-layer" rt-if="this.state.dialogToDisplay">
+        <div rt-scope="this.state.dialogToDisplay.dialog as dialogComp">
+            <dialogComp rt-props="this.state.dialogToDisplay.props"/>
         </div>
-    </footer>
+    </div>
 </div>

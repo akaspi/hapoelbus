@@ -1,13 +1,18 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
+var template = require('./loading.rt');
 
-var template = require('./loading.rt.js');
-var muiMixin = require('../mixins/mui-mixin');
-
-var MyAccount = React.createClass({
-    mixins: [ muiMixin ],
+var Loading =  React.createClass({
+    propTypes: {
+      text: React.PropTypes.string
+    },
+    getDefaultProps: function() {
+      return {
+          text: 'טוען נתונים...'
+      };
+    },
     render: template
 });
 
-module.exports = MyAccount;
+module.exports = Loading;

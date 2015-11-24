@@ -1,130 +1,195 @@
 'use strict';
 
 var dispatcher = require('../dispatcher/dispatcher');
-var _ = require('lodash');
+var authAPI = require('../API/authAPI');
 
-var authAPI = require('../DAL/auth');
-var authConstants = require('../constants/authConstants');
+var actionsConstants = require('../actions/actionsConstants');
 
 var listeners = [];
 
-function notifyAll() {
-    _.forEach(listeners, function (listener) {
-        listener(storeData);
-    });
-}
-
-var storeData = {
-    pending: false,
-    errorMsg: '',
-    uid: null,
-    isAdmin: false
+var authData = {
+    uid: authAPI.getUID(),
+    isAdmin: false,
+    loading: false,
+    error: false
 };
 
-dispatcher.register(function (actionData) {
-    switch (actionData.type) {
-        case authConstants.ACTIONS.FETCH_LOGIN_STATE:
-            fetchLoginState(actionData);
+
+dispatcher.register(function (action) {
+    switch (action.actionType) {
+        case actionsConstants.LOAD_AUTH_DATA:
+            loadAuthData();
             break;
-        case authConstants.ACTIONS.CREATE_USER:
-            handleCreateUser(actionData);
+        case actionsConstants.CREATE_USER:
+            createUser(action.payload.email, action.payload.password);
             break;
-        case authConstants.ACTIONS.LOGIN:
-            handleLogin(actionData);
+        case actionsConstants.LOGIN:
+            login(action.payload.email, action.payload.password);
             break;
-        case authConstants.ACTIONS.SOCIAL_LOGIN:
-            handleSocialLogin(actionData);
+        case actionsConstants.SOCIAL_LOGIN:
+            socialLogin(action.payload.provider);
             break;
-        case authConstants.ACTIONS.LOGOUT:
-            handleLogOut();
+        case actionsConstants.RESET_PASSWORD:
+            resetPassword(action.payload.email);
             break;
-        //case 'RESET_PASSWORD_REQUEST':
-        //    handleResetPasswordRequest(actionData);
-        //    break;
-        //case 'CHANGE_PASSWORD':
-        //    handleChangePassword(actionData);
-        //    break;
+        case actionsConstants.CHANGE_PASSWORD:
+            changePassword(action.payload.email, action.payload.oldPassword, action.payload.newPassword);
+            break;
+        case actionsConstants.LOGOUT:
+            logout();
+            break;
     }
 });
 
-function fetchLoginState() {
-    storeData.pending = true;
-    notifyAll();
+function loadAuthData() {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
 
-    storeData.uid = authAPI.getUserId();
-    if (storeData.uid) {
-        authAPI.isAdmin(function(isAdmin) {
-            storeData.isAdmin = isAdmin;
-            storeData.pending = false;
-            notifyAll();
+    var uid = authAPI.getUID();
+    authAPI.isAdmin(uid)
+        .then(function(isAdmin) {
+            authData.uid = uid;
+            authData.isAdmin = isAdmin;
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        })
+}
+
+function createUser(email, password) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    return authAPI.createUser(email, password)
+        .then(function () {
+            return login(email, password);
+        })
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
         });
-    } else {
-        storeData.pending = false;
-        notifyAll();
-    }
+
 }
 
-function handleCreateUser(actionData) {
-    if (storeData.errorMsg) {
-        storeData.errorMsg = '';
-        notifyAll();
-    }
-    authAPI.createUser(actionData.email, actionData.password, function () {
-        handleLogin(actionData);
-    }, function (errorCode) {
-        switch(errorCode) {
-            case authConstants.ERROR_CODE.EMAIL_TAKEN:
-                storeData.errorMsg = authConstants.ERROR_MSG.EMAIL_TAKEN;
-                break;
-            default:
-                storeData.errorMsg = authConstants.ERROR_MSG.GENERAL;
-        }
-        storeData.pending = false;
-        notifyAll();
-    })
+function login(email, password) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    return authAPI.login(email, password)
+        .then(function (uid) {
+            authData.uid = uid;
+            return authAPI.isAdmin(uid);
+        })
+        .then(function(isAdmin) {
+            authData.isAdmin = isAdmin;
+        })
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        })
 }
 
-function handleLogin(actionData) {
-    if (storeData.errorMsg) {
-        storeData.errorMsg = '';
-        notifyAll();
-    }
-    authAPI.login(actionData.email, actionData.password, function () {
-        fetchLoginState();
-    }, function () {
-        storeData.pending = false;
-        storeData.errorMsg = authConstants.ERROR_MSG.GENERAL;
-        notifyAll();
-    })
+function socialLogin(provider) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    authAPI.socialLogin(provider)
+        .then(function (uid) {
+            authData.uid = uid;
+            return authAPI.isAdmin(uid);
+        })
+        .then(function (isAdmin) {
+            authData.isAdmin = isAdmin;
+        })
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        });
 }
 
-function handleSocialLogin(actionData) {
-    authAPI.socialLogin(actionData.provider, function () {
-        fetchLoginState();
-    }, function () {
-        storeData.pending = false;
-        storeData.errorMsg = authConstants.ERROR_MSG.GENERAL;
-        notifyAll();
-    })
+function resetPassword(email) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    authAPI.resetPassword(email)
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        });
 }
 
-function handleLogOut() {
-    authAPI.logOut();
-    storeData.uid = null;
-    storeData.isAdmin = false;
-    notifyAll();
+function changePassword(email, oldPassword, newPassword) {
+    authData.loading = true;
+    authData.error = false;
+    emitChange();
+
+    authAPI.changePassword(email, oldPassword, newPassword)
+        .then(function() {
+            return login(email, newPassword);
+        })
+        .catch(function() {
+            authData.error = true;
+            emitChange();
+        })
+        .finally(function() {
+            authData.loading = false;
+            emitChange();
+        });
+}
+
+function logout() {
+    authAPI.logout();
+    authData.uid = null;
+    authData.isAdmin = false;
+    authData.loading = false;
+    authData.error = false;
+    emitChange();
+}
+
+function emitChange() {
+    _.forEach(listeners, function (listener) {
+        listener();
+    });
+}
+
+function getAuthData() {
+    return authData;
+}
+
+function addChangeListener(listener) {
+    listeners.push(listener);
+}
+
+function removeChangeListener(listenerToRemove) {
+    listeners = _.reject(listeners, function (listener) {
+        return _.isEqual(listener, listenerToRemove);
+    });
 }
 
 module.exports = {
-    getAll: function () {
-        return storeData;
-    },
-    registerToChange: function (fn) {
-        listeners.push(fn);
-    },
-    removeChangeListener: function (fn) {
-        listeners = _.reject(listeners, function (listener) {
-            return _.isEqual(listener, fn);
-        });
-    }
+    getAuthData: getAuthData,
+    addChangeListener: addChangeListener,
+    removeChangeListener: removeChangeListener
 };

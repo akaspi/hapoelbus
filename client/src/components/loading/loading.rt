@@ -1,5 +1,6 @@
 <rt-require dependency="material-ui" as="mui"/>
 
-<div class="loading">
-    <mui.CircularProgress mode="indeterminate" size="{0.5}"/>
+<div class="base-loading">
+    <div class="text-wrapper">{this.props.text}</div>
+    <mui.LinearProgress mode="indeterminate"/>
 </div>

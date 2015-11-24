@@ -1,0 +1,28 @@
+.edit-booking-dialog {
+
+  .field-row {
+    text-align: center;
+  }
+
+  section {
+    margin: 20px 0;
+    background: aliceblue;
+    padding: 10px 20px;
+    border-radius: 8px;
+
+    &:first-child{
+      margin-top: 0;
+    }
+  }
+
+
+  h2 {
+    margin: 3px 5px;
+    font-size: 16px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+  }
+}

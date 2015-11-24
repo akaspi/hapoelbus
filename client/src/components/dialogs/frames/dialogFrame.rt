@@ -1,0 +1,26 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<mui.Dialog ref="dialog"
+            onDismiss="{this.closeDialog}"
+            title="{this.props.title}"
+            contentStyle="{{width:'360'}}"
+            contentClassName="dialog-frame {this.props.contentClassName || ''}"
+            autoScrollBodyContent="{true}"
+            modal="{this.props.isModal}">
+
+    {this.props.children}
+
+    <div class="dialog-actions">
+        <mui.RaisedButton rt-if="this.props.onSubmit"
+                          label="שמור"
+                          primary="{true}"
+                          onClick="{this.onSubmit}"/>
+
+        <mui.RaisedButton rt-if="!this.props.isModal"
+                          label="בטל"
+                          secondary="{true}"
+                          style="{{marginRight: '25px'}}"
+                          onClick="{this.onDismiss}"/>
+    </div>
+
+</mui.Dialog>

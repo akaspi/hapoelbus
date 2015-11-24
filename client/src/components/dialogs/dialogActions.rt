@@ -1,0 +1,14 @@
+<rt-require dependency="material-ui" as="mui"/>
+
+<div class="dialog-actions">
+    <mui.RaisedButton rt-if="this.props.okButton"
+                      label="{this.props.okButton.label}"
+                      primary="{true}"
+                      style="{{marginLeft: '25px'}}"
+                      onClick="{this.props.okButton.onClick}"/>
+
+    <mui.RaisedButton rt-if="this.props.cancelButton"
+                      label="{this.props.cancelButton.label}"
+                      secondary="{true}"
+                      onClick="{this.props.cancelButton.onClick}"/>
+</div>

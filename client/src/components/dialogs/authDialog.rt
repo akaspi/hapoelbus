@@ -1,0 +1,36 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="./loginDialogContent" as="loginDialogContent"/>
+<rt-require dependency="./createAccountDialogContent" as="createAccountDialogContent"/>
+<rt-require dependency="./resetPasswordDialogContent" as="resetPasswordDialogContent"/>
+<rt-require dependency="./changePasswordDialogContent" as="changePasswordDialogContent"/>
+
+<mui.Dialog ref="dialog"
+            onDismiss="{this.onDismiss}"
+            contentStyle="{{width:'360'}}"
+            autoScrollBodyContent="{true}"
+            contentClassName="auth-dialog"
+            rt-scope="this.getDialogModes() as MODES">
+
+    <loginDialogContent rt-if="this.state.mode === MODES.LOGIN"
+                        switchToCreateAccount="{this.switchToCreateAccount}"
+                        switchToForgotPassword="{this.switchToForgotPassword}"
+                        loading="{this.props.authData.loading}"
+                        error="{this.props.authData.error}"/>
+
+    <createAccountDialogContent rt-if="this.state.mode === MODES.CREATE_USER"
+                                switchToLogin="{this.switchToLogin}"
+                                loading="{this.props.authData.loading}"
+                                error="{this.props.authData.error}"/>
+
+    <resetPasswordDialogContent rt-if="this.state.mode === MODES.RESET_PASSWORD"
+                                switchToLogin="{this.switchToLogin}"
+                                switchToChangePassword="{this.switchToChangePassword}"
+                                loading="{this.props.authData.loading}"
+                                error="{this.props.authData.error}"/>
+
+    <changePasswordDialogContent rt-if="this.state.mode === MODES.CHANGE_PASSWORD"
+                                switchToLogin="{this.switchToLogin}"
+                                loading="{this.props.authData.loading}"
+                                error="{this.props.authData.error}"/>
+
+</mui.Dialog>

@@ -1,6 +1,59 @@
 .my-account {
-  flex: 1;
+  header {
+    display: flex;
+    background: #ccc;
+    height: 60px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-content: center;
+    padding: 5px 15px;
+    color: #171A1F;
+    font-weight: bold;
 
-  display: flex;
-  flex-direction: column;
+    .logo {
+      background: url('../resources/outside-text.png') no-repeat;
+      width: 100px;
+      height: 50px;
+      background-size: cover;
+    }
+
+    .auth-data-box {
+      display: flex;
+      align-items: center;
+
+      .avatar {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .user-display-name {
+        margin-right: 5px;
+        margin-left: 10px;
+        max-width: 125px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .logout-link {
+        font-size: 10px;
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .loading-wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
 }

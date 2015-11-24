@@ -1,33 +1,83 @@
 'use strict';
 
-var React = require('react/addons');
-var template = require('./myAccount.rt.js');
-var _ = require('lodash');
-var navigationStore = require('../../stores/navigationStore');
+var React = require('react');
+var template = require('./myAccount.rt');
 
-var navigationConstants = require('../../constants/navigationConstants');
+var actionsCreator = require('../../actions/actionsCreator');
+var actionsConstants = require('../../actions/actionsConstants');
+
+var authAPI = require('../../API/authAPI');
+
+var editUserDataDialog = require('../dialogs/editUserDataDialog');
+
+function openEditUserDialog(user, uid, isModal, title) {
+    actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
+        dialog: editUserDataDialog,
+        props: {
+            user: user,
+            uid: uid,
+            title: title,
+            isModal: isModal
+        }
+    });
+}
 
 var MyAccount = React.createClass({
-    getInitialState: function() {
-      var navigationState = navigationStore.getAll();
-        return {
-            tabToDisplay: navigationState.tabToDisplay
+    displayName: 'MyAccount',
+    isDataInitialized: function (props) {
+        var propsToCheck = props || this.props;
+        return propsToCheck.usersData.initialized && propsToCheck.gamesData.initialized && propsToCheck.bookingsData.initialized;
+    },
+    hasErrors: function () {
+        return this.props.authData.error || this.props.usersData.error || this.props.gamesData.error || this.props.bookingsData.error;
+    },
+    componentDidMount: function () {
+        actionsCreator.createAction(actionsConstants.LOAD_AUTH_DATA, {});
+        actionsCreator.createAction(actionsConstants.LOAD_USERS, {});
+        actionsCreator.createAction(actionsConstants.LOAD_GAMES, {});
+        actionsCreator.createAction(actionsConstants.LOAD_BOOKINGS, {});
+    },
+    isUserMissingData: function () {
+        var uid = this.props.authData.uid;
+        var user = this.props.usersData.users && this.props.usersData.users[uid];
+
+        return _.isEmpty(user);
+    },
+    componentDidUpdate: function (prevProps) {
+        if (!this.isDataInitialized(prevProps) && this.isDataInitialized(this.props)) {
+            if (this.isUserMissingData()) {
+                openEditUserDialog({
+                    info: {
+                        email: authAPI.getUserEmail(),
+                        profileImage: this.getUserProfileUrl()
+                    }
+                }, this.props.authData.uid, true, 'פרטי משתמש ראשוניים');
+            } else {
+                actionsCreator.createAction(actionsConstants.UPDATE_USER, {
+                    uid: this.props.authData.uid,
+                    user: {
+                        info: {
+                            profileImage: this.getUserProfileUrl()
+                        }
+                    }
+                });
+            }
         }
     },
-    componentDidMount: function() {
-        navigationStore.registerToChange(this.onNavigationStoreDataChanged);
+    getUserName: function () {
+        var user = this.props.usersData.users[this.props.authData.uid];
+        return user.info.displayName || 'משתמש';
     },
-    onNavigationStoreDataChanged: function(navigationStoreData) {
-        this.setState({ tabToDisplay: navigationStoreData.tabToDisplay });
+    getUserProfileUrl: function () {
+        return authAPI.getUserProfileImageURL();
     },
-    componentWillUnmount: function() {
-        navigationStore.removeChangeListener(this.onNavigationStoreDataChanged);
+    editUser: function() {
+        var uid = this.props.authData.uid;
+        var user = this.props.usersData.users[uid];
+        openEditUserDialog(user, uid, false, 'עריכת פרטי משתמש');
     },
-    shouldShowUserDashboard: function() {
-        return _.contains(_.values(navigationConstants.TABS.USER), this.state.tabToDisplay);
-    },
-    shouldShowAdminDashboard: function() {
-        return _.contains(_.values(navigationConstants.TABS.ADMIN), this.state.tabToDisplay);
+    logout: function () {
+        actionsCreator.createAction(actionsConstants.LOGOUT, {});
     },
     render: template
 });

@@ -1,0 +1,28 @@
+<rt-require dependency="material-ui" as="mui"/>
+<rt-require dependency="./frames/dialogFrame" as="dialogFrame"/>
+
+<dialogFrame title="ערוך הרשמה להסעה"
+            contentClassName="edit-booking-dialog"
+            onSubmit="{this.updateBooking}">
+
+    <section>
+        <mui.SelectField
+                menuItems="{this.getStationsMenuItems()}"
+                valueLink={this.linkState('booking.station')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="תחנה"/>
+
+        <mui.SelectField
+                menuItems="{this.getNumOfSeatsMenuItems()}"
+                valueLink={this.linkNumericState('booking.numOfSeats')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="מס׳ מקומות"/>
+
+        <mui.TextField
+                valueLink={this.linkState('booking.comment')}
+                multiLine="{true}"
+                rowsMax="{2}"
+                floatingLabelText="הערות"/>
+    </section>
+
+</dialogFrame>
