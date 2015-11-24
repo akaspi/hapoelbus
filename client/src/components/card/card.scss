@@ -16,7 +16,7 @@
     height: 140px;
     text-align: center;
     background: #171a1f;
-    
+
     .card-image {
       margin-top: 10px;
       width: $card-image-size;
@@ -86,7 +86,7 @@
       font-weight: bold;
       text-align: center;
       -webkit-transform: rotate(-45deg);
-      -moz-transform: rotate(45deg);
+      -moz-transform: rotate(-45deg);
       -ms-transform: rotate(45deg);
       -o-transform: rotate(45deg);
       position: relative;
