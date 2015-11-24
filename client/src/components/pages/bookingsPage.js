@@ -5,6 +5,7 @@ var template = require('./bookingsPage.rt');
 var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 var vsidMap = require('json!../../utils/vsidMap.json');
 var stationsMap = require('json!../../utils/stationsMap.json');
+var dateUtils = require('../../utils/dateUtils');
 
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
@@ -26,7 +27,7 @@ var BookingPage = React.createClass({
     },
     getGamesFilterMenuItems: function () {
         return _.map(this.props.gamesData.games, function (gameData, gameId) {
-            return {payload: gameId, text: vsidMap[gameData.vsid].text};
+            return {payload: gameId, text: vsidMap[gameData.vsid].text + ' - ' + dateUtils.convertDate(gameData.date)};
         });
     },
     getBookingForAGame: function() {
