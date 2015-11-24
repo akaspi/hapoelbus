@@ -40,6 +40,11 @@ var BookingPage = React.createClass({
             .omit(_.isUndefined)
             .value();
     },
+    getBookedUsersData: function(bookedUsers) {
+        return _.map(bookedUsers, function(booking, uid) {
+           return {booking: booking, user: this.props.usersData.users[uid]}
+        }, this);
+    },
     getBookingCardProps: function(uid, booking) {
         return {
             title: this.props.usersData.users[uid].info.displayName,
