@@ -12,6 +12,7 @@ config.json
 bundle.js
 vendor.bundle.js
 *.css
+services/logs/
 
 # Dist
 client/public/
