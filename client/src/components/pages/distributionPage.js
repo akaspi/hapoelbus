@@ -151,13 +151,13 @@ var EmailsPage = React.createClass({
 
                     if (this.state.distributionType == DISTRIBUTION_TYPE.TEMPLATE) {
                         var game = this.props.gamesData.games[this.state.gameId];
-                        if (this.state.distributionMethod === DISTRIBUTION_METHODS.MAIL) {
+                        if (this.state.distributionMethod === DISTRIBUTION_METHODS.EMAIL) {
                             distributionAPI.sendTemplateEmail(this.state.templateId, getSubsForGameTemplate(game), getUsersEmails(recipientsUsers));
                         } else {
                             distributionAPI.sendTemplateSMS(this.state.templateId, getSubsForGameTemplate(game), getUsersPhoneNumbers(recipientsUsers));
                         }
                     } else {
-                        if (this.state.distributionMethod === DISTRIBUTION_METHODS.MAIL) {
+                        if (this.state.distributionMethod === DISTRIBUTION_METHODS.EMAIL) {
                             distributionAPI.sendCustomEmail(getUsersEmails(recipientsUsers), this.state.subject, prepareCustomMailContentForSend(this.state.customContent));
                         } else {
                             distributionAPI.sendCustomSMS(getUsersPhoneNumbers(recipientsUsers), this.state.customContent);
