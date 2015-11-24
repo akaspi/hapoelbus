@@ -12,7 +12,7 @@ var defaultUser = {
     seasonTicket: {},
     contactRequest: true,
     distribution: {
-        mail: true,
+        email: true,
         sms: true
     }
 };

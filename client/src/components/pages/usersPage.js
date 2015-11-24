@@ -40,6 +40,13 @@ function getUserCardRibbon(user) {
     return null;
 }
 
+function getSeasonTicketSubtitle(user) {
+    if (user.seasonTicket && !_.isUndefined(user.seasonTicket.ticketId)) {
+        return 'מס׳ מנוי: ' + user.seasonTicket.ticketId;
+    }
+    return '';
+}
+
 var UsersPage = React.createClass({
     displayName: 'UsersPage',
     mixins: [deepLinkStateMixin],
@@ -87,7 +94,7 @@ var UsersPage = React.createClass({
     getUserCardProps: function (uid, user) {
         return {
             title: user.info.displayName,
-            subtitles: [user.info.email, user.info.phone],
+            subtitles: [user.info.email, user.info.phone, getSeasonTicketSubtitle(user)],
             imageUrl: user.info.profileImage,
             ribbon: getUserCardRibbon(user),
             actions: [

@@ -17,6 +17,13 @@ function getNumOfSeatsSubtitle(booking) {
     return 'מקומות: ' + booking.numOfSeats || 0;
 }
 
+function getSeasonTicketSubtitle(user) {
+    if (user.seasonTicket && !_.isUndefined(user.seasonTicket.ticketId)) {
+        return 'מס׳ מנוי: ' + user.seasonTicket.ticketId;
+    }
+    return '';
+}
+
 var BookingPage = React.createClass({
     displayName: 'BookingPage',
     mixins: [deepLinkStateMixin],
@@ -46,9 +53,10 @@ var BookingPage = React.createClass({
         }, this);
     },
     getBookingCardProps: function(uid, booking) {
+        var user = this.props.usersData.users[uid];
         return {
-            title: this.props.usersData.users[uid].info.displayName,
-            subtitles: [getNumOfSeatsSubtitle(booking), stationsMap[booking.station]],
+            title: user.info.displayName,
+            subtitles: [getNumOfSeatsSubtitle(booking), stationsMap[booking.station], getSeasonTicketSubtitle(user)],
             actions: [
                 {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditBooking.bind(this, booking, uid, this.props.usersData.users[uid])},
                 {label: 'בטל', icon: 'delete', onClick: this.onCancelBooking.bind(this, uid)}
