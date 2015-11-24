@@ -67,6 +67,11 @@ dbUtils.loginAsAdmin()
             promises.push(sendPendingCustom(pendingCustom, mailId));
         });
 
+        if (_.isEmpty(promises)) {
+            console.log('No pending mails were found');
+            return [];
+        }
+
         return Promise.all(promises);
     })
     .then(function() {

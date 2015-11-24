@@ -66,6 +66,11 @@ dbUtils.loginAsAdmin()
             promises.push(sendPendingCustom(pendingCustom, smsId));
         });
 
+        if (_.isEmpty(promises)) {
+            console.log('No pending SMS were found');
+            return [];
+        }
+
         return Promise.all(promises);
     })
     .then(function() {
