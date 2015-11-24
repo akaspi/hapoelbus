@@ -21,12 +21,10 @@
     }
 
     .title-wrapper {
-      padding-right: 35px;
       font-size: 26px;
       color: #171A1F;
 
       @media screen and (max-width: 1200px) {
-        padding-right: 0;
         text-align: center;
       }
 
