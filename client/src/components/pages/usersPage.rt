@@ -11,7 +11,7 @@
     <div class="filter-container">
 
         <div class="filter">
-            <mui.RadioButtonGroup defaultSelected="all" onChange="{this.onFilterChanged}">
+            <mui.RadioButtonGroup name="users-filter" defaultSelected="all" onChange="{this.onFilterChanged}">
                 <mui.RadioButton value="all" labelStyle="{{float: 'initial'}}" label="כל המשתמשים"/>
                 <mui.RadioButton value="hasSeasonTicketsOnly" labelStyle="{{float: 'initial'}}" label="מנויים"/>
                 <mui.RadioButton value="doNotHasSeasonTicketsOnly" labelStyle="{{float: 'initial'}}" label="חד פעמיים"/>

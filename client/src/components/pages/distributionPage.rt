@@ -3,21 +3,21 @@
 <div class="emails-page">
 
     <div class="distribution-section distribution-method">
-        <mui.RadioButtonGroup defaultSelected="{this.DISTRIBUTION_METHODS.EMAIL}" onChange="{this.onDistributionMethodChange}">
+        <mui.RadioButtonGroup name="distribution-method" defaultSelected="{this.DISTRIBUTION_METHODS.EMAIL}" onChange="{this.onDistributionMethodChange}">
             <mui.RadioButton value="{this.DISTRIBUTION_METHODS.EMAIL}" labelStyle="{{float: 'initial'}}" label="אימייל"/>
             <mui.RadioButton value="{this.DISTRIBUTION_METHODS.SMS}" labelStyle="{{float: 'initial'}}" label="סמס"/>
         </mui.RadioButtonGroup>
     </div>
 
     <div class="distribution-section recipients">
-        <mui.RadioButtonGroup defaultSelected="{this.RECIPIENTS_TYPES.ALL}" onChange="{this.onRecipientsChange}">
+        <mui.RadioButtonGroup name="recipients-types" defaultSelected="{this.RECIPIENTS_TYPES.ALL}" onChange="{this.onRecipientsChange}">
             <mui.RadioButton value="{this.RECIPIENTS_TYPES.ALL}" labelStyle="{{float: 'initial'}}" label="כל המשתמשים"/>
             <mui.RadioButton value="{this.RECIPIENTS_TYPES.MEMBERS_ONLY}" labelStyle="{{float: 'initial'}}" label="מנויים בלבד"/>
             <mui.RadioButton value="{this.RECIPIENTS_TYPES.NON_MEMBERS}" labelStyle="{{float: 'initial'}}" label="חד פעמיים בלבד"/>
         </mui.RadioButtonGroup>
     </div>
     <div class="distribution-section distribution-type">
-        <mui.RadioButtonGroup defaultSelected="{this.DISTRIBUTION_TYPE.TEMPLATE}" onChange="{this.onDistributionTypeChange}">
+        <mui.RadioButtonGroup name="distribution-types" defaultSelected="{this.DISTRIBUTION_TYPE.TEMPLATE}" onChange="{this.onDistributionTypeChange}">
             <mui.RadioButton value="{this.DISTRIBUTION_TYPE.TEMPLATE}" labelStyle="{{float: 'initial'}}" label="תבנית"/>
             <mui.RadioButton value="{this.DISTRIBUTION_TYPE.CUSTOM}" labelStyle="{{float: 'initial'}}" label="חופשי"/>
         </mui.RadioButtonGroup>
