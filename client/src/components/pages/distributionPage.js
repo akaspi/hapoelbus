@@ -70,6 +70,7 @@ function getUsersEmails(users) {
             return !(user.distribution && user.distribution.email);
         })
         .pluck('info.email')
+        .uniq()
         .value();
 }
 
@@ -81,6 +82,7 @@ function getUsersPhoneNumbers(users) {
         .map(function(user) {
             return '+972' + user.info.phone.replace(/-/g, '').slice(1);
         })
+        .uniq()
         .value();
 }
 
