@@ -1,7 +1,7 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <mui.Dialog ref="dialog"
-            onDismiss="{this.closeDialog}"
+            onRequestClose="{this.closeDialog}"
             contentStyle="{{width:'360'}}"
             contentClassName="are-you-sure-dialog"
             autoScrollBodyContent="{true}"
