@@ -29,7 +29,7 @@ var BookingPage = React.createClass({
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
-            gameIdFilter: _.keys(this.props.gamesData.games)[0]
+            gameIdFilter: _.last(_.keys(this.props.gamesData.games))
         };
     },
     getGamesFilterMenuItems: function () {
