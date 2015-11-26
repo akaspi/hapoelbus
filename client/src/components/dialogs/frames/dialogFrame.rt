@@ -1,7 +1,7 @@
 <rt-require dependency="material-ui" as="mui"/>
 
 <mui.Dialog ref="dialog"
-            onRequestClose="{this.closeDialog}"
+            onDismiss="{this.closeDialog}"
             title="{this.props.title}"
             contentStyle="{{width:'360'}}"
             contentClassName="dialog-frame {this.props.contentClassName || ''}"

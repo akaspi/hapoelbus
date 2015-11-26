@@ -5,7 +5,7 @@
 <rt-require dependency="./changePasswordDialogContent" as="changePasswordDialogContent"/>
 
 <mui.Dialog ref="dialog"
-            onRequestClose="{this.onDismiss}"
+            onDismiss="{this.onDismiss}"
             contentStyle="{{width:'360'}}"
             autoScrollBodyContent="{true}"
             contentClassName="auth-dialog"
