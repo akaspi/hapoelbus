@@ -52,7 +52,8 @@
         <distributionPage rt-if="this.props.currentPage === pagesConstants.DISTRIBUTION_PAGE"
                           key="key-emails-page"
                           gamesData="{this.props.gamesData}"
-                          usersData="{this.props.usersData}"/>
+                          usersData="{this.props.usersData}"
+                          bookingsData="{this.props.bookingsData}"/>
     </div>
 
     <mui.Snackbar rt-if="this.hasErrors()" openOnMount="{true}" autoHideDuration="{5000}" message="אירעה שגיאה במערכת"/>

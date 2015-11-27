@@ -36,7 +36,8 @@ function getSubsForGameTemplate(game) {
 var RECIPIENTS_TYPES = {
     'ALL': 'ALL',
     'MEMBERS_ONLY': 'MEMBERS_ONLY',
-    'NON_MEMBERS': 'NON_MEMBERS'
+    'NON_MEMBERS': 'NON_MEMBERS',
+    'BOOKED_FOR_GAME': 'BOOKED_FOR_GAME'
 };
 
 var DISTRIBUTION_METHODS = {
@@ -49,7 +50,7 @@ var DISTRIBUTION_TYPE = {
     'CUSTOM': 'CUSTOM'
 };
 
-function filterUsersByRecipientsType(recipientsType, users) {
+function filterUsersByRecipientsType(recipientsType, users, bookings, gameId) {
     switch (recipientsType) {
         case RECIPIENTS_TYPES.ALL:
             return users;
@@ -61,6 +62,11 @@ function filterUsersByRecipientsType(recipientsType, users) {
             return _.omit(users, function (user) {
                 return user.seasonTicket && user.seasonTicket.maxSeats > 0
             });
+        case RECIPIENTS_TYPES.BOOKED_FOR_GAME:
+            return _.omit(users, function(user, uid) {
+                var bookedForAGame = !!(bookings[uid] && bookings[uid][gameId]);
+                return !bookedForAGame;
+            })
     }
 }
 
@@ -131,7 +137,11 @@ var EmailsPage = React.createClass({
         this.setState({recipientsType: selected});
     },
     onDistributionTypeChange: function (e, selected) {
-        this.setState({distributionType: selected});
+        var newState = {distributionType: selected};
+        if (selected === DISTRIBUTION_TYPE.CUSTOM && this.state.recipientsType === RECIPIENTS_TYPES.BOOKED_FOR_GAME) {
+            newState.recipientsType = RECIPIENTS_TYPES.ALL;
+        }
+        this.setState(newState);
     },
     getTemplatesIdsMenuItems: function () {
         return _.map(this.state.distributionMethod === DISTRIBUTION_METHODS.EMAIL ? emailTemplatesData : smsTemplatesData, function (templateData) {
@@ -149,7 +159,7 @@ var EmailsPage = React.createClass({
             props: {
                 text: 'האם אתה בטוח?',
                 onConfirm: function () {
-                    var recipientsUsers = filterUsersByRecipientsType(this.state.recipientsType, this.props.usersData.users);
+                    var recipientsUsers = filterUsersByRecipientsType(this.state.recipientsType, this.props.usersData.users, this.props.bookingsData.bookings, this.state.gameId);
 
                     if (this.state.distributionType == DISTRIBUTION_TYPE.TEMPLATE) {
                         var game = this.props.gamesData.games[this.state.gameId];
