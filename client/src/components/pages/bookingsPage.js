@@ -24,6 +24,13 @@ function getSeasonTicketSubtitle(user) {
     return '';
 }
 
+function getBookingRibbon(user) {
+    if (user.seasonTicket && user.seasonTicket.maxSeats > 0) {
+        return {label: 'מנוי', color: 'Green'}
+    }
+    return null;
+}
+
 var BookingPage = React.createClass({
     displayName: 'BookingPage',
     mixins: [deepLinkStateMixin],
@@ -57,6 +64,7 @@ var BookingPage = React.createClass({
         return {
             title: user.info.displayName,
             subtitles: [getNumOfSeatsSubtitle(booking), stationsMap[booking.station], getSeasonTicketSubtitle(user)],
+            ribbon: getBookingRibbon(user),
             actions: [
                 {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditBooking.bind(this, booking, uid, this.props.usersData.users[uid])},
                 {label: 'בטל', icon: 'delete', onClick: this.onCancelBooking.bind(this, uid)}
