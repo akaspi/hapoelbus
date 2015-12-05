@@ -32,9 +32,17 @@
             <mui.RadioButton value="{this.RECIPIENTS_TYPES.ALL}" labelStyle="{{float: 'initial'}}" label="כל המשתמשים"/>
             <mui.RadioButton value="{this.RECIPIENTS_TYPES.MEMBERS_ONLY}" labelStyle="{{float: 'initial'}}" label="מנויים בלבד"/>
             <mui.RadioButton value="{this.RECIPIENTS_TYPES.NON_MEMBERS}" labelStyle="{{float: 'initial'}}" label="חד פעמיים בלבד"/>
-            <mui.RadioButton disabled="{this.state.distributionType !== this.DISTRIBUTION_TYPE.TEMPLATE}" value="{this.RECIPIENTS_TYPES.BOOKED_FOR_GAME}" labelStyle="{{float: 'initial'}}" label="רשומים להסעה"/>
+            <mui.RadioButton value="{this.RECIPIENTS_TYPES.BOOKED_FOR_GAME}" labelStyle="{{float: 'initial'}}" label="רשומים להסעה"/>
 
         </mui.RadioButtonGroup>
+    </div>
+
+    <div class="game-selection">
+        <mui.SelectField
+                menuItems="{this.getOpenGamesMenuItems()}"
+                valueLink={this.linkState('gameId')}
+                iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="משחק"/>
     </div>
 
     <div rt-if="this.state.distributionType === this.DISTRIBUTION_TYPE.TEMPLATE" class="template-mail">
@@ -43,12 +51,6 @@
                 valueLink={this.linkState('templateId')}
                 iconStyle="{{left: 0, right: 'initial'}}"
                 floatingLabelText="תבנית"/>
-
-        <mui.SelectField
-                menuItems="{this.getOpenGamesMenuItems()}"
-                valueLink={this.linkState('gameId')}
-                iconStyle="{{left: 0, right: 'initial'}}"
-                floatingLabelText="משחק"/>
     </div>
     <div rt-if="this.state.distributionType === this.DISTRIBUTION_TYPE.CUSTOM" class="custom-mail">
         <mui.TextField
