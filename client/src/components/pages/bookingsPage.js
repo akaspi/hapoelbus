@@ -63,7 +63,7 @@ var BookingPage = React.createClass({
         var user = this.props.usersData.users[uid];
         return {
             title: user.info.displayName,
-            subtitles: [getNumOfSeatsSubtitle(booking), stationsMap[booking.station], getSeasonTicketSubtitle(user)],
+            subtitles: [user.info.phone, getNumOfSeatsSubtitle(booking), stationsMap[booking.station], getSeasonTicketSubtitle(user)],
             ribbon: getBookingRibbon(user),
             actions: [
                 {label: 'ערוך', icon: 'mode_edit', onClick: this.onEditBooking.bind(this, booking, uid, this.props.usersData.users[uid])},
