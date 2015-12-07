@@ -12,7 +12,7 @@
 
         <div class="total-bookings-for-a-game">
             <span>סה״כ:</span>
-            <span class="total">{_.size(bookingForAGame)}</span>
+            <span class="total">{_.sum(bookingForAGame, 'numOfSeats')}</span>
         </div>
 
         <mui.SelectField
