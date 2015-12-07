@@ -78,6 +78,7 @@ var BookingPage = React.createClass({
                 uid: uid,
                 user: user,
                 gameId: this.state.gameIdFilter,
+                game: this.props.gamesData.games[this.state.gameIdFilter],
                 booking: booking
             }
         });

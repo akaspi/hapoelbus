@@ -130,7 +130,8 @@ var HomePage = React.createClass({
         }
     },
     updateBooking: function(index) {
-        var openGameIds = _.keys(getAllOpenGames(this.props.gamesData.games));
+        var openGames = getAllOpenGames(this.props.gamesData.games);
+        var openGameIds = _.keys(openGames);
         var gameId = openGameIds[index];
         actionsCreator.createAction(actionsConstants.SHOW_DIALOG, {
             dialog: editBookingDialog,
@@ -138,6 +139,7 @@ var HomePage = React.createClass({
                 uid: this.props.uid,
                 user: this.props.usersData.users[this.props.uid],
                 gameId: gameId,
+                game: openGames[gameId],
                 booking: getBooking(this.props.uid, gameId, this.props.bookingsData.bookings)
             }
         });

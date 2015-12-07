@@ -4,6 +4,7 @@ var React = require('react');
 var template = require('./editBookingDialog.rt');
 var deepLinkStateMixin = require('../mixins/deepLinkStateMixin');
 var stationsMap = require('json!../../utils/stationsMap.json');
+var gameStatusMap = require('json!../../utils/gameStatusMap.json');
 
 var actionsCreator = require('../../actions/actionsCreator');
 var actionsConstants = require('../../actions/actionsConstants');
@@ -20,13 +21,17 @@ var EditBookingDialog = React.createClass({
         booking: React.PropTypes.object,
         user: React.PropTypes.object,
         uid: React.PropTypes.string,
-        gameId: React.PropTypes.string
+        gameId: React.PropTypes.string,
+        game: React.PropTypes.object
     },
     mixins: [deepLinkStateMixin],
     getInitialState: function () {
         return {
             booking: _.defaults(_.cloneDeep(this.props.booking), defaultBooking)
         };
+    },
+    isGameOpenForAll: function() {
+        return gameStatusMap[this.props.game.status] === gameStatusMap.OPEN_FOR_ALL;
     },
     getStationsMenuItems: function () {
         return _.map(stationsMap, function (val, key) {

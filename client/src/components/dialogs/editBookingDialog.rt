@@ -5,7 +5,7 @@
             contentClassName="edit-booking-dialog"
             onSubmit="{this.updateBooking}">
 
-    <section>
+    <section rt-scope="this.isGameOpenForAll() as isGameOpenForAll">
         <mui.SelectField
                 menuItems="{this.getStationsMenuItems()}"
                 valueLink={this.linkState('booking.station')}
@@ -13,9 +13,17 @@
                 floatingLabelText="תחנה"/>
 
         <mui.SelectField
+                rt-if="!isGameOpenForAll"
                 menuItems="{this.getNumOfSeatsMenuItems()}"
                 valueLink={this.linkNumericState('booking.numOfSeats')}
                 iconStyle="{{left: 0, right: 'initial'}}"
+                floatingLabelText="מס׳ מקומות"/>
+
+        <mui.TextField
+                rt-if="isGameOpenForAll"
+                type="number"
+                min="{1}"
+                valueLink={this.linkState('booking.numOfSeats')}
                 floatingLabelText="מס׳ מקומות"/>
 
         <mui.TextField
