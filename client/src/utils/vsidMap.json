@@ -63,5 +63,17 @@
     "NOVGOROD": {
         "text": "נפטונאס",
         "img": "https://upload.wikimedia.org/wikipedia/en/9/97/BC_Nizhny_Novgorod_logo_2014.png"
+    },
+    "STRASBOURG": {
+        "text": "שטראסבורג",
+        "img": "http://cache.images.core.optasports.com/basketball/teams/150x150/104.png"
+    },
+    "GRAN_CANARIA": {
+        "text": "גראן קנאריה",
+        "img": "https://upload.wikimedia.org/wikipedia/en/2/2a/CB_Gran_Canaria_2014.png"
+    },
+    "SARATOV": {
+        "text": "סראטוב",
+        "img": "https://upload.wikimedia.org/wikipedia/en/e/e4/Avtodor_Saratov_logo.png"
     }
 }
