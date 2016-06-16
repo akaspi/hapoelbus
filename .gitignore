@@ -4,15 +4,3 @@ node_modules/
 npm-debug.log
 Gemfile
 Gemfile.lock
-
-# Private:
-config.json
-
-# Generated:
-bundle.js
-vendor.bundle.js
-*.css
-services/logs/
-
-# Dist
-client/public/
