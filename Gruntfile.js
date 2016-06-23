@@ -6,13 +6,20 @@ module.exports = function (grunt) {
     },
     eslint: {
       target: ['.']
+    },
+    webpack: {
+      all: require('./webpack.config')
     }
   });
 
   grunt.loadNpmTasks('grunt-jasmine-npm');
   grunt.loadNpmTasks('grunt-eslint');
+  grunt.loadNpmTasks('grunt-webpack');
 
   grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('test', ['jasmine']);
+
+  grunt.registerTask('build', ['webpack']);
+
   grunt.registerTask('default', ['eslint', 'jasmine']);
 };
