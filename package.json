@@ -1,5 +1,10 @@
 {
   "name": "hapoelbus",
-  "version": "1.0.0",
-  "scripts": {}
+  "version": "3.0.0",
+  "scripts": {},
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-jasmine-npm": "^0.2.1",
+    "lodash": "^4.13.1"
+  }
 }
