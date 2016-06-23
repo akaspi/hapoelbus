@@ -4,7 +4,15 @@
   "scripts": {},
   "dependencies": {
     "grunt": "^1.0.1",
-    "grunt-jasmine-npm": "^0.2.1",
     "lodash": "^4.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2",
+    "grunt-eslint": "^18.1.0",
+    "grunt-jasmine-npm": "^0.2.1"
   }
 }
