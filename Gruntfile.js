@@ -1,3 +1,5 @@
+const webpackConfig = require('./webpack.config');
+
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -8,7 +10,7 @@ module.exports = function (grunt) {
       target: ['.']
     },
     webpack: {
-      all: require('./webpack.config')
+      all: webpackConfig
     }
   });
 
