@@ -1,3 +1,4 @@
-/**
- * Created by Amit_Kaspi on 23/06/2016.
- */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(React.createElement('span', {}, 'Hello, World!'), document.getElementById('app'));

@@ -3,9 +3,12 @@
   "version": "3.0.0",
   "scripts": {},
   "dependencies": {
+    "babel-preset-react": "^6.5.0",
     "grunt": "^1.0.1",
     "grunt-webpack": "^1.0.11",
     "lodash": "^4.13.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
