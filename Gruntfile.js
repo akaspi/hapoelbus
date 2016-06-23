@@ -12,6 +12,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-jasmine-npm');
   grunt.loadNpmTasks('grunt-eslint');
 
-  grunt.registerTask('default', ['eslint', 'jasmine']);
   grunt.registerTask('lint', ['eslint']);
+  grunt.registerTask('test', ['jasmine']);
+  grunt.registerTask('default', ['eslint', 'jasmine']);
 };
