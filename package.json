@@ -1,7 +1,9 @@
 {
   "name": "hapoelbus",
   "version": "3.0.0",
-  "scripts": {},
+  "scripts": {
+    "start": "grunt build serve"
+  },
   "dependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
