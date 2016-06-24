@@ -20,7 +20,7 @@
     "grunt-eslint": "^18.1.0",
     "grunt-http-server": "^2.0.0",
     "grunt-jasmine-npm": "^0.2.1",
-    "grunt-webpack": "^1.0.11",
+    "grunt-webpack-without-server": "^1.0.8",
     "lodash": "^4.13.1",
     "node-sass": "^3.8.0",
     "react": "^15.1.0",

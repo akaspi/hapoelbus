@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-jasmine-npm');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-webpack');
+  grunt.loadNpmTasks('grunt-webpack-without-server');
   grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('lint', ['eslint']);
