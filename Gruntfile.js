@@ -12,7 +12,7 @@ module.exports = function (grunt) {
     webpack: {
       all: webpackConfig
     },
-    "http-server": {
+    'http-server': {
       all: {
         root: '.',
         port: process.env.PORT || 8080
