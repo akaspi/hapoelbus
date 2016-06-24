@@ -4,6 +4,7 @@
   "scripts": {},
   "dependencies": {
     "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
     "grunt": "^1.0.1",
     "grunt-webpack": "^1.0.11",
     "lodash": "^4.13.1",
@@ -11,6 +12,7 @@
     "react-dom": "^15.1.0",
     "react-templates": "^0.5.2",
     "react-templates-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
@@ -25,6 +27,7 @@
     "eslint-plugin-react": "^5.2.2",
     "grunt-eslint": "^18.1.0",
     "grunt-jasmine-npm": "^0.2.1",
-    "grunt-react-templates": "^0.6.0"
+    "node-sass": "^3.8.0",
+    "sass-loader": "^3.2.1"
   }
 }

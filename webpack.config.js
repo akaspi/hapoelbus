@@ -15,7 +15,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
-      { test: /\.rt/, exclude: /node_modules/, loaders: ['react-templates-loader'] }
+      { test: /\.rt/, exclude: /node_modules/, loaders: ['react-templates-loader'] },
+      { test: /\.scss/, exclude: /node_modules/, loaders: ['style', 'css', 'resolve-url', 'sass'] }
     ]
   },
   plugins: [
