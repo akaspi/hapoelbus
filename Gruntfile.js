@@ -11,17 +11,25 @@ module.exports = function (grunt) {
     },
     webpack: {
       all: webpackConfig
+    },
+    "http-server": {
+      all: {
+        root: '.',
+        port: process.env.PORT || 8080
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-jasmine-npm');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-webpack');
+  grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('test', ['jasmine']);
 
   grunt.registerTask('build', ['webpack']);
+  grunt.registerTask('serve', ['http-server']);
 
   grunt.registerTask('default', ['eslint', 'jasmine']);
 };
