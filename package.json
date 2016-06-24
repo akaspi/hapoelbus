@@ -9,6 +9,8 @@
     "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-templates": "^0.5.2",
+    "react-templates-loader": "^0.5.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
@@ -22,6 +24,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
     "grunt-eslint": "^18.1.0",
-    "grunt-jasmine-npm": "^0.2.1"
+    "grunt-jasmine-npm": "^0.2.1",
+    "grunt-react-templates": "^0.6.0"
   }
 }

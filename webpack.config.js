@@ -14,7 +14,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] }
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
+      { test: /\.rt/, exclude: /node_modules/, loaders: ['react-templates-loader'] }
     ]
   },
   plugins: [
