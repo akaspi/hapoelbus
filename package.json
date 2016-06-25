@@ -2,7 +2,9 @@
   "name": "hapoelbus",
   "version": "3.0.0",
   "scripts": {
-    "start": "grunt build && node servers/prodServer.js"
+    "start": "grunt build && node servers/prodServer.js",
+    "test": "grunt test",
+    "dev": "node servers/devServer.js"
   },
   "dependencies": {
     "babel-core": "^6.10.4",
