@@ -7,4 +7,5 @@ Gemfile.lock
 
 # Generated:
 dist/
+bin/
 *.rt.js

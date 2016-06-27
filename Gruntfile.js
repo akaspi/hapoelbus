@@ -11,13 +11,7 @@ module.exports = function (grunt) {
       target: ['.']
     },
     webpack: {
-      all: webpackConfig
-    },
-    'http-server': {
-      all: {
-        root: '.',
-        port: process.env.PORT || 8080
-      }
+      production: webpackConfig
     },
     copy: {
       schedulerTasks: {
@@ -37,24 +31,25 @@ module.exports = function (grunt) {
       }
     },
     clean: {
-      dist: ['dist']
+      dist: ['dist'],
+      bin: ['bin']
     }
   });
 
   grunt.loadNpmTasks('grunt-jasmine-npm');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-webpack-without-server');
-  grunt.loadNpmTasks('grunt-http-server');
-  grunt.loadNpmTasks('grunt-file-append');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('lint', ['eslint']);
+
   grunt.registerTask('test', ['jasmine']);
+  grunt.registerTask('lint', ['eslint']);
+  grunt.registerTask('schedulerTasks', ['clean:bin', 'copy:schedulerTasks']);
+  grunt.registerTask('bundle', ['clean:dist', 'webpack:production']);
 
-  grunt.registerTask('build', ['webpack']);
-  grunt.registerTask('serve', ['http-server']);
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.registerTask('build', ['bundle', 'schedulerTasks']);
+  grunt.registerTask('verify', ['lint', 'test']);
 
-  grunt.registerTask('default', ['eslint', 'jasmine']);
+  grunt.registerTask('default', ['verify', 'build']);
 };

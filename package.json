@@ -20,7 +20,6 @@
     "express": "^4.14.0",
     "grunt": "0.4.5",
     "grunt-eslint": "^18.1.0",
-    "grunt-http-server": "^2.0.0",
     "grunt-jasmine-npm": "^0.2.1",
     "grunt-webpack-without-server": "^1.0.8",
     "lodash": "^4.13.1",
