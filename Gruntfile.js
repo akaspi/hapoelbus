@@ -35,6 +35,9 @@ module.exports = function (grunt) {
           }
         ]
       }
+    },
+    clean: {
+      dist: ['dist']
     }
   });
 
@@ -43,6 +46,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-webpack-without-server');
   grunt.loadNpmTasks('grunt-http-server');
   grunt.loadNpmTasks('grunt-file-append');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('test', ['jasmine']);
