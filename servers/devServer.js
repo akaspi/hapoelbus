@@ -1,7 +1,7 @@
-const webpack =require('webpack');
+const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('../webpack.config');
-const _  = require('lodash');
+const _ = require('lodash');
 
 const webpackDevConfig = _.cloneDeep(webpackConfig);
 const devPort = 3000;
