@@ -34,6 +34,7 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
+    "grunt-contrib-copy": "^1.0.0",
     "webpack-dev-server": "^1.14.1"
   }
 }
