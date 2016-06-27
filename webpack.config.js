@@ -4,11 +4,12 @@ const path = require('path');
 module.exports = {
   cache: true,
   devtool: 'source-map',
-  entry: [
-    './src/index.js'
-  ],
+  entry: {
+    app: ['./src/index.js'],
+    vendors: ['lodash', 'react', 'react-dom']
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/'
   },
@@ -20,6 +21,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors'
+    })
   ]
 };
