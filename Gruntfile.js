@@ -42,14 +42,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-
-  grunt.registerTask('test', ['jasmine']);
-  grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('schedulerTasks', ['clean:bin', 'copy:schedulerTasks']);
   grunt.registerTask('bundle', ['clean:dist', 'webpack:production']);
 
+  grunt.registerTask('test', ['jasmine']);
+  grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('build', ['bundle', 'schedulerTasks']);
-  grunt.registerTask('verify', ['lint', 'test']);
 
-  grunt.registerTask('default', ['verify', 'build']);
+  grunt.registerTask('default', ['lint', 'test', 'build']);
 };
