@@ -15,6 +15,12 @@ module.exports = function (grunt) {
     },
     copy: {
       schedulerTasks: {
+        options: {
+          process: (content) => {
+            const sheband = '#!/usr/bin/env node';
+            return sheband + '\n\n' + content;
+          }
+        },
         files: [
           {
             expand: true,
@@ -23,7 +29,6 @@ module.exports = function (grunt) {
             rename: (dest, src) => {
               const fileName = _.last(src.split('/'));
               const fileNameWithoutExtension = _.first(fileName.split('.'));
-
               return dest + fileNameWithoutExtension;
             }
           }
@@ -41,6 +46,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-webpack-without-server');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('schedulerTasks', ['clean:bin', 'copy:schedulerTasks']);
   grunt.registerTask('bundle', ['clean:dist', 'webpack:production']);
