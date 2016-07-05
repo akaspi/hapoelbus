@@ -50,11 +50,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('schedulerTasks', ['clean:bin', 'copy:schedulerTasks']);
-  grunt.registerTask('bundle', ['clean:dist', 'webpack:production']);
+  grunt.registerTask('buildWebpack', ['clean:dist', 'webpack:production']);
   grunt.registerTask('buildConfig', ['clean:config', 'createConfigFile']);
   grunt.registerTask('test', ['jasmine']);
   grunt.registerTask('lint', ['eslint']);
-  grunt.registerTask('build', ['bundle', 'schedulerTasks']);
+  grunt.registerTask('build', ['buildConfig', 'buildWebpack', 'schedulerTasks']);
 
   grunt.task.loadTasks('./conf/grunt/tasks/');
 
