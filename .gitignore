@@ -8,8 +8,9 @@ Gemfile.lock
 # Generated:
 dist/
 bin/
-config.json
+config.client.json
+config.server.json
 *.rt.js
 
 # Config
-config.override.json
+conf/config.json
