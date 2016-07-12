@@ -29,6 +29,10 @@ function createServerConfig(overrideConfig) {
         privateKey: getConfigVar('fb_privateKey', overrideConfig, true)
       },
       databaseURL: getConfigVar('fb_databaseURL', overrideConfig, true)
+    },
+    sendGrid: {
+      apiToken: getConfigVar('sg_apiToken', overrideConfig, true),
+      fromAddress: getConfigVar('sg_fromAddress', overrideConfig, true)
     }
   };
 }
