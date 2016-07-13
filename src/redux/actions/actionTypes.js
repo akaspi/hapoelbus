@@ -1,0 +1,1 @@
+export const USER_INFO_CREATED = 'USER_INFO_CREATED';

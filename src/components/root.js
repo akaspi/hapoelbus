@@ -1,10 +1,16 @@
 import React from 'react';
 import template from './root.rt';
 
+import { makeStore } from '../redux/makeStore';
+
 require('./root.scss');
 
-export default class Root extends React.Component {
-  render() {
-    return template.apply(this);
-  }
-}
+const Root = React.createClass({
+  displayName: 'Root',
+  createStore() {
+    return makeStore();
+  },
+  render: template
+});
+
+module.exports = Root;
