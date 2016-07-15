@@ -24,7 +24,7 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            src: ['schedulerTasks/**/*'],
+            src: ['server/tasks/**/*'],
             dest: 'bin/',
             rename: (dest, src) => {
               const fileName = _.last(src.split('/'));
@@ -36,9 +36,9 @@ module.exports = function (grunt) {
       }
     },
     clean: {
-      dist: ['dist'],
+      dist: ['client/dist'],
       bin: ['bin'],
-      config: ['config.json']
+      config: ['conf/*.json']
     }
   });
 

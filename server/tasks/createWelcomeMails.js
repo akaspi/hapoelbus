@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
+
 const _ = require('lodash');
-const config = require('../config.server.json');
+const config = require('../../conf/server.config.json');
 const Promise = require('bluebird');
-const dbAPI = require('../common/DatabaseAPI').init(config.firebase);
+const dbAPI = require('../../common/DatabaseAPI').init(config.firebase);
 
 const TASK_NAME = 'createWelcomeMails';
 const PENDING_MAILS_COLLECTION_NAME = 'pendingMails';

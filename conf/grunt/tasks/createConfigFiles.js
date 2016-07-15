@@ -1,67 +1,63 @@
 const _ = require('lodash');
 const fs = require('fs');
 
-function getConfigVar(name, overrideConfig, isRequired) {
-  const configVar = _.get(process, ['env', name]) || _.get(overrideConfig, name);
-  if (!configVar && isRequired) {
-    throw new Error('Failed to assign a required config variable: ' + name);
-  }
-  return configVar;
-}
+const envVariables = ['fb_apiKey', 'fb_authDomain', 'fb_databaseURL',
+  'fb_storageBucket', 'fb_projectId', 'fb_clientEmail', 'fb_privateKey', 'fb_databaseURL',
+  'sg_apiToken', 'sg_fromAddress'];
 
-function createClientConfig(overrideConfig) {
+function createClientConfig() {
   return {
     firebase: {
-      apiKey: getConfigVar('fb_apiKey', overrideConfig, true),
-      authDomain: getConfigVar('fb_authDomain', overrideConfig, true),
-      databaseURL: getConfigVar('fb_databaseURL', overrideConfig, true),
-      storageBucket: getConfigVar('fb_storageBucket', overrideConfig, true)
+      apiKey: process.env.fb_apiKey,
+      authDomain: process.env.fb_authDomain,
+      databaseURL: process.env.fb_databaseURL,
+      storageBucket: process.env.fb_storageBucket
     }
   };
 }
 
-function createServerConfig(overrideConfig) {
+function createServerConfig() {
   return {
     firebase: {
       serviceAccount: {
-        projectId: getConfigVar('fb_projectId', overrideConfig, true),
-        clientEmail: getConfigVar('fb_clientEmail', overrideConfig, true),
-        privateKey: getConfigVar('fb_privateKey', overrideConfig, true)
+        projectId: process.env.fb_projectId,
+        clientEmail: process.env.fb_clientEmail,
+        privateKey: process.env.fb_privateKey
       },
-      databaseURL: getConfigVar('fb_databaseURL', overrideConfig, true)
+      databaseURL: process.env.fb_databaseURL
     },
     sendGrid: {
-      apiToken: getConfigVar('sg_apiToken', overrideConfig, true),
-      fromAddress: getConfigVar('sg_fromAddress', overrideConfig, true)
+      apiToken: process.env.sg_apiToken,
+      fromAddress: process.env.sg_fromAddress
     }
   };
 }
 
-module.exports = function (grunt) {
-  'use strict'; // eslint-disable-line strict
-  grunt.registerTask('createConfigFiles', 'Build app configuration', () => {
-    let overrideConfig = {};
+function writeConfigFile(path, config) {
+  fs.writeFileSync(path, JSON.stringify(config, null, 2), 'utf-8');
+}
 
-    try {
-      overrideConfig = grunt.file.readJSON('./conf/config.json');
-    } catch (e) {
-      grunt.log.writeln('No override config detected...');
+function isVariablesValid() {
+  return _.every(envVariables, (varName) => _.has(process.env, varName));
+}
+
+module.exports = function (grunt) {
+  grunt.registerTask('createConfigFiles', 'Build app configuration', () => {
+    const hasDotEnvFile = require('dotenv').config({ silent: true }); // eslint-disable-line global-require
+
+    if (!hasDotEnvFile) {
+      grunt.log.writeln('No .env file detected...');
     }
 
-    let clientConfig;
-    let serverConfig;
+    if (!isVariablesValid()) {
+      grunt.log.fatal('Some env variables are missing...');
+    }
+
     try {
-      clientConfig = createClientConfig(overrideConfig);
-      serverConfig = createServerConfig(overrideConfig);
+      writeConfigFile('./conf/client.config.json', createClientConfig());
+      writeConfigFile('./conf/server.config.json', createServerConfig());
     } catch (e) {
       grunt.fail.fatal(e.message);
-    }
-
-    try {
-      fs.writeFileSync('./config.client.json', JSON.stringify(clientConfig, null, 2), 'utf-8');
-      fs.writeFileSync('./config.server.json', JSON.stringify(serverConfig, null, 2), 'utf-8');
-    } catch (e) {
-      grunt.fail.fatal('Failed to create config.json');
     }
 
     grunt.log.oklns('config files created successfully');

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {USER_INFO_CREATED} from '../actions/actionTypes';
+import { USER_INFO_CREATED } from '../actions/actionTypes';
 
 const initialState = {};
 

@@ -5,13 +5,13 @@ module.exports = {
   cache: true,
   devtool: 'source-map',
   entry: {
-    app: ['./src/index.js'],
-    vendors: ['lodash', 'react', 'react-dom']
+    app: ['./client/src/index.js'],
+    vendors: ['lodash', 'react', 'react-dom', 'redux', 'react-redux']
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/'
+    path: path.join(__dirname, 'client/dist'),
+    publicPath: '/client/dist/'
   },
   module: {
     loaders: [

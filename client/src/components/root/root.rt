@@ -1,5 +1,5 @@
 <rt-require dependency="react-redux" as="ReactRedux"></rt-require>
-<rt-require dependency="./homePage/homePage" as="HomePage"></rt-require>
+<rt-require dependency="../homePage/homePage" as="HomePage"></rt-require>
 
 <ReactRedux.Provider store="{this.createStore()}">
     <HomePage></HomePage>

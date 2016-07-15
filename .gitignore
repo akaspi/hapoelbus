@@ -6,12 +6,11 @@ Gemfile
 Gemfile.lock
 
 # Generated:
-dist/
+client/dist/
 bin/
-config.client.json
-config.server.json
+conf/client.config.json
+conf/server.config.json
 *.rt.js
 
 # Config
-conf/config.json
 .env

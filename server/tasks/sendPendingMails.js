@@ -1,9 +1,11 @@
-const config = require('../config.server.json');
+/* eslint-disable no-console */
+
+const config = require('../../conf/server.config.json');
 
 const _ = require('lodash');
 const sendGrid = require('sendgrid');
 
-const dbAPI = require('../common/DatabaseAPI').init(config.firebase);
+const dbAPI = require('../../common/DatabaseAPI').init(config.firebase);
 const Promise = require('bluebird');
 
 const TASK_NAME = 'sendPendingMails';
