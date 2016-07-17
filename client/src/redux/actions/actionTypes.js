@@ -1,1 +1,2 @@
 export const USER_INFO_CREATED = 'USER_INFO_CREATED';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
