@@ -1,5 +1,4 @@
 const firebase = require('firebase');
-
 const createAPI = (config) => {
   const firebaseApp = firebase.initializeApp(config);
   const database = firebaseApp.database();
@@ -20,6 +19,10 @@ const createAPI = (config) => {
     },
     remove(path) {
       return database.ref(path).remove();
+    },
+    loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      return firebaseApp.auth().signInWithPopup(provider);
     }
   };
 };

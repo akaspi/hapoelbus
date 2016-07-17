@@ -1,7 +1,9 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import usersInfoReducer from './reducers/usersInfoReducer';
 import currentUserReducer from './reducers/currentUserReducer';
+
+import thunk from 'redux-thunk'
 
 export const makeStore = () => {
   const reducers = combineReducers({
@@ -9,5 +11,9 @@ export const makeStore = () => {
     currentUser: currentUserReducer
   });
 
-  return createStore(reducers);
+  const middleware = applyMiddleware(
+    thunk
+  );
+
+  return createStore(reducers, undefined, middleware);
 };

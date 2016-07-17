@@ -8,7 +8,7 @@ const initialState = fromJS({});
 export default function currentUserReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_CURRENT_USER:
-      return fromJS(_.pick(action.currentUser, ['uid', 'isAdmin']));
+      return fromJS(_.pick(action.currentUser, ['uid', 'email']));
     default:
       return state;
   }
