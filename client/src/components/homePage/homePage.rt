@@ -1,7 +1,7 @@
 <div>
     <div rt-if="!this.shouldShowSignUpForm()">
         <button onClick="{this.props.loginWithGoogle}">Google</button>
-        <button>Facebook</button>
+        <button onClick="{this.props.loginWithFacebook}">Facebook</button>
         <button onClick="{this.loginWithEmail}">Email</button>
     </div>
     <div rt-if="this.shouldShowSignUpForm()">
@@ -13,5 +13,5 @@
         <input type="text" onChange="{this.onChange}" value="{this.state.lastName}" name="lastName" placeholder="last"/>
         <button onClick="{this.submit}">Submit</button>
     </div>
-    <!--HomePages {JSON.stringify(this.props.currentUser.toJS())}-->
+    HomePages {JSON.stringify(this.props.currentUser.toJS())}
 </div>

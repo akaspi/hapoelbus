@@ -1,7 +1,7 @@
 import React from 'react';
 import template from './homePage.rt';
 import { connect } from 'react-redux';
-import { loginWithGoogle } from '../../redux/actions/dbActionsCreator';
+import { loginWithGoogle, loginWithFacebook, signUpWithPassword } from '../../redux/actions/dbActionsCreator';
 
 const mapStateToProps = (state) => ({
   usersInfo: state.usersInfo,
@@ -9,7 +9,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginWithGoogle: () => dispatch(loginWithGoogle())
+  loginWithGoogle: () => dispatch(loginWithGoogle()),
+  loginWithFacebook: () => dispatch(loginWithFacebook()),
+  signUpWithPassword: (email, password, userInfo) => dispatch(signUpWithPassword(email, password, userInfo))
 });
 
 const HomePage = React.createClass({
@@ -42,9 +44,8 @@ const HomePage = React.createClass({
   },
   submit: function() {
     if (this.state.emailAuthentication) {
-
+      this.props.signUpWithPassword(this.state.email, this.state.password);
     }
-    console.log(this.state);
   },
   render: template
 });

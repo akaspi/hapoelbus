@@ -23,6 +23,13 @@ const createAPI = (config) => {
     loginWithGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider();
       return firebaseApp.auth().signInWithPopup(provider);
+    },
+    loginWithFacebook() {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      return firebaseApp.auth().signInWithPopup(provider);
+    },
+    createUserWithEmailAndPassword(email, password) {
+      return firebaseApp.auth().createUserWithEmailAndPassword(email, password);
     }
   };
 };
