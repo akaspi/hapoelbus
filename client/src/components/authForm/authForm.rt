@@ -1,0 +1,8 @@
+<div>
+    <button onClick="{this.props.loginWithGoogle}">Google</button>
+    <button onClick="{this.props.loginWithFacebook}">Facebook</button>
+    <hr>
+    <input type="text" value="{this.state.email}" onChange="{this.onChange}" name="email" placeholder="email"/>
+    <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password" placeholder="password"/>
+    <button onClick="{this.signUpWithUserAndPassword}">Sign Up</button>
+</div>

@@ -1,14 +1,15 @@
-import _ from 'lodash';
 import { fromJS } from 'immutable';
 
-import { SET_CURRENT_USER } from '../actions/actionTypes';
+import { SET_CURRENT_USER, SIGN_OUT } from '../actions/actionTypes';
 
-const initialState = fromJS({});
+const initialState = null;
 
 export default function currentUserReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_CURRENT_USER:
-      return fromJS(_.pick(action.currentUser, ['uid', 'email']));
+      return fromJS(action.currentUser);
+    case SIGN_OUT:
+      return initialState;
     default:
       return state;
   }

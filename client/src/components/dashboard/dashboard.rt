@@ -1,0 +1,6 @@
+<rt-require dependency="../userInfoForm/userInfoForm" as="userInfoForm"></rt-require>
+
+<div>
+    <userInfoForm rt-if="!this.hasUserInfo()" uid="{this.getUID()}"/>
+    <button onClick="{this.props.signOut}">Sign Out</button>
+</div>

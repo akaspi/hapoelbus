@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   cache: true,
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   entry: {
     app: ['./client/src/index.js'],
     vendors: ['lodash', 'react', 'react-dom', 'redux', 'react-redux']

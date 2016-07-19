@@ -3,7 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import usersInfoReducer from './reducers/usersInfoReducer';
 import currentUserReducer from './reducers/currentUserReducer';
 
-import thunk from 'redux-thunk'
+import dbMiddleware from './middleware/dbMiddleware';
 
 export const makeStore = () => {
   const reducers = combineReducers({
@@ -12,7 +12,7 @@ export const makeStore = () => {
   });
 
   const middleware = applyMiddleware(
-    thunk
+    dbMiddleware
   );
 
   return createStore(reducers, undefined, middleware);

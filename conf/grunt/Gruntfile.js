@@ -47,7 +47,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-webpack-without-server');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('schedulerTasks', ['clean:bin', 'copy:schedulerTasks']);
   grunt.registerTask('buildWebpack', ['clean:dist', 'webpack:production']);
