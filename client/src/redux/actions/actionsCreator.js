@@ -1,6 +1,7 @@
 import {
   START_LOADING,
   END_LOADING,
+  REPORT_ERROR,
   SET_CURRENT_USER,
   UPDATE_USER_INFO,
   FETCH_CURRENT_USER,
@@ -14,6 +15,11 @@ import {
 export const startLoading = () => ({ type: START_LOADING });
 
 export const endLoading = () => ({ type: END_LOADING });
+
+export const reportError = errorMsg => ({
+  type: REPORT_ERROR,
+  errorMsg
+});
 
 export const setCurrentUser = currentUser => ({
   type: SET_CURRENT_USER,
