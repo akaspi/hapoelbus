@@ -22,7 +22,8 @@ const Dashboard = React.createClass({
     currentUser: React.PropTypes.object,
     usersInfo: React.PropTypes.object.isRequired,
     fetchUserInfo: React.PropTypes.func.isRequired,
-    signOut: React.PropTypes.func.isRequired
+    signOut: React.PropTypes.func.isRequired,
+    updateUserInfo: React.PropTypes.func.isRequired
   },
 
   componentWillMount() {
