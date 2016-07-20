@@ -50,7 +50,7 @@ module.exports = function (grunt) {
     }
 
     if (!isVariablesValid()) {
-      grunt.log.fatal('Some env variables are missing...');
+      grunt.fail.fatal('Some env variables are missing...');
     }
 
     try {
