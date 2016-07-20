@@ -53,9 +53,9 @@ module.exports = function (grunt) {
   grunt.registerTask('buildConfig', ['clean:config', 'createConfigFiles']);
   grunt.registerTask('test', ['jasmine']);
   grunt.registerTask('lint', ['eslint']);
-  grunt.registerTask('build', ['buildWebpack']);
+  grunt.registerTask('build', ['buildConfig', 'buildWebpack', 'schedulerTasks']);
 
-  // grunt.task.loadTasks('./conf/grunt/tasks/');
+  grunt.task.loadTasks('./conf/grunt/tasks/');
 
   grunt.registerTask('default', ['lint', 'test', 'build']);
 };
