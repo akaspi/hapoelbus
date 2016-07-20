@@ -1,7 +1,8 @@
 import React from 'react';
+import * as _ from 'lodash';
 import template from './userInfoForm.rt';
-import { connect } from 'react-redux';
-import { updateUserInfo } from '../../redux/actions/actionsCreator';
+import {connect} from 'react-redux';
+import {updateUserInfo} from '../../redux/actions/actionsCreator';
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser
@@ -23,15 +24,29 @@ const UserInfoForm = React.createClass({
     return {
       firstName: '',
       lastName: '',
-      phonePrefix: '',
+      phonePrefix: '050',
       phoneNumber: '',
       station: 'tel-aviv'
     };
   },
 
-  onChange(e) {
+  onChange(e, validationType) {
+
+    const value = e.target.value;
+
+    if (validationType === 'numeric') {
+      if (!/^[0-9]*$/.test(value)) {
+        return;
+      }
+    }
+
+    if (validationType === 'hebrew') {
+      if (!/^[א-ת\s]*$/.test(value)) {
+        return
+      }
+    }
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   },
 
@@ -39,6 +54,12 @@ const UserInfoForm = React.createClass({
     this.props.updateUserInfo(this.props.currentUser.uid, this.state);
   },
 
+  isSubmitDisabled(){
+    return _.some(this.state, (field)=>_.isEmpty(field)) || this.isPhoneInvalid();
+  },
+  isPhoneInvalid(){
+    return this.state.phoneNumber.length < 7;
+  },
   render: template
 });
 

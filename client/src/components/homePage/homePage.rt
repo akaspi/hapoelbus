@@ -3,7 +3,7 @@
 <rt-require dependency="./homePage.scss" as="css"></rt-require>
 
 <div class="site">
-    <div class="row cotainer medium-6 small-centered columns">
+    <div class="row cotainer large-3 large-centered">
         <authForm rt-if="!this.props.currentUser" />
         <dashboard rt-if="this.props.currentUser" />
         <span rt-if="this.props.errorMsg" key="homePageErrorMsg">{this.props.errorMsg}</span>

@@ -18,7 +18,8 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
       { test: /\.json$/, exclude: /node_modules/, loaders: ['json'] },
       { test: /\.rt/, exclude: /node_modules/, loaders: ['react-templates-loader'] },
-      { test: /\.scss/, exclude: /node_modules/, loaders: ['style', 'css', 'sass'] }
+      { test: /\.scss/, exclude: /node_modules/, loaders: ['style', 'css', 'sass'] },
+      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$/, loader: "file" }
     ]
   },
   plugins: [
