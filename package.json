@@ -2,8 +2,7 @@
   "name": "hapoelbus",
   "version": "3.0.0",
   "scripts": {
-    "start": "grunt && node server/prodServer.js",
-    "test": "grunt test",
+    "start": "node server/prodServer.js",
     "dev": "node server/devServer.js"
   },
   "dependencies": {
