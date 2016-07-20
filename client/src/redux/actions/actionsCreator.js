@@ -1,4 +1,6 @@
 import {
+  START_LOADING,
+  END_LOADING,
   SET_CURRENT_USER,
   UPDATE_USER_INFO,
   FETCH_CURRENT_USER,
@@ -8,6 +10,10 @@ import {
   SIGN_UP_WITH_EMAIL_AND_PASSWORD,
   SIGN_OUT
 } from '../actions/actionTypes';
+
+export const startLoading = () => ({ type: START_LOADING });
+
+export const endLoading = () => ({ type: END_LOADING });
 
 export const setCurrentUser = currentUser => ({
   type: SET_CURRENT_USER,

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { fetchUserInfo, updateUserInfo, signOut } from '../../redux/actions/actionsCreator';
 
 const mapStateToProps = (state) => ({
+  loading: state.loading,
   currentUser: state.currentUser,
   usersInfo: state.usersInfo
 });
@@ -19,6 +20,7 @@ const Dashboard = React.createClass({
   displayName: 'Dashboard',
 
   propTypes: {
+    loading: React.PropTypes.bool.isRequired,
     currentUser: React.PropTypes.object,
     usersInfo: React.PropTypes.object.isRequired,
     fetchUserInfo: React.PropTypes.func.isRequired,

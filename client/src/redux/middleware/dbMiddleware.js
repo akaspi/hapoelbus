@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import clientConfig from '../../../../conf/client.config.json';
 import firebase from 'firebase';
 
-import { setCurrentUser, updateUserInfo } from '../actions/actionsCreator';
+import { setCurrentUser, updateUserInfo, startLoading, endLoading } from '../actions/actionsCreator';
 import {
   LOGIN_WITH_GOOGLE,
   LOGIN_WITH_FACEBOOK,
@@ -14,6 +14,11 @@ import {
 } from '../actions/actionTypes';
 
 const CURRENT_USER_KEYS = ['uid', 'email'];
+
+const asyncEnd = (next, cb) => (response) => {
+  next(endLoading());
+  cb(response);
+};
 
 const loginWithProvider = (provider, onSuccess, onError) => {
   firebase.auth().signInWithPopup(provider)
@@ -44,9 +49,15 @@ const signUpWithEmailAndPassword = (next, action) => {
 };
 
 const dbUpdateUserInfo = (next, action) => {
-  firebase.database().ref('usersInfo/' + action.uid).update(action.userInfo)
-    .then(() => next(action))
-    .catch(error => console.log(error));
+  const onUpdateComplete = (error) => {
+    if (error) {
+      return console.log(error);
+    }
+    return next(action);
+  };
+
+  next(startLoading());
+  firebase.database().ref('usersInfo/' + action.uid).update(action.userInfo, asyncEnd(next, onUpdateComplete));
 };
 
 const dbSignOut = (next, action) => {
@@ -57,21 +68,23 @@ const dbSignOut = (next, action) => {
 };
 
 const fetchUserInfo = (next, action) => {
-  firebase.database().ref('usersInfo/' + action.uid).once('value')
-    .then(
-      snapshot => next(updateUserInfo(action.uid, snapshot.val())),
-      error => console.log(error)
-    );
+  const onFetchSuccess = snapshot => next(updateUserInfo(action.uid, snapshot.val()));
+  const onFetchError = error => console.log(error);
+
+  next(startLoading());
+  firebase.database().ref('usersInfo/' + action.uid).once('value', asyncEnd(next, onFetchSuccess), asyncEnd(next, onFetchError));
 };
 
 const fetchCurrentUser = (next) => {
   const onAuthStateChange = (user) => {
+    next(endLoading());
     if (user) {
       next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
     }
     firebase.auth().removeAuthTokenListener(onAuthStateChange);
   };
 
+  next(startLoading());
   firebase.auth().onAuthStateChanged(onAuthStateChange);
 };
 
