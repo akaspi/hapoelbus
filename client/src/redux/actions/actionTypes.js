@@ -6,3 +6,8 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const FETCH_USER_INFO = 'FETCH_USER_INFO';
+
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';
+
+export const REPORT_ERROR = 'REPORT_ERROR';
