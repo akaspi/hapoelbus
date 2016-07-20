@@ -55,7 +55,7 @@ const UserInfoForm = React.createClass({
   },
 
   isSubmitDisabled(){
-    return _.some(this.state, (field)=>_.isEmpty(field)) || this.isPhoneInvalid();
+    return _.some(this.state, _.isEmpty) || this.isPhoneInvalid();
   },
   isPhoneInvalid(){
     return this.state.phoneNumber.length < 7;

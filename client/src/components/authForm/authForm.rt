@@ -19,7 +19,7 @@
     <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password"
            placeholder="סיסמא"/>
 
-    <button onClick="{this.props.signUpWithUserAndPassword}" class="button split">
+    <button onClick="{this.signUpWithUserAndPassword}" class="button split" disabled="{this.isSubmitDisabled()}">
         <span>הירשם</span>
     </button>
 </div>
