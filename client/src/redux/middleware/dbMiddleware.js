@@ -44,7 +44,7 @@ const signUpWithEmailAndPassword = (next, action) => {
 };
 
 const dbUpdateUserInfo = (next, action) => {
-  firebase.database().ref().update({ ['usersInfo/' + action.uid]: action.userInfo })
+  firebase.database().ref('usersInfo/' + action.uid).update(action.userInfo)
     .then(() => next(action))
     .catch(error => console.log(error));
 };
@@ -76,6 +76,7 @@ const fetchCurrentUser = (next) => {
 };
 
 firebase.initializeApp(clientConfig.firebase);
+window.fb = firebase;
 
 export default store => next => action => { // eslint-disable-line no-unused-vars
   switch (action.type) {
