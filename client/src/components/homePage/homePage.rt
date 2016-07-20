@@ -1,7 +1,10 @@
 <rt-require dependency="../dashboard/dashboard" as="dashboard"></rt-require>
 <rt-require dependency="../authForm/authForm" as="authForm"></rt-require>
+<rt-require dependency="./homePage.scss" as="css"></rt-require>
 
-<div>
+<div class="site">
+    <div class="row cotainer medium-6 small-centered columns">
     <authForm rt-if="!this.props.currentUser" />
     <dashboard rt-if="this.props.currentUser" />
+    </div>
 </div>

@@ -1,14 +1,48 @@
 <div>
-    <input type="text" value="{this.state.firstName}" onChange="{this.onChange}" name="firstName"
-           placeholder="firstName"/>
-
-    <input type="text" value="{this.state.lastName}" onChange="{this.onChange}" name="lastName" placeholder="lastName"/>
-
-    <input type="text" value="{this.state.phonePrefix}" onChange="{this.onChange}" name="phonePrefix"
-           placeholder="prefixPhone"/>
-
-    <input type="text" value="{this.state.phoneNumber}" onChange="{this.onChange}" name="phoneNumber"
-           placeholder="phoneNumber"/>
-
-    <button onClick="{this.updateUserInfo}">Save</button>
+    <div class="row">
+        <div class="large-6 columns">
+            <label>שם
+                <input type="text" value="{this.state.firstName}" onChange="{this.onChange}" name="firstName"
+                       placeholder="firstName"/>
+            </label>
+        </div>
+        <div class="large-6 columns">
+            <label>שם משפחה
+                <input type="text" value="{this.state.lastName}" onChange="{this.onChange}" name="lastName"
+                       placeholder="lastName"/>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-3 columns">
+            <label>קידומת
+                <select value="{this.state.phonePrefix}" onChange="{this.onChange}" name="phonePrefix">
+                    <option value="50">050</option>
+                    <option value="52">052</option>
+                </select>
+            </label>
+        </div>
+        <div class="small-9 columns">
+            <label>טלפון נייד
+                <input type="text" maxlength="7" type="text" value="{this.state.phoneNumber}"
+                       onChange="{this.onChange}" name="phoneNumber"
+                       placeholder="phoneNumber"/>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>תחנת עלייה מועדפת
+                <select value="{this.state.station}" onChange="{this.onChange}" name="station">
+                    <option value="modiin">מודיעין</option>
+                    <option value="tel-aviv">תל אביב</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div class="large-4 small-centered">
+        <button onClick="{this.updateUserInfo}" class="submit button split">
+            <span>המשך</span>
+        </button>
+    </div>
 </div>
