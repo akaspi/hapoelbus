@@ -3,9 +3,14 @@
 <rt-require dependency="./homePage.scss" as="css"></rt-require>
 
 <div class="site">
-    <div class="row cotainer large-centered">
-        <authForm rt-if="!this.props.currentUser" />
-        <dashboard rt-if="this.props.currentUser" />
-        <span rt-if="this.props.errorMsg" key="homePageErrorMsg">{this.props.errorMsg}</span>
+    <div class="large-6 small-centered">
+        <authForm rt-if="!this.props.currentUser"/>
+        <dashboard rt-if="this.props.currentUser"/>
+        <div class="large-6  small-centered">
+            <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                <span class="error-msg-txt">{this.props.errorMsg}</span>
+            </div>
+        </div>
     </div>
 </div>

@@ -6,12 +6,12 @@
         <img class="" src="../../../../assets/outside-logo.png" title="outside-logo"/>
     </div>
     <button onClick="{this.props.loginWithFacebook}" class="facebook button split">
-        <span>facebook</span>
+        <span>Facebook</span>
         <i class="fa fa-facebook-official"></i>
     </button>
 
     <button onClick="{this.props.loginWithGoogle}" class="google button split">
-        <span>google </span>
+        <span>Google</span>
         <i class="fa fa-google" aria-hidden="true"></i>
     </button>
     <hr>

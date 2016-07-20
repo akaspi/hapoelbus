@@ -1,4 +1,4 @@
-<div class="small-10 columns small-centered user-info-form">
+<div class="large-6 small-centered user-info-form">
     <h2>פרטים אישיים:</h2>
     <hr>
     <div class="row">
@@ -30,6 +30,7 @@
                     <option value="053">053</option>
                     <option value="054">054</option>
                     <option value="055">055</option>
+                    <option value="057">057</option>
                     <option value="058">058</option>
                 </select>
             </label>

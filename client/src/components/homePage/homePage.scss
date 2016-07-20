@@ -1,4 +1,15 @@
 .site {
+
+  direction: rtl;
+  padding: 20px;
+
+  input, select {
+    border: 1px solid #000000;
+  }
+
+  $facebook-color: #3b5998;
+  $google-color: #d50f25;
+
   .split.button {
     width: 100%;
     font-size: 16px;
@@ -10,8 +21,37 @@
       line-height: 16px;
     }
 
-    &.submit {
-      background: green;
+    &.facebook {
+      background: $facebook-color;
+    }
+
+    &.approve {
+      background: #5da423;
+    }
+
+    &.cancel {
+      background: #c60f13;
+    }
+
+    &.google {
+      background: $google-color;
+    }
+
+    &.left-icon {
+      text-align: right;
+      span {
+        left: 0;
+      }
     }
   }
+
+  .error-msg {
+    color: $google-color;
+    padding: 0 15px;
+
+    i {
+      margin-left: 10px;
+    }
+  }
+
 }

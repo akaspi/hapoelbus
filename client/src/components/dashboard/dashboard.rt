@@ -1,18 +1,18 @@
 <rt-require dependency="../userInfoForm/userInfoForm" as="userInfoForm"></rt-require>
 
-<div class="large-6 columns large-centered dashboard-page">
+<div class="dashboard-page">
     <userInfoForm rt-if="!this.hasUserInfo()"/>
-    <div class="row" rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
+    <div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
         <h2>מעוניין במנוי הסעות?</h2>
         <hr>
-        <div class="row small-centered">
-            <div class="large-3 columns">
-                <button class="split button approve" onClick="{() => this.updateMembershipRequest(true)}">
+        <div>
+            <div class="large-3 columns large-offset-3">
+                <button class="split button success" onClick="{() => this.updateMembershipRequest(true)}">
                     <span>כן</span>
                 </button>
             </div>
             <div class="large-3 end columns">
-                <button class="split button small-4 cancel" onClick="{() => this.updateMembershipRequest(false)}">
+                <button class="split button small-4 alert" onClick="{() => this.updateMembershipRequest(false)}">
                     <span>לא</span>
                 </button>
             </div>
@@ -20,7 +20,7 @@
     </div>
 
 
-    <div class="large-12 large-centered sign-out" rt-if="this.hasUserInfo() && this.hasEverRequestedForMembership()">
+    <div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo() && this.hasEverRequestedForMembership()">
         <h2>תודה על הרשמתך!</h2>
         <h3>נתראה בעונת 2016/17</h3>
         <hr>

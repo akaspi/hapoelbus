@@ -1,9 +1,4 @@
 .site {
-  direction: rtl;
-
-  input, select {
-    border: 1px solid #000000;
-  }
 
   .sign-out {
     margin-top: 25px;
@@ -31,42 +26,4 @@
 
 .dashboard-page {
   margin-top: 25px;
-}
-
-$facebook-color: #3b5998;
-$google-color: #d50f25;
-
-.split.button {
-  width: 100%;
-  font-size: 16px;
-  line-height: 16px;
-
-  i {
-    font-size: 20px;
-    padding-right: 10px;
-    line-height: 16px;
-  }
-
-  &.facebook {
-    background: $facebook-color;
-  }
-
-  &.approve {
-    background: green;
-  }
-
-  &.cancel {
-    background: red;
-  }
-
-  &.google {
-    background: $google-color;
-  }
-
-  &.left-icon {
-    text-align: right;
-    span {
-      left: 0;
-    }
-  }
 }
