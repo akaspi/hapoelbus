@@ -1,4 +1,4 @@
-<div>
+<div class="small-10 columns small-centered user-info-form">
     <h2>פרטים אישיים:</h2>
     <hr>
     <div class="row">
@@ -45,7 +45,7 @@
             </label>
         </div>
     </div>
-    <div class="large-4 small-centered">
+    <div class="large-4 small-centered user-info-btn">
         <button onClick="{this.updateUserInfo}" class="button split" disabled="{this.isSubmitDisabled()}">
             <span>המשך</span>
         </button>

@@ -1,6 +1,6 @@
 <rt-require dependency="./authForm.scss" as="css"></rt-require>
 
-<div class="small-10 columns small-centered">
+<div class="large-6 columns small-centered">
 
     <div class="medium-centered logo">
         <img class="" src="../../../../assets/outside-logo.png" title="outside-logo"/>

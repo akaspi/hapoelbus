@@ -1,8 +1,7 @@
 <rt-require dependency="../userInfoForm/userInfoForm" as="userInfoForm"></rt-require>
 
-<div>
+<div class="large-6 columns large-centered dashboard-page">
     <userInfoForm rt-if="!this.hasUserInfo()"/>
-
     <div class="row" rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
         <h2>מעוניין במנוי הסעות?</h2>
         <hr>
@@ -21,7 +20,10 @@
     </div>
 
 
-    <div class="large-4 small-centered sign-out" rt-if="this.hasUserInfo() && this.hasEverRequestedForMembership()">
+    <div class="large-12 large-centered sign-out" rt-if="this.hasUserInfo() && this.hasEverRequestedForMembership()">
+        <h2>תודה על הרשמתך!</h2>
+        <h3>נתראה בעונת 2016/17</h3>
+        <hr>
         <button onClick="{this.props.signOut}" class="button split">
             <span>התנתק</span>
         </button>
