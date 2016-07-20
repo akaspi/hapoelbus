@@ -18,21 +18,17 @@ const Dashboard = React.createClass({
 
   propTypes: {
     currentUser: React.PropTypes.object,
-    usersInfo: React.PropTypes.usersInfo.isRequired,
+    usersInfo: React.PropTypes.object.isRequired,
     fetchUserInfo: React.PropTypes.func.isRequired,
     signOut: React.PropTypes.func.isRequired
   },
 
   componentWillMount() {
-    this.props.fetchUserInfo(this.getUID());
-  },
-
-  getUID() {
-    return this.props.currentUser.getIn(['uid']);
+    this.props.fetchUserInfo(this.props.currentUser.uid);
   },
 
   hasUserInfo() {
-    return this.props.usersInfo.getIn([this.getUID()]);
+    return this.props.usersInfo[this.props.currentUser.uid];
   },
 
   render: template

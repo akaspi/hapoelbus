@@ -1,7 +1,7 @@
 <rt-require dependency="../dashboard/dashboard" as="dashboard"></rt-require>
 <rt-require dependency="../authForm/authForm" as="authForm"></rt-require>
 
-<div rt-scope="this.isUserLoggedIn() as isLoggedIn">
-    <authForm rt-if="!isLoggedIn" />
-    <dashboard rt-if="isLoggedIn" />
+<div>
+    <authForm rt-if="!this.props.currentUser" />
+    <dashboard rt-if="this.props.currentUser" />
 </div>

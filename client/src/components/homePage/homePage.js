@@ -22,9 +22,7 @@ const HomePage = React.createClass({
   componentWillMount() {
     this.props.fetchCurrentUser();
   },
-  isUserLoggedIn() {
-    return this.props.currentUser && !!this.props.currentUser.getIn(['uid']);
-  },
+
   render: template
 });
 

@@ -1,5 +1,3 @@
-import { fromJS } from 'immutable';
-
 import { SET_CURRENT_USER, SIGN_OUT } from '../actions/actionTypes';
 
 const initialState = null;
@@ -7,7 +5,7 @@ const initialState = null;
 export default function currentUserReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_CURRENT_USER:
-      return fromJS(action.currentUser);
+      return action.currentUser;
     case SIGN_OUT:
       return initialState;
     default:

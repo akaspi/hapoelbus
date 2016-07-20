@@ -1,16 +1,14 @@
 <div>
-
     <input type="text" value="{this.state.firstName}" onChange="{this.onChange}" name="firstName"
            placeholder="firstName"/>
 
     <input type="text" value="{this.state.lastName}" onChange="{this.onChange}" name="lastName" placeholder="lastName"/>
 
-    <input type="text" value="{this.state.prefixPhone}" onChange="{this.onChange}" name="prefixPhone"
+    <input type="text" value="{this.state.phonePrefix}" onChange="{this.onChange}" name="phonePrefix"
            placeholder="prefixPhone"/>
 
     <input type="text" value="{this.state.phoneNumber}" onChange="{this.onChange}" name="phoneNumber"
            placeholder="phoneNumber"/>
 
     <button onClick="{this.updateUserInfo}">Save</button>
-
 </div>

@@ -27,7 +27,6 @@
     "grunt-eslint": "^18.1.0",
     "grunt-jasmine-npm": "^0.2.1",
     "grunt-webpack-without-server": "^1.0.8",
-    "immutable": "^3.8.1",
     "json-loader": "^0.5.4",
     "lodash": "^4.13.1",
     "node-sass": "^3.8.0",

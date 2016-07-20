@@ -3,7 +3,11 @@ import template from './userInfoForm.rt';
 import { connect } from 'react-redux';
 import { updateUserInfo } from '../../redux/actions/actionsCreator';
 
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+});
+
+const mapDispatchToProps = dispatch => ({
   updateUserInfo: (uid, userInfo) => dispatch(updateUserInfo(uid, userInfo)),
 });
 
@@ -11,7 +15,7 @@ const UserInfoForm = React.createClass({
   displayName: 'UserInfoForm',
 
   propTypes: {
-    uid: React.PropTypes.string.isRequired,
+    currentUser: React.PropTypes.object.isRequired,
     updateUserInfo: React.PropTypes.func.isRequired
   },
 
@@ -31,10 +35,10 @@ const UserInfoForm = React.createClass({
   },
 
   updateUserInfo() {
-    this.props.updateUserInfo(this.props.uid, this.state);
+    this.props.updateUserInfo(this.props.currentUser.uid, this.state);
   },
 
   render: template
 });
 
-module.exports = connect(null, mapDispatchToProps)(UserInfoForm);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(UserInfoForm);
