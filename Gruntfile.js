@@ -1,5 +1,1 @@
-module.exports = function (grunt) {
-  grunt.initConfig({});
-
-  grunt.registerTask('default', []);
-};
+module.exports = require('./conf/grunt/Gruntfile.js');
