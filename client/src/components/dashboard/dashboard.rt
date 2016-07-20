@@ -4,14 +4,15 @@
     <userInfoForm rt-if="!this.hasUserInfo()"/>
 
     <div class="row" rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
-        <span>האם אתה רוצה לעשות מנוי?</span>
-        <div class="row">
-            <div class="large-2 columns">
+        <h2>מעוניין במנוי הסעות?</h2>
+        <hr>
+        <div class="row small-centered">
+            <div class="large-3 columns">
                 <button class="split button approve" onClick="{() => this.updateMembershipRequest(true)}">
                     <span>כן</span>
                 </button>
             </div>
-            <div class="large-2 end columns">
+            <div class="large-3 end columns">
                 <button class="split button small-4 cancel" onClick="{() => this.updateMembershipRequest(false)}">
                     <span>לא</span>
                 </button>
@@ -19,5 +20,10 @@
         </div>
     </div>
 
-    <button onClick="{this.props.signOut}">Sign Out</button>
+
+    <div class="large-4 small-centered sign-out" rt-if="this.hasUserInfo() && this.hasEverRequestedForMembership()">
+        <button onClick="{this.props.signOut}" class="button split">
+            <span>התנתק</span>
+        </button>
+    </div>
 </div>

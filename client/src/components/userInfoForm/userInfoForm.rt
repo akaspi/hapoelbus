@@ -1,4 +1,6 @@
 <div>
+    <h2>פרטים אישיים:</h2>
+    <hr>
     <div class="row">
         <div class="large-6 columns">
             <label>שם
@@ -44,7 +46,7 @@
         </div>
     </div>
     <div class="large-4 small-centered">
-        <button onClick="{this.updateUserInfo}" class="submit button split" disabled="{this.isSubmitDisabled()}">
+        <button onClick="{this.updateUserInfo}" class="button split" disabled="{this.isSubmitDisabled()}">
             <span>המשך</span>
         </button>
     </div>

@@ -1,8 +1,12 @@
 .site {
   direction: rtl;
 
-  input {
+  input, select {
     border: 1px solid #000000;
+  }
+
+  .sign-out {
+    margin-top: 25px;
   }
 }
 
@@ -30,8 +34,12 @@ $google-color: #d50f25;
     background: $facebook-color;
   }
 
-  &.submit {
+  &.approve {
     background: green;
+  }
+
+  &.cancel {
+    background: red;
   }
 
   &.google {
