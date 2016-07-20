@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
 import clientConfig from '../../../../conf/client.config.json';
 import firebase from 'firebase';
+import Constants from '../../utils/constants';
 
-import { setCurrentUser, updateUserInfo, startLoading, endLoading, reportError } from '../actions/actionsCreator';
+import {setCurrentUser, updateUserInfo, startLoading, endLoading, reportError} from '../actions/actionsCreator';
 import {
   LOGIN_WITH_GOOGLE,
   LOGIN_WITH_FACEBOOK,
@@ -14,6 +15,15 @@ import {
 } from '../actions/actionTypes';
 
 const CURRENT_USER_KEYS = ['uid', 'email'];
+const errorCodeMap = {
+  'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
+  'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
+  'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE
+};
+
+const parseDBError = errorCode => {
+  return errorCodeMap[errorCode] || Constants.ERRORS.GENERAL;
+};
 
 const asyncEnd = (next, cb) => (response) => {
   next(endLoading());
@@ -44,7 +54,7 @@ const loginWithGoogle = next => {
 
 const signUpWithEmailAndPassword = (next, action) => {
   const onSignUpSuccess = (user) => next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
-  const onSignUpError = (error) => next(reportError(error.message));
+  const onSignUpError = (error) => next(reportError(parseDBError(error.code)));
 
   next(startLoading());
   firebase.auth().createUserWithEmailAndPassword(action.email, action.password)
