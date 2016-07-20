@@ -24,7 +24,8 @@ const UserInfoForm = React.createClass({
       firstName: '',
       lastName: '',
       phonePrefix: '',
-      phoneNumber: ''
+      phoneNumber: '',
+      station: 'tel-aviv'
     };
   },
 

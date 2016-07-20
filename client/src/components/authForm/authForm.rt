@@ -1,8 +1,20 @@
+<rt-require dependency="./authForm.scss" as="css"></rt-require>
+
 <div>
-    <button onClick="{this.props.loginWithGoogle}">Google</button>
-    <button onClick="{this.props.loginWithFacebook}">Facebook</button>
+    <button onClick="{this.props.loginWithFacebook}" class="facebook button split">
+        <span>facebook</span>
+        <i class="fa fa-facebook-official"></i>
+    </button>
+
+    <button onClick="{this.props.loginWithGoogle}" class="google button split">
+        <span>google </span>
+        <i class="fa fa-google" aria-hidden="true"></i>
+    </button>
     <hr>
     <input type="text" value="{this.state.email}" onChange="{this.onChange}" name="email" placeholder="email"/>
     <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password" placeholder="password"/>
-    <button onClick="{this.signUpWithUserAndPassword}">Sign Up</button>
+
+    <button onClick="{this.props.signUpWithUserAndPassword}" class="submit button split">
+        <span>Sign Up</span>
+    </button>
 </div>

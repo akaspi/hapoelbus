@@ -1,0 +1,17 @@
+.site {
+  .split.button {
+    width: 100%;
+    font-size: 16px;
+    line-height: 16px;
+
+    i {
+      font-size: 20px;
+      padding-right: 10px;
+      line-height: 16px;
+    }
+
+    &.submit {
+      background: green;
+    }
+  }
+}

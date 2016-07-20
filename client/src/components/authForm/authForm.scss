@@ -1,0 +1,40 @@
+.site{
+
+  background: gray;
+  direction: rtl;
+
+}
+
+$facebook-color: #3b5998;
+$google-color: #d50f25;
+
+.split.button {
+  width: 100%;
+  font-size: 16px;
+  line-height: 16px;
+
+  i{
+    font-size: 20px;
+    padding-right: 10px;
+    line-height: 16px;
+  }
+
+  &.facebook {
+    background: $facebook-color;
+  }
+
+  &.submit{
+    background: green;
+  }
+
+  &.google {
+    background: $google-color;
+  }
+
+  &.left-icon {
+    text-align: right;
+    span {
+      left: 0;
+    }
+  }
+}

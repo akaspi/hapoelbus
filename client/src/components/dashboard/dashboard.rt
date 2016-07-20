@@ -3,10 +3,20 @@
 <div>
     <userInfoForm rt-if="!this.hasUserInfo()"/>
 
-    <div rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
-        <span>Request For Membership?</span>
-        <button onClick="{() => this.updateMembershipRequest(true)}">Yes</button>
-        <button onClick="{() => this.updateMembershipRequest(false)}">No</button>
+    <div class="row" rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
+        <span>האם אתה רוצה לעשות מנוי?</span>
+        <div class="row">
+            <div class="large-2 columns">
+                <button class="split button approve" onClick="{() => this.updateMembershipRequest(true)}">
+                    <span>כן</span>
+                </button>
+            </div>
+            <div class="large-2 end columns">
+                <button class="split button small-4 cancel" onClick="{() => this.updateMembershipRequest(false)}">
+                    <span>לא</span>
+                </button>
+            </div>
+        </div>
     </div>
 
     <button onClick="{this.props.signOut}">Sign Out</button>
