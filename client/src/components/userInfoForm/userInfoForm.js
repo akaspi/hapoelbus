@@ -60,6 +60,11 @@ const UserInfoForm = React.createClass({
   isPhoneInvalid(){
     return this.state.phoneNumber.length < 7;
   },
+  handleKeyDown(e){
+    if (e.keyCode === 13 && !this.isSubmitDisabled()) {
+      this.updateUserInfo();
+    }
+  },
   render: template
 });
 

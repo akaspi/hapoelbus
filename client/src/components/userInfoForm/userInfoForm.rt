@@ -1,4 +1,4 @@
-<div class="large-6 small-centered user-info-form">
+<div class="large-6 small-centered user-info-form" onKeyDown="{this.handleKeyDown}">
     <h2>פרטים אישיים:</h2>
     <hr>
     <div class="row">

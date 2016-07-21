@@ -15,11 +15,14 @@
         <i class="fa fa-google" aria-hidden="true"></i>
     </button>
     <hr>
-    <input type="email" value="{this.state.email}" onChange="{this.onChange}" name="email" placeholder="דואר אלקטרוני"/>
-    <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password"
-           placeholder="סיסמא"/>
+    <div onKeyDown="{this.handleKeyDown}">
+        <input type="email" value="{this.state.email}" onChange="{this.onChange}" name="email"
+               placeholder="דואר אלקטרוני"/>
+        <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password"
+               placeholder="סיסמא"/>
 
-    <button onClick="{this.signUpWithUserAndPassword}" class="button split" disabled="{this.isSubmitDisabled()}">
-        <span>הירשם</span>
-    </button>
+        <button onClick="{this.signUpWithUserAndPassword}" class="button split" disabled="{this.isSubmitDisabled()}">
+            <span>הירשם</span>
+        </button>
+    </div>
 </div>
