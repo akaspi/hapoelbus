@@ -7,12 +7,12 @@
         <hr>
         <div>
             <div class="large-3 columns large-offset-3">
-                <button class="split button success" onClick="{() => this.updateMembershipRequest(true)}">
+                <button class="split button success" onClick="() => this.updateMembershipRequest(true)">
                     <span>כן</span>
                 </button>
             </div>
             <div class="large-3 end columns">
-                <button class="split button small-4 alert" onClick="{() => this.updateMembershipRequest(false)}">
+                <button class="split button small-4 alert" onClick="() => this.updateMembershipRequest(false)">
                     <span>לא</span>
                 </button>
             </div>
