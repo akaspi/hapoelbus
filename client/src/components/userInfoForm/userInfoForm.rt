@@ -41,7 +41,7 @@
             <label>תחנת עלייה מועדפת
                 <select value="{this.state.station}" onChange="{this.onChange}" name="station">
                     <option value="modiin">מודיעין</option>
-                    <option value="tel-aviv">תל אביב</option>
+                    <option value="tlv">תל אביב</option>
                 </select>
             </label>
         </div>

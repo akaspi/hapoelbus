@@ -26,7 +26,7 @@ const UserInfoForm = React.createClass({
       lastName: '',
       phonePrefix: '050',
       phoneNumber: '',
-      station: 'tel-aviv'
+      station: 'tlv'
     };
   },
 
@@ -51,7 +51,14 @@ const UserInfoForm = React.createClass({
   },
 
   updateUserInfo() {
-    this.props.updateUserInfo(this.props.currentUser.uid, this.state);
+    const userInfo = {
+      firstName: _.trim(this.state.firstName),
+      lastName: _.trim(this.state.lastName),
+      phonePrefix: this.state.phonePrefix,
+      phoneNumber: this.state.phoneNumber,
+      station: this.state.station
+    };
+    this.props.updateUserInfo(this.props.currentUser.uid, userInfo);
   },
 
   isSubmitDisabled(){
