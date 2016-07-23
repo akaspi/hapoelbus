@@ -3,7 +3,7 @@ import clientConfig from '../../../../conf/client.config.json';
 import firebase from 'firebase';
 import Constants from '../../utils/constants';
 
-import {setCurrentUser, updateUserInfo, startLoading, endLoading, reportError} from '../actions/actionsCreator';
+import { setCurrentUser, updateUserInfo, startLoading, endLoading, reportError } from '../actions/actionsCreator';
 import {
   LOGIN_WITH_GOOGLE,
   LOGIN_WITH_FACEBOOK,
@@ -21,9 +21,7 @@ const errorCodeMap = {
   'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE
 };
 
-const parseDBError = errorCode => {
-  return errorCodeMap[errorCode] || Constants.ERRORS.GENERAL;
-};
+const parseDBError = errorCode => (errorCodeMap[errorCode] || Constants.ERRORS.GENERAL);
 
 const asyncEnd = (next, cb) => (response) => {
   next(endLoading());

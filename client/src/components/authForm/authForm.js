@@ -1,8 +1,8 @@
 import React from 'react';
 import template from './authForm.rt';
 import * as _ from 'lodash';
-import {connect} from 'react-redux';
-import {loginWithGoogle, loginWithFacebook, signUpWithUserAndPassword} from '../../redux/actions/actionsCreator';
+import { connect } from 'react-redux';
+import { loginWithGoogle, loginWithFacebook, signUpWithUserAndPassword } from '../../redux/actions/actionsCreator';
 
 const mapDispatchToProps = (dispatch) => ({
   loginWithGoogle: () => dispatch(loginWithGoogle()),
@@ -36,11 +36,11 @@ const AuthForm = React.createClass({
     this.props.signUpWithUserAndPassword(this.state.email, this.state.password);
   },
 
-  isSubmitDisabled(){
+  isSubmitDisabled() {
     return _.some(this.state, _.isEmpty);
   },
 
-  handleKeyDown(e){
+  handleKeyDown(e) {
     if (e.keyCode === 13 && !this.isSubmitDisabled()) {
       this.signUpWithUserAndPassword();
     }

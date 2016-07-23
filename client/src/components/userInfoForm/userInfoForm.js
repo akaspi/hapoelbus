@@ -1,8 +1,8 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './userInfoForm.rt';
-import {connect} from 'react-redux';
-import {updateUserInfo} from '../../redux/actions/actionsCreator';
+import { connect } from 'react-redux';
+import { updateUserInfo } from '../../redux/actions/actionsCreator';
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser
@@ -31,7 +31,6 @@ const UserInfoForm = React.createClass({
   },
 
   onChange(e, validationType) {
-
     const value = e.target.value;
 
     if (validationType === 'numeric') {
@@ -42,9 +41,10 @@ const UserInfoForm = React.createClass({
 
     if (validationType === 'hebrew') {
       if (!/^[א-ת\s]*$/.test(value)) {
-        return
+        return;
       }
     }
+
     this.setState({
       [e.target.name]: value
     });
@@ -61,13 +61,13 @@ const UserInfoForm = React.createClass({
     this.props.updateUserInfo(this.props.currentUser.uid, userInfo);
   },
 
-  isSubmitDisabled(){
+  isSubmitDisabled() {
     return _.some(this.state, _.isEmpty) || this.isPhoneInvalid();
   },
-  isPhoneInvalid(){
+  isPhoneInvalid() {
     return this.state.phoneNumber.length < 7;
   },
-  handleKeyDown(e){
+  handleKeyDown(e) {
     if (e.keyCode === 13 && !this.isSubmitDisabled()) {
       this.updateUserInfo();
     }
