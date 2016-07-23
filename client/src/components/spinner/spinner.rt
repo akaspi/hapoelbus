@@ -1,0 +1,7 @@
+<rt-require dependency="./spinner.scss" as="spinnerCss"></rt-require>
+
+<div class="spinner">
+    <div rt-if="this.props.loading" class="overlay">
+        <h1>LOADING...</h1>
+    </div>
+</div>
