@@ -52,6 +52,7 @@ const UserInfoForm = React.createClass({
 
   updateUserInfo() {
     const userInfo = {
+      email: this.props.currentUser.email,
       firstName: _.trim(this.state.firstName),
       lastName: _.trim(this.state.lastName),
       phonePrefix: this.state.phonePrefix,
