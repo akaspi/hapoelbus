@@ -80,9 +80,9 @@ const fetchUserInfo = (action, next, onSuccess, onError) => {
 
 const fetchCurrentUser = (action, next, onSuccess) => {
   dbAPI.getLoggedInUser(user => {
+    onSuccess();
     if (user) {
       next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
-      onSuccess();
     }
   });
 };
