@@ -4,7 +4,7 @@ import template from './spinner.rt';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-  loading: state.loading || true
+  loading: state.loading
 });
 
 class Spinner extends React.Component {
