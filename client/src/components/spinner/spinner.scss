@@ -9,12 +9,20 @@
     z-index: 1000;
 
     .loading-txt {
-      width: 100px;
+      width: 200px;
       margin: 100px auto 0;
 
       h5 {
         text-align: center;
       }
+    }
+
+    .rotate-right {
+      transform: translate(20, 20) rotate(15deg);
+    }
+
+    .rotate-right {
+      transform: translate(-20, -20) rotate(15deg);
     }
   }
 }
