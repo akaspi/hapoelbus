@@ -5,7 +5,6 @@ import { fetchCurrentUser } from '../../redux/actions/actionsCreator';
 
 const mapStateToProps = (state) => ({
   errorMsg: state.errorMsg,
-  loading: state.loading,
   currentUser: state.currentUser
 });
 
@@ -18,7 +17,6 @@ const HomePage = React.createClass({
 
   propTypes: {
     errorMsg: React.PropTypes.string,
-    loading: React.PropTypes.bool.isRequired,
     currentUser: React.PropTypes.object,
     fetchCurrentUser: React.PropTypes.func.isRequired
   },
