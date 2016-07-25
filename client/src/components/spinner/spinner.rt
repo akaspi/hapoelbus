@@ -1,0 +1,11 @@
+<rt-require dependency="./spinner.scss" as="spinnerCss"></rt-require>
+<rt-require dependency="./clock.scss" as="clockCss"></rt-require>
+
+<div class="spinner">
+    <div rt-if="this.props.loading" class="overlay">
+        <div class="loading-txt">
+            <div class='uil-clock-css' style='transform:scale(0.40);'><div class="clock"></div><div class="ptr1"></div><div class="ptr2"></div></div>
+            <h5>טוען...</h5>
+        </div>
+    </div>
+</div>

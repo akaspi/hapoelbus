@@ -1,0 +1,28 @@
+.spinner {
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1000;
+
+    .loading-txt {
+      width: 200px;
+      margin: 100px auto 0;
+
+      h5 {
+        text-align: center;
+      }
+    }
+
+    .rotate-right {
+      transform: translate(20, 20) rotate(15deg);
+    }
+
+    .rotate-right {
+      transform: translate(-20, -20) rotate(15deg);
+    }
+  }
+}

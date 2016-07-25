@@ -1,8 +1,10 @@
 <rt-require dependency="../dashboard/dashboard" as="dashboard"></rt-require>
 <rt-require dependency="../authForm/authForm" as="authForm"></rt-require>
-<rt-require dependency="./homePage.scss" as="css"></rt-require>
+<rt-require dependency="../spinner/spinner" as="spinner"></rt-require>
+<rt-require dependency="./homePage.scss" as="homePageCss"></rt-require>
 
 <div class="site">
+    <spinner />
     <div class="large-6 small-centered">
         <authForm rt-if="!this.props.currentUser"/>
         <dashboard rt-if="this.props.currentUser"/>
