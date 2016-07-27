@@ -1,8 +1,8 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './userInfoForm.rt';
-import { connect } from 'react-redux';
-import { updateUserInfo } from '../../redux/actions/actionsCreator';
+import {connect} from 'react-redux';
+import {updateUserInfo} from '../../redux/actions/actionsCreator';
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser
@@ -26,7 +26,11 @@ const UserInfoForm = React.createClass({
       lastName: '',
       phonePrefix: '050',
       phoneNumber: '',
-      station: 'tlv'
+      station: 'tlv',
+      requestForMembership: '',
+      payed: 0,
+      subscribeSMS: true,
+      subscribeMail: true
     };
   },
 
@@ -50,6 +54,22 @@ const UserInfoForm = React.createClass({
     });
   },
 
+  onNumericChange(e){
+    const value = _.toNumber(e.target.value);
+
+    this.setState({
+      [e.target.name]: value
+    });
+  },
+
+  onBooleanChange(e){
+    const value = Boolean(e.target.checked);
+
+    this.setState({
+      [e.target.name]: value
+    });
+  },
+
   updateUserInfo() {
     const userInfo = {
       email: this.props.currentUser.email,
@@ -57,7 +77,9 @@ const UserInfoForm = React.createClass({
       lastName: _.trim(this.state.lastName),
       phonePrefix: this.state.phonePrefix,
       phoneNumber: this.state.phoneNumber,
-      station: this.state.station
+      requestForMembership: this.state.requestForMembership,
+      station: this.state.station,
+      subscribeMail: this.state.subscribeMail
     };
     this.props.updateUserInfo(this.props.currentUser.uid, userInfo);
   },

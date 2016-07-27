@@ -37,13 +37,46 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-12 columns">
+        <div class="large-8 columns">
             <label>תחנת עלייה מועדפת
                 <select value="{this.state.station}" onChange="{this.onChange}" name="station">
                     <option value="modiin">מודיעין</option>
                     <option value="tlv">תל אביב</option>
                 </select>
             </label>
+        </div>
+        <div class="large-4 columns">
+            <label>כמות מנויים
+                <select name="payed" value="{this.state.payed}" onChange="{this.onNumericChange}">
+                    <option value="{0}">0</option>
+                    <option value="{1}">1</option>
+                    <option value="{2}">2</option>
+                    <option value="{3}">3</option>
+                    <option value="{4}">4</option>
+                    <option value="{5}">5</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-4 columns">
+            <label>מעוניין במנוי?
+                <select name="requestForMembership" value="{this.state.requestForMembership}" onChange="{this.onChange}">
+                    <option value="">בחר</option>
+                    <option value="yes">כן</option>
+                    <option value="no">לא</option>
+                </select>
+            </label>
+        </div>
+        <div class="small-4 columns more-space">
+            <input type="checkbox" name="subscribeMail" id="email-yes" onChange="{this.onBooleanChange}"
+                   checked="{this.state.subscribeMail}">
+            <label for="email-yes">תפוצת דוא״ל</label>
+        </div>
+        <div class="small-4 columns more-space">
+            <input type="checkbox" name="subscribeSMS" id="sms-yes" onChange="{this.onBooleanChange}"
+                   checked="{this.state.subscribeSMS}">
+            <label for="sms-yes">תפוצת SMS</label>
         </div>
     </div>
     <div class="large-4 small-centered user-info-btn">
