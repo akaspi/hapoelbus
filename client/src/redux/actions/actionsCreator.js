@@ -21,9 +21,10 @@ export const reportError = errorMsg => ({
   errorMsg
 });
 
-export const setCurrentUser = currentUser => ({
+export const setCurrentUser = (uid, email) => ({
   type: SET_CURRENT_USER,
-  currentUser
+  uid,
+  email
 });
 
 export const loginWithGoogle = () => ({ type: LOGIN_WITH_GOOGLE });

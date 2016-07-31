@@ -22,7 +22,6 @@ import {
 } from '../actions/actionTypes';
 
 const dbAPI = new DatabaseAPI(clientConfig.firebase);
-const CURRENT_USER_KEYS = ['uid', 'email'];
 
 const errorCodeMap = {
   'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
@@ -34,7 +33,7 @@ const parseDBError = errorCode => (errorCodeMap[errorCode] || Constants.ERRORS.G
 
 const loginWithFacebook = (action, next, onSuccess, onError) => {
   const onLoginSuccess = user => {
-    next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
+    next(setCurrentUser(user.uid, user.email));
     onSuccess();
   };
 
@@ -43,7 +42,7 @@ const loginWithFacebook = (action, next, onSuccess, onError) => {
 
 const loginWithGoogle = (action, next, onSuccess, onError) => {
   const onLoginSuccess = user => {
-    next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
+    next(setCurrentUser(user.uid, user.email));
     onSuccess();
   };
 
@@ -82,7 +81,7 @@ const fetchCurrentUser = (action, next, onSuccess) => {
   dbAPI.getLoggedInUser(user => {
     onSuccess();
     if (user) {
-      next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
+      next(setCurrentUser(user.uid, user.email));
     }
   });
 };
