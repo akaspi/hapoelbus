@@ -1,13 +1,15 @@
 <rt-require dependency="../userInfoForm/userInfoForm" as="userInfoForm"></rt-require>
+<rt-require dependency="../eventForm/eventForm" as="eventForm"></rt-require>
 
 <div class="dashboard-page">
     <userInfoForm rt-if="!this.hasUserInfo()"/>
-    <div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo()">
-        <h2>תודה על הרשמתך!</h2>
-        <h3>נתראה בעונת 2016/17</h3>
-        <hr>
-        <button onClick="{this.props.signOut}" class="button split">
-            <span>התנתק</span>
-        </button>
-    </div>
+    <eventForm></eventForm>
+    <!--<div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo()">-->
+        <!--<h2>תודה על הרשמתך!</h2>-->
+        <!--<h3>נתראה בעונת 2016/17</h3>-->
+        <!--<hr>-->
+        <!--<button onClick="{this.props.signOut}" class="button split">-->
+            <!--<span>התנתק</span>-->
+        <!--</button>-->
+    <!--</div>-->
 </div>

@@ -1,0 +1,79 @@
+<rt-require dependency="../../utils/constants" as="constants"></rt-require>
+
+<div class="large-6 small-centered user-info-form">
+    <h2>אירוע:</h2>
+    <hr>
+    <div class="row">
+        <div class="small-9 large-10 columns">
+            <label>שם האירוע
+                <select value="{this.state.eventId}" onChange="{this.onChange}" name="eventId">
+                    <option rt-repeat="event in constants.EVENTS_TYPES" key="event-{eventIndex}" value="{eventIndex}">
+                        {event.name}
+                    </option>
+                </select></label>
+        </div>
+        <div class="small-1 large-2 columns end">
+            <img class="event-pic" src="{this.getEventPicture()}"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-6 columns">
+            <label>תאריך
+                <input type="date" onChange="{this.onDateChange}" name="date"/>
+            </label>
+        </div>
+        <div class="small-6 columns">
+            <label>שעה
+                <input type="time"/>
+            </label>
+        </div>
+    </div>
+    <div class="row unsupported-date-picker">
+        <div class="small-2 columns date-field">
+            <label>תאריך</label>
+            <select value="{this.state.year}" onChange="{this.onChange}" name="year">
+                <option value="" style="display: none">yy</option>
+                <option rt-repeat="year in constants.DATE_TIME_DATA.years" key="yy-{yearIndex}" value="20{year}">
+                    {year}
+                </option>
+            </select>
+        </div>
+        <div class="small-2 columns date-field more-space">
+            <select value="{this.state.month}" onChange="{this.onChange}" name="month">
+                <option value="" style="display: none">mm</option>
+                <option rt-repeat="month in constants.DATE_TIME_DATA.months" key="mm-{monthIndex}">{month}</option>
+            </select>
+        </div>
+        <div class="small-2 columns date-field more-space">
+            <select value="{this.state.day}" onChange="{this.onChange}" name="day">
+                <option value="" style="display: none">dd</option>
+                <option rt-repeat="day in constants.DATE_TIME_DATA.days" key="dd-{dayIndex}">{day}</option>
+            </select>
+        </div>
+        <div class="small-3 columns">
+            <label>שעה</label>
+            <select value="{this.state.minute}" onChange="{this.onChange}" name="minute">
+                <option value="" style="display: none">mm</option>
+                <option rt-repeat="minute in constants.DATE_TIME_DATA.minutes" key="min-{minuteIndex}">{minute}</option>
+            </select>
+        </div>
+        <div class="small-3 columns more-space end">
+            <select value="{this.state.hour}" onChange="{this.onChange}" name="hour">
+                <option value="" style="display: none">hh</option>
+                <option rt-repeat="hour in constants.DATE_TIME_DATA.hours" key="hh-{hourIndex}">{hour}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <label> סטטוס
+                <select value="{this.state.status}" onChange="{this.onChange}" name="status">
+                    <option value="closed">סגור</option>
+                    <option value="open-all">פתוח לכולם</option>
+                    <option value="open-subscribers">פתוח למנויים</option>
+                </select>
+            </label>
+        </div>
+    </div>
+</div>

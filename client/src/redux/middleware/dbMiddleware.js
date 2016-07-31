@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import Constants from '../../utils/constants';
+import * as Constants from '../../utils/constants';
 import DatabaseAPI from '../../../../common/DatabaseAPI';
 import * as clientConfig from '../../../../conf/client.config.json';
 
