@@ -28,7 +28,7 @@ const UserInfoForm = React.createClass({
       phoneNumber: '',
       station: 'tlv',
       requestForMembership: '',
-      payed: 0,
+      paid: 0,
       subscribeSMS: true,
       subscribeMail: true
     };
@@ -85,7 +85,8 @@ const UserInfoForm = React.createClass({
   },
 
   isSubmitDisabled() {
-    return _.some(this.state, _.isEmpty) || this.isPhoneInvalid();
+    const stringValues = _.pick(this.state, ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneNumber', 'station', 'requestForMembership']);
+    return _.some(stringValues, _.isEmpty) || this.isPhoneInvalid();
   },
   isPhoneInvalid() {
     return this.state.phoneNumber.length < 7;
