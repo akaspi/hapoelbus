@@ -1,6 +1,6 @@
 <rt-require dependency="./authForm.scss" as="css"></rt-require>
 
-<div class="large-6 columns small-centered">
+<div class="large-6 columns small-centered auth-form-container">
 
     <div class="medium-centered logo">
         <img class="" src="../../../../assets/outside-logo.png" title="outside-logo"/>
@@ -15,14 +15,20 @@
         <i class="fa fa-google" aria-hidden="true"></i>
     </button>
     <hr>
-    <div onKeyDown="{this.handleKeyDown}">
+    <div onKeyDown="{this.handleKeyDown}" class="auth-form">
         <input type="email" value="{this.state.email}" onChange="{this.onChange}" name="email"
                placeholder="דואר אלקטרוני"/>
         <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password"
                placeholder="סיסמא"/>
 
-        <button onClick="{this.signUpWithUserAndPassword}" class="button split" disabled="{this.isSubmitDisabled()}">
-            <span>הירשם</span>
+        <input rt-if="!this.state.isLoginMode" type="password" value="{this.state.passwordAgain}"
+               onChange="{this.onChange}" name="passwordAgain"
+               placeholder="שוב סיסמא"/>
+
+        <button onClick="{this.handleSubmitClick}" class="button split dark" disabled="{this.isSubmitDisabled()}">
+            <span>{this.getButtonLabel()}</span>
         </button>
+        <a onClick="{this.toggleLoginMode}">{this.getLinkLabel()}</a>
     </div>
+</div>
 </div>

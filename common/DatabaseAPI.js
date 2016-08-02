@@ -58,6 +58,12 @@ class DatabaseAPI {
       .catch(error => onError(error));
   }
 
+  loginWithEmailAndPassword(email, password, onSuccess, onError) {
+    this.firebaseApp.auth().signInWithEmailAndPassword(email, password)
+      .then(user => onSuccess(_.pick(user, ['uid', 'email'])))
+      .catch(error => onError(error));
+  }
+
   createUserWithEmailAndPassword(email, password, onSuccess, onError) {
     this.firebaseApp.auth().createUserWithEmailAndPassword(email, password)
       .then(user => onSuccess(_.pick(user, ['uid', 'email'])))

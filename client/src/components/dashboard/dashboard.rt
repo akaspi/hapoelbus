@@ -1,6 +1,7 @@
+<rt-require dependency="./dashboard.scss" as="css"></rt-require>
 <rt-require dependency="../userInfoForm/userInfoForm" as="userInfoForm"></rt-require>
 
-<div class="dashboard-page">
+<div class="dashboard-container">
     <userInfoForm rt-if="!this.hasUserInfo()"/>
     <div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo() && !this.hasEverRequestedForMembership()">
         <h2>מעוניין במנוי הסעות?</h2>
