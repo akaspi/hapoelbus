@@ -5,7 +5,7 @@
 
 <div class="site">
     <spinner />
-    <div class="large-6 small-centered">
+    <div class="small-centered">
         <authForm rt-if="!this.props.currentUser"/>
         <dashboard rt-if="this.props.currentUser"/>
         <div class="large-6  small-centered">

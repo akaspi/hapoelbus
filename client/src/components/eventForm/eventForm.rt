@@ -20,17 +20,17 @@
     <div class="row">
         <div class="small-6 columns">
             <label>תאריך
-                <input type="date" onChange="{this.onDateChange}" name="date"/>
+                <input type="date" value="{this.getDateValue()}" onChange="{this.onDateChange}" min="2016-01-01" max="2017-12-31" name="date"/>
             </label>
         </div>
         <div class="small-6 columns">
             <label>שעה
-                <input type="time"/>
+                <input type="time" value="{this.getTimeValue()}" step="{300}" onChange="{this.onTimeChange}"/>
             </label>
         </div>
     </div>
     <div class="row unsupported-date-picker">
-        <div class="small-2 columns date-field">
+        <div class="small-3 large-2 columns date-field">
             <label>תאריך</label>
             <select value="{this.state.year}" onChange="{this.onChange}" name="year">
                 <option value="" style="display: none">yy</option>
@@ -39,13 +39,13 @@
                 </option>
             </select>
         </div>
-        <div class="small-2 columns date-field more-space">
+        <div class="small-3 large-2 columns date-field more-space">
             <select value="{this.state.month}" onChange="{this.onChange}" name="month">
                 <option value="" style="display: none">mm</option>
                 <option rt-repeat="month in constants.DATE_TIME_DATA.months" key="mm-{monthIndex}">{month}</option>
             </select>
         </div>
-        <div class="small-2 columns date-field more-space">
+        <div class="small-3 large-2 columns date-field more-space small-end">
             <select value="{this.state.day}" onChange="{this.onChange}" name="day">
                 <option value="" style="display: none">dd</option>
                 <option rt-repeat="day in constants.DATE_TIME_DATA.days" key="dd-{dayIndex}">{day}</option>

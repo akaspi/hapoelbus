@@ -12,11 +12,11 @@ const eventForm = React.createClass({
   getInitialState() {
     return {
       eventId: 'hapoel-tlv',
-      day: '',
-      month: '',
-      year: '',
-      hour: '',
-      minute: '',
+      day: '01',
+      month: '12',
+      year: '2017',
+      hour: '22',
+      minute: '35',
       status: 'closed'
     };
   },
@@ -50,6 +50,26 @@ const eventForm = React.createClass({
     this.setState({
       [e.target.name]: value
     });
+  },
+
+  getTimeValue(){
+    return _.chain(this.state).pick(['hour', 'minute']).map().value().join(":");
+  },
+
+  onTimeChange (e){
+    const val = e.target.value.split(':');
+    this.setState({hour: val[0], minute: val[1]});
+
+  },
+
+  getDateValue(){
+    return _.chain(this.state).pick(['year', 'month', 'day']).map().value().join("-");
+  },
+
+  onDateChange(e){
+    const val = e.target.value.split('-');
+    this.setState({year: val[0], month: val[1], day: val[2]});
+
   },
 
   onBooleanChange(e){
