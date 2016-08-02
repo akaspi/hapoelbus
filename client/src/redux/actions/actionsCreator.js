@@ -8,6 +8,7 @@ import {
   FETCH_USER_INFO,
   LOGIN_WITH_GOOGLE,
   LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_EMAIL,
   SIGN_UP_WITH_EMAIL_AND_PASSWORD,
   SIGN_OUT
 } from '../actions/actionTypes';
@@ -21,14 +22,21 @@ export const reportError = errorMsg => ({
   errorMsg
 });
 
-export const setCurrentUser = currentUser => ({
+export const setCurrentUser = (uid, email) => ({
   type: SET_CURRENT_USER,
-  currentUser
+  uid,
+  email
 });
 
 export const loginWithGoogle = () => ({ type: LOGIN_WITH_GOOGLE });
 
 export const loginWithFacebook = () => ({ type: LOGIN_WITH_FACEBOOK });
+
+export const loginWithEmailAndPassword = (email, password) => ({
+  type: LOGIN_WITH_EMAIL,
+  email,
+  password
+});
 
 export const signUpWithUserAndPassword = (email, password) => ({
   type: SIGN_UP_WITH_EMAIL_AND_PASSWORD,

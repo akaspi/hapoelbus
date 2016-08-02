@@ -14,6 +14,7 @@ import {
 import {
   LOGIN_WITH_GOOGLE,
   LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_EMAIL,
   SIGN_UP_WITH_EMAIL_AND_PASSWORD,
   UPDATE_USER_INFO,
   FETCH_CURRENT_USER,
@@ -22,20 +23,20 @@ import {
 } from '../actions/actionTypes';
 
 const dbAPI = new DatabaseAPI(clientConfig.firebase);
-const CURRENT_USER_KEYS = ['uid', 'email'];
 
 const errorCodeMap = {
   'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
   'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
-  'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE
+  'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE,
+  'auth/wrong-password': Constants.ERRORS.WRONG_PASSWORD
 };
 
 const parseDBError = errorCode => (errorCodeMap[errorCode] || Constants.ERRORS.GENERAL);
 
 const loginWithFacebook = (action, next, onSuccess, onError) => {
   const onLoginSuccess = user => {
-    next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
     onSuccess();
+    next(setCurrentUser(user.uid, user.email));
   };
 
   dbAPI.loginWithFacebook(onLoginSuccess, onError);
@@ -43,17 +44,26 @@ const loginWithFacebook = (action, next, onSuccess, onError) => {
 
 const loginWithGoogle = (action, next, onSuccess, onError) => {
   const onLoginSuccess = user => {
-    next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
     onSuccess();
+    next(setCurrentUser(user.uid, user.email));
   };
 
   dbAPI.loginWithGoogle(onLoginSuccess, onError);
 };
 
+const loginWithEmail = (action, next, onSuccess, onError) => {
+  const onLoginSuccess = user => {
+    onSuccess();
+    next(setCurrentUser(user.uid, user.email));
+  };
+
+  dbAPI.loginWithEmailAndPassword(action.email, action.password, onLoginSuccess, onError);
+};
+
 const signUpWithEmailAndPassword = (action, next, onSuccess, onError) => {
   const onSignUpSuccess = user => {
-    next(setCurrentUser(user));
     onSuccess();
+    next(setCurrentUser(user.uid, user.email));
   };
 
   dbAPI.createUserWithEmailAndPassword(action.email, action.password, onSignUpSuccess, onError);
@@ -71,8 +81,8 @@ const signOut = (next, action, onSuccess, onError) => {
 const fetchUserInfo = (action, next, onSuccess, onError) => {
   const userInfoPath = 'usersInfo/' + action.uid;
   const onFetchSuccess = userInfo => {
-    next(updateUserInfo(action.uid, userInfo));
     onSuccess();
+    next(updateUserInfo(action.uid, userInfo));
   };
 
   dbAPI.read(userInfoPath, onFetchSuccess, onError);
@@ -82,7 +92,7 @@ const fetchCurrentUser = (action, next, onSuccess) => {
   dbAPI.getLoggedInUser(user => {
     onSuccess();
     if (user) {
-      next(setCurrentUser(_.pick(user, CURRENT_USER_KEYS)));
+      next(setCurrentUser(user.uid, user.email));
     }
   });
 };
@@ -90,6 +100,7 @@ const fetchCurrentUser = (action, next, onSuccess) => {
 const actionsMap = {
   [LOGIN_WITH_FACEBOOK]: loginWithFacebook,
   [LOGIN_WITH_GOOGLE]: loginWithGoogle,
+  [LOGIN_WITH_EMAIL]: loginWithEmail,
   [SIGN_UP_WITH_EMAIL_AND_PASSWORD]: signUpWithEmailAndPassword,
   [SIGN_OUT]: signOut,
   [FETCH_CURRENT_USER]: fetchCurrentUser,
