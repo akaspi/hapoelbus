@@ -20,7 +20,26 @@ const eventForm = React.createClass({
       status: 'closed'
     };
   },
+  componentDidMount() {
+    this.checkIfHtml5Supported();
+  },
 
+  checkIfHtml5Supported(){
+    const supportedInputTypes = ['date', 'time'];
+    const testResult = {};
+    const testString = 'test!';
+
+    _.each(supportedInputTypes, (inputType)=> {
+      const input = document.createElement('input');
+      input.type = inputType;
+      input.value = testString;
+      const isSupported = input.value !== testString;
+      testResult[inputType + 'InputSupported'] = isSupported;
+    });
+
+    this.setState(testResult);
+    console.log(testResult);
+  },
   onChange(e, validationType) {
     const value = e.target.value;
 

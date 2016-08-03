@@ -18,52 +18,49 @@
     </div>
 
     <div class="row">
-        <div class="small-6 columns">
+        <div class="small-6 columns" rt-if="this.state.dateInputSupported" key="date-input">
             <label>תאריך
-                <input type="date" value="{this.getDateValue()}" onChange="{this.onDateChange}" min="2016-01-01" max="2017-12-31" name="date"/>
+                <input type="date" value="{this.getDateValue()}" onChange="{this.onDateChange}" min="2016-01-01"
+                       max="2017-12-31" name="date"/>
             </label>
         </div>
-        <div class="small-6 columns">
+        <div class="small-6 columns" rt-if="this.state.timeInputSupported" key="time-input">
             <label>שעה
                 <input type="time" value="{this.getTimeValue()}" step="{300}" onChange="{this.onTimeChange}"/>
             </label>
         </div>
     </div>
-    <div class="row unsupported-date-picker">
-        <div class="small-3 large-2 columns date-field">
-            <label>תאריך</label>
-            <select value="{this.state.year}" onChange="{this.onChange}" name="year">
-                <option value="" style="display: none">yy</option>
-                <option rt-repeat="year in constants.DATE_TIME_DATA.years" key="yy-{yearIndex}" value="20{year}">
-                    {year}
-                </option>
-            </select>
-        </div>
-        <div class="small-3 large-2 columns date-field more-space">
-            <select value="{this.state.month}" onChange="{this.onChange}" name="month">
-                <option value="" style="display: none">mm</option>
-                <option rt-repeat="month in constants.DATE_TIME_DATA.months" key="mm-{monthIndex}">{month}</option>
-            </select>
-        </div>
-        <div class="small-3 large-2 columns date-field more-space small-end">
-            <select value="{this.state.day}" onChange="{this.onChange}" name="day">
-                <option value="" style="display: none">dd</option>
-                <option rt-repeat="day in constants.DATE_TIME_DATA.days" key="dd-{dayIndex}">{day}</option>
-            </select>
-        </div>
-        <div class="small-3 columns">
-            <label>שעה</label>
-            <select value="{this.state.minute}" onChange="{this.onChange}" name="minute">
-                <option value="" style="display: none">mm</option>
-                <option rt-repeat="minute in constants.DATE_TIME_DATA.minutes" key="min-{minuteIndex}">{minute}</option>
-            </select>
-        </div>
-        <div class="small-3 columns more-space end">
-            <select value="{this.state.hour}" onChange="{this.onChange}" name="hour">
-                <option value="" style="display: none">hh</option>
-                <option rt-repeat="hour in constants.DATE_TIME_DATA.hours" key="hh-{hourIndex}">{hour}</option>
-            </select>
-        </div>
+    <div class="row">
+            <div class="small-3 large-2 columns" rt-if="!this.state.dateInputSupported" key="year-dd">
+                <label>תאריך</label>
+                <select value="{this.state.year}" onChange="{this.onChange}" name="year">
+                    <option rt-repeat="year in constants.DATE_TIME_DATA.years" key="yy-{yearIndex}" value="20{year}">
+                        {year}
+                    </option>
+                </select>
+            </div>
+            <div class="small-3 large-2 columns more-space" rt-if="!this.state.dateInputSupported" key="month-dd">
+                <select value="{this.state.month}" onChange="{this.onChange}" name="month">
+                    <option rt-repeat="month in constants.DATE_TIME_DATA.months" key="mm-{monthIndex}">{month}</option>
+                </select>
+            </div>
+            <div class="small-3 large-2 columns more-space" rt-if="!this.state.dateInputSupported" key="day-dd">
+                <select value="{this.state.day}" onChange="{this.onChange}" name="day">qq
+                    <option rt-repeat="day in constants.DATE_TIME_DATA.days" key="dd-{dayIndex}">{day}</option>
+                </select>
+            </div>
+            <div class="small-3 columns" rt-if="!this.state.timeInputSupported" key="minute-dd">
+                <label>שעה</label>
+                <select value="{this.state.minute}" onChange="{this.onChange}" name="minute">
+                    <option rt-repeat="minute in constants.DATE_TIME_DATA.minutes" key="min-{minuteIndex}">{minute}
+                    </option>
+                </select>
+            </div>
+            <div class="small-3 columns more-space" rt-if="!this.state.timeInputSupported" key="hour-dd">
+                <select value="{this.state.hour}" onChange="{this.onChange}" name="hour">
+                    <option rt-repeat="hour in constants.DATE_TIME_DATA.hours" key="hh-{hourIndex}">{hour}</option>
+                </select>
+            </div>
     </div>
     <div class="row">
         <div class="large-12 columns">
