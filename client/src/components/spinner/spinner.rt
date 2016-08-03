@@ -1,11 +1,14 @@
 <rt-require dependency="./spinner.scss" as="spinnerCss"></rt-require>
-<rt-require dependency="./clock.scss" as="clockCss"></rt-require>
+<rt-require dependency="../logo/logo" as="logo"></rt-require>
 
-<div class="spinner">
-    <div rt-class="{hide: !this.props.loading}" class="overlay">
-        <div class="loading-txt">
-            <div class='uil-clock-css' style='transform:scale(0.40);'><div class="clock"></div><div class="ptr1"></div><div class="ptr2"></div></div>
-            <h5>טוען...</h5>
+<div class="spinner-container">
+    <div rt-class="" class="overlay">
+            <div class="spinner">
+                <logo height="80" width="80" opacity="0.7"/>
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
         </div>
     </div>
 </div>
