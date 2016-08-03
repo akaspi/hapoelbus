@@ -2,7 +2,7 @@
 <rt-require dependency="../logo/logo" as="logo"></rt-require>
 
 <div class="spinner-container">
-    <div rt-class="" class="overlay">
+    <div rt-class="{hide: !this.props.loading}" class="overlay">
             <div class="spinner">
                 <logo height="80" width="80" opacity="0.7"/>
                 <div class="bounce1"></div>
