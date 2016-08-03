@@ -81,7 +81,7 @@
             <label for="sms-yes">תפוצת SMS</label>
         </div>
     </div>
-    <div class="large-4 small-centered user-info-btn">
+    <div class="large-4 small-centered more-space">
         <button onClick="{this.updateUserInfo}" class="button split" disabled="{this.isSubmitDisabled()}">
             <span>המשך</span>
         </button>

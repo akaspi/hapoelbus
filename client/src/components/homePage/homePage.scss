@@ -54,7 +54,15 @@
     }
   }
 
-  $primary-color: #007095;
+  $primary-color: #066;
+  $hover-color: #005757;
+
+  label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
   input {
     &[type=checkbox], &[type=radio] {
@@ -63,6 +71,11 @@
 
       &:checked + label:before {
         background: $primary-color;
+      }
+
+      &:checked:hover + label:before {
+        background: $hover-color;
+        border: 0.0625rem solid $hover-color;
       }
 
       & + label:before {
