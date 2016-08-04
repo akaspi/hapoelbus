@@ -1,7 +1,5 @@
 import * as _ from 'lodash';
 import Constants from '../../utils/constants';
-import DatabaseAPI from '../../../../common/DatabaseAPI';
-import * as clientConfig from '../../../../conf/client.config.json';
 
 import {
   setCurrentUser,
@@ -22,8 +20,6 @@ import {
   SIGN_OUT
 } from '../actions/actionTypes';
 
-const dbAPI = new DatabaseAPI(clientConfig.firebase);
-
 const errorCodeMap = {
   'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
   'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
@@ -33,68 +29,61 @@ const errorCodeMap = {
 
 const parseDBError = errorCode => (errorCodeMap[errorCode] || Constants.ERRORS.GENERAL);
 
-const loginWithFacebook = (action, next, onSuccess, onError) => {
-  const onLoginSuccess = user => {
-    onSuccess();
-    next(setCurrentUser(user.uid, user.email));
-  };
-
-  dbAPI.loginWithFacebook(onLoginSuccess, onError);
+const loginWithFacebook = (storage, action, next, onSuccess, onError) => {
+  storage.loginWithFacebook()
+    .then(user => next(setCurrentUser(user.uid, user.email)))
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const loginWithGoogle = (action, next, onSuccess, onError) => {
-  const onLoginSuccess = user => {
-    onSuccess();
-    next(setCurrentUser(user.uid, user.email));
-  };
-
-  dbAPI.loginWithGoogle(onLoginSuccess, onError);
+const loginWithGoogle = (storage, action, next, onSuccess, onError) => {
+  storage.loginWithGoogle()
+    .then(user => next(setCurrentUser(user.uid, user.email)))
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const loginWithEmail = (action, next, onSuccess, onError) => {
-  const onLoginSuccess = user => {
-    onSuccess();
-    next(setCurrentUser(user.uid, user.email));
-  };
-
-  dbAPI.loginWithEmailAndPassword(action.email, action.password, onLoginSuccess, onError);
+const loginWithEmail = (storage, action, next, onSuccess, onError) => {
+  storage.loginWithEmailAndPassword(action.email, action.password)
+    .then(user => next(setCurrentUser(user.uid, user.email)))
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const signUpWithEmailAndPassword = (action, next, onSuccess, onError) => {
-  const onSignUpSuccess = user => {
-    onSuccess();
-    next(setCurrentUser(user.uid, user.email));
-  };
-
-  dbAPI.createUserWithEmailAndPassword(action.email, action.password, onSignUpSuccess, onError);
+const signUpWithEmailAndPassword = (storage, action, next, onSuccess, onError) => {
+  storage.createUserWithEmailAndPassword(action.email, action.password)
+    .then(user => next(setCurrentUser(user.uid, user.email)))
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const dbUpdateUserInfo = (action, next, onSuccess, onError) => {
-  const userInfoPath = 'usersInfo/' + action.uid;
-  dbAPI.update(userInfoPath, action.userInfo, onSuccess, onError);
+const dbUpdateUserInfo = (storage, action, next, onSuccess, onError) => {
+  storage.update('usersInfo/' + action.uid, action.userInfo)
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const signOut = (next, action, onSuccess, onError) => {
-  dbAPI.signOut(onSuccess, onError);
+const signOut = (storage, action, next, onSuccess, onError) => {
+  storage.signOut()
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const fetchUserInfo = (action, next, onSuccess, onError) => {
-  const userInfoPath = 'usersInfo/' + action.uid;
-  const onFetchSuccess = userInfo => {
-    onSuccess();
-    next(updateUserInfo(action.uid, userInfo));
-  };
-
-  dbAPI.read(userInfoPath, onFetchSuccess, onError);
+const fetchUserInfo = (storage, action, next, onSuccess, onError) => {
+  storage.read('usersInfo/' + action.uid)
+    .then(userInfo => next(updateUserInfo(action.uid, userInfo)))
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const fetchCurrentUser = (action, next, onSuccess) => {
-  dbAPI.getLoggedInUser(user => {
-    onSuccess();
-    if (user) {
-      next(setCurrentUser(user.uid, user.email));
-    }
-  });
+const fetchCurrentUser = (storage, action, next, onSuccess) => {
+  storage.getLoggedInUser()
+    .then(user => {
+      onSuccess();
+      if (user) {
+        next(setCurrentUser(user.uid, user.email));
+      }
+    });
 };
 
 const actionsMap = {
@@ -118,10 +107,10 @@ const onActionError = (next, dbError) => {
   next(reportError(parseDBError(dbError.code)));
 };
 
-export default store => next => action => { // eslint-disable-line no-unused-vars
+export default storage => store => next => action => { // eslint-disable-line no-unused-vars
   if (_.isFunction(actionsMap[action.type])) {
     onActionStart(next);
-    actionsMap[action.type](action, next, onActionSuccess.bind(null, next), onActionError.bind(null, next));
+    actionsMap[action.type](storage, action, next, onActionSuccess.bind(null, next), onActionError.bind(null, next));
   }
 
   return next(action);
