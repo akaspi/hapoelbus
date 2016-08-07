@@ -1,32 +1,39 @@
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
 
-<div class="large-6 small-centered user-info-container" onKeyDown="{this.handleKeyDown}">
+<div class="large-6 small-centered user-container" onKeyDown="{this.handleKeyDown}">
     <h2>פרטים אישיים:</h2>
     <hr>
     <div class="row">
         <div class="large-6 columns">
             <label>שם
-                <input type="text" value="{this.state.firstName}" onChange="(e)=>this.onChange(e,'hebrew')"
+                <input type="text" value="{this.state.info.firstName}" onChange="(e)=>this.onInfoChange(e,'hebrew')"
                        maxlength="20" name="firstName"/>
             </label>
         </div>
         <div class="large-6 columns">
             <label>שם משפחה
-                <input type="text" value="{this.state.lastName}" onChange="(e)=>this.onChange(e,'hebrew')"
+                <input type="text" value="{this.state.info.lastName}" onChange="(e)=>this.onInfoChange(e,'hebrew')"
                        maxlength="20" name="lastName"/>
+            </label>
+        </div>
+    </div>
+    <div class="row" rt-if="!this.props.currentUser.email" key="userEmail">
+        <div class="large-12 columns">
+            <label>דואר אלקטרוני
+                <input type="email" value="{this.state.info.email}" onChange="{this.onInfoChange}" name="email"/>
             </label>
         </div>
     </div>
     <div class="row">
         <div class="small-8 columns">
             <label>טלפון נייד
-                <input type="tel" maxlength="7" value="{this.state.phoneNumber}"
-                       onChange="(e)=>this.onChange(e, 'numeric')" name="phoneNumber"/>
+                <input type="tel" maxlength="7" value="{this.state.info.phoneNumber}"
+                       onChange="(e)=>this.onInfoChange(e, 'numeric')" name="phoneNumber"/>
             </label>
         </div>
         <div class="small-4 columns end">
             <label>קידומת
-                <select value="{this.state.phonePrefix}" onChange="{this.onChange}" name="phonePrefix">
+                <select value="{this.state.info.phonePrefix}" onChange="{this.onInfoChange}" name="phonePrefix">
                     <option rt-repeat="phonePrefix in constants.PHONE_PREFIXES" key="phonePrefix-{phonePrefixIndex}" value="{phonePrefix}">{phonePrefix}</option>
                 </select>
             </label>
@@ -35,14 +42,14 @@
     <div class="row">
         <div class="small-8 columns">
             <label>תחנת עלייה מועדפת
-                <select value="{this.state.station}" onChange="{this.onChange}" name="station">
+                <select value="{this.state.info.station}" onChange="{this.onInfoChange}" name="station">
                     <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}" value="{stationIndex}">{station}</option>
                 </select>
             </label>
         </div>
         <div class="small-4 columns">
             <label>מעוניין במנוי?
-                <select name="requestForMembership" value="{this.state.requestForMembership}" onChange="{this.onChange}">
+                <select name="requestForSeasonTickets" value="{this.getRequestForSeasonTicketsValue()}" onChange="{this.onRequestSeasonChange}">
                     <option value="" style="display: none">בחר</option>
                     <option value="yes">כן</option>
                     <option value="no">לא</option>
@@ -50,10 +57,10 @@
             </label>
         </div>
     </div>
-    <div class="row">
+    <div class="row" rt-if="this.props.isAdminMode" key="seasonTickets">
         <div class="small-12 columns">
             <label>כמות נוסעים
-                <select value="{this.state.paid}" onChange="{this.onNumericChange}" name="paid">
+                <select value="{this.state.seasonTickets}" onChange="{this.onSeasonTicketChange}" name="seasonTickets">
                     <option rt-repeat="amount in _.times(constants.MAX_SEASON_TICKETS)" key="amount-{amountIndex}"
                             value="{amountIndex}">{amountIndex}
                     </option>
@@ -63,18 +70,18 @@
     </div>
     <div class="row">
         <div class="small-6 columns">
-            <input type="checkbox" name="subscribeMail" id="email-yes" onChange="{this.onBooleanChange}"
-                   checked="{this.state.subscribeMail}">
+            <input type="checkbox" name="subscribeMail" id="email-yes" onChange="{this.onBooleanInfoChange}"
+                   checked="{this.state.info.subscribeMail}">
             <label for="email-yes">תפוצת דוא״ל</label>
         </div>
         <div class="small-6 columns">
-            <input type="checkbox" name="subscribeSMS" id="sms-yes" onChange="{this.onBooleanChange}"
-                   checked="{this.state.subscribeSMS}">
+            <input type="checkbox" name="subscribeSMS" id="sms-yes" onChange="{this.onBooleanInfoChange}"
+                   checked="{this.state.info.subscribeSMS}">
             <label for="sms-yes">תפוצת SMS</label>
         </div>
     </div>
     <div class="large-4 small-centered more-space">
-        <button onClick="{this.updateUserInfo}" class="button split" disabled="{this.isSubmitDisabled()}">
+        <button onClick="{this.updateUserInfo}" class="button split" disabled="{!this.isFormValid()}">
             <span>המשך</span>
         </button>
     </div>
