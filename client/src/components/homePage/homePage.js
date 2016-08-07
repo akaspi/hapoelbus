@@ -1,7 +1,7 @@
 import React from 'react';
 import template from './homePage.rt';
 import { connect } from 'react-redux';
-import { fetchCurrentUser } from '../../redux/actions/actionsCreator';
+import { initializeApp } from '../../redux/actions/actionsCreator';
 
 const mapStateToProps = (state) => ({
   errorMsg: state.errorMsg,
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurrentUser: () => dispatch(fetchCurrentUser())
+  initializeApp: () => dispatch(initializeApp())
 });
 
 const HomePage = React.createClass({
@@ -18,11 +18,11 @@ const HomePage = React.createClass({
   propTypes: {
     errorMsg: React.PropTypes.string,
     currentUser: React.PropTypes.object,
-    fetchCurrentUser: React.PropTypes.func.isRequired
+    initializeApp: React.PropTypes.func.isRequired
   },
 
   componentWillMount() {
-    this.props.fetchCurrentUser();
+    this.props.initializeApp();
   },
 
   render: template

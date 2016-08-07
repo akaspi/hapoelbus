@@ -5,6 +5,7 @@ import * as Promise from 'bluebird';
 import Constants from '../src/utils/constants';
 
 import {
+  initializeApp,
   loginWithFacebook,
   loginWithGoogle,
   loginWithEmailAndPassword,
@@ -37,6 +38,50 @@ describe('dbMiddleware spec', () => {
         expect(getNextActions()).toEqual([unknownAction]);
       })
       .then(done);
+  });
+
+  describe('initializeApp', () => {
+    describe('user is signed out', () => {
+      it('should fire logOut action to make sure the user is logged out', done => {
+        mockedClientDB.getLoggedInUser = jasmine.createSpy('getLoggedInUser').and.returnValue(Promise.resolve(null));
+
+        dbMiddleware(mockedClientDB)(mockStore)(next)(initializeApp())
+          .then(() => {
+            const expectedNextActions = [startLoading(), signOut(), endLoading()];
+            expect(getNextActions()).toEqual(expectedNextActions);
+          })
+          .finally(done);
+      });
+
+      it('should NOT request for any data', done => {
+        mockedClientDB.getLoggedInUser = jasmine.createSpy('getLoggedInUser').and.returnValue(Promise.resolve(null));
+
+        dbMiddleware(mockedClientDB)(mockStore)(next)(initializeApp())
+          .then(() => {
+            expect(mockedClientDB.read).not.toHaveBeenCalled();
+          })
+          .finally(done);
+      });
+    });
+
+    describe('user is signed in', () => {
+      it('should set the current user and load app data', done => {
+        const user = { uid: 'UID', email: 'spider@pig.com' };
+        const userInfo = {
+          firstName: 'spider',
+          lastName: 'pig'
+        };
+        mockedClientDB.getLoggedInUser = jasmine.createSpy('getLoggedInUser').and.returnValue(Promise.resolve(user));
+        mockedClientDB.read = jasmine.createSpy('read').and.returnValue(Promise.resolve(userInfo));
+
+        dbMiddleware(mockedClientDB)(mockStore)(next)(initializeApp())
+          .then(() => {
+            const expectedNextActions = [startLoading(), setCurrentUser(user.uid, user.email), updateUserInfo(user.uid, userInfo), endLoading()];
+            expect(getNextActions()).toEqual(expectedNextActions);
+          })
+          .finally(done);
+      });
+    });
   });
 
   describe('signIn', () => {

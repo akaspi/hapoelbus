@@ -1,4 +1,5 @@
 import {
+  INITIALIZE_APP,
   START_LOADING,
   END_LOADING,
   REPORT_ERROR,
@@ -12,6 +13,10 @@ import {
   SIGN_UP_WITH_EMAIL_AND_PASSWORD,
   SIGN_OUT
 } from '../actions/actionTypes';
+
+export const initializeApp = () => ({
+  type: INITIALIZE_APP
+});
 
 export const startLoading = () => ({ type: START_LOADING });
 

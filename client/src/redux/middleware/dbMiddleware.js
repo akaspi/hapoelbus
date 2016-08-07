@@ -2,15 +2,10 @@ import * as _ from 'lodash';
 import Constants from '../../utils/constants';
 import * as Promise from 'bluebird';
 
-import {
-  setCurrentUser,
-  updateUserInfo,
-  startLoading,
-  endLoading,
-  reportError
-} from '../actions/actionsCreator';
+import * as actionsCreator from '../actions/actionsCreator';
 
 import {
+  INITIALIZE_APP,
   LOGIN_WITH_GOOGLE,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_EMAIL,
@@ -31,44 +26,54 @@ const errorCodeMap = {
 
 const parseDBError = errorCode => (errorCodeMap[errorCode] || Constants.ERRORS.GENERAL);
 
-const loginWithFacebook = storage =>
+const loginWithFacebook = (storage, action, next) =>
   storage.loginWithFacebook()
-    .then(user => [setCurrentUser(user.uid, user.email)]);
+    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
 
-const loginWithGoogle = storage =>
+const loginWithGoogle = (storage, action, next) =>
   storage.loginWithGoogle()
-    .then(user => [setCurrentUser(user.uid, user.email)]);
+    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
 
-const loginWithEmail = (storage, action) =>
+const loginWithEmail = (storage, action, next) =>
   storage.loginWithEmailAndPassword(action.email, action.password)
-    .then(user => [setCurrentUser(user.uid, user.email)]);
+    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
 
-const signUpWithEmailAndPassword = (storage, action) =>
+const signUpWithEmailAndPassword = (storage, action, next) =>
   storage.createUserWithEmailAndPassword(action.email, action.password)
-    .then(user => [setCurrentUser(user.uid, user.email)]);
+    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
 
-const dbUpdateUserInfo = (storage, action) =>
+const updateUserInfo = (storage, action, next) =>
   storage.update('usersInfo/' + action.uid, action.userInfo)
-    .then(() => [action]);
+    .then(() => next(action));
 
-const signOut = (storage, action) =>
+const signOut = (storage, action, next) =>
   storage.signOut()
-    .then(() => [action]);
+    .then(() => next(action));
 
-const fetchUserInfo = (storage, action) =>
+const fetchUserInfo = (storage, action, next) =>
   storage.read('usersInfo/' + action.uid)
-    .then(userInfo => [updateUserInfo(action.uid, userInfo)]);
+    .then(userInfo => next(actionsCreator.updateUserInfo(action.uid, userInfo)));
 
-const fetchCurrentUser = storage =>
+const fetchCurrentUser = (storage, action, next) =>
   storage.getLoggedInUser()
     .then(user => {
       if (user) {
-        return [setCurrentUser(user.uid, user.email)];
+        next(actionsCreator.setCurrentUser(user.uid, user.email));
       }
-      return [];
+    });
+
+const initializeApp = (storage, action, next) =>
+  storage.getLoggedInUser()
+    .then(user => {
+      if (user) {
+        next(actionsCreator.setCurrentUser(user.uid, user.email));
+        return fetchUserInfo(storage, actionsCreator.fetchUserInfo(user.uid), next);
+      }
+      return next(actionsCreator.signOut());
     });
 
 const actionsMap = {
+  [INITIALIZE_APP]: initializeApp,
   [LOGIN_WITH_FACEBOOK]: loginWithFacebook,
   [LOGIN_WITH_GOOGLE]: loginWithGoogle,
   [LOGIN_WITH_EMAIL]: loginWithEmail,
@@ -76,17 +81,16 @@ const actionsMap = {
   [SIGN_OUT]: signOut,
   [FETCH_CURRENT_USER]: fetchCurrentUser,
   [FETCH_USER_INFO]: fetchUserInfo,
-  [UPDATE_USER_INFO]: dbUpdateUserInfo
+  [UPDATE_USER_INFO]: updateUserInfo
 };
 
 export default storage => store => next => action => { // eslint-disable-line no-unused-vars
   if (_.isFunction(actionsMap[action.type])) {
     return Promise.resolve()
-      .then(() => next(startLoading()))
-      .then(() => actionsMap[action.type](storage, action))
-      .then(nextActions => _.forEach(nextActions, nextAction => next(nextAction)))
-      .catch(dbError => next(reportError(parseDBError(dbError.code))))
-      .finally(() => next(endLoading()));
+      .then(() => next(actionsCreator.startLoading()))
+      .then(() => actionsMap[action.type](storage, action, next))
+      .catch(dbError => next(actionsCreator.reportError(parseDBError(dbError.code))))
+      .finally(() => next(actionsCreator.endLoading()));
   }
 
   return Promise.resolve()
