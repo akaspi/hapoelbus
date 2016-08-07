@@ -7,7 +7,7 @@ import currentUserReducer from './reducers/currentUserReducer';
 
 import dbMiddleware from './middleware/dbMiddleware';
 
-export const makeStore = () => {
+export const makeStore = (storage) => {
   const reducers = combineReducers({
     errorMsg: errorReducer,
     loading: loadingReducer,
@@ -16,7 +16,7 @@ export const makeStore = () => {
   });
 
   const middleware = applyMiddleware(
-    dbMiddleware
+    dbMiddleware(storage)
   );
 
   return createStore(reducers, undefined, middleware);
