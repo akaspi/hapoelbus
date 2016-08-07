@@ -1,10 +1,12 @@
 <rt-require dependency="./dashboard.scss" as="css"></rt-require>
 <rt-require dependency="../userInfoForm/userInfoForm" as="userInfoForm"></rt-require>
 <rt-require dependency="../eventForm/eventForm" as="eventForm"></rt-require>
+<rt-require dependency="../bookingForm/bookingForm" as="bookingForm"></rt-require>
 
 <div class="dashboard-container">
     <userInfoForm rt-if="!this.hasUserInfo()"/>
-    <eventForm></eventForm>
+    <eventForm/>
+    <bookingForm/>
     <!--<div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo()">-->
         <!--<h2>תודה על הרשמתך!</h2>-->
         <!--<h3>נתראה בעונת 2016/17</h3>-->

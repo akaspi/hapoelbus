@@ -26,5 +26,12 @@ module.exports = {
       'src': 'http://www.koolbadges.co.uk/images/thumbnails/sweetsummergreen-200x200.jpg',
       'name': 'אירוע הקיץ'
     }
-  }
+  },
+  STATIONS: {
+    'modiin': 'מודיעין',
+    'tlv': 'תל אביב'
+  },
+  MAX_SEASON_TICKETS: 7,
+  MAX_EXTRA_PASSENGERS: 4,
+  PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058']
 };

@@ -38,7 +38,6 @@ const eventForm = React.createClass({
     });
 
     this.setState(testResult);
-    console.log(testResult);
   },
   onChange(e, validationType) {
     const value = e.target.value;

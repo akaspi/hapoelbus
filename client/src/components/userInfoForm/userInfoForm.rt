@@ -1,3 +1,5 @@
+<rt-require dependency="../../utils/constants" as="constants"></rt-require>
+
 <div class="large-6 small-centered user-info-container" onKeyDown="{this.handleKeyDown}">
     <h2>פרטים אישיים:</h2>
     <hr>
@@ -25,13 +27,7 @@
         <div class="small-4 columns end">
             <label>קידומת
                 <select value="{this.state.phonePrefix}" onChange="{this.onChange}" name="phonePrefix">
-                    <option value="050">050</option>
-                    <option value="052">052</option>
-                    <option value="053">053</option>
-                    <option value="054">054</option>
-                    <option value="055">055</option>
-                    <option value="057">057</option>
-                    <option value="058">058</option>
+                    <option rt-repeat="phonePrefix in constants.PHONE_PREFIXES" key="phonePrefix-{phonePrefixIndex}" value="{phonePrefix}">{phonePrefix}</option>
                 </select>
             </label>
         </div>
@@ -40,8 +36,7 @@
         <div class="small-8 columns">
             <label>תחנת עלייה מועדפת
                 <select value="{this.state.station}" onChange="{this.onChange}" name="station">
-                    <option value="modiin">מודיעין</option>
-                    <option value="tlv">תל אביב</option>
+                    <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}" value="{stationIndex}">{station}</option>
                 </select>
             </label>
         </div>
@@ -57,14 +52,11 @@
     </div>
     <div class="row">
         <div class="small-12 columns">
-            <label>כמות מנויים
-                <select name="paid" value="{this.state.paid}" onChange="{this.onNumericChange}">
-                    <option value="{0}">0</option>
-                    <option value="{1}">1</option>
-                    <option value="{2}">2</option>
-                    <option value="{3}">3</option>
-                    <option value="{4}">4</option>
-                    <option value="{5}">5</option>
+            <label>כמות נוסעים
+                <select value="{this.state.paid}" onChange="{this.onNumericChange}" name="paid">
+                    <option rt-repeat="amount in _.times(constants.MAX_SEASON_TICKETS)" key="amount-{amountIndex}"
+                            value="{amountIndex}">{amountIndex}
+                    </option>
                 </select>
             </label>
         </div>
