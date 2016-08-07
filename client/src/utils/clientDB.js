@@ -34,7 +34,7 @@ const loginWithEmailAndPassword = (email, password) => firebase.auth().signInWit
 const createUserWithEmailAndPassword = (email, password) => firebase.auth().createUserWithEmailAndPassword(email, password)
   .then(user => _.pick(user, ['uid', 'email']));
 
-let signOut = () => firebase.auth().signOut();
+const signOut = () => firebase.auth().signOut();
 
 const getLoggedInUser = () => new Promise(resolve => {
   const onAuthStateChange = user => {
