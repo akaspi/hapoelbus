@@ -86,13 +86,19 @@ describe('dbMiddleware spec', () => {
 
   describe('signIn', () => {
     const user = { uid: 'UID', email: 'spider@pig.com' };
+    const userInfo = { firstName: 'spider', lastName: 'pig' };
 
     it('should sign in with facebook', done => {
       mockedClientDB.loginWithFacebook = jasmine.createSpy('loginWithFacebook').and.returnValue(Promise.resolve(user));
+      mockedClientDB.read = jasmine.createSpy('read').and.returnValue(Promise.resolve(userInfo));
 
       dbMiddleware(mockedClientDB)(mockStore)(next)(loginWithFacebook())
         .then(() => {
-          const expectedNextActions = [startLoading(), setCurrentUser(user.uid, user.email), endLoading()];
+          const expectedNextActions = [
+            startLoading(),
+            setCurrentUser(user.uid, user.email),
+            updateUserInfo(user.uid, userInfo),
+            endLoading()];
           expect(getNextActions()).toEqual(expectedNextActions);
         })
         .finally(done);
@@ -111,10 +117,16 @@ describe('dbMiddleware spec', () => {
 
     it('should login with google', done => {
       mockedClientDB.loginWithGoogle = jasmine.createSpy('loginWithGoogle').and.returnValue(Promise.resolve(user));
+      mockedClientDB.read = jasmine.createSpy('read').and.returnValue(Promise.resolve(userInfo));
 
       dbMiddleware(mockedClientDB)(mockStore)(next)(loginWithGoogle())
         .then(() => {
-          const expectedNextActions = [startLoading(), setCurrentUser(user.uid, user.email), endLoading()];
+          const expectedNextActions = [
+            startLoading(),
+            setCurrentUser(user.uid, user.email),
+            updateUserInfo(user.uid, userInfo),
+            endLoading()
+          ];
           expect(getNextActions()).toEqual(expectedNextActions);
         })
         .finally(done);
@@ -133,10 +145,16 @@ describe('dbMiddleware spec', () => {
 
     it('should sign in with email and password', done => {
       mockedClientDB.loginWithEmailAndPassword = jasmine.createSpy('loginWithEmailAndPassword').and.returnValue(Promise.resolve(user));
+      mockedClientDB.read = jasmine.createSpy('read').and.returnValue(Promise.resolve(userInfo));
 
       dbMiddleware(mockedClientDB)(mockStore)(next)(loginWithEmailAndPassword())
         .then(() => {
-          const expectedNextActions = [startLoading(), setCurrentUser(user.uid, user.email), endLoading()];
+          const expectedNextActions = [
+            startLoading(),
+            setCurrentUser(user.uid, user.email),
+            updateUserInfo(user.uid, userInfo),
+            endLoading()
+          ];
           expect(getNextActions()).toEqual(expectedNextActions);
         })
         .finally(done);
@@ -156,13 +174,20 @@ describe('dbMiddleware spec', () => {
 
   describe('signUp', () => {
     const user = { uid: 'UID', email: 'spider@pig.com' };
+    const userInfo = { firstName: 'spider', lastName: 'pig' };
 
     it('should sign up with email and password', done => {
       mockedClientDB.createUserWithEmailAndPassword = jasmine.createSpy('createUserWithEmailAndPassword').and.returnValue(Promise.resolve(user));
+      mockedClientDB.read = jasmine.createSpy('read').and.returnValue(Promise.resolve(userInfo));
 
       dbMiddleware(mockedClientDB)(mockStore)(next)(signUpWithUserAndPassword())
         .then(() => {
-          const expectedNextActions = [startLoading(), setCurrentUser(user.uid, user.email), endLoading()];
+          const expectedNextActions = [
+            startLoading(),
+            setCurrentUser(user.uid, user.email),
+            updateUserInfo(user.uid, userInfo),
+            endLoading()
+          ];
           expect(getNextActions()).toEqual(expectedNextActions);
         })
         .finally(done);

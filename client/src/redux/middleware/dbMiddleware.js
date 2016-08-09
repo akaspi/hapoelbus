@@ -26,21 +26,43 @@ const errorCodeMap = {
 
 const parseDBError = errorCode => (errorCodeMap[errorCode] || Constants.ERRORS.GENERAL);
 
+const fetchUserInfo = (storage, action, next) =>
+  storage.read('usersInfo/' + action.uid)
+    .then(userInfo => next(actionsCreator.updateUserInfo(action.uid, userInfo)));
+
+const loadInitialData = (storage, next, uid) => fetchUserInfo(storage, actionsCreator.fetchUserInfo(uid), next);
+
 const loginWithFacebook = (storage, action, next) =>
   storage.loginWithFacebook()
-    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
+    .then(user => {
+      next(actionsCreator.setCurrentUser(user.uid, user.email));
+      return user.uid;
+    })
+    .then(uid => loadInitialData(storage, next, uid));
 
 const loginWithGoogle = (storage, action, next) =>
   storage.loginWithGoogle()
-    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
+    .then(user => {
+      next(actionsCreator.setCurrentUser(user.uid, user.email));
+      return user.uid;
+    })
+    .then(uid => loadInitialData(storage, next, uid));
 
 const loginWithEmail = (storage, action, next) =>
   storage.loginWithEmailAndPassword(action.email, action.password)
-    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
+    .then(user => {
+      next(actionsCreator.setCurrentUser(user.uid, user.email));
+      return user.uid;
+    })
+    .then(uid => loadInitialData(storage, next, uid));
 
 const signUpWithEmailAndPassword = (storage, action, next) =>
   storage.createUserWithEmailAndPassword(action.email, action.password)
-    .then(user => next(actionsCreator.setCurrentUser(user.uid, user.email)));
+    .then(user => {
+      next(actionsCreator.setCurrentUser(user.uid, user.email));
+      return user.uid;
+    })
+    .then(uid => loadInitialData(storage, next, uid));
 
 const updateUserInfo = (storage, action, next) =>
   storage.update('usersInfo/' + action.uid, action.userInfo)
@@ -49,10 +71,6 @@ const updateUserInfo = (storage, action, next) =>
 const signOut = (storage, action, next) =>
   storage.signOut()
     .then(() => next(action));
-
-const fetchUserInfo = (storage, action, next) =>
-  storage.read('usersInfo/' + action.uid)
-    .then(userInfo => next(actionsCreator.updateUserInfo(action.uid, userInfo)));
 
 const fetchCurrentUser = (storage, action, next) =>
   storage.getLoggedInUser()
@@ -67,7 +85,7 @@ const initializeApp = (storage, action, next) =>
     .then(user => {
       if (user) {
         next(actionsCreator.setCurrentUser(user.uid, user.email));
-        return fetchUserInfo(storage, actionsCreator.fetchUserInfo(user.uid), next);
+        return loadInitialData(storage, next, user.uid);
       }
       return next(actionsCreator.signOut());
     });
