@@ -5,7 +5,7 @@ const initialState = '';
 export default function errorReducer(state = initialState, action = {}) {
   switch (action.type) {
     case REPORT_ERROR:
-      return action.errorMsg;
+      return action.message;
     case START_LOADING:
       return '';
     default:

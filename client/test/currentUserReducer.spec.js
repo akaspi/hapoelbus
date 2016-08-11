@@ -1,5 +1,7 @@
 import currentUserReducer from '../src/redux/reducers/currentUserReducer';
-import { setCurrentUser, signOut } from '../src/redux/actions/actionsCreator';
+import { setCurrentUser } from '../src/redux/actions/userActions';
+import { userSignedOut } from '../src/redux/actions/authActions';
+
 
 describe('currentUserReducer spec', () => {
   it('should be null by default', () => {
@@ -30,7 +32,7 @@ describe('currentUserReducer spec', () => {
     it('should be null', () => {
       const currentState = { uid: 'someUID', email: 'some@email.com' };
 
-      const nextState = currentUserReducer(currentState, signOut());
+      const nextState = currentUserReducer(currentState, userSignedOut());
 
       expect(nextState).toBeNull();
     });

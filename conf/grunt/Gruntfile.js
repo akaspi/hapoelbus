@@ -9,6 +9,7 @@ module.exports = function (grunt) {
         src: [
           // helpers
           'node_modules/babel-register/lib/node.js',
+          'client/test/helpers/**/*.js',
 
           // specs
           'client/**/*.spec.js'

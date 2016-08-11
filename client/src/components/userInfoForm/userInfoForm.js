@@ -2,7 +2,7 @@ import React from 'react';
 import * as _ from 'lodash';
 import template from './userInfoForm.rt';
 import { connect } from 'react-redux';
-import { updateUserInfo } from '../../redux/actions/actionsCreator';
+import { updateUserInfo } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser

@@ -5,9 +5,9 @@ import loadingReducer from './reducers/loadingReducer';
 import usersInfoReducer from './reducers/usersInfoReducer';
 import currentUserReducer from './reducers/currentUserReducer';
 
-import dbMiddleware from './middleware/dbMiddleware';
+import thunk from 'redux-thunk';
 
-export const makeStore = (storage) => {
+export const makeStore = () => {
   const reducers = combineReducers({
     errorMsg: errorReducer,
     loading: loadingReducer,
@@ -16,7 +16,7 @@ export const makeStore = (storage) => {
   });
 
   const middleware = applyMiddleware(
-    dbMiddleware(storage)
+    thunk
   );
 
   return createStore(reducers, undefined, middleware);

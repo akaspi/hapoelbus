@@ -2,7 +2,8 @@ import * as _ from 'lodash';
 import React from 'react';
 import template from './dashboard.rt';
 import { connect } from 'react-redux';
-import { updateUserInfo, signOut } from '../../redux/actions/actionsCreator';
+import { updateUserInfo } from '../../redux/actions/userActions';
+import { signOut } from '../../redux/actions/authActions';
 
 const mapStateToProps = (state) => ({
   loading: state.loading,

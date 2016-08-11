@@ -1,7 +1,7 @@
 import React from 'react';
 import template from './homePage.rt';
 import { connect } from 'react-redux';
-import { initializeApp } from '../../redux/actions/actionsCreator';
+import { initializeApp } from '../../redux/actions/initActions';
 
 const mapStateToProps = (state) => ({
   errorMsg: state.errorMsg,

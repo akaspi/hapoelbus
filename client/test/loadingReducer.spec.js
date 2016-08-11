@@ -1,5 +1,5 @@
 import loadingReducer from '../src/redux/reducers/loadingReducer';
-import { startLoading, endLoading } from '../src/redux/actions/actionsCreator';
+import { startLoading, stopLoading } from '../src/redux/actions/loadingActions';
 
 describe('loadingReducer spec', () => {
   it('should be false by default', () => {
@@ -22,7 +22,7 @@ describe('loadingReducer spec', () => {
     it('should be false', () => {
       const state = true;
 
-      const nextState = loadingReducer(state, endLoading());
+      const nextState = loadingReducer(state, stopLoading());
 
       expect(nextState).toBe(false);
     });

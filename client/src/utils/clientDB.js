@@ -1,60 +1,76 @@
-import * as _ from 'lodash';
 import firebase from 'firebase';
 import * as clientConfig from '../../../conf/client.config.json';
+import { Promise } from 'bluebird';
 
 firebase.initializeApp(clientConfig.firebase);
 
-const setIn = (path, data) => firebase.database().ref(path).set(data);
+const setIn = (path, data) => new Promise((resolve, reject) => {
+  firebase.database().ref(path).set(data)
+    .then(resolve)
+    .catch(reject);
+});
 
-const read = path => firebase.database().ref(path).once('value')
-  .then(snapshot => snapshot.val());
+export const read = path => new Promise((resolve, reject) => {
+  firebase.database().ref(path).once('value')
+    .then(snapshot => resolve(snapshot.val()))
+    .catch(reject);
+});
 
-const push = (path, data) => {
+export const push = (path, data) => new Promise((resolve, reject) => {
   const uniqueKey = firebase.database().ref(path).push().key;
-  return setIn(path + '/' + uniqueKey, data);
-};
+  setIn(path + '/' + uniqueKey, data)
+    .then(resolve)
+    .catch(reject);
+});
 
-const update = (path, data) => firebase.database().ref(path).update(data);
+export const update = (path, data) => new Promise((resolve, reject) => {
+  firebase.database().ref(path).update(data)
+    .then(resolve)
+    .catch(reject);
+});
 
-const remove = path => firebase.database().ref(path).remove();
+export const remove = path => new Promise((resolve, reject) => {
+  firebase.database().ref(path).remove()
+    .then(resolve)
+    .catch(reject);
+});
 
-const loginWithGoogle = () => {
+export const loginWithGoogle = () => new Promise((resolve, reject) => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithPopup(provider).then(result => result.user);
-};
+  firebase.auth().signInWithPopup(provider)
+    .then(result => resolve(result.user))
+    .catch(reject);
+});
 
-const loginWithFacebook = () => {
+export const loginWithFacebook = () => new Promise((resolve, reject) => {
   const provider = new firebase.auth.FacebookAuthProvider();
-  return firebase.auth().signInWithPopup(provider).then(result => result.user);
-};
+  firebase.auth().signInWithPopup(provider)
+    .then(result => resolve(result.user))
+    .catch(reject);
+});
 
-const loginWithEmailAndPassword = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password)
-  .then(user => _.pick(user, ['uid', 'email']));
+export const loginWithEmailAndPassword = (email, password) => new Promise((resolve, reject) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(resolve)
+    .catch(reject);
+});
 
-const createUserWithEmailAndPassword = (email, password) => firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then(user => _.pick(user, ['uid', 'email']));
+export const createUserWithEmailAndPassword = (email, password) => new Promise((resolve, reject) => {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(resolve)
+    .catch(reject);
+});
 
-const signOut = () => firebase.auth().signOut();
+export const signOut = () => new Promise((resolve, reject) => {
+  firebase.auth().signOut()
+    .then(resolve)
+    .catch(reject);
+});
 
-const getLoggedInUser = () => new Promise(resolve => {
+export const getLoggedInUser = () => new Promise(resolve => {
   const onAuthStateChange = user => {
     firebase.auth().removeAuthTokenListener(onAuthStateChange);
     resolve(user);
   };
   firebase.auth().onAuthStateChanged(onAuthStateChange);
 });
-
-module.exports = {
-  setIn,
-  read,
-  push,
-  update,
-  remove,
-  loginWithGoogle,
-  loginWithFacebook,
-  loginWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  getLoggedInUser
-};
-
