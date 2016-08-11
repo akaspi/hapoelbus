@@ -1,4 +1,4 @@
-import { SIGN_OUT } from './actionTypes';
+import { SET_AUTH_DATA, SIGN_OUT } from './actionTypes';
 
 import * as Constants from '../../utils/constants';
 import * as clientDB from '../../utils/clientDB';
@@ -13,6 +13,18 @@ export const AUTH_ERROR_CODES_MAP = {
   'auth/wrong-password': Constants.ERRORS.WRONG_PASSWORD,
   'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE
 };
+
+export const setAuthData = (uid, email, isAdmin) => ({
+  type: SET_AUTH_DATA,
+  uid,
+  email,
+  isAdmin
+});
+
+const fetchAppData = (dispatch, user) =>
+  clientDB.read('admins/' + user.uid)
+    .then(isAdmin => dispatch(setAuthData(user.uid, user.email, !!isAdmin)))
+    .then(() => dispatch(userActions.fetchUserInfo(user.uid)));
 
 export const userSignedOut = () => ({
   type: SIGN_OUT
@@ -35,10 +47,7 @@ export const loginWithEmailAndPassword = (email, password) => dispatch => {
   dispatch(loadingActions.startLoading());
 
   return clientDB.loginWithEmailAndPassword(email, password)
-    .then(user => {
-      dispatch(userActions.setCurrentUser(user.uid, user.email));
-      return dispatch(userActions.fetchUserInfo(user.uid));
-    })
+    .then(user => fetchAppData(dispatch, user))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -47,7 +56,21 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
   dispatch(loadingActions.startLoading());
 
   return clientDB.createUserWithEmailAndPassword(email, password)
-    .then(user => dispatch(userActions.setCurrentUser(user.uid, user.email)))
+    .then(user => fetchAppData(dispatch, user))
+    .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
+    .finally(() => dispatch(loadingActions.stopLoading()));
+};
+
+export const fetchAuthData = () => dispatch => {
+  dispatch(loadingActions.startLoading());
+
+  return clientDB.getLoggedInUser()
+    .then(user => {
+      if (user) {
+        return fetchAppData(dispatch, user);
+      }
+      return null;
+    })
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };

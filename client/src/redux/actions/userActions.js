@@ -1,13 +1,7 @@
-import { SET_CURRENT_USER, USER_INFO_RECEIVED } from './actionTypes';
+import { USER_INFO_RECEIVED } from './actionTypes';
 
 import * as clientDB from '../../utils/clientDB';
 import * as loadingActions from './loadingActions';
-
-export const setCurrentUser = (uid, email) => ({
-  type: SET_CURRENT_USER,
-  uid,
-  email
-});
 
 export const userInfoReceived = (uid, userInfo) => ({
   type: USER_INFO_RECEIVED,

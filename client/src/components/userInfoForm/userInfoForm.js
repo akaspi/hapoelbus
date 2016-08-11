@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { updateUserInfo } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser
+  authData: state.authData
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -16,7 +16,7 @@ const UserInfoForm = React.createClass({
   displayName: 'UserInfoForm',
 
   propTypes: {
-    currentUser: React.PropTypes.object.isRequired,
+    authData: React.PropTypes.object.isRequired,
     updateUserInfo: React.PropTypes.func.isRequired
   },
 
@@ -52,14 +52,14 @@ const UserInfoForm = React.createClass({
 
   updateUserInfo() {
     const userInfo = {
-      email: this.props.currentUser.email,
+      email: this.props.authData.email,
       firstName: _.trim(this.state.firstName),
       lastName: _.trim(this.state.lastName),
       phonePrefix: this.state.phonePrefix,
       phoneNumber: this.state.phoneNumber,
       station: this.state.station
     };
-    this.props.updateUserInfo(this.props.currentUser.uid, userInfo);
+    this.props.updateUserInfo(this.props.authData.uid, userInfo);
   },
 
   isSubmitDisabled() {

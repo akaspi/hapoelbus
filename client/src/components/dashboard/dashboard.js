@@ -7,7 +7,7 @@ import { signOut } from '../../redux/actions/authActions';
 
 const mapStateToProps = (state) => ({
   loading: state.loading,
-  currentUser: state.currentUser,
+  authData: state.authData,
   usersInfo: state.usersInfo
 });
 
@@ -21,22 +21,22 @@ const Dashboard = React.createClass({
 
   propTypes: {
     loading: React.PropTypes.bool.isRequired,
-    currentUser: React.PropTypes.object,
+    authData: React.PropTypes.object,
     usersInfo: React.PropTypes.object.isRequired,
     signOut: React.PropTypes.func.isRequired,
     updateUserInfo: React.PropTypes.func.isRequired
   },
 
   hasUserInfo() {
-    return !!this.props.usersInfo[this.props.currentUser.uid];
+    return !!this.props.usersInfo[this.props.authData.uid];
   },
 
   hasEverRequestedForMembership() {
-    return _.has(this.props.usersInfo[this.props.currentUser.uid], 'requestForMembership');
+    return _.has(this.props.usersInfo[this.props.authData.uid], 'requestForMembership');
   },
 
   updateMembershipRequest(value) {
-    this.props.updateUserInfo(this.props.currentUser.uid, { requestForMembership: value });
+    this.props.updateUserInfo(this.props.authData.uid, { requestForMembership: value });
   },
 
   render: template
