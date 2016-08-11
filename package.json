@@ -33,6 +33,7 @@
     "grunt-webpack-without-server": "^1.0.8",
     "json-loader": "^0.5.4",
     "lodash": "^4.13.1",
+    "mkdirp": "^0.5.1",
     "node-sass": "^3.8.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
