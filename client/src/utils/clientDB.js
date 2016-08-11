@@ -35,18 +35,16 @@ export const remove = path => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export const loginWithGoogle = () => new Promise((resolve, reject) => {
+export const loginWithGoogle = () => new Promise(resolve => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-    .then(result => resolve(result.user))
-    .catch(reject);
+  firebase.auth().signInWithRedirect(provider)
+    .then(resolve);
 });
 
-export const loginWithFacebook = () => new Promise((resolve, reject) => {
+export const loginWithFacebook = () => new Promise(resolve => {
   const provider = new firebase.auth.FacebookAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-    .then(result => resolve(result.user))
-    .catch(reject);
+  firebase.auth().signInWithRedirect(provider)
+    .then(resolve);
 });
 
 export const loginWithEmailAndPassword = (email, password) => new Promise((resolve, reject) => {
@@ -67,10 +65,18 @@ export const signOut = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export const getLoggedInUser = () => new Promise(resolve => {
-  const onAuthStateChange = user => {
-    firebase.auth().removeAuthTokenListener(onAuthStateChange);
-    resolve(user);
-  };
-  firebase.auth().onAuthStateChanged(onAuthStateChange);
+export const getLoggedInUser = () => new Promise((resolve, reject) => {
+  firebase.auth().getRedirectResult()
+    .then(result => {
+      if (result.user) {
+        resolve(result.user);
+      } else {
+        const onAuthStateChange = user => {
+          firebase.auth().removeAuthTokenListener(onAuthStateChange);
+          resolve(user);
+        };
+        firebase.auth().onAuthStateChanged(onAuthStateChange);
+      }
+    })
+    .catch(reject);
 });
