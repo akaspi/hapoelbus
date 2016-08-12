@@ -24,7 +24,7 @@ export const setAuthData = (uid, email, isAdmin) => ({
 const fetchAppData = (dispatch, user) =>
   clientDB.read('admins/' + user.uid)
     .then(isAdmin => dispatch(setAuthData(user.uid, user.email, !!isAdmin)))
-    .then(() => dispatch(userActions.fetchUserInfo(user.uid)));
+    .then(() => dispatch(userActions.fetchUsers()));
 
 export const userSignedOut = () => ({
   type: SIGN_OUT

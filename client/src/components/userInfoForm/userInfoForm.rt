@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="large-4 small-centered user-info-btn">
-        <button onClick="{this.updateUserInfo}" class="button split" disabled="{this.isSubmitDisabled()}">
+        <button onClick="{this.updateUser}" class="button split" disabled="{this.isSubmitDisabled()}">
             <span>המשך</span>
         </button>
     </div>

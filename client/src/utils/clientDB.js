@@ -4,7 +4,7 @@ import { Promise } from 'bluebird';
 
 firebase.initializeApp(clientConfig.firebase);
 
-const setIn = (path, data) => new Promise((resolve, reject) => {
+export const setIn = (path, data) => new Promise((resolve, reject) => {
   firebase.database().ref(path).set(data)
     .then(resolve)
     .catch(reject);

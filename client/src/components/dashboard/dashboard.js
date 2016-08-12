@@ -2,17 +2,17 @@ import * as _ from 'lodash';
 import React from 'react';
 import template from './dashboard.rt';
 import { connect } from 'react-redux';
-import { updateUserInfo } from '../../redux/actions/userActions';
+import { updateUser } from '../../redux/actions/userActions';
 import { signOut } from '../../redux/actions/authActions';
 
 const mapStateToProps = (state) => ({
   loading: state.loading,
   authData: state.authData,
-  usersInfo: state.usersInfo
+  users: state.users
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateUserInfo: (uid, userInfo) => dispatch(updateUserInfo(uid, userInfo)),
+  updateUser: (uid, userInfo) => dispatch(updateUser(uid, userInfo)),
   signOut: () => dispatch(signOut())
 });
 
@@ -22,21 +22,21 @@ const Dashboard = React.createClass({
   propTypes: {
     loading: React.PropTypes.bool.isRequired,
     authData: React.PropTypes.object,
-    usersInfo: React.PropTypes.object.isRequired,
+    users: React.PropTypes.object.isRequired,
     signOut: React.PropTypes.func.isRequired,
-    updateUserInfo: React.PropTypes.func.isRequired
+    updateUser: React.PropTypes.func.isRequired
   },
 
   hasUserInfo() {
-    return !!this.props.usersInfo[this.props.authData.uid];
+    return !!this.props.users[this.props.authData.uid];
   },
 
   hasEverRequestedForMembership() {
-    return _.has(this.props.usersInfo[this.props.authData.uid], 'requestForMembership');
+    return _.has(this.props.users[this.props.authData.uid], 'requestForMembership');
   },
 
   updateMembershipRequest(value) {
-    this.props.updateUserInfo(this.props.authData.uid, { requestForMembership: value });
+    this.props.updateUser(this.props.authData.uid, { requestForMembership: value });
   },
 
   render: template

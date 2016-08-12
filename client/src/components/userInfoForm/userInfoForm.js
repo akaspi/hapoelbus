@@ -2,14 +2,14 @@ import React from 'react';
 import * as _ from 'lodash';
 import template from './userInfoForm.rt';
 import { connect } from 'react-redux';
-import { updateUserInfo } from '../../redux/actions/userActions';
+import { updateUser } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   authData: state.authData
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUserInfo: (uid, userInfo) => dispatch(updateUserInfo(uid, userInfo)),
+  updateUser: (uid, userInfo) => dispatch(updateUser(uid, userInfo)),
 });
 
 const UserInfoForm = React.createClass({
@@ -17,7 +17,7 @@ const UserInfoForm = React.createClass({
 
   propTypes: {
     authData: React.PropTypes.object.isRequired,
-    updateUserInfo: React.PropTypes.func.isRequired
+    updateUser: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
@@ -50,7 +50,7 @@ const UserInfoForm = React.createClass({
     });
   },
 
-  updateUserInfo() {
+  updateUser() {
     const userInfo = {
       email: this.props.authData.email,
       firstName: _.trim(this.state.firstName),
@@ -59,7 +59,7 @@ const UserInfoForm = React.createClass({
       phoneNumber: this.state.phoneNumber,
       station: this.state.station
     };
-    this.props.updateUserInfo(this.props.authData.uid, userInfo);
+    this.props.updateUser(this.props.authData.uid, userInfo);
   },
 
   isSubmitDisabled() {

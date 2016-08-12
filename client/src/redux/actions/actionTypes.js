@@ -4,7 +4,6 @@ export const STOP_LOADING = 'STOP_LOADING';
 export const REPORT_ERROR = 'REPORT_ERROR';
 
 export const SET_AUTH_DATA = 'SET_AUTH_DATA';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const SIGN_OUT = 'SIGN_OUT';
 
-export const USER_INFO_RECEIVED = 'USER_INFO_RECEIVED';
+export const USERS_RECEIVED = 'USERS_RECEIVED';
