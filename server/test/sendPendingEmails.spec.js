@@ -4,7 +4,7 @@ const Promise = require('bluebird');
 const sendPendingEMails = require('../tasks/sendPendingEMails');
 const nock = require('nock');
 
-fdescribe('sendPendingEmails spec', () => {
+describe('sendPendingEmails spec', () => {
   beforeEach(() => {
     spyOn(console, 'log');
     nock.cleanAll();
