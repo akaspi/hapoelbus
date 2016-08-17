@@ -4,15 +4,16 @@
 <rt-require dependency="../bookingForm/bookingForm" as="bookingForm"></rt-require>
 
 <div class="dashboard-container">
-    <userForm />
-    <eventForm/>
-    <bookingForm/>
-    <!--<div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo()">-->
-        <!--<h2>תודה על הרשמתך!</h2>-->
-        <!--<h3>נתראה בעונת 2016/17</h3>-->
-        <!--<hr>-->
-        <!--<button onClick="{this.props.signOut}" class="button split">-->
-            <!--<span>התנתק</span>-->
-        <!--</button>-->
-    <!--</div>-->
+    <userForm rt-if="!this.hasUserInfo()" key="userForm"/>
+
+    <!--<eventForm/>-->
+    <!--<bookingForm/>-->
+    <div class="large-6 sign-out small-centered" rt-if="this.hasUserInfo()">
+        <h2>תודה על הרשמתך!</h2>
+        <h3>נתראה בעונת 2016/17</h3>
+        <hr>
+        <button onClick="{this.props.signOut}" class="button split">
+            <span>התנתק</span>
+        </button>
+    </div>
 </div>

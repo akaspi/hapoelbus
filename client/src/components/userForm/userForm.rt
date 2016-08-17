@@ -6,13 +6,13 @@
     <div class="row">
         <div class="large-6 columns">
             <label>שם
-                <input type="text" value="{this.state.info.firstName}" onChange="(e)=>this.onInfoChange(e,'hebrew')"
+                <input type="text" value="{this.state.firstName}" onChange="(e)=>this.onInfoChange(e,'hebrew')"
                        maxlength="20" name="firstName"/>
             </label>
         </div>
         <div class="large-6 columns">
             <label>שם משפחה
-                <input type="text" value="{this.state.info.lastName}" onChange="(e)=>this.onInfoChange(e,'hebrew')"
+                <input type="text" value="{this.state.lastName}" onChange="(e)=>this.onInfoChange(e,'hebrew')"
                        maxlength="20" name="lastName"/>
             </label>
         </div>
@@ -20,20 +20,20 @@
     <div class="row" rt-if="!this.props.authData.email" key="userEmail">
         <div class="large-12 columns">
             <label>דואר אלקטרוני
-                <input type="email" value="{this.state.info.email}" onChange="{this.onInfoChange}" name="email"/>
+                <input type="email" value="{this.state.email}" onChange="{this.onInfoChange}" name="email"/>
             </label>
         </div>
     </div>
     <div class="row">
         <div class="small-8 columns">
             <label>טלפון נייד
-                <input type="tel" maxlength="7" value="{this.state.info.phoneNumber}"
+                <input type="tel" maxlength="7" value="{this.state.phoneNumber}"
                        onChange="(e)=>this.onInfoChange(e, 'numeric')" name="phoneNumber"/>
             </label>
         </div>
         <div class="small-4 columns end">
             <label>קידומת
-                <select value="{this.state.info.phonePrefix}" onChange="{this.onInfoChange}" name="phonePrefix">
+                <select value="{this.state.phonePrefix}" onChange="{this.onInfoChange}" name="phonePrefix">
                     <option rt-repeat="phonePrefix in constants.PHONE_PREFIXES" key="phonePrefix-{phonePrefixIndex}" value="{phonePrefix}">{phonePrefix}</option>
                 </select>
             </label>
@@ -42,14 +42,14 @@
     <div class="row">
         <div class="small-8 columns">
             <label>תחנת עלייה מועדפת
-                <select value="{this.state.info.station}" onChange="{this.onInfoChange}" name="station">
+                <select value="{this.state.station}" onChange="{this.onInfoChange}" name="station">
                     <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}" value="{stationIndex}">{station}</option>
                 </select>
             </label>
         </div>
         <div class="small-4 columns">
             <label>מעוניין במנוי?
-                <select name="requestForSeasonTickets" value="{this.getRequestForSeasonTicketsValue()}" onChange="{this.onRequestSeasonChange}">
+                <select name="requestForMembership" value="{this.getRequestForMembership()}" onChange="{this.onRequestForMembershipChange}">
                     <option value="" style="display: none">בחר</option>
                     <option value="yes">כן</option>
                     <option value="no">לא</option>
@@ -71,17 +71,17 @@
     <div class="row">
         <div class="small-6 columns">
             <input type="checkbox" name="subscribeMail" id="email-yes" onChange="{this.onBooleanInfoChange}"
-                   checked="{this.state.info.subscribeMail}">
+                   checked="{this.state.subscribeMail}">
             <label for="email-yes">תפוצת דוא״ל</label>
         </div>
         <div class="small-6 columns">
             <input type="checkbox" name="subscribeSMS" id="sms-yes" onChange="{this.onBooleanInfoChange}"
-                   checked="{this.state.info.subscribeSMS}">
+                   checked="{this.state.subscribeSMS}">
             <label for="sms-yes">תפוצת SMS</label>
         </div>
     </div>
     <div class="large-4 small-centered more-space">
-        <button onClick="{this.updateUserInfo}" class="button split" disabled="{!this.isFormValid()}">
+        <button onClick="{this.updateUser}" class="button split" disabled="{!this.isFormValid()}">
             <span>המשך</span>
         </button>
     </div>

@@ -31,14 +31,6 @@ const Dashboard = React.createClass({
     return !!this.props.users[this.props.authData.uid];
   },
 
-  hasEverRequestedForMembership() {
-    return _.has(this.props.users[this.props.authData.uid], 'requestForMembership');
-  },
-
-  updateMembershipRequest(value) {
-    this.props.updateUser(this.props.authData.uid, { requestForMembership: value });
-  },
-
   render: template
 });
 

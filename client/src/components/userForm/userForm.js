@@ -2,7 +2,7 @@ import React from 'react';
 import * as _ from 'lodash';
 import template from './userForm.rt';
 import {connect} from 'react-redux';
-import { updateUser } from '../../redux/actions/userActions';
+import {updateUser} from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   authData: state.authData
@@ -22,15 +22,13 @@ const userForm = React.createClass({
 
   getInitialState() {
     return {
-      info: {
-        firstName: '',
-        lastName: '',
-        phonePrefix: '050',
-        phoneNumber: '',
-        station: 'tlv',
-        subscribeSMS: true,
-        subscribeMail: true
-      },
+      firstName: '',
+      lastName: '',
+      phonePrefix: '050',
+      phoneNumber: '',
+      station: 'tlv',
+      subscribeSMS: true,
+      subscribeMail: true,
       seasonTickets: 0
     };
   },
@@ -50,32 +48,28 @@ const userForm = React.createClass({
       }
     }
 
-    const newInfoState = _.merge({}, this.state.info, {[e.target.name]: value});
-
     this.setState({
-      info: newInfoState
+      [e.target.name]: value
     });
   },
 
   onBooleanInfoChange(e){
     const value = Boolean(e.target.checked);
 
-    const newInfoState = _.merge({}, this.state.info, {[e.target.name]: value});
-
     this.setState({
-      info: newInfoState
+      [e.target.name]: value
     });
   },
 
-  onRequestSeasonChange(e){
+  onRequestForMembershipChange(e){
     this.setState({
-      requestForSeasonTickets: e.target.value === 'yes'
+      requestForMembership: e.target.value === 'yes'
     });
   },
 
-  getRequestForSeasonTicketsValue () {
-    if (_.has(this.state, 'requestForSeasonTickets')) {
-      return this.state.requestForSeasonTickets ? 'yes' : 'no';
+  getRequestForMembership () {
+    if (_.has(this.state, 'requestForMembership')) {
+      return this.state.requestForMembership ? 'yes' : 'no';
     }
     return '';
   },
@@ -89,30 +83,34 @@ const userForm = React.createClass({
   },
 
   updateUser() {
-    const userInfo = {
+    const user = {
       email: this.props.authData.email,
       firstName: _.trim(this.state.firstName),
       lastName: _.trim(this.state.lastName),
       phonePrefix: this.state.phonePrefix,
       phoneNumber: this.state.phoneNumber,
-      station: this.state.station
+      station: this.state.station,
+      subscribeSMS: this.state.subscribeSMS,
+      subscribeMail: this.state.subscribeMail,
+      seasonTickets: this.state.seasonTickets,
+      requestForMembership: this.state.requestForMembership
     };
-    this.props.updateUser(this.props.authData.uid, userInfo);
+    this.props.updateUser(this.props.authData.uid, user);
   },
 
   isFormValid() {
-    const requiredInfo = _.pick(this.state.info, ['firstName', 'lastName', 'phonePrefix', 'phoneNumber']);
+    const requiredInfo = _.pick(this.state, ['firstName', 'lastName', 'phonePrefix', 'phoneNumber']);
     const isUserInfoValid = !_.some(requiredInfo, _.isEmpty);
-    const isEmailValid = !_.isEmpty(this.props.authData.email) || !_.isEmpty(this.state.info.email);
-    return isUserInfoValid && isEmailValid && !this.isPhoneInvalid() && _.has(this.state, 'requestForSeasonTickets');
+    const isEmailValid = !_.isEmpty(this.props.authData.email) || !_.isEmpty(this.state.email);
+    return isUserInfoValid && isEmailValid && !this.isPhoneInvalid() && _.has(this.state, 'requestForMembership');
   },
 
   isPhoneInvalid() {
-    return this.state.info.phoneNumber.length < 7;
+    return this.state.phoneNumber.length < 7;
   },
   handleKeyDown(e) {
     if (e.keyCode === 13 && !this.isSubmitDisabled()) {
-      this.updateUserInfo();
+      this.updateUser();
     }
   },
   render: template
