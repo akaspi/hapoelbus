@@ -2,21 +2,21 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import errorReducer from './reducers/errorReducer';
 import loadingReducer from './reducers/loadingReducer';
-import usersInfoReducer from './reducers/usersInfoReducer';
-import currentUserReducer from './reducers/currentUserReducer';
+import usersReducer from './reducers/usersReducer';
+import authDataReducer from './reducers/authDataReducer';
 
-import dbMiddleware from './middleware/dbMiddleware';
+import thunk from 'redux-thunk';
 
-export const makeStore = (storage) => {
+export const makeStore = () => {
   const reducers = combineReducers({
+    authData: authDataReducer,
     errorMsg: errorReducer,
     loading: loadingReducer,
-    usersInfo: usersInfoReducer,
-    currentUser: currentUserReducer
+    users: usersReducer
   });
 
   const middleware = applyMiddleware(
-    dbMiddleware(storage)
+    thunk
   );
 
   return createStore(reducers, undefined, middleware);

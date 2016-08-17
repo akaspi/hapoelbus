@@ -2,22 +2,22 @@ import React from 'react';
 import * as _ from 'lodash';
 import template from './userForm.rt';
 import {connect} from 'react-redux';
-import {updateUserInfo} from '../../redux/actions/actionsCreator';
+import { updateUser } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser
+  authData: state.authData
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUserInfo: (uid, userInfo) => dispatch(updateUserInfo(uid, userInfo)),
+  updateUser: (uid, userInfo) => dispatch(updateUser(uid, userInfo)),
 });
 
 const userForm = React.createClass({
   displayName: 'userForm',
 
   propTypes: {
-    currentUser: React.PropTypes.object.isRequired,
-    updateUserInfo: React.PropTypes.func.isRequired
+    authData: React.PropTypes.object.isRequired,
+    updateUser: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
@@ -88,14 +88,22 @@ const userForm = React.createClass({
     });
   },
 
-  updateUserInfo() {
-    console.log(this.state);
+  updateUser() {
+    const userInfo = {
+      email: this.props.authData.email,
+      firstName: _.trim(this.state.firstName),
+      lastName: _.trim(this.state.lastName),
+      phonePrefix: this.state.phonePrefix,
+      phoneNumber: this.state.phoneNumber,
+      station: this.state.station
+    };
+    this.props.updateUser(this.props.authData.uid, userInfo);
   },
 
   isFormValid() {
     const requiredInfo = _.pick(this.state.info, ['firstName', 'lastName', 'phonePrefix', 'phoneNumber']);
     const isUserInfoValid = !_.some(requiredInfo, _.isEmpty);
-    const isEmailValid = !_.isEmpty(this.props.currentUser.email) || !_.isEmpty(this.state.info.email);
+    const isEmailValid = !_.isEmpty(this.props.authData.email) || !_.isEmpty(this.state.info.email);
     return isUserInfoValid && isEmailValid && !this.isPhoneInvalid() && _.has(this.state, 'requestForSeasonTickets');
   },
 

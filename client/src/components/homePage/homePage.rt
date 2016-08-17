@@ -6,8 +6,8 @@
 <div class="site">
     <spinner />
     <div class="small-centered">
-        <authForm rt-if="!this.props.currentUser"/>
-        <dashboard rt-if="this.props.currentUser"/>
+        <authForm rt-if="!this.props.authData"/>
+        <dashboard rt-if="this.props.authData"/>
         <div class="large-6  small-centered">
             <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i>

@@ -7,15 +7,16 @@ import {
   loginWithGoogle,
   loginWithFacebook,
   loginWithEmailAndPassword,
-  signUpWithUserAndPassword,
-  reportError
-} from '../../redux/actions/actionsCreator';
+  createUserWithEmailAndPassword,
+} from '../../redux/actions/authActions';
+
+import { reportError } from '../../redux/actions/errorActions';
 
 const mapDispatchToProps = (dispatch) => ({
   loginWithGoogle: () => dispatch(loginWithGoogle()),
   loginWithFacebook: () => dispatch(loginWithFacebook()),
   loginWithEmail: (email, password) => dispatch(loginWithEmailAndPassword(email, password)),
-  signUpWithUserAndPassword: (email, password) => dispatch(signUpWithUserAndPassword(email, password)),
+  signUpWithUserAndPassword: (email, password) => dispatch(createUserWithEmailAndPassword(email, password)),
   reportError: (msg) => dispatch(reportError(msg))
 });
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import template from './homePage.rt';
 import { connect } from 'react-redux';
-import { initializeApp } from '../../redux/actions/actionsCreator';
+import { fetchAuthData } from '../../redux/actions/authActions';
 
 const mapStateToProps = (state) => ({
   errorMsg: state.errorMsg,
-  currentUser: state.currentUser
+  authData: state.authData
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  initializeApp: () => dispatch(initializeApp())
+  fetchAuthData: () => dispatch(fetchAuthData())
 });
 
 const HomePage = React.createClass({
@@ -17,12 +17,12 @@ const HomePage = React.createClass({
 
   propTypes: {
     errorMsg: React.PropTypes.string,
-    currentUser: React.PropTypes.object,
-    initializeApp: React.PropTypes.func.isRequired
+    authData: React.PropTypes.object,
+    fetchAuthData: React.PropTypes.func.isRequired
   },
 
   componentWillMount() {
-    this.props.initializeApp();
+    this.props.fetchAuthData();
   },
 
   render: template
