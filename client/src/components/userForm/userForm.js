@@ -1,8 +1,8 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './userForm.rt';
-import {connect} from 'react-redux';
-import {updateUser} from '../../redux/actions/userActions';
+import { connect } from 'react-redux';
+import { updateUser } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   authData: state.authData
@@ -48,38 +48,34 @@ const userForm = React.createClass({
       }
     }
 
-    this.setState({
-      [e.target.name]: value
-    });
+    this.setState({ [e.target.name]: value });
   },
 
-  onBooleanInfoChange(e){
+  onBooleanInfoChange(e) {
     const value = Boolean(e.target.checked);
 
-    this.setState({
-      [e.target.name]: value
-    });
+    this.setState({ [e.target.name]: value });
   },
 
-  onRequestForMembershipChange(e){
+  onRequestForMembershipChange(e) {
     this.setState({
       requestForMembership: e.target.value === 'yes'
     });
   },
 
-  getRequestForMembership () {
-    if (_.has(this.state, 'requestForMembership')) {
-      return this.state.requestForMembership ? 'yes' : 'no';
-    }
-    return '';
-  },
-
-  onSeasonTicketChange(e){
+  onSeasonTicketChange(e) {
     const value = _.toNumber(e.target.value);
 
     this.setState({
       [e.target.name]: value
     });
+  },
+
+  getRequestForMembership() {
+    if (_.has(this.state, 'requestForMembership')) {
+      return this.state.requestForMembership ? 'yes' : 'no';
+    }
+    return '';
   },
 
   updateUser() {
@@ -108,11 +104,13 @@ const userForm = React.createClass({
   isPhoneInvalid() {
     return this.state.phoneNumber.length < 7;
   },
+
   handleKeyDown(e) {
     if (e.keyCode === 13 && !this.isSubmitDisabled()) {
       this.updateUser();
     }
   },
+
   render: template
 });
 

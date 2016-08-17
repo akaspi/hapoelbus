@@ -1,8 +1,7 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './bookingForm.rt';
-import {connect} from 'react-redux';
-import * as constants from '../../utils/constants';
+import { connect } from 'react-redux';
 
 const bookingForm = React.createClass({
   displayName: 'bookingForm',
@@ -35,20 +34,16 @@ const bookingForm = React.createClass({
     });
   },
 
-  onNumericChange(e){
+  onNumericChange(e) {
     const value = _.toNumber(e.target.value);
 
-    this.setState({
-      [e.target.name]: value
-    });
+    this.setState({ [e.target.name]: value });
   },
 
-  onBooleanChange(e){
+  onBooleanChange(e) {
     const value = Boolean(e.target.checked);
 
-    this.setState({
-      [e.target.name]: value
-    });
+    this.setState({ [e.target.name]: value });
   },
   render: template
 });

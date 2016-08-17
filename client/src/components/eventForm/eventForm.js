@@ -1,7 +1,7 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './eventForm.rt';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as constants from '../../utils/constants';
 
 const eventForm = React.createClass({
@@ -24,21 +24,6 @@ const eventForm = React.createClass({
     this.checkIfHtml5Supported();
   },
 
-  checkIfHtml5Supported(){
-    const supportedInputTypes = ['date', 'time'];
-    const testResult = {};
-    const testString = 'test!';
-
-    _.each(supportedInputTypes, (inputType)=> {
-      const input = document.createElement('input');
-      input.type = inputType;
-      input.value = testString;
-      const isSupported = input.value !== testString;
-      testResult[inputType + 'InputSupported'] = isSupported;
-    });
-
-    this.setState(testResult);
-  },
   onChange(e, validationType) {
     const value = e.target.value;
 
@@ -60,42 +45,61 @@ const eventForm = React.createClass({
   },
 
   getEventPicture() {
-    return _.get(constants.EVENTS_TYPES, [this.state.eventId, 'src'])
+    return _.get(constants.EVENTS_TYPES, [this.state.eventId, 'src']);
   },
-  onNumericChange(e){
+
+  getTimeValue() {
+    return _.chain(this.state)
+      .pick(['hour', 'minute'])
+      .map()
+      .value()
+      .join(':');
+  },
+
+  onTimeChange(e) { // eslint-disable-line react/sort-comp
+    const val = e.target.value.split(':');
+    this.setState({ hour: val[0], minute: val[1] });
+  },
+
+  getDateValue() {
+    return _.chain(this.state)
+      .pick(['year', 'month', 'day'])
+      .map()
+      .value()
+      .join('-');
+  },
+
+  onNumericChange(e) {
     const value = _.toNumber(e.target.value);
 
-    this.setState({
-      [e.target.name]: value
+    this.setState({ [e.target.name]: value });
+  },
+
+  checkIfHtml5Supported() {
+    const supportedInputTypes = ['date', 'time'];
+    const testResult = {};
+    const testString = 'test!';
+
+    _.each(supportedInputTypes, (inputType) => {
+      const input = document.createElement('input');
+      input.type = inputType;
+      input.value = testString;
+      const isSupported = input.value !== testString;
+      testResult[inputType + 'InputSupported'] = isSupported;
     });
+
+    this.setState(testResult);
   },
 
-  getTimeValue(){
-    return _.chain(this.state).pick(['hour', 'minute']).map().value().join(":");
-  },
-
-  onTimeChange (e){
-    const val = e.target.value.split(':');
-    this.setState({hour: val[0], minute: val[1]});
-
-  },
-
-  getDateValue(){
-    return _.chain(this.state).pick(['year', 'month', 'day']).map().value().join("-");
-  },
-
-  onDateChange(e){
+  onDateChange(e) {
     const val = e.target.value.split('-');
-    this.setState({year: val[0], month: val[1], day: val[2]});
-
+    this.setState({ year: val[0], month: val[1], day: val[2] });
   },
 
-  onBooleanChange(e){
+  onBooleanChange(e) {
     const value = Boolean(e.target.checked);
 
-    this.setState({
-      [e.target.name]: value
-    });
+    this.setState({ [e.target.name]: value });
   },
   render: template
 });

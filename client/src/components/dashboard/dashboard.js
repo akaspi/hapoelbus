@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import React from 'react';
 import template from './dashboard.rt';
 import { connect } from 'react-redux';

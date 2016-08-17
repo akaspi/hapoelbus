@@ -18,18 +18,17 @@ module.exports = {
 
   EVENTS_TYPES: {
     'hapoel-tlv': {
-      'src': 'https://upload.wikimedia.org/wikipedia/he/0/07/Hapoel_Tel_Aviv_New_Logo.png',
-      'name': 'הפועל ירושלים - הפועל תל אביב'
-
+      src: 'https://upload.wikimedia.org/wikipedia/he/0/07/Hapoel_Tel_Aviv_New_Logo.png',
+      name: 'הפועל ירושלים - הפועל תל אביב'
     },
     'summer-event': {
-      'src': 'http://www.koolbadges.co.uk/images/thumbnails/sweetsummergreen-200x200.jpg',
-      'name': 'אירוע הקיץ'
+      src: 'http://www.koolbadges.co.uk/images/thumbnails/sweetsummergreen-200x200.jpg',
+      name: 'אירוע הקיץ'
     }
   },
   STATIONS: {
-    'modiin': 'מודיעין',
-    'tlv': 'תל אביב'
+    modiin: 'מודיעין',
+    tlv: 'תל אביב'
   },
   MAX_SEASON_TICKETS: 7,
   MAX_EXTRA_PASSENGERS: 4,
