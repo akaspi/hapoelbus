@@ -7,3 +7,4 @@ export const SET_AUTH_DATA = 'SET_AUTH_DATA';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const USERS_RECEIVED = 'USERS_RECEIVED';
+export const EVENTS_RECEIVED = 'EVENTS_RECEIVED';
