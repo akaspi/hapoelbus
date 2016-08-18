@@ -29,6 +29,10 @@ function createServerConfig() {
     sendGrid: {
       apiToken: process.env.sg_apiToken,
       fromAddress: process.env.sg_fromAddress
+    },
+    twilio: {
+      account: process.env.twilio_account,
+      token: process.env.twilio_token
     }
   };
 }

@@ -10,10 +10,16 @@ const read = path => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const setIn = (path, data) => new Promise((resolve, reject) => {
+  firebase.database().ref(path).set(data)
+    .then(resolve)
+    .catch(reject);
+});
+
 const remove = path => new Promise((resolve, reject) => {
   firebase.database().ref(path).remove()
     .then(resolve)
     .catch(reject);
 });
 
-module.exports = { read, remove };
+module.exports = { read, setIn, remove };

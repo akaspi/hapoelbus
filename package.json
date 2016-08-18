@@ -36,6 +36,7 @@
     "mkdirp": "^0.5.1",
     "nock": "^8.0.0",
     "node-sass": "^3.8.0",
+    "proxyquire": "^1.7.10",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
@@ -48,6 +49,7 @@
     "sass-loader": "^3.2.1",
     "sendgrid": "^4.0.1",
     "style-loader": "^0.13.1",
+    "twilio": "^2.9.2",
     "webpack": "^1.13.1"
   },
   "devDependencies": {
