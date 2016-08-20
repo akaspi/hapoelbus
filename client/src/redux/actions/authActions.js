@@ -3,6 +3,7 @@ import { SET_AUTH_DATA, SIGN_OUT } from './actionTypes';
 import * as Constants from '../../utils/constants';
 import * as clientDB from '../../utils/clientDB';
 import * as userActions from './userActions';
+import * as eventActions from './eventActions';
 import * as loadingActions from './loadingActions';
 import * as errorActions from './errorActions';
 
@@ -24,7 +25,8 @@ export const setAuthData = (uid, email, isAdmin) => ({
 const fetchAppData = (dispatch, user) =>
   clientDB.read('admins/' + user.uid)
     .then(isAdmin => dispatch(setAuthData(user.uid, user.email, !!isAdmin)))
-    .then(() => dispatch(userActions.fetchUsers()));
+    .then(() => dispatch(userActions.fetchUsers()))
+    .then(() => dispatch(eventActions.fetchEvents()));
 
 export const userSignedOut = () => ({
   type: SIGN_OUT
