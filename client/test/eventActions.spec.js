@@ -81,6 +81,60 @@ describe('eventActions spec', () => {
 
   });
 
+  describe('create event', () => {
+
+    it('should create event in DB', done => {
+      const newEvent = { typeId: 'someTypeId', day: '13', month: '04', year: '2016', status: 'openForAll' };
+      clientDB.push.and.returnValue(Promise.resolve());
+
+      store.dispatch(eventActions.createEvent(newEvent))
+        .then(() => {
+          expect(clientDB.push).toHaveBeenCalledWith('events', newEvent);
+          done();
+        });
+    });
+
+    it('should notify events reducer', done => {
+      const newEvent = { typeId: 'someTypeId', day: '13', month: '04', year: '2016', status: 'openForAll' };
+      const newEventId = 'new_event_id';
+
+      clientDB.push.and.returnValue(Promise.resolve(newEventId));
+
+      const expectedActions = [
+        loadingActions.startLoading(),
+        eventActions.eventsReceived({
+          [newEventId]: newEvent
+        }),
+        loadingActions.stopLoading()
+      ];
+
+      store.dispatch(eventActions.createEvent(newEvent))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+
+    it('should report error if action failed', done => {
+      const newEvent = { typeId: 'someTypeId', day: '13', month: '04', year: '2016', status: 'openForAll' };
+
+      clientDB.push.and.returnValue(Promise.reject({ code: '1234' }));
+
+      const expectedActions = [
+        loadingActions.startLoading(),
+        errorActions.reportError(),
+        loadingActions.stopLoading()
+      ];
+
+      store.dispatch(eventActions.createEvent(newEvent))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+
+  });
+
   describe('update event', () => {
 
     it('should update event in DB', done => {

@@ -23,6 +23,15 @@ export const fetchEvents = () => dispatch =>
       return null;
     });
 
+export const createEvent = event => dispatch => {
+  dispatch(loadingActions.startLoading());
+
+  return clientDB.push(EVENTS_PATH, event)
+    .then(eventId => dispatch(eventsReceived({ [eventId]: event })))
+    .catch(() => dispatch(errorActions.reportError()))
+    .finally(() => dispatch(loadingActions.stopLoading()));
+};
+
 export const updateEvent = (eventId, event) => dispatch => {
   dispatch(loadingActions.startLoading());
 

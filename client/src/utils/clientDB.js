@@ -19,7 +19,7 @@ export const read = path => new Promise((resolve, reject) => {
 export const push = (path, data) => new Promise((resolve, reject) => {
   const uniqueKey = firebase.database().ref(path).push().key;
   setIn(path + '/' + uniqueKey, data)
-    .then(resolve)
+    .then(() => resolve(uniqueKey))
     .catch(reject);
 });
 
