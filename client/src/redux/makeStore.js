@@ -4,6 +4,7 @@ import errorReducer from './reducers/errorReducer';
 import loadingReducer from './reducers/loadingReducer';
 import usersReducer from './reducers/usersReducer';
 import eventsReducer from './reducers/eventsReducer';
+import bookingsReducer from './reducers/bookingsReducer';
 import authDataReducer from './reducers/authDataReducer';
 
 import thunk from 'redux-thunk';
@@ -14,7 +15,8 @@ export const makeStore = () => {
     errorMsg: errorReducer,
     loading: loadingReducer,
     users: usersReducer,
-    events: eventsReducer
+    events: eventsReducer,
+    bookings: bookingsReducer
   });
 
   const middleware = applyMiddleware(
