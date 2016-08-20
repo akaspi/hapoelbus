@@ -8,8 +8,11 @@ export default function eventsReducer(state = initialState, action = {}) {
     case BOOKINGS_RECEIVED:
       return _.merge({}, state, action.bookings);
     case BOOKING_CANCELED: {
-      const clonedBookings = _.cloneDeep(action.bookings);
+      const clonedBookings = _.cloneDeep(state);
       delete clonedBookings[action.uid][action.eventId];
+      if (_.size(clonedBookings[action.uid]) === 0) {
+        delete clonedBookings[action.uid];
+      }
       return clonedBookings;
     }
     case SIGN_OUT:
