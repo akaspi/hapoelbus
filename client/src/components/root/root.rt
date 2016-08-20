@@ -1,6 +1,9 @@
+<rt-require dependency="react-router" as="ReactRouter"></rt-require>
 <rt-require dependency="react-redux" as="ReactRedux"></rt-require>
 <rt-require dependency="../homePage/homePage" as="HomePage"></rt-require>
 
 <ReactRedux.Provider store="{this.createStore()}">
-    <HomePage></HomePage>
+    <ReactRouter.Router history={ReactRouter.browserHistory}>
+        <ReactRouter.Route path="/" component="{HomePage}" />
+    </ReactRouter.Router>
 </ReactRedux.Provider>

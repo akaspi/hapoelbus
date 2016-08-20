@@ -49,6 +49,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test:client', ['jasmine:client']);
   grunt.registerTask('test:server', ['jasmine:server']);
+  grunt.registerTask('test', ['test:client', 'test:server']);
 
   grunt.registerTask('lint', ['eslint']);
 
