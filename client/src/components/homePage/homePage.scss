@@ -67,6 +67,7 @@
   input {
     &[type=checkbox], &[type=radio] {
       opacity: 0;
+      visibility: hidden;
       position: absolute;
 
       &:checked + label:before {
@@ -78,6 +79,12 @@
         border: 0.0625rem solid $hover-color;
       }
 
+      & + label {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+
       & + label:before {
         display: inline-block;
         text-align: center;
@@ -85,7 +92,7 @@
         border: 0.0625rem solid $primary-color;
         width: 1.2rem;
         height: 1.2rem;
-        margin-left: 0.5rem;
+        margin-left: 0.7rem;
         font-size: 1rem;
         color: white;
         background: white;
@@ -97,7 +104,6 @@
         content: "\2713";
         padding-left: 1px;
         border-radius: 0.125rem;
-        margin-top: 10px;
       }
     }
 

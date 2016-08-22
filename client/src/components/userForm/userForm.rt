@@ -1,6 +1,8 @@
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
+<rt-require dependency="../emailIcon/emailIcon" as="emailIcon"></rt-require>
+<rt-require dependency="../smsIcon/smsIcon" as="smsIcon"></rt-require>
 
-<div class="large-6 small-centered user-container" onKeyDown="{this.handleKeyDown}">
+<div class="small-centered user-container" onKeyDown="{this.handleKeyDown}">
     <h2>פרטים אישיים:</h2>
     <hr>
     <div class="row">
@@ -40,14 +42,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="small-8 columns">
+        <div class="medium-8 small-12 columns">
             <label>תחנת עלייה מועדפת
                 <select value="{this.state.station}" onChange="{this.onInfoChange}" name="station">
                     <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}" value="{stationIndex}">{station}</option>
                 </select>
             </label>
         </div>
-        <div class="small-4 columns">
+        <div class="medium-4 small-12 columns">
             <label>מעוניין במנוי?
                 <select name="requestForMembership" value="{this.getRequestForMembership()}" onChange="{this.onRequestForMembershipChange}">
                     <option value="" style="display: none">בחר</option>
@@ -69,15 +71,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="small-6 columns">
+        <div class="small-6 large-5 columns">
+            <label>רשימת תפוצה:</label>
             <input type="checkbox" name="subscribeMail" id="email-yes" onChange="{this.onBooleanInfoChange}"
                    checked="{this.state.subscribeMail}">
-            <label for="email-yes">תפוצת דוא״ל</label>
+            <label for="email-yes"><emailIcon width="18" height="18"/></label>
         </div>
-        <div class="small-6 columns">
+        <div class="small-6 large-5 columns more-space end">
             <input type="checkbox" name="subscribeSMS" id="sms-yes" onChange="{this.onBooleanInfoChange}"
                    checked="{this.state.subscribeSMS}">
-            <label for="sms-yes">תפוצת SMS</label>
+            <label for="sms-yes">
+                <smsIcon width="18" height="18"/>
+            </label>
         </div>
     </div>
     <div class="large-4 small-centered more-space">

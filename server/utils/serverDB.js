@@ -5,7 +5,7 @@ const Promise = require('bluebird');
 if (firebase.apps.length === 0) {
   firebase.initializeApp(serverConfig.firebase);
 } else {
-  firebase.initializeApp(serverConfig.firebase, 'ServerFirebase')
+  firebase.initializeApp(serverConfig.firebase, 'ServerFirebase');
 }
 
 const read = path => new Promise((resolve, reject) => {

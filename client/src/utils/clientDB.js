@@ -5,7 +5,7 @@ import { Promise } from 'bluebird';
 if (firebase.apps.length === 0) {
   firebase.initializeApp(clientConfig.firebase);
 } else {
-  firebase.initializeApp(clientConfig.firebase, 'ClientFirebase')
+  firebase.initializeApp(clientConfig.firebase, 'ClientFirebase');
 }
 
 export const setIn = (path, data) => new Promise((resolve, reject) => {
