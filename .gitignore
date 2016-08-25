@@ -11,6 +11,7 @@ bin/
 conf/client.config.json
 conf/server.config.json
 *.rt.js
+public/bundle/
 
 # Config
 .env
