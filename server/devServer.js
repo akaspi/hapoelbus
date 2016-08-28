@@ -13,7 +13,6 @@ webpackDevConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 new WebpackDevServer(webpack(webpackDevConfig), {
   publicPath: webpackConfig.output.publicPath,
   hot: true,
-  historyApiFallback: true,
   stats: {
     colors: true,
     chunks: false
