@@ -6,7 +6,9 @@
 <rt-require dependency="./app.scss" as="appCss"></rt-require>
 
 <div class="site">
-    <spinner />
-    <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH" key="auth-page" />
-    <HomePage rt-if="this.props.currentPage === Constants.PAGES.HOME" key="home-page" />
+    <spinner/>
+    <div class="small-centered">
+        <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH" key="auth-page"/>
+        <HomePage rt-if="this.props.currentPage === Constants.PAGES.HOME" key="home-page"/>
+    </div>
 </div>
