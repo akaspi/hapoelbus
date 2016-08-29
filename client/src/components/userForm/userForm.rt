@@ -5,6 +5,7 @@
 
 <formFrame
         title="פרטים אישיים"
+        hideBack="{this.props.hideBack}"
         onSubmit="{this.updateUser}"
         onClose="{this.props.onClose}"
         disabled="{!this.isFormValid()}">
@@ -24,7 +25,7 @@
                 </label>
             </div>
         </div>
-        <div class="row" rt-if="!this.props.authData.email" key="userEmail">
+        <div class="row" rt-if="!(_.get(this.props.user, 'email') || this.props.email)" key="userEmail">
             <div class="large-12 columns">
                 <label>דואר אלקטרוני
                     <input type="email" value="{this.state.email}" onChange="{this.onInfoChange}" name="email"/>

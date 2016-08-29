@@ -2,9 +2,15 @@
 <rt-require dependency="../userForm/userForm" as="userForm"></rt-require>
 <rt-require dependency="../eventForm/eventForm" as="eventForm"></rt-require>
 <rt-require dependency="../bookingForm/bookingForm" as="bookingForm"></rt-require>
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 
 <div class="dashboard-container large-4 medium-10 small-centered">
-    <userForm rt-if="!this.hasUserInfo()" key="userForm"/>
+    <userForm rt-if="!this.hasUserInfo()" key="userForm"
+              hideBack="{true}"
+              uid="{this.props.authData.uid}"
+              email="{this.props.authData.email}"
+              updateUser="{this.props.updateUser}"
+    />
 
     <!--<eventForm/>-->
     <!--<bookingForm/>-->
@@ -12,7 +18,8 @@
         <h2>תודה על הרשמתך!</h2>
         <h3>נתראה בעונת 2016/17</h3>
         <hr>
-        <button onClick="{this.props.signOut}" class="button split">
+        <a rt-if="this.props.authData.isAdmin" key="all-users-btn" onClick="() => this.props.navigateTo(Constants.PAGES.USERS)">ALL USERS</a>
+        <button onClick="{this.props.signOut}" class="button split more-space">
             <span>התנתק</span>
         </button>
     </div>

@@ -2,9 +2,13 @@
 <rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 
 <div class="large-4 small-centered">
-    <div rt-if="!this.state.editingUser" key="list-view">
-        <listItem rt-repeat="user in this.props.users" title="{this.getUserTitle(user)}"
-                  subtitles="{this.getUserSubtitles(user)}" imageSrc="{this.getUserImage(user)}" onClick="()=>this.onUserClick(user)"></listItem>
+    <div rt-if="!this.state.editingUserId" key="list-view">
+        <listItem rt-repeat="user in this.props.users" title="{this.getUserTitle(user)}" key="user-{userIndex}"
+                  subtitles="{this.getUserSubtitles(user)}" imageSrc="{this.getUserImage(user)}" onClick="()=>this.onUserClick(userIndex)"></listItem>
     </div>
-    <UserForm rt-if="this.state.editingUser" key="edit-user" user="{this.state.editingUser}" onClose="() => this.stopEditing()" />
+    <UserForm rt-if="this.state.editingUserId" key="edit-user"
+              user="{this.props.users[this.state.editingUserId]}"
+              uid="{this.state.editingUserId}"
+              updateUser="{this.props.updateUser}"
+              onClose="() => this.stopEditing()" />
 </div>

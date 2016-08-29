@@ -1,25 +1,31 @@
 import React from 'react';
 import template from './usersPage.rt';
 import {connect} from 'react-redux';
+import {updateUser} from '../../redux/actions/userActions';
+
 
 const mapStateToProps = (state) => ({
   users: state.users
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateUser: (uid, user) => dispatch(updateUser(uid, user))
 });
 
 class UsersPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editingUser: {}
+      editingUserId: null
     }
   }
 
-  onUserClick(user) {
-    this.setState({editingUser: user})
+  onUserClick(uid) {
+    this.setState({editingUserId: uid})
   }
 
   stopEditing() {
-    this.setState({editingUser: null})
+    this.setState({editingUserId: null})
   }
 
   render() {
@@ -43,4 +49,4 @@ UsersPage.propTypes = {
   users: React.PropTypes.object.isRequired
 };
 
-module.exports = connect(mapStateToProps)(UsersPage);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(UsersPage);

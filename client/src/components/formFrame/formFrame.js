@@ -20,7 +20,7 @@ class FormFrame extends React.Component {
 
 FormFrame.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
-  onClose: React.PropTypes.func.isRequired,
+  onClose: React.PropTypes.func,
   onRemove: React.PropTypes.func,
   title: React.PropTypes.string,
   disabled: React.PropTypes.bool,

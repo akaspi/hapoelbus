@@ -2,6 +2,7 @@ import React from 'react';
 import template from './dashboard.rt';
 import { connect } from 'react-redux';
 import { updateUser } from '../../redux/actions/userActions';
+import { navigateTo } from '../../redux/actions/navigationActions';
 import { signOut } from '../../redux/actions/authActions';
 
 const mapStateToProps = (state) => ({
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateUser: (uid, userInfo) => dispatch(updateUser(uid, userInfo)),
+  navigateTo: page => dispatch(navigateTo(page)),
   signOut: () => dispatch(signOut())
 });
 
