@@ -35,6 +35,7 @@ module.exports = {
   PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058'],
   PAGES: {
     HOME: 'home',
-    AUTH: 'auth'
+    AUTH: 'auth',
+    USERS: 'users'
   }
 };

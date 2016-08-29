@@ -76,7 +76,7 @@ export const fetchAuthData = () => dispatch => {
     .then(user => {
       if (user) {
         return fetchAppData(dispatch, user)
-          .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME)));
+          .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.USERS)));
       }
       return null;
     })

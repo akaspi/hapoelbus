@@ -1,0 +1,5 @@
+<rt-require dependency="../listItem/listItem" as="listItem"></rt-require>
+
+<div class="large-4 small-centered">
+    <listItem rt-repeat="user in this.props.users" title="{this.getUserTitle(user)}" subtitles="{this.getUserSubtitles(user)}" imageSrc="{this.getUserImage(user)}"></listItem>
+</div>
