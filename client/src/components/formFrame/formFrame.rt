@@ -1,0 +1,12 @@
+<rt-require dependency="./formFrame.scss" as="formFrameCss"></rt-require>
+
+<div class="form-frame">
+    <div class="header">
+        <button disabled="{this.props.disabled}" onclick="{this.onSubmit}">SUBMIT</button>
+        <span>{this.props.title}</span>
+        <button rt-if="!this.props.hideBack" key="back-btn" onClick="{this.props.onClose}">Back</button>
+    </div>
+    <div class="content">
+        {this.props.children}
+    </div>
+</div>

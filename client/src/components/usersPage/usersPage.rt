@@ -1,12 +1,10 @@
 <rt-require dependency="../listItem/listItem" as="listItem"></rt-require>
+<rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 
 <div class="large-4 small-centered">
     <div rt-if="!this.state.editingUser" key="list-view">
         <listItem rt-repeat="user in this.props.users" title="{this.getUserTitle(user)}"
                   subtitles="{this.getUserSubtitles(user)}" imageSrc="{this.getUserImage(user)}" onClick="()=>this.onUserClick(user)"></listItem>
     </div>
-    <div rt-if="this.state.editingUser" key="edit-user">
-        {JSON.stringify(this.state.editingUser)}
-        <button onClick="()=>this.stopEditing()">back</button>
-    </div>
+    <UserForm rt-if="this.state.editingUser" key="edit-user" user="{this.state.editingUser}" onClose="() => this.stopEditing()" />
 </div>
