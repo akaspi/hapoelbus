@@ -2,11 +2,23 @@
 
 <div class="form-frame">
     <div class="header">
-        <button disabled="{this.props.disabled}" onclick="{this.onSubmit}">SUBMIT</button>
-        <span>{this.props.title}</span>
-        <button rt-if="!this.props.hideBack" key="back-btn" onClick="{this.props.onClose}">Back</button>
+        <label class="title">{this.props.title}</label>
+        <button rt-if="!this.props.hideBack" class="back-btn" key="back-btn" onClick="{this.props.onClose}">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
     </div>
     <div class="content">
         {this.props.children}
+    </div>
+    <div class="actions small-centered">
+        <button disabled="{this.props.disabled}" onclick="{this.onSubmit}" class="action-btn submit large-8 small-centered more-space">
+            <span>שמור</span>
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button rt-if="this.props.onRemove" key="remove-btn" onclick="{this.onRemove}" class="action-btn remove large-8 small-centered more-space">
+            <span>מחק</span>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+
     </div>
 </div>

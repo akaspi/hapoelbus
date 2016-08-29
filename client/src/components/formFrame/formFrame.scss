@@ -1,0 +1,48 @@
+.form-frame {
+  .header {
+    display: flex;
+    background: aliceblue;
+    border-bottom: 1px solid skyblue;
+    height: 50px;
+    padding: 0 10px;
+    align-items: center;
+
+    .title {
+      flex: 1;
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .back-btn {
+      width: 20px;
+    }
+  }
+
+  .content {
+    margin-top: 20px;
+  }
+
+  .actions {
+    margin-top: 10px;
+    text-align: center;
+
+    .action-btn {
+      border-radius: 0;
+      color: white;
+      height: 40px;
+      padding: 5px;
+
+      i {
+        margin-right: 10px;
+      }
+
+      &.submit {
+        background: green;
+      }
+
+      &.remove {
+        background: red;
+      }
+    }
+  }
+}

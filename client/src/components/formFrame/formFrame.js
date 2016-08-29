@@ -8,6 +8,11 @@ class FormFrame extends React.Component {
     this.props.onClose();
   }
 
+  onRemove() {
+    this.props.onRemove();
+    this.props.onClose();
+  }
+
   render() {
     return template.apply(this);
   }
@@ -16,6 +21,7 @@ class FormFrame extends React.Component {
 FormFrame.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
   onClose: React.PropTypes.func.isRequired,
+  onRemove: React.PropTypes.func,
   title: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   hideBack: React.PropTypes.bool
