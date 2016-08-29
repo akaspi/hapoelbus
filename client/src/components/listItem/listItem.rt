@@ -1,7 +1,7 @@
 <rt-require dependency="./listItem.scss" as="listItemCss"></rt-require>
 
 
-<div class="list-item small-12">
+<div class="list-item small-12" onClick="{this.props.onClick}">
     <img src="{this.props.imageSrc}" class="list-image"/>
     <div class="list-titles">
         <label class="title large-text">{this.props.title}</label>

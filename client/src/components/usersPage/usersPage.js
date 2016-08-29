@@ -7,6 +7,21 @@ const mapStateToProps = (state) => ({
 });
 
 class UsersPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editingUser: null
+    }
+  }
+
+  onUserClick(user) {
+    this.setState({editingUser: user})
+  }
+
+  stopEditing() {
+    this.setState({editingUser: null})
+  }
+
   render() {
     return template.apply(this);
   }
@@ -19,7 +34,7 @@ class UsersPage extends React.Component {
     return [user.phonePrefix + '-' + user.phoneNumber, user.email, 'כמות מנויים: ' + (user.seasonTickets || 0)];
   }
 
-  getUserImage(user){
+  getUserImage(user) {
     return user.imageSrc || 'http://image.flaticon.com/icons/svg/163/163804.svg'
   }
 }
