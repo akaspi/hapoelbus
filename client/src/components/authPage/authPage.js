@@ -1,5 +1,5 @@
 import React from 'react';
-import template from './authForm.rt';
+import template from './authPage.rt';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import * as constants from '../../utils/constants';

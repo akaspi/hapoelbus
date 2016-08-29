@@ -32,5 +32,9 @@ module.exports = {
   },
   MAX_SEASON_TICKETS: 7,
   MAX_EXTRA_PASSENGERS: 4,
-  PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058']
+  PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058'],
+  PAGES: {
+    HOME: 'home',
+    AUTH: 'auth'
+  }
 };
