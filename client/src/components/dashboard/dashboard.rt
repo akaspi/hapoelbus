@@ -18,7 +18,14 @@
         <h2>תודה על הרשמתך!</h2>
         <h3>נתראה בעונת 2016/17</h3>
         <hr>
-        <a rt-if="this.props.authData.isAdmin" key="all-users-btn" onClick="() => this.props.navigateTo(Constants.PAGES.USERS)">ALL USERS</a>
+        <div>
+            <a rt-if="this.props.authData.isAdmin" key="all-users-btn"
+               onClick="() => this.props.navigateTo(Constants.PAGES.USERS)">ALL USERS</a>
+        </div>
+        <div>
+            <a rt-if="this.props.authData.isAdmin" key="all-events-btn"
+               onClick="() => this.props.navigateTo(Constants.PAGES.EVENTS)">ALL EVENTS</a>
+        </div>
         <button onClick="{this.props.signOut}" class="button split more-space">
             <span>התנתק</span>
         </button>

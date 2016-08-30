@@ -3,6 +3,7 @@
 <rt-require dependency="../homePage/homePage" as="HomePage"></rt-require>
 <rt-require dependency="../usersPage/usersPage" as="UsersPage"></rt-require>
 <rt-require dependency="../authPage/authPage" as="AuthPage"></rt-require>
+<rt-require dependency="../eventsPage/eventsPage" as="EventsPage"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./app.scss" as="appCss"></rt-require>
 
@@ -12,5 +13,6 @@
         <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH" key="auth-page"/>
         <HomePage rt-if="this.props.currentPage === Constants.PAGES.HOME" key="home-page"/>
         <UsersPage rt-if="this.props.currentPage === Constants.PAGES.USERS" key="users-page"/>
+        <EventsPage rt-if="this.props.currentPage === Constants.PAGES.EVENTS" key="events-page"/>
     </div>
 </div>

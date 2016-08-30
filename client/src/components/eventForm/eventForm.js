@@ -1,25 +1,32 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './eventForm.rt';
-import { connect } from 'react-redux';
-import * as constants from '../../utils/constants';
+import * as Constants from '../../utils/constants';
+
+const emptyEvent = {
+  typeId: '',
+  day: '01',
+  month: '01',
+  year: '2017',
+  hour: '17',
+  minute: '00',
+  status: Constants.EVENTS_STATUS.CLOSED.value
+};
 
 const eventForm = React.createClass({
   displayName: 'eventForm',
 
-  propTypes: {},
+  propTypes: {
+    onSubmit: React.PropTypes.func.isRequired,
+    onClose: React.PropTypes.func,
+    eventId: React.PropTypes.string,
+    event: React.PropTypes.object
+  },
 
   getInitialState() {
-    return {
-      eventId: 'hapoel-tlv',
-      day: '01',
-      month: '12',
-      year: '2017',
-      hour: '22',
-      minute: '35',
-      status: 'closed'
-    };
+    return _.defaults(this.props.event, emptyEvent, { dateInputSupported: true, timeInputSupported: true });
   },
+
   componentDidMount() {
     this.checkIfHtml5Supported();
   },
@@ -45,7 +52,7 @@ const eventForm = React.createClass({
   },
 
   getEventPicture() {
-    return _.get(constants.EVENTS_TYPES, [this.state.eventId, 'src']);
+    return _.get(Constants.EVENTS_TYPES, [this.state.eventId, 'src']);
   },
 
   getTimeValue() {
@@ -101,7 +108,17 @@ const eventForm = React.createClass({
 
     this.setState({ [e.target.name]: value });
   },
+
+  isFormValid() {
+    return !!(this.state.typeId);
+  },
+
+  onSubmit() {
+    const event = _.omit(this.state, ['timeInputSupported', 'dateInputSupported']);
+    this.props.onSubmit(event);
+  },
+
   render: template
 });
 
-module.exports = connect()(eventForm);
+module.exports = eventForm;

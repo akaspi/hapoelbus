@@ -36,6 +36,21 @@ module.exports = {
   PAGES: {
     HOME: 'home',
     AUTH: 'auth',
-    USERS: 'users'
+    USERS: 'users',
+    EVENTS: 'events'
+  },
+  EVENTS_STATUS: {
+    CLOSED: {
+      value: 'closed',
+      name: 'ההרשמה סגורה'
+    },
+    OPEN_FOR_MEMBERS: {
+      value: 'openForMembers',
+      name: 'ההרשמה פתוחה למנויי הסעות'
+    },
+    OPEN_FOR_ALL: {
+      value: 'openForAll',
+      name: 'ההרשמה פתוחה לכולם'
+    }
   }
 };

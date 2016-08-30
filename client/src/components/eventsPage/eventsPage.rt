@@ -1,0 +1,26 @@
+<rt-require dependency="../listItem/listItem" as="listItem"></rt-require>
+<rt-require dependency="../eventForm/eventForm" as="EventForm"></rt-require>
+<rt-require dependency="./eventsPage.scss" as="eventsPageCss"></rt-require>
+
+<div class="large-4 small-centered events-page" rt-scope="(!this.state.editingEventId && !this.state.createMode) as listViewMode">
+
+    <div rt-if="listViewMode" key="events-view" rt-scope="this.getVisibleEvents() as visibleEvents">
+
+        <listItem rt-repeat="eventItem in visibleEvents" title="{this.getEventTitle(eventItem.event)}" key="event-{eventItem.eventId}"
+                  subtitles="{this.getEventSubtitles(eventItem.event)}" imageSrc="{this.getEventImage(eventItem.event)}"
+                  onClick="()=>this.onEventClick(eventItem.eventId)"></listItem>
+
+        <label class="filter-status" rt-if="visibleEvents.length === 0">
+            <i class="fa fa-frown-o" aria-hidden="true"></i>
+            <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
+        </label>
+
+        <button onClick="() => this.onCreateEventClick()">CREATE EVENT</button>
+
+    </div>
+
+    <EventForm rt-if="!listViewMode" key="event-user"
+              event="{this.props.events[this.state.editingEventId]}"
+              onSubmit="{event => this.updateEvent(event)}"
+              onClose="() => this.stopEditing()"/>
+</div>
