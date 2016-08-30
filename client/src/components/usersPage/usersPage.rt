@@ -1,14 +1,24 @@
 <rt-require dependency="../listItem/listItem" as="listItem"></rt-require>
 <rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
+<rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
-<div class="large-4 small-centered">
-    <div rt-if="!this.state.editingUserId" key="list-view">
-        <listItem rt-repeat="user in this.props.users" title="{this.getUserTitle(user)}" key="user-{userIndex}"
-                  subtitles="{this.getUserSubtitles(user)}" imageSrc="{this.getUserImage(user)}" onClick="()=>this.onUserClick(userIndex)"></listItem>
+<div class="large-4 small-centered users-page">
+    <div rt-if="!this.state.editingUserId" key="list-view" rt-scope="this.getVisibleUsers() as visibleUsers">
+        <div>
+            <input type="text" onChange="(e)=>this.handleFilterChange(e)" value="{this.state.filter}"/>
+        </div>
+        <listItem rt-repeat="userItem in visibleUsers" title="{this.getUserTitle(userItem.user)}"
+                  key="user-{userItem.uid}"
+                  subtitles="{this.getUserSubtitles(userItem.user)}" imageSrc="{this.getUserImage(userItem.user)}"
+                  onClick="()=>this.onUserClick(userItem.uid)"></listItem>
+        <label class="filter-status" rt-if="visibleUsers.length === 0">
+            <i class="fa fa-frown-o" aria-hidden="true"></i>
+            <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
+        </label>
     </div>
     <UserForm rt-if="this.state.editingUserId" key="edit-user"
               user="{this.props.users[this.state.editingUserId]}"
               uid="{this.state.editingUserId}"
               updateUser="{this.props.updateUser}"
-              onClose="() => this.stopEditing()" />
+              onClose="() => this.stopEditing()"/>
 </div>

@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import React from 'react';
 import template from './usersPage.rt';
 import {connect} from 'react-redux';
@@ -16,8 +17,20 @@ class UsersPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editingUserId: null
+      editingUserId: null,
+      filter: ''
     }
+  }
+
+  getVisibleUsers() {
+    return _.chain(this.props.users)
+      .pickBy(user => _.startsWith(user.firstName, this.state.filter) || _.startsWith(user.lastName, this.state.filter), this)
+      .map((user, uid)=>({user, uid}))
+      .value()
+  }
+
+  handleFilterChange(e) {
+    this.setState({filter: e.target.value})
   }
 
   onUserClick(uid) {
@@ -25,7 +38,7 @@ class UsersPage extends React.Component {
   }
 
   stopEditing() {
-    this.setState({editingUserId: null})
+    this.setState({editingUserId: null, filter: ''})
   }
 
   render() {
