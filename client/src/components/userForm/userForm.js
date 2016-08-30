@@ -20,7 +20,8 @@ const userForm = React.createClass({
     uid: React.PropTypes.string.isRequired,
     user: React.PropTypes.object,
     email: React.PropTypes.string,
-    updateUser: React.PropTypes.func.isRequired
+    updateUser: React.PropTypes.func.isRequired,
+    onClose: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
