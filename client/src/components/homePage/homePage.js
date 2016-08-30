@@ -3,7 +3,6 @@ import template from './homePage.rt';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  errorMsg: state.errorMsg,
   authData: state.authData
 });
 
@@ -14,7 +13,6 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  errorMsg: React.PropTypes.string,
   authData: React.PropTypes.object
 };
 

@@ -5,12 +5,16 @@ import template from './formFrame.rt';
 class FormFrame extends React.Component {
   onSubmit() {
     this.props.onSubmit();
-    this.props.onClose();
+    if (_.isFunction(this.props.onClose)) {
+      this.props.onClose();
+    }
   }
 
   onRemove() {
     this.props.onRemove();
-    this.props.onClose();
+    if (_.isFunction(this.props.onClose)) {
+      this.props.onClose();
+    }
   }
 
   render() {

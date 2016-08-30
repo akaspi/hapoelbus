@@ -12,6 +12,10 @@ import {
 
 import { reportError } from '../../redux/actions/errorActions';
 
+const mapStateToProps = (state) => ({
+  errorMsg: state.errorMsg
+});
+
 const mapDispatchToProps = (dispatch) => ({
   loginWithGoogle: () => dispatch(loginWithGoogle()),
   loginWithFacebook: () => dispatch(loginWithFacebook()),
@@ -85,4 +89,4 @@ const AuthForm = React.createClass({
   render: template
 });
 
-module.exports = connect(null, mapDispatchToProps)(AuthForm);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(AuthForm);

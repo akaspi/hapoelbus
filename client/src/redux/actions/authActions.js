@@ -40,7 +40,7 @@ export const signOut = () => dispatch => {
 
   return clientDB.signOut()
     .then(() => dispatch(userSignedOut()))
-    .then(() => dispatch(navigationActions(Constants.PAGES.AUTH)))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.AUTH)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
