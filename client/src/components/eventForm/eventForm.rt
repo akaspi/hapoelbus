@@ -9,8 +9,6 @@
         disabled="{!this.isFormValid()}">
 
     <div class="large-6 small-centered user-info-form">
-        <h2>אירוע:</h2>
-        <hr>
         <div class="row">
             <div class="small-9 large-10 columns">
                 <label>שם האירוע
