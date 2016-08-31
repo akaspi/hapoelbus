@@ -37,7 +37,8 @@ module.exports = {
     HOME: 'home',
     AUTH: 'auth',
     USERS: 'users',
-    EVENTS: 'events'
+    EVENTS: 'events',
+    BOOKINGS: 'bookings'
   },
   EVENTS_STATUS: {
     CLOSED: {

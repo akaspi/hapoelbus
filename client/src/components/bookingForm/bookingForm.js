@@ -1,19 +1,25 @@
-import React from 'react';
 import * as _ from 'lodash';
+import React from 'react';
 import template from './bookingForm.rt';
-import { connect } from 'react-redux';
+
+const emptyBooking = {
+  paidSeats: 1,
+  extraSeats: 0
+};
 
 const bookingForm = React.createClass({
-  displayName: 'bookingForm',
+  displayName: 'BookingForm',
 
-  propTypes: {},
+  propTypes: {
+    onSubmit: React.PropTypes.func.isRequired,
+    booking: React.PropTypes.object,
+    onClose: React.PropTypes.func
+  },
 
   getInitialState() {
-    return {
-      userId: '',
-      eventId: 'hapoel_tlv'
-    };
+    return _.defaults(this.props.booking, emptyBooking);
   },
+
   onChange(e, validationType) {
     const value = e.target.value;
 
@@ -45,7 +51,13 @@ const bookingForm = React.createClass({
 
     this.setState({ [e.target.name]: value });
   },
+
+  onSubmit() {
+    const booking = _.omit(this.state, val => val === '');
+    this.props.onSubmit(booking);
+  },
+
   render: template
 });
 
-module.exports = connect()(bookingForm);
+module.exports = bookingForm;
