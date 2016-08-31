@@ -30,6 +30,10 @@
             <a rt-if="this.props.authData.isAdmin" key="all-bookings-btn"
                onClick="() => this.props.navigateTo(Constants.PAGES.BOOKINGS)">ALL BOOKINGS</a>
         </div>
+        <div>
+            <a rt-if="this.props.authData.isAdmin" key="distribution-page-btn"
+               onClick="() => this.props.navigateTo(Constants.PAGES.DISTRIBUTION)">DISTRIBUTION</a>
+        </div>
         <button onClick="{this.props.signOut}" class="button split more-space">
             <span>התנתק</span>
         </button>

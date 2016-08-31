@@ -38,7 +38,8 @@ module.exports = {
     AUTH: 'auth',
     USERS: 'users',
     EVENTS: 'events',
-    BOOKINGS: 'bookings'
+    BOOKINGS: 'bookings',
+    DISTRIBUTION: 'distribution'
   },
   EVENTS_STATUS: {
     CLOSED: {
@@ -52,6 +53,16 @@ module.exports = {
     OPEN_FOR_ALL: {
       value: 'openForAll',
       name: 'ההרשמה פתוחה לכולם'
+    }
+  },
+  DISTRIBUTION: {
+    METHODS: {
+      EMAIL: 'email',
+      SMS: 'sms'
+    },
+    TYPES: {
+      TEMPLATE: 'template',
+      CUSTOM: 'custom'
     }
   }
 };

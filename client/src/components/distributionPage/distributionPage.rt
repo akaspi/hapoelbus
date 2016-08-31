@@ -1,0 +1,34 @@
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
+<rt-require dependency="./distributionPage.scss" as="distributionPageCss"></rt-require>
+
+<div class="large-4 small-centered distribution-page">
+    <div class="medium-8 small-12 columns">
+        <label>שלח באמצעות
+            <select value="{this.state.distributionMethod}" onChange="(e) => this.onDistributionMethodChange(e)">
+                <option value="{Constants.DISTRIBUTION.METHODS.EMAIL}">דואר אלקטרוני</option>
+                <option value="{Constants.DISTRIBUTION.METHODS.SMS}">סמס</option>
+            </select>
+        </label>
+    </div>
+    <div class="medium-8 small-12 columns" rt-if="this.isDistributionTypeVisible()" key="distributionType">
+        <label>צורת שליחה
+            <select value="{this.state.distributionType}" onChange="(e) => this.onDistributionTypeChange(e)">
+                <option value="{Constants.DISTRIBUTION.TYPES.TEMPLATE}">תבנית</option>
+                <option value="{Constants.DISTRIBUTION.TYPES.CUSTOM}">חופשי</option>
+            </select>
+        </label>
+    </div>
+    <div class="medium-8 small-12 columns" rt-if="this.isEventsVisible()" key="eventId">
+        <label>בחירת אירוע
+            <select value="{this.state.eventId}" onChange="(e) => this.onEventChange(e)">
+                <option rt-repeat="event in this.getOpenEvents()" key="event-{eventIndex}"
+                        value="{eventIndex}">{Constants.EVENTS_TYPES[event.typeId].name}
+                </option>
+            </select>
+        </label>
+    </div>
+    <input type="text" rt-if="this.isCustomTitleVisible()" key="customTitle">
+    <textarea name="" id="" cols="30" rows="10" rt-if="this.isCustomContentVisible()" key="customContent"/>
+
+    <button onClick="() => this.send()">שלח</button>
+</div>
