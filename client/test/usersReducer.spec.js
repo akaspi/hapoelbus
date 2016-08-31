@@ -1,5 +1,5 @@
 import usersReducer from '../src/redux/reducers/usersReducer';
-import { usersReceived } from '../src/redux/actions/userActions';
+import { usersReceived, usersRemoved } from '../src/redux/actions/userActions';
 import { userSignedOut } from '../src/redux/actions/authActions';
 
 describe('usersReducer spec', () => {
@@ -55,6 +55,29 @@ describe('usersReducer spec', () => {
         }
       });
     });
+  });
+
+  describe('users removed', () => {
+
+    it('should remove the received user id from the existing users state', () => {
+      const currentState = {
+        uid: {
+          email: 'some@email.com'
+        },
+        uid2: {
+          email: 'spider@pig.com'
+        }
+      };
+
+      const nextState = usersReducer(currentState, usersRemoved('uid'));
+
+      expect(nextState).toEqual({
+        uid2: {
+          email: 'spider@pig.com'
+        }
+      });
+    });
+
   });
 
   describe('user signed out', () => {
