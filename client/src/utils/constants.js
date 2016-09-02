@@ -56,6 +56,16 @@ module.exports = {
     }
   },
   DISTRIBUTION: {
+    RECIPIENTS: {
+      ALL: {
+        value: 'allUsers',
+        name: 'כלל המשתמשים'
+      },
+      MEMBERS_ONLY: {
+        value: 'membersOnly',
+        name: 'מנויים בלבד'
+      }
+    },
     METHODS: {
       EMAIL: 'email',
       SMS: 'sms'
@@ -63,6 +73,12 @@ module.exports = {
     TYPES: {
       TEMPLATE: 'template',
       CUSTOM: 'custom'
+    },
+    TEMPLATES: {
+      EVENT_OPEN_FOR_MEMBERS: {
+        id: 'some-template-id',
+        name: 'פתיחת הרשמה למנויים'
+      }
     }
   }
 };

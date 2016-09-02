@@ -10,11 +10,28 @@
             </select>
         </label>
     </div>
+    <div class="medium-8 small-12 columns">
+        <label>שלח אל
+            <select value="{this.state.recipientsType}" onChange="(e) => this.onRecipientsTypeChange(e)">
+                <option value="{Constants.DISTRIBUTION.RECIPIENTS.ALL.value}">{Constants.DISTRIBUTION.RECIPIENTS.ALL.name}</option>
+                <option value="{Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.value}">{Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.name}</option>
+            </select>
+        </label>
+    </div>
     <div class="medium-8 small-12 columns" rt-if="this.isDistributionTypeVisible()" key="distributionType">
         <label>צורת שליחה
             <select value="{this.state.distributionType}" onChange="(e) => this.onDistributionTypeChange(e)">
                 <option value="{Constants.DISTRIBUTION.TYPES.TEMPLATE}">תבנית</option>
                 <option value="{Constants.DISTRIBUTION.TYPES.CUSTOM}">חופשי</option>
+            </select>
+        </label>
+    </div>
+    <div class="medium-8 small-12 columns" rt-if="this.isEventsVisible()" key="templatPicker">
+        <label>בחר תבנית
+            <select value="{this.state.templateId}" onChange="(e) => this.onTemplateIdChange(e)">
+                <option rt-repeat="templateConst in Constants.DISTRIBUTION.TEMPLATES" key="template-{templateConst.id}"
+                        value="{templateConst.id}">{templateConst.name}
+                </option>
             </select>
         </label>
     </div>
@@ -27,8 +44,9 @@
             </select>
         </label>
     </div>
-    <input type="text" rt-if="this.isCustomTitleVisible()" key="customTitle">
-    <textarea name="" id="" cols="30" rows="10" rt-if="this.isCustomContentVisible()" key="customContent"/>
+
+    <input type="text" rt-if="this.isCustomTitleVisible()" value="{this.state.subject}" onChange="(e) => this.onSubjectChange(e)" key="customSubject">
+    <textarea name="" id="" cols="30" rows="10" rt-if="this.isCustomContentVisible()" value="{this.state.content}" onChange="(e) => this.onContentChange(e)" key="customContent"/>
 
     <button onClick="() => this.send()">שלח</button>
 </div>
