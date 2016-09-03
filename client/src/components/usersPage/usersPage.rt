@@ -2,16 +2,29 @@
 <rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 <rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
-<div class="small-centered users-page">
+<div class="small-centered dashboard-page users-page">
     <div rt-if="!this.state.editingUserId" key="list-view" rt-scope="this.getVisibleUsers() as visibleUsers">
         <div class="header">
             <label class="header-title">משתמשים</label>
-            <div class="search">
-                <input class="search-input" type="search" placeholder="חיפוש" onChange="(e)=>this.handleFilterChange(e)"
-                       value="{this.state.filter}"/>
-                <span class="postfix search-icon"><i class="fa fa-search"></i></span>
+        </div>
+        <div class="filtering row expanded collapse">
+            <div class="column small-12 large-4">
+                <ul class="menu">
+                    <li class="active"><a class="button is-active">כולם (12)</a></li>
+                    <li><a>מנויים (11)</a></li>
+                    <li><a>לא מנויים (1)</a></li>
+                </ul>
+            </div>
+            <div class="column small-12 large-4 end">
+                <div class="search">
+                    <input class="search-input" type="search" placeholder="חיפוש"
+                           onChange="(e)=>this.handleFilterChange(e)"
+                           value="{this.state.filter}"/>
+                    <span class="search-icon"><i class="fa fa-search"></i></span>
+                </div>
             </div>
         </div>
+
         <listItem rt-repeat="userItem in visibleUsers" title="{this.getUserTitle(userItem.user)}"
                   key="user-{userItem.uid}"
                   subtitles="{this.getUserSubtitles(userItem.user)}" imageSrc="{this.getUserImage(userItem.user)}"
@@ -21,9 +34,12 @@
             <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
         </label>
     </div>
-    <UserForm rt-if="this.state.editingUserId" key="edit-user"
-              user="{this.props.users[this.state.editingUserId]}"
-              uid="{this.state.editingUserId}"
-              updateUser="{this.props.updateUser}"
-              onClose="() => this.stopEditing()"/>
+
+    <div class="large-6 small-12 small-centered">
+        <UserForm rt-if="this.state.editingUserId" key="edit-user"
+                  user="{this.props.users[this.state.editingUserId]}"
+                  uid="{this.state.editingUserId}"
+                  updateUser="{this.props.updateUser}"
+                  onClose="() => this.stopEditing()"/>
+    </div>
 </div>

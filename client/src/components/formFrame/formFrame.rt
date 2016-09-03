@@ -10,15 +10,15 @@
     <div class="content">
         {this.props.children}
     </div>
-    <div class="actions small-centered">
-        <button disabled="{this.props.disabled}" onClick="()=>this.onSubmit()" class="action-btn submit large-8 small-4 small-centered more-space">
+    <div class="action-buttons button-group stacked small-centered large-6 small-8 ">
+        <a disabled="{this.props.disabled}" onClick="()=>this.onSubmit()" class="button success more-space">
             <span>שמור</span>
             <i class="fa fa-check" aria-hidden="true"></i>
-        </button>
-        <button rt-if="this.props.onRemove" key="remove-btn" onClick="()=>this.onRemove()" class="action-btn remove small-4 large-8 small-centered more-space">
+        </a>
+        <a key="remove-btn" onClick="()=>this.onRemove()" class="button alert more-space">
             <span>מחק</span>
             <i class="fa fa-trash" aria-hidden="true"></i>
-        </button>
-
+        </a>
     </div>
+
 </div>

@@ -25,26 +25,12 @@
     margin-top: 20px;
   }
 
-  .actions {
+  .action-buttons {
     margin-top: 10px;
-    text-align: center;
 
-    .action-btn {
-      border-radius: 0;
-      color: white;
-      height: 40px;
-      padding: 5px;
-
+    .button {
       i {
         margin-right: 10px;
-      }
-
-      &.submit {
-        background: #3FC380;
-      }
-
-      &.remove {
-        background: #CF000F;
       }
     }
   }

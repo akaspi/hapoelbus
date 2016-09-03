@@ -83,20 +83,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="small-6 large-5 columns">
-                <label>רשימת תפוצה:</label>
-                <input type="checkbox" name="subscribeMail" id="email-yes" onChange="{this.onBooleanInfoChange}"
-                       checked="{this.state.subscribeMail}">
-                <label for="email-yes">
-                    <emailIcon width="18" height="18"/>
-                </label>
+            <div class="small-3 column">
+                <label>תפוצת אימייל?</label>
+                <div class="switch">
+                    <input class="switch-input" name="subscribeMail" id="subscribeMail" type="checkbox"
+                           onChange="{this.onBooleanInfoChange}" checked="{this.state.subscribeMail}"/>
+                    <label class="switch-paddle" for="subscribeMail">
+                        <span class="switch-active" aria-hidden="true">כן</span>
+                        <span class="switch-inactive" aria-hidden="true">לא</span>
+                    </label>
+                </div>
             </div>
-            <div class="small-6 large-5 columns more-space end">
-                <input type="checkbox" name="subscribeSMS" id="sms-yes" onChange="{this.onBooleanInfoChange}"
-                       checked="{this.state.subscribeSMS}">
-                <label for="sms-yes">
-                    <smsIcon width="18" height="18"/>
-                </label>
+            <div class="small-3 column end">
+                <label>תפוצת SMS?</label>
+                <div class="switch">
+                    <input class="switch-input" name="subscribeSMS" id="subscribeSMS" type="checkbox"
+                           onChange="{this.onBooleanInfoChange}" checked="{this.state.subscribeSMS}"/>
+                    <label class="switch-paddle" for="subscribeSMS">
+                        <span class="switch-active" aria-hidden="true">כן</span>
+                        <span class="switch-inactive" aria-hidden="true">לא</span>
+                    </label>
+                </div>
             </div>
         </div>
     </div>

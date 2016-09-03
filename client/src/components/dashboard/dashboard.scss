@@ -9,3 +9,78 @@
     }
   }
 }
+
+.dashboard-page {
+  background: #f3f3f3;
+  min-height: 100vh;
+
+  .header {
+    background: #59ABE3;
+    border-bottom: 8px solid #3498DB;
+    color: #ffffff;
+    height: 4.5em;
+    padding: 10px 10px 0 10px;
+    display: flex;
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #ffffff;
+      flex: 1;
+    }
+  }
+
+  .filtering {
+
+    .search {
+      position: relative;
+      padding-top: 10px;
+      padding-right: 0.935em;
+      padding-left: 0.935em;
+    }
+    .search-input {
+      text-indent: 30px;
+    }
+    .search-icon {
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      font-size: 0.8em;
+      color: #cacaca;
+    }
+  }
+
+  .add-btn {
+    background: #DB0A5B;
+    border-radius: 50%;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 0;
+    cursor: pointer;
+    transition: background-color .25s ease-out, color .25s ease-out;
+    padding: .85em;
+    color: #ffffff;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    //@include disable-mouse-outline; -- not working..
+
+    &:hover {
+      background: #E60C62;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .filter-status {
+    color: #666;
+    font-size: 1rem;
+    text-align: center;
+
+    i {
+      margin-left: 5px;
+    }
+  }
+}
