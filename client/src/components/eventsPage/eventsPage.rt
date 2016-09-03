@@ -2,7 +2,8 @@
 <rt-require dependency="../eventForm/eventForm" as="EventForm"></rt-require>
 <rt-require dependency="./eventsPage.scss" as="eventsPageCss"></rt-require>
 
-<div class="small-centered dashboard-page events-page" rt-scope="(!this.state.editingEventId && !this.state.createMode) as listViewMode">
+<div class="small-centered dashboard-page events-page"
+     rt-scope="(!this.state.editingEventId && !this.state.createMode) as listViewMode">
 
     <div rt-if="listViewMode" key="events-view" rt-scope="this.getVisibleEvents() as visibleEvents">
 
@@ -10,7 +11,21 @@
             <label class="header-title">אירועים</label>
         </div>
 
-        <listItem rt-repeat="eventItem in visibleEvents" title="{this.getEventTitle(eventItem.event)}" key="event-{eventItem.eventId}"
+        <div class="filtering row expanded collapse">
+            <div class="column small-12 large-4">
+                <ul class="menu">
+                    <li class="active"><a>פתוח (11)</a></li>
+                    <li><a>סגור(1)</a></li>
+                    <li><a>כולם (12)</a></li>
+                </ul>
+            </div>
+            <button class="float-left add-btn hide-for-small-only" onClick="() => this.onCreateEventClick()">+</button>
+            <button class="float-left add-btn small show-for-small-only" onClick="() => this.onCreateEventClick()">+</button>
+        </div>
+
+
+        <listItem rt-repeat="eventItem in visibleEvents" title="{this.getEventTitle(eventItem.event)}"
+                  key="event-{eventItem.eventId}"
                   subtitles="{this.getEventSubtitles(eventItem.event)}" imageSrc="{this.getEventImage(eventItem.event)}"
                   onClick="()=>this.onEventClick(eventItem.eventId)"></listItem>
 
@@ -18,13 +33,13 @@
             <i class="fa fa-frown-o" aria-hidden="true"></i>
             <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
         </label>
-
-        <button class="add-btn" onClick="() => this.onCreateEventClick()"> + </button>
-
     </div>
 
-    <EventForm rt-if="!listViewMode" key="event-user"
-              event="{this.props.events[this.state.editingEventId]}"
-              onSubmit="{event => this.updateEvent(event)}"
-              onClose="() => this.stopEditing()"/>
+    <div class="large-6 small-12 small-centered">
+
+        <EventForm rt-if="!listViewMode" key="event-user"
+                   event="{this.props.events[this.state.editingEventId]}"
+                   onSubmit="{event => this.updateEvent(event)}"
+                   onClose="() => this.stopEditing()"/>
+    </div>
 </div>

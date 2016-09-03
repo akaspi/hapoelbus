@@ -41,8 +41,8 @@ class EventsPage extends React.Component {
 
   getEventSubtitles(event) {
     return [
-      `${event.day}/${event.month}/${event.year}`,
-      `${event.hour}:${event.minute}`,
+      'תאריך: ' + `${event.day}/${event.month}/${event.year}`,
+      'שעה: ' +  `${event.hour}:${event.minute}`,
       getStatusSubtitle(event)
     ];
   }

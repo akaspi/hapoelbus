@@ -52,7 +52,7 @@ const eventForm = React.createClass({
   },
 
   getEventPicture() {
-    return _.get(Constants.EVENTS_TYPES, [this.state.eventId, 'src']);
+    return _.get(Constants.EVENTS_TYPES, [this.state.typeId, 'src']) || Constants.EVENT_DEFAULT_PIC;
   },
 
   getTimeValue() {

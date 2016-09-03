@@ -16,13 +16,18 @@ module.exports = {
     minutes: ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
   },
 
+  EVENT_DEFAULT_PIC: 'http://image.flaticon.com/icons/svg/124/124150.svg',
   EVENTS_TYPES: {
     'hapoel-tlv': {
-      src: 'https://upload.wikimedia.org/wikipedia/he/0/07/Hapoel_Tel_Aviv_New_Logo.png',
+      src: 'https://upload.wikimedia.org/wikipedia/he/thumb/5/52/Hapoel_Tel_Aviv_Logo.png/480px-Hapoel_Tel_Aviv_Logo.png',
       name: 'הפועל ירושלים - הפועל תל אביב'
     },
+    'macabi-tlv': {
+      src: 'https://upload.wikimedia.org/wikipedia/he/thumb/1/14/MaccabiLogo.png/400px-MaccabiLogo.png',
+      name: 'הפועל ירושלים - מכבי תל אביב'
+    },
     'summer-event': {
-      src: 'http://www.koolbadges.co.uk/images/thumbnails/sweetsummergreen-200x200.jpg',
+      src: 'http://image.flaticon.com/icons/svg/164/164789.svg',
       name: 'אירוע הקיץ'
     }
   },

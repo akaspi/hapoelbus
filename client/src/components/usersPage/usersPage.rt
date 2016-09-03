@@ -10,7 +10,7 @@
         <div class="filtering row expanded collapse">
             <div class="column small-12 large-4">
                 <ul class="menu">
-                    <li class="active"><a class="button is-active">כולם (12)</a></li>
+                    <li class="active"><a>כולם (12)</a></li>
                     <li><a>מנויים (11)</a></li>
                     <li><a>לא מנויים (1)</a></li>
                 </ul>
