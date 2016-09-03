@@ -2,10 +2,15 @@
 <rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 <rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
-<div class="large-4 small-centered users-page">
+<div class="small-centered users-page">
     <div rt-if="!this.state.editingUserId" key="list-view" rt-scope="this.getVisibleUsers() as visibleUsers">
-        <div>
-            <input type="text" onChange="(e)=>this.handleFilterChange(e)" value="{this.state.filter}"/>
+        <div class="header">
+            <label class="header-title">משתמשים</label>
+            <div class="search">
+                <input class="search-input" type="search" placeholder="חיפוש" onChange="(e)=>this.handleFilterChange(e)"
+                       value="{this.state.filter}"/>
+                <span class="postfix search-icon"><i class="fa fa-search"></i></span>
+            </div>
         </div>
         <listItem rt-repeat="userItem in visibleUsers" title="{this.getUserTitle(userItem.user)}"
                   key="user-{userItem.uid}"

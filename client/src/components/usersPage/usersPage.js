@@ -50,7 +50,7 @@ class UsersPage extends React.Component {
   }
 
   getUserSubtitles(user) {
-    return [user.phonePrefix + '-' + user.phoneNumber, user.email, 'כמות מנויים: ' + (user.seasonTickets || 0)];
+    return [ user.phonePrefix + '-' + user.phoneNumber, user.email, 'כמות מנויים: ' + (user.seasonTickets || 0)];
   }
 
   getUserImage(user) {

@@ -14,12 +14,12 @@
         <span>Google</span>
         <i class="fa fa-google" aria-hidden="true"></i>
     </button>
-    <div class="large-3 medium-6  small-centered">
-        <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            <span class="error-msg-txt">{this.props.errorMsg}</span>
-        </div>
+
+    <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <span class="error-msg-txt">{this.props.errorMsg}</span>
     </div>
+
     <hr>
     <div onKeyDown="{this.handleKeyDown}" class="auth-form">
         <input type="email" value="{this.state.email}" onChange="{this.onChange}" name="email"

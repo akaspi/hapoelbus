@@ -8,6 +8,8 @@
 
   $facebook-color: #3b5998;
   $google-color: #d50f25;
+  $primary-color: #3498db;
+  $hover-color: #2385c6;
 
   .split.button {
     width: 100%;
@@ -22,14 +24,6 @@
 
     &.facebook {
       background: $facebook-color;
-    }
-
-    &.approve {
-      background: #5da423;
-    }
-
-    &.cancel {
-      background: #c60f13;
     }
 
     &.google {
@@ -52,9 +46,6 @@
       margin-left: 10px;
     }
   }
-
-  $primary-color: #066;
-  $hover-color: #005757;
 
   label {
     -webkit-user-select: none;
