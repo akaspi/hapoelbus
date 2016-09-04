@@ -72,7 +72,7 @@
         </div>
         <div class="row" rt-if="this.props.isAdminMode" key="seasonTickets">
             <div class="small-12 columns">
-                <label>כמות נוסעים
+                <label>כמות מנויים
                     <select value="{this.state.seasonTickets}" onChange="{this.onSeasonTicketChange}"
                             name="seasonTickets">
                         <option rt-repeat="amount in _.times(constants.MAX_SEASON_TICKETS)" key="amount-{amountIndex}"

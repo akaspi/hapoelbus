@@ -20,11 +20,11 @@ module.exports = {
   EVENTS_TYPES: {
     'hapoel-tlv': {
       src: 'https://upload.wikimedia.org/wikipedia/he/thumb/5/52/Hapoel_Tel_Aviv_Logo.png/480px-Hapoel_Tel_Aviv_Logo.png',
-      name: 'הפועל ירושלים - הפועל תל אביב'
+      name: 'הפועל תל אביב'
     },
     'macabi-tlv': {
       src: 'https://upload.wikimedia.org/wikipedia/he/thumb/1/14/MaccabiLogo.png/400px-MaccabiLogo.png',
-      name: 'הפועל ירושלים - מכבי תל אביב'
+      name: 'מכבי תל אביב'
     },
     'summer-event': {
       src: 'http://image.flaticon.com/icons/svg/164/164789.svg',

@@ -6,7 +6,8 @@ import { updateUser } from '../../redux/actions/userActions';
 
 
 const mapStateToProps = (state) => ({
-  users: state.users
+  users: state.users,
+  authData: state.authData
 });
 
 const mapDispatchToProps = dispatch => ({

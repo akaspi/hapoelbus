@@ -39,6 +39,7 @@
         <UserForm rt-if="this.state.editingUserId" key="edit-user"
                   user="{this.props.users[this.state.editingUserId]}"
                   uid="{this.state.editingUserId}"
+                  isAdminMode="{this.props.authData.isAdmin}"
                   updateUser="{this.props.updateUser}"
                   onClose="() => this.stopEditing()"/>
     </div>

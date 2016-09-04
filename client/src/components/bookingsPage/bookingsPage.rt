@@ -3,17 +3,32 @@
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./bookingsPage.scss" as="bookingsPageCss"></rt-require>
 
-<div class="large-4 small-centered bookings-page">
+<div class="ֿsmall-centered dashboard-page bookings-page">
     <div rt-if="!this.state.editingUserId" key="list-view" rt-scope="this.getVisibleBookings() as visibleBookings">
 
-        <label>שם האירוע
-            <select value="{this.state.eventId}" onChange="e => this.onEventIdChange(e.target.value)">
-                <option rt-repeat="event in this.props.events" key="event-{eventIndex}"
-                        value="{eventIndex}">
-                    {Constants.EVENTS_TYPES[event.typeId].name}
-                </option>
-            </select>
-        </label>
+        <div class="header">
+            <label class="header-title">רשומים להסעות</label>
+        </div>
+
+        <div class="filtering row expanded collapse">
+            <div class="column small-12 large-4">
+                <ul class="menu">
+                    <li class="active"><a>כולם ({visibleBookings.length})</a></li>
+                    <!--<li><a>הלוך(1)</a></li>-->
+                    <!--<li><a>חזור (12)</a></li>-->
+                </ul>
+            </div>
+            <div class="column small-12 large-4 end">
+                <div class="search">
+                    <select value="{this.state.eventId}" onChange="e => this.onEventIdChange(e.target.value)">
+                        <option rt-repeat="event in this.props.events" key="event-{eventIndex}"
+                                value="{eventIndex}">
+                            {event.day}/{event.month}/{event.year} - {Constants.EVENTS_TYPES[event.typeId].name}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
         <listItem rt-repeat="bookingItem in visibleBookings" title="{this.getBookingTitle(bookingItem.uid, bookingItem.booking)}"
                   key="booking-{bookingItem.uid}"
