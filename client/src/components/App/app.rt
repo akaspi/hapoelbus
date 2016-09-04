@@ -6,17 +6,21 @@
 <rt-require dependency="../eventsPage/eventsPage" as="EventsPage"></rt-require>
 <rt-require dependency="../bookingsPage/bookingsPage" as="BookingsPage"></rt-require>
 <rt-require dependency="../distributionPage/distributionPage" as="DistributionPage"></rt-require>
+<rt-require dependency="../topBar/topBar" as="TopBar"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./app.scss" as="appCss"></rt-require>
 
 <div class="site">
     <spinner/>
-    <div class="small-centered">
-        <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH" key="auth-page"/>
-        <HomePage rt-if="this.props.currentPage === Constants.PAGES.HOME" key="home-page"/>
-        <UsersPage rt-if="this.props.currentPage === Constants.PAGES.USERS" key="users-page"/>
-        <EventsPage rt-if="this.props.currentPage === Constants.PAGES.EVENTS" key="events-page"/>
-        <BookingsPage rt-if="this.props.currentPage === Constants.PAGES.BOOKINGS" key="bookings-page"/>
-        <DistributionPage rt-if="this.props.currentPage === Constants.PAGES.DISTRIBUTION" key="distribution-page"/>
+    <div rt-if="!this.props.authData" key="auth-page-container" class="small-centered">
+        <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH.val" key="auth-page"/>
+    </div>
+    <div rt-if="this.props.authData" key="app-container" class="small-centered">
+        <TopBar/>
+        <HomePage rt-if="this.props.currentPage === Constants.PAGES.HOME.val" key="home-page"/>
+        <UsersPage rt-if="this.props.currentPage === Constants.PAGES.USERS.val" key="users-page"/>
+        <EventsPage rt-if="this.props.currentPage === Constants.PAGES.EVENTS.val" key="events-page"/>
+        <BookingsPage rt-if="this.props.currentPage === Constants.PAGES.BOOKINGS.val" key="bookings-page"/>
+        <DistributionPage rt-if="this.props.currentPage === Constants.PAGES.DISTRIBUTION.val" key="distribution-page"/>
     </div>
 </div>

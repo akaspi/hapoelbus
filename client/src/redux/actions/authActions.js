@@ -40,7 +40,7 @@ export const signOut = () => dispatch => {
 
   return clientDB.signOut()
     .then(() => dispatch(userSignedOut()))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.AUTH)))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.AUTH.val)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -54,7 +54,7 @@ export const loginWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.loginWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME)))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -64,7 +64,7 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.createUserWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME)))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -76,10 +76,13 @@ export const fetchAuthData = () => dispatch => {
     .then(user => {
       if (user) {
         return fetchAppData(dispatch, user)
-          .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME)));
+          .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)));
       }
       return null;
     })
-    .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
+    .catch(dbError => {
+      debugger
+      dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code]))
+    })
     .finally(() => dispatch(loadingActions.stopLoading()));
 };

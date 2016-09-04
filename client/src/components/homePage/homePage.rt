@@ -1,8 +1,5 @@
-<rt-require dependency="../dashboard/dashboard" as="dashboard"></rt-require>
-<rt-require dependency="../authPage/authPage" as="AuthPage"></rt-require>
-
 <div class="site">
     <div class="small-centered">
-        <dashboard rt-if="this.props.authData"/>
+        תודה על הרשמתך!
     </div>
 </div>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fetchAuthData } from '../../redux/actions/authActions';
 
 const mapStateToProps = state => ({
+  authData: state.authData,
   currentPage: state.currentPage
 });
 

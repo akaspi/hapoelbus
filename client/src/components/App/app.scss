@@ -54,4 +54,89 @@
   .more-space {
     margin-top: 25px;
   }
+
+
+  .dashboard-page {
+    background: #f3f3f3;
+    min-height: 100vh;
+
+    .header {
+      background: #59ABE3;
+      border-bottom: 8px solid #3498DB;
+      color: #ffffff;
+      height: 4.5em;
+      padding: 10px 10px 0 10px;
+      display: flex;
+
+      .header-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #ffffff;
+        flex: 1;
+      }
+    }
+
+    .filtering {
+
+      .search {
+        position: relative;
+        padding-top: 10px;
+        padding-right: 0.935em;
+        padding-left: 0.935em;
+      }
+      .search-input {
+        text-indent: 30px;
+      }
+      .search-icon {
+        position: absolute;
+        top: 22px;
+        right: 28px;
+        font-size: 0.8em;
+        color: #cacaca;
+      }
+    }
+
+    .add-btn {
+      background-color: #d23f31;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 1em;
+      font-weight: bold;
+      line-height: 0;
+      outline: none;
+      transition: background-color .25s ease-out, color .25s ease-out;
+      padding: .85em;
+      color: #ffffff;
+      width: 3.5rem;
+      height: 3.5rem;
+      margin-left: 10px;
+      margin-top: 10px;
+
+      //@include disable-mouse-outline; -- not working..
+
+      &.small {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &:hover {
+        background: #da5144;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .filter-status {
+      color: #666;
+      font-size: 1rem;
+      text-align: center;
+
+      i {
+        margin-left: 5px;
+      }
+    }
+  }
 }

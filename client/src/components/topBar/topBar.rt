@@ -1,0 +1,16 @@
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
+
+<div class="top-bar">
+    <div>
+        <span>שלום </span><span class="user-name">{this.getUserTitle()}</span>
+    </div>
+    <button onClick="{this.props.signOut}" class="button small-3 more-space">
+        <span>התנתק</span>
+    </button>
+
+    <ul class="menu" rt-if="this.props.authData.isAdmin" key="admin-menu">
+        <li rt-repeat="page in Constants.PAGES" key="page-{page.val}" rt-class="{'active' : this.props.currentPage === page.val}">
+            <a onClick="() => this.props.navigateTo(page.val)" >{page.name}</a>
+        </li>
+    </ul>
+</div>

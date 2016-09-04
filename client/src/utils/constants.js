@@ -39,12 +39,12 @@ module.exports = {
   MAX_EXTRA_PASSENGERS: 4,
   PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058'],
   PAGES: {
-    HOME: 'home',
-    AUTH: 'auth',
-    USERS: 'users',
-    EVENTS: 'events',
-    BOOKINGS: 'bookings',
-    DISTRIBUTION: 'distribution'
+    HOME: {val: 'home', name: 'דף הבית'},
+    AUTH: {val: 'auth', name: 'בב'},
+    USERS: {val: 'users', name: 'users'},
+    EVENTS: {val: 'events', name: 'events'},
+    BOOKINGS: {val: 'bookings', name: 'bookings'},
+    DISTRIBUTION: {val: 'distribution', name: 'distr'}
   },
   EVENTS_STATUS: {
     CLOSED: {
