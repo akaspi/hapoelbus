@@ -8,14 +8,14 @@
             <label class="header-title">משתמשים</label>
         </div>
         <div class="filtering row expanded collapse">
-            <div class="column small-12 large-4">
+            <div class="column small-12 large-6">
                 <ul class="menu">
                     <li class="active"><a>כולם (12)</a></li>
                     <li><a>מנויים (11)</a></li>
                     <li><a>לא מנויים (1)</a></li>
                 </ul>
             </div>
-            <div class="column small-12 large-4 end">
+            <div class="column small-12 large-4">
                 <div class="search">
                     <input class="search-input" type="search" placeholder="חיפוש"
                            onChange="(e)=>this.handleFilterChange(e)"
@@ -35,7 +35,7 @@
         </label>
     </div>
 
-    <div class="large-6 small-12 small-centered">
+    <div class="small-centered">
         <UserForm rt-if="this.state.editingUserId" key="edit-user"
                   user="{this.props.users[this.state.editingUserId]}"
                   uid="{this.state.editingUserId}"

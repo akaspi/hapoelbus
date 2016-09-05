@@ -1,3 +1,43 @@
-.top-bar{
+.top-bar {
+  background: #222222;
+  color: #FFFFFF;
+  border-bottom: 3px solid #fff;
 
+  span {
+    cursor: default;
+  }
+
+  .small-menu {
+    background: #e83a30;
+  }
+
+  .menu {
+    margin-top: 0.6rem;
+
+    .button {
+      color: #FFFFFF;
+      background: none;
+
+      &.active {
+        background: #e83a30;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .avatar {
+    width: 2.5rem;
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 10px 0 10px 10px;
+  }
+
+  .disconnect {
+    color: #e83a30;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

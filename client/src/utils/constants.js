@@ -41,10 +41,10 @@ module.exports = {
   PAGES: {
     HOME: {val: 'home', name: 'דף הבית'},
     AUTH: {val: 'auth', name: 'בב'},
-    USERS: {val: 'users', name: 'users'},
-    EVENTS: {val: 'events', name: 'events'},
-    BOOKINGS: {val: 'bookings', name: 'bookings'},
-    DISTRIBUTION: {val: 'distribution', name: 'distr'}
+    USERS: {val: 'users', name: 'משתמשים', visible: true},
+    EVENTS: {val: 'events', name: 'אירועים', visible: true},
+    BOOKINGS: {val: 'bookings', name: 'רשומים להסעות', visible: true},
+    DISTRIBUTION: {val: 'distribution', name: 'מיילים', visible: true}
   },
   EVENTS_STATUS: {
     CLOSED: {

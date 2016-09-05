@@ -81,7 +81,6 @@ export const fetchAuthData = () => dispatch => {
       return null;
     })
     .catch(dbError => {
-      debugger
       dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code]))
     })
     .finally(() => dispatch(loadingActions.stopLoading()));

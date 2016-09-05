@@ -1,7 +1,7 @@
 <rt-require dependency="./authPage.scss" as="css"></rt-require>
 <rt-require dependency="../logo/logo" as="logo"></rt-require>
 
-<div class="large-3 medium-6 columns small-centered auth-form-container">
+<div class="large-6 columns small-centered auth-form-container">
     <div class="medium-centered logo">
         <logo width="120" height="120"/>
     </div>

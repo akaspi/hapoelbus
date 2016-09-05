@@ -12,7 +12,7 @@
         </div>
 
         <div class="filtering row expanded collapse">
-            <div class="column small-12 large-4">
+            <div class="column small-12 large-6">
                 <ul class="menu">
                     <li class="active"><a>פתוח (11)</a></li>
                     <li><a>סגור(1)</a></li>
@@ -35,7 +35,7 @@
         </label>
     </div>
 
-    <div class="large-6 small-12 small-centered">
+    <div class="small-centered">
 
         <EventForm rt-if="!listViewMode" key="event-user"
                    event="{this.props.events[this.state.editingEventId]}"

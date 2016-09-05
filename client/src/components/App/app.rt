@@ -10,7 +10,7 @@
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./app.scss" as="appCss"></rt-require>
 
-<div class="site">
+<div class="site large-6 small-12 small-centered">
     <spinner/>
     <div rt-if="!this.props.authData" key="auth-page-container" class="small-centered">
         <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH.val" key="auth-page"/>
