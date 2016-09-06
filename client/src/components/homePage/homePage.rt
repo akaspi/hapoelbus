@@ -1,5 +1,20 @@
-<div class="site">
+<rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
+
+<div class="site" rt-scope="this.getOpenEvents() as openEvents">
     <div class="small-centered">
-        תודה על הרשמתך!
+        <div rt-if="_.size(openEvents) === 0">
+            <label>אין כרגע הסעות פתוחות</label>
+        </div>
+
+        <div rt-repeat="event in openEvents">
+            <label>{event.typeId}</label>
+            <a class="button" disabled="{!this.isBookingEnabled(event)}" onClick="()=>this.bookEvent(eventIndex)">בבב</a>
+        </div>
+
+        <BookingForm rt-if="this.state.eventId" key="edit-booking"
+                     booking="{_.get(this.props.bookings, [this.props.authData.uid, this.state.eventId])}"
+                     onSubmit="booking => this.updateBooking(booking)"
+                     onClose="() => this.stopEditing()"/>
+
     </div>
 </div>

@@ -4,7 +4,9 @@ import template from './bookingForm.rt';
 
 const emptyBooking = {
   paidSeats: 1,
-  extraSeats: 0
+  extraSeats: 0,
+  pickUp: 'tlv',
+  dropOff: 'tlv'
 };
 
 const bookingForm = React.createClass({
