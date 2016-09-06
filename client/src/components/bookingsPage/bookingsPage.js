@@ -1,9 +1,32 @@
 import * as _ from 'lodash';
 import React from 'react';
 import template from './bookingsPage.rt';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as Constants from '../../utils/constants';
-import { updateBooking } from '../../redux/actions/bookingActions';
+import {updateBooking} from '../../redux/actions/bookingActions';
+
+const getDropOffMap = bookings => _.chain(bookings)
+  .omitBy(booking => !(booking.dropOff && (booking.dropOff !== booking.pickUp)))
+  .transform((acc, booking, uid) => {
+    acc[booking.dropOff][uid] = booking
+  }, {tlv: {}, modiin: {}})
+  .value();
+
+const getPickUpMap = bookings => _.chain(bookings)
+  .omitBy(booking => !(booking.pickUp && (booking.dropOff !== booking.pickUp)))
+  .transform((acc, booking, uid) => {
+    acc[booking.pickUp][uid] = booking
+  }, {tlv: {}, modiin: {}})
+  .value();
+
+
+const getBothWaysMap = bookings => _.chain(bookings)
+  .omitBy(booking => !(booking.dropOff === booking.pickUp))
+  .transform((acc, booking, uid) => {
+    acc[booking.pickUp][uid] = booking
+  }, {tlv: {}, modiin: {}})
+  .value();
+
 
 const mapStateToProps = (state) => ({
   bookings: state.bookings,
@@ -25,19 +48,26 @@ class BookingsPage extends React.Component {
   }
 
   getVisibleBookings() {
-    return _.chain(this.props.bookings)
+    const bookingForEventMap = _.chain(this.props.bookings)
       .mapValues(userBookings => userBookings[this.state.eventId])
       .omitBy(_.isUndefined)
-      .map((booking, uid) => ({ uid, booking }))
       .value();
+
+    return {
+      both: getBothWaysMap(bookingForEventMap),
+      pickUp: getPickUpMap(bookingForEventMap),
+      dropOff: getDropOffMap(bookingForEventMap)
+    }
+
+
   }
 
   onEventIdChange(eventId) {
-    this.setState({ eventId });
+    this.setState({eventId});
   }
 
   onBookingClick(uid) {
-    this.setState({ editingUserId: uid });
+    this.setState({editingUserId: uid});
   }
 
   getBookingTitle(uid) {
@@ -67,7 +97,7 @@ class BookingsPage extends React.Component {
   }
 
   stopEditing() {
-    this.setState({ editingUserId: null, filter: '' });
+    this.setState({editingUserId: null, filter: ''});
   }
 
   updateBooking(booking) {
