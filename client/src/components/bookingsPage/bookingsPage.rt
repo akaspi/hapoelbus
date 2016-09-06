@@ -11,14 +11,14 @@
         </div>
 
         <div class="filtering row expanded collapse">
-            <div class="column small-12 large-4">
+            <div class="column small-12 large-6">
                 <ul class="menu">
                     <li class="active"><a>כולם ({visibleBookings.length})</a></li>
-                    <!--<li><a>הלוך(1)</a></li>-->
-                    <!--<li><a>חזור (12)</a></li>-->
+                    <li><a>הלוך(1)</a></li>
+                    <li><a>חזור (12)</a></li>
                 </ul>
             </div>
-            <div class="column small-12 large-4 end">
+            <div class="column small-12 large-6">
                 <div class="search">
                     <select value="{this.state.eventId}" onChange="e => this.onEventIdChange(e.target.value)">
                         <option rt-repeat="event in this.props.events" key="event-{eventIndex}"
