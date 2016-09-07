@@ -19,16 +19,68 @@ module.exports = {
   EVENT_DEFAULT_PIC: 'http://image.flaticon.com/icons/svg/124/124150.svg',
   EVENTS_TYPES: {
     'hapoel-tlv': {
-      src: 'https://upload.wikimedia.org/wikipedia/he/thumb/5/52/Hapoel_Tel_Aviv_Logo.png/480px-Hapoel_Tel_Aviv_Logo.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_hapoelta.png',
       name: 'הפועל תל אביב'
     },
-    'macabi-tlv': {
-      src: 'https://upload.wikimedia.org/wikipedia/he/thumb/1/14/MaccabiLogo.png/400px-MaccabiLogo.png',
+    'maccabi-tlv': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_maccabi.png',
       name: 'מכבי תל אביב'
     },
-    'summer-event': {
-      src: 'http://image.flaticon.com/icons/svg/164/164789.svg',
-      name: 'אירוע הקיץ'
+    'herzeliya': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_sharon.png',
+      name: 'בני הרצליה'
+    },
+    'kiryat-gat': {
+      src: 'http://www.basket.co.il/Images/teams/bigGat.png',
+      name: 'מכבי קרית גת'
+    },
+    'gilboa': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_Galil.png',
+      name: 'הפועל גליל/גלבוע'
+    },
+    'nahariya': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_naharia.png',
+      name: 'עירוני נהריה'
+    },
+    'holon': {
+      src: 'http://www.basket.co.il/pics/2007/articles/logo_hh.png',
+      name: 'הפועל חולון'
+    },
+    'ashdod': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_ashdod.png',
+      name: 'מכבי אשדוד'
+    },
+    'haifa': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_haifa.png',
+      name: 'מכבי חיפה'
+    },
+    'rishon': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_rishon.png',
+      name: 'מכבי ראשון לציון'
+    },
+    'eilat': {
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_eilat.png',
+      name: 'הפועל אילת'
+    },
+    'ljubljana': {
+      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Union_olimpija.png/140px-Union_olimpija.png',
+      name: 'לובליאנה'
+    },
+    'valencia': {
+      src: 'http://samvanrossom.com/wp-content/uploads/2014/10/valencia-basket1-logo.jpg',
+      name: 'ולנסיה'
+    },
+    'kuban': {
+      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Lokomotiv_Kuban_logo.png/200px-Lokomotiv_Kuban_logo.png',
+      name: 'לוקומוטיב קובאן'
+    },
+    'fuenlabrada': {
+      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Baloncestofuenlabrada.jpg/110px-Baloncestofuenlabrada.jpg',
+      name: 'פואנלברדה'
+    },
+    'ulm': {
+      src: 'https://upload.wikimedia.org/wikipedia/en/b/b6/Ratiopharm_Ulm_logo.png',
+      name: 'אולם'
     }
   },
   STATIONS: {
