@@ -59,23 +59,6 @@
     background: #f3f3f3;
     min-height: 90vh;
 
-    .header {
-      background: #ee6d66;
-      border-bottom: 8px solid #e83a30;
-      color: #ffffff;
-      height: 3.3em;
-      padding: 10px 10px 0 10px;
-      display: flex;
-
-      .header-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #ffffff;
-        flex: 1;
-        line-height: 1;
-      }
-    }
-
     .filtering {
 
       .menu {
@@ -154,5 +137,9 @@
         margin-left: 5px;
       }
     }
+  }
+
+  .button.success[disabled]:hover {
+    background: #25a35a !important;
   }
 }

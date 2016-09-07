@@ -1,0 +1,23 @@
+<rt-require dependency="./eventItem.scss" as="eventItemCss"></rt-require>
+
+
+<div class="event-item small-12">
+    <img src="{this.props.hapoelSrc}" class="hapoel-image"/>
+    <span>VS.</span>
+    <img src="{this.props.imageSrc}" class="event-image"/>
+
+    <label class="event-name">{this.props.name}</label>
+    <label class="event-date">{this.props.date}</label>
+    <label class="event-time" rt-if="!this.props.closed">{this.props.time}</label>
+
+
+    <div class="action-buttons button-group ">
+        <a rt-if="!this.props.closed" key="register-btn" class="button success small">
+            <span rt-if="!this.props.booked" key="book-btn" disabled="{!this.props.isBookingEnabled}">הירשם</span>
+            <span rt-if="this.props.booked" key="edit-btn">ערוך הרשמה</span>
+        </a>
+        <a rt-if="!this.props.closed" key="remove-btn" class="button small alert more-space">
+            <span>בטל הרשמה</span>
+        </a>
+    </div>
+</div>

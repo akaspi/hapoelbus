@@ -6,22 +6,22 @@
         hideBack="{this.props.hideBack}"
         onSubmit="{this.onSubmit}"
         onClose="{this.props.onClose}"
-        disabled="{false}">
+        disabled="{!this.isFormValid()}">
 
-    <div class="booking-form">
+        <div class="booking-form small-11 small-centered">
         <div class="row">
-            <div class="small-4 large-5 columns end">
+            <div class="small-6 columns" rt-if="this.props.seasonTickets">
                 <label>כמות נוסעים
-                    <select value="{this.state.paidSeats}" onChange="{this.onChange}" name="paidSeats">
-                        <option rt-repeat="seat in _.times(2)" key="seat-{seatIndex}"
-                                value="{seatIndex + 1}">{seatIndex + 1}
+                    <select value="{this.state.paidSeats}" onChange="{this.onNumericChange}" name="paidSeats">
+                        <option rt-repeat="seat in _.times(this.props.seasonTickets + 1)" key="seat-{seatIndex}"
+                                value="{seatIndex}">{seatIndex}
                         </option>
                     </select>
                 </label>
             </div>
-            <div class="small-4 large-5 columns end">
+            <div class="small-6 columns end">
                 <label>נוסעים נוספים בתשלום
-                    <select value="{this.state.extraSeats}" onChange="{this.onChange}" name="extraSeats">
+                    <select value="{this.state.extraSeats}" onChange="{this.onNumericChange}" name="extraSeats">
                         <option rt-repeat="extraSeat in _.times(constants.MAX_EXTRA_PASSENGERS)"
                                 key="extraSeat-{extraSeatIndex}"
                                 value="{extraSeatIndex}">{extraSeatIndex}
@@ -30,13 +30,18 @@
                 </label>
             </div>
         </div>
-        <div class="row more-space">
-            <div class="small-2 large-3 columns">
-                <input type="checkbox" name="isGoNeeded" checked="true" id="isGoNeeded">
-                <label for="isGoNeeded">הלוך</label>
+        <div class="row">
+            <div class="small-3 large-2 columns">
+                <label for="pickUpToggle">הלוך</label>
+                <div class="switch large">
+                    <input class="switch-input" id="pickUpToggle" type="checkbox"
+                           onChange="(e)=>this.togglePickUp(e)" checked="{this.state.pickUpEnabled}"/>
+                    <label class="switch-paddle" for="pickUpToggle"/>
+                </div>
             </div>
-            <div class="small-6 large-7 columns end">
-                <select value="{this.state.pickUp}" onChange="{this.onChange}" name="pickUp">
+            <div class="small-9 large-10 columns end more-space">
+                <select value="{this.state.pickUp}" onChange="{this.onChange}" name="pickUp" disabled="{!this.state.pickUpEnabled}">
+                    <option value="" style="display: none">בחר</option>
                     <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}"
                             value="{stationIndex}">
                         {station}
@@ -45,12 +50,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="small-2 large-3 columns">
-                <input type="checkbox" name="back" checked="true" id="back-yes">
-                <label for="back-yes">חזור</label>
+            <div class="small-3 large-2 columns">
+                <label for="dropOffToggle">חזור</label>
+                <div class="switch large">
+                    <input class="switch-input" id="dropOffToggle" type="checkbox"
+                           onChange="(e)=>this.toggleDropOff(e)" checked="{this.state.dropOffEnabled}"/>
+                    <label class="switch-paddle" for="dropOffToggle"/>
+                </div>
             </div>
-            <div class="small-6 large-7 columns end">
-                <select value="{this.state.dropOff}" onChange="{this.onChange}" name="dropOff">
+            <div class="small-9 large-10 columns end more-space">
+                <select value="{this.state.dropOff}" onChange="{this.onChange}" name="dropOff" disabled="{!this.state.dropOffEnabled}">
+                    <option value="" style="display: none">בחר</option>
                     <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}"
                             value="{stationIndex}">
                         {station}
