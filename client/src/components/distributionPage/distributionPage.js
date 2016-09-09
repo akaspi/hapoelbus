@@ -24,7 +24,7 @@ const getUsersPhoneNumbers = (users, membersOnly) => _.chain(users)
 const getEventSubstitutions = event => ({
   '-DATE-': `${event.hour}:${event.minute}`,
   '-DEPARTURE-': `${event.day}/${event.month}/${event.year}`,
-  '-NAME': Constants.EVENTS_TYPES[event.typeId].name
+  '-NAME-': Constants.EVENTS_TYPES[event.typeId].name
 });
 
 const getInitialState = events => ({
