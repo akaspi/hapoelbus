@@ -3,7 +3,7 @@ import React from 'react';
 import template from './bookingForm.rt';
 
 const emptyBooking = {
-  paidSeats: 1,
+  paidSeats: 0,
   extraSeats: 0,
   pickUp: 'tlv',
   dropOff: 'tlv'
@@ -19,7 +19,11 @@ const bookingForm = React.createClass({
   },
 
   getInitialState() {
-    return _.defaults(this.props.booking, emptyBooking);
+    const booking = _.defaults(this.props.booking, emptyBooking);
+    return _.merge({}, booking, {
+      pickUpEnabled: !!booking.pickUp,
+      dropOffEnabled: !!booking.dropOff
+    });
   },
 
   onChange(e, validationType) {
@@ -42,21 +46,51 @@ const bookingForm = React.createClass({
     });
   },
 
+  togglePickUp(e){
+    const pickUpEnabled = e.target.checked;
+    this.setState({pickUpEnabled});
+    if (!pickUpEnabled) {
+      this.setState({pickUp: ''});
+    }
+  },
+
+  toggleDropOff(e){
+    const dropOffEnabled = e.target.checked;
+    this.setState({dropOffEnabled});
+    if (!dropOffEnabled) {
+      this.setState({dropOff: ''});
+    }
+  },
+
   onNumericChange(e) {
     const value = _.toNumber(e.target.value);
 
-    this.setState({ [e.target.name]: value });
+    this.setState({[e.target.name]: value});
   },
 
-  onBooleanChange(e) {
-    const value = Boolean(e.target.checked);
+  isFormValid(){
+    if (this.state.paidSeats === 0 && this.state.extraSeats === 0) {
+      return false;
+    }
 
-    this.setState({ [e.target.name]: value });
+    if (!this.state.pickUpEnabled && !this.state.dropOffEnabled) {
+      return false;
+    }
+
+    if (this.state.pickUpEnabled && this.state.pickUp === '') {
+      return false;
+    }
+
+    if (this.state.dropOffEnabled && this.state.dropOff === '') {
+      return false;
+    }
+
+    return true;
   },
 
   onSubmit() {
-    const booking = _.omit(this.state, val => val === '');
-    this.props.onSubmit(booking);
+    const bookingToSubmit = _.pick(this.state, _.keys(emptyBooking));
+    this.props.onSubmit(bookingToSubmit);
   },
 
   render: template

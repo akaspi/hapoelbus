@@ -1,4 +1,6 @@
+<rt-require dependency="../eventItem/eventItem" as="eventItem"></rt-require>
 <rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 
 <div class="site" rt-scope="this.getOpenEvents() as openEvents">
     <div class="small-centered">
@@ -6,14 +8,21 @@
             <label>אין כרגע הסעות פתוחות</label>
         </div>
 
-        <div rt-repeat="event in openEvents">
-            <label>{event.typeId}</label>
-            <a class="button" disabled="{!this.isBookingEnabled(event)}" onClick="()=>this.bookEvent(eventIndex)">בבב</a>
-        </div>
 
-        <BookingForm rt-if="this.state.eventId" key="edit-booking"
+        <eventItem rt-repeat="event in openEvents" key="event-{eventIndex}"
+                   name="{this.getEventName(event)}"
+                   date="{this.getEventDate(event)}"
+                   time="{this.getEventTime(event)}"
+                   booked="{this.isRegisteredToEvent(event)}"
+                   closed="{false}"
+                   isBookingEnabled="{this.isBookingEnabled(event)}"
+                   imageSrc="{this.getEventImage(event)}"
+                   hapoelSrc="{this.getEventHapoelImage()}"
+        />
+
+        <BookingForm rt-if="this.state.eventId" key="edit-booking" title="{this.props.events[this.state.eventId]}"
                      booking="{_.get(this.props.bookings, [this.props.authData.uid, this.state.eventId])}"
-                     onSubmit="booking => this.updateBooking(booking)"
+                     onSubmit="booking => this.updateBooking(booking)" seasonTickets="{_.get(this.props.users, [this.props.authData.uid, 'seasonTickets']) || 0}"
                      onClose="() => this.stopEditing()"/>
 
     </div>

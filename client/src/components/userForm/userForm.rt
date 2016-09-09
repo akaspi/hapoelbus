@@ -1,6 +1,4 @@
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
-<rt-require dependency="../emailIcon/emailIcon" as="emailIcon"></rt-require>
-<rt-require dependency="../smsIcon/smsIcon" as="smsIcon"></rt-require>
 <rt-require dependency="../formFrame/formFrame" as="formFrame"></rt-require>
 
 <formFrame

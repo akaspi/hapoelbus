@@ -46,6 +46,38 @@ class HomePage extends React.Component {
     }
   }
 
+  getEventName(event) {
+    if (event.typeId) {
+      return Constants.EVENTS_TYPES[event.typeId].name;
+    }
+  }
+
+  getEventHapoelImage() {
+    return 'http://hapoel.co.il/sites/default/files/logo120x120.png';
+  }
+
+  isRegisteredToEvent(event) {
+    return false;
+  }
+
+  getEventImage(event) {
+    if (event.typeId) {
+      return Constants.EVENTS_TYPES[event.typeId].src;
+    }
+  }
+
+  getEventDate(event) {
+    if (event) {
+      return event.day + '/' + event.month + '/' + event.year;
+    }
+  }
+
+  getEventTime(event) {
+    if (event) {
+      return event.hour + ':' + event.minute;
+    }
+  }
+
   stopEditing() {
     this.setState({eventId: null});
   }
