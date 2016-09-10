@@ -29,6 +29,10 @@ class HomePage extends React.Component {
     return _.omitBy(this.props.events, event => event.status === Constants.EVENTS_STATUS.CLOSED.value);
   }
 
+  getClosedEvents() {
+    return _.omitBy(this.props.events, event => event.status !== Constants.EVENTS_STATUS.CLOSED.value);
+  }
+
   bookEvent(eventId) {
     this.setState({eventId});
   }

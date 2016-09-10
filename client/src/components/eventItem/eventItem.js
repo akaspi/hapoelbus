@@ -14,7 +14,8 @@ EventItem.propTypes = {
   date: React.PropTypes.string,
   closed: React.PropTypes.bool,
   booked: React.PropTypes.bool,
-  isBookingEnabled: React.PropTypes.bool
+  isBookingEnabled: React.PropTypes.bool,
+  onBookingClick: React.PropTypes.func
 };
 
 module.exports = EventItem;

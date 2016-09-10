@@ -2,7 +2,7 @@
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
 
 <FormFrame
-        title="עריכת הרשמה"
+        title="{this.props.title}"
         hideBack="{this.props.hideBack}"
         onSubmit="{this.onSubmit}"
         onClose="{this.props.onClose}"
@@ -33,7 +33,7 @@
         <div class="row">
             <div class="small-3 large-2 columns">
                 <label for="pickUpToggle">הלוך</label>
-                <div class="switch large">
+                <div class="switch">
                     <input class="switch-input" id="pickUpToggle" type="checkbox"
                            onChange="(e)=>this.togglePickUp(e)" checked="{this.state.pickUpEnabled}"/>
                     <label class="switch-paddle" for="pickUpToggle"/>
@@ -52,7 +52,7 @@
         <div class="row">
             <div class="small-3 large-2 columns">
                 <label for="dropOffToggle">חזור</label>
-                <div class="switch large">
+                <div class="switch">
                     <input class="switch-input" id="dropOffToggle" type="checkbox"
                            onChange="(e)=>this.toggleDropOff(e)" checked="{this.state.dropOffEnabled}"/>
                     <label class="switch-paddle" for="dropOffToggle"/>

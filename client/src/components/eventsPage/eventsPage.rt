@@ -19,7 +19,7 @@
                     <li><a>כולם (12)</a></li>
                 </ul>
             </div>
-            <button class="float-left add-btn hide-for-small-only" onClick="() => this.onCreateEventClick()">+</button>
+            <button class="float-left add-btn big hide-for-small-only" onClick="() => this.onCreateEventClick()">+</button>
             <button class="float-left add-btn small show-for-small-only" onClick="() => this.onCreateEventClick()">+</button>
         </div>
 

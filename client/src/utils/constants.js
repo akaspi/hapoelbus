@@ -79,7 +79,7 @@ module.exports = {
       name: 'פואנלברדה'
     },
     'ulm': {
-      src: 'https://upload.wikimedia.org/wikipedia/en/b/b6/Ratiopharm_Ulm_logo.png',
+      src: 'http://nachwuchs.bbu01.com/modules/mod_bbunewsflash/assets/images/noimage_thumb.jpg',
       name: 'אולם'
     }
   },
@@ -91,7 +91,7 @@ module.exports = {
   MAX_EXTRA_PASSENGERS: 4,
   PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058'],
   PAGES: {
-    HOME: {val: 'home', name: 'דף הבית'},
+    HOME: {val: 'home', name: 'דף הבית', visible: true},
     AUTH: {val: 'auth', name: 'בב'},
     USERS: {val: 'users', name: 'משתמשים', visible: true},
     EVENTS: {val: 'events', name: 'אירועים', visible: true},

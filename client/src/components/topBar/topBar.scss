@@ -7,6 +7,10 @@
     cursor: default;
   }
 
+  .user-info {
+    font-size: 0.85rem;
+  }
+
   .small-menu {
     background: #e83a30;
     margin-top: 1em;
@@ -20,6 +24,10 @@
       color: #FFFFFF;
       background: none;
 
+      &.small {
+        font-size: 0.85rem;
+      }
+
       &.active {
         background: #e83a30;
         font-weight: bold;
@@ -32,7 +40,7 @@
     background: #fff;
     border-radius: 50%;
     padding: 5px;
-    margin: 10px 0 10px 10px;
+    margin: 10px;
   }
 
   .disconnect {
@@ -42,4 +50,5 @@
       text-decoration: underline;
     }
   }
+
 }

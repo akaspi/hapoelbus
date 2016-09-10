@@ -2,7 +2,7 @@
 <rt-require dependency="./topBar.scss" as="TopBarCss"></rt-require>
 
 <div class="top-bar row small-collapse">
-    <div class="medium-5 small-10 column">
+    <div class="medium-5 small-10 column user-info">
         <img src="http://image.flaticon.com/icons/svg/163/163804.svg" class="avatar"/>
         <span>שלום </span><span class="user-name">{this.getUserTitle()}</span><span> | </span>
         <a onClick="{this.props.signOut}" class="disconnect">התנתק</a>
@@ -14,10 +14,10 @@
         </a>
     </div>
 
-    <div class="medium-7 small-12 column vertical">
+    <div class="medium-7 small-12 column vertical collapsed">
         <div  class="menu button-group hide-for-small-only" rt-if="this.props.authData.isAdmin" key="admin-menu">
             <a rt-repeat="page in this.getPages()" key="page-{page.val}"
-               rt-class="{'active' : this.props.currentPage === page.val, 'button' : true}"
+               rt-class="{'active' : this.props.currentPage === page.val, 'button' : true, 'small': true}"
                onClick="() => this.props.navigateTo(page.val)">
                 {page.name}</a>
         </div>

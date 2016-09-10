@@ -54,6 +54,27 @@
     margin-top: 25px;
   }
 
+  .header {
+    background: #ee6d66;
+    border-bottom: 8px solid #e83a30;
+    color: #ffffff;
+    height: 3.3em;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+
+    .header-title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ffffff;
+      flex: 1;
+    }
+  }
+
+  .back-btn {
+    width: 20px;
+  }
+
   .dashboard-page {
     position: relative;
     background: #f3f3f3;
@@ -108,15 +129,19 @@
       color: #ffffff;
       width: 3.5rem;
       height: 3.5rem;
-      position: absolute;
+      position: fixed;
       bottom: 1rem;
-      left: 6%;
+
+      &.big {
+        left: 27%;
+      }
 
       //@include disable-mouse-outline; -- not working..
 
       &.small {
         width: 2.5rem;
         height: 2.5rem;
+        left: 5%;
       }
 
       &:hover {

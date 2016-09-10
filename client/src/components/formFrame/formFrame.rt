@@ -2,7 +2,7 @@
 
 <div class="form-frame">
     <div class="header">
-        <label class="title">{this.props.title}</label>
+        <label class="header-title">{this.props.title}</label>
         <button rt-if="!this.props.hideBack" class="back-btn" key="back-btn" onClick="{this.props.onClose}">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
