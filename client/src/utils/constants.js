@@ -133,8 +133,16 @@ module.exports = {
     },
     TEMPLATES: {
       EVENT_OPEN_FOR_MEMBERS: {
-        id: 'some-template-id',
+        id: '4fab6b92-bf61-48f1-b13b-bc702ed78695',
         name: 'פתיחת הרשמה למנויים'
+      },
+      EVENT_OPEN_FOR_ALL: {
+        id: 'dbe3e0e4-bb0e-41ad-bf12-5be64a30f3b7',
+        name: 'פתיחת הרשמה לכולם'
+      },
+      CHANGE_EVENT_DETAILS: {
+        id: '170fcd4f-df2e-44dd-b760-693d04fdd07c',
+        name: 'שינוי במועד האירוע'
       }
     }
   }
