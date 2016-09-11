@@ -19,7 +19,7 @@
             <div class="column small-12 large-6">
                 <div class="search">
                     <select value="{this.state.eventId}" onChange="e => this.onEventIdChange(e.target.value)">
-                        <option rt-repeat="event in this.getOpenedEvents()" key="event-{eventIndex}"
+                        <option rt-repeat="event in this.getOpenEvents()" key="event-{eventIndex}"
                                 value="{eventIndex}">
                             {event.day}/{event.month}/{event.year} - {Constants.EVENTS_TYPES[event.typeId].name}
                         </option>

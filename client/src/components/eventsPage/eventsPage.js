@@ -32,7 +32,7 @@ class EventsPage extends React.Component {
     this.state = {
       editingEventId: null,
       createMode: false,
-      filter: 'ALL'
+      filter: 'OPEN'
     };
   }
 
