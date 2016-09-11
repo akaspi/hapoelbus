@@ -11,10 +11,24 @@
             <label class="header-title">רשומים להסעות</label>
         </div>
 
-        <h5 class="show-for-print">{this.getEventPrintTitle()}</h5>
-
-        <div class="filtering row hide-for-print">
-            <div class="column small-12 large-6 small-centered more-space">
+        <div class="filtering row expanded collapse hide-for-print">
+            <div class="column small-12 large-6">
+                <ul class="menu">
+                    <li rt-class="{active: this.state.filter === 'PICKUP'}">
+                        <a onClick="() => this.handleFilterChange('PICKUP')">
+                            <span>הלוך </span>
+                            <span>({_.size(visibleBookings.pickUp.tlv) + _.size(visibleBookings.pickUp.modiin) })</span>
+                        </a>
+                    </li>
+                    <li rt-class="{active: this.state.filter === 'DROPOFF'}">
+                        <a onClick="() => this.handleFilterChange('DROPOFF')">
+                            <span>חזור </span>
+                            <span>({_.size(visibleBookings.dropOff.tlv) + _.size(visibleBookings.dropOff.modiin) })</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column small-12 large-6">
                 <div class="search">
                     <select value="{this.state.eventId}" onChange="e => this.onEventIdChange(e.target.value)">
                         <option rt-repeat="event in this.props.events" key="event-{eventIndex}"
@@ -26,35 +40,16 @@
             </div>
         </div>
 
-        <div class="both-container row"
-             rt-scope="visibleBookings.both.modiin as modiinBoth; visibleBookings.both.tlv as tlvBoth">
-            <h5 rt-if="_.size(tlvBoth) !== 0 || _.size(modiinBoth) !== 0" key="both-label">
-                <span>הלוך-חזור:</span>
-            </h5>
-            <h6 rt-if="_.size(tlvBoth) !== 0" key="tlvBoth">
-                <span>תל אביב</span>
-            </h6>
-            <listItem rt-repeat="booking in tlvBoth" title="{this.getBookingTitle(bookingIndex)}"
-                      key="booking-{bookingIndex}"
-                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage()}"
-                      onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
+        <h5 class="show-for-print">{this.getEventPrintTitle()}</h5>
 
-            <h6 rt-if="_.size(modiinBoth) !== 0" key="modiinBoth">
-                <span>מודיעין</span>
-            </h6>
-            <listItem rt-repeat="booking in modiinBoth" title="{this.getBookingTitle(bookingIndex)}"
-                      key="booking-{bookingIndex}"
-                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage()}"
-                      onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
-        </div>
-
-        <div class="pick-up-container row"
+        <div class="pick-up-container row hide-for-print" rt-if="this.state.filter === 'PICKUP'" key="pick-up-container"
              rt-scope="visibleBookings.pickUp.modiin as modiinPickUp; visibleBookings.pickUp.tlv as tlvPickUp">
             <h5 rt-if="_.size(tlvPickUp) !== 0 || _.size(modiinPickUp) !== 0" key="pickUp-label">
                 <span>הלוך:</span>
             </h5>
             <h6 rt-if="_.size(tlvPickUp) !== 0" key="tlvPickUp">
                 <span>תל אביב</span>
+                <span> ({_.size(tlvPickUp)})</span>
             </h6>
             <listItem rt-repeat="booking in tlvPickUp" title="{this.getBookingTitle(bookingIndex)}"
                       key="booking-{bookingIndex}"
@@ -63,6 +58,7 @@
 
             <h6 rt-if="_.size(modiinPickUp) !== 0" key="modiinPickUp">
                 <span>מודיעין</span>
+                <span> ({_.size(modiinPickUp)})</span>
             </h6>
             <listItem rt-repeat="booking in modiinPickUp" title="{this.getBookingTitle(bookingIndex)}"
                       key="booking-{bookingIndex}"
@@ -70,7 +66,7 @@
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
         </div>
 
-        <div class="drop-off-container row"
+        <div class="drop-off-container row hide-for-print" rt-if="this.state.filter === 'DROPOFF'" key="drop-off-container"
              rt-scope="visibleBookings.dropOff.modiin as modiinDropOff; visibleBookings.dropOff.tlv as tlvDropOff">
             <h5 rt-if="_.size(tlvDropOff) !== 0 || _.size(modiinDropOff) !== 0" key="drop-off-label">
                 <span>חזור:</span>
@@ -92,8 +88,7 @@
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
         </div>
 
-
-        <label class="filter-status" rt-if="visibleBookings.length === 0">
+        <label class="filter-status hide-for-print" rt-if="visibleBookings.length === 0">
             <i class="fa fa-frown-o" aria-hidden="true"></i>
             <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
         </label>
@@ -107,11 +102,15 @@
                  onClose="() => this.stopEditing()"/>
 
 
-    <div class="both-table" rt-scope="visibleBookings.both.modiin as modiinBoth; visibleBookings.both.tlv as tlvBoth">
+    <div class="pickUp-table show-for-print" rt-if="this.state.filter === 'PICKUP'" key="pickUp-table"
+         rt-scope="visibleBookings.pickUp.modiin as modiinPickUp; visibleBookings.pickUp.tlv as tlvPickUp">
         <table>
             <thead>
-            <tr rt-if="_.size(tlvBoth) !== 0 || _.size(modiinBoth) !== 0" key="both-label">
-                <td colspan="6">הלוך-חזור</td>
+            <tr rt-if="_.size(modiinPickUp) !== 0 || _.size(tlvPickUp) !== 0" key="pickUp-label">
+                <td colspan="6">
+                    <span>הלוך</span>
+                    <span> ({_.size(tlvPickUp) + _.size(modiinPickUp) })</span>
+                </td>
             </tr>
             <tr>
                 <th>שם</th>
@@ -123,10 +122,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr rt-if="_.size(tlvBoth) !== 0" key="tlvBoth">
-                <td colspan="6" class="table-sub">תל אביב</td>
+            <tr rt-if="_.size(tlvPickUp) !== 0" key="tlvPickUp">
+                <td colspan="6" class="table-sub">
+                    <span>תל אביב</span>
+                    <span> ({_.size(tlvPickUp)})</span>
+                </td>
             </tr>
-            <tr rt-repeat="booking in tlvBoth">
+            <tr rt-repeat="booking in tlvPickUp">
                 <td>{this.getBookingTitle(bookingIndex)}</td>
                 <td>{this.getBookingPhone(bookingIndex)}</td>
                 <td>{booking.paidSeats}</td>
@@ -134,10 +136,65 @@
                 <td>{Constants.STATIONS[booking.pickUp]}</td>
                 <td>{Constants.STATIONS[booking.dropOff]}</td>
             </tr>
-            <tr>
-                <td colspan="6" class="table-sub">מודיעין</td>
+            <tr rt-if="_.size(modiinPickUp) !== 0" key="modiinPickUp">
+                <td colspan="6" class="table-sub">
+                    <span>מודיעין</span>
+                    <span> ({_.size(modiinPickUp)})</span>
+                </td>
             </tr>
-            <tr rt-repeat="booking in modiinBoth">
+            <tr rt-repeat="booking in modiinPickUp">
+                <td>{this.getBookingTitle(bookingIndex)}</td>
+                <td>{this.getBookingPhone(bookingIndex)}</td>
+                <td>{booking.paidSeats}</td>
+                <td>{booking.extraSeats}</td>
+                <td>{Constants.STATIONS[booking.pickUp]}</td>
+                <td>{Constants.STATIONS[booking.dropOff]}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dropOff-table show-for-print" rt-if="this.state.filter === 'DROPOFF'" key="dropOff-table"
+         rt-scope="visibleBookings.dropOff.modiin as modiinDropOff; visibleBookings.dropOff.tlv as tlvDropOff">
+        <table>
+            <thead>
+            <tr rt-if="_.size(tlvDropOff) !== 0 || _.size(modiinDropOff) !== 0" key="dropOff-label">
+                <td colspan="6">
+                    <span>חזור</span>
+                    <span> ({_.size(tlvDropOff) + _.size(modiinDropOff) })</span>
+                </td>
+            </tr>
+            <tr>
+                <th>שם</th>
+                <th>טלפון</th>
+                <th>מנויים</th>
+                <th>בתשלום</th>
+                <th>תחנת עליה</th>
+                <th>תחנת ירידה</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr rt-if="_.size(tlvDropOff) !== 0" key="tlvDropOff">
+                <td colspan="6" class="table-sub">
+                    <span>תל אביב</span>
+                    <span> ({_.size(tlvDropOff)})</span>
+                </td>
+            </tr>
+            <tr rt-repeat="booking in tlvDropOff">
+                <td>{this.getBookingTitle(bookingIndex)}</td>
+                <td>{this.getBookingPhone(bookingIndex)}</td>
+                <td>{booking.paidSeats}</td>
+                <td>{booking.extraSeats}</td>
+                <td>{Constants.STATIONS[booking.pickUp]}</td>
+                <td>{Constants.STATIONS[booking.dropOff]}</td>
+            </tr>
+            <tr rt-if="_.size(modiinDropOff) !== 0" key="modiinDropOff">
+                <td colspan="6" class="table-sub">
+                    <span>מודיעין</span>
+                    <span> ({_.size(modiinDropOff)})</span>
+                </td>
+            </tr>
+            <tr rt-repeat="booking in modiinDropOff">
                 <td>{this.getBookingTitle(bookingIndex)}</td>
                 <td>{this.getBookingPhone(bookingIndex)}</td>
                 <td>{booking.paidSeats}</td>

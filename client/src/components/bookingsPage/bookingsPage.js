@@ -6,26 +6,19 @@ import * as Constants from '../../utils/constants';
 import {updateBooking} from '../../redux/actions/bookingActions';
 
 const getDropOffMap = bookings => _.chain(bookings)
-  .omitBy(booking => !(booking.dropOff && (booking.dropOff !== booking.pickUp)))
+  .omitBy(booking => !(booking.dropOff))
   .transform((acc, booking, uid) => {
     acc[booking.dropOff][uid] = booking
   }, {tlv: {}, modiin: {}})
   .value();
 
 const getPickUpMap = bookings => _.chain(bookings)
-  .omitBy(booking => !(booking.pickUp && (booking.dropOff !== booking.pickUp)))
+  .omitBy(booking => !(booking.pickUp))
   .transform((acc, booking, uid) => {
     acc[booking.pickUp][uid] = booking
   }, {tlv: {}, modiin: {}})
   .value();
 
-
-const getBothWaysMap = bookings => _.chain(bookings)
-  .omitBy(booking => !(booking.dropOff === booking.pickUp))
-  .transform((acc, booking, uid) => {
-    acc[booking.pickUp][uid] = booking
-  }, {tlv: {}, modiin: {}})
-  .value();
 
 
 const mapStateToProps = (state) => ({
@@ -43,7 +36,8 @@ class BookingsPage extends React.Component {
     super(props);
     this.state = {
       editingUserId: null,
-      eventId: _.last(_.keys(this.props.events))
+      eventId: _.last(_.keys(this.props.events)),
+      filter: 'PICKUP'
     };
   }
 
@@ -54,10 +48,13 @@ class BookingsPage extends React.Component {
       .value();
 
     return {
-      both: getBothWaysMap(bookingForEventMap),
       pickUp: getPickUpMap(bookingForEventMap),
       dropOff: getDropOffMap(bookingForEventMap)
     }
+  }
+
+  handleFilterChange(filter) {
+    this.setState({ filter });
   }
 
   onEventIdChange(eventId) {
@@ -95,10 +92,10 @@ class BookingsPage extends React.Component {
       subtitles.push('חד פעמי: ' + booking.extraSeats);
     }
     if (booking.pickUp) {
-      subtitles.push('תחנת עליה: ' + Constants.STATIONS[booking.pickUp]);
+      subtitles.push('הלוך: ' + Constants.STATIONS[booking.pickUp]);
     }
     if (booking.dropOff) {
-      subtitles.push('תחנת ירידה: ' + Constants.STATIONS[booking.dropOff]);
+      subtitles.push('חזור: ' + Constants.STATIONS[booking.dropOff]);
     }
 
     if (uid) {
