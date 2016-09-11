@@ -10,16 +10,31 @@
         <div class="filtering row expanded collapse">
             <div class="column small-12 large-6">
                 <ul class="menu">
-                    <li class="active"><a>כולם (12)</a></li>
-                    <li><a>מנויים (11)</a></li>
-                    <li><a>לא מנויים (1)</a></li>
+                    <li rt-class="{active: this.state.filter === 'ALL'}">
+                        <a onClick="() => this.handleFilterChange('ALL')">
+                            <span>כולם </span>
+                            <span>({_.size(this.props.users)})</span>
+                        </a>
+                    </li>
+                    <li rt-class="{active: this.state.filter === 'MEMBERS'}">
+                        <a onClick="() => this.handleFilterChange('MEMBERS')">
+                            <span>מנויים </span>
+                            <span>({_.size(this.getMembersUser())})</span>
+                        </a>
+                    </li>
+                    <li rt-class="{active: this.state.filter === 'NON_MEMBERS'}">
+                        <a onClick="() => this.handleFilterChange('NON_MEMBERS')">
+                            <span>לא מנויים </span>
+                            <span>({_.size(this.getNonMembersUsers())})</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="column small-12 large-6">
                 <div class="search">
                     <input class="search-input" type="search" placeholder="חיפוש"
-                           onChange="(e)=>this.handleFilterChange(e)"
-                           value="{this.state.filter}"/>
+                           onChange="(e)=>this.handleSearchQueryChange(e)"
+                           value="{this.state.searchQuery}"/>
                     <span class="search-icon"><i class="fa fa-search"></i></span>
                 </div>
             </div>
@@ -29,6 +44,7 @@
                   key="user-{userItem.uid}"
                   subtitles="{this.getUserSubtitles(userItem.user)}" imageSrc="{this.getUserImage(userItem.user)}"
                   onClick="()=>this.onUserClick(userItem.uid)"></listItem>
+
         <label class="filter-status" rt-if="visibleUsers.length === 0">
             <i class="fa fa-frown-o" aria-hidden="true"></i>
             <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
