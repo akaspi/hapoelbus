@@ -80,9 +80,13 @@ class BookingsPage extends React.Component {
     return user.firstName + ' ' + user.lastName;
   }
 
+  getBookingPhone(uid) {
+    const user = this.props.users[uid];
+    return user.phonePrefix + '-' + user.phoneNumber;
+  }
+
   getBookingSubtitles(booking, uid) {
     const subtitles = [];
-    const user = this.props.users[uid];
 
     if (booking.paidSeats > 0) {
       subtitles.push('מנויים: ' + booking.paidSeats);
@@ -97,8 +101,8 @@ class BookingsPage extends React.Component {
       subtitles.push('תחנת ירידה: ' + Constants.STATIONS[booking.dropOff]);
     }
 
-    if (user) {
-      subtitles.push('טל׳: ' + user.phonePrefix + '-' + user.phoneNumber);
+    if (uid) {
+      subtitles.push('טל׳: ' + this.getBookingPhone(uid));
     }
 
     return subtitles;
