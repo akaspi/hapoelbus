@@ -73,6 +73,10 @@ class DistributionPage extends React.Component {
     this.setState({ distributionType: e.target.value });
   }
 
+  onTemplateIdChange(e) {
+    this.setState({ templateId: e.target.value });
+  }
+
   onEventChange(e) {
     this.setState({ eventId: e.target.value });
   }
