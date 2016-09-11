@@ -62,6 +62,10 @@ class BookingsPage extends React.Component {
 
   }
 
+  getOpenedEvents() {
+    return _.reject(this.props.events, (evt)=>{return evt.status === Constants.EVENTS_STATUS.CLOSED.value});
+  }
+
   onEventIdChange(eventId) {
     this.setState({eventId});
   }

@@ -12,8 +12,8 @@
   }
 
   .small-menu {
-    background: #e83a30;
-    margin-top: 1em;
+    background: #D50000;
+    margin-top: 0.5em;
     margin-left: 0.5em;
   }
 
@@ -28,9 +28,17 @@
         font-size: 0.85rem;
       }
 
+      &:hover {
+        color: #D32F2F;
+      }
+
       &.active {
-        background: #e83a30;
+        background: #D32F2F;
         font-weight: bold;
+
+        &:hover {
+          background: #D50000;
+        }
       }
     }
   }
@@ -44,7 +52,7 @@
   }
 
   .disconnect {
-    color: #e83a30;
+    color: #F44336;
 
     &:hover {
       text-decoration: underline;

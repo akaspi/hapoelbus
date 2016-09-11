@@ -55,8 +55,8 @@
   }
 
   .header {
-    background: #ee6d66;
-    border-bottom: 8px solid #e83a30;
+    background: #EF5350;
+    border-bottom: 8px solid #D32F2F;
     color: #ffffff;
     height: 3.3em;
     padding: 0 10px 0 10px;
@@ -77,7 +77,7 @@
 
   .dashboard-page {
     position: relative;
-    background: #f3f3f3;
+    background: #F5F5F5;
     min-height: 90vh;
 
     .filtering {
@@ -86,11 +86,11 @@
         li {
           a {
             padding: 1rem;
-            color: #e83a30;
+            color: #D32F2F;
           }
           &.active {
             a {
-              background: #e83a30;
+              background: #D32F2F;
               color: #FFFFFF;
             }
           }
@@ -116,7 +116,7 @@
     }
 
     .add-btn {
-      background-color: #d23f31;
+      background-color: #D32F2F;
       box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
       cursor: pointer;
       border-radius: 50%;
@@ -145,7 +145,7 @@
       }
 
       &:hover {
-        background: #da5144;
+        background: #D50000;
       }
 
       &:focus {
@@ -154,7 +154,7 @@
     }
 
     .filter-status {
-      color: #666;
+      color: #424242;
       font-size: 1rem;
       text-align: center;
 
