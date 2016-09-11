@@ -6,6 +6,12 @@ import { createEvent, updateEvent } from '../../redux/actions/eventActions';
 
 import * as Constants from '../../utils/constants';
 
+const pickEvents = {
+  ALL: event => true,
+  OPEN: event => event.status === Constants.EVENTS_STATUS.OPEN_FOR_ALL.value || event.status === Constants.EVENTS_STATUS.OPEN_FOR_MEMBERS.value,
+  CLOSED: event => event.status === Constants.EVENTS_STATUS.CLOSED.value,
+};
+
 const getStatusSubtitle = event => {
   const eventStatus = _.find(Constants.EVENTS_STATUS, { value: event.status });
   return eventStatus ? eventStatus.name : '';
@@ -25,14 +31,28 @@ class EventsPage extends React.Component {
     super(props);
     this.state = {
       editingEventId: null,
-      createMode: false
+      createMode: false,
+      filter: 'ALL'
     };
   }
 
   getVisibleEvents() {
     return _.chain(this.props.events)
+      .pickBy(pickEvents[this.state.filter])
       .map((event, eventId) => ({ eventId, event }))
       .value();
+  }
+
+  getOpenEvents() {
+    return _.pickBy(this.props.events, pickEvents['OPEN']);
+  }
+
+  getClosedEvents() {
+    return _.pickBy(this.props.events, pickEvents['CLOSED']);
+  }
+
+  handleFilterChange(filter) {
+    this.setState({ filter });
   }
 
   getEventTitle(event) {
