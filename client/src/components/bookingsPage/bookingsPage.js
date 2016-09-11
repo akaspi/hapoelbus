@@ -43,7 +43,7 @@ class BookingsPage extends React.Component {
     super(props);
     this.state = {
       editingUserId: null,
-      eventId: _.first(_.keys(this.getOpenEvents()))
+      eventId: _.last(_.keys(this.props.events))
     };
   }
 
@@ -58,16 +58,8 @@ class BookingsPage extends React.Component {
       pickUp: getPickUpMap(bookingForEventMap),
       dropOff: getDropOffMap(bookingForEventMap)
     }
-
-
   }
-
-  getOpenEvents() {
-    return _.omitBy(this.props.events,
-      event => event.status === Constants.EVENTS_STATUS.CLOSED.value
-    );
-  }
-
+  
   onEventIdChange(eventId) {
     this.setState({eventId});
   }
