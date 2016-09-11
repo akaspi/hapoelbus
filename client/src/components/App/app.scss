@@ -80,6 +80,15 @@
     background: #F5F5F5;
     min-height: 90vh;
 
+    .list-item {
+      &:nth-child(even) {
+        background: #EEEEEE;
+      }
+      &:nth-child(odd) {
+        background: #E0E0E0;
+      }
+    }
+
     .filtering {
 
       .menu {

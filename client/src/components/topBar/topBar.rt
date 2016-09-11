@@ -1,7 +1,7 @@
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./topBar.scss" as="TopBarCss"></rt-require>
 
-<div class="top-bar row small-collapse">
+<div class="top-bar row small-collapse hide-for-print">
     <div class="medium-5 small-10 column user-info">
         <img src="http://image.flaticon.com/icons/svg/163/163804.svg" class="avatar"/>
         <span>שלום </span><span class="user-name">{this.getUserTitle()}</span><span> | </span>

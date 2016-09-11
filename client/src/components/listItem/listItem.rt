@@ -4,9 +4,8 @@
 <div class="list-item small-12" onClick="{this.props.onClick}">
     <img src="{this.props.imageSrc}" class="list-image"/>
     <div class="list-titles">
-        <label class="title large-text">{this.props.title}</label>
+        <label class="title large-text hide-for-print">{this.props.title}</label>
         <label rt-repeat="subtitle in this.props.subtitles" key="subtitle-{subtitleIndex}" class="subtitle small-12 show-for-small-only">{subtitle}</label>
-        <label rt-repeat="subtitle in this.props.subtitles" key="subtitle-large-{subtitleIndex}" class="subtitle hide-for-small-only">{subtitle}</label>
-
+        <label rt-repeat="subtitle in this.props.subtitles" key="subtitle-large-{subtitleIndex}" class="subtitle inline hide-for-small-only">{subtitle}</label>
     </div>
 </div>

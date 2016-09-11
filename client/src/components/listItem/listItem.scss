@@ -1,7 +1,7 @@
 .list-item {
   display: flex;
   align-items: flex-start;
-  padding: 10px 10px 0 10px;
+  padding: 5px 10px 5px 10px;
 
   &:first-child {
     padding-top: 0;
@@ -21,7 +21,6 @@
   .list-titles {
     flex: 1;
     overflow: hidden;
-    border-bottom: 1px solid #d6d6d6;
 
     .title.large-text {
       font-size: 1.2em;
@@ -29,7 +28,7 @@
     }
     .subtitle {
       font-size: 0.80rem;
-      &.hide-for-small-only {
+      &.inline, &.inline.show-for-print {
         display: inline-block;
         margin-left: 15px;
       }

@@ -59,7 +59,7 @@ class BookingsPage extends React.Component {
       dropOff: getDropOffMap(bookingForEventMap)
     }
   }
-  
+
   onEventIdChange(eventId) {
     this.setState({eventId});
   }
@@ -68,13 +68,22 @@ class BookingsPage extends React.Component {
     this.setState({editingUserId: uid});
   }
 
+  getEventPrintTitle() {
+    if (this.state.eventId) {
+      const currentEvt = this.props.events[this.state.eventId];
+      return Constants.EVENTS_TYPES[currentEvt.typeId].name + ' - ' + currentEvt.day + '/' + currentEvt.month + '/' + currentEvt.year;
+    }
+  }
+
   getBookingTitle(uid) {
     const user = this.props.users[uid];
     return user.firstName + ' ' + user.lastName;
   }
 
-  getBookingSubtitles(booking) {
+  getBookingSubtitles(booking, uid) {
     const subtitles = [];
+    const user = this.props.users[uid];
+
     if (booking.paidSeats > 0) {
       subtitles.push('מנויים: ' + booking.paidSeats);
     }
@@ -87,11 +96,16 @@ class BookingsPage extends React.Component {
     if (booking.dropOff) {
       subtitles.push('תחנת ירידה: ' + Constants.STATIONS[booking.dropOff]);
     }
+
+    if (user) {
+      subtitles.push('טל׳: ' + user.phonePrefix + '-' + user.phoneNumber);
+    }
+
     return subtitles;
   }
 
   getBookingImage() {
-    return 'http://image.flaticon.com/icons/svg/171/171867.svg';
+    return 'http://image.flaticon.com/icons/svg/147/147125.svg';
   }
 
   stopEditing() {
