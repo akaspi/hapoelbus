@@ -4,6 +4,11 @@ import template from './usersPage.rt';
 import { connect } from 'react-redux';
 import { updateUser } from '../../redux/actions/userActions';
 
+const pickUsersFunctions = {
+  ALL: user => true,
+  MEMBERS: user => user.seasonTickets > 0,
+  NON_MEMBERS: user => !user.seasonTickets,
+};
 
 const mapStateToProps = (state) => ({
   users: state.users,
@@ -19,19 +24,33 @@ class UsersPage extends React.Component {
     super(props);
     this.state = {
       editingUserId: null,
-      filter: ''
+      searchQuery: '',
+      filter: 'ALL'
     };
   }
 
   getVisibleUsers() {
     return _.chain(this.props.users)
-      .pickBy(user => _.startsWith(user.firstName, this.state.filter) || _.startsWith(user.lastName, this.state.filter), this)
+      .pickBy(pickUsersFunctions[this.state.filter])
+      .pickBy(user => _.startsWith(user.firstName, this.state.searchQuery) || _.startsWith(user.lastName, this.state.searchQuery), this)
       .map((user, uid) => ({ user, uid }))
       .value();
   }
 
-  handleFilterChange(e) {
-    this.setState({ filter: e.target.value });
+  getMembersUser() {
+    return _.pickBy(this.props.users, pickUsersFunctions['MEMBERS']);
+  }
+
+  getNonMembersUsers() {
+    return _.pickBy(this.props.users, pickUsersFunctions['NON_MEMBERS']);
+  }
+
+  handleSearchQueryChange(e) {
+    this.setState({ searchQuery: e.target.value });
+  }
+
+  handleFilterChange(filter) {
+    this.setState({ filter });
   }
 
   onUserClick(uid) {
@@ -39,7 +58,7 @@ class UsersPage extends React.Component {
   }
 
   stopEditing() {
-    this.setState({ editingUserId: null, filter: '' });
+    this.setState({ editingUserId: null, searchQuery: '' });
   }
 
   render() {
