@@ -43,7 +43,7 @@ class BookingsPage extends React.Component {
     super(props);
     this.state = {
       editingUserId: null,
-      eventId: _.last(_.keys(this.props.events))
+      eventId: _.first(_.keys(this.getOpenEvents()))
     };
   }
 
