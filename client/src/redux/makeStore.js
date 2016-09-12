@@ -6,11 +6,13 @@ import usersReducer from './reducers/usersReducer';
 import eventsReducer from './reducers/eventsReducer';
 import bookingsReducer from './reducers/bookingsReducer';
 import authDataReducer from './reducers/authDataReducer';
+import navigationReducer from './reducers/navigationReducer';
 
 import thunk from 'redux-thunk';
 
 export const makeStore = () => {
   const reducers = combineReducers({
+    currentPage: navigationReducer,
     authData: authDataReducer,
     errorMsg: errorReducer,
     loading: loadingReducer,

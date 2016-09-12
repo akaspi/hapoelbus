@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { USERS_RECEIVED } from './actionTypes';
+import { USERS_RECEIVED, USER_REMOVED } from './actionTypes';
 import { Promise } from 'bluebird';
 
 import * as clientDB from '../../utils/clientDB';
@@ -50,6 +50,11 @@ const fetchSingleUser = uid => {
     });
 };
 
+export const usersRemoved = uid => ({
+  type: USER_REMOVED,
+  uid
+});
+
 export const usersReceived = users => ({
   type: USERS_RECEIVED,
   users
@@ -83,6 +88,17 @@ export const updateUser = (uid, user) => (dispatch, getState) => {
 
   return Promise.all(userUpdatePromises)
     .then(() => dispatch(usersReceived({ [uid]: user })))
+    .catch(() => dispatch(errorActions.reportError()))
+    .finally(() => dispatch(loadingActions.stopLoading()));
+};
+
+export const removeUser = uid => dispatch => {
+  dispatch(loadingActions.startLoading());
+
+  const userRemovePromises = _.map(PATH_MAP, userPath => clientDB.remove(`${userPath}/${uid}`));
+
+  return Promise.all(userRemovePromises)
+    .then(() => dispatch(usersRemoved(uid)))
     .catch(() => dispatch(errorActions.reportError()))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };

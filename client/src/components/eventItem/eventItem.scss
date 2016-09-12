@@ -1,0 +1,68 @@
+
+.event-item {
+
+  font-size: 0.9em;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  .groups-images {
+
+    .separator {
+      margin-right: 5px;
+    }
+  }
+
+  .event-image {
+    border-radius: 50%;
+    background: #ffffff;
+
+    &.big {
+      margin-bottom: 10px;
+      width: 90px;
+      height: 90px;
+    }
+
+    &.small {
+      margin: 0 5px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .groups-names {
+    padding: 0 4em;
+  }
+
+  .event-info {
+    text-align: center;
+    margin-top: 10px;
+
+    &.colored {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    span {
+      margin: 0 15px;
+    }
+  }
+
+  .action-buttons {
+    margin-right: auto;
+    margin-top: 5px;
+
+    .button {
+      &.small {
+        font-size: 0.75rem;
+        margin: 0 5px;
+      }
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+}

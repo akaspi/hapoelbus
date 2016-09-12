@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { EVENTS_RECEIVED } from './actionTypes';
+import { EVENTS_RECEIVED, EVENT_REMOVED } from './actionTypes';
 
 import * as clientDB from '../../utils/clientDB';
 import * as loadingActions from './loadingActions';
@@ -8,6 +8,11 @@ import * as errorActions from './errorActions';
 
 const EVENT_KEYS = ['typeId', 'day', 'month', 'year', 'hour', 'minute', 'status'];
 const EVENTS_PATH = 'events';
+
+export const eventRemoved = eventId => ({
+  type: EVENT_REMOVED,
+  eventId
+});
 
 export const eventsReceived = events => ({
   type: EVENTS_RECEIVED,
@@ -39,6 +44,15 @@ export const updateEvent = (eventId, event) => dispatch => {
 
   return clientDB.update('events/' + eventId, eventToUpdate)
     .then(() => dispatch(eventsReceived({ [eventId]: eventToUpdate })))
+    .catch(() => dispatch(errorActions.reportError()))
+    .finally(() => dispatch(loadingActions.stopLoading()));
+};
+
+export const removeEvent = eventId => dispatch => {
+  dispatch(loadingActions.startLoading());
+
+  return clientDB.remove(`${EVENTS_PATH}/${eventId}`)
+    .then(() => dispatch(eventRemoved(eventId)))
     .catch(() => dispatch(errorActions.reportError()))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };

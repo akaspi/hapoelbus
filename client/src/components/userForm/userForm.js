@@ -1,36 +1,31 @@
 import React from 'react';
 import * as _ from 'lodash';
 import template from './userForm.rt';
-import { connect } from 'react-redux';
-import { updateUser } from '../../redux/actions/userActions';
 
-const mapStateToProps = state => ({
-  authData: state.authData
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateUser: (uid, userInfo) => dispatch(updateUser(uid, userInfo)),
-});
+const emptyUser = {
+  firstName: '',
+  lastName: '',
+  phonePrefix: '050',
+  phoneNumber: '',
+  station: 'tlv',
+  subscribeSMS: true,
+  subscribeMail: true,
+  seasonTickets: 0
+};
 
 const userForm = React.createClass({
   displayName: 'userForm',
 
   propTypes: {
-    authData: React.PropTypes.object.isRequired,
-    updateUser: React.PropTypes.func.isRequired
+    uid: React.PropTypes.string.isRequired,
+    user: React.PropTypes.object,
+    email: React.PropTypes.string,
+    updateUser: React.PropTypes.func.isRequired,
+    onClose: React.PropTypes.func
   },
 
   getInitialState() {
-    return {
-      firstName: '',
-      lastName: '',
-      phonePrefix: '050',
-      phoneNumber: '',
-      station: 'tlv',
-      subscribeSMS: true,
-      subscribeMail: true,
-      seasonTickets: 0
-    };
+    return _.defaults(this.props.user, emptyUser, {email: this.props.email});
   },
 
   onInfoChange(e, validationType) {
@@ -80,7 +75,7 @@ const userForm = React.createClass({
 
   updateUser() {
     const user = {
-      email: this.props.authData.email,
+      email: _.get(this.props.user, 'email') || this.props.email,
       firstName: _.trim(this.state.firstName),
       lastName: _.trim(this.state.lastName),
       phonePrefix: this.state.phonePrefix,
@@ -91,14 +86,13 @@ const userForm = React.createClass({
       seasonTickets: this.state.seasonTickets,
       requestForMembership: this.state.requestForMembership
     };
-    this.props.updateUser(this.props.authData.uid, user);
+    this.props.updateUser(this.props.uid, user);
   },
 
   isFormValid() {
     const requiredInfo = _.pick(this.state, ['firstName', 'lastName', 'phonePrefix', 'phoneNumber']);
     const isUserInfoValid = !_.some(requiredInfo, _.isEmpty);
-    const isEmailValid = !_.isEmpty(this.props.authData.email) || !_.isEmpty(this.state.email);
-    return isUserInfoValid && isEmailValid && !this.isPhoneInvalid() && _.has(this.state, 'requestForMembership');
+    return isUserInfoValid && !this.isPhoneInvalid() && _.has(this.state, 'requestForMembership');
   },
 
   isPhoneInvalid() {
@@ -106,12 +100,13 @@ const userForm = React.createClass({
   },
 
   handleKeyDown(e) {
-    if (e.keyCode === 13 && !this.isSubmitDisabled()) {
+    if (e.keyCode === 13 && this.isFormValid()) {
       this.updateUser();
+      this.props.onClose();
     }
   },
 
   render: template
 });
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(userForm);
+module.exports = userForm;

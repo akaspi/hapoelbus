@@ -7,6 +7,7 @@ import * as eventActions from './eventActions';
 import * as bookingActions from './bookingActions';
 import * as loadingActions from './loadingActions';
 import * as errorActions from './errorActions';
+import * as navigationActions from './navigationActions';
 
 export const AUTH_ERROR_CODES_MAP = {
   'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
@@ -39,6 +40,7 @@ export const signOut = () => dispatch => {
 
   return clientDB.signOut()
     .then(() => dispatch(userSignedOut()))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.AUTH.val)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -52,6 +54,7 @@ export const loginWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.loginWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -61,6 +64,7 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.createUserWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
+    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -71,10 +75,13 @@ export const fetchAuthData = () => dispatch => {
   return clientDB.getLoggedInUser()
     .then(user => {
       if (user) {
-        return fetchAppData(dispatch, user);
+        return fetchAppData(dispatch, user)
+          .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)));
       }
       return null;
     })
-    .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
+    .catch(dbError => {
+      dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code]))
+    })
     .finally(() => dispatch(loadingActions.stopLoading()));
 };

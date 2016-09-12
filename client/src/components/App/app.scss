@@ -1,0 +1,182 @@
+.site {
+
+  direction: rtl;
+
+  $facebook-color: #3b5998;
+  $google-color: #d50f25;
+  $primary-color: #3498db;
+  $hover-color: #2385c6;
+
+  .split.button {
+    width: 100%;
+    font-size: 16px;
+    line-height: 16px;
+
+    i {
+      font-size: 20px;
+      padding-right: 10px;
+      line-height: 16px;
+    }
+
+    &.facebook {
+      background: $facebook-color;
+    }
+
+    &.google {
+      background: $google-color;
+    }
+
+    &.left-icon {
+      text-align: right;
+      span {
+        left: 0;
+      }
+    }
+  }
+
+  .error-msg {
+    color: $google-color;
+    padding: 0 15px;
+
+    i {
+      margin-left: 10px;
+    }
+  }
+
+  label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .more-space {
+    margin-top: 25px;
+  }
+
+  .header {
+    background: #EF5350;
+    border-bottom: 8px solid #D32F2F;
+    color: #ffffff;
+    height: 3.3em;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+
+    .header-title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ffffff;
+      flex: 1;
+    }
+  }
+
+  .back-btn {
+    width: 20px;
+  }
+
+  .dashboard-page {
+    position: relative;
+    background: #F5F5F5;
+    min-height: 100vh;
+
+    .list-item {
+      &:nth-child(even) {
+        background: #EEEEEE;
+      }
+      &:nth-child(odd) {
+        background: #E0E0E0;
+      }
+    }
+
+    .filtering {
+
+      .menu {
+        li {
+          a {
+            padding: 1rem;
+            color: #D32F2F;
+          }
+          &.active {
+            a {
+              background: #D32F2F;
+              color: #FFFFFF;
+            }
+            &:hover {
+              color: #FFFFFF;
+            }
+          }
+        }
+      }
+
+      .search {
+        position: relative;
+        margin-top: 5px;
+        padding-right: 0.935em;
+        padding-left: 0.935em;
+      }
+      .search-input {
+        text-indent: 30px;
+      }
+      .search-icon {
+        position: absolute;
+        top: 11px;
+        right: 28px;
+        font-size: 0.8em;
+        color: #cacaca;
+      }
+    }
+
+    .add-btn {
+      background-color: #D32F2F;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 1em;
+      font-weight: bold;
+      line-height: 0;
+      outline: none;
+      transition: background-color .25s ease-out, color .25s ease-out;
+      padding: .85em;
+      color: #ffffff;
+      width: 3.5rem;
+      height: 3.5rem;
+      position: fixed;
+      bottom: 1rem;
+
+      &.big {
+        left: 27%;
+      }
+
+      //@include disable-mouse-outline; -- not working..
+
+      &.small {
+        width: 2.5rem;
+        height: 2.5rem;
+        left: 5%;
+      }
+
+      &:hover {
+        background: #D50000;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .filter-status {
+      color: #424242;
+      font-size: 1rem;
+      text-align: center;
+
+      i {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .button.success[disabled]:hover {
+    background: #25a35a !important;
+  }
+}

@@ -1,8 +1,7 @@
-<rt-require dependency="./authForm.scss" as="css"></rt-require>
+<rt-require dependency="./authPage.scss" as="css"></rt-require>
 <rt-require dependency="../logo/logo" as="logo"></rt-require>
 
-<div class="large-3 medium-6 columns small-centered auth-form-container">
-
+<div class="large-6 columns small-centered auth-form-container">
     <div class="medium-centered logo">
         <logo width="120" height="120"/>
     </div>
@@ -15,6 +14,12 @@
         <span>Google</span>
         <i class="fa fa-google" aria-hidden="true"></i>
     </button>
+
+    <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <span class="error-msg-txt">{this.props.errorMsg}</span>
+    </div>
+
     <hr>
     <div onKeyDown="{this.handleKeyDown}" class="auth-form">
         <input type="email" value="{this.state.email}" onChange="{this.onChange}" name="email"

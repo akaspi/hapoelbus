@@ -1,72 +1,72 @@
+<rt-require dependency="../formFrame/formFrame" as="FormFrame"></rt-require>
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
 
-<div class="large-6 small-centered user-info-form">
-    <h2>הרשמה:</h2>
-    <hr>
-    <div class="row">
-        <div class="small-8 large-10 columns">
-            <label>שם המשתמש
-                <select value="{this.state.userId}" onChange="{this.onChange}" name="userId">
-                    <option value="1">חן אלישע</option>
-                    <option value="2">עמית כספי</option>
-                </select>
-            </label>
+<FormFrame
+        title="{this.props.title}"
+        hideBack="{this.props.hideBack}"
+        onSubmit="{this.onSubmit}"
+        onClose="{this.props.onClose}"
+        disabled="{!this.isFormValid()}">
+
+        <div class="booking-form small-11 small-centered">
+        <div class="row">
+            <div class="small-6 columns" rt-if="this.props.seasonTickets">
+                <label>כמות מנויים
+                    <select value="{this.state.paidSeats}" onChange="{this.onNumericChange}" name="paidSeats">
+                        <option rt-repeat="seat in _.times(this.props.seasonTickets + 1)" key="seat-{seatIndex}"
+                                value="{seatIndex}">{seatIndex}
+                        </option>
+                    </select>
+                </label>
+            </div>
+            <div class="small-6 columns end">
+                <label>נוסעים בתשלום
+                    <select value="{this.state.extraSeats}" onChange="{this.onNumericChange}" name="extraSeats">
+                        <option rt-repeat="extraSeat in _.times(constants.MAX_EXTRA_PASSENGERS)"
+                                key="extraSeat-{extraSeatIndex}"
+                                value="{extraSeatIndex}">{extraSeatIndex}
+                        </option>
+                    </select>
+                </label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="small-8 large-10 columns">
-            <label>שם האירוע
-                <select value="{this.state.eventId}" onChange="{this.onChange}" name="eventId">
-                    <option rt-repeat="event in constants.EVENTS_TYPES" key="event-{eventIndex}" value="{eventIndex}">
-                        {event.name}
+        <div class="row">
+            <div class="small-3 large-2 columns">
+                <label for="pickUpToggle">הלוך</label>
+                <div class="switch">
+                    <input class="switch-input" id="pickUpToggle" type="checkbox"
+                           onChange="(e)=>this.togglePickUp(e)" checked="{this.state.pickUpEnabled}"/>
+                    <label class="switch-paddle" for="pickUpToggle"/>
+                </div>
+            </div>
+            <div class="small-9 large-10 columns end more-space">
+                <select value="{this.state.pickUp}" onChange="{this.onChange}" name="pickUp" disabled="{!this.state.pickUpEnabled}">
+                    <option value="" style="display: none">בחר</option>
+                    <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}"
+                            value="{stationIndex}">
+                        {station}
                     </option>
-                </select></label>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="small-4 large-5 columns end">
-            <label>כמות נוסעים
-                <select value="{this.state.paidAmount}" onChange="{this.onChange}" name="paidAmount">
-                    <option rt-repeat="amount in _.times(2)" key="amount-{amountIndex}"
-                            value="{amountIndex}">{amountIndex}
+        <div class="row">
+            <div class="small-3 large-2 columns">
+                <label for="dropOffToggle">חזור</label>
+                <div class="switch">
+                    <input class="switch-input" id="dropOffToggle" type="checkbox"
+                           onChange="(e)=>this.toggleDropOff(e)" checked="{this.state.dropOffEnabled}"/>
+                    <label class="switch-paddle" for="dropOffToggle"/>
+                </div>
+            </div>
+            <div class="small-9 large-10 columns end more-space">
+                <select value="{this.state.dropOff}" onChange="{this.onChange}" name="dropOff" disabled="{!this.state.dropOffEnabled}">
+                    <option value="" style="display: none">בחר</option>
+                    <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}"
+                            value="{stationIndex}">
+                        {station}
                     </option>
                 </select>
-            </label>
-        </div>
-        <div class="small-4 large-5 columns end">
-            <label>נוסעים נוספים בתשלום
-                <select value="{this.state.unpaidAmount}" onChange="{this.onChange}" name="unpaidAmount">
-                    <option rt-repeat="amount in _.times(constants.MAX_EXTRA_PASSENGERS)" key="extraAmount-{amountIndex}"
-                            value="{amountIndex}">{amountIndex}
-                    </option>
-                </select>
-            </label>
+            </div>
         </div>
     </div>
-    <div class="row more-space">
-        <div class="small-2 large-3 columns">
-            <input type="checkbox" name="isGoNeeded" checked="true" id="isGoNeeded">
-            <label for="isGoNeeded">הלוך</label>
-        </div>
-        <div class="small-6 large-7 columns end">
-            <select value="{this.state.goStation}" onChange="{this.onChange}" name="goStation">
-                <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}" value="{stationIndex}">
-                    {station}
-                </option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="small-2 large-3 columns">
-            <input type="checkbox" name="back" checked="true" id="back-yes">
-            <label for="back-yes">חזור</label>
-        </div>
-        <div class="small-6 large-7 columns end">
-            <select value="{this.state.backStation}" onChange="{this.onChange}" name="backStation">
-                <option rt-repeat="station in constants.STATIONS" key="station-{stationIndex}" value="{stationIndex}">
-                    {station}
-                </option>
-            </select>
-        </div>
-    </div>
-</div>
+</FormFrame>

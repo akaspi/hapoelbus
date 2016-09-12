@@ -1,0 +1,54 @@
+<rt-require dependency="./eventItem.scss" as="eventItemCss"></rt-require>
+
+
+<div class="event-item row collapse">
+    <div class="groups-images medium-6 small-12  text-center medium-text-right column">
+        <img src="{this.props.hapoelSrc}" class="event-image small hide-for-small-only"/>
+        <span class="group-text hide-for-small-only">הפועל ירושלים</span>
+        <span class="hide-for-small-only separator"> - </span>
+
+        <img src="{this.props.imageSrc}" class="event-image small hide-for-small-only"/>
+        <span class="group-text hide-for-small-only">{this.props.name}</span>
+    </div>
+
+    <div class="groups-names show-for-small-only text-center row">
+        <div class="columns small-6">
+            <img src="{this.props.hapoelSrc}" class="event-image big"/>
+            <span class="group-text small">הפועל ירושלים</span>
+        </div>
+        <div class="columns small-6">
+            <img src="{this.props.imageSrc}" class="event-image big"/>
+            <span class="group-text small">{this.props.name}</span>
+        </div>
+    </div>
+
+    <div class="event-info column medium-2 small-12 hide-for-small-only">
+        <span class="event-time" rt-if="!this.props.closed">{this.props.time}</span>
+        <span class="event-date">{this.props.date}</span>
+    </div>
+
+    <div class="event-info column medium-2 small-12 show-for-small-only colored">
+        <span class="event-time" rt-if="!this.props.closed">{this.props.time}</span>
+        <span class="event-date">{this.props.date}</span>
+    </div>
+
+
+    <div class="action-buttons medium-4 small-12  text-center medium-text-left column">
+        <a rt-if="!this.props.closed" key="register-btn" class="button success small"
+           onClick="{this.props.onBookingClick}" disabled="{!this.props.isBookingEnabled}">
+            <span rt-if="!this.props.booked" key="book-btn">
+                <span class="">הירשם</span>
+                <i class="fa fa-bus" aria-hidden="true"></i>
+            </span>
+            <span rt-if="this.props.booked" key="edit-btn">
+                <span>ערוך</span>
+                <i class="fa fa-bus" aria-hidden="true"></i>
+            </span>
+        </a>
+        <a rt-if="!this.props.closed && this.props.booked" key="remove-btn" class="button small alert"
+           onClick="{this.props.onBookingCancel}">
+            <span>בטל הרשמה</span>
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>

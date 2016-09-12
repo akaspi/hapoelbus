@@ -1,0 +1,32 @@
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
+<rt-require dependency="./topBar.scss" as="TopBarCss"></rt-require>
+
+<div class="top-bar row small-collapse hide-for-print">
+    <div class="medium-5 small-10 column user-info">
+        <img src="http://image.flaticon.com/icons/svg/163/163804.svg" class="avatar"/>
+        <span>שלום </span><span class="user-name">{this.getUserTitle()}</span><span> | </span>
+        <a onClick="{this.props.signOut}" class="disconnect">התנתק</a>
+    </div>
+
+    <div class="show-for-small-only float-left">
+        <a class="small-menu button" onClick="()=>this.onMenuClick()">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    <div class="medium-7 small-12 column vertical collapsed">
+        <div  class="menu button-group hide-for-small-only" rt-if="this.props.authData.isAdmin" key="admin-menu">
+            <a rt-repeat="page in this.getPages()" key="page-{page.val}"
+               rt-class="{'active' : this.props.currentPage === page.val, 'button' : true, 'small': true}"
+               onClick="() => this.props.navigateTo(page.val)">
+                {page.name}</a>
+        </div>
+
+        <div  class="menu button-group stacked-for-small show-for-small-only" rt-if="this.props.authData.isAdmin && this.state.isMenuVisible" key="admin-menu-mobile">
+            <a rt-repeat="page in this.getPages()" key="page-{page.val}"
+               rt-class="{'active' : this.props.currentPage === page.val, 'button' : true}"
+               onClick="() => this.onMenuItemClick(page.val)">
+                {page.name}</a>
+        </div>
+    </div>
+</div>

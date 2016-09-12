@@ -1,0 +1,61 @@
+.top-bar {
+  background: #222222;
+  color: #FFFFFF;
+
+  span {
+    cursor: default;
+  }
+
+  .user-info {
+    font-size: 0.85rem;
+  }
+
+  .small-menu {
+    background: #D50000;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+  }
+
+  .menu {
+    margin-top: 0.6rem;
+
+    .button {
+      color: #FFFFFF;
+      background: none;
+
+      &.small {
+        font-size: 0.85rem;
+      }
+
+      &:hover {
+        color: #D32F2F;
+      }
+
+      &.active {
+        background: #D32F2F;
+        font-weight: bold;
+
+        &:hover {
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+
+  .avatar {
+    width: 2.5rem;
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 10px;
+  }
+
+  .disconnect {
+    color: #F44336;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}

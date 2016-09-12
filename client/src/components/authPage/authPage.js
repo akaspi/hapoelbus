@@ -1,5 +1,5 @@
 import React from 'react';
-import template from './authForm.rt';
+import template from './authPage.rt';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import * as constants from '../../utils/constants';
@@ -11,6 +11,10 @@ import {
 } from '../../redux/actions/authActions';
 
 import { reportError } from '../../redux/actions/errorActions';
+
+const mapStateToProps = (state) => ({
+  errorMsg: state.errorMsg
+});
 
 const mapDispatchToProps = (dispatch) => ({
   loginWithGoogle: () => dispatch(loginWithGoogle()),
@@ -85,4 +89,4 @@ const AuthForm = React.createClass({
   render: template
 });
 
-module.exports = connect(null, mapDispatchToProps)(AuthForm);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(AuthForm);

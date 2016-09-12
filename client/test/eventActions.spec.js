@@ -1,7 +1,7 @@
 import * as clientDB from '../src/utils/clientDB';
 import * as Promise from 'bluebird';
 
-import { EVENTS_RECEIVED } from '../src/redux/actions/actionTypes';
+import { EVENTS_RECEIVED, EVENT_REMOVED } from '../src/redux/actions/actionTypes';
 
 import * as eventActions from '../src/redux/actions/eventActions';
 import * as loadingActions from '../src/redux/actions/loadingActions';
@@ -35,6 +35,20 @@ describe('eventActions spec', () => {
         }
       });
     });
+
+  });
+
+  describe('events removed', () => {
+
+    it('should create action with removed event id', () => {
+      const action = eventActions.eventRemoved('someEventId');
+
+      expect(action).toEqual({
+        type: EVENT_REMOVED,
+        eventId: 'someEventId'
+      });
+    });
+
   });
 
   describe('fetch events', () => {
@@ -175,6 +189,51 @@ describe('eventActions spec', () => {
       ];
 
       store.dispatch(eventActions.updateEvent('evid', { day: '13', month: '04' }))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+  });
+
+  describe('remove event', () => {
+
+    it('should remove event from DB', done => {
+      clientDB.remove.and.returnValue(Promise.resolve());
+
+      store.dispatch(eventActions.removeEvent('someEventId'))
+        .then(() => {
+          expect(clientDB.remove).toHaveBeenCalledWith('events/someEventId');
+          done();
+        });
+    });
+
+    it('should notify events reducer', done => {
+      clientDB.remove.and.returnValue(Promise.resolve());
+
+      const expectedActions = [
+        loadingActions.startLoading(),
+        eventActions.eventRemoved('someEventId'),
+        loadingActions.stopLoading()
+      ];
+
+      store.dispatch(eventActions.removeEvent('someEventId'))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+
+    it('should report error if remove event fails', done => {
+      clientDB.remove.and.returnValue(Promise.reject({ code: '1234' }));
+
+      const expectedActions = [
+        loadingActions.startLoading(),
+        errorActions.reportError(),
+        loadingActions.stopLoading()
+      ];
+
+      store.dispatch(eventActions.removeEvent('someEventId'))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
           done();

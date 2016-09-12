@@ -1,0 +1,24 @@
+<rt-require dependency="./formFrame.scss" as="formFrameCss"></rt-require>
+
+<div class="form-frame">
+    <div class="header">
+        <label class="header-title">{this.props.title}</label>
+        <button rt-if="this.props.onClose" class="back-btn" key="back-btn" onClick="{this.props.onClose}">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="content">
+        {this.props.children}
+    </div>
+    <div class="action-buttons button-group stacked small-centered large-6 small-8 ">
+        <a disabled="{this.props.disabled}" onClick="()=>this.onSubmit()" class="button success more-space">
+            <span>שמור</span>
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </a>
+        <a rt-if="this.props.onRemove" key="remove-btn" onClick="()=>this.onRemove()" class="button alert more-space">
+            <span>מחק</span>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </div>
+
+</div>

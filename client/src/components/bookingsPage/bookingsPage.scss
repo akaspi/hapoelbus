@@ -1,0 +1,24 @@
+
+.bookings-page {
+
+  h5 {
+    font-weight: bold;
+    background: #CFD8DC;
+    color: #37474F;
+    padding: 5px;
+    margin-bottom: 0;
+  }
+  h6 {
+    padding: 5px 10px;
+    background: #ECEFF1;
+    margin-bottom: 0;
+  }
+
+  .table-sub {
+    font-weight: bold;
+    border-bottom: 2px solid #222222;
+  }
+  table tbody, table tfoot, table thead {
+    border: 1px solid #222222;
+  }
+}

@@ -1,121 +1,45 @@
-.site {
+.home-page {
 
-  direction: rtl;
-  padding: 20px;
+  .events {
+    margin-top: 10px;
 
-  input, select {
-    border: 1px solid #000000;
+    @media screen and (max-width: 39.9375em) {
+      margin-top: 0px;
+    }
   }
 
-  $facebook-color: #3b5998;
-  $google-color: #d50f25;
+  .open-events {
+    margin-bottom: 25px;
+  }
 
-  .split.button {
-    width: 100%;
-    font-size: 16px;
-    line-height: 16px;
+  .events-list {
+    h6 {
+      font-weight: bold;
+    }
+  }
+
+  .no-bookings {
+    font-size: 1.2em;
+    text-align: center;
+    color: #424242;
 
     i {
-      font-size: 20px;
-      padding-right: 10px;
-      line-height: 16px;
-    }
-
-    &.facebook {
-      background: $facebook-color;
-    }
-
-    &.approve {
-      background: #5da423;
-    }
-
-    &.cancel {
-      background: #c60f13;
-    }
-
-    &.google {
-      background: $google-color;
-    }
-
-    &.left-icon {
-      text-align: right;
-      span {
-        left: 0;
-      }
+      margin-right: 10px;
     }
   }
 
-  .error-msg {
-    color: $google-color;
-    padding: 0 15px;
+  .event-item {
+    padding: 5px 0;
 
-    i {
-      margin-left: 10px;
-    }
-  }
-
-  $primary-color: #066;
-  $hover-color: #005757;
-
-  label {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  input {
-    &[type=checkbox], &[type=radio] {
-      opacity: 0;
-      visibility: hidden;
-      position: absolute;
-
-      &:checked + label:before {
-        background: $primary-color;
-      }
-
-      &:checked:hover + label:before {
-        background: $hover-color;
-        border: 0.0625rem solid $hover-color;
-      }
-
-      & + label {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-      }
-
-      & + label:before {
-        display: inline-block;
-        text-align: center;
-        line-height: 1;
-        border: 0.0625rem solid $primary-color;
-        width: 1.2rem;
-        height: 1.2rem;
-        margin-left: 0.7rem;
-        font-size: 1rem;
-        color: white;
-        background: white;
-      }
+    @media screen and (max-width: 39.9375em) {
+      padding: 15px 0 30px 0;
     }
 
-    &[type=checkbox] {
-      & + label:before {
-        content: "\2713";
-        padding-left: 1px;
-        border-radius: 0.125rem;
-      }
+    &:nth-child(even) {
+      background: #EEEEEE;
     }
-
-    &[type=radio] {
-      & + label:before {
-        content: "\200b";
-        border-radius: 50%;
-        margin-top: 10px;
-      }
+    &:nth-child(odd) {
+      background: #E0E0E0;
     }
-  }
-  .more-space {
-    margin-top: 25px;
   }
 }

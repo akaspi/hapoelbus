@@ -1,76 +1,85 @@
-<rt-require dependency="../../utils/constants" as="constants"></rt-require>
+<rt-require dependency="../formFrame/formFrame" as="FormFrame"></rt-require>
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
+<rt-require dependency="./eventForm.scss" as="eventFormCss"></rt-require>
 
-<div class="large-6 small-centered user-info-form">
-    <h2>אירוע:</h2>
-    <hr>
-    <div class="row">
-        <div class="small-9 large-10 columns">
-            <label>שם האירוע
-                <select value="{this.state.eventId}" onChange="{this.onChange}" name="eventId">
-                    <option rt-repeat="event in constants.EVENTS_TYPES" key="event-{eventIndex}" value="{eventIndex}">
-                        {event.name}
-                    </option>
-                </select></label>
-        </div>
-        <div class="small-1 large-2 columns end">
-            <img class="event-pic" src="{this.getEventPicture()}"/>
-        </div>
-    </div>
+<FormFrame
+        title="עריכת אירוע"
+        hideBack="{this.props.hideBack}"
+        onSubmit="{this.onSubmit}"
+        onClose="{this.props.onClose}"
+        disabled="{!this.isFormValid()}">
 
-    <div class="row">
-        <div class="small-6 columns" rt-if="this.state.dateInputSupported" key="date-input">
-            <label>תאריך
-                <input type="date" value="{this.getDateValue()}" onChange="{this.onDateChange}" min="2016-01-01"
-                       max="2017-12-31" name="date"/>
-            </label>
+    <div class="event-form large-11 large-centered"
+         rt-scope="this.state.dateInputSupported && this.state.timeInputSupported as supportedInputs">
+        <div class="row">
+            <div class="small-9 large-10 large-collapse columns">
+                <label>שם האירוע
+                    <select value="{this.state.typeId}" onChange="{this.onChange}" name="typeId">
+                        <option value="" style="display: none">בחר</option>
+                        <option rt-repeat="event in Constants.EVENTS_TYPES" key="event-{eventIndex}"
+                                value="{eventIndex}">
+                            {event.name}
+                        </option>
+                    </select></label>
+            </div>
+            <div class="float-left">
+                <img class="event-pic" src="{this.getEventPicture()}"/>
+            </div>
         </div>
-        <div class="small-6 columns" rt-if="this.state.timeInputSupported" key="time-input">
-            <label>שעה
-                <input type="time" value="{this.getTimeValue()}" step="{300}" onChange="{this.onTimeChange}"/>
-            </label>
-        </div>
-    </div>
-    <div class="row">
-            <div class="small-3 large-2 columns" rt-if="!this.state.dateInputSupported" key="year-dd">
+
+        <div class="row small-expanded small-centered" rt-if="!supportedInputs" key="unsupported-dropdowns">
+            <div class="small-4 medium-2 columns">
                 <label>תאריך</label>
                 <select value="{this.state.year}" onChange="{this.onChange}" name="year">
-                    <option rt-repeat="year in constants.DATE_TIME_DATA.years" key="yy-{yearIndex}" value="20{year}">
+                    <option rt-repeat="year in Constants.DATE_TIME_DATA.years" key="yy-{yearIndex}" value="20{year}">
                         {year}
                     </option>
                 </select>
             </div>
-            <div class="small-3 large-2 columns more-space" rt-if="!this.state.dateInputSupported" key="month-dd">
+            <div class="small-4 medium-2 columns more-space">
                 <select value="{this.state.month}" onChange="{this.onChange}" name="month">
-                    <option rt-repeat="month in constants.DATE_TIME_DATA.months" key="mm-{monthIndex}">{month}</option>
+                    <option rt-repeat="month in Constants.DATE_TIME_DATA.months" key="mm-{monthIndex}">{month}</option>
                 </select>
             </div>
-            <div class="small-3 large-2 columns more-space" rt-if="!this.state.dateInputSupported" key="day-dd">
+            <div class="small-4 medium-2 columns more-space">
                 <select value="{this.state.day}" onChange="{this.onChange}" name="day">qq
-                    <option rt-repeat="day in constants.DATE_TIME_DATA.days" key="dd-{dayIndex}">{day}</option>
+                    <option rt-repeat="day in Constants.DATE_TIME_DATA.days" key="dd-{dayIndex}">{day}</option>
                 </select>
             </div>
-            <div class="small-3 columns" rt-if="!this.state.timeInputSupported" key="minute-dd">
+            <div class="small-3 columns">
                 <label>שעה</label>
                 <select value="{this.state.minute}" onChange="{this.onChange}" name="minute">
-                    <option rt-repeat="minute in constants.DATE_TIME_DATA.minutes" key="min-{minuteIndex}">{minute}
+                    <option rt-repeat="minute in Constants.DATE_TIME_DATA.minutes" key="min-{minuteIndex}">{minute}
                     </option>
                 </select>
             </div>
-            <div class="small-3 columns more-space" rt-if="!this.state.timeInputSupported" key="hour-dd">
+            <div class="small-3 columns more-space end">
                 <select value="{this.state.hour}" onChange="{this.onChange}" name="hour">
-                    <option rt-repeat="hour in constants.DATE_TIME_DATA.hours" key="hh-{hourIndex}">{hour}</option>
+                    <option rt-repeat="hour in Constants.DATE_TIME_DATA.hours" key="hh-{hourIndex}">{hour}</option>
                 </select>
             </div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <label> סטטוס
-                <select value="{this.state.status}" onChange="{this.onChange}" name="status">
-                    <option value="closed">סגור</option>
-                    <option value="open-all">פתוח לכולם</option>
-                    <option value="open-subscribers">פתוח למנויים</option>
-                </select>
-            </label>
+        </div>
+        <div class="row" rt-if="supportedInputs" key="supported-inputs">
+            <div class="small-7 large-5 columns">
+                <label>תאריך
+                    <input type="date" value="{this.getDateValue()}" onChange="{this.onDateChange}" min="2016-01-01"
+                           max="2017-12-31" name="date"/>
+                </label>
+            </div>
+            <div class="small-5 large-3 columns">
+                <label>שעה
+                    <input type="time" value="{this.getTimeValue()}" step="{300}" onChange="{this.onTimeChange}"/>
+                </label>
+            </div>
+            <div class="large-4 medium-12 columns">
+                <label> סטטוס
+                    <select value="{this.state.status}" onChange="{this.onChange}" name="status">
+                        <option value="{Constants.EVENTS_STATUS.CLOSED.value}">סגור</option>
+                        <option value="{Constants.EVENTS_STATUS.OPEN_FOR_MEMBERS.value}">פתוח למנויים</option>
+                        <option value="{Constants.EVENTS_STATUS.OPEN_FOR_ALL.value}">פתוח לכולם</option>
+                    </select>
+                </label>
+            </div>
         </div>
     </div>
-</div>
+</FormFrame>

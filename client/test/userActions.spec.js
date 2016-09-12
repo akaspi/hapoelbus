@@ -265,4 +265,61 @@ describe('userActions spec', () => {
       });
     });
   });
+
+  describe('remove user', () => {
+
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('should remove userInfo', done => {
+      store.dispatch(userActions.removeUser('SPIDER_PIG_UID'))
+        .then(() => {
+          expect(clientDB.remove.calls.allArgs()).toContain(['usersInfo/SPIDER_PIG_UID']);
+          done();
+        });
+    });
+
+    it('should remove seasonTickets', done => {
+      store.dispatch(userActions.removeUser('SPIDER_PIG_UID'))
+        .then(() => {
+          expect(clientDB.remove.calls.allArgs()).toContain(['seasonTickets/SPIDER_PIG_UID']);
+          done();
+        });
+    });
+
+    it('notify users reducer', done => {
+      clientDB.remove.and.returnValue(Promise.resolve());
+
+      const expectedActions = [
+        loadingActions.startLoading(),
+        userActions.usersRemoved('SPIDER_PIG_UID'),
+        loadingActions.stopLoading()
+      ];
+
+      store.dispatch(userActions.removeUser('SPIDER_PIG_UID'))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+
+    it('should report error if action failed', done => {
+      clientDB.remove.and.returnValue(Promise.reject({ code: '1234' }));
+
+      const expectedActions = [
+        loadingActions.startLoading(),
+        errorActions.reportError(),
+        loadingActions.stopLoading()
+      ];
+
+      store.dispatch(userActions.removeUser('SPIDER_PIG_UID'))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    });
+
+  });
+
 });
