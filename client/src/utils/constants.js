@@ -92,7 +92,7 @@ module.exports = {
   PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058'],
   PAGES: {
     HOME: {val: 'home', name: 'דף הבית', visible: true},
-    AUTH: {val: 'auth', name: 'בב'},
+    AUTH: {val: 'auth', name: ''},
     USERS: {val: 'users', name: 'משתמשים', visible: true},
     EVENTS: {val: 'events', name: 'אירועים', visible: true},
     BOOKINGS: {val: 'bookings', name: 'רשומים להסעות', visible: true},
