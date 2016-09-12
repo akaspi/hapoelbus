@@ -16,11 +16,12 @@
                            name="{this.getEventName(event)}"
                            date="{this.getEventDate(event)}"
                            time="{this.getEventTime(event)}"
-                           booked="{this.isRegisteredToEvent(event)}"
+                           booked="{this.isRegisteredToEvent(eventIndex)}"
                            closed="{false}"
                            isBookingEnabled="{this.isBookingEnabled(event)}"
                            imageSrc="{this.getEventImage(event)}"
                            onBookingClick="()=>this.bookEvent(eventIndex)"
+                           onBookingCancel="()=>this.cancelBooking(eventIndex)"
                            hapoelSrc="{this.getEventHapoelImage()}"
                 />
             </div>

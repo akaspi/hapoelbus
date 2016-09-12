@@ -3,7 +3,7 @@ import React from 'react';
 import template from './homePage.rt';
 import {connect} from 'react-redux';
 import * as Constants from '../../utils/constants';
-import {updateBooking} from '../../redux/actions/bookingActions';
+import {updateBooking, cancelBooking} from '../../redux/actions/bookingActions';
 
 const mapStateToProps = (state) => ({
   authData: state.authData,
@@ -13,7 +13,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking))
+  updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking)),
+  cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId))
 });
 
 class HomePage extends React.Component {
@@ -60,8 +61,10 @@ class HomePage extends React.Component {
     return 'http://hapoel.co.il/sites/default/files/logo120x120.png';
   }
 
-  isRegisteredToEvent(event) {
-    return false;
+  isRegisteredToEvent(eventId) {
+    const userBookings = this.props.bookings[this.props.authData.uid];
+
+    return _.has(userBookings, eventId);
   }
 
   getEventImage(event) {
@@ -91,6 +94,9 @@ class HomePage extends React.Component {
     this.stopEditing();
   }
 
+  cancelBooking(eventId) {
+    this.props.cancelBooking(this.props.authData.uid, eventId);
+  }
 
   render() {
     return template.apply(this);

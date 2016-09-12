@@ -31,8 +31,8 @@
 
     <div class="action-buttons medium-4 small-12  text-center medium-text-left column">
         <a rt-if="!this.props.closed" key="register-btn" class="button success small"
-           onClick="{this.props.onBookingClick}">
-            <span rt-if="!this.props.booked" key="book-btn" disabled="{!this.props.isBookingEnabled}">
+           onClick="{this.props.onBookingClick}" disabled="{!this.props.isBookingEnabled}">
+            <span rt-if="!this.props.booked" key="book-btn">
                 <span class="">הירשם</span>
                 <i class="fa fa-bus" aria-hidden="true"></i>
             </span>
@@ -41,7 +41,8 @@
                 <i class="fa fa-bus" aria-hidden="true"></i>
             </span>
         </a>
-        <a rt-if="!this.props.closed && this.props.booked" key="remove-btn" class="button small alert">
+        <a rt-if="!this.props.closed && this.props.booked" key="remove-btn" class="button small alert"
+           onClick="{this.props.onBookingCancel}">
             <span>בטל הרשמה</span>
             <i class="fa fa-times" aria-hidden="true"></i>
         </a>
