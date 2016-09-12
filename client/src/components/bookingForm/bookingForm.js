@@ -46,29 +46,29 @@ const bookingForm = React.createClass({
     });
   },
 
-  togglePickUp(e){
+  togglePickUp(e) {
     const pickUpEnabled = e.target.checked;
-    this.setState({pickUpEnabled});
+    this.setState({ pickUpEnabled });
     if (!pickUpEnabled) {
-      this.setState({pickUp: ''});
+      this.setState({ pickUp: '' });
     }
   },
 
-  toggleDropOff(e){
+  toggleDropOff(e) {
     const dropOffEnabled = e.target.checked;
-    this.setState({dropOffEnabled});
+    this.setState({ dropOffEnabled });
     if (!dropOffEnabled) {
-      this.setState({dropOff: ''});
+      this.setState({ dropOff: '' });
     }
   },
 
   onNumericChange(e) {
     const value = _.toNumber(e.target.value);
 
-    this.setState({[e.target.name]: value});
+    this.setState({ [e.target.name]: value });
   },
 
-  isFormValid(){
+  isFormValid() {
     if (this.state.paidSeats === 0 && this.state.extraSeats === 0) {
       return false;
     }

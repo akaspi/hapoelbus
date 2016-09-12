@@ -1,22 +1,22 @@
 import * as _ from 'lodash';
 import React from 'react';
 import template from './bookingsPage.rt';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as Constants from '../../utils/constants';
-import {updateBooking} from '../../redux/actions/bookingActions';
+import { updateBooking } from '../../redux/actions/bookingActions';
 
 const getDropOffMap = bookings => _.chain(bookings)
   .omitBy(booking => !(booking.dropOff))
   .transform((acc, booking, uid) => {
-    acc[booking.dropOff][uid] = booking
-  }, {tlv: {}, modiin: {}})
+    acc[booking.dropOff][uid] = booking; // eslint-disable-line no-param-reassign
+  }, { tlv: {}, modiin: {} })
   .value();
 
 const getPickUpMap = bookings => _.chain(bookings)
   .omitBy(booking => !(booking.pickUp))
   .transform((acc, booking, uid) => {
-    acc[booking.pickUp][uid] = booking
-  }, {tlv: {}, modiin: {}})
+    acc[booking.pickUp][uid] = booking; // eslint-disable-line no-param-reassign
+  }, { tlv: {}, modiin: {} })
   .value();
 
 
@@ -49,19 +49,19 @@ class BookingsPage extends React.Component {
     return {
       pickUp: getPickUpMap(bookingForEventMap),
       dropOff: getDropOffMap(bookingForEventMap)
-    }
+    };
   }
 
   handleFilterChange(filter) {
-    this.setState({filter});
+    this.setState({ filter });
   }
 
   onEventIdChange(eventId) {
-    this.setState({eventId: eventId, filter: 'PICKUP'});
+    this.setState({ eventId, filter: 'PICKUP' });
   }
 
   onBookingClick(uid) {
-    this.setState({editingUserId: uid});
+    this.setState({ editingUserId: uid });
   }
 
   getEventPrintTitle() {
@@ -69,6 +69,7 @@ class BookingsPage extends React.Component {
       const currentEvt = this.props.events[this.state.eventId];
       return Constants.EVENTS_TYPES[currentEvt.typeId].name + ' - ' + currentEvt.day + '/' + currentEvt.month + '/' + currentEvt.year;
     }
+    return '';
   }
 
   getBookingTitle(uid) {
@@ -110,28 +111,56 @@ class BookingsPage extends React.Component {
 
   getPickUpCount() {
     const visibleBookings = this.getVisibleBookings();
-    const tlvPickUpsPaid = _.chain(visibleBookings.pickUp.tlv).values().sumBy('paidSeats').value();
-    const tlvPickUpsExtra = _.chain(visibleBookings.pickUp.tlv).values().sumBy('extraSeats').value();
+    const tlvPickUpsPaid = _.chain(visibleBookings.pickUp.tlv)
+      .values()
+      .sumBy('paidSeats')
+      .value();
 
-    const modiinPickUpsPaid = _.chain(visibleBookings.pickUp.modiin).values().sumBy('paidSeats').value();
-    const modiinPickUpsExtra = _.chain(visibleBookings.pickUp.modiin).values().sumBy('extraSeats').value();
+    const tlvPickUpsExtra = _.chain(visibleBookings.pickUp.tlv)
+      .values()
+      .sumBy('extraSeats')
+      .value();
+
+    const modiinPickUpsPaid = _.chain(visibleBookings.pickUp.modiin)
+      .values()
+      .sumBy('paidSeats')
+      .value();
+
+    const modiinPickUpsExtra = _.chain(visibleBookings.pickUp.modiin)
+      .values()
+      .sumBy('extraSeats')
+      .value();
 
     return tlvPickUpsPaid + tlvPickUpsExtra + modiinPickUpsPaid + modiinPickUpsExtra;
   }
 
   getDropOffCount() {
     const visibleBookings = this.getVisibleBookings();
-    const tlvDropOffsPaid = _.chain(visibleBookings.dropOff.tlv).values().sumBy('paidSeats').value();
-    const tlvDropOffsExtra = _.chain(visibleBookings.dropOff.tlv).values().sumBy('extraSeats').value();
+    const tlvDropOffsPaid = _.chain(visibleBookings.dropOff.tlv)
+      .values()
+      .sumBy('paidSeats')
+      .value();
 
-    const modiinDropOffsPaid = _.chain(visibleBookings.dropOff.modiin).values().sumBy('paidSeats').value();
-    const modiinDropOffsExtra = _.chain(visibleBookings.dropOff.modiin).values().sumBy('extraSeats').value();
+    const tlvDropOffsExtra = _.chain(visibleBookings.dropOff.tlv)
+      .values()
+      .sumBy('extraSeats')
+      .value();
+
+    const modiinDropOffsPaid = _.chain(visibleBookings.dropOff.modiin)
+      .values()
+      .sumBy('paidSeats')
+      .value();
+
+    const modiinDropOffsExtra = _.chain(visibleBookings.dropOff.modiin)
+      .values()
+      .sumBy('extraSeats')
+      .value();
 
     return tlvDropOffsPaid + tlvDropOffsExtra + modiinDropOffsPaid + modiinDropOffsExtra;
   }
 
   stopEditing() {
-    this.setState({editingUserId: null});
+    this.setState({ editingUserId: null });
   }
 
   updateBooking(booking) {

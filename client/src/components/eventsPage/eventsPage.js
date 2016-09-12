@@ -7,9 +7,9 @@ import { createEvent, updateEvent } from '../../redux/actions/eventActions';
 import * as Constants from '../../utils/constants';
 
 const pickEvents = {
-  ALL: event => true,
-  OPEN: event => event.status === Constants.EVENTS_STATUS.OPEN_FOR_ALL.value || event.status === Constants.EVENTS_STATUS.OPEN_FOR_MEMBERS.value,
-  CLOSED: event => event.status === Constants.EVENTS_STATUS.CLOSED.value,
+  ALL: () => true,
+  ['OPEN']: event => event.status === Constants.EVENTS_STATUS.OPEN_FOR_ALL.value || event.status === Constants.EVENTS_STATUS.OPEN_FOR_MEMBERS.value,
+  ['CLOSED']: event => event.status === Constants.EVENTS_STATUS.CLOSED.value,
 };
 
 const getStatusSubtitle = event => {
@@ -61,8 +61,8 @@ class EventsPage extends React.Component {
 
   getEventSubtitles(event) {
     return [
-      'תאריך: ' + `${event.day}/${event.month}/${event.year}`,
-      'שעה: ' +  `${event.hour}:${event.minute}`,
+      'תאריך: ' + `${event.day}/${event.month}/${event.year}`, // eslint-disable-line no-useless-concat
+      'שעה: ' +  `${event.hour}:${event.minute}`, // eslint-disable-line no-useless-concat
       getStatusSubtitle(event)
     ];
   }
