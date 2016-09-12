@@ -28,9 +28,9 @@ const fetchAllUsers = () => {
   ];
 
   return Promise.all(userReadPromises)
-    .then(([usersInfo, seasonTickets = {}]) =>
+    .then(([usersInfo, seasonTickets]) =>
       _.transform(usersInfo, (acc, info, uid) => {
-        acc[uid] = buildUser(info, seasonTickets[uid]); // eslint-disable-line no-param-reassign
+        acc[uid] = buildUser(info, seasonTickets && seasonTickets[uid]); // eslint-disable-line no-param-reassign
       }, {})
     );
 };
