@@ -22,8 +22,8 @@ const getUsersPhoneNumbers = (users, membersOnly) => _.chain(users)
   .value();
 
 const getEventSubstitutions = event => ({
-  '-DATE-': `${event.hour}:${event.minute}`,
-  '-DEPARTURE-': `${event.day}/${event.month}/${event.year}`,
+  '-DEPARTURE-': `${event.hour}:${event.minute}`,
+  '-DATE-': `${event.day}/${event.month}/${event.year}`,
   '-NAME-': Constants.EVENTS_TYPES[event.typeId].name
 });
 
