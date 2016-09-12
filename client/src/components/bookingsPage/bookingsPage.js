@@ -20,7 +20,6 @@ const getPickUpMap = bookings => _.chain(bookings)
   .value();
 
 
-
 const mapStateToProps = (state) => ({
   bookings: state.bookings,
   events: state.events,
@@ -54,11 +53,11 @@ class BookingsPage extends React.Component {
   }
 
   handleFilterChange(filter) {
-    this.setState({ filter });
+    this.setState({filter});
   }
 
   onEventIdChange(eventId) {
-    this.setState({eventId});
+    this.setState({eventId: eventId, filter: 'PICKUP'});
   }
 
   onBookingClick(uid) {
@@ -107,6 +106,28 @@ class BookingsPage extends React.Component {
 
   getBookingImage() {
     return 'http://image.flaticon.com/icons/svg/147/147125.svg';
+  }
+
+  getPickUpCount() {
+    const visibleBookings = this.getVisibleBookings();
+    const tlvPickUpsPaid = _.chain(visibleBookings.pickUp.tlv).values().sumBy('paidSeats').value();
+    const tlvPickUpsExtra = _.chain(visibleBookings.pickUp.tlv).values().sumBy('extraSeats').value();
+
+    const modiinPickUpsPaid = _.chain(visibleBookings.pickUp.modiin).values().sumBy('paidSeats').value();
+    const modiinPickUpsExtra = _.chain(visibleBookings.pickUp.modiin).values().sumBy('extraSeats').value();
+
+    return tlvPickUpsPaid + tlvPickUpsExtra + modiinPickUpsPaid + modiinPickUpsExtra;
+  }
+
+  getDropOffCount() {
+    const visibleBookings = this.getVisibleBookings();
+    const tlvDropOffsPaid = _.chain(visibleBookings.dropOff.tlv).values().sumBy('paidSeats').value();
+    const tlvDropOffsExtra = _.chain(visibleBookings.dropOff.tlv).values().sumBy('extraSeats').value();
+
+    const modiinDropOffsPaid = _.chain(visibleBookings.dropOff.modiin).values().sumBy('paidSeats').value();
+    const modiinDropOffsExtra = _.chain(visibleBookings.dropOff.modiin).values().sumBy('extraSeats').value();
+
+    return tlvDropOffsPaid + tlvDropOffsExtra + modiinDropOffsPaid + modiinDropOffsExtra;
   }
 
   stopEditing() {
