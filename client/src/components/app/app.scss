@@ -92,6 +92,14 @@
     .filtering {
 
       .menu {
+
+        &.small-text {
+          @media screen and (max-width: 39.9375em) {
+            font-size: 0.9em;
+            text-align: center;
+          }
+        }
+
         li {
           a {
             padding: 1rem;

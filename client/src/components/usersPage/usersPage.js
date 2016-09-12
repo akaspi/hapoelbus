@@ -1,13 +1,14 @@
 import * as _ from 'lodash';
 import React from 'react';
 import template from './usersPage.rt';
-import { connect } from 'react-redux';
-import { updateUser } from '../../redux/actions/userActions';
+import {connect} from 'react-redux';
+import {updateUser} from '../../redux/actions/userActions';
 
 const pickUsersFunctions = {
   ALL: user => true,
   MEMBERS: user => user.seasonTickets > 0,
   NON_MEMBERS: user => !user.seasonTickets,
+  REQUESTS: user => user.requestForMembership,
 };
 
 const mapStateToProps = (state) => ({
@@ -33,7 +34,7 @@ class UsersPage extends React.Component {
     return _.chain(this.props.users)
       .pickBy(pickUsersFunctions[this.state.filter])
       .pickBy(user => _.startsWith(user.firstName, this.state.searchQuery) || _.startsWith(user.lastName, this.state.searchQuery), this)
-      .map((user, uid) => ({ user, uid }))
+      .map((user, uid) => ({user, uid}))
       .value();
   }
 
@@ -45,20 +46,24 @@ class UsersPage extends React.Component {
     return _.pickBy(this.props.users, pickUsersFunctions['NON_MEMBERS']);
   }
 
+  getRequestsForMembership() {
+    return _.pickBy(this.props.users, pickUsersFunctions['REQUESTS']);
+  }
+
   handleSearchQueryChange(e) {
-    this.setState({ searchQuery: e.target.value });
+    this.setState({searchQuery: e.target.value});
   }
 
   handleFilterChange(filter) {
-    this.setState({ filter });
+    this.setState({filter});
   }
 
   onUserClick(uid) {
-    this.setState({ editingUserId: uid });
+    this.setState({editingUserId: uid});
   }
 
   stopEditing() {
-    this.setState({ editingUserId: null, searchQuery: '' });
+    this.setState({editingUserId: null, searchQuery: ''});
   }
 
   render() {
@@ -70,7 +75,7 @@ class UsersPage extends React.Component {
   }
 
   getUserSubtitles(user) {
-    return [ user.phonePrefix + '-' + user.phoneNumber, user.email, 'כמות מנויים: ' + (user.seasonTickets || 0)];
+    return [user.phonePrefix + '-' + user.phoneNumber, user.email, 'כמות מנויים: ' + (user.seasonTickets || 0)];
   }
 
   getUserImage(user) {

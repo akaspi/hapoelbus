@@ -86,14 +86,14 @@
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
         </div>
 
-        <label class="filter-status hide-for-print" rt-if="visibleBookings.length === 0">
+        <label class="filter-status hide-for-print" rt-if="visibleBookings.length === 0" key="no-events">
             <i class="fa fa-frown-o" aria-hidden="true"></i>
             <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
         </label>
 
     </div>
 
-    <BookingForm rt-if="this.state.editingUserId" key="edit-user"
+    <BookingForm rt-if="this.state.editingUserId" key="edit-user" key="edit-booking-form"
                  title="עריכת הרשמה"
                  booking="{this.props.bookings[this.state.editingUserId][this.state.eventId]}"
                  onSubmit="booking => this.updateBooking(booking)"
@@ -101,7 +101,7 @@
                  onClose="() => this.stopEditing()"/>
 
 
-    <div class="pickUp-table show-for-print" rt-if="this.state.filter === 'PICKUP'" key="pickUp-table"
+    <div class="pickUp-table show-for-print" rt-if="this.state.filter === 'PICKUP'" key="pickUp-table" key="pickup-table"
          rt-scope="visibleBookings.pickUp.modiin as modiinPickUp; visibleBookings.pickUp.tlv as tlvPickUp">
         <table>
             <thead>
@@ -126,7 +126,7 @@
                     <span>תל אביב</span>
                 </td>
             </tr>
-            <tr rt-repeat="booking in tlvPickUp">
+            <tr rt-repeat="booking in tlvPickUp" key="{bookingIndex}-tlv-pickup-row">
                 <td>{this.getBookingTitle(bookingIndex)}</td>
                 <td>{this.getBookingPhone(bookingIndex)}</td>
                 <td>{booking.paidSeats}</td>
@@ -139,7 +139,7 @@
                     <span>מודיעין</span>
                 </td>
             </tr>
-            <tr rt-repeat="booking in modiinPickUp">
+            <tr rt-repeat="booking in modiinPickUp" key="{bookingIndex}-modiin-pickup-row">
                 <td>{this.getBookingTitle(bookingIndex)}</td>
                 <td>{this.getBookingPhone(bookingIndex)}</td>
                 <td>{booking.paidSeats}</td>
@@ -176,7 +176,7 @@
                     <span>תל אביב</span>
                 </td>
             </tr>
-            <tr rt-repeat="booking in tlvDropOff">
+            <tr rt-repeat="booking in tlvDropOff" key="{bookingIndex}-tlv-dropoff-row">
                 <td>{this.getBookingTitle(bookingIndex)}</td>
                 <td>{this.getBookingPhone(bookingIndex)}</td>
                 <td>{booking.paidSeats}</td>
@@ -189,7 +189,7 @@
                     <span>מודיעין</span>
                 </td>
             </tr>
-            <tr rt-repeat="booking in modiinDropOff">
+            <tr rt-repeat="booking in modiinDropOff" key="{bookingIndex}-modiin-dropoff-row">
                 <td>{this.getBookingTitle(bookingIndex)}</td>
                 <td>{this.getBookingPhone(bookingIndex)}</td>
                 <td>{booking.paidSeats}</td>
