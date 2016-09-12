@@ -131,7 +131,7 @@ class BookingsPage extends React.Component {
   }
 
   stopEditing() {
-    this.setState({editingUserId: null, filter: ''});
+    this.setState({editingUserId: null});
   }
 
   updateBooking(booking) {

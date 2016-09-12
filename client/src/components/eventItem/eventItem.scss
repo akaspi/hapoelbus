@@ -12,22 +12,22 @@
     .separator {
       margin-right: 5px;
     }
+  }
 
-    .event-image {
-      border-radius: 50%;
-      background: #ffffff;
+  .event-image {
+    border-radius: 50%;
+    background: #ffffff;
 
-      &.big {
-        margin: 10px 12px 0;
-        width: 90px;
-        height: 90px;
-      }
+    &.big {
+      margin-bottom: 10px;
+      width: 90px;
+      height: 90px;
+    }
 
-      &.small {
-        margin: 0 5px;
-        width: 40px;
-        height: 40px;
-      }
+    &.small {
+      margin: 0 5px;
+      width: 40px;
+      height: 40px;
     }
   }
 

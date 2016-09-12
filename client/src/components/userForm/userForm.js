@@ -21,11 +21,11 @@ const userForm = React.createClass({
     user: React.PropTypes.object,
     email: React.PropTypes.string,
     updateUser: React.PropTypes.func.isRequired,
-    onClose: React.PropTypes.func.isRequired
+    onClose: React.PropTypes.func
   },
 
   getInitialState() {
-    return _.defaults(this.props.user, emptyUser);
+    return _.defaults(this.props.user, emptyUser, {email: this.props.email});
   },
 
   onInfoChange(e, validationType) {

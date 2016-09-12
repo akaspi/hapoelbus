@@ -1,52 +1,62 @@
 <rt-require dependency="../eventItem/eventItem" as="eventItem"></rt-require>
 <rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
+<rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 <rt-require dependency="./homePage.scss" as="homePageCss"></rt-require>
 
-<div class="site" rt-scope="this.getOpenEvents() as openEvents; this.getClosedEvents() as closedEvents">
+<div class="site" rt-scope="this.getOpenEvents() as openEvents; this.getClosedEvents() as closedEvents; this.props.users[this.props.authData.uid] as hasUser">
     <div class="home-page small-centered">
-        <div class="events" rt-if="!this.state.eventId" key="events">
-            <div rt-if="_.size(openEvents) === 0" class="show-for-small-only no-bookings more-space">
-                <span>אין כרגע הסעות פתוחות</span>
-                <i class="fa fa-bus" aria-hidden="true"></i>
+        <div class="events-container" rt-if="hasUser" key="events-container">
+            <div class="events" rt-if="!this.state.eventId" key="events">
+                <div rt-if="_.size(openEvents) === 0" class="show-for-small-only no-bookings more-space">
+                    <span>אין כרגע הסעות פתוחות</span>
+                    <i class="fa fa-bus" aria-hidden="true"></i>
+                </div>
+
+                <div class="events-list open-events" rt-if="_.size(openEvents) !== 0">
+                    <h6 class="hide-for-small-only">הסעות:</h6>
+                    <eventItem rt-repeat="event in openEvents" key="event-{eventIndex}"
+                               name="{this.getEventName(event)}"
+                               date="{this.getEventDate(event)}"
+                               time="{this.getEventTime(event)}"
+                               booked="{this.isRegisteredToEvent(eventIndex)}"
+                               closed="{false}"
+                               isBookingEnabled="{this.isBookingEnabled(event)}"
+                               imageSrc="{this.getEventImage(event)}"
+                               onBookingClick="()=>this.bookEvent(eventIndex)"
+                               onBookingCancel="()=>this.cancelBooking(eventIndex)"
+                               hapoelSrc="{this.getEventHapoelImage()}"
+                    />
+                </div>
+
+                <div class="events-list closed-events hide-for-small-only">
+                    <h6>לוח משחקים:</h6>
+                    <eventItem rt-repeat="event in closedEvents" key="closed-event-{eventIndex}"
+                               name="{this.getEventName(event)}"
+                               date="{this.getEventDate(event)}"
+                               time="{this.getEventTime(event)}"
+                               closed="{true}"
+                               imageSrc="{this.getEventImage(event)}"
+                               hapoelSrc="{this.getEventHapoelImage()}"
+                    />
+                </div>
             </div>
 
-            <div class="events-list open-events" rt-if="_.size(openEvents) !== 0">
-                <h6 class="hide-for-small-only">הסעות:</h6>
-                <eventItem rt-repeat="event in openEvents" key="event-{eventIndex}"
-                           name="{this.getEventName(event)}"
-                           date="{this.getEventDate(event)}"
-                           time="{this.getEventTime(event)}"
-                           booked="{this.isRegisteredToEvent(eventIndex)}"
-                           closed="{false}"
-                           isBookingEnabled="{this.isBookingEnabled(event)}"
-                           imageSrc="{this.getEventImage(event)}"
-                           onBookingClick="()=>this.bookEvent(eventIndex)"
-                           onBookingCancel="()=>this.cancelBooking(eventIndex)"
-                           hapoelSrc="{this.getEventHapoelImage()}"
-                />
-            </div>
-
-            <div class="events-list closed-events more-space hide-for-small-only">
-                <h6>לוח משחקים:</h6>
-                <eventItem rt-repeat="event in closedEvents" key="closed-event-{eventIndex}"
-                           name="{this.getEventName(event)}"
-                           date="{this.getEventDate(event)}"
-                           time="{this.getEventTime(event)}"
-                           closed="{true}"
-                           imageSrc="{this.getEventImage(event)}"
-                           hapoelSrc="{this.getEventHapoelImage()}"
-                />
-            </div>
+            <BookingForm rt-if="this.state.eventId" rt-scope="this.props.events[this.state.eventId] as editingEvent"
+                         key="edit-booking"
+                         title="{this.getEventName(editingEvent)} - {this.getEventDate(editingEvent)} {this.getEventTime(editingEvent)}"
+                         booking="{_.get(this.props.bookings, [this.props.authData.uid, this.state.eventId])}"
+                         onSubmit="booking => this.updateBooking(booking)"
+                         seasonTickets="{_.get(this.props.users, [this.props.authData.uid, 'seasonTickets']) || 0}"
+                         onClose="() => this.stopEditing()"/>
         </div>
+        <div class="user-edit-container" rt-if="!hasUser" key="user-edit-container">
 
-        <BookingForm rt-if="this.state.eventId" rt-scope="this.props.events[this.state.eventId] as editingEvent"
-                     key="edit-booking"
-                     title="{this.getEventName(editingEvent)} - {this.getEventDate(editingEvent)} {this.getEventTime(editingEvent)}"
-                     booking="{_.get(this.props.bookings, [this.props.authData.uid, this.state.eventId])}"
-                     onSubmit="booking => this.updateBooking(booking)"
-                     seasonTickets="{_.get(this.props.users, [this.props.authData.uid, 'seasonTickets']) || 0}"
-                     onClose="() => this.stopEditing()"/>
+            <UserForm
+                      uid="{this.props.authData.uid}"
+                      email="{this.props.authData.email}"
+                      updateUser="{this.props.updateUser}" />
+        </div>
 
     </div>
 </div>

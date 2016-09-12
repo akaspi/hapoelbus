@@ -11,7 +11,7 @@
         <div class="booking-form small-11 small-centered">
         <div class="row">
             <div class="small-6 columns" rt-if="this.props.seasonTickets">
-                <label>כמות נוסעים
+                <label>כמות מנויים
                     <select value="{this.state.paidSeats}" onChange="{this.onNumericChange}" name="paidSeats">
                         <option rt-repeat="seat in _.times(this.props.seasonTickets + 1)" key="seat-{seatIndex}"
                                 value="{seatIndex}">{seatIndex}
@@ -20,7 +20,7 @@
                 </label>
             </div>
             <div class="small-6 columns end">
-                <label>נוסעים נוספים בתשלום
+                <label>נוסעים בתשלום
                     <select value="{this.state.extraSeats}" onChange="{this.onNumericChange}" name="extraSeats">
                         <option rt-repeat="extraSeat in _.times(constants.MAX_EXTRA_PASSENGERS)"
                                 key="extraSeat-{extraSeatIndex}"

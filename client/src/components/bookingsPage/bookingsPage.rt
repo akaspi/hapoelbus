@@ -94,6 +94,7 @@
     </div>
 
     <BookingForm rt-if="this.state.editingUserId" key="edit-user"
+                 title="עריכת הרשמה"
                  booking="{this.props.bookings[this.state.editingUserId][this.state.eventId]}"
                  onSubmit="booking => this.updateBooking(booking)"
                  seasonTickets="{_.get(this.props.users, [this.state.editingUserId, 'seasonTickets']) || 0}"

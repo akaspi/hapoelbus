@@ -4,6 +4,7 @@ import template from './homePage.rt';
 import {connect} from 'react-redux';
 import * as Constants from '../../utils/constants';
 import {updateBooking, cancelBooking} from '../../redux/actions/bookingActions';
+import {updateUser} from '../../redux/actions/userActions';
 
 const mapStateToProps = (state) => ({
   authData: state.authData,
@@ -14,7 +15,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking)),
-  cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId))
+  cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId)),
+  updateUser: (uid, user) => dispatch(updateUser(uid, user))
 });
 
 class HomePage extends React.Component {
