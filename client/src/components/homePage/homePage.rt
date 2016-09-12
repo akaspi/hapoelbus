@@ -6,8 +6,9 @@
 <div class="site" rt-scope="this.getOpenEvents() as openEvents; this.getClosedEvents() as closedEvents">
     <div class="home-page small-centered">
         <div class="events" rt-if="!this.state.eventId" key="events">
-            <div rt-if="_.size(openEvents) === 0">
-                <label>אין כרגע הסעות פתוחות</label>
+            <div rt-if="_.size(openEvents) === 0" class="show-for-small-only no-bookings more-space">
+                <span>אין כרגע הסעות פתוחות</span>
+                <i class="fa fa-bus" aria-hidden="true"></i>
             </div>
 
             <div class="events-list open-events" rt-if="_.size(openEvents) !== 0">
