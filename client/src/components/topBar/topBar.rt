@@ -8,7 +8,7 @@
         <a onClick="{this.props.signOut}" class="disconnect">התנתק</a>
     </div>
 
-    <div class="show-for-small-only float-left">
+    <div class="show-for-small-only float-left" rt-if="this.props.authData.isAdmin" key="admin-menu-icon">
         <a class="small-menu button" onClick="()=>this.onMenuClick()">
             <i class="fa fa-bars" aria-hidden="true"></i>
         </a>
