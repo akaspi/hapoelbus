@@ -77,27 +77,28 @@ const sendTemplate = (recipients, templateId, substitutions) => {
 
 const exec = () => {
   const readPromises = [db.read(PENDING_TEMPLATE_EMAILS_PATH), db.read(PENDING_CUSTOM_EMAILS_PATH)];
-  return Promise.all(readPromises)
-    .spread((pendingTemplates, pendingCustom) => {
-      const templatePromises = _.map(pendingTemplates, (mailData, mailId) =>
-        sendTemplate(mailData.recipients, mailData.templateId, mailData.substitutions)
-          .then(() => db.remove(PENDING_TEMPLATE_EMAILS_PATH + '/' + mailId))
-      );
-
-      const customMailsPromises = _.map(pendingCustom, (mailData, mailId) =>
-        sendCustomEmail(mailData.recipients, mailData.subject, mailData.content)
-          .then(() => db.remove(PENDING_CUSTOM_EMAILS_PATH + '/' + mailId))
-      );
-      return Promise.all(templatePromises.concat(customMailsPromises));
-    })
-    .then(results => {
-      if (results.length) {
-        console.log(results.length + ' emails were sent successfully!');
-      } else {
-        console.log('No pending emails were found...');
-      }
-    })
-    .catch(e => console.log('Failed to send pending emails!', e));
+  // return Promise.all(readPromises)
+  //   .spread((pendingTemplates, pendingCustom) => {
+  //     const templatePromises = _.map(pendingTemplates, (mailData, mailId) =>
+  //       sendTemplate(mailData.recipients, mailData.templateId, mailData.substitutions)
+  //         .then(() => db.remove(PENDING_TEMPLATE_EMAILS_PATH + '/' + mailId))
+  //     );
+  //
+  //     const customMailsPromises = _.map(pendingCustom, (mailData, mailId) =>
+  //       sendCustomEmail(mailData.recipients, mailData.subject, mailData.content)
+  //         .then(() => db.remove(PENDING_CUSTOM_EMAILS_PATH + '/' + mailId))
+  //     );
+  //     return Promise.all(templatePromises.concat(customMailsPromises));
+  //   })
+  //   .then(results => {
+  //     if (results.length) {
+  //       console.log(results.length + ' emails were sent successfully!');
+  //     } else {
+  //       console.log('No pending emails were found...');
+  //     }
+  //   })
+  //   .catch(e => console.log('Failed to send pending emails!', e));
+  return;
 };
 
 module.exports = { exec };
