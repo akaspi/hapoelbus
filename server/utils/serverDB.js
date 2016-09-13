@@ -2,10 +2,21 @@ const firebase = require('firebase');
 const serverConfig = require('../../conf/server.config.json');
 const Promise = require('bluebird');
 
+const fbConfig= {
+  serviceAccount: {
+    projectId: process.env.fb_projectId,
+    clientEmail: process.env.fb_clientEmail,
+    privateKey: unescape(process.env.fb_privateKey)
+  },
+  databaseURL: process.env.fb_databaseURL
+};
+
+console.log(fbConfig);
+
 if (firebase.apps.length === 0) {
-  firebase.initializeApp(serverConfig.firebase);
+  firebase.initializeApp(fbConfig);
 } else {
-  firebase.initializeApp(serverConfig.firebase, 'ServerFirebase');
+  firebase.initializeApp(fbConfig, 'ServerFirebase');
 }
 
 console.log(JSON.stringify(serverConfig.firebase));
