@@ -76,10 +76,10 @@ const sendTemplate = (recipients, templateId, substitutions) => {
 };
 
 const exec = () => {
-  console.log('calling exec!');
   const readPromises = [db.read(PENDING_TEMPLATE_EMAILS_PATH), db.read(PENDING_CUSTOM_EMAILS_PATH)];
   return Promise.all(readPromises)
     .spread((pendingTemplates, pendingCustom) => {
+      console.log('have read results...');
       const templatePromises = _.map(pendingTemplates, (mailData, mailId) =>
         sendTemplate(mailData.recipients, mailData.templateId, mailData.substitutions)
           .then(() => db.remove(PENDING_TEMPLATE_EMAILS_PATH + '/' + mailId))
@@ -89,7 +89,7 @@ const exec = () => {
         sendCustomEmail(mailData.recipients, mailData.subject, mailData.content)
           .then(() => db.remove(PENDING_CUSTOM_EMAILS_PATH + '/' + mailId))
       );
-
+      console.log('customMailsPromises: ' + customMailsPromises);
       return Promise.all(templatePromises.concat(customMailsPromises));
     })
     .then(results => {
