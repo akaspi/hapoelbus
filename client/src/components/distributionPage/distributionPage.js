@@ -27,6 +27,8 @@ const getEventSubstitutions = event => ({
   '-NAME-': Constants.EVENTS_TYPES[event.typeId].name
 });
 
+const prepareCustomMailContentForSend = content => '<p dir=\'rtl\'>' + content.replace(/(?:\r\n|\r|\n)/g, '<br/>') + '</p>';
+
 const getInitialState = events => ({
   distributionMethod: 'email',
   recipientsType: Constants.DISTRIBUTION.RECIPIENTS.ALL.value,
@@ -117,7 +119,7 @@ class DistributionPage extends React.Component {
         const substitutions = getEventSubstitutions(this.props.events[this.state.eventId]);
         this.props.sendTemplateEmail(recipients, this.state.templateId, substitutions);
       } else {
-        this.props.sendCustomEmail(recipients, this.state.subject, this.state.content);
+        this.props.sendCustomEmail(recipients, this.state.subject, prepareCustomMailContentForSend(this.state.content));
       }
     } else {
       const recipients = getUsersPhoneNumbers(this.props.users, sendToMembersOnly);
