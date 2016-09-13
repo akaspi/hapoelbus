@@ -6,7 +6,7 @@ const fbConfig= {
   serviceAccount: {
     projectId: process.env.fb_projectId,
     clientEmail: process.env.fb_clientEmail,
-    privateKey: unescape(process.env.fb_privateKey)
+    privateKey: process.env.fb_privateKey
   },
   databaseURL: process.env.fb_databaseURL
 };
