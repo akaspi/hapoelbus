@@ -79,13 +79,13 @@ const exec = () => {
   const readPromises = [db.read(PENDING_TEMPLATE_EMAILS_PATH), db.read(PENDING_CUSTOM_EMAILS_PATH)];
   return Promise.all(readPromises)
     .spread((pendingTemplates, pendingCustom) => {
-      const templatePromises = _.map(pendingTemplates, ({ recipients, templateId, substitutions }, mailId) =>
-        sendTemplate(recipients, templateId, substitutions)
+      const templatePromises = _.map(pendingTemplates, (mailData, mailId) =>
+        sendTemplate(mailData.recipients, mailData.templateId, mailData.substitutions)
           .then(() => db.remove(PENDING_TEMPLATE_EMAILS_PATH + '/' + mailId))
       );
 
-      const customMailsPromises = _.map(pendingCustom, ({ recipients, subject, content }, mailId) =>
-        sendCustomEmail(recipients, subject, content)
+      const customMailsPromises = _.map(pendingCustom, (mailData, mailId) =>
+        sendCustomEmail(mailData.recipients, mailData.subject, mailData.content)
           .then(() => db.remove(PENDING_CUSTOM_EMAILS_PATH + '/' + mailId))
       );
 
