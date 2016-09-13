@@ -98,7 +98,7 @@ const exec = () => {
   //     }
   //   })
   //   .catch(e => console.log('Failed to send pending emails!', e));
-  return;
+  return Promise.resolve();
 };
 
 module.exports = { exec };

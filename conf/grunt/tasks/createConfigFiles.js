@@ -22,7 +22,7 @@ function createServerConfig() {
       serviceAccount: {
         projectId: process.env.fb_projectId,
         clientEmail: process.env.fb_clientEmail,
-        privateKey: process.env.fb_privateKey
+        privateKey: unescape(process.env.fb_privateKey)
       },
       databaseURL: process.env.fb_databaseURL
     },
