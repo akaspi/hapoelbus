@@ -1,5 +1,7 @@
 import { SET_AUTH_DATA, SIGN_OUT } from './actionTypes';
 
+import { Promise } from 'bluebird';
+
 import * as Constants from '../../utils/constants';
 import * as clientDB from '../../utils/clientDB';
 import * as userActions from './userActions';
@@ -27,9 +29,11 @@ export const setAuthData = (uid, email, isAdmin) => ({
 const fetchAppData = (dispatch, user) =>
   clientDB.read('admins/' + user.uid)
     .then(isAdmin => dispatch(setAuthData(user.uid, user.email, !!isAdmin)))
-    .then(() => dispatch(userActions.fetchUsers()))
-    .then(() => dispatch(eventActions.fetchEvents()))
-    .then(() => dispatch(bookingActions.fetchBookings()));
+    .then(() => Promise.all([
+      dispatch(userActions.fetchUsers()),
+      dispatch(eventActions.fetchEvents()),
+      dispatch(bookingActions.fetchBookings())
+    ]));
 
 export const userSignedOut = () => ({
   type: SIGN_OUT
