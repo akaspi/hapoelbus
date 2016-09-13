@@ -76,6 +76,7 @@ const sendTemplate = (recipients, templateId, substitutions) => {
 };
 
 const exec = () => {
+  console.log('calling exec!');
   const readPromises = [db.read(PENDING_TEMPLATE_EMAILS_PATH), db.read(PENDING_CUSTOM_EMAILS_PATH)];
   return Promise.all(readPromises)
     .spread((pendingTemplates, pendingCustom) => {
