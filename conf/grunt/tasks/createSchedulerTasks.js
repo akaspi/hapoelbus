@@ -6,7 +6,7 @@ const createSchedulerTaskTemplate = () => {
   const templateArr = [];
   templateArr.push('#!/usr/bin/env node');
   templateArr.push('const task = require(\'<%= fileName %>\');');
-  templateArr.push('task.exec();');
+  templateArr.push('task.exec().then(() => process.exit());');
   return _.template(templateArr.join('\n'));
 };
 
