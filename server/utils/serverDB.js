@@ -8,6 +8,8 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(serverConfig.firebase, 'ServerFirebase');
 }
 
+console.log(JSON.stringify(serverConfig.firebase));
+
 const read = path => new Promise((resolve, reject) => {
   firebase.database().ref(path).once('value')
     .then(snapshot => resolve(snapshot.val()))
