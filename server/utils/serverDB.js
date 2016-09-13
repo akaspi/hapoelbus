@@ -11,10 +11,6 @@ const fbConfig= {
   databaseURL: process.env.fb_databaseURL
 };
 
-console.log('escaped: ' + process.env.fb_privateKey);
-console.log('\n\n');
-console.log('unescaped: ' + unescape(process.env.fb_privateKey));
-
 if (firebase.apps.length === 0) {
   firebase.initializeApp(fbConfig);
 } else {
