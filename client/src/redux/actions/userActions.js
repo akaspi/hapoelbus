@@ -11,6 +11,7 @@ const USER_INFO_KEYS = ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneN
 const PATH_MAP = {
   USERS_INFO: 'usersInfo',
   SEASON_TICKETS: 'seasonTickets',
+  BOOKINGS: 'bookings'
 };
 
 const buildUser = (userInfo, seasonTickets) => {

@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import template from './usersPage.rt';
 import {connect} from 'react-redux';
-import {updateUser} from '../../redux/actions/userActions';
+import {updateUser, removeUser} from '../../redux/actions/userActions';
 
 const pickUsersFunctions = {
   ALL: user => true,
@@ -17,7 +17,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: (uid, user) => dispatch(updateUser(uid, user))
+  updateUser: (uid, user) => dispatch(updateUser(uid, user)),
+  removeUser: (uid) => dispatch(removeUser(uid))
 });
 
 class UsersPage extends React.Component {

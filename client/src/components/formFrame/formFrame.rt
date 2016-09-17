@@ -15,7 +15,7 @@
             <span>שמור</span>
             <i class="fa fa-check" aria-hidden="true"></i>
         </a>
-        <a rt-if="this.props.onRemove" key="remove-btn" onClick="()=>this.onRemove()" class="button alert more-space">
+        <a rt-if="this.props.onRemove && this.props.isAdminMode" key="remove-btn" onClick="()=>this.onRemove()" class="button alert more-space">
             <span>מחק</span>
             <i class="fa fa-trash" aria-hidden="true"></i>
         </a>

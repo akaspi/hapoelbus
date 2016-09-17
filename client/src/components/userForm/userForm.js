@@ -43,13 +43,13 @@ const userForm = React.createClass({
       }
     }
 
-    this.setState({ [e.target.name]: value });
+    this.setState({[e.target.name]: value});
   },
 
   onBooleanInfoChange(e) {
     const value = Boolean(e.target.checked);
 
-    this.setState({ [e.target.name]: value });
+    this.setState({[e.target.name]: value});
   },
 
   onRequestForMembershipChange(e) {
@@ -90,6 +90,12 @@ const userForm = React.createClass({
       requestForMembership: this.state.requestForMembership
     };
     this.props.updateUser(this.props.uid, user);
+  },
+
+  removeUser(){
+    if (this.props.uid) {
+      this.props.removeUser(this.props.uid);
+    }
   },
 
   isFormValid() {

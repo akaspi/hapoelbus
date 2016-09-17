@@ -5,6 +5,8 @@
         title="פרטים אישיים"
         hideBack="{this.props.hideBack}"
         onSubmit="{this.updateUser}"
+        isAdminMode="{this.props.isAdminMode}"
+        onRemove="{this.removeUser}"
         onClose="{this.props.onClose}"
         disabled="{!this.isFormValid()}">
 
