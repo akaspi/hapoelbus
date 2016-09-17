@@ -74,8 +74,11 @@ const userForm = React.createClass({
   },
 
   updateUser() {
+
+    const propsEmail = _.get(this.props.user, 'email') || this.props.email;
+
     const user = {
-      email: _.get(this.props.user, 'email') || this.props.email,
+      email: propsEmail || this.state.email,
       firstName: _.trim(this.state.firstName),
       lastName: _.trim(this.state.lastName),
       phonePrefix: this.state.phonePrefix,
