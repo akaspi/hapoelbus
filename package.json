@@ -2,10 +2,11 @@
   "name": "hapoelbus",
   "version": "3.0.0",
   "scripts": {
-    "start": "node server/prodServer.js",
+    "start": "npm run build && node server.js",
     "dev": "webpack-dev-server --progress --colors --hot --config ./webpack.dev.config.js",
+    "build": "grunt build && webpack --config ./webpack.prod.config.js",
     "test": "grunt test",
-    "postinstall": "grunt build"
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "babel-core": "^6.14.0",

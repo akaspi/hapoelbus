@@ -1,5 +1,3 @@
-const webpackConfig = require('../../webpack.config');
-
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -28,11 +26,7 @@ module.exports = function (grunt) {
     eslint: {
       target: ['.']
     },
-    webpack: {
-      production: webpackConfig
-    },
     clean: {
-      dist: ['client/dist'],
       bin: ['bin'],
       config: ['conf/*.json']
     }
@@ -44,7 +38,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('schedulerTasks', ['clean:bin', 'createSchedulerTasks']);
-  grunt.registerTask('buildWebpack', ['clean:dist', 'webpack:production']);
+
   grunt.registerTask('buildConfig', ['clean:config', 'createConfigFiles']);
 
   grunt.registerTask('test:client', ['jasmine:client']);
@@ -53,7 +47,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('lint', ['eslint']);
 
-  grunt.registerTask('build', ['buildConfig', 'buildWebpack', 'schedulerTasks']);
+  grunt.registerTask('build', ['buildConfig', 'schedulerTasks']);
 
   grunt.task.loadTasks('./conf/grunt/tasks/');
 
