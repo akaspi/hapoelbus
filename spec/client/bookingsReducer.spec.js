@@ -1,6 +1,6 @@
-import bookingsReducer from '../src/redux/reducers/bookingsReducer';
-import { bookingsReceived, bookingsCanceled } from '../src/redux/actions/bookingActions';
-import { userSignedOut } from '../src/redux/actions/authActions';
+import bookingsReducer from '../../src/redux/reducers/bookingsReducer';
+import { bookingsReceived, bookingsCanceled } from '../../src/redux/actions/bookingActions';
+import { userSignedOut } from '../../src/redux/actions/authActions';
 
 describe('bookingsReducer spec', () => {
 

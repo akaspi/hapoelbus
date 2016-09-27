@@ -3,7 +3,7 @@ const webpack = require('webpack');
 module.exports = {
   cache: true,
 
-  entry: './client/src/index.js',
+  entry: './src/index.js',
 
   output: {
     path: __dirname + '/dist',

@@ -1,28 +1,6 @@
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    jasmine: {
-      client: {
-        src: [
-          // helpers
-          'node_modules/babel-register/lib/node.js',
-          'client/test/helpers/**/*.js',
-
-          // specs
-          'client/**/*.spec.js'
-        ]
-      },
-      server: {
-        src: [
-          // helpers
-          'node_modules/babel-register/lib/node.js',
-          'server/test/helpers/**/*.js',
-
-          // specs
-          'server/**/*.spec.js'
-        ]
-      }
-    },
     eslint: {
       target: ['.']
     },
@@ -34,16 +12,11 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-jasmine-npm');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-webpack-without-server');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('schedulerTasks', ['clean:bin', 'createSchedulerTasks']);
 
   grunt.registerTask('buildConfig', ['clean:config', 'createConfigFiles']);
-
-  grunt.registerTask('test:client', ['jasmine:client']);
-  grunt.registerTask('test:server', ['jasmine:server']);
-  grunt.registerTask('test', ['test:client', 'test:server']);
 
   grunt.registerTask('lint', ['eslint']);
 
@@ -51,5 +24,5 @@ module.exports = function (grunt) {
 
   grunt.task.loadTasks('./conf/grunt/tasks/');
 
-  grunt.registerTask('default', ['lint', 'test:client', 'test:server', 'build']);
+  grunt.registerTask('default', ['lint', 'build']);
 };

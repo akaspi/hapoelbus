@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const db = require('../utils/serverDB');
+const db = require('../../server/utils/serverDB');
 const Promise = require('bluebird');
-const sendPendingEMails = require('../tasks/sendPendingEMails');
+const sendPendingEMails = require('../../server/tasks/sendPendingEMails');
 const nock = require('nock');
 
 describe('sendPendingEmails spec', () => {

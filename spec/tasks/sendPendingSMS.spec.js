@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const db = require('../utils/serverDB');
+const db = require('../../server/utils/serverDB');
 const Promise = require('bluebird');
 const proxyquire = require('proxyquire');
 
@@ -11,7 +11,7 @@ describe('sendPendingSMS spec', () => {
 
   beforeEach(() => {
     spy = jasmine.createSpy('sendMessage').and.callFake((data, cb) => cb());
-    sendPendingSMS = proxyquire('../tasks/sendPendingSMS', {
+    sendPendingSMS = proxyquire('../../server/tasks/sendPendingSMS', {
       twilio: () => ({
         messages: {
           create: spy

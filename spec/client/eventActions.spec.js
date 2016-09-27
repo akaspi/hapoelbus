@@ -1,11 +1,11 @@
-import * as clientDB from '../src/utils/clientDB';
+import * as clientDB from '../../src/utils/clientDB';
 import * as Promise from 'bluebird';
 
-import { EVENTS_RECEIVED, EVENT_REMOVED } from '../src/redux/actions/actionTypes';
+import { EVENTS_RECEIVED, EVENT_REMOVED } from '../../src/redux/actions/actionTypes';
 
-import * as eventActions from '../src/redux/actions/eventActions';
-import * as loadingActions from '../src/redux/actions/loadingActions';
-import * as errorActions from '../src/redux/actions/errorActions';
+import * as eventActions from '../../src/redux/actions/eventActions';
+import * as loadingActions from '../../src/redux/actions/loadingActions';
+import * as errorActions from '../../src/redux/actions/errorActions';
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

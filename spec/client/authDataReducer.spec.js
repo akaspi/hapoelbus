@@ -1,5 +1,5 @@
-import authDataReducer from '../src/redux/reducers/authDataReducer';
-import { setAuthData, userSignedOut } from '../src/redux/actions/authActions';
+import authDataReducer from '../../src/redux/reducers/authDataReducer';
+import { setAuthData, userSignedOut } from '../../src/redux/actions/authActions';
 
 describe('authDataReducer spec', () => {
   it('should be null by default', () => {

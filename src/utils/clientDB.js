@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import * as clientConfig from '../../../conf/client.config.json';
+import * as clientConfig from '../../conf/client.config.json';
 import { Promise } from 'bluebird';
 
 if (firebase.apps.length === 0) {

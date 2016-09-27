@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const serverDB = require('../../utils/serverDB');
+const serverDB = require('../../server/utils/serverDB');
 
 beforeEach(() => {
   _.forOwn(serverDB, (v, key) => {

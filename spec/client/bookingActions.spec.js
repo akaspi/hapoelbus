@@ -1,11 +1,11 @@
-import * as clientDB from '../src/utils/clientDB';
+import * as clientDB from '../../src/utils/clientDB';
 import * as Promise from 'bluebird';
 
-import { BOOKINGS_RECEIVED, BOOKING_CANCELED } from '../src/redux/actions/actionTypes';
+import { BOOKINGS_RECEIVED, BOOKING_CANCELED } from '../../src/redux/actions/actionTypes';
 
-import * as bookingActions from '../src/redux/actions/bookingActions';
-import * as loadingActions from '../src/redux/actions/loadingActions';
-import * as errorActions from '../src/redux/actions/errorActions';
+import * as bookingActions from '../../src/redux/actions/bookingActions';
+import * as loadingActions from '../../src/redux/actions/loadingActions';
+import * as errorActions from '../../src/redux/actions/errorActions';
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
