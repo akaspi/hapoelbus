@@ -7,10 +7,9 @@ Gemfile.lock
 
 # Generated:
 bin/
-conf/client.config.json
-conf/server.config.json
 *.rt.js
 dist/bundle.js
 
 # Config
 .env
+src/config/config.json

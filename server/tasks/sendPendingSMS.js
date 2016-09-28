@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const config = require('../../conf/server.config.json');
+const config = require('../config/config');
 const Twilio = require('twilio')(config.twilio.account, config.twilio.token);
 const db = require('../utils/serverDB');
 const Promise = require('bluebird');

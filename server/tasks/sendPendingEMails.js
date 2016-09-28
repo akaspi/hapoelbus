@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const _ = require('lodash');
-const config = require('../../conf/server.config.json');
+const config = require('../config/config');
 const sendGrid = require('sendgrid')(config.sendGrid.apiToken);
 const db = require('../utils/serverDB');
 const Promise = require('bluebird');

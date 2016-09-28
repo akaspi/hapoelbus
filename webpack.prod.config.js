@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   cache: true,
@@ -19,6 +20,12 @@ module.exports = {
       { test: /\.scss/, exclude: /node_modules/, loaders: ['style', 'css', 'sass'] },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$/, exclude: /node_modules/, loaders: ['file'] }
     ]
+  },
+
+  resolve: {
+    alias: {
+      config: __dirname + 'src/config.js'
+    }
   }
 
 };

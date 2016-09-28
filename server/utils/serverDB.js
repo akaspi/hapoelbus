@@ -1,12 +1,8 @@
+const config = require('../config/config');
 const firebase = require('firebase');
-const serverConfig = require('../../conf/server.config.json');
 const Promise = require('bluebird');
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(serverConfig.firebase);
-} else {
-  firebase.initializeApp(serverConfig.firebase, 'ServerFirebase');
-}
+firebase.initializeApp(config.firebase, 'ServerFirebase');
 
 const read = path => new Promise((resolve, reject) => {
   firebase.database().ref(path).once('value')
