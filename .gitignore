@@ -9,7 +9,11 @@ Gemfile.lock
 bin/
 *.rt.js
 dist/bundle.js
+public/
+client/
 
 # Config
 .env
 src/config/config.json
+conf/client.config.json
+conf/server.config.json
