@@ -12,4 +12,4 @@ dist/bundle.js
 
 # Config
 .env
-#src/config/config.json
+src/config/config.json
