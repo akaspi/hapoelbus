@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import React from 'react';
 import template from './eventsPage.rt';
 import { connect } from 'react-redux';
-import { createEvent, updateEvent } from '../../redux/actions/eventActions';
+import { createEvent, updateEvent, removeEvent } from '../../redux/actions/eventActions';
 
 import * as Constants from '../../utils/constants';
 
@@ -18,12 +18,14 @@ const getStatusSubtitle = event => {
 };
 
 const mapStateToProps = (state) => ({
-  events: state.events
+  events: state.events,
+  authData: state.authData
 });
 
 const mapDispatchToProps = dispatch => ({
   createEvent: event => dispatch(createEvent(event)),
-  updateEvent: (eventId, event) => dispatch(updateEvent(eventId, event))
+  updateEvent: (eventId, event) => dispatch(updateEvent(eventId, event)),
+  removeEvent: (eventId) => dispatch(removeEvent(eventId))
 });
 
 class EventsPage extends React.Component {
@@ -93,15 +95,22 @@ class EventsPage extends React.Component {
     this.stopEditing();
   }
 
+  removeEvent() {
+    this.props.removeEvent(this.state.editingEventId);
+    this.stopEditing();
+  }
+
   render() {
     return template.apply(this);
   }
 }
 
 EventsPage.propTypes = {
+  authData: React.PropTypes.object.isRequired,
   events: React.PropTypes.object.isRequired,
   createEvent: React.PropTypes.func.isRequired,
-  updateEvent: React.PropTypes.func.isRequired
+  updateEvent: React.PropTypes.func.isRequired,
+  removeEvent: React.PropTypes.func.isRequired
 };
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(EventsPage);

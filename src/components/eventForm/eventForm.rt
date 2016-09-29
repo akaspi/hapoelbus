@@ -6,6 +6,8 @@
         title="עריכת אירוע"
         hideBack="{this.props.hideBack}"
         onSubmit="{this.onSubmit}"
+        onRemove="{this.props.removeEvent}"
+        isAdminMode="{this.props.isAdminMode}"
         onClose="{this.props.onClose}"
         disabled="{!this.isFormValid()}">
 
