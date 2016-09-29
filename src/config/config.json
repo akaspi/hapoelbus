@@ -1,8 +1,0 @@
-{
-  "firebase": {
-    "apiKey": "AIzaSyCaFxh-5Z78uZeALx9dZn5r4kJZ2s0GVBs",
-    "authDomain": "hapoelbus-test.firebaseapp.com",
-    "databaseURL": "https://hapoelbus-test.firebaseio.com",
-    "storageBucket": "hapoelbus-test.appspot.com"
-  }
-}
