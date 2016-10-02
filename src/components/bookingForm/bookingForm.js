@@ -19,7 +19,7 @@ const bookingForm = React.createClass({
   },
 
   getInitialState() {
-    const booking = _.defaults(this.props.booking, emptyBooking);
+    const booking = _.defaults(this.props.booking, { paidSeats: this.props.seasonTickets }, emptyBooking);
     return _.merge({}, booking, {
       pickUpEnabled: !!booking.pickUp,
       dropOffEnabled: !!booking.dropOff
