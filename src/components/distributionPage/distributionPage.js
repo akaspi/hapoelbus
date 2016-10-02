@@ -31,7 +31,7 @@ const prepareCustomMailContentForSend = content => '<p dir=\'rtl\'>' + content.r
 
 const getInitialState = events => ({
   distributionMethod: 'email',
-  recipientsType: Constants.DISTRIBUTION.RECIPIENTS.ALL.value,
+  recipientsType: Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.value,
   distributionType: 'template',
   eventId: _.last(_.keys(events)),
   templateId: Constants.DISTRIBUTION.TEMPLATES.EVENT_OPEN_FOR_MEMBERS.id,
