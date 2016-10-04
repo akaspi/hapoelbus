@@ -5,6 +5,7 @@ const sendPendingEMails = require('../../server/tasks/sendPendingEMails');
 const nock = require('nock');
 
 describe('sendPendingEmails spec', () => {
+
   beforeEach(() => {
     spyOn(console, 'log');
     nock.cleanAll();
@@ -36,6 +37,7 @@ describe('sendPendingEmails spec', () => {
   };
 
   describe('pending templates', () => {
+
     it('should not send email if there is no pending templates', done => {
       let isSendGridCalled = false;
 
@@ -115,11 +117,10 @@ describe('sendPendingEmails spec', () => {
 
       sendPendingEMails.exec()
         .then(() => {
-          expect(sendGridBody.personalizations[0].to).toEqual([
-            { email: 'test@example.com' },
-            { email: 'spider@pig.com' }
-          ]);
+          expect(sendGridBody.personalizations[0].to).toEqual([{ email: 'test@example.com' }]);
           expect(sendGridBody.personalizations[0].substitutions).toEqual({});
+          expect(sendGridBody.personalizations[1].to).toEqual([{ email: 'spider@pig.com' }]);
+          expect(sendGridBody.personalizations[1].substitutions).toEqual({});
           expect(sendGridBody.template_id).toEqual('someTemplateId');
           done();
         });
@@ -172,11 +173,10 @@ describe('sendPendingEmails spec', () => {
 
       sendPendingEMails.exec()
         .then(() => {
-          expect(sendGridBody.personalizations[0].to).toEqual([
-            { email: 'test@example.com' },
-            { email: 'spider@pig.com' }
-          ]);
+          expect(sendGridBody.personalizations[0].to).toEqual([{ email: 'test@example.com' }]);
           expect(sendGridBody.personalizations[0].substitutions).toEqual({});
+          expect(sendGridBody.personalizations[1].to).toEqual([{ email: 'spider@pig.com' }]);
+          expect(sendGridBody.personalizations[1].substitutions).toEqual({});
           expect(sendGridBody.template_id).toEqual('someTemplateId');
           done();
         });
@@ -217,9 +217,11 @@ describe('sendPendingEmails spec', () => {
           done();
         });
     });
+
   });
 
   describe('pending custom mails', () => {
+
     it('should not send email if there is no pending custom mails', done => {
       let isSendGridCalled = false;
 
@@ -253,11 +255,10 @@ describe('sendPendingEmails spec', () => {
 
       sendPendingEMails.exec()
         .then(() => {
-          expect(sendGridBody.personalizations[0].to).toEqual([
-            { email: 'test@example.com' },
-            { email: 'spider@pig.com' }
-          ]);
+          expect(sendGridBody.personalizations[0].to).toEqual([{ email: 'test@example.com' }]);
           expect(sendGridBody.personalizations[0].subject).toEqual('Can He Swing?');
+          expect(sendGridBody.personalizations[1].to).toEqual([{ email: 'spider@pig.com' }]);
+          expect(sendGridBody.personalizations[1].subject).toEqual('Can He Swing?');
           expect(sendGridBody.content).toEqual([{ type: 'text/html', value: '<h1>From A Web</h1>' }]);
           done();
         });
@@ -313,11 +314,10 @@ describe('sendPendingEmails spec', () => {
 
       sendPendingEMails.exec()
         .then(() => {
-          expect(sendGridBody.personalizations[0].to).toEqual([
-            { email: 'test@example.com' },
-            { email: 'spider@pig.com' }
-          ]);
+          expect(sendGridBody.personalizations[0].to).toEqual([{ email: 'test@example.com' }]);
           expect(sendGridBody.personalizations[0].subject).toEqual('Can He Swing?');
+          expect(sendGridBody.personalizations[1].to).toEqual([{ email: 'spider@pig.com' }]);
+          expect(sendGridBody.personalizations[1].subject).toEqual('Can He Swing?');
           expect(sendGridBody.content).toEqual([{ type: 'text/html', value: '<h1>From A Web</h1>' }]);
           done();
         });
@@ -360,9 +360,11 @@ describe('sendPendingEmails spec', () => {
           done();
         });
     });
+
   });
 
   describe('both pending and custom emails', () => {
+
     it('should send all', done => {
       const sendGridBodyCalls = [];
       const pendingTemplates = {
@@ -415,5 +417,6 @@ describe('sendPendingEmails spec', () => {
           done();
         });
     });
+
   });
 });

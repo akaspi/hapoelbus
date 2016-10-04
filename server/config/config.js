@@ -1,4 +1,5 @@
-require('dotenv').config({ silent: true });
+const path = require('path');
+require('dotenv').config({ silent: true, path: path.join(__dirname, '.env')});
 
 const config = {
   firebase: {

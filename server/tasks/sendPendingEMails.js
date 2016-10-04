@@ -13,10 +13,9 @@ const isEmailValid = emailAddress => {
   return re.test(emailAddress);
 };
 
-const createRecipientsArray = recipients => _(recipients)
+const getValidRecipients = recipients => _(recipients)
   .compact()
   .filter(isEmailValid)
-  .map(email => ({ email }))
   .value();
 
 const send = request => new Promise((resolve, reject) => {
@@ -28,17 +27,28 @@ const send = request => new Promise((resolve, reject) => {
   });
 });
 
+const createCustomPersonalizations = (recipients, subject) => {
+  const validRecipients = getValidRecipients(recipients);
+  return _.map(validRecipients, email => ({
+    to: [{ email }],
+    subject
+  }))
+};
+
+const createTemplatePersonalizations = (recipients, substitutions) => {
+  const validRecipients = getValidRecipients(recipients);
+  return _.map(validRecipients, email => ({
+    to: [{ email }],
+    substitutions
+  }))
+};
+
 const sendCustomEmail = (recipients, subject, content) => {
   const request = sendGrid.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',
     body: {
-      personalizations: [
-        {
-          to: createRecipientsArray(recipients),
-          subject
-        }
-      ],
+      personalizations: createCustomPersonalizations(recipients, subject),
       from: {
         email: config.sendGrid.fromAddress
       },
@@ -59,12 +69,7 @@ const sendTemplate = (recipients, templateId, substitutions) => {
     method: 'POST',
     path: '/v3/mail/send',
     body: {
-      personalizations: [
-        {
-          to: createRecipientsArray(recipients),
-          substitutions: substitutions || {}
-        }
-      ],
+      personalizations: createTemplatePersonalizations(recipients, substitutions || {}),
       from: {
         email: config.sendGrid.fromAddress
       },
