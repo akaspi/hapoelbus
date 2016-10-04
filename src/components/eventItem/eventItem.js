@@ -2,6 +2,16 @@ import React from 'react';
 import template from './eventItem.rt';
 
 class EventItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleBookingClick() {
+    if (this.props.isBookingEnabled) {
+      this.props.onBookingClick();
+    }
+  }
+
   render() {
     return template.apply(this);
   }

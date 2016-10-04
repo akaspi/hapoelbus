@@ -35,7 +35,7 @@
 
     <div class="action-buttons medium-4 small-12  text-center medium-text-left column">
         <a rt-if="!this.props.closed" key="register-btn" class="button success small"
-           onClick="{this.props.onBookingClick}" disabled="{!this.props.isBookingEnabled}">
+           onClick="()=>this.handleBookingClick()" disabled="{!this.props.isBookingEnabled}">
             <span rt-if="!this.props.booked" key="book-btn">
                 <span class="">הירשם</span>
                 <i class="fa fa-bus" aria-hidden="true"></i>
