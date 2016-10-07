@@ -1,5 +1,8 @@
+import * as _ from 'lodash';
+
 import React from 'react';
 import template from './topBar.rt';
+
 import {connect} from 'react-redux';
 import * as Constants from '../../utils/constants';
 
@@ -24,6 +27,10 @@ class TopBar extends React.Component {
     this.state = {
       isMenuVisible: false
     };
+  }
+
+  getUserPhotoURL() {
+    return _.get(this.props.authData, ['photoURL'], 'http://image.flaticon.com/icons/svg/163/163804.svg');
   }
 
   getUserTitle() {

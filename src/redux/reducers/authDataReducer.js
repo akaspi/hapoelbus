@@ -5,7 +5,7 @@ const initialState = null;
 export default function authDataReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_AUTH_DATA:
-      return { uid: action.uid, email: action.email, isAdmin: action.isAdmin };
+      return { uid: action.uid, email: action.email, photoURL: action.photoURL, isAdmin: action.isAdmin };
     case SIGN_OUT:
       return initialState;
     default:

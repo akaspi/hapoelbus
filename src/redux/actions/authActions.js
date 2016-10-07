@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import { SET_AUTH_DATA, SIGN_OUT } from './actionTypes';
 
 import { Promise } from 'bluebird';
@@ -19,16 +21,17 @@ export const AUTH_ERROR_CODES_MAP = {
   'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE
 };
 
-export const setAuthData = (uid, email, isAdmin) => ({
+export const setAuthData = (uid, email, photoURL, isAdmin) => ({
   type: SET_AUTH_DATA,
   uid,
   email,
+  photoURL,
   isAdmin
 });
 
 const fetchAppData = (dispatch, user) =>
   clientDB.read('admins/' + user.uid)
-    .then(isAdmin => dispatch(setAuthData(user.uid, user.email, !!isAdmin)))
+    .then(isAdmin => dispatch(setAuthData(user.uid, user.email, _.get(user, ['providerData', 0, 'photoURL']), !!isAdmin)))
     .then(() => Promise.all([
       dispatch(userActions.fetchUsers()),
       dispatch(eventActions.fetchEvents()),
