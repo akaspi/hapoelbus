@@ -35,7 +35,7 @@ class BookingsPage extends React.Component {
     super(props);
     this.state = {
       editingUserId: null,
-      eventId: _.findKey(this.props.events, {status: 'openForMembers'}),
+      eventId: _.findKey(this.props.events, {status: 'openForMembers'}) || _.findKey(this.props.events, {status: 'openForAll'}) ||  _.findKey(this.props.events, {status: 'closed'}) ,
       filter: 'PICKUP'
     };
   }
