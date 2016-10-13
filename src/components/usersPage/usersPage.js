@@ -36,6 +36,7 @@ class UsersPage extends React.Component {
       .pickBy(pickUsersFunctions[this.state.filter])
       .pickBy(user => _.startsWith(user.firstName, this.state.searchQuery) || _.startsWith(user.lastName, this.state.searchQuery), this)
       .map((user, uid) => ({user, uid}))
+      .sortBy('user.firstName')
       .value();
   }
 
