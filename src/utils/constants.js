@@ -110,6 +110,10 @@ module.exports = {
     OPEN_FOR_ALL: {
       value: 'openForAll',
       name: 'ההרשמה פתוחה לכולם'
+    },
+    FULLY_BOOKED: {
+      value: 'fullyBooked',
+      name: 'ההסעה מלאה'
     }
   },
   DISTRIBUTION: {

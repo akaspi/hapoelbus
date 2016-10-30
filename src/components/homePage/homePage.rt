@@ -1,6 +1,5 @@
 <rt-require dependency="../eventItem/eventItem" as="eventItem"></rt-require>
 <rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
-<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 <rt-require dependency="./homePage.scss" as="homePageCss"></rt-require>
 
@@ -20,7 +19,7 @@
                                date="{this.getEventDate(event)}"
                                time="{this.getEventTime(event)}"
                                booked="{this.isRegisteredToEvent(eventIndex)}"
-                               closed="{false}"
+                               status="{event.status}"
                                isBookingEnabled="{this.isBookingEnabled(event)}"
                                imageSrc="{this.getEventImage(event)}"
                                onBookingClick="()=>this.bookEvent(eventIndex)"
@@ -35,7 +34,7 @@
                                name="{this.getEventName(event)}"
                                date="{this.getEventDate(event)}"
                                time="{this.getEventTime(event)}"
-                               closed="{true}"
+                               status="{event.status}"
                                imageSrc="{this.getEventImage(event)}"
                                hapoelSrc="{this.getEventHapoelImage()}"
                     />
