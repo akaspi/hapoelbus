@@ -106,7 +106,7 @@ class BookingsPage extends React.Component {
   }
 
   getBookingImage() {
-    return 'http://image.flaticon.com/icons/svg/147/147125.svg';
+    return 'http://image.flaticon.com/icons/svg/189/189991.svg';
   }
 
   getPickUpCount() {
