@@ -19,19 +19,19 @@
                     <li rt-class="{active: this.state.filter === 'MEMBERS'}">
                         <a onClick="() => this.handleFilterChange('MEMBERS')">
                             <span>מנויים </span>
-                            <span>({_.size(this.getMembersUser())})</span>
+                            <span>({this.countSeasonTickets()})</span>
                         </a>
                     </li>
                     <li rt-class="{active: this.state.filter === 'REQUESTS'}">
                         <a onClick="() => this.handleFilterChange('REQUESTS')">
                             <span>בקשה למנוי </span>
-                            <span>({_.size(this.getRequestsForMembership())})</span>
+                            <span>({this.countRequestsForMembership()})</span>
                         </a>
                     </li>
                     <li rt-class="{active: this.state.filter === 'NON_MEMBERS'}">
                         <a onClick="() => this.handleFilterChange('NON_MEMBERS')">
                             <span>לא מנויים </span>
-                            <span>({_.size(this.getNonMembersUsers())})</span>
+                            <span>({this.countNonMembersUsers()})</span>
                         </a>
                     </li>
                 </ul>

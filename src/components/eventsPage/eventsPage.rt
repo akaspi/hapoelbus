@@ -56,7 +56,7 @@
         <EventForm rt-if="!listViewMode" key="event-user"
                    event="{this.props.events[this.state.editingEventId]}"
                    onSubmit="event => this.updateEvent(event)"
-                   removeEvent="{() => this.removeEvent()}"
+                   removeEvent="() => this.removeEvent()"
                    isAdminMode="{this.props.authData.isAdmin}"
                    onClose="() => this.stopEditing()"/>
     </div>

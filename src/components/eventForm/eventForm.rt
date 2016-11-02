@@ -76,9 +76,7 @@
             <div class="large-4 medium-12 columns">
                 <label> סטטוס
                     <select value="{this.state.status}" onChange="{this.onChange}" name="status">
-                        <option value="{Constants.EVENTS_STATUS.CLOSED.value}">סגור</option>
-                        <option value="{Constants.EVENTS_STATUS.OPEN_FOR_MEMBERS.value}">פתוח למנויים</option>
-                        <option value="{Constants.EVENTS_STATUS.OPEN_FOR_ALL.value}">פתוח לכולם</option>
+                        <option rt-repeat="eventStatus in Constants.EVENTS_STATUS" value="{eventStatus.value}">{eventStatus.name}</option>
                     </select>
                 </label>
             </div>

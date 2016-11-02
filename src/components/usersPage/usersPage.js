@@ -36,19 +36,30 @@ class UsersPage extends React.Component {
       .pickBy(pickUsersFunctions[this.state.filter])
       .pickBy(user => _.startsWith(user.firstName, this.state.searchQuery) || _.startsWith(user.lastName, this.state.searchQuery), this)
       .map((user, uid) => ({user, uid}))
+      .sortBy('user.firstName')
       .value();
   }
 
-  getMembersUser() {
-    return _.pickBy(this.props.users, pickUsersFunctions['MEMBERS']);
+  countSeasonTickets() {
+    return _.chain(this.props.users)
+      .pickBy(pickUsersFunctions.MEMBERS)
+      .values()
+      .sumBy('seasonTickets')
+      .value();
   }
 
-  getNonMembersUsers() {
-    return _.pickBy(this.props.users, pickUsersFunctions['NON_MEMBERS']);
+  countNonMembersUsers() {
+    return _.chain(this.props.users)
+      .pickBy(pickUsersFunctions.NON_MEMBERS)
+      .size()
+      .value();
   }
 
-  getRequestsForMembership() {
-    return _.pickBy(this.props.users, pickUsersFunctions['REQUESTS']);
+  countRequestsForMembership() {
+    return _.chain(this.props.users)
+      .pickBy(pickUsersFunctions.REQUESTS)
+      .size()
+      .value();
   }
 
   handleSearchQueryChange(e) {
