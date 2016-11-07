@@ -6,6 +6,17 @@ import * as Constants from '../../utils/constants';
 import {updateBooking, cancelBooking} from '../../redux/actions/bookingActions';
 import {updateUser} from '../../redux/actions/userActions';
 
+function parseEventDate(event) {
+  const eventDate = new Date(event.year, event.month, event.day);
+  eventDate.setMonth(eventDate.getMonth() - 1);
+  return eventDate;
+}
+
+function isFutureEvent(event) {
+  const eventDate = parseEventDate(event);
+  return eventDate > Date.now();
+}
+
 const mapStateToProps = (state) => ({
   authData: state.authData,
   events: state.events,
@@ -33,7 +44,13 @@ class HomePage extends React.Component {
   }
 
   getClosedEvents() {
-    return _.omitBy(this.props.events, event => event.status !== Constants.EVENTS_STATUS.CLOSED.value);
+    return _.chain(this.props.events)
+      .omitBy(event => {
+        return event.status !== Constants.EVENTS_STATUS.CLOSED.value || !isFutureEvent(event);
+      })
+      .map(_.identity)
+      .sortBy(parseEventDate)
+      .value();
   }
 
   bookEvent(eventId) {
