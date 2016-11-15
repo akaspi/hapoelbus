@@ -76,6 +76,14 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
 
+export const sendPasswordResetEmail = email => dispatch => {
+  dispatch(loadingActions.startLoading());
+
+  return clientDB.sendPasswordResetEmail(email)
+    .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
+    .finally(() => dispatch(loadingActions.stopLoading()));
+};
+
 export const fetchAuthData = () => dispatch => {
   dispatch(loadingActions.startLoading());
 
