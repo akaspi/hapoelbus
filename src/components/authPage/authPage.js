@@ -8,6 +8,7 @@ import {
   loginWithFacebook,
   loginWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail
 } from '../../redux/actions/authActions';
 
 import { reportError } from '../../redux/actions/errorActions';
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   loginWithFacebook: () => dispatch(loginWithFacebook()),
   loginWithEmail: (email, password) => dispatch(loginWithEmailAndPassword(email, password)),
   signUpWithUserAndPassword: (email, password) => dispatch(createUserWithEmailAndPassword(email, password)),
+  sendPasswordResetEmail: email => dispatch(sendPasswordResetEmail(email)),
   reportError: (msg) => dispatch(reportError(msg))
 });
 
@@ -40,6 +42,7 @@ const AuthForm = React.createClass({
       email: '',
       password: '',
       passwordAgain: '',
+      authMode: 'login',
       isLoginMode: false
     };
   },
@@ -50,12 +53,15 @@ const AuthForm = React.createClass({
     });
   },
 
-  getLinkLabel() {
-    return (this.state.isLoginMode) ? 'אין לך משתמש?' : 'כבר נרשמת?';
-  },
-
   getButtonLabel() {
-    return (this.state.isLoginMode) ? 'התחבר' : 'הירשם';
+    switch (this.state.authMode) {
+      case 'login':
+        return 'התחבר';
+      case 'register':
+        return 'הירשם';
+      case 'forgotPassword':
+        return 'שלח לינק לאיפוס סיסמא';
+    }
   },
 
   handleKeyDown(e) {
@@ -69,20 +75,53 @@ const AuthForm = React.createClass({
   },
 
   isSubmitDisabled() {
-    return _.isEmpty(this.state.email) || _.isEmpty(this.state.password) || (!this.state.isLoginMode && _.isEmpty(this.state.passwordAgain));
+    switch (this.state.authMode) {
+      case 'login':
+        return _.isEmpty(this.state.email) || _.isEmpty(this.state.password);
+      case 'register':
+        return _.isEmpty(this.state.email) || _.isEmpty(this.state.password) || _.isEmpty(this.state.passwordAgain);
+      case 'forgotPassword':
+        return _.isEmpty(this.state.email);
+    }
   },
 
-  toggleLoginMode() {
-    this.setState({ isLoginMode: !this.state.isLoginMode });
+  goToLogin() {
+    this.setState({ authMode: 'login' });
   },
 
-  handleSubmitClick() {
-    if (this.state.isLoginMode) {
-      this.props.loginWithEmail(this.state.email, this.state.password);
-    } else if (_.isEqual(this.state.password, this.state.passwordAgain)) {
+  goToRegister() {
+    this.setState({ authMode: 'register' });
+  },
+
+  goToForgotPassword() {
+    this.setState({ authMode: 'forgotPassword' });
+  },
+
+  handleLogin() {
+    this.props.loginWithEmail(this.state.email, this.state.password);
+  },
+
+  handleRegister() {
+    if (_.isEqual(this.state.password, this.state.passwordAgain)) {
       this.props.signUpWithUserAndPassword(this.state.email, this.state.password);
     } else {
       this.props.reportError(constants.ERRORS.NOT_SAME_PASSWORD);
+    }
+  },
+
+  handleForgotPassword() {
+    this.props.sendPasswordResetEmail(this.state.email);
+    this.goToLogin();
+  },
+
+  handleSubmitClick() {
+    switch (this.state.authMode) {
+      case 'login':
+        return this.handleLogin();
+      case 'register':
+        return this.handleRegister();
+      case 'forgotPassword':
+        return this.handleForgotPassword();
     }
   },
 

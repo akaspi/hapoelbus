@@ -5,36 +5,52 @@
     <div class="medium-centered logo">
         <logo width="120" height="120"/>
     </div>
-    <button onClick="{this.props.loginWithFacebook}" class="facebook button split">
-        <span>Facebook</span>
-        <i class="fa fa-facebook-official"></i>
-    </button>
 
-    <button onClick="{this.props.loginWithGoogle}" class="google button split">
-        <span>Google</span>
-        <i class="fa fa-google" aria-hidden="true"></i>
-    </button>
+    <div rt-if="_.includes(['login', 'register'], this.state.authMode)">
+        <button onClick="{this.props.loginWithFacebook}" class="facebook button split">
+            <span>Facebook</span>
+            <i class="fa fa-facebook-official"></i>
+        </button>
+
+        <button onClick="{this.props.loginWithGoogle}" class="google button split">
+            <span>Google</span>
+            <i class="fa fa-google" aria-hidden="true"></i>
+        </button>
+
+        <hr class="hr">
+    </div>
 
     <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
         <span class="error-msg-txt">{this.props.errorMsg}</span>
     </div>
 
-    <hr>
     <div onKeyDown="{this.handleKeyDown}" class="auth-form">
+
         <input type="email" value="{this.state.email}" onChange="{this.onChange}" name="email"
                placeholder="דואר אלקטרוני"/>
-        <input type="password" value="{this.state.password}" onChange="{this.onChange}" name="password"
+
+        <input rt-if="_.includes(['login', 'register'], this.state.authMode)" type="password" value="{this.state.password}" onChange="{this.onChange}" name="password"
                placeholder="סיסמא"/>
 
-        <input rt-if="!this.state.isLoginMode" type="password" value="{this.state.passwordAgain}"
+
+        <input rt-if="this.state.authMode === 'register'" type="password" value="{this.state.passwordAgain}"
                onChange="{this.onChange}" name="passwordAgain"
                placeholder="שוב סיסמא"/>
 
-        <button onClick="{this.handleSubmitClick}" class="button split dark" disabled="{this.isSubmitDisabled()}">
+
+        <button onClick="{this.handleSubmitClick}" class="button split success" disabled="{this.isSubmitDisabled()}">
             <span>{this.getButtonLabel()}</span>
         </button>
-        <a onClick="{this.toggleLoginMode}">{this.getLinkLabel()}</a>
+
+        <div rt-if="this.state.authMode === 'login'" class="row">
+            <div class="column small-6 red-link"><a onClick="{this.goToRegister}">אין לך חשבון?</a></div>
+            <div class="column small-6 red-link"><a onClick="{this.goToForgotPassword}">שכחת סיסמא?</a></div>
+        </div>
+
+        <div rt-if="this.state.authMode !== 'login'">
+            <a class="red-link" onClick="{this.goToLogin}">כבר יש לך חשבון?</a>
+        </div>
+
     </div>
-</div>
 </div>

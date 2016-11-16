@@ -57,6 +57,12 @@ export const loginWithEmailAndPassword = (email, password) => new Promise((resol
     .catch(reject);
 });
 
+export const sendPasswordResetEmail = email => new Promise((resolve, reject) => {
+  firebase.auth().sendPasswordResetEmail(email)
+    .then(resolve)
+    .catch(reject);
+});
+
 export const createUserWithEmailAndPassword = (email, password) => new Promise((resolve, reject) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(resolve)

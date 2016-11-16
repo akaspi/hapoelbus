@@ -20,7 +20,8 @@ export const AUTH_ERROR_CODES_MAP = {
   'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
   'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE,
   'auth/wrong-password': Constants.ERRORS.WRONG_PASSWORD,
-  'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE
+  'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE,
+  'auth/user-not-found': Constants.ERRORS.USER_NOT_FOUND
 };
 
 export const setAuthData = (uid, email, photoURL, isAdmin) => ({
@@ -74,6 +75,14 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
   return clientDB.createUserWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
     .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
+    .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
+    .finally(() => dispatch(loadingActions.stopLoading()));
+};
+
+export const sendPasswordResetEmail = email => dispatch => {
+  dispatch(loadingActions.startLoading());
+
+  return clientDB.sendPasswordResetEmail(email)
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
