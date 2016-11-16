@@ -105,8 +105,9 @@ class BookingsPage extends React.Component {
     return subtitles;
   }
 
-  getBookingImage() {
-    return 'http://image.flaticon.com/icons/svg/189/189991.svg';
+  getBookingImage(uid) {
+    const user = this.props.users[uid];
+    return user.photoURL || 'http://image.flaticon.com/icons/svg/189/189991.svg';
   }
 
   getPickUpCount() {

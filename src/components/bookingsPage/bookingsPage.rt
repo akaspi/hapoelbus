@@ -60,7 +60,7 @@
             </h6>
             <listItem rt-repeat="booking in modiinPickUp" title="{this.getBookingTitle(bookingIndex)}"
                       key="booking-{bookingIndex}"
-                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage()}"
+                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage(bookingIndex)}"
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
         </div>
 
