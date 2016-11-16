@@ -12,7 +12,7 @@ describe('authDataReducer spec', () => {
     it('should have a uid property', () => {
       const currentState = null;
 
-      const nextState = authDataReducer(currentState, setAuthData('someUID', 'spider@pig.com', true));
+      const nextState = authDataReducer(currentState, setAuthData('someUID', 'spider@pig.com', 'photoURL', true));
 
       expect(nextState.uid).toEqual('someUID');
     });
@@ -20,7 +20,7 @@ describe('authDataReducer spec', () => {
     it('should have isAdmin property', () => {
       const currentState = null;
 
-      const nextState = authDataReducer(currentState, setAuthData('someUID', 'spider@pig.com', true));
+      const nextState = authDataReducer(currentState, setAuthData('someUID', 'spider@pig.com', 'photoURL', true));
 
       expect(nextState.isAdmin).toBe(true);
     });
@@ -28,7 +28,7 @@ describe('authDataReducer spec', () => {
     it('should have email property', () => {
       const currentState = null;
 
-      const nextState = authDataReducer(currentState, setAuthData('someUID', 'spider@pig.com', true));
+      const nextState = authDataReducer(currentState, setAuthData('someUID', 'spider@pig.com', 'photoURL', true));
 
       expect(nextState.email).toEqual('spider@pig.com');
     });
