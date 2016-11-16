@@ -18,7 +18,8 @@ export const AUTH_ERROR_CODES_MAP = {
   'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
   'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE,
   'auth/wrong-password': Constants.ERRORS.WRONG_PASSWORD,
-  'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE
+  'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE,
+  'auth/user-not-found': Constants.ERRORS.USER_NOT_FOUND
 };
 
 export const setAuthData = (uid, email, photoURL, isAdmin) => ({
