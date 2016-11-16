@@ -17,7 +17,7 @@
             <i class="fa fa-google" aria-hidden="true"></i>
         </button>
 
-        <hr>
+        <hr class="hr">
     </div>
 
     <div class="error-msg" rt-if="this.props.errorMsg" key="homePageErrorMsg">
@@ -39,17 +39,17 @@
                placeholder="שוב סיסמא"/>
 
 
-        <button onClick="{this.handleSubmitClick}" class="button split dark" disabled="{this.isSubmitDisabled()}">
+        <button onClick="{this.handleSubmitClick}" class="button split success" disabled="{this.isSubmitDisabled()}">
             <span>{this.getButtonLabel()}</span>
         </button>
 
-        <div rt-if="this.state.authMode === 'login'">
-            <a onClick="{this.goToRegister}">אין לך חשבון?</a>
-            <a onClick="{this.goToForgotPassword}">שכחת ססמא?</a>
+        <div rt-if="this.state.authMode === 'login'" class="row">
+            <div class="column small-6 red-link"><a onClick="{this.goToRegister}">אין לך חשבון?</a></div>
+            <div class="column small-6 red-link"><a onClick="{this.goToForgotPassword}">שכחת סיסמא?</a></div>
         </div>
 
         <div rt-if="this.state.authMode !== 'login'">
-            <a onClick="{this.goToLogin}">התחבר</a>
+            <a class="red-link" onClick="{this.goToLogin}">כבר יש לך חשבון?</a>
         </div>
 
     </div>
