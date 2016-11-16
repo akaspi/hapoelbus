@@ -13,6 +13,8 @@ import * as loadingActions from './loadingActions';
 import * as errorActions from './errorActions';
 import * as navigationActions from './navigationActions';
 
+import updatePhotoUrlFixer from '../../dataFixers/updatePhotoUrlFixer';
+
 export const AUTH_ERROR_CODES_MAP = {
   'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
   'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
@@ -76,13 +78,14 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
 
-export const fetchAuthData = () => dispatch => {
+export const fetchAuthData = () => (dispatch, getState) => {
   dispatch(loadingActions.startLoading());
 
   return clientDB.getLoggedInUser()
     .then(user => {
       if (user) {
         return fetchAppData(dispatch, user)
+          .then(() => updatePhotoUrlFixer(dispatch, getState()))
           .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)));
       }
       return null;

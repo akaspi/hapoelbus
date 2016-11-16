@@ -117,6 +117,11 @@ class HomePage extends React.Component {
     this.props.cancelBooking(this.props.authData.uid, eventId);
   }
 
+  createUserInfo(uid, user) {
+    user.photoURL = this.props.authData.photoURL;
+    this.props.updateUser(uid, user);
+  }
+
   render() {
     return template.apply(this);
   }

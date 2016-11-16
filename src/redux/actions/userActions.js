@@ -7,7 +7,7 @@ import * as clientDB from '../../utils/clientDB';
 import * as loadingActions from './loadingActions';
 import * as errorActions from './errorActions';
 
-const USER_INFO_KEYS = ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneNumber', 'requestForMembership', 'station', 'subscribeSMS', 'subscribeMail'];
+const USER_INFO_KEYS = ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneNumber', 'requestForMembership', 'station', 'subscribeSMS', 'subscribeMail', 'photoURL'];
 const PATH_MAP = {
   USERS_INFO: 'usersInfo',
   SEASON_TICKETS: 'seasonTickets',
