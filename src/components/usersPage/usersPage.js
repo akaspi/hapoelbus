@@ -91,7 +91,7 @@ class UsersPage extends React.Component {
   }
 
   getUserImage(user) {
-    return user.imageSrc || 'http://image.flaticon.com/icons/svg/163/163804.svg';
+    return user.photoURL || 'http://image.flaticon.com/icons/svg/163/163804.svg';
   }
 }
 
