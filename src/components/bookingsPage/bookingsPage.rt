@@ -52,7 +52,7 @@
             </h6>
             <listItem rt-repeat="booking in tlvPickUp" title="{this.getBookingTitle(bookingIndex)}"
                       key="booking-{bookingIndex}"
-                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage()}"
+                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage(bookingIndex)}"
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
 
             <h6 rt-if="_.size(modiinPickUp) !== 0" key="modiinPickUp">
@@ -74,7 +74,7 @@
             </h6>
             <listItem rt-repeat="booking in tlvDropOff" title="{this.getBookingTitle(bookingIndex)}"
                       key="booking-{bookingIndex}"
-                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage()}"
+                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage(bookingIndex)}"
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
 
             <h6 rt-if="_.size(modiinDropOff) !== 0" key="modiinDropOff">
@@ -82,7 +82,7 @@
             </h6>
             <listItem rt-repeat="booking in modiinDropOff" title="{this.getBookingTitle(bookingIndex)}"
                       key="booking-{bookingIndex}"
-                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage()}"
+                      subtitles="{this.getBookingSubtitles(booking, bookingIndex)}" imageSrc="{this.getBookingImage(bookingIndex)}"
                       onClick="()=>this.onBookingClick(bookingIndex)"></listItem>
         </div>
 
