@@ -54,7 +54,7 @@
             <UserForm
                       uid="{this.props.authData.uid}"
                       email="{this.props.authData.email}"
-                      updateUser="{(uid, user) => this.createUserInfo(uid, user)}"
+                      onUpdateUser="(uid, user) => this.createUserInfo(uid, user)"
             />
         </div>
 

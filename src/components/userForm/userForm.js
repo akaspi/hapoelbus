@@ -20,7 +20,7 @@ const userForm = React.createClass({
     uid: React.PropTypes.string.isRequired,
     user: React.PropTypes.object,
     email: React.PropTypes.string,
-    updateUser: React.PropTypes.func.isRequired,
+    onUpdateUser: React.PropTypes.func.isRequired,
     onClose: React.PropTypes.func
   },
 
@@ -89,7 +89,7 @@ const userForm = React.createClass({
       seasonTickets: this.state.seasonTickets,
       requestForMembership: this.state.requestForMembership
     };
-    this.props.updateUser(this.props.uid, user);
+    this.props.onUpdateUser(this.props.uid, user);
   },
 
   removeUser(){
