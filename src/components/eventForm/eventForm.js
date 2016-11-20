@@ -18,7 +18,7 @@ const eventForm = React.createClass({
 
   propTypes: {
     onSubmit: React.PropTypes.func.isRequired,
-    removeEvent: React.PropTypes.func,
+    onRemoveEvent: React.PropTypes.func,
     onClose: React.PropTypes.func,
     event: React.PropTypes.object,
     isAdminMode: React.PropTypes.bool
