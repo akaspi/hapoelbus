@@ -45,7 +45,7 @@
                          key="edit-booking"
                          title="{this.getEventName(editingEvent)} - {this.getEventDate(editingEvent)} {this.getEventTime(editingEvent)}"
                          booking="{_.get(this.props.bookings, [this.props.authData.uid, this.state.eventId])}"
-                         onSubmit="{booking => this.updateBooking(booking)}"
+                         onSubmit="(booking) => this.updateBooking(booking)"
                          seasonTickets="{_.get(this.props.users, [this.props.authData.uid, 'seasonTickets']) || 0}"
                          onClose="() => this.stopEditing()"/>
         </div>
