@@ -30,7 +30,7 @@ class TopBar extends React.Component {
   }
 
   getUserPhotoURL() {
-    return _.get(this.props.authData, ['photoURL'], 'http://image.flaticon.com/icons/svg/163/163804.svg');
+    return _.get(this.props.authData, ['photoURL']) || 'http://image.flaticon.com/icons/svg/163/163804.svg';
   }
 
   getUserTitle() {
@@ -43,6 +43,10 @@ class TopBar extends React.Component {
 
   onMenuClick(){
     this.setState({ isMenuVisible: !this.state.isMenuVisible });
+  }
+
+  onAvatarClick() {
+
   }
 
   onMenuItemClick(page){

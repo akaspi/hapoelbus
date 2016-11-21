@@ -3,7 +3,7 @@
 
 <div class="top-bar row small-collapse hide-for-print">
     <div class="medium-5 small-10 column user-info">
-        <img src="{this.getUserPhotoURL()}" class="avatar"/>
+        <img src="{this.getUserPhotoURL()}" class="avatar" onClick="() => this.onMenuItemClick(Constants.PAGES.EDIT_USER_INFO.val)"/>
         <span>שלום </span><span class="user-name">{this.getUserTitle()}</span><span> | </span>
         <a onClick="{this.props.signOut}" class="disconnect">התנתק</a>
     </div>

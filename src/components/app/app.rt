@@ -5,6 +5,7 @@
 <rt-require dependency="../authPage/authPage" as="AuthPage"></rt-require>
 <rt-require dependency="../eventsPage/eventsPage" as="EventsPage"></rt-require>
 <rt-require dependency="../bookingsPage/bookingsPage" as="BookingsPage"></rt-require>
+<rt-require dependency="../editUserInfoPage/editUserInfoPage" as="EditUserInfoPage"></rt-require>
 <rt-require dependency="../distributionPage/distributionPage" as="DistributionPage"></rt-require>
 <rt-require dependency="../topBar/topBar" as="TopBar"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
@@ -22,5 +23,6 @@
         <EventsPage rt-if="this.props.currentPage === Constants.PAGES.EVENTS.val" key="events-page"/>
         <BookingsPage rt-if="this.props.currentPage === Constants.PAGES.BOOKINGS.val" key="bookings-page"/>
         <DistributionPage rt-if="this.props.currentPage === Constants.PAGES.DISTRIBUTION.val" key="distribution-page"/>
+        <EditUserInfoPage rt-if="this.props.currentPage === Constants.PAGES.EDIT_USER_INFO.val" key="editUserInfoPage-page"/>
     </div>
 </div>

@@ -1,0 +1,10 @@
+<rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
+
+<div class="edit-user-info-page">
+    <UserForm
+            uid="{this.props.authData.uid}"
+            email="{this.props.authData.email}"
+            user="{this.props.users[this.props.authData.uid]}"
+            onUpdateUser="(uid, user) => this.updateUserInfo(uid, user)"
+    />
+</div>

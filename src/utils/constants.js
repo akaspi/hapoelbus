@@ -97,7 +97,8 @@ module.exports = {
     USERS: {val: 'users', name: 'משתמשים', visible: true},
     EVENTS: {val: 'events', name: 'אירועים', visible: true},
     BOOKINGS: {val: 'bookings', name: 'רשומים להסעות', visible: true},
-    DISTRIBUTION: {val: 'distribution', name: 'מיילים', visible: true}
+    DISTRIBUTION: {val: 'distribution', name: 'מיילים', visible: true},
+    EDIT_USER_INFO: {val: 'editUserInfo', name: ''}
   },
   EVENTS_STATUS: {
     CLOSED: {
