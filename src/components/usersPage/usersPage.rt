@@ -62,7 +62,7 @@
                   user="{this.props.users[this.state.editingUserId]}"
                   uid="{this.state.editingUserId}"
                   isAdminMode="{this.props.authData.isAdmin}"
-                  updateUser="{this.props.updateUser}"
+                  onUpdateUser="{this.props.updateUser}"
                   removeUser="{this.props.removeUser}"
                   onClose="() => this.stopEditing()"/>
     </div>
