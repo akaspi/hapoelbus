@@ -8,6 +8,7 @@
     "start": "node server.js",
     "dev": "webpack-dev-server --progress --colors --hot --config ./webpack.dev.config.js",
     "build": "webpack --config ./webpack.prod.config.js",
+    "publish": "npm test && npm build",
     "test": "jasmine",
     "lint": "eslint .",
     "createTasks": "node server/createHerokuTasks.js",
