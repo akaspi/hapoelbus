@@ -7,19 +7,38 @@ import { sendTemplateEmail, sendCustomEmail, sendSMS } from '../../redux/actions
 
 import * as Constants from '../../utils/constants';
 
-const getUsersEmails = (users, membersOnly) => _.chain(users)
-  .omitBy(user => !user.subscribeMail)
-  .omitBy(user => membersOnly && (!user.seasonTickets || user.seasonTickets === 0))
-  .map(user => user.email)
-  .compact()
-  .value();
+function getMembersUsersOnly(users) {
+  return _.pickBy(users, user => user.seasonTickets && user.seasonTickets > 0);
+}
 
-const getUsersPhoneNumbers = (users, membersOnly) => _.chain(users)
-  .omitBy(user => !user.subscribeSMS)
-  .omitBy(user => membersOnly && (!user.seasonTickets || user.seasonTickets === 0))
-  .map(user => user.phonePrefix + user.phoneNumber)
-  .compact()
-  .value();
+function getBookedUsersOnly(users, bookings, eventId) {
+  return _.pickBy(users, (user, uid) => _.has(bookings[uid], eventId));
+}
+
+function getRecipients(users, recipientsType, bookings, eventId) {
+  let recipientsUsers = _.pickBy(users, user => user.subscribeMail);
+
+  switch (recipientsType) {
+    case Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.value:
+      recipientsUsers = getMembersUsersOnly(recipientsUsers);
+      break;
+    case Constants.DISTRIBUTION.RECIPIENTS.BOOKED_TO_EVENT.value:
+      recipientsUsers = getBookedUsersOnly(recipientsUsers, bookings, eventId);
+      break;
+  }
+
+  return recipientsUsers;
+}
+
+function getUsersEmails(users, recipientsType, bookings, eventId) {
+  const recipients = getRecipients(users, recipientsType, bookings, eventId);
+  return _.map(recipients, user => user.email);
+}
+
+function getUsersPhoneNumbers(users, recipientsType, bookings, eventId) {
+  const recipients = getRecipients(users, recipientsType, bookings, eventId);
+  return _.map(recipients, user => user.phonePrefix + user.phoneNumber);
+}
 
 const getEventSubstitutions = event => ({
   '-DEPARTURE-': `${event.hour}:${event.minute}`,
@@ -41,6 +60,7 @@ const getInitialState = events => ({
 
 const mapStateToProps = state => ({
   events: state.events,
+  bookings: state.bookings,
   users: state.users
 });
 
@@ -112,9 +132,11 @@ class DistributionPage extends React.Component {
   }
 
   send() {
-    const sendToMembersOnly = (this.state.recipientsType === Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.value);
     if (this.state.distributionMethod === Constants.DISTRIBUTION.METHODS.EMAIL) {
-      const recipients = getUsersEmails(this.props.users, sendToMembersOnly);
+      const recipients = getUsersEmails(this.props.users, this.state.recipientsType, this.props.bookings, this.state.eventId);
+      if (_.isEmpty(recipients)) {
+        return;
+      }
       if (this.state.distributionType === Constants.DISTRIBUTION.TYPES.TEMPLATE) {
         const substitutions = getEventSubstitutions(this.props.events[this.state.eventId]);
         this.props.sendTemplateEmail(recipients, this.state.templateId, substitutions);
@@ -122,7 +144,10 @@ class DistributionPage extends React.Component {
         this.props.sendCustomEmail(recipients, this.state.subject, prepareCustomMailContentForSend(this.state.content));
       }
     } else {
-      const recipients = getUsersPhoneNumbers(this.props.users, sendToMembersOnly);
+      const recipients = getUsersPhoneNumbers(this.props.users, this.state.recipientsType, this.props.bookings, this.state.eventId);
+      if (_.isEmpty(recipients)) {
+        return;
+      }
       this.props.sendSMS(recipients, this.state.content);
     }
 

@@ -24,6 +24,9 @@
                     <option value="{Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.value}">
                         {Constants.DISTRIBUTION.RECIPIENTS.MEMBERS_ONLY.name}
                     </option>
+                    <option value="{Constants.DISTRIBUTION.RECIPIENTS.BOOKED_TO_EVENT.value}">
+                        {Constants.DISTRIBUTION.RECIPIENTS.BOOKED_TO_EVENT.name}
+                    </option>
                 </select>
             </label>
         </div>

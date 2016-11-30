@@ -127,6 +127,10 @@ module.exports = {
       MEMBERS_ONLY: {
         value: 'membersOnly',
         name: 'מנויים בלבד'
+      },
+      BOOKED_TO_EVENT: {
+        value: 'bookedToEvent',
+        name: 'רשומים להסעה'
       }
     },
     METHODS: {
