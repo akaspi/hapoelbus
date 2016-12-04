@@ -1,4 +1,4 @@
-<rt-require dependency="../listItem/listItem" as="listItem"></rt-require>
+<rt-require dependency="../listItem" as="listItem"></rt-require>
 <rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
 <rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
