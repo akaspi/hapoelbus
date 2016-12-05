@@ -50,7 +50,10 @@ class HomePage extends React.Component {
       .omitBy(event => {
         return event.status !== Constants.EVENTS_STATUS.CLOSED.value || !isFutureEvent(event);
       })
-      .map(_.identity)
+      .map((event, eventId) => ({
+        event,
+        eventId
+      }))
       .sortBy(parseEventDate)
       .value();
   }

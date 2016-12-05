@@ -1,8 +1,41 @@
+const _ = require('lodash');
 const React = require('react');
+const ReactRedux = require('react-redux');
+
 const gamesConstants = require('../utils/gameConstants');
 const bookingsConstants = require('../utils/bookingsConstants');
+const teamsData = require('../utils/teamsData');
 
 require('../styles/eventItem.scss');
+
+function isBookingEnabled(event, user) {
+    switch (event.status) {
+        case gamesConstants.STATUS.OPEN_FOR_ALL:
+            return true;
+        case gamesConstants.STATUS.OPEN_FOR_MEMBERS: {
+            return user.seasonTickets > 0
+        }
+        default:
+            return false
+    }
+}
+
+function mapStateToProps(state, ownProps) {
+    const authData = state.authData;
+    const users = state.users;
+    const event = state.events[ownProps.eventId];
+    const bookings = state.bookings;
+
+    return {
+        homeTeam: teamsData.HAPOEL_JERUSALEM,
+        awayTeam: teamsData[event.typeId],
+        status: event.status,
+        date: event.day + '/' + event.month + '/' + event.year,
+        time: event.hour + ':' + event.minute,
+        isBookingAllowed: isBookingEnabled(event, users[authData.uid]),
+        isBooked: _.hasIn(bookings, [authData.uid, ownProps.eventId])
+    }
+}
 
 function createTeamLogos(home, away) {
     return (
@@ -134,4 +167,4 @@ EventItem.propTypes = {
     onCancelBooking: React.PropTypes.func
 };
 
-module.exports = EventItem;
+module.exports = ReactRedux.connect(mapStateToProps)(EventItem);

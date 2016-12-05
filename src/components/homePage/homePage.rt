@@ -15,13 +15,7 @@
                 <div class="events-list open-events" rt-if="_.size(openEvents) !== 0">
                     <h6 class="hide-for-small-only">הסעות:</h6>
                     <EventItem rt-repeat="event in openEvents" key="event-{eventIndex}"
-                               homeTeam="{this.getHomeTeam()}"
-                               awayTeam="{this.getAwayTeam(event)}"
-                               status="{event.status}"
-                               date="{this.getEventDate(event)}"
-                               time="{this.getEventTime(event)}"
-                               isBookingAllowed="{this.isBookingEnabled(event)}"
-                               isBooked="{this.isRegisteredToEvent(eventIndex)}"
+                               eventId="{eventIndex}"
                                onBooking="()=>this.bookEvent(eventIndex)"
                                onCancelBooking="()=>this.cancelBooking(eventIndex)"
                     />
@@ -30,15 +24,9 @@
                 <div class="events-list closed-events hide-for-small-only">
                     <h6>ההסעות הבאות:</h6>
                     <EventItem rt-repeat="event in closedEvents" key="event-{eventIndex}"
-                               homeTeam="{this.getHomeTeam()}"
-                               awayTeam="{this.getAwayTeam(event)}"
-                               status="{event.status}"
-                               date="{this.getEventDate(event)}"
-                               time="{this.getEventTime(event)}"
-                               isBookingAllowed="{this.isBookingEnabled(event)}"
-                               isBooked="{this.isRegisteredToEvent(eventIndex)}"
-                               onBooking="()=>this.bookEvent(eventIndex)"
-                               onCancelBooking="()=>this.cancelBooking(eventIndex)"
+                               eventId="{event.eventId}"
+                               onBooking="()=>this.bookEvent(event.eventId)"
+                               onCancelBooking="()=>this.cancelBooking(event.eventId)"
                     />
                 </div>
             </div>
