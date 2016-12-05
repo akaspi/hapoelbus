@@ -6,6 +6,8 @@ import * as Constants from '../../utils/constants';
 import {updateBooking, cancelBooking} from '../../redux/actions/bookingActions';
 import {updateUser} from '../../redux/actions/userActions';
 
+const teamsData = require('../../utils/teamsData');
+
 function parseEventDate(event) {
   const eventDate = new Date(event.year, event.month, event.day);
   eventDate.setMonth(eventDate.getMonth() - 1);
@@ -120,6 +122,14 @@ class HomePage extends React.Component {
   createUserInfo(uid, user) {
     user.photoURL = this.props.authData.photoURL;
     this.props.updateUser(uid, user);
+  }
+
+  getHomeTeam() {
+    return teamsData.HAPOEL_JERUSALEM;
+  }
+
+  getAwayTeam(event) {
+    return teamsData[event.typeId];
   }
 
   render() {

@@ -1,5 +1,4 @@
 <rt-require dependency="../listItem" as="listItem"></rt-require>
-<rt-require dependency="../eventItem/eventItem" as="eventItem"></rt-require>
 <rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./bookingsPage.scss" as="bookingsPageCss"></rt-require>
