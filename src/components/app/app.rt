@@ -7,7 +7,7 @@
 <rt-require dependency="../bookingsPage/bookingsPage" as="BookingsPage"></rt-require>
 <rt-require dependency="../editUserInfoPage/editUserInfoPage" as="EditUserInfoPage"></rt-require>
 <rt-require dependency="../distributionPage/distributionPage" as="DistributionPage"></rt-require>
-<rt-require dependency="../topBar/topBar" as="TopBar"></rt-require>
+<rt-require dependency="../topBar" as="TopBar"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./app.scss" as="appCss"></rt-require>
 
