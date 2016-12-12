@@ -1,5 +1,5 @@
 <rt-require dependency="../listItem" as="listItem"></rt-require>
-<rt-require dependency="../userForm/userForm" as="UserForm"></rt-require>
+<rt-require dependency="../userForm" as="UserForm"></rt-require>
 <rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
 <div class="small-centered dashboard-page users-page">
@@ -57,13 +57,7 @@
         </label>
     </div>
 
-    <div class="small-centered">
-        <UserForm rt-if="this.state.editingUserId" key="edit-user"
-                  user="{this.props.users[this.state.editingUserId]}"
-                  uid="{this.state.editingUserId}"
-                  isAdminMode="{this.props.authData.isAdmin}"
-                  onUpdateUser="{this.props.updateUser}"
-                  removeUser="{this.props.removeUser}"
-                  onClose="() => this.stopEditing()"/>
+    <div rt-if="this.state.editingUserId" key="edit-user" class="small-centered">
+        <UserForm uid="{this.state.editingUserId}" onClose="() => this.stopEditing()" />
     </div>
 </div>
