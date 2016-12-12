@@ -1,9 +1,9 @@
 <rt-require dependency="./authPage.scss" as="css"></rt-require>
-<rt-require dependency="../logo/logo" as="logo"></rt-require>
+<rt-require dependency="../logo" as="logo"></rt-require>
 
 <div class="large-6 columns small-centered auth-form-container">
     <div class="medium-centered logo">
-        <logo width="120" height="120"/>
+        <logo width="{120}" height="{120}" />
     </div>
 
     <div rt-if="_.includes(['login', 'register'], this.state.authMode)">
