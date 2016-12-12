@@ -224,6 +224,13 @@ class UserForm extends React.Component {
       }
   };
 
+  onRemove = () => {
+      this.props.removeUser();
+      if (_.isFunction(this.props.onClose)) {
+          this.props.onClose();
+      }
+  };
+
   render() {
       const onTextChange = this.onChange.bind(this, 'text');
       const onNumberChange = this.onChange.bind(this, 'number');
@@ -233,7 +240,7 @@ class UserForm extends React.Component {
     return (
         <FormFrame title={userFormTranslations.TITLE}
                    onSubmit={this.onSubmit}
-                   onRemove={this.props.allowUserRemove ? this.props.removeUser : null}
+                   onRemove={this.props.allowUserRemove ? this.onRemove : null}
                    onClose={this.props.onClose}
                    disabled={!this.isFormValid()}>
 
