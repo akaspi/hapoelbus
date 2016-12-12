@@ -2,7 +2,7 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux= require('react-redux');
 
-const FormFrame = require('./formFrame/formFrame');
+const FormFrame = require('./formFrame');
 
 const userInfoConstants = require('../utils/userInfoConstants');
 const userFormTranslations = require('../utils/translations/userFormTranslations');
@@ -231,8 +231,10 @@ class UserForm extends React.Component {
 
 
     return (
-        <FormFrame title={userFormTranslations.TITLE} hideBack={this.props.hideBack} isAdminMode={this.props.isAdminMode}
-                   onSubmit={this.onSubmit} onRemove={this.props.allowUserRemove ? this.props.removeUser : null} onClose={this.props.onClose}
+        <FormFrame title={userFormTranslations.TITLE}
+                   onSubmit={this.onSubmit}
+                   onRemove={this.props.allowUserRemove ? this.props.removeUser : null}
+                   onClose={this.props.onClose}
                    disabled={!this.isFormValid()}>
 
           <div className="small-centered user-container" onKeyPress={this.onKeyPress}>

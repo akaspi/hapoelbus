@@ -1,11 +1,9 @@
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
-<rt-require dependency="../formFrame/formFrame" as="formFrame"></rt-require>
+<rt-require dependency="../formFrame" as="formFrame"></rt-require>
 
 <formFrame
         title="פרטים אישיים"
-        hideBack="{this.props.hideBack}"
         onSubmit="{this.updateUser}"
-        isAdminMode="{this.props.isAdminMode}"
         onRemove="{this.removeUser}"
         onClose="{this.props.onClose}"
         disabled="{!this.isFormValid()}">

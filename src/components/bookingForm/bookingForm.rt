@@ -1,9 +1,8 @@
-<rt-require dependency="../formFrame/formFrame" as="FormFrame"></rt-require>
+<rt-require dependency="../formFrame" as="FormFrame"></rt-require>
 <rt-require dependency="../../utils/constants" as="constants"></rt-require>
 
 <FormFrame
         title="{this.props.title}"
-        hideBack="{this.props.hideBack}"
         onSubmit="{this.onSubmit}"
         onClose="{this.props.onClose}"
         disabled="{!this.isFormValid()}">

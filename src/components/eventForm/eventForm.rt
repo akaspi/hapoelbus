@@ -1,13 +1,11 @@
-<rt-require dependency="../formFrame/formFrame" as="FormFrame"></rt-require>
+<rt-require dependency="../formFrame" as="FormFrame"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./eventForm.scss" as="eventFormCss"></rt-require>
 
 <FormFrame
         title="עריכת אירוע"
-        hideBack="{this.props.hideBack}"
         onSubmit="{this.onSubmit}"
         onRemove="{this.props.onRemoveEvent}"
-        isAdminMode="{this.props.isAdminMode}"
         onClose="{this.props.onClose}"
         disabled="{!this.isFormValid()}">
 
