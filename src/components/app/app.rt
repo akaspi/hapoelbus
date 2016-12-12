@@ -1,5 +1,5 @@
 <rt-require dependency="react-redux" as="ReactRedux"></rt-require>
-<rt-require dependency="../spinner/spinner" as="spinner"></rt-require>
+<rt-require dependency="../spinner" as="spinner"></rt-require>
 <rt-require dependency="../homePage/homePage" as="HomePage"></rt-require>
 <rt-require dependency="../usersPage/usersPage" as="UsersPage"></rt-require>
 <rt-require dependency="../authPage/authPage" as="AuthPage"></rt-require>
