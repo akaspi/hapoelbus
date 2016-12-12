@@ -6,9 +6,6 @@ import { USERS_RECEIVED } from '../../src/redux/actions/actionTypes';
 import * as userActions from '../../src/redux/actions/userActions';
 import * as loadingActions from '../../src/redux/actions/loadingActions';
 import * as errorActions from '../../src/redux/actions/errorActions';
-import * as navigationActions from '../../src/redux/actions/navigationActions';
-
-import * as Constants from '../../src/utils/constants';
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -204,7 +201,6 @@ describe('userActions spec', () => {
         userActions.usersReceived({
           SPIDER_PIG_UID: { firstName: 'CAN_HE_SWING?' }
         }),
-        navigationActions.navigateTo(Constants.PAGES.HOME.val),
         loadingActions.stopLoading()
       ];
 

@@ -3,10 +3,8 @@ import * as _ from 'lodash';
 import { USERS_RECEIVED, USER_REMOVED } from './actionTypes';
 import { Promise } from 'bluebird';
 
-import * as Constants from '../../utils/constants';
 import * as clientDB from '../../utils/clientDB';
 import * as loadingActions from './loadingActions';
-import * as navigationActions from './navigationActions';
 import * as errorActions from './errorActions';
 
 const USER_INFO_KEYS = ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneNumber', 'requestForMembership', 'station', 'subscribeSMS', 'subscribeMail', 'photoURL'];
@@ -91,7 +89,6 @@ export const updateUser = (uid, user) => (dispatch, getState) => {
 
   return Promise.all(userUpdatePromises)
     .then(() => dispatch(usersReceived({ [uid]: user })))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
     .catch(() => dispatch(errorActions.reportError()))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };

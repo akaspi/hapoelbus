@@ -1,7 +1,9 @@
 import React from 'react';
 import template from './editUserInfoPage.rt';
 import { connect } from 'react-redux';
-import { updateUser } from '../../redux/actions/userActions';
+import { navigateTo } from '../../redux/actions/navigationActions';
+
+const navigationConstants = require('../../utils/navigationConstants');
 
 const mapStateToProps = (state) => ({
   authData: state.authData,
@@ -9,7 +11,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: (uid, user) => dispatch(updateUser(uid, user))
+  navigateTo: pageId => dispatch(navigateTo(pageId))
 });
 
 class EditorUserInfoPage extends React.Component {
@@ -17,6 +19,10 @@ class EditorUserInfoPage extends React.Component {
     user.photoURL = this.props.authData.photoURL;
     this.props.updateUser(uid, user);
   }
+
+  onFormClose = () => {
+    this.props.navigateTo(navigationConstants.PAGES.HOME.val);
+  };
 
   render() {
     return template.apply(this);
