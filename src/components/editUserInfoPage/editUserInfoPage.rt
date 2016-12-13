@@ -1,5 +1,0 @@
-<rt-require dependency="../userForm" as="UserForm"></rt-require>
-
-<div class="edit-user-info-page">
-    <UserForm uid="{this.props.authData.uid}" onClose="{this.onFormClose}" />
-</div>
