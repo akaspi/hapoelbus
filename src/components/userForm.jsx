@@ -41,10 +41,6 @@ function mapDispatchToProps(dispatch, ownProps) {
     };
 }
 
-function onRemove() {
-    console.log('onRemove');
-}
-
 function createAdminSection(seasonTickets, onNumberChange) {
   return (
       <div className="row" key="seasonTickets">
