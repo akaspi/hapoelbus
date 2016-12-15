@@ -12,7 +12,7 @@ module.exports = {
   ],
 
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/docs',
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: './dist',
+    contentBase: './docs',
     hot: true
   }
 
