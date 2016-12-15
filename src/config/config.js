@@ -1,20 +1,10 @@
-const _  = require('lodash');
-
-const defaults = {
-  firebase: {
-    apiKey: "AIzaSyDEISV2aMiePkueCwlDR8CVg7h_BLa3Joc",
-    authDomain: "hapoelbus-b25d4.firebaseapp.com",
-    databaseURL: "https://hapoelbus-b25d4.firebaseio.com",
-    storageBucket: "hapoelbus-b25d4.appspot.com"
-  }
-};
-
-let config = {};
+let config = require('./config.prod.json');
 
 try {
-  config = require('./config.json');
+  config = require('./config.dev.json');
+  console.log('using development configuration')
 } catch (e) {
-  console.log('config.json missing or bad.');
+  console.log('using production configuration');
 }
 
-module.exports = _.defaults(config, defaults);
+module.exports = config;
