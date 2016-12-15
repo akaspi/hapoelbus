@@ -8,11 +8,11 @@
     "start": "node server.js",
     "dev": "webpack-dev-server --progress --colors --hot --config ./webpack.dev.config.js",
     "build": "webpack --config ./webpack.prod.config.js",
-    "publish": "npm test && npm build",
     "test": "jasmine",
     "lint": "eslint .",
     "createTasks": "node server/createHerokuTasks.js",
-    "postinstall": "npm run createTasks && npm run build"
+    "postinstall": "npm run createTasks && npm run build",
+    "publish": "webpack --config ./webpack.prod.docs.config.js"
   },
   "dependencies": {
     "babel-core": "^6.14.0",
