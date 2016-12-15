@@ -54,7 +54,7 @@ class HomePage extends React.Component {
         event,
         eventId
       }))
-      .sortBy(parseEventDate)
+      .sortBy(eventData => parseEventDate(eventData.event))
       .value();
   }
 
