@@ -33,7 +33,7 @@ module.exports = {
     'react-dom': 'ReactDOM',
     redux: 'Redux',
     'react-redux': 'ReactRedux',
-    'redux-thunk': 'ReactThunk'
+    'redux-thunk': 'ReduxThunk'
   },
 
   resolve: {
