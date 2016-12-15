@@ -17,82 +17,82 @@ module.exports = {
     minutes: ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
   },
 
-  EVENT_DEFAULT_PIC: '//image.flaticon.com/icons/svg/124/124150.svg',
+  EVENT_DEFAULT_PIC: 'http://image.flaticon.com/icons/svg/124/124150.svg',
   EVENTS_TYPES: {
     'hapoel-tlv': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_hapoelta.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_hapoelta.png',
       name: 'הפועל תל אביב'
     },
     'maccabi-tlv': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_maccabi.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_maccabi.png',
       name: 'מכבי תל אביב'
     },
     'herzeliya': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_sharon.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_sharon.png',
       name: 'בני הרצליה'
     },
     'kiryat-gat': {
-      src: '//www.basket.co.il/Images/teams/bigGat.png',
+      src: 'http://www.basket.co.il/Images/teams/bigGat.png',
       name: 'מכבי קרית גת'
     },
     'gilboa': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_Galil.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_Galil.png',
       name: 'גליל/גלבוע'
     },
     'nahariya': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_naharia.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_naharia.png',
       name: 'עירוני נהריה'
     },
     'holon': {
-      src: '//www.basket.co.il/pics/2007/articles/logo_hh.png',
+      src: 'http://www.basket.co.il/pics/2007/articles/logo_hh.png',
       name: 'הפועל חולון'
     },
     'ashdod': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_ashdod.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_ashdod.png',
       name: 'מכבי אשדוד'
     },
     'haifa': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_haifa.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_haifa.png',
       name: 'מכבי חיפה'
     },
     'rishon': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_rishon.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_rishon.png',
       name: 'מכבי ראשון לציון'
     },
     'eilat': {
-      src: '//www.basket.co.il/pics/2007/logos/logo_eilat.png',
+      src: 'http://www.basket.co.il/pics/2007/logos/logo_eilat.png',
       name: 'הפועל אילת'
     },
     'ljubljana': {
-      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Union_olimpija.png/140px-Union_olimpija.png',
+      src: 'http://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Union_olimpija.png/140px-Union_olimpija.png',
       name: 'לובליאנה'
     },
     'valencia': {
-      src: '//samvanrossom.com/wp-content/uploads/2014/10/valencia-basket1-logo.jpg',
+      src: 'http://samvanrossom.com/wp-content/uploads/2014/10/valencia-basket1-logo.jpg',
       name: 'ולנסיה'
     },
     'kuban': {
-      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Lokomotiv_Kuban_logo.png/200px-Lokomotiv_Kuban_logo.png',
+      src: 'http://upload.wikimedia.org/wikipedia/en/thumb/0/04/Lokomotiv_Kuban_logo.png/200px-Lokomotiv_Kuban_logo.png',
       name: 'לוקומוטיב קובאן'
     },
     'fuenlabrada': {
-      src: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Baloncestofuenlabrada.jpg/110px-Baloncestofuenlabrada.jpg',
+      src: 'http://upload.wikimedia.org/wikipedia/en/thumb/1/13/Baloncestofuenlabrada.jpg/110px-Baloncestofuenlabrada.jpg',
       name: 'פואנלברדה'
     },
     'ulm': {
-      src: '//nachwuchs.bbu01.com/modules/mod_bbunewsflash/assets/images/noimage_thumb.jpg',
+      src: 'http://nachwuchs.bbu01.com/modules/mod_bbunewsflash/assets/images/noimage_thumb.jpg',
       name: 'אולם'
     },
     'vilna': {
-      src: '//upload.wikimedia.org/wikipedia/en/thumb/7/75/BC_Lietuvos_Rytas_logo.svg/907px-BC_Lietuvos_Rytas_logo.svg.png',
+      src: 'http://upload.wikimedia.org/wikipedia/en/thumb/7/75/BC_Lietuvos_Rytas_logo.svg/907px-BC_Lietuvos_Rytas_logo.svg.png',
       name: 'ריטאס וילנה'
     },
     'novgorod': {
-      src: '//olympiakos-live.gr/img/teams/Nizhny%20Novgorod.png',
+      src: 'http://olympiakos-live.gr/img/teams/Nizhny%20Novgorod.png',
       name: 'ניז׳ני'
     },
     'zenit': {
-      src: '//upload.wikimedia.org/wikipedia/commons/thumb/2/25/FC_Zenit_1_star_2015_logo.png/220px-FC_Zenit_1_star_2015_logo.png',
+      src: 'http://upload.wikimedia.org/wikipedia/commons/thumb/2/25/FC_Zenit_1_star_2015_logo.png/220px-FC_Zenit_1_star_2015_logo.png',
       name: 'זניט'
     }
   },
