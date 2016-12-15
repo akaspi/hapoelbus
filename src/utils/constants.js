@@ -37,7 +37,7 @@ module.exports = {
     },
     'gilboa': {
       src: 'http://www.basket.co.il/pics/2007/logos/logo_Galil.png',
-      name: 'הפועל גליל/גלבוע'
+      name: 'גליל/גלבוע'
     },
     'nahariya': {
       src: 'http://www.basket.co.il/pics/2007/logos/logo_naharia.png',

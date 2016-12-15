@@ -21,7 +21,7 @@ module.exports = {
   },
   'gilboa': {
     logo: 'http://www.basket.co.il/pics/2007/logos/logo_Galil.png',
-    label: 'הפועל גליל/גלבוע'
+    label: 'גליל/גלבוע'
   },
   'nahariya': {
     logo: 'http://www.basket.co.il/pics/2007/logos/logo_naharia.png',
