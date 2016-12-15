@@ -1,11 +1,11 @@
 let config = {};
 
-if (isProduction) {
+if (process.env.NODE_ENV === 'production') {
   config = require('./config.prod.json');
-  console.log('Running with production config');
+  console.log('using production configuration');
 } else {
   config = require('./config.dev.json');
-  console.log('Running with development config');
+  console.log('using development configuration');
 }
 
 module.exports = config;

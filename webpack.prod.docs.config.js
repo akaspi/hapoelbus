@@ -25,7 +25,11 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.DefinePlugin({ isProduction: true })
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
   ],
 
   externals: {
