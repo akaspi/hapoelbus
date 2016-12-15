@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "createTasks": "node server/createHerokuTasks.js",
     "postinstall": "npm run createTasks && npm run build",
-    "publish": "webpack --config ./webpack.prod.docs.config.js",
+    "make-docs": "webpack --config ./webpack.prod.docs.config.js",
     "update-version": "npm version $1 -m \"Update version to %s\""
   },
   "dependencies": {
