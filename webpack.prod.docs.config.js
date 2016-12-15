@@ -24,6 +24,18 @@ module.exports = {
     ]
   },
 
+  externals: {
+    lodash: '_',
+    bluebird: 'Promise',
+    firebase: 'firebase',
+    classNames: 'classNames',
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    redux: 'Redux',
+    'react-redux': 'ReactRedux',
+    'redux-thunk': 'ReactThunk'
+  },
+
   resolve: {
     extensions: ['', '.js', '.jsx']
   }
