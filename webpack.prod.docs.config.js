@@ -24,6 +24,10 @@ module.exports = {
     ]
   },
 
+  plugins: [
+    new webpack.DefinePlugin({ isProduction: true })
+  ],
+
   externals: {
     lodash: '_',
     bluebird: 'Promise',

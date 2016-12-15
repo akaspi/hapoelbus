@@ -28,6 +28,10 @@ module.exports = {
     ]
   },
 
+  plugins: [
+    new webpack.DefinePlugin({ isProduction: false })
+  ],
+
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
