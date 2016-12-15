@@ -14,4 +14,3 @@ client/
 
 # Config
 .env
-config.dev.json
