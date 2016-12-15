@@ -66,5 +66,17 @@ module.exports = {
   'ulm': {
     logo: 'http://nachwuchs.bbu01.com/modules/mod_bbunewsflash/assets/images/noimage_thumb.jpg',
     label: 'אולם'
+  },
+  'vilna': {
+    logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/75/BC_Lietuvos_Rytas_logo.svg/907px-BC_Lietuvos_Rytas_logo.svg.png',
+    label: 'ריטאס וילנה'
+  },
+  'novgorod': {
+    logo: 'http://olympiakos-live.gr/img/teams/Nizhny%20Novgorod.png',
+    label: 'ניז׳ני'
+  },
+  'zenit': {
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/FC_Zenit_1_star_2015_logo.png/220px-FC_Zenit_1_star_2015_logo.png',
+    label: 'זניט'
   }
 };
