@@ -14,6 +14,7 @@ const bookingForm = React.createClass({
 
   propTypes: {
     onSubmit: React.PropTypes.func.isRequired,
+    onBookingCancel: React.PropTypes.func,
     booking: React.PropTypes.object,
     onClose: React.PropTypes.func
   },

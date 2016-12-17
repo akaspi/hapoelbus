@@ -5,6 +5,7 @@
         title="{this.props.title}"
         onSubmit="{this.onSubmit}"
         onClose="{this.props.onClose}"
+        onRemove="{this.props.onBookingCancel}"
         disabled="{!this.isFormValid()}">
 
         <div class="booking-form small-11 small-centered">

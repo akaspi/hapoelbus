@@ -3,7 +3,7 @@ import React from 'react';
 import template from './bookingsPage.rt';
 import { connect } from 'react-redux';
 import * as Constants from '../../utils/constants';
-import { updateBooking } from '../../redux/actions/bookingActions';
+import { updateBooking, cancelBooking } from '../../redux/actions/bookingActions';
 
 const getDropOffMap = bookings => _.chain(bookings)
   .omitBy(booking => !(booking.dropOff))
@@ -27,7 +27,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking))
+  updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking)),
+  cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId))
 });
 
 class BookingsPage extends React.Component {
@@ -166,6 +167,11 @@ class BookingsPage extends React.Component {
 
   updateBooking(booking) {
     this.props.updateBooking(this.state.editingUserId, this.state.eventId, booking);
+    this.stopEditing();
+  }
+
+  cancelBooking() {
+    this.props.cancelBooking(this.state.editingUserId, this.state.eventId);
     this.stopEditing();
   }
 

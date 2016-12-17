@@ -96,6 +96,7 @@
                  title="עריכת הרשמה"
                  booking="{this.props.bookings[this.state.editingUserId][this.state.eventId]}"
                  onSubmit="booking => this.updateBooking(booking)"
+                 onBookingCancel="() => this.cancelBooking()"
                  seasonTickets="{_.get(this.props.users, [this.state.editingUserId, 'seasonTickets']) || 0}"
                  onClose="() => this.stopEditing()"/>
 
