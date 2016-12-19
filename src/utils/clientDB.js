@@ -1,12 +1,9 @@
-import * as config from '../config/config';
 import firebase from 'firebase';
 import { Promise } from 'bluebird';
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(config.firebase);
-} else {
-  firebase.initializeApp(config.firebase, 'ClientFirebase');
-}
+export const initialize = config => {
+  firebase.initializeApp(config);
+};
 
 export const setIn = (path, data) => new Promise((resolve, reject) => {
   firebase.database().ref(path).set(data)
