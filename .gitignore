@@ -9,8 +9,6 @@ Gemfile.lock
 bin/
 *.rt.js
 dist/bundle.js
-public/
-client/
 
 # Config
 .env
