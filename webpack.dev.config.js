@@ -28,10 +28,6 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new webpack.DefinePlugin({ isProduction: false })
-  ],
-
   resolve: {
     alias: {
       config: './config/config.dev.json'
