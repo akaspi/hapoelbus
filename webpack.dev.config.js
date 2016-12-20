@@ -33,6 +33,9 @@ module.exports = {
   ],
 
   resolve: {
+    alias: {
+      config: './config/config.dev.json'
+    },
     extensions: ['', '.js', '.jsx']
   },
 

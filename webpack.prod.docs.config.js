@@ -24,14 +24,6 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ],
-
   externals: {
     lodash: '_',
     bluebird: 'Promise',
@@ -45,6 +37,9 @@ module.exports = {
   },
 
   resolve: {
+    alias: {
+      config: './config/config.prod.json'
+    },
     extensions: ['', '.js', '.jsx']
   }
 

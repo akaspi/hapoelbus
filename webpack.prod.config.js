@@ -23,15 +23,10 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  ],
-
   resolve: {
+    alias: {
+      config: './config/config.prod.json'
+    },
     extensions: ['', '.js', '.jsx']
   }
 
