@@ -4,6 +4,7 @@ import { SET_AUTH_DATA, SIGN_OUT } from './actionTypes';
 
 import { Promise } from 'bluebird';
 
+import * as navigationConstants from '../../utils/navigationConstants';
 import * as Constants from '../../utils/constants';
 import * as clientDB from '../../utils/clientDB';
 import * as userActions from './userActions';
@@ -50,7 +51,7 @@ export const signOut = () => dispatch => {
 
   return clientDB.signOut()
     .then(() => dispatch(userSignedOut()))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.AUTH.val)))
+    .then(() => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.AUTH.id)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -64,7 +65,7 @@ export const loginWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.loginWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val)))
+    .then(() => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.HOME.id)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -74,7 +75,7 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.createUserWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
-    .then(() => dispatch(navigationActions.navigateTo(Constants.PAGES.EDIT_USER_INFO.val)))
+    .then(() => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.id)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -98,9 +99,9 @@ export const fetchAuthData = () => (dispatch, getState) => {
           .then(() => {
             const userInfo = getState().users[user.uid];
             if (_.isEmpty(userInfo)) {
-              dispatch(navigationActions.navigateTo(Constants.PAGES.EDIT_USER_INFO.val));
+              dispatch(navigationActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.id));
             } else {
-              dispatch(navigationActions.navigateTo(Constants.PAGES.HOME.val));
+              dispatch(navigationActions.navigateTo(navigationConstants.PAGES.HOME.id));
             }
           });
       }

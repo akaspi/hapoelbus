@@ -1,12 +1,11 @@
-<rt-require dependency="../listItem" as="listItem"></rt-require>
+<rt-require dependency="../pageFrame" as="PageFrame"></rt-require>
 <rt-require dependency="../userForm" as="UserForm"></rt-require>
-<rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
-<div class="small-centered dashboard-page users-page">
+<rt-require dependency="../listItem" as="listItem"></rt-require>
+
+<PageFrame title="משתמשים">
     <div rt-if="!this.state.editingUserId" key="list-view" rt-scope="this.getVisibleUsers() as visibleUsers">
-        <div class="header">
-            <label class="header-title">משתמשים</label>
-        </div>
+
         <div class="filtering row expanded collapse">
             <div class="column small-12 large-8">
                 <ul class="menu small-text">
@@ -46,18 +45,17 @@
             </div>
         </div>
 
-        <listItem rt-repeat="userItem in visibleUsers" title="{this.getUserTitle(userItem.user)}"
+        <listItem rt-repeat="userItem in this.getVisibleUsers()" title="{this.getUserTitle(userItem.user)}"
                   key="user-{userItem.uid}"
                   subtitles="{this.getUserSubtitles(userItem.user)}" imageSrc="{this.getUserImage(userItem.user)}"
                   onClick="()=>this.onUserClick(userItem.uid)"></listItem>
 
-        <label class="filter-status" rt-if="visibleUsers.length === 0">
+        <label class="filter-status" rt-if="this.getVisibleUsers().length === 0">
             <i class="fa fa-frown-o" aria-hidden="true"></i>
             <span>מצטערים, לא נמצאו רשומות מתאימות...</span>
         </label>
     </div>
-
     <div rt-if="this.state.editingUserId" key="edit-user" class="small-centered">
         <UserForm uid="{this.state.editingUserId}" onClose="() => this.stopEditing()" />
     </div>
-</div>
+</PageFrame>

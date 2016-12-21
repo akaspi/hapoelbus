@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import React from 'react';
 import template from './app.rt';
 
@@ -7,7 +8,7 @@ import { fetchAuthData } from '../../redux/actions/authActions';
 
 const mapStateToProps = state => ({
   authData: state.authData,
-  currentPage: state.currentPage
+  currentPageId: _.last(state.navigation)
 });
 
 const mapDispatchToProps = (dispatch) => ({

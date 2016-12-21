@@ -1,0 +1,23 @@
+.page {
+
+  background: #F5F5F5;
+  min-height: 100vh;
+
+  .header {
+    background: #EF5350;
+    border-bottom: 8px solid #D32F2F;
+    color: #ffffff;
+    height: 3.3em;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+
+    .header-title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ffffff;
+      flex: 1;
+    }
+  }
+
+}
