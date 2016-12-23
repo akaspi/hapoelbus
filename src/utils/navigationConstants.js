@@ -1,11 +1,18 @@
 module.exports = {
   PAGES: {
-    HOME: { id: 'HOME', visible: true },
-    AUTH: { id: 'AUTH', visible: false },
-    USERS: { id: 'USERS', visible: true },
-    EVENTS: { id: 'EVENTS', visible: true },
-    BOOKINGS: { id: 'BOOKINGS', visible: true },
-    DISTRIBUTION: { id: 'DISTRIBUTION', visible: true },
-    EDIT_USER_INFO: { id: 'EDIT_USER_INFO', visible: false }
+    HOME: { val: 'home', visible: true },
+    AUTH: { val: 'auth', visible: false },
+    USERS: { val: 'users', visible: true },
+    EVENTS: { val: 'events', visible: true },
+    BOOKINGS: { val: 'bookings', visible: true },
+    DISTRIBUTION: { val: 'distribution', visible: true },
+    EDIT_USER_INFO: { val: 'editUserInfo', visible: false }
   },
+  TRANSLATIONS: {
+    home: 'דף הבית',
+    users: 'משתמשים',
+    events: 'משחקים',
+    bookings: 'רשומית להסעות',
+    distribution: 'רשימת תפוצה'
+  }
 };

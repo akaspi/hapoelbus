@@ -4,7 +4,6 @@ const ReactRedux = require('react-redux');
 const classNames = require('classnames');
 
 const navigationConstants = require('../utils/navigationConstants');
-const navigationTranslations = require('../utils/translations/navigationTranslations');
 
 const navigationActions = require('../redux/actions/navigationActions');
 const authActions = require('../redux/actions/authActions');
@@ -18,7 +17,7 @@ function mapStateToProps(state) {
     return {
         photoURL: authData.photoURL || 'http://image.flaticon.com/icons/svg/163/163804.svg',
         isAdmin: authData.isAdmin,
-        currentPageId: _.last(state.navigation),
+        currentPage: state.currentPage,
         currentUser: authData && users[authData.uid]
     };
 }
@@ -58,36 +57,36 @@ function createSmallMenuForMobile(toggleMenuVisibility) {
     );
 }
 
-function createMenu(pages, currentPageId, navigateTo, isAdmin, isMenuVisible, toggleMenuVisibility) {
+function createMenu(pages, currentPage, navigateTo, isAdmin, isMenuVisible, toggleMenuVisibility) {
 
     function createDesktopMenuItem(page) {
         const itemClasses = classNames({
-            active: currentPageId === page.id,
+            active: currentPage === page.val,
             button: true,
             small: true
         });
 
         return (
-            <a className={itemClasses} onClick={navigateTo.bind(this, page.id)} key={'page-' + page.id}>
-                { navigationTranslations[page.id] }
+            <a className={itemClasses} onClick={navigateTo.bind(this, page.val)} key={'page-' + page.val}>
+                { navigationConstants.TRANSLATIONS[page.val] }
             </a>
         );
     }
 
     function createMobileMenuItem(page) {
         const itemClasses = classNames({
-            active: currentPageId === page.id,
+            active: currentPage === page.val,
             button: true
         });
 
         const onMobileMenuClicked = () => {
-            navigateTo(page.id);
+            navigateTo(page.val);
             toggleMenuVisibility();
         };
 
         return (
-            <a className={itemClasses} onClick={onMobileMenuClicked} key={'page-' + page.id}>
-                { navigationTranslations[page.id] }
+            <a className={itemClasses} onClick={onMobileMenuClicked} key={'page-' + page.val}>
+                { navigationConstants.TRANSLATIONS[page.val] }
             </a>
         );
     }
@@ -136,7 +135,7 @@ class TopBar extends React.Component {
             <div className="top-bar row small-collapse hide-for-print">
                 { createHeader(this.props.currentUser, this.props.photoURL, this.props.navigateTo, this.props.signOut) }
                 { this.props.isAdmin ? createSmallMenuForMobile(this.toggleMenuVisibility.bind(this)) : null }
-                { createMenu(navigationConstants.PAGES, this.props.currentPageId, this.props.navigateTo, this.props.isAdmin, this.state.isMenuVisible, this.toggleMenuVisibility.bind(this)) }
+                { createMenu(navigationConstants.PAGES, this.props.currentPage, this.props.navigateTo, this.props.isAdmin, this.state.isMenuVisible, this.toggleMenuVisibility.bind(this)) }
             </div>
         );
     }
@@ -145,7 +144,7 @@ class TopBar extends React.Component {
 TopBar.propTypes = {
     photoURL: React.PropTypes.string,
     isAdmin: React.PropTypes.bool,
-    currentPageId: React.PropTypes.string,
+    currentPage: React.PropTypes.string,
     navigateTo: React.PropTypes.func,
     signOut: React.PropTypes.func
 };

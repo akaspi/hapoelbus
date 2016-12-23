@@ -1,13 +1,6 @@
-function navigateTo(pageId) {
-  return { type: 'NAVIGATE_TO', pageId }
-}
+import { NAVIGATE_TO } from './actionTypes';
 
-function navigateBack() {
-  return { type: 'NAVIGATE_BACK' }
-}
-
-function replace(pageId) {
-  return { type: 'REPLACE_NAVIGATION', pageId }
-}
-
-module.exports = { navigateTo, navigateBack, replace };
+export const navigateTo = page => ({
+  type: NAVIGATE_TO,
+  page
+});

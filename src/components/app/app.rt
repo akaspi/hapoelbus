@@ -8,21 +8,21 @@
 <rt-require dependency="../editUserInfoPage" as="EditUserInfoPage"></rt-require>
 <rt-require dependency="../distributionPage/distributionPage" as="DistributionPage"></rt-require>
 <rt-require dependency="../topBar" as="TopBar"></rt-require>
-<rt-require dependency="../../utils/navigationConstants" as="navigationConstants"></rt-require>
+<rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./app.scss" as="appCss"></rt-require>
 
 <div class="site large-6 small-12 small-centered">
     <spinner/>
     <div rt-if="!this.props.authData" key="auth-page-container" class="small-centered">
-        <AuthPage rt-if="this.props.currentPageId === navigationConstants.PAGES.AUTH.id" key="auth-page"/>
+        <AuthPage rt-if="this.props.currentPage === Constants.PAGES.AUTH.val" key="auth-page"/>
     </div>
     <div rt-if="this.props.authData" key="app-container" class="small-centered">
         <TopBar/>
-        <HomePage rt-if="this.props.currentPageId === navigationConstants.PAGES.HOME.id" key="home-page"/>
-        <UsersPage rt-if="this.props.currentPageId === navigationConstants.PAGES.USERS.id" key="users-page"/>
-        <EventsPage rt-if="this.props.currentPageId === navigationConstants.PAGES.EVENTS.id" key="events-page"/>
-        <BookingsPage rt-if="this.props.currentPageId === navigationConstants.PAGES.BOOKINGS.id" key="bookings-page"/>
-        <DistributionPage rt-if="this.props.currentPageId === navigationConstants.PAGES.DISTRIBUTION.id" key="distribution-page"/>
-        <EditUserInfoPage rt-if="this.props.currentPageId === navigationConstants.PAGES.EDIT_USER_INFO.id" key="editUserInfoPage-page"/>
+        <HomePage rt-if="this.props.currentPage === Constants.PAGES.HOME.val" key="home-page"/>
+        <UsersPage rt-if="this.props.currentPage === Constants.PAGES.USERS.val" key="users-page"/>
+        <EventsPage rt-if="this.props.currentPage === Constants.PAGES.EVENTS.val" key="events-page"/>
+        <BookingsPage rt-if="this.props.currentPage === Constants.PAGES.BOOKINGS.val" key="bookings-page"/>
+        <DistributionPage rt-if="this.props.currentPage === Constants.PAGES.DISTRIBUTION.val" key="distribution-page"/>
+        <EditUserInfoPage rt-if="this.props.currentPage === Constants.PAGES.EDIT_USER_INFO.val" key="editUserInfoPage-page"/>
     </div>
 </div>
