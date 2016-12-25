@@ -1,5 +1,3 @@
-const webpack = require('webpack');
-
 module.exports = {
   cache: true,
 
@@ -8,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    path: __dirname + '/docs',
+    path: __dirname + '/docs', // eslint-disable-line no-undef
     publicPath: '/',
     filename: 'bundle.js'
   },

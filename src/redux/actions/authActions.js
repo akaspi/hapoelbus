@@ -107,7 +107,7 @@ export const fetchAuthData = () => (dispatch, getState) => {
       return null;
     })
     .catch(dbError => {
-      console.error(dbError);
+      console.error(dbError); // eslint-disable-line no-console
       dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code]))
     })
     .finally(() => dispatch(loadingActions.stopLoading()));

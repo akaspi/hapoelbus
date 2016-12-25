@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {updateUser, removeUser} from '../../redux/actions/userActions';
 
 const pickUsersFunctions = {
-  ALL: user => true,
+  ALL: () => true,
   MEMBERS: user => user.seasonTickets > 0,
   NON_MEMBERS: user => !user.seasonTickets,
   REQUESTS: user => user.requestForMembership,
