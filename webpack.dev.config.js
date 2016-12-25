@@ -26,6 +26,18 @@ module.exports = {
     ]
   },
 
+  externals: {
+    lodash: '_',
+    bluebird: 'Promise',
+    firebase: 'firebase',
+    classNames: 'classNames',
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    redux: 'Redux',
+    'react-redux': 'ReactRedux',
+    'redux-thunk': 'ReduxThunk'
+  },
+
   resolve: {
     alias: {
       config: './config/config.dev.json'
