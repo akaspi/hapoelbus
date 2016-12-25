@@ -1,5 +1,5 @@
-import loadingReducer from '../../src/redux/reducers/loadingReducer';
-import { startLoading, stopLoading } from '../../src/redux/actions/loadingActions';
+import loadingReducer from '../src/redux/reducers/loadingReducer';
+import { startLoading, stopLoading } from '../src/redux/actions/loadingActions';
 
 describe('loadingReducer spec', () => {
   it('should be false by default', () => {

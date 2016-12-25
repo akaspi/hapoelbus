@@ -1,11 +1,11 @@
-import * as clientDB from '../../src/utils/clientDB';
+import * as clientDB from '../src/utils/clientDB';
 import * as Promise from 'bluebird';
 
-import { USERS_RECEIVED } from '../../src/redux/actions/actionTypes';
+import { USERS_RECEIVED } from '../src/redux/actions/actionTypes';
 
-import * as userActions from '../../src/redux/actions/userActions';
-import * as loadingActions from '../../src/redux/actions/loadingActions';
-import * as errorActions from '../../src/redux/actions/errorActions';
+import * as userActions from '../src/redux/actions/userActions';
+import * as loadingActions from '../src/redux/actions/loadingActions';
+import * as errorActions from '../src/redux/actions/errorActions';
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

@@ -1,6 +1,6 @@
-import errorReducer from '../../src/redux/reducers/errorReducer';
-import { reportError } from '../../src/redux/actions/errorActions';
-import { startLoading } from '../../src/redux/actions/loadingActions';
+import errorReducer from '../src/redux/reducers/errorReducer';
+import { reportError } from '../src/redux/actions/errorActions';
+import { startLoading } from '../src/redux/actions/loadingActions';
 
 describe('errorReducer spec', () => {
 

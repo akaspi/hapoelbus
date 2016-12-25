@@ -1,6 +1,6 @@
-import usersReducer from '../../src/redux/reducers/usersReducer';
-import { usersReceived, usersRemoved } from '../../src/redux/actions/userActions';
-import { userSignedOut } from '../../src/redux/actions/authActions';
+import usersReducer from '../src/redux/reducers/usersReducer';
+import { usersReceived, usersRemoved } from '../src/redux/actions/userActions';
+import { userSignedOut } from '../src/redux/actions/authActions';
 
 describe('usersReducer spec', () => {
   it('should be empty by default', () => {

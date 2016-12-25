@@ -1,6 +1,6 @@
-import eventsReducer from '../../src/redux/reducers/eventsReducer';
-import { eventsReceived, eventRemoved } from '../../src/redux/actions/eventActions';
-import { userSignedOut } from '../../src/redux/actions/authActions';
+import eventsReducer from '../src/redux/reducers/eventsReducer';
+import { eventsReceived, eventRemoved } from '../src/redux/actions/eventActions';
+import { userSignedOut } from '../src/redux/actions/authActions';
 
 describe('eventsReducer spec', () => {
 
