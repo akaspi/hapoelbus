@@ -7,7 +7,7 @@ import * as clientDB from '../../utils/clientDB';
 import * as loadingActions from './loadingActions';
 import * as errorActions from './errorActions';
 
-const USER_INFO_KEYS = ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneNumber', 'requestForMembership', 'station', 'subscribeSMS', 'subscribeMail', 'photoURL', 'seasonTickets'];
+const USER_INFO_KEYS = ['email', 'firstName', 'lastName', 'phonePrefix', 'phoneNumber', 'requestForMembership', 'station', 'subscribeSMS', 'subscribeMail', 'photoURL'];
 const PATH_MAP = {
   USERS_INFO: 'usersInfo',
   SEASON_TICKETS: 'seasonTickets',
@@ -83,7 +83,7 @@ export const updateUser = (uid, user) => (dispatch, getState) => {
     clientDB.update('usersInfo/' + uid, _.pick(user, USER_INFO_KEYS))
   ];
 
-  if (isAdmin && user.seasonTickets) {
+  if (isAdmin && _.has(user, 'seasonTickets')) {
     userUpdatePromises.push(clientDB.setIn('seasonTickets/' + uid, user.seasonTickets));
   }
 
