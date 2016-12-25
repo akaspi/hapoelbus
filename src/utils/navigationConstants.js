@@ -12,7 +12,7 @@ module.exports = {
     home: 'דף הבית',
     users: 'משתמשים',
     events: 'משחקים',
-    bookings: 'רשומית להסעות',
+    bookings: 'רשומים להסעות',
     distribution: 'רשימת תפוצה'
   }
 };
