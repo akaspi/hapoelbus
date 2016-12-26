@@ -7,7 +7,7 @@ const navigationConstatns = require('../utils/navigationConstants');
 
 const Spinner = require('./spinner');
 const TopBar = require('./topBar');
-const AuthPage = require('./authPage/authPage');
+const AuthPage = require('./authPage');
 const HomePage = require('./homePage/homePage');
 const UsersPage = require('./usersPage/usersPage');
 const EventsPage = require('./eventsPage/eventsPage');
