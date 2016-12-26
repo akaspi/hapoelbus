@@ -10,7 +10,7 @@ import navigationReducer from './reducers/navigationReducer';
 
 import thunk from 'redux-thunk';
 
-export const makeStore = () => {
+module.exports = () => {
   const reducers = combineReducers({
     currentPage: navigationReducer,
     authData: authDataReducer,
