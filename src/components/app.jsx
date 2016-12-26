@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const React = require('react');
 const ReactReudx = require('react-redux');
 
@@ -20,7 +19,7 @@ require('../styles/app.scss');
 function mapStateToProps(state) {
     return {
         authData: state.authData,
-        currentPage: state.currentPage
+        currentPageId: state.routing.current.pageId
     };
 }
 
@@ -71,7 +70,7 @@ class App extends React.Component {
         return (
             <div className="site large-6 small-12 small-centered">
                 <Spinner />
-                { getPageToRender(this.props.authData, this.props.currentPage) }
+                { getPageToRender(this.props.authData, this.props.currentPageId) }
             </div>
         );
     }
@@ -79,7 +78,7 @@ class App extends React.Component {
 
 App.propTypes = {
     authData: React.PropTypes.object,
-    currentPage: React.PropTypes.string.isRequired,
+    currentPageId: React.PropTypes.string.isRequired,
     fetchAuthData: React.PropTypes.func.isRequired
 };
 

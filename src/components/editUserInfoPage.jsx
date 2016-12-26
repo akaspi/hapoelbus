@@ -7,8 +7,9 @@ const navigationActions = require('../redux/actions/navigationActions');
 const navigationConstants = require('../utils/navigationConstants');
 
 function mapStateToProps(state) {
+    const uidToEdit = state.routing.current.params.uid || state.authData.uid;
     return {
-        uid: state.authData.uid
+        uid: uidToEdit
     };
 }
 

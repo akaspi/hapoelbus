@@ -15,16 +15,17 @@ function mapStateToProps(state) {
     const users = state.users;
 
     return {
+        uid: authData.uid,
         photoURL: authData.photoURL || 'http://image.flaticon.com/icons/svg/163/163804.svg',
         isAdmin: authData.isAdmin,
-        currentPage: state.currentPage,
+        currentPageId: state.routing.current.pageId,
         currentUser: authData && users[authData.uid]
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        navigateTo: pageId => dispatch(navigationActions.navigateTo(pageId)),
+        navigateTo: (pageId, params) => dispatch(navigationActions.navigateTo(pageId, params)),
         signOut: () => dispatch(authActions.signOut())
     };
 }
@@ -36,10 +37,10 @@ function getUserTitle(currentUser) {
     return currentUser.firstName;
 }
 
-function createHeader(currentUser, photoURL, navigateTo, signOut) {
+function createHeader(uid, currentUser, photoURL, navigateTo, signOut) {
     return (
         <div className="medium-5 small-10 column user-info">
-            <img className="avatar" src={photoURL} onClick={navigateTo.bind(this, navigationConstants.PAGES.EDIT_USER_INFO.val)}/>
+            <img className="avatar" src={photoURL} onClick={navigateTo.bind(this, navigationConstants.PAGES.EDIT_USER_INFO.val, { uid })}/>
             <span>שלום </span>
             <span className="user-name">{getUserTitle(currentUser)}</span><span> | </span>
             <a className="disconnect" onClick={signOut}>התנתק</a>
@@ -133,18 +134,19 @@ class TopBar extends React.Component {
     render() {
         return (
             <div className="top-bar row small-collapse hide-for-print">
-                { createHeader(this.props.currentUser, this.props.photoURL, this.props.navigateTo, this.props.signOut) }
+                { createHeader(this.props.uid, this.props.currentUser, this.props.photoURL, this.props.navigateTo, this.props.signOut) }
                 { this.props.isAdmin ? createSmallMenuForMobile(this.toggleMenuVisibility.bind(this)) : null }
-                { createMenu(navigationConstants.PAGES, this.props.currentPage, this.props.navigateTo, this.props.isAdmin, this.state.isMenuVisible, this.toggleMenuVisibility.bind(this)) }
+                { createMenu(navigationConstants.PAGES, this.props.currentPageId, this.props.navigateTo, this.props.isAdmin, this.state.isMenuVisible, this.toggleMenuVisibility.bind(this)) }
             </div>
         );
     }
 }
 
 TopBar.propTypes = {
+    uid: React.PropTypes.string.isRequired,
     photoURL: React.PropTypes.string,
     isAdmin: React.PropTypes.bool,
-    currentPage: React.PropTypes.string,
+    currentPageId: React.PropTypes.string.isRequired,
     navigateTo: React.PropTypes.func,
     signOut: React.PropTypes.func
 };

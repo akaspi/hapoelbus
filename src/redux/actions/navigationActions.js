@@ -1,6 +1,27 @@
-import { NAVIGATE_TO } from './actionTypes';
+function navigateTo(pageId, params) {
+  params = params || {};
 
-export const navigateTo = page => ({
-  type: NAVIGATE_TO,
-  page
-});
+  return {
+    type: 'NAVIGATE_TO',
+    pageId,
+    params
+  };
+}
+
+function navigateBack() {
+  return {
+    type: 'NAVIGATE_BACK'
+  };
+}
+
+function replace(pageId, params) {
+  params = params || {};
+
+  return {
+    type: 'REPLACE_ROUTING',
+    pageId,
+    params
+  };
+}
+
+module.exports = { navigateTo, navigateBack, replace };

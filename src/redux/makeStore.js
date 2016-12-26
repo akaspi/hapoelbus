@@ -6,13 +6,14 @@ import usersReducer from './reducers/usersReducer';
 import eventsReducer from './reducers/eventsReducer';
 import bookingsReducer from './reducers/bookingsReducer';
 import authDataReducer from './reducers/authDataReducer';
-import navigationReducer from './reducers/navigationReducer';
+
+const routingReducer = require('./reducers/routingReducer');
 
 import thunk from 'redux-thunk';
 
 module.exports = () => {
   const reducers = combineReducers({
-    currentPage: navigationReducer,
+    routing: routingReducer,
     authData: authDataReducer,
     errorMsg: errorReducer,
     loading: loadingReducer,
