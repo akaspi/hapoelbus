@@ -45,7 +45,7 @@ function getPageComponent(currentPageId) {
 }
 
 function getPageToRender(authData, currentPageId) {
-    if (!authData && currentPageId === navigationConstatns.PAGES.AUTH.val) {
+    if (!authData) {
         return (
             <div>
                 <AuthPage />
