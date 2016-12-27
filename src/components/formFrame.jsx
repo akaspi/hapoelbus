@@ -3,25 +3,9 @@ const React = require('react');
 
 require('../styles/formFrame.scss');
 
+const PageTtitle = require('./pageTitle');
+
 const formFrameTranslations = require('../utils/translations/formFrameTranslations');
-
-function createHeader(title, onClose) {
-
-    function createBackButton() {
-        return (
-            <button className="back-btn" key="back-btn" onClick={onClose}>
-                <i className="fa fa-arrow-left" aria-hidden="true"/>
-            </button>
-        );
-    }
-
-    return (
-        <div className="header">
-            <label className="header-title">{title}</label>
-            { _.isFunction(onClose) ? createBackButton() : null }
-        </div>
-    );
-}
 
 function createActionsButtons(disabled, onSubmit, onRemove) {
 
@@ -49,7 +33,7 @@ class FormFrame extends React.Component {
     render() {
         return (
             <div className="form-frame">
-                { createHeader(this.props.title, this.props.onClose) }
+                <PageTtitle title={this.props.title} />
 
                 <div className="content">
                     {this.props.children}

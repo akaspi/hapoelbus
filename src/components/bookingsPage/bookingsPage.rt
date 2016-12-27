@@ -1,3 +1,4 @@
+<rt-require dependency="../pageTitle" as="PageTitle"></rt-require>
 <rt-require dependency="../listItem" as="listItem"></rt-require>
 <rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
@@ -6,8 +7,8 @@
 <div class="ֿsmall-centered dashboard-page bookings-page" rt-scope="this.getVisibleBookings() as visibleBookings">
     <div rt-if="!this.state.editingUserId" key="list-view">
 
-        <div class="header hide-for-print">
-            <label class="header-title">רשומים להסעות</label>
+        <div class="hide-for-printr">
+            <PageTitle title="רשומים להסעות" />
         </div>
 
         <div class="filtering row expanded collapse hide-for-print">

@@ -1,12 +1,11 @@
+<rt-require dependency="../pageTitle" as="PageTitle"></rt-require>
 <rt-require dependency="../listItem" as="listItem"></rt-require>
 <rt-require dependency="../userForm" as="UserForm"></rt-require>
 <rt-require dependency="./usersPage.scss" as="usersPageCss"></rt-require>
 
 <div class="small-centered dashboard-page users-page">
     <div rt-if="!this.state.editingUserId" key="list-view" rt-scope="this.getVisibleUsers() as visibleUsers">
-        <div class="header">
-            <label class="header-title">משתמשים</label>
-        </div>
+        <PageTitle title="משתמשים"/>
         <div class="filtering row expanded collapse">
             <div class="column small-12 large-8">
                 <ul class="menu small-text">

@@ -1,0 +1,16 @@
+.page-title {
+  background: #EF5350;
+  border-bottom: 8px solid #D32F2F;
+  color: #ffffff;
+  height: 3.3em;
+  padding: 0 10px 0 10px;
+  display: flex;
+  align-items: center;
+
+  .title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    flex: 1;
+  }
+}

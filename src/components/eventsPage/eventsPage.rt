@@ -1,3 +1,4 @@
+<rt-require dependency="../pageTitle" as="PageTitle"></rt-require>
 <rt-require dependency="../listItem" as="listItem"></rt-require>
 <rt-require dependency="../eventForm/eventForm" as="EventForm"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
@@ -8,9 +9,7 @@
 
     <div rt-if="listViewMode" key="events-view" rt-scope="this.getVisibleEvents() as visibleEvents">
 
-        <div class="header">
-            <label class="header-title">אירועים</label>
-        </div>
+        <PageTitle title="אירועים"/>
 
         <div class="filtering row expanded collapse">
             <div class="column small-12 large-6">

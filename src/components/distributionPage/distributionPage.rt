@@ -1,10 +1,9 @@
+<rt-require dependency="../pageTitle" as="PageTitle"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./distributionPage.scss" as="distributionPageCss"></rt-require>
 
 <div class="dashboard-page distribution-page">
-    <div class="header">
-        <label class="header-title">שליחת מיילים</label>
-    </div>
+    <PageTitle title="רשימת תפוצה"/>
     <div class="distribution-form small-11 small-centered">
         <div class="medium-8 small-12 columns small-centered more-space">
             <label>שלח באמצעות
