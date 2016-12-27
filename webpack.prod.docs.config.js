@@ -36,7 +36,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      config: './config/config.prod.json'
+      config: '../config/config.prod.json'
     },
     extensions: ['', '.js', '.jsx']
   }

@@ -6,10 +6,7 @@ Gemfile
 Gemfile.lock
 
 # Generated:
-bin/
 *.rt.js
-dist/bundle.js
 
 # Config
-.env
-config.dev.json
+config/config.dev.json
