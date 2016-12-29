@@ -11,7 +11,7 @@ const HomePage = require('./homePage/homePage');
 const UsersPage = require('./usersPage');
 const EventsPage = require('./eventsPage/eventsPage');
 const BookingsPage = require('./bookingsPage/bookingsPage');
-const DistributionPage = require('./distributionPage/distributionPage');
+const DistributionPage = require('./distributionPage');
 const EditUserInfoPage = require('./editUserInfoPage');
 
 require('../styles/app.scss');
