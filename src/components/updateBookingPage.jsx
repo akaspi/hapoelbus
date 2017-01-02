@@ -24,6 +24,7 @@ function mapStateToProps(state) {
     const booking = _.get(state, ['bookings', uid, gameId], {});
 
     return {
+        isAdmin: state.authData.isAdmin,
         uid,
         gameId,
         booking,
@@ -34,6 +35,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         updateBooking: (uid, gameId, booking) => dispatch(bookingActions.updateBooking(uid, gameId, booking)),
+        cancelBooking: (uid, gameId) => dispatch(bookingActions.cancelBooking(uid, gameId)),
         navigateBack: () => dispatch(navigationActions.navigateBack())
     };
 }
@@ -196,9 +198,14 @@ class UpdateBookingPage extends React.Component {
         this.props.navigateBack();
     };
 
+    onRemove = () => {
+        this.props.cancelBooking(this.props.uid, this.props.gameId);
+        this.props.navigateBack();
+    };
+
     render() {
         return(
-            <FormFrame title={bookingFormTranslations.TITLE} onSubmit={this.onSubmit} onClose={this.props.navigateBack} disabled={!this.isFormValid()}>
+            <FormFrame title={bookingFormTranslations.TITLE} onSubmit={this.onSubmit} onClose={this.props.navigateBack} onRemove={this.props.isAdmin ? this.onRemove: null} disabled={!this.isFormValid()}>
                 <div className='booking-form small-11 small-centered'>
                     { createPassengersSection(this.props.userInfo.seasonTickets, this.state.paidSeats, this.state.extraSeats, this.onPaidSeatChange, this.onExtraSeatChange) }
                     { createPickupSection(this.state.pickUpEnabled, this.state.pickUp, this.togglePickUp, this.onPickUpStationChange) }
@@ -211,10 +218,12 @@ class UpdateBookingPage extends React.Component {
 
 UpdateBookingPage.propTypes = {
     uid: React.PropTypes.string.isRequired,
+    isAdmin: React.PropTypes.bool.isRequired,
     gameId: React.PropTypes.string.isRequired,
     booking: React.PropTypes.object,
     userInfo: React.PropTypes.object.isRequired,
     updateBooking: React.PropTypes.func.isRequired,
+    cancelBooking: React.PropTypes.func.isRequired,
     navigateBack: React.PropTypes.func.isRequired
 };
 

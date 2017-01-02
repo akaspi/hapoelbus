@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import * as Constants from '../../utils/constants';
 import { updateBooking, cancelBooking } from '../../redux/actions/bookingActions';
 
+const navigationActions = require('../../redux/actions/navigationActions');
+const navigationConstants = require('../../utils/navigationConstants');
+
 const getDropOffMap = bookings => _.chain(bookings)
   .omitBy(booking => !(booking.dropOff))
   .transform((acc, booking, uid) => {
@@ -28,14 +31,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking)),
-  cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId))
+  cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId)),
+  navigateToUpdateBooking: (uid, gameId) => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { uid, gameId }))
 });
 
 class BookingsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editingUserId: null,
       eventId: _.findKey(this.props.events, {status: 'openForMembers'}) || _.findKey(this.props.events, {status: 'openForAll'}) ||  _.findKey(this.props.events, {status: 'closed'}) ,
       filter: 'PICKUP'
     };
@@ -62,7 +65,7 @@ class BookingsPage extends React.Component {
   }
 
   onBookingClick(uid) {
-    this.setState({ editingUserId: uid });
+    this.props.navigateToUpdateBooking(uid, this.state.eventId);
   }
 
   getEventPrintTitle() {
@@ -159,20 +162,6 @@ class BookingsPage extends React.Component {
       .value();
 
     return tlvDropOffsPaid + tlvDropOffsExtra + modiinDropOffsPaid + modiinDropOffsExtra;
-  }
-
-  stopEditing() {
-    this.setState({ editingUserId: null });
-  }
-
-  updateBooking(booking) {
-    this.props.updateBooking(this.state.editingUserId, this.state.eventId, booking);
-    this.stopEditing();
-  }
-
-  cancelBooking() {
-    this.props.cancelBooking(this.state.editingUserId, this.state.eventId);
-    this.stopEditing();
   }
 
   render() {
