@@ -13,6 +13,7 @@ const EventsPage = require('./eventsPage/eventsPage');
 const BookingsPage = require('./bookingsPage/bookingsPage');
 const DistributionPage = require('./distributionPage');
 const EditUserInfoPage = require('./editUserInfoPage');
+const UpdateBookingPage = require('./updateBookingPage');
 
 require('../styles/app.scss');
 
@@ -41,6 +42,8 @@ function getPageComponent(currentPageId) {
             return ( <DistributionPage key='distribution-page' /> );
         case navigationConstatns.PAGES.EDIT_USER_INFO.val:
             return ( <EditUserInfoPage key='editUserInfo-page' /> );
+        case navigationConstatns.PAGES.UPDATE_BOOKING.val:
+            return ( <UpdateBookingPage key='updateBooking-page' /> );
     }
 }
 

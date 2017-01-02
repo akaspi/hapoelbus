@@ -1,6 +1,4 @@
 <rt-require dependency="../eventItem" as="EventItem"></rt-require>
-<rt-require dependency="../bookingForm/bookingForm" as="BookingForm"></rt-require>
-<rt-require dependency="../userForm" as="UserForm"></rt-require>
 <rt-require dependency="./homePage.scss" as="homePageCss"></rt-require>
 
 <div class="site" rt-scope="this.getOpenEvents() as openEvents; this.getClosedEvents() as closedEvents; this.props.users[this.props.authData.uid] as hasUser">
@@ -30,18 +28,6 @@
                     />
                 </div>
             </div>
-
-            <BookingForm rt-if="this.state.eventId" rt-scope="this.props.events[this.state.eventId] as editingEvent"
-                         key="edit-booking"
-                         title="{this.getEventName(editingEvent)} - {this.getEventDate(editingEvent)} {this.getEventTime(editingEvent)}"
-                         booking="{_.get(this.props.bookings, [this.props.authData.uid, this.state.eventId])}"
-                         onSubmit="(booking) => this.updateBooking(booking)"
-                         seasonTickets="{_.get(this.props.users, [this.props.authData.uid, 'seasonTickets']) || 0}"
-                         onClose="() => this.stopEditing()"/>
         </div>
-        <div class="user-edit-container" rt-if="!hasUser" key="user-edit-container">
-            <UserForm uid="{this.props.authData.uid}" />
-        </div>
-
     </div>
 </div>

@@ -6,7 +6,8 @@ module.exports = {
     EVENTS: { val: 'events', visible: true },
     BOOKINGS: { val: 'bookings', visible: true },
     DISTRIBUTION: { val: 'distribution', visible: true },
-    EDIT_USER_INFO: { val: 'editUserInfo', visible: false }
+    EDIT_USER_INFO: { val: 'editUserInfo', visible: false },
+    UPDATE_BOOKING: { val: 'updateBooking', visible: false }
   },
   TRANSLATIONS: {
     home: 'דף הבית',

@@ -7,6 +7,8 @@ import {updateBooking, cancelBooking} from '../../redux/actions/bookingActions';
 import {updateUser} from '../../redux/actions/userActions';
 
 const teamsData = require('../../utils/teamsData');
+const navigationActions = require('../../redux/actions/navigationActions');
+const navigationConstants = require('../../utils/navigationConstants');
 
 function parseEventDate(event) {
   const eventDate = new Date(event.year, event.month, event.day);
@@ -29,7 +31,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
   updateBooking: (uid, eventId, booking) => dispatch(updateBooking(uid, eventId, booking)),
   cancelBooking: (uid, eventId) => dispatch(cancelBooking(uid, eventId)),
-  updateUser: (uid, user) => dispatch(updateUser(uid, user))
+  updateUser: (uid, user) => dispatch(updateUser(uid, user)),
+  navigateToUpdateBooking: (uid, gameId) => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { uid, gameId }))
 });
 
 class HomePage extends React.Component {
@@ -58,8 +61,9 @@ class HomePage extends React.Component {
       .value();
   }
 
-  bookEvent(eventId) {
-    this.setState({eventId});
+  bookEvent(gameId) {
+    // this.setState({eventId});
+    this.props.navigateToUpdateBooking(this.props.authData.uid, gameId);
   }
 
   isBookingEnabled(event) {
