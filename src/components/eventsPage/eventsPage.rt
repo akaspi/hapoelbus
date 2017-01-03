@@ -1,6 +1,5 @@
 <rt-require dependency="../pageTitle" as="PageTitle"></rt-require>
 <rt-require dependency="../listItem" as="listItem"></rt-require>
-<rt-require dependency="../eventForm/eventForm" as="EventForm"></rt-require>
 <rt-require dependency="../../utils/constants" as="Constants"></rt-require>
 <rt-require dependency="./eventsPage.scss" as="eventsPageCss"></rt-require>
 
@@ -50,13 +49,4 @@
         </label>
     </div>
 
-    <div class="small-centered">
-
-        <EventForm rt-if="!listViewMode" key="event-user"
-                   event="{this.props.events[this.state.editingEventId]}"
-                   onSubmit="(event) => this.updateEvent(event)"
-                   onRemoveEvent="() => this.removeEvent()"
-                   isAdminMode="{this.props.authData.isAdmin}"
-                   onClose="() => this.stopEditing()"/>
-    </div>
 </div>

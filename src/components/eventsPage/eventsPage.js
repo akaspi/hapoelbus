@@ -6,6 +6,9 @@ import { createEvent, updateEvent, removeEvent } from '../../redux/actions/event
 
 import * as Constants from '../../utils/constants';
 
+const navigationConstants = require('../../utils/navigationConstants');
+const navigationActions = require('../../redux/actions/navigationActions');
+
 const pickEvents = {
   ALL: () => true,
   ['OPEN']: event => event.status === Constants.EVENTS_STATUS.OPEN_FOR_ALL.value || event.status === Constants.EVENTS_STATUS.OPEN_FOR_MEMBERS.value,
@@ -25,7 +28,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
   createEvent: event => dispatch(createEvent(event)),
   updateEvent: (eventId, event) => dispatch(updateEvent(eventId, event)),
-  removeEvent: (eventId) => dispatch(removeEvent(eventId))
+  removeEvent: (eventId) => dispatch(removeEvent(eventId)),
+  navigateToCreateGame: () => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val)),
+  navigateToUpdateGame: gameId => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val, { gameId }))
 });
 
 class EventsPage extends React.Component {
@@ -75,30 +80,30 @@ class EventsPage extends React.Component {
   }
 
   onEventClick(eventId) {
-    this.setState({ editingEventId: eventId });
+    this.props.navigateToUpdateGame(eventId);
   }
 
   onCreateEventClick() {
-    this.setState({ createMode: true });
+    this.props.navigateToCreateGame();
   }
 
-  stopEditing() {
-    this.setState({ editingEventId: null, createMode: false });
-  }
+  // stopEditing() {
+  //   this.setState({ editingEventId: null, createMode: false });
+  // }
 
-  updateEvent(event) {
-    if (this.state.createMode) {
-      this.props.createEvent(event);
-    } else {
-      this.props.updateEvent(this.state.editingEventId, event);
-    }
-    this.stopEditing();
-  }
-
-  removeEvent() {
-    this.props.removeEvent(this.state.editingEventId);
-    this.stopEditing();
-  }
+  // updateEvent(event) {
+  //   if (this.state.createMode) {
+  //     this.props.createEvent(event);
+  //   } else {
+  //     this.props.updateEvent(this.state.editingEventId, event);
+  //   }
+  //   this.stopEditing();
+  // }
+  //
+  // removeEvent() {
+  //   this.props.removeEvent(this.state.editingEventId);
+  //   this.stopEditing();
+  // }
 
   render() {
     return template.apply(this);

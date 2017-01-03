@@ -14,6 +14,7 @@ const BookingsPage = require('./bookingsPage/bookingsPage');
 const DistributionPage = require('./distributionPage');
 const EditUserInfoPage = require('./editUserInfoPage');
 const UpdateBookingPage = require('./updateBookingPage');
+const UpdateGamePage = require('./updateGamePage');
 
 require('../styles/app.scss');
 
@@ -44,6 +45,8 @@ function getPageComponent(currentPageId) {
             return ( <EditUserInfoPage key='editUserInfo-page' /> );
         case navigationConstatns.PAGES.UPDATE_BOOKING.val:
             return ( <UpdateBookingPage key='updateBooking-page' /> );
+        case navigationConstatns.PAGES.UPDATE_GAME.val:
+            return ( <UpdateGamePage key='updateGame-page' /> );
     }
 }
 
