@@ -9,7 +9,7 @@ const TopBar = require('./topBar');
 const AuthPage = require('./authPage');
 const HomePage = require('./homePage');
 const UsersPage = require('./usersPage');
-const EventsPage = require('./eventsPage/eventsPage');
+const GamesPage = require('./gamesPage');
 const BookingsPage = require('./bookingsPage/bookingsPage');
 const DistributionPage = require('./distributionPage');
 const EditUserInfoPage = require('./editUserInfoPage');
@@ -36,7 +36,7 @@ function getPageComponent(currentPageId) {
         case navigationConstatns.PAGES.USERS.val:
             return ( <UsersPage key='users-page' /> );
         case navigationConstatns.PAGES.EVENTS.val:
-            return ( <EventsPage key='events-page' /> );
+            return ( <GamesPage key='games-page' /> );
         case navigationConstatns.PAGES.BOOKINGS.val:
             return ( <BookingsPage key='bookings-page' /> );
         case navigationConstatns.PAGES.DISTRIBUTION.val:
