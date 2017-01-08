@@ -143,6 +143,10 @@ module.exports = {
       }
     }
   },
+  FORM_FRAME: {
+    SUBMIT: 'שמור',
+    REMOVE: 'מחק'
+  },
   ERROR_MESSAGES: {
     GENERAL: 'שגיאת מערכת',
     AUTH: {
