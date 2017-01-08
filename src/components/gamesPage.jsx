@@ -3,11 +3,11 @@ const React = require('react');
 const ReactRedux = require('react-redux');
 const classNames = require('classnames');
 
+const Constants = require('../utils/constants');
+const Translations = require('../utils/translations');
+
 const teamsData = require('../utils/teamsData');
 const gameConstants = require('../utils/gameConstants');
-const gamesPageTranslations = require('../utils/translations/gamesPageTranslations');
-const Constants = require('../utils/constants');
-
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
@@ -76,19 +76,19 @@ function createTabs(games, filter, onFilterChange) {
                 <ul className='menu'>
                     <li className={classNames({ active: filter === TABS.ALL})}>
                         <a onClick={onTabClick.bind(this, TABS.ALL)}>
-                            <span>{gamesPageTranslations.TABS.ALL}</span>
+                            <span>{Translations.GAMES_PAGE.TABS.ALL}</span>
                             <span>({_.size(games)})</span>
                         </a>
                     </li>
                     <li className={classNames({ active: filter === TABS.OPEN})}>
                         <a onClick={onTabClick.bind(this, TABS.OPEN)}>
-                            <span>{gamesPageTranslations.TABS.OPEN}</span>
+                            <span>{Translations.GAMES_PAGE.TABS.OPEN}</span>
                             <span>({_.size(getOpenGames(games))})</span>
                         </a>
                     </li>
                     <li className={classNames({ active: filter === TABS.CLOSED})}>
                         <a onClick={onTabClick.bind(this, TABS.CLOSED)}>
-                            <span>{gamesPageTranslations.TABS.CLOSED}</span>
+                            <span>{Translations.GAMES_PAGE.TABS.CLOSED}</span>
                             <span>({_.size(getClosedGames(games))})</span>
                         </a>
                     </li>
@@ -102,7 +102,7 @@ function createNoGamesMessage() {
     return (
         <label className='filter-status'>
             <i className='fa fa-frown-o' aria-hidden="true" />
-            <span>{gamesPageTranslations.NO_GAMES_LABEL}</span>
+            <span>{Translations.GAMES_PAGE.NO_GAMES_LABEL}</span>
         </label>
     );
 }
@@ -127,7 +127,7 @@ class GamesPage extends React.Component {
         return (
             <div className='small-centered dashboard-page games-page'>
 
-                <PageTitle title={gamesPageTranslations.TITLE} />
+                <PageTitle title={Translations.GAMES_PAGE.TITLE} />
 
                 { createTabs(this.props.games, this.props.query.filter, this.onFilterChanged) }
 

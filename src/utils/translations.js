@@ -63,6 +63,15 @@ module.exports = {
     DROPOFF_TOGGLE: 'חזור',
     PICKUP_STATION_DROPDOWN_DEFAULT: 'בחר'
   },
+  GAMES_PAGE: {
+    TITLE: 'משחקים',
+    TABS: {
+      ALL: 'כולם',
+      OPEN: 'פתוחים',
+      CLOSED: 'סגורים'
+    },
+    NO_GAMES_LABEL: 'לא נמצאו משחקים'
+  },
   UPDATE_GAME_PAGE: {
     TITLE: 'הרשמה להסעה',
     GAME_LABEL: 'שם המשחק',
