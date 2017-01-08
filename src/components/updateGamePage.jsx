@@ -2,14 +2,12 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux = require('react-redux');
 
+const Constants = require('../utils/constants');
+const Translations = require('../utils/translations');
+
 const eventActions = require('../redux/actions/eventActions');
 const routingActions = require('../redux/actions/routingActions');
-
 const teamsData = require('../utils/teamsData');
-const gameConstants = require('../utils/gameConstants');
-const dateTimeConstants = require('../utils/dateTimeConstants');
-const gamesConstants = require('../utils/gameConstants');
-const Translations = require('../utils/translations');
 
 const DEFAULT_GAME_LOGO = 'http://image.flaticon.com/icons/svg/124/124150.svg';
 
@@ -24,7 +22,7 @@ const emptyEvent = {
     year: '2017',
     hour: '17',
     minute: '00',
-    status: gamesConstants.STATUS.CLOSED
+    status: Constants.GAME.STATUS.CLOSED
 };
 
 function mapStateToProps(state) {
@@ -85,28 +83,28 @@ function createInfoWithoutSupportedInputs(year, month, hour, minute, onNonSuppor
             <div className='small-4 medium-2 columns'>
                 <label>{Translations.UPDATE_GAME_PAGE.DATE_LABEL}</label>
                 <select value={year} onChange={onNonSupportedInputChange} name='year'>
-                    { _.map(dateTimeConstants.years, year => <option key={'yy-' + year} value={'20' + year}>{year}</option>) }
+                    { _.map(Constants.DATE_AND_TIME.years, year => <option key={'yy-' + year} value={'20' + year}>{year}</option>) }
                 </select>
             </div>
             <div className='small-4 medium-2 columns more-space'>
                 <select value={month} onChange={onNonSupportedInputChange} name='month'>
-                    { _.map(dateTimeConstants.months, month => <option key={'mm-' + month} value={month}>{month}</option>) }
+                    { _.map(Constants.DATE_AND_TIME.months, month => <option key={'mm-' + month} value={month}>{month}</option>) }
                 </select>
             </div>
             <div className='small-4 medium-2 columns more-space'>
                 <select value={day} onChange={onNonSupportedInputChange} name='day'>
-                    { _.map(dateTimeConstants.days, day => <option key={'dd-' + day} value={day}>{day}</option>) }
+                    { _.map(Constants.DATE_AND_TIME.days, day => <option key={'dd-' + day} value={day}>{day}</option>) }
                 </select>
             </div>
             <div className='small-3 columns'>
                 <label>{Translations.UPDATE_GAME_PAGE.TIME}</label>
                 <select value={minute} onChange={onNonSupportedInputChange} name='minute'>
-                    { _.map(dateTimeConstants.minutes, day => <option key={'min-' + minute} value={minute}>{minute}</option>) }
+                    { _.map(Constants.DATE_AND_TIME.minutes, day => <option key={'min-' + minute} value={minute}>{minute}</option>) }
                 </select>
             </div>
             <div className='small-3 columns more-space end'>
                 <select value={hour} onChange={onNonSupportedInputChange} name='minute'>
-                    { _.map(dateTimeConstants.hours, hour => <option key={'hh-' + hour} value={hour}>{hour}</option>) }
+                    { _.map(Constants.DATE_AND_TIME.hours, hour => <option key={'hh-' + hour} value={hour}>{hour}</option>) }
                 </select>
             </div>
         </div>

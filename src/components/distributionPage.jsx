@@ -2,13 +2,12 @@ const _ = require('lodash');
 const React = require('react');
 const ReactReudx = require('react-redux');
 
+const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
 const distributionActions = require('../redux/actions/distributionActions');
 const distributionConstants = require('../utils/distributionConstants');
 const teamsData = require('../utils/teamsData');
-const gameConstants = require('../utils/gameConstants');
-
 
 const PageTitle = require('./pageTitle');
 
@@ -163,7 +162,7 @@ function createGamesSelection(games, gameId, onGameChange) {
 
 function getOpenGames(games) {
     return _.pickBy(games, game => {
-        return game.status === gameConstants.STATUS.OPEN_FOR_MEMBERS || game.status === gameConstants.STATUS.OPEN_FOR_ALL;
+        return game.status === Constants.GAME.STATUS.OPEN_FOR_MEMBERS || game.status === Constants.GAME.STATUS.OPEN_FOR_ALL;
     });
 }
 

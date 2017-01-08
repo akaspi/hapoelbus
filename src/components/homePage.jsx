@@ -7,7 +7,6 @@ const Translations = require('../utils/translations');
 
 const bookingActions = require('../redux/actions/bookingActions');
 const routingActions = require('../redux/actions/routingActions');
-const gameConstants = require('../utils/gameConstants');
 const EventItem = require('./eventItem');
 
 require('../styles/homePage.scss');
@@ -40,7 +39,7 @@ function isFutureEvent(game) {
 function getClosedGamesArr(games) {
   return _.chain(games)
     .omitBy(game => {
-      return game.status !== gameConstants.STATUS.CLOSED || !isFutureEvent(game);
+      return game.status !== Constants.GAME.STATUS.CLOSED || !isFutureEvent(game);
     })
     .map((game, gameId) => ({
       game,
@@ -51,7 +50,7 @@ function getClosedGamesArr(games) {
 }
 
 function getOpenGames(games) {
-  return _.omitBy(games, game => game.status === gameConstants.STATUS.CLOSED);
+  return _.omitBy(games, game => game.status === Constants.GAME.STATUS.CLOSED);
 }
 
 function createMobileNoGamesMessageSection() {

@@ -14,6 +14,14 @@ module.exports = {
     [Constants.STATIONS.TEL_AVIV]: 'תל אביב',
     [Constants.STATIONS.MODIIN]: 'צומת שילת'
   },
+  GAME: {
+    STATUS: {
+      [Constants.GAME.STATUS.CLOSED]: 'ההרשמה סגורה',
+      [Constants.GAME.STATUS.OPEN_FOR_MEMBERS]: 'ההרשמה פתוחה למנויים',
+      [Constants.GAME.STATUS.OPEN_FOR_ALL]: 'ההרשמה פתוחה לכולם',
+      [Constants.GAME.STATUS.FULLY_BOOKED]: 'ההסעה מלאה',
+    }
+  },
   GAME_ITEM: {
     BOOK: 'הרשם',
     EDIT_BOOKING: 'ערוך',

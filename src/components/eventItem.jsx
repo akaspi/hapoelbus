@@ -3,17 +3,17 @@ const React = require('react');
 const ReactRedux = require('react-redux');
 
 const Translations = require('../utils/translations');
+const Constants = require('../utils/constants');
 
-const gamesConstants = require('../utils/gameConstants');
 const teamsData = require('../utils/teamsData');
 
 require('../styles/eventItem.scss');
 
 function isBookingEnabled(event, user) {
     switch (event.status) {
-        case gamesConstants.STATUS.OPEN_FOR_ALL:
+        case Constants.GAME.STATUS.OPEN_FOR_ALL:
             return true;
-        case gamesConstants.STATUS.OPEN_FOR_MEMBERS: {
+        case Constants.GAME.STATUS.OPEN_FOR_MEMBERS: {
             return user.seasonTickets > 0
         }
         default:
@@ -85,11 +85,11 @@ function createFullyBookedLabel() {
     return (
         <div>
             <div className="event-info column medium-2 small-12 hide-for-small-only">
-                <span className="event-status">{gamesConstants.TRANSLATIONS.fullyBooked}</span>
+                <span className="event-status">{Translations.GAME.STATUS[Constants.GAME.STATUS.FULLY_BOOKED]}</span>
             </div>
 
             <div className="event-info column medium-2 small-12 show-for-small-only colored">
-                <span className="event-status">{gamesConstants.TRANSLATIONS.fullyBooked}</span>
+                <span className="event-status">{Translations.GAME.STATUS[Constants.GAME.STATUS.FULLY_BOOKED]}</span>
             </div>
         </div>
     );
@@ -137,8 +137,8 @@ function createActionsButtons(isOpenForBooking, isBookingAllowed, isBooked, onBo
 
 class EventItem extends React.Component {
     render() {
-        const isOpenForBooking = this.props.status !== gamesConstants.STATUS.CLOSED;
-        const isFullyBooked = this.props.status === gamesConstants.STATUS.FULLY_BOOKED;
+        const isOpenForBooking = this.props.status !== Constants.GAME.STATUS.CLOSED;
+        const isFullyBooked = this.props.status === Constants.GAME.STATUS.FULLY_BOOKED;
         return (
             <div className="event-item row collapse">
                 { createTeamLogos(this.props.homeTeam, this.props.awayTeam) }

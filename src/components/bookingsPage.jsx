@@ -7,7 +7,6 @@ const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
 const teamsData = require('../utils/teamsData');
-const gameConstants = require('../utils/gameConstants');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
@@ -26,7 +25,7 @@ function mapStateToProps(state) {
         games: state.events,
         users: state.users,
         query: {
-            gameId: state.routing.current.params.gameId || _.findKey(state.events, {status: gameConstants.STATUS.OPEN_FOR_MEMBERS}) || _.findKey(state.events, {status: gameConstants.STATUS.OPEN_FOR_ALL}) ||  _.findKey(state.events, {status: gameConstants.STATUS.CLOSED}),
+            gameId: state.routing.current.params.gameId || _.findKey(state.events, {status: Constants.GAME.STATUS.OPEN_FOR_MEMBERS}) || _.findKey(state.events, {status: Constants.GAME.STATUS.OPEN_FOR_ALL}) ||  _.findKey(state.events, {status: Constants.GAME.STATUS.CLOSED}),
             filter: state.routing.current.params.filter || TABS.PICKUP
         }
     };

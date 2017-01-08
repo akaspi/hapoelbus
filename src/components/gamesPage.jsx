@@ -7,12 +7,10 @@ const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
 const teamsData = require('../utils/teamsData');
-const gameConstants = require('../utils/gameConstants');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
 const ListItem = require('./listItem');
-
 
 require('../styles/gamesPage.scss');
 
@@ -50,18 +48,18 @@ function getVisibleGames(games, filter) {
 }
 
 function getOpenGames(games) {
-    return _.omitBy(games, game => game.status === gameConstants.STATUS.CLOSED);
+    return _.omitBy(games, game => game.status === Constants.GAME.STATUS.CLOSED);
 }
 
 function getClosedGames(games) {
-    return _.pickBy(games, game => game.status === gameConstants.STATUS.CLOSED);
+    return _.pickBy(games, game => game.status === Constants.GAME.STATUS.CLOSED);
 }
 
 function getGameSubtitles(game) {
     return [
         'תאריך: ' + `${game.day}/${game.month}/${game.year}`, // eslint-disable-line no-useless-concat
         'שעה: ' +  `${game.hour}:${game.minute}`, // eslint-disable-line no-useless-concat
-        gameConstants.TRANSLATIONS[game.status]
+        Translations.GAME.STATUS[game.status]
     ];
 }
 
