@@ -113,7 +113,7 @@ function createDropoffSection(dropOffEnabled, dropOffStation, toggleDropOff, onD
                 <select value={dropOffStation} onChange={onDropOffStationChange} name='dropOff' disabled={!dropOffEnabled}>
                     <option value='' style={{display: 'none'}}>{bookingFormTranslations.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
                     <option value={bookingsConstants.STATIONS.TEL_AVIV}>{bookingsTranslations.STATIONS.TEL_AVIV}</option>
-                    <option value={bookingsConstants.STATIONS.MODDIN}>{bookingsTranslations.STATIONS.MODDIN}</option>
+                    <option value={bookingsConstants.STATIONS.MODIIN}>{bookingsTranslations.STATIONS.MODDIN}</option>
                 </select>
             </div>
         </div>
@@ -134,13 +134,13 @@ class UpdateBookingPage extends React.Component {
 
     onPaidSeatChange = e => {
         this.setState({
-            paidSeats: e.target.value
+            paidSeats: parseInt(e.target.value)
         });
     };
 
     onExtraSeatChange = e => {
         this.setState({
-            extraSeats: e.target.value
+            extraSeats: parseInt(e.target.value)
         });
     };
 
