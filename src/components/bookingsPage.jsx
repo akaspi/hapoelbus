@@ -3,12 +3,12 @@ const React = require('react');
 const ReactRedux = require('react-redux');
 const classNames = require('classnames');
 
-const bookingsPageTranslations = require('../utils/translations/bookingsPageTranslations');
-const userFormTranslations = require('../utils/translations/userFormTranslations');
-const teamsData = require('../utils/teamsData');
 const Constants = require('../utils/constants');
-const gameConstants = require('../utils/gameConstants');
+const Translations = require('../utils/translations');
 
+const bookingsPageTranslations = require('../utils/translations/bookingsPageTranslations');
+const teamsData = require('../utils/teamsData');
+const gameConstants = require('../utils/gameConstants');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
@@ -59,10 +59,10 @@ function getBookingSubtitles(booking, user) {
         subtitles.push('חד פעמי: ' + booking.extraSeats);
     }
     if (booking.pickUp) {
-        subtitles.push('הלוך: ' + userFormTranslations.STATIONS[booking.pickUp]);
+        subtitles.push('הלוך: ' + Translations.STATIONS[booking.pickUp]);
     }
     if (booking.dropOff) {
-        subtitles.push('חזור: ' + userFormTranslations.STATIONS[booking.dropOff]);
+        subtitles.push('חזור: ' + Translations.STATIONS[booking.dropOff]);
     }
 
     if (user) {
@@ -236,8 +236,8 @@ function createBookingTableForPrint(user, visibleBookings, tlvBookings, modiinBo
                     <td>{getBookingPhone(user)}</td>
                     <td>{booking.paidSeats}</td>
                     <td>{booking.extraSeats}</td>
-                    <td>{userFormTranslations.STATIONS[booking.pickUp]}</td>
-                    <td>{userFormTranslations.STATIONS[booking.dropOff]}</td>
+                    <td>{Translations.STATIONS[booking.pickUp]}</td>
+                    <td>{Translations.STATIONS[booking.dropOff]}</td>
                 </tr>
             ))
         );
@@ -261,8 +261,8 @@ function createBookingTableForPrint(user, visibleBookings, tlvBookings, modiinBo
                     <td>{getBookingPhone(user)}</td>
                     <td>{booking.paidSeats}</td>
                     <td>{booking.extraSeats}</td>
-                    <td>{userFormTranslations.STATIONS[booking.pickUp]}</td>
-                    <td>{userFormTranslations.STATIONS[booking.dropOff]}</td>
+                    <td>{Translations.STATIONS[booking.pickUp]}</td>
+                    <td>{Translations.STATIONS[booking.dropOff]}</td>
                 </tr>
             ))
         );

@@ -5,7 +5,7 @@ const ReactRedux= require('react-redux');
 const FormFrame = require('./formFrame');
 
 const userInfoConstants = require('../utils/userInfoConstants');
-const userFormTranslations = require('../utils/translations/userFormTranslations');
+const Translations = require('../utils/translations');
 const userActions = require('../redux/actions/userActions');
 
 const emptyUser = {
@@ -59,12 +59,12 @@ function createUserNameInputs(firstName, lastName, onTextChange) {
     return (
         <div className="row">
             <div className="large-6 columns">
-                <label>{ userFormTranslations.FIRST_NAME }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.FIRST_NAME }
                     <input type="text" name="firstName" value={firstName} onChange={onTextChange} maxLength="20" />
                 </label>
             </div>
             <div className="large-6 columns">
-                <label>{ userFormTranslations.LAST_NAME }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.LAST_NAME }
                     <input type="text" name="lastName" value={lastName} onChange={onTextChange} maxLength="20" />
                 </label>
             </div>
@@ -76,7 +76,7 @@ function createEmailInput(email, onTextChange) {
     return (
         <div className="row" key="user-info-email-input">
             <div className="large-12 columns">
-                <label>{ userFormTranslations.EMAIL }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.EMAIL }
                     <input type="email" name="email" value={email} onChange={onTextChange} />
                 </label>
             </div>
@@ -88,12 +88,12 @@ function createPhoneNumberInputs(phonePrefix, phoneNumber, onTextChange) {
     return (
         <div className="row">
             <div className="small-8 columns">
-                <label>{ userFormTranslations.PHONE_NUMBER }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.PHONE_NUMBER }
                     <input type="tel" name="phoneNumber" value={phoneNumber} onChange={onTextChange} maxLength="7" />
                 </label>
             </div>
             <div className="small-4 columns end">
-                <label>{ userFormTranslations.PHONE_PREFIX }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.PHONE_PREFIX }
                     <select name="phonePrefix" value={phonePrefix} onChange={onTextChange}>
                         { _.map(userInfoConstants.PHONE_PREFIXES, prefix => <option key={'phone-prefix-' + prefix} value={prefix}>{prefix}</option>)}
                     </select>
@@ -108,9 +108,9 @@ function createPickupStationRow(station, requestForMembership, onTextChange, onB
     function createPickUpStationInput() {
         return (
             <div className="medium-8 small-12 columns">
-                <label>{ userFormTranslations.FAVORITE_PICKUP_STATION }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.FAVORITE_PICKUP_STATION }
                     <select name="station" value={station} onChange={onTextChange}>
-                        { _.map(userInfoConstants.STATIONS, station => <option key={'station-' + station} value={station}>{ userFormTranslations.STATIONS[station] }</option>)}
+                        { _.map(userInfoConstants.STATIONS, station => <option key={'station-' + station} value={station}>{ Translations.STATIONS[station] }</option>)}
                     </select>
                 </label>
             </div>
@@ -120,7 +120,7 @@ function createPickupStationRow(station, requestForMembership, onTextChange, onB
     function createRequestForMembershipInput() {
         return (
             <div className="medium-4 small-12 columns">
-                <label>{ userFormTranslations.REQUEST_FOR_MEMBERSHIP }
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.REQUEST_FOR_MEMBERSHIP }
                     <select name="requestForMembership" value={requestForMembership} onChange={onBooleanChange}>
                         <option value={undefined} style={{display: 'none'}}>בחר</option>
                         <option value={true}>כן</option>
@@ -143,22 +143,22 @@ function createDistributionInputs(subscribeMail, subscribeSMS, onBooleanChange) 
     return (
         <div className="row">
             <div className="small-3 column">
-                <label>{ userFormTranslations.DISTRIBUTION.EMAIL }</label>
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.DISTRIBUTION.EMAIL }</label>
                 <div className="switch">
                     <input type="checkbox" className="switch-input" name="subscribeMail" id="subscribeMail" onChange={onBooleanChange} checked={subscribeMail} />
                     <label className="switch-paddle" htmlFor="subscribeMail">
-                        <span className="switch-active" aria-hidden="true">{ userFormTranslations.TOGGLE.YES }</span>
-                        <span className="switch-inactive" aria-hidden="true">{ userFormTranslations.TOGGLE.NO }</span>
+                        <span className="switch-active" aria-hidden="true">{ Translations.UPDATE_USER_INFO_PAGE.TOGGLE.YES }</span>
+                        <span className="switch-inactive" aria-hidden="true">{ Translations.UPDATE_USER_INFO_PAGE.TOGGLE.NO }</span>
                     </label>
                 </div>
             </div>
             <div className="small-3 column end">
-                <label>{ userFormTranslations.DISTRIBUTION.SMS }</label>
+                <label>{ Translations.UPDATE_USER_INFO_PAGE.DISTRIBUTION.SMS }</label>
                 <div className="switch">
                     <input type="checkbox" className="switch-input" name="subscribeSMS" id="subscribeSMS" onChange={onBooleanChange} checked={subscribeSMS} />
                     <label className="switch-paddle" htmlFor="subscribeSMS">
-                        <span className="switch-active" aria-hidden="true">{ userFormTranslations.TOGGLE.YES }</span>
-                        <span className="switch-inactive" aria-hidden="true">{ userFormTranslations.TOGGLE.NO }</span>
+                        <span className="switch-active" aria-hidden="true">{ Translations.UPDATE_USER_INFO_PAGE.TOGGLE.YES }</span>
+                        <span className="switch-inactive" aria-hidden="true">{ Translations.UPDATE_USER_INFO_PAGE.TOGGLE.NO }</span>
                     </label>
                 </div>
             </div>
@@ -234,7 +234,7 @@ class UserForm extends React.Component {
 
 
     return (
-        <FormFrame title={userFormTranslations.TITLE}
+        <FormFrame title={Translations.UPDATE_USER_INFO_PAGE.TITLE}
                    onSubmit={this.onSubmit}
                    onRemove={this.props.allowUserRemove ? this.onRemove : null}
                    onClose={this.props.onClose}
