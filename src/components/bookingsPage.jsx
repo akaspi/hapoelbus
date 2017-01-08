@@ -6,7 +6,6 @@ const classNames = require('classnames');
 const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
-const bookingsPageTranslations = require('../utils/translations/bookingsPageTranslations');
 const teamsData = require('../utils/teamsData');
 const gameConstants = require('../utils/gameConstants');
 const routingActions = require('../redux/actions/routingActions');
@@ -157,7 +156,7 @@ function countDropOffs(visibleBookings) {
 function createPageTitle() {
     return (
         <div className='hide-for-print'>
-            <PageTitle title={bookingsPageTranslations.TITLE} />
+            <PageTitle title={Translations.BOOKINGS_PAGE.TITLE} />
         </div>
     );
 }
@@ -178,13 +177,13 @@ function createFilterSection(filter, gameId, onFilterChange, onGameIdChange, vis
                 <ul className='menu'>
                     <li className={classNames({active: filter === TABS.PICKUP})}>
                         <a onClick={onTabClick.bind(this, TABS.PICKUP)}>
-                            <span>{bookingsPageTranslations.TABS.PICKUP}</span>
+                            <span>{Translations.BOOKINGS_PAGE.TABS.PICKUP}</span>
                             <span>({countPickups(visibleBookings)})</span>
                         </a>
                     </li>
                     <li className={classNames({active: filter === TABS.DROPOFF})}>
                         <a onClick={onTabClick.bind(this, TABS.DROPOFF)}>
-                            <span>{bookingsPageTranslations.TABS.DROPOFF}</span>
+                            <span>{Translations.BOOKINGS_PAGE.TABS.DROPOFF}</span>
                             <span>({countDropOffs(visibleBookings)})</span>
                         </a>
                     </li>

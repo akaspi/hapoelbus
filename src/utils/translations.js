@@ -92,6 +92,13 @@ module.exports = {
     },
     NO_GAMES_LABEL: 'לא נמצאו משחקים'
   },
+  BOOKINGS_PAGE: {
+    TITLE: 'רשומים להסעה',
+    TABS: {
+      PICKUP: 'הלוך',
+      DROPOFF: 'חזור'
+    }
+  },
   UPDATE_GAME_PAGE: {
     TITLE: 'הרשמה להסעה',
     GAME_LABEL: 'שם המשחק',
