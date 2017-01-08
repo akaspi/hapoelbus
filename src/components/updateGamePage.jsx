@@ -9,7 +9,7 @@ const teamsData = require('../utils/teamsData');
 const gameConstants = require('../utils/gameConstants');
 const dateTimeConstants = require('../utils/dateTimeConstants');
 const gamesConstants = require('../utils/gameConstants');
-const updateGamePageTranslations = require('../utils/translations/updateGamePageTranslations');
+const Translations = require('../utils/translations');
 
 const DEFAULT_GAME_LOGO = 'http://image.flaticon.com/icons/svg/124/124150.svg';
 
@@ -65,9 +65,9 @@ function createGameTitleSection(typeId, onTypeIdChange) {
     return (
         <div className='row'>
             <div className='small-9 large-10 large-collapse columns'>
-                <label>{updateGamePageTranslations.GAME_LABEL}
+                <label>{Translations.UPDATE_GAME_PAGE.GAME_LABEL}
                     <select name='typeId' value={typeId} onChange={onTypeIdChange}>
-                        <option value='' style={{display: 'none'}}>{updateGamePageTranslations.GAME_PLACEHOLDER}</option>
+                        <option value='' style={{display: 'none'}}>{Translations.UPDATE_GAME_PAGE.GAME_PLACEHOLDER}</option>
                         { _.map(teamsData, (teamData, id) => <option key={'update-game-' + id} value={id}>{teamData.label}</option>) }
                     </select>
                 </label>
@@ -83,7 +83,7 @@ function createInfoWithoutSupportedInputs(year, month, hour, minute, onNonSuppor
     return (
         <div key='unsupported-inputs' className='row small-expanded small-centered'>
             <div className='small-4 medium-2 columns'>
-                <label>{updateGamePageTranslations.DATE_LABEL}</label>
+                <label>{Translations.UPDATE_GAME_PAGE.DATE_LABEL}</label>
                 <select value={year} onChange={onNonSupportedInputChange} name='year'>
                     { _.map(dateTimeConstants.years, year => <option key={'yy-' + year} value={'20' + year}>{year}</option>) }
                 </select>
@@ -99,7 +99,7 @@ function createInfoWithoutSupportedInputs(year, month, hour, minute, onNonSuppor
                 </select>
             </div>
             <div className='small-3 columns'>
-                <label>{updateGamePageTranslations.TIME}</label>
+                <label>{Translations.UPDATE_GAME_PAGE.TIME}</label>
                 <select value={minute} onChange={onNonSupportedInputChange} name='minute'>
                     { _.map(dateTimeConstants.minutes, day => <option key={'min-' + minute} value={minute}>{minute}</option>) }
                 </select>
@@ -117,12 +117,12 @@ function createInfoWithSupportedInputs(date, time, onDateChange, onTimeChange) {
     return (
         <div key='supported-inputs' className='row'>
             <div className='small-6 columns'>
-                <label>{updateGamePageTranslations.DATE_LABEL}
+                <label>{Translations.UPDATE_GAME_PAGE.DATE_LABEL}
                     <input type='date' value={date} onChange={onDateChange} min='2016-01-01' max='2017-12-31' name='date' />
                 </label>
             </div>
             <div className='small-6 columns'>
-                <label>{updateGamePageTranslations.TIME}
+                <label>{Translations.UPDATE_GAME_PAGE.TIME}
                     <input type='time' value={time} step={300} onChange={onTimeChange} name='time' />
                 </label>
             </div>
@@ -133,7 +133,7 @@ function createInfoWithSupportedInputs(date, time, onDateChange, onTimeChange) {
 function createGameStatusSection(status, onGameStatusChange) {
     return (
         <div className='small-12 columns'>
-            <label>{updateGamePageTranslations.GAME_STATUS}
+            <label>{Translations.UPDATE_GAME_PAGE.GAME_STATUS}
                 <select value={status} onChange={onGameStatusChange}>
                     { _.map(gameConstants.STATUS, val => <option value={val}>{gameConstants.TRANSLATIONS[val]}</option>) }
                 </select>
@@ -219,7 +219,7 @@ class UpdateGamePage extends React.Component {
     render() {
         return (
             <FormFrame
-                title={updateGamePageTranslations.TITLE} onSubmit={this.onSubmit} onRemove={this.onRemove} onClose={this.props.navigateBack} disabled={!this.isFormValid()}>
+                title={Translations.UPDATE_GAME_PAGE.TITLE} onSubmit={this.onSubmit} onRemove={this.onRemove} onClose={this.props.navigateBack} disabled={!this.isFormValid()}>
 
                 <div className='update-game-page large-11 large-centered'>
 

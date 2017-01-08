@@ -58,6 +58,14 @@ module.exports = {
     DROPOFF_TOGGLE: 'חזור',
     PICKUP_STATION_DROPDOWN_DEFAULT: 'בחר'
   },
+  UPDATE_GAME_PAGE: {
+    TITLE: 'הרשמה להסעה',
+    GAME_LABEL: 'שם המשחק',
+    GAME_PLACEHOLDER: 'בחר משחק',
+    DATE_LABEL: 'תאריך',
+    TIME: 'שעה',
+    GAME_STATUS: 'סטטוס הסעה'
+  },
   ERROR_MESSAGES: {
     GENERAL: 'שגיאת מערכת',
     AUTH: {
