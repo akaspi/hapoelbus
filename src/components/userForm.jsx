@@ -2,11 +2,12 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux= require('react-redux');
 
-const FormFrame = require('./formFrame');
-
-const userInfoConstants = require('../utils/userInfoConstants');
+const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
+
 const userActions = require('../redux/actions/userActions');
+
+const FormFrame = require('./formFrame');
 
 const emptyUser = {
     firstName: '',
@@ -47,7 +48,7 @@ function createAdminSection(seasonTickets, onNumberChange) {
         <div className="small-12 columns">
           <label>כמות מנויים
             <select name="seasonTickets" value={seasonTickets} onChange={onNumberChange}>
-                { _.times(userInfoConstants.MAX_SEASON_TICKETS, i => <option key={'amount-' + i} value={i}>{i}</option>) }
+                { _.times(Constants.USER.MAX_SEASON_TICKETS, i => <option key={'amount-' + i} value={i}>{i}</option>) }
             </select>
           </label>
         </div>
@@ -95,7 +96,7 @@ function createPhoneNumberInputs(phonePrefix, phoneNumber, onTextChange) {
             <div className="small-4 columns end">
                 <label>{ Translations.UPDATE_USER_INFO_PAGE.PHONE_PREFIX }
                     <select name="phonePrefix" value={phonePrefix} onChange={onTextChange}>
-                        { _.map(userInfoConstants.PHONE_PREFIXES, prefix => <option key={'phone-prefix-' + prefix} value={prefix}>{prefix}</option>)}
+                        { _.map(Constants.USER.PHONE_PREFIXES, prefix => <option key={'phone-prefix-' + prefix} value={prefix}>{prefix}</option>)}
                     </select>
                 </label>
             </div>
@@ -110,7 +111,7 @@ function createPickupStationRow(station, requestForMembership, onTextChange, onB
             <div className="medium-8 small-12 columns">
                 <label>{ Translations.UPDATE_USER_INFO_PAGE.FAVORITE_PICKUP_STATION }
                     <select name="station" value={station} onChange={onTextChange}>
-                        { _.map(userInfoConstants.STATIONS, station => <option key={'station-' + station} value={station}>{ Translations.STATIONS[station] }</option>)}
+                        { _.map(Constants.STATIONS, station => <option key={'station-' + station} value={station}>{ Translations.STATIONS[station] }</option>)}
                     </select>
                 </label>
             </div>

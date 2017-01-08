@@ -20,6 +20,10 @@ module.exports = {
       FULLY_BOOKED: 'fullyBooked'
     }
   },
+  USER: {
+    MAX_SEASON_TICKETS: 7,
+    PHONE_PREFIXES: ['050', '052', '053', '054', '055', '057', '058'],
+  },
   STATIONS: {
     TEL_AVIV: 'tlv',
     MODIIN: 'modiin'
