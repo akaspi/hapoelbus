@@ -2,11 +2,13 @@ const _ = require('lodash');
 const React = require('react');
 const ReactReudx = require('react-redux');
 
+const Translations = require('../utils/translations');
+
 const distributionActions = require('../redux/actions/distributionActions');
 const distributionConstants = require('../utils/distributionConstants');
 const teamsData = require('../utils/teamsData');
 const gameConstants = require('../utils/gameConstants');
-const distributionPageTranslations = require('../utils/translations/distributionPageTranslations');
+
 
 const PageTitle = require('./pageTitle');
 
@@ -88,10 +90,10 @@ function getUsersPhoneNumbers(users, recipientsType, bookings, gameId) {
 function createDistributionMethodInput(distributionMethod, onDistributionMethodChange) {
     return (
         <div className='medium-8 small-12 columns small-centered more-space'>
-            <label>{distributionPageTranslations.DISTRIBUTION_METHOD.TITLE}
+            <label>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_METHOD.TITLE}
                 <select value={distributionMethod} onChange={onDistributionMethodChange}>
-                    <option value={distributionConstants.DISTRIBUTION_METHODS.EMAIL}>{distributionPageTranslations.DISTRIBUTION_METHOD.EMAIL}</option>
-                    <option value={distributionConstants.DISTRIBUTION_METHODS.SMS}>{distributionPageTranslations.DISTRIBUTION_METHOD.SMS}</option>
+                    <option value={distributionConstants.DISTRIBUTION_METHODS.EMAIL}>{Translations.DISTRIBUTION_PAGE.EMAIL}</option>
+                    <option value={distributionConstants.DISTRIBUTION_METHODS.SMS}>{Translations.DISTRIBUTION_PAGE.SMS}</option>
                 </select>
             </label>
         </div>
@@ -101,16 +103,16 @@ function createDistributionMethodInput(distributionMethod, onDistributionMethodC
 function createRecipientsTypeInput(recipientsType, onRecipientsTypeChange) {
     return (
         <div className='medium-8 small-12 columns small-centered'>
-            <label>{distributionPageTranslations.RECIPIENTS_TYPES.TITLE}
+            <label>{Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.TITLE}
                 <select value={recipientsType} onChange={onRecipientsTypeChange}>
                     <option value={distributionConstants.RECIPIENTS_TYPES.ALL}>
-                        {distributionPageTranslations.RECIPIENTS_TYPES.ALL}
+                        {Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.ALL}
                     </option>
                     <option value={distributionConstants.RECIPIENTS_TYPES.MEMBERS_ONLY}>
-                        {distributionPageTranslations.RECIPIENTS_TYPES.MEMBERS_ONLY}
+                        {Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.MEMBERS_ONLY}
                     </option>
                     <option value={distributionConstants.RECIPIENTS_TYPES.BOOKED_TO_EVENT}>
-                        {distributionPageTranslations.RECIPIENTS_TYPES.BOOKED_TO_EVENT}
+                        {Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.BOOKED_TO_EVENT}
                     </option>
                 </select>
             </label>
@@ -121,10 +123,10 @@ function createRecipientsTypeInput(recipientsType, onRecipientsTypeChange) {
 function createDistributionTypeInput(distributionType, onDistributionTypeChange) {
     return (
         <div className='medium-8 small-12 columns small-centered' key="distribution-distributionType-input">
-            <label>{distributionPageTranslations.DISTRIBUTION_TYPES.TITLE}
+            <label>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.TITLE}
                 <select value={distributionType} onChange={onDistributionTypeChange}>
-                    <option value={distributionConstants.DISTRIBUTION_TYPES.TEMPLATE}>{distributionPageTranslations.DISTRIBUTION_TYPES.TEMPLATE}</option>
-                    <option value={distributionConstants.DISTRIBUTION_TYPES.CUSTOM}>{distributionPageTranslations.DISTRIBUTION_TYPES.CUSTOM}</option>
+                    <option value={distributionConstants.DISTRIBUTION_TYPES.TEMPLATE}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.TEMPLATE}</option>
+                    <option value={distributionConstants.DISTRIBUTION_TYPES.CUSTOM}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.CUSTOM}</option>
                 </select>
             </label>
         </div>
@@ -134,11 +136,11 @@ function createDistributionTypeInput(distributionType, onDistributionTypeChange)
 function createTemplateSelection(templateId, onTemplateIdChange) {
     return (
         <div className='medium-8 small-12 columns small-centered' key='distribution-template-selection'>
-            <label>{distributionPageTranslations.TEMPLATES.TITLE}
+            <label>{Translations.DISTRIBUTION_PAGE.TEMPLATES.TITLE}
                 <select value={templateId} onChange={onTemplateIdChange}>
-                    <option value={distributionConstants.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}>{distributionPageTranslations.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}</option>
-                    <option value={distributionConstants.TEMPLATES.EVENT_OPEN_FOR_ALL}>{distributionPageTranslations.TEMPLATES.EVENT_OPEN_FOR_ALL}</option>
-                    <option value={distributionConstants.TEMPLATES.CHANGE_EVENT_DETAILS}>{distributionPageTranslations.TEMPLATES.CHANGE_EVENT_DETAILS}</option>
+                    <option value={distributionConstants.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}</option>
+                    <option value={distributionConstants.TEMPLATES.EVENT_OPEN_FOR_ALL}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.EVENT_OPEN_FOR_ALL}</option>
+                    <option value={distributionConstants.TEMPLATES.CHANGE_EVENT_DETAILS}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.CHANGE_EVENT_DETAILS}</option>
                 </select>
             </label>
         </div>
@@ -150,7 +152,7 @@ function createGamesSelection(games, gameId, onGameChange) {
 
     return (
         <div className='medium-8 small-12 columns small-centered' key="distribution-game-selection">
-            <label>{distributionPageTranslations.GAMES.TITLE}
+            <label>{Translations.DISTRIBUTION_PAGE.GAMES.TITLE}
                 <select value={gameId} onChange={onGameChange}>
                     { options }
                 </select>
@@ -168,7 +170,7 @@ function getOpenGames(games) {
 function createCustomTitle(subject, onSubjectChanged) {
     return (
         <div className='small-centered medium-8 small-12 columns' key='distribution-customTitle'>
-            <label>{distributionPageTranslations.CUSTOM.TITLE.TITLE}</label>
+            <label>{Translations.DISTRIBUTION_PAGE.CUSTOM.TITLE.TITLE}</label>
             <input type='text' value={subject} onChange={onSubjectChanged}/>
         </div>
     );
@@ -177,7 +179,7 @@ function createCustomTitle(subject, onSubjectChanged) {
 function createCustomContent(content, onContentChanged) {
     return (
         <div className='small-centered medium-8 small-12 columns' key='distribution-customContent'>
-            <label>{distributionPageTranslations.CUSTOM.CONTENT.TITLE}</label>
+            <label>{Translations.DISTRIBUTION_PAGE.CUSTOM.CONTENT.TITLE}</label>
             <textarea rows="10" value={content} onChange={onContentChanged} />
         </div>
     );
@@ -289,7 +291,7 @@ class DistributionPage extends React.Component {
     render() {
         return (
             <div className='dashboard-page distribution-page'>
-                <PageTitle title={distributionPageTranslations.TITLE} />
+                <PageTitle title={Translations.DISTRIBUTION_PAGE.TITLE} />
                 <div className='small-11 small-centered'>
                     { createDistributionMethodInput(this.state.distributionMethod, this.onDistributionMethodChange) }
                     { createRecipientsTypeInput(this.state.recipientsType, this.onRecipientsTypeChange) }
