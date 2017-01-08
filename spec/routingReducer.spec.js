@@ -102,7 +102,80 @@ describe('routingReducer', () => {
 
   describe('replace', () => {
 
-    it('should replace the history and current', () => {
+    it('should replace the history and current', function() {
+      const currentState = {
+        current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+        history: [
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: 'somePage', params: { p1: 1 } },
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} }
+        ]
+      };
+
+      const nextState = countingReducer(currentState, navigationActions.replace('replacedPage', { r1: 1 }));
+
+      expect(nextState).toEqual({
+        current: { pageId: 'replacedPage', params: { r1: 1 } },
+        history: [
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: 'somePage', params: { p1: 1 } },
+          { pageId: 'replacedPage', params: { r1: 1 } }
+        ]
+      });
+
+    });
+
+    it('should replace only params in current history', function() {
+      const currentState = {
+        current: { pageId: 'somePage2', params: { } },
+        history: [
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: 'somePage', params: { p1: 1 } },
+          { pageId: 'somePage2', params: { } }
+        ]
+      };
+
+      const nextState = countingReducer(currentState, navigationActions.replace(null, { r1: 1 }));
+
+      expect(nextState).toEqual({
+        current: { pageId: 'somePage2', params: { r1: 1 } },
+        history: [
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: 'somePage', params: { p1: 1 } },
+          { pageId: 'somePage2', params: { r1: 1 } }
+        ]
+      });
+
+    });
+
+    it('should replace only pageId in current history', function() {
+      const currentState = {
+        current: { pageId: 'somePage2', params: { r1: 1 } },
+        history: [
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: 'somePage', params: { p1: 1 } },
+          { pageId: 'somePage2', params: { r1: 1 } }
+        ]
+      };
+
+      const nextState = countingReducer(currentState, navigationActions.replace('somePage3'));
+
+      expect(nextState).toEqual({
+        current: { pageId: 'somePage3', params: { r1: 1 } },
+        history: [
+          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: 'somePage', params: { p1: 1 } },
+          { pageId: 'somePage3', params: { r1: 1 } }
+        ]
+      });
+
+    });
+
+  });
+
+  describe('reset', () => {
+
+    it('should reset the history and current', () => {
       const currentState = {
         current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
         history: [
@@ -112,17 +185,17 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.replace('replacedPage'));
+      const nextState = countingReducer(currentState, navigationActions.reset('resetPage'));
 
       expect(nextState).toEqual({
-        current: { pageId: 'replacedPage', params: {} },
+        current: { pageId: 'resetPage', params: {} },
         history: [
-          { pageId: 'replacedPage', params: {} }
+          { pageId: 'resetPage', params: {} }
         ]
       });
     });
 
-    it('should replace the history and current with params', () => {
+    it('should reset the history and current with params', () => {
       const currentState = {
         current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
         history: [
@@ -132,12 +205,12 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.replace('replacedPage', { p2: 2 }));
+      const nextState = countingReducer(currentState, navigationActions.reset('resetPage', { p2: 2 }));
 
       expect(nextState).toEqual({
-        current: { pageId: 'replacedPage', params: { p2: 2 } },
+        current: { pageId: 'resetPage', params: { p2: 2 } },
         history: [
-          { pageId: 'replacedPage', params: { p2: 2 } }
+          { pageId: 'resetPage', params: { p2: 2 } }
         ]
       });
     });

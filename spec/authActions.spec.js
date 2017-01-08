@@ -21,7 +21,7 @@ describe('authActions spec', () => {
     const expectedActions = [
       loadingActions.startLoading(),
       authActions.userSignedOut(),
-      navigationActions.replace(Constants.PAGES.AUTH.val),
+      navigationActions.reset(Constants.PAGES.AUTH.val),
       loadingActions.stopLoading()
     ];
 

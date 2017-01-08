@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        navigateHome: () => dispatch(navigationActions.replace(navigationConstants.PAGES.HOME.val)),
+        navigateHome: () => dispatch(navigationActions.reset(navigationConstants.PAGES.HOME.val)),
         navigateBack: () => dispatch(navigationActions.navigateBack())
     };
 }

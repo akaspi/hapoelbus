@@ -4,7 +4,6 @@ function createRoutingData(pageId, params) {
   return { pageId, params: params || {} }
 }
 
-
 const initialState = {
   current: createRoutingData(navigationConstants.PAGES.AUTH.val, {}),
   history: [
@@ -37,6 +36,14 @@ module.exports = function(state, action) {
       break;
     }
     case 'REPLACE_ROUTING': {
+      const historyWithoutLast = state.history.slice(0, -1);
+      const current = createRoutingData(action.pageId || state.current.pageId, action.params || state.current.params);
+      return {
+        current: current,
+        history: historyWithoutLast.concat([current])
+      };
+    }
+    case 'RESET_ROUTING': {
       const routingData = createRoutingData(action.pageId, action.params);
 
       return {

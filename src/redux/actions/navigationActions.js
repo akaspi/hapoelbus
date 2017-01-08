@@ -14,9 +14,17 @@ function navigateBack() {
   };
 }
 
-function replace(pageId, params) {
+function reset(pageId, params) {
   params = params || {};
 
+  return {
+    type: 'RESET_ROUTING',
+    pageId,
+    params
+  };
+}
+
+function replace(pageId, params) {
   return {
     type: 'REPLACE_ROUTING',
     pageId,
@@ -24,4 +32,4 @@ function replace(pageId, params) {
   };
 }
 
-module.exports = { navigateTo, navigateBack, replace };
+module.exports = { navigateTo, navigateBack, replace, reset };
