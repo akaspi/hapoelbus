@@ -4,7 +4,7 @@ const ReactRedux = require('react-redux');
 const classNames = require('classnames');
 
 const usersPageTranslations = require('../utils/translations/usersPageTranslations');
-const navigationConstants = require('../utils/navigationConstants');
+const Constants = require('../utils/constants');
 const routingActions = require('../redux/actions/routingActions');
 
 const ListItem = require('./listItem');
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        navToEditUser: uid =>  dispatch(routingActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.val, { uid })),
+        navToEditUser: uid =>  dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.EDIT_USER_INFO, { uid })),
         changeFilter: filter =>  dispatch(routingActions.replace(null, { filter })),
         changeSearchQuery: _.debounce(search =>  dispatch(routingActions.replace(null, { search })), 500)
     };

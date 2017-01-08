@@ -6,7 +6,7 @@ const classNames = require('classnames');
 const teamsData = require('../utils/teamsData');
 const gameConstants = require('../utils/gameConstants');
 const gamesPageTranslations = require('../utils/translations/gamesPageTranslations');
-const navigationConstants = require('../utils/navigationConstants');
+const Constants = require('../utils/constants');
 
 const routingActions = require('../redux/actions/routingActions');
 
@@ -33,8 +33,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        editGame: gameId => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val, { gameId })),
-        createGame: () => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val)),
+        editGame: gameId => dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.UPDATE_GAME, { gameId })),
+        createGame: () => dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.UPDATE_GAME)),
         changeFilter: filter => dispatch(routingActions.replace(null, { filter }))
     };
 }

@@ -4,7 +4,7 @@ const ReactRedux = require('react-redux');
 const UserForm = require('./userForm.jsx');
 
 const routingActions = require('../redux/actions/routingActions');
-const navigationConstants = require('../utils/navigationConstants');
+const Constants = require('../utils/constants');
 
 function mapStateToProps(state) {
     const uidToEdit = state.routing.current.uid || state.authData.uid;
@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        navigateHome: () => dispatch(routingActions.reset(navigationConstants.PAGES.HOME.val)),
+        navigateHome: () => dispatch(routingActions.reset(Constants.ROUTING.PAGES.HOME)),
         navigateBack: () => dispatch(routingActions.navigateBack())
     };
 }

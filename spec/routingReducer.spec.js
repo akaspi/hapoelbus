@@ -1,6 +1,6 @@
 const countingReducer = require('../src/redux/reducers/routingReducer');
 const routingActions = require('../src/redux/actions/routingActions');
-const navigationConstants = require('../src/utils/navigationConstants');
+const Constants = require('../src/utils/constants');
 
 describe('routingReducer', () => {
 
@@ -8,9 +8,9 @@ describe('routingReducer', () => {
     const state = countingReducer();
 
     expect(state).toEqual({
-      current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+      current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
       history: [
-        { pageId: navigationConstants.PAGES.AUTH.val, params: {} }
+        { pageId: Constants.ROUTING.PAGES.AUTH, params: {} }
       ]
     });
   });
@@ -19,9 +19,9 @@ describe('routingReducer', () => {
 
     it('should navigate', () => {
        const currentState = {
-         current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+         current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
          history: [
-           { pageId: navigationConstants.PAGES.AUTH.val, params: {} }
+           { pageId: Constants.ROUTING.PAGES.AUTH, params: {} }
          ]
        };
 
@@ -30,7 +30,7 @@ describe('routingReducer', () => {
        expect(nextState).toEqual({
          current: { pageId: 'somePage', params: {} },
          history: [
-           { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+           { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
            { pageId: 'somePage', params: {} }
          ]
        });
@@ -38,9 +38,9 @@ describe('routingReducer', () => {
 
     it('should navigate with params', () => {
       const currentState = {
-        current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+        current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} }
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} }
         ]
       };
 
@@ -49,7 +49,7 @@ describe('routingReducer', () => {
       expect(nextState).toEqual({
         current: { pageId: 'somePage', params: { p1: 1 } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } }
         ]
       });
@@ -61,9 +61,9 @@ describe('routingReducer', () => {
 
     it('should navigateBack', () => {
       const currentState = {
-        current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+        current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage2', params: { } }
         ]
@@ -74,7 +74,7 @@ describe('routingReducer', () => {
       expect(nextState).toEqual({
         current: { pageId: 'somePage', params: { p1: 1 } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } }
         ]
       });
@@ -104,11 +104,11 @@ describe('routingReducer', () => {
 
     it('should replace the history and current', function() {
       const currentState = {
-        current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+        current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} }
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} }
         ]
       };
 
@@ -117,7 +117,7 @@ describe('routingReducer', () => {
       expect(nextState).toEqual({
         current: { pageId: 'replacedPage', params: { r1: 1 } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'replacedPage', params: { r1: 1 } }
         ]
@@ -129,7 +129,7 @@ describe('routingReducer', () => {
       const currentState = {
         current: { pageId: 'somePage2', params: { } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage2', params: { } }
         ]
@@ -140,7 +140,7 @@ describe('routingReducer', () => {
       expect(nextState).toEqual({
         current: { pageId: 'somePage2', params: { r1: 1 } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage2', params: { r1: 1 } }
         ]
@@ -152,7 +152,7 @@ describe('routingReducer', () => {
       const currentState = {
         current: { pageId: 'somePage2', params: { r1: 1 } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage2', params: { r1: 1 } }
         ]
@@ -163,7 +163,7 @@ describe('routingReducer', () => {
       expect(nextState).toEqual({
         current: { pageId: 'somePage3', params: { r1: 1 } },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage3', params: { r1: 1 } }
         ]
@@ -177,9 +177,9 @@ describe('routingReducer', () => {
 
     it('should reset the history and current', () => {
       const currentState = {
-        current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+        current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage2', params: { } }
         ]
@@ -197,9 +197,9 @@ describe('routingReducer', () => {
 
     it('should reset the history and current with params', () => {
       const currentState = {
-        current: { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+        current: { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
         history: [
-          { pageId: navigationConstants.PAGES.AUTH.val, params: {} },
+          { pageId: Constants.ROUTING.PAGES.AUTH, params: {} },
           { pageId: 'somePage', params: { p1: 1 } },
           { pageId: 'somePage2', params: { } }
         ]

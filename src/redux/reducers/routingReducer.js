@@ -1,13 +1,13 @@
-const navigationConstants = require('../../utils/navigationConstants');
+const Constants = require('../../utils/constants');
 
 function createRoutingData(pageId, params) {
   return { pageId, params: params || {} }
 }
 
 const initialState = {
-  current: createRoutingData(navigationConstants.PAGES.AUTH.val, {}),
+  current: createRoutingData(Constants.ROUTING.PAGES.AUTH, {}),
   history: [
-    createRoutingData(navigationConstants.PAGES.AUTH.val, {})
+    createRoutingData(Constants.ROUTING.PAGES.AUTH, {})
   ]
 };
 

@@ -2,7 +2,7 @@ const React = require('react');
 const ReactReudx = require('react-redux');
 
 const authActions = require('../redux/actions/authActions');
-const navigationConstatns = require('../utils/navigationConstants');
+const Constants = require('../utils/constants');
 
 const Spinner = require('./spinner');
 const TopBar = require('./topBar');
@@ -31,21 +31,21 @@ const mapDispatchToProps = (dispatch) => ({
 
 function getPageComponent(currentPageId) {
     switch (currentPageId) {
-        case navigationConstatns.PAGES.HOME.val:
+        case Constants.ROUTING.PAGES.HOME:
             return ( <HomePage key='home-page' /> );
-        case navigationConstatns.PAGES.USERS.val:
+        case Constants.ROUTING.PAGES.USERS:
             return ( <UsersPage key='users-page' /> );
-        case navigationConstatns.PAGES.EVENTS.val:
+        case Constants.ROUTING.PAGES.GAMES:
             return ( <GamesPage key='games-page' /> );
-        case navigationConstatns.PAGES.BOOKINGS.val:
+        case Constants.ROUTING.PAGES.BOOKINGS:
             return ( <BookingsPage key='bookings-page' /> );
-        case navigationConstatns.PAGES.DISTRIBUTION.val:
+        case Constants.ROUTING.PAGES.DISTRIBUTION:
             return ( <DistributionPage key='distribution-page' /> );
-        case navigationConstatns.PAGES.EDIT_USER_INFO.val:
+        case Constants.ROUTING.PAGES.EDIT_USER_INFO:
             return ( <EditUserInfoPage key='editUserInfo-page' /> );
-        case navigationConstatns.PAGES.UPDATE_BOOKING.val:
+        case Constants.ROUTING.PAGES.UPDATE_BOOKING:
             return ( <UpdateBookingPage key='updateBooking-page' /> );
-        case navigationConstatns.PAGES.UPDATE_GAME.val:
+        case Constants.ROUTING.PAGES.UPDATE_GAME:
             return ( <UpdateGamePage key='updateGame-page' /> );
     }
 }

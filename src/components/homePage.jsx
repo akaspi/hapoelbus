@@ -7,7 +7,7 @@ const routingActions = require('../redux/actions/routingActions');
 
 const homePageTranslations = require('../utils/translations/homePageTranslations');
 const gameConstants = require('../utils/gameConstants');
-const navigationConstants = require('../utils/navigationConstants');
+const Constants = require('../utils/constants');
 
 const EventItem = require('./eventItem');
 
@@ -22,7 +22,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    navigateToUpdateBooking: (uid, gameId) => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { uid, gameId })),
+    navigateToUpdateBooking: (uid, gameId) => dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.UPDATE_BOOKING, { uid, gameId })),
     cancelBooking: (uid, gameId) => dispatch(bookingActions.bookingsCanceled(uid, gameId)),
   };
 }

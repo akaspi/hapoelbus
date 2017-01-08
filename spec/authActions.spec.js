@@ -6,7 +6,7 @@ import * as loadingActions from '../src/redux/actions/loadingActions';
 import * as errorActions from '../src/redux/actions/errorActions';
 import * as routingActions from '../src/redux/actions/routingActions';
 
-import * as Constants from '../src/utils/constants';
+const Constants = require('../src/utils/constants');
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -21,7 +21,7 @@ describe('authActions spec', () => {
     const expectedActions = [
       loadingActions.startLoading(),
       authActions.userSignedOut(),
-      routingActions.reset(Constants.PAGES.AUTH.val),
+      routingActions.reset(Constants.ROUTING.PAGES.AUTH),
       loadingActions.stopLoading()
     ];
 

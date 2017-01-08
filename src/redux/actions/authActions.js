@@ -4,9 +4,9 @@ import { SET_AUTH_DATA, SIGN_OUT } from './actionTypes';
 
 import { Promise } from 'bluebird';
 
-const navigationConstants = require('../../utils/navigationConstants');
+const Constants = require('../../utils/constants');
+const Translations = require('../../utils/translations');
 
-import * as Constants from '../../utils/constants';
 import * as clientDB from '../../utils/clientDB';
 import * as userActions from './userActions';
 import * as eventActions from './eventActions';
@@ -18,12 +18,12 @@ import * as navigationActions from './routingActions';
 import updatePhotoUrlFixer from '../../dataFixers/updatePhotoUrlFixer';
 
 export const AUTH_ERROR_CODES_MAP = {
-  'auth/invalid-email': Constants.ERRORS.INVALID_MAIL,
-  'auth/weak-password': Constants.ERRORS.WEAK_PASSWORD,
-  'auth/email-already-in-use': Constants.ERRORS.EMAIL_IN_USE,
-  'auth/wrong-password': Constants.ERRORS.WRONG_PASSWORD,
-  'auth/account-exists-with-different-credential': Constants.ERRORS.EMAIL_IN_USE,
-  'auth/user-not-found': Constants.ERRORS.USER_NOT_FOUND
+  'auth/invalid-email': Translations.ERROR_MESSAGES.AUTH.INVALID_EMAIL,
+  'auth/weak-password': Translations.ERROR_MESSAGES.AUTH.WEAK_PASSWORD,
+  'auth/email-already-in-use': Translations.ERROR_MESSAGES.AUTH.EMAIL_IN_USE,
+  'auth/wrong-password': Translations.ERROR_MESSAGES.AUTH.WRONG_PASSWORD,
+  'auth/account-exists-with-different-credential': Translations.ERROR_MESSAGES.AUTH.EMAIL_IN_USE,
+  'auth/user-not-found': Translations.ERROR_MESSAGES.AUTH.USER_NOT_FOUND
 };
 
 export const setAuthData = (uid, email, photoURL, isAdmin) => ({
@@ -52,7 +52,7 @@ export const signOut = () => dispatch => {
 
   return clientDB.signOut()
     .then(() => dispatch(userSignedOut()))
-    .then(() => dispatch(navigationActions.reset(navigationConstants.PAGES.AUTH.val)))
+    .then(() => dispatch(navigationActions.reset(Constants.ROUTING.PAGES.AUTH)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -66,7 +66,7 @@ export const loginWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.loginWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
-    .then(() => dispatch(navigationActions.reset(navigationConstants.PAGES.HOME.val)))
+    .then(() => dispatch(navigationActions.reset(Constants.ROUTING.PAGES.HOME)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -76,7 +76,7 @@ export const createUserWithEmailAndPassword = (email, password) => dispatch => {
 
   return clientDB.createUserWithEmailAndPassword(email, password)
     .then(user => fetchAppData(dispatch, user))
-    .then(() => dispatch(navigationActions.reset(navigationConstants.PAGES.EDIT_USER_INFO.val)))
+    .then(() => dispatch(navigationActions.reset(Constants.ROUTING.PAGES.EDIT_USER_INFO)))
     .catch(dbError => dispatch(errorActions.reportError(AUTH_ERROR_CODES_MAP[dbError.code])))
     .finally(() => dispatch(loadingActions.stopLoading()));
 };
@@ -100,9 +100,9 @@ export const fetchAuthData = () => (dispatch, getState) => {
           .then(() => {
             const userInfo = getState().users[user.uid];
             if (_.isEmpty(userInfo)) {
-              dispatch(navigationActions.reset(Constants.PAGES.EDIT_USER_INFO.val, { uid: user.uid }));
+              dispatch(navigationActions.reset(Constants.ROUTING.PAGES.EDIT_USER_INFO, { uid: user.uid }));
             } else {
-              dispatch(navigationActions.reset(navigationConstants.PAGES.HOME.val));
+              dispatch(navigationActions.reset(Constants.ROUTING.PAGES.HOME));
             }
           });
       }

@@ -6,7 +6,7 @@ const classNames = require('classnames');
 const bookingsPageTranslations = require('../utils/translations/bookingsPageTranslations');
 const userFormTranslations = require('../utils/translations/userFormTranslations');
 const teamsData = require('../utils/teamsData');
-const navigationConstants = require('../utils/navigationConstants');
+const Constants = require('../utils/constants');
 const gameConstants = require('../utils/gameConstants');
 
 const routingActions = require('../redux/actions/routingActions');
@@ -35,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { gameId, uid })),
+        editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.UPDATE_BOOKING, { gameId, uid })),
         changeFilter: filter => dispatch(routingActions.replace(null, { filter })),
         changeGameId: gameId => dispatch(routingActions.replace(null, { gameId }))
     };
