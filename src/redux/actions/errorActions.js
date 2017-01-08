@@ -1,7 +1,7 @@
 import { REPORT_ERROR } from './actionTypes';
-import * as Constants from '../../utils/constants';
+const Translations = require('../../utils/translations');
 
-export const reportError = (message = Constants.ERRORS.GENERAL) => ({
+export const reportError = (message = Translations.ERROR_MESSAGES.GENERAL) => ({
   type: REPORT_ERROR,
   message
 });
