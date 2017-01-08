@@ -6,7 +6,6 @@ const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
 const distributionActions = require('../redux/actions/distributionActions');
-const distributionConstants = require('../utils/distributionConstants');
 const teamsData = require('../utils/teamsData');
 
 const PageTitle = require('./pageTitle');
@@ -31,10 +30,10 @@ function mapDispatchToProps(dispatch) {
 
 function getInitialState(games) {
     return {
-        distributionMethod: distributionConstants.DISTRIBUTION_METHODS.EMAIL,
-        recipientsType: distributionConstants.RECIPIENTS_TYPES.MEMBERS_ONLY,
-        distributionType: distributionConstants.DISTRIBUTION_TYPES.TEMPLATE,
-        templateId: distributionConstants.TEMPLATES.EVENT_OPEN_FOR_MEMBERS,
+        distributionMethod: Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL,
+        recipientsType: Constants.DISTRIBUTION.RECIPIENTS_TYPES.MEMBERS_ONLY,
+        distributionType: Constants.DISTRIBUTION.DISTRIBUTION_TYPES.TEMPLATE,
+        templateId: Constants.DISTRIBUTION.TEMPLATES.EVENT_OPEN_FOR_MEMBERS,
         gameId: _.last(_.keys(getOpenGames(games))),
         subject: '',
         content: ''
@@ -53,10 +52,10 @@ function getRecipients(users, recipientsType, bookings, gameId) {
     let recipientsUsers = _.pickBy(users, user => user.subscribeMail);
 
     switch (recipientsType) {
-        case distributionConstants.RECIPIENTS_TYPES.MEMBERS_ONLY:
+        case Constants.DISTRIBUTION.RECIPIENTS_TYPES.MEMBERS_ONLY:
             recipientsUsers = getMembersUsersOnly(recipientsUsers);
             break;
-        case distributionConstants.RECIPIENTS_TYPES.BOOKED_TO_EVENT:
+        case Constants.DISTRIBUTION.RECIPIENTS_TYPES.BOOKED_TO_EVENT:
             recipientsUsers = getBookedUsersOnly(recipientsUsers, bookings, gameId);
             break;
     }
@@ -91,8 +90,8 @@ function createDistributionMethodInput(distributionMethod, onDistributionMethodC
         <div className='medium-8 small-12 columns small-centered more-space'>
             <label>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_METHOD.TITLE}
                 <select value={distributionMethod} onChange={onDistributionMethodChange}>
-                    <option value={distributionConstants.DISTRIBUTION_METHODS.EMAIL}>{Translations.DISTRIBUTION_PAGE.EMAIL}</option>
-                    <option value={distributionConstants.DISTRIBUTION_METHODS.SMS}>{Translations.DISTRIBUTION_PAGE.SMS}</option>
+                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL}>{Translations.DISTRIBUTION_PAGE.EMAIL}</option>
+                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_METHODS.SMS}>{Translations.DISTRIBUTION_PAGE.SMS}</option>
                 </select>
             </label>
         </div>
@@ -104,13 +103,13 @@ function createRecipientsTypeInput(recipientsType, onRecipientsTypeChange) {
         <div className='medium-8 small-12 columns small-centered'>
             <label>{Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.TITLE}
                 <select value={recipientsType} onChange={onRecipientsTypeChange}>
-                    <option value={distributionConstants.RECIPIENTS_TYPES.ALL}>
+                    <option value={Constants.DISTRIBUTION.RECIPIENTS_TYPES.ALL}>
                         {Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.ALL}
                     </option>
-                    <option value={distributionConstants.RECIPIENTS_TYPES.MEMBERS_ONLY}>
+                    <option value={Constants.DISTRIBUTION.RECIPIENTS_TYPES.MEMBERS_ONLY}>
                         {Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.MEMBERS_ONLY}
                     </option>
-                    <option value={distributionConstants.RECIPIENTS_TYPES.BOOKED_TO_EVENT}>
+                    <option value={Constants.DISTRIBUTION.RECIPIENTS_TYPES.BOOKED_TO_EVENT}>
                         {Translations.DISTRIBUTION_PAGE.RECIPIENTS_TYPES.BOOKED_TO_EVENT}
                     </option>
                 </select>
@@ -124,8 +123,8 @@ function createDistributionTypeInput(distributionType, onDistributionTypeChange)
         <div className='medium-8 small-12 columns small-centered' key="distribution-distributionType-input">
             <label>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.TITLE}
                 <select value={distributionType} onChange={onDistributionTypeChange}>
-                    <option value={distributionConstants.DISTRIBUTION_TYPES.TEMPLATE}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.TEMPLATE}</option>
-                    <option value={distributionConstants.DISTRIBUTION_TYPES.CUSTOM}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.CUSTOM}</option>
+                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_TYPES.TEMPLATE}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.TEMPLATE}</option>
+                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_TYPES.CUSTOM}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_TYPES.CUSTOM}</option>
                 </select>
             </label>
         </div>
@@ -137,9 +136,9 @@ function createTemplateSelection(templateId, onTemplateIdChange) {
         <div className='medium-8 small-12 columns small-centered' key='distribution-template-selection'>
             <label>{Translations.DISTRIBUTION_PAGE.TEMPLATES.TITLE}
                 <select value={templateId} onChange={onTemplateIdChange}>
-                    <option value={distributionConstants.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}</option>
-                    <option value={distributionConstants.TEMPLATES.EVENT_OPEN_FOR_ALL}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.EVENT_OPEN_FOR_ALL}</option>
-                    <option value={distributionConstants.TEMPLATES.CHANGE_EVENT_DETAILS}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.CHANGE_EVENT_DETAILS}</option>
+                    <option value={Constants.DISTRIBUTION.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.EVENT_OPEN_FOR_MEMBERS}</option>
+                    <option value={Constants.DISTRIBUTION.TEMPLATES.EVENT_OPEN_FOR_ALL}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.EVENT_OPEN_FOR_ALL}</option>
+                    <option value={Constants.DISTRIBUTION.TEMPLATES.CHANGE_EVENT_DETAILS}>{Translations.DISTRIBUTION_PAGE.TEMPLATES.CHANGE_EVENT_DETAILS}</option>
                 </select>
             </label>
         </div>
@@ -196,23 +195,23 @@ function createSubmitButton(onSubmit) {
 }
 
 function shouldShowDistributionTypeInput(distributionMethod) {
-    return distributionMethod === distributionConstants.DISTRIBUTION_METHODS.EMAIL;
+    return distributionMethod === Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL;
 }
 
 function shouldShowTemplateSelection(distributionMethod, distributionType) {
-    return shouldShowDistributionTypeInput(distributionMethod) && distributionType === distributionConstants.DISTRIBUTION_TYPES.TEMPLATE;
+    return shouldShowDistributionTypeInput(distributionMethod) && distributionType === Constants.DISTRIBUTION.DISTRIBUTION_TYPES.TEMPLATE;
 }
 
 function shouldCreateCustomTitle(distributionMethod, distributionType) {
-    return distributionMethod === distributionConstants.DISTRIBUTION_METHODS.EMAIL &&
-        distributionType === distributionConstants.DISTRIBUTION_TYPES.CUSTOM;
+    return distributionMethod === Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL &&
+        distributionType === Constants.DISTRIBUTION.DISTRIBUTION_TYPES.CUSTOM;
 }
 
 function shouldShowCustomContent(distributionMethod, distributionType) {
     return (
-            distributionMethod === distributionConstants.DISTRIBUTION_METHODS.EMAIL &&
-            distributionType === distributionConstants.DISTRIBUTION_TYPES.CUSTOM
-        ) || distributionMethod === distributionConstants.DISTRIBUTION_METHODS.SMS;
+            distributionMethod === Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL &&
+            distributionType === Constants.DISTRIBUTION.DISTRIBUTION_TYPES.CUSTOM
+        ) || distributionMethod === Constants.DISTRIBUTION.DISTRIBUTION_METHODS.SMS;
 }
 
 class DistributionPage extends React.Component {
@@ -265,12 +264,12 @@ class DistributionPage extends React.Component {
     };
 
     onSubmit = () => {
-        if (this.state.distributionMethod === distributionConstants.DISTRIBUTION_METHODS.EMAIL) {
+        if (this.state.distributionMethod === Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL) {
             const recipients = getUsersEmails(this.props.users, this.state.recipientsType, this.props.bookings, this.state.gameId);
             if (_.isEmpty(recipients)) {
                 return;
             }
-            if (this.state.distributionType === distributionConstants.DISTRIBUTION_TYPES.TEMPLATE) {
+            if (this.state.distributionType === Constants.DISTRIBUTION.DISTRIBUTION_TYPES.TEMPLATE) {
                 const substitutions = getEventSubstitutions(this.props.games[this.state.gameId]);
                 this.props.sendTemplateEmail(recipients, this.state.templateId, substitutions);
             } else {
