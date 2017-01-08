@@ -89,8 +89,8 @@ function createDistributionMethodInput(distributionMethod, onDistributionMethodC
         <div className='medium-8 small-12 columns small-centered more-space'>
             <label>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_METHOD.TITLE}
                 <select value={distributionMethod} onChange={onDistributionMethodChange}>
-                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL}>{Translations.DISTRIBUTION_PAGE.EMAIL}</option>
-                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_METHODS.SMS}>{Translations.DISTRIBUTION_PAGE.SMS}</option>
+                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_METHODS.EMAIL}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_METHOD.EMAIL}</option>
+                    <option value={Constants.DISTRIBUTION.DISTRIBUTION_METHODS.SMS}>{Translations.DISTRIBUTION_PAGE.DISTRIBUTION_METHOD.SMS}</option>
                 </select>
             </label>
         </div>
