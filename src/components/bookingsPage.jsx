@@ -25,13 +25,19 @@ function mapStateToProps(state) {
     return {
         bookings: state.bookings,
         games: state.events,
-        users: state.users
+        users: state.users,
+        query: {
+            gameId: state.routing.current.params.gameId || _.findKey(state.events, {status: gameConstants.STATUS.OPEN_FOR_MEMBERS}) || _.findKey(state.events, {status: gameConstants.STATUS.OPEN_FOR_ALL}) ||  _.findKey(state.events, {status: gameConstants.STATUS.CLOSED}),
+            filter: state.routing.current.params.filter || TABS.PICKUP
+        }
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { gameId, uid }))
+        editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { gameId, uid })),
+        changeFilter: filter => dispatch(routingActions.replace(null, { filter })),
+        changeGameId: gameId => dispatch(routingActions.replace(null, { gameId }))
     };
 }
 
@@ -407,34 +413,25 @@ function createDropOffList(visibleBookings, onBookingClick, users) {
 }
 
 class BookingsPage extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            gameId: _.findKey(this.props.games, {status: gameConstants.STATUS.OPEN_FOR_MEMBERS}) || _.findKey(this.props.games, {status: gameConstants.STATUS.OPEN_FOR_ALL}) ||  _.findKey(this.props.games, {status: gameConstants.STATUS.CLOSED}),
-            filter: TABS.PICKUP
-        };
-    }
-
     onFilterChange = filter => {
-        this.setState({ filter });
+        this.props.changeFilter(filter);
     };
 
     onGameIdChange = gameId => {
-        this.setState({ gameId });
+        this.props.changeGameId(gameId);
     };
 
     onBookingClick = uid => {
-        this.props.editBooking(this.state.gameId, uid);
+        this.props.editBooking(this.props.query.gameId, uid);
     };
 
     render() {
-        const visibleBookings = getVisibleBookings(this.props.bookings, this.state.gameId);
+        const visibleBookings = getVisibleBookings(this.props.bookings, this.props.query.gameId);
         return (
             <div className='ֿsmall-centered dashboard-page bookings-page'>
                 { createPageTitle() }
-                { createFilterSection(this.state.filter, this.state.gameId, this.onFilterChange, this.onGameIdChange, visibleBookings, this.props.games) }
-                { this.state.filter === TABS.PICKUP ? createPickUpsList(visibleBookings, this.onBookingClick, this.props.users) : createDropOffList(visibleBookings, this.onBookingClick, this.props.users) }
+                { createFilterSection(this.props.query.filter, this.props.query.gameId, this.onFilterChange, this.onGameIdChange, visibleBookings, this.props.games) }
+                { this.props.query.filter === TABS.PICKUP ? createPickUpsList(visibleBookings, this.onBookingClick, this.props.users) : createDropOffList(visibleBookings, this.onBookingClick, this.props.users) }
             </div>
         );
     }
@@ -444,7 +441,10 @@ BookingsPage.propTypes = {
     bookings: React.PropTypes.object.isRequired,
     games: React.PropTypes.object.isRequired,
     users: React.PropTypes.object.isRequired,
-    editBooking: React.PropTypes.func.isRequried
+    query: React.PropTypes.object.isRequired,
+    editBooking: React.PropTypes.func.isRequried,
+    changeFilter: React.PropTypes.func.isRequried,
+    changeGameId: React.PropTypes.func.isRequried
 };
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(BookingsPage);

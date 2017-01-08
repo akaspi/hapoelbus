@@ -19,13 +19,19 @@ const FILTERS = {
 
 function mapStateToProps(state) {
     return {
+        query: {
+            filter: state.routing.current.params.filter || FILTERS.ALL,
+            search: state.routing.current.params.search || ''
+        },
         users: state.users
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        navToEditUser: uid =>  dispatch(routingActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.val, { uid }))
+        navToEditUser: uid =>  dispatch(routingActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.val, { uid })),
+        changeFilter: filter =>  dispatch(routingActions.replace(null, { filter })),
+        changeSearchQuery: _.debounce(search =>  dispatch(routingActions.replace(null, { search })), 500)
     };
 }
 
@@ -189,37 +195,34 @@ class UsersPage extends React.Component {
         super(props);
 
         this.state = {
-            filter: FILTERS.ALL,
-            filterCounts: countAccordingToFilters(this.props.users),
-            searchQuery: ''
+            search: this.props.query.search
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            filterCounts: countAccordingToFilters(nextProps.users),
-        });
+        if (nextProps.query.search !== this.state.search) {
+            this.setState({ search: nextProps.query.search });
+        }
     }
 
     handleSearchQueryChange = e => {
-      this.setState({
-          searchQuery: e.target.value
-      });
+        const search = e.target.value;
+        this.setState({ search }, () => this.props.changeSearchQuery(search));
     };
 
     handleFilterChange = filter => {
-      this.setState({ filter });
+      this.props.changeFilter(filter);
     };
 
     render() {
-        const visibleUsersArr = getVisibleUsers(this.props.users, this.state.filter, this.state.searchQuery);
+        const visibleUsersArr = getVisibleUsers(this.props.users, this.props.query.filter, this.state.search);
 
         return (
             <div className='small-centered dashboard-page'>
 
                 <PageTitle title={usersPageTranslations.TITLE} />
 
-                { createFilter(this.state.searchQuery, this.state.filter, this.handleFilterChange, this.handleSearchQueryChange, this.state.filterCounts) }
+                { createFilter(this.state.search, this.props.query.filter, this.handleFilterChange, this.handleSearchQueryChange, countAccordingToFilters(this.props.users)) }
 
                 { _.isEmpty(visibleUsersArr) ? createNoUsersMessage() : createUsersList(visibleUsersArr, this.props.navToEditUser) }
             </div>
@@ -229,7 +232,10 @@ class UsersPage extends React.Component {
 
 UsersPage.propTypes = {
     users: React.PropTypes.object,
-    navToEditUser: React.PropTypes.func.isRequired
+    query: React.PropTypes.object.isRequired,
+    navToEditUser: React.PropTypes.func.isRequired,
+    changeFilter: React.PropTypes.func.isRequired,
+    changeSearchQuery: React.PropTypes.func.isRequired
 };
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(UsersPage);

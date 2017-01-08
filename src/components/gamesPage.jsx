@@ -24,14 +24,18 @@ const TABS = {
 
 function mapStateToProps(state) {
     return {
-        games: state.events
+        games: state.events,
+        query: {
+            filter: state.routing.current.params.filter || TABS.ALL
+        }
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         editGame: gameId => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val, { gameId })),
-        createGame: () => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val))
+        createGame: () => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val)),
+        changeFilter: filter => dispatch(routingActions.replace(null, { filter }))
     };
 }
 
@@ -113,27 +117,19 @@ function createPlusButton(onCreateGame) {
 }
 
 class GamesPage extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-          filter: TABS.ALL
-        };
-    }
-
     onFilterChanged = filter => {
-        this.setState({ filter });
+        this.props.changeFilter(filter);
     };
 
     render() {
-        const visibleGames = getVisibleGames(this.props.games, this.state.filter);
+        const visibleGames = getVisibleGames(this.props.games, this.props.query.filter);
 
         return (
             <div className='small-centered dashboard-page games-page'>
 
                 <PageTitle title={gamesPageTranslations.TITLE} />
 
-                { createTabs(this.props.games, this.state.filter, this.onFilterChanged) }
+                { createTabs(this.props.games, this.props.query.filter, this.onFilterChanged) }
 
                 {
                     _.map(visibleGames, (game, gameId) => (
@@ -158,7 +154,8 @@ class GamesPage extends React.Component {
 GamesPage.propTypes = {
     games: React.PropTypes.object.isRequired,
     createGame: React.PropTypes.func.isRequired,
-    editGame: React.PropTypes.func.isRequired
+    editGame: React.PropTypes.func.isRequired,
+    changeFilter: React.PropTypes.func.isRequired
 };
 
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(GamesPage);
