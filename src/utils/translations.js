@@ -32,6 +32,11 @@ module.exports = {
       }
     }
   },
+  HOME_PAGE: {
+    NO_OPEN_GAMES: 'אין הסעות פתוחות',
+    OPEN_GAMES: 'הסעות פתוחות',
+    CLOSED_GAMES: 'ההסעות הבאות'
+  },
   UPDATE_USER_INFO_PAGE: {
     TITLE: 'פרטים אישיים',
     FIRST_NAME: 'שם',

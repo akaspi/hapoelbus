@@ -2,13 +2,12 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux = require('react-redux');
 
+const Constants = require('../utils/constants');
+const Translations = require('../utils/translations');
+
 const bookingActions = require('../redux/actions/bookingActions');
 const routingActions = require('../redux/actions/routingActions');
-
-const homePageTranslations = require('../utils/translations/homePageTranslations');
 const gameConstants = require('../utils/gameConstants');
-const Constants = require('../utils/constants');
-
 const EventItem = require('./eventItem');
 
 require('../styles/homePage.scss');
@@ -58,7 +57,7 @@ function getOpenGames(games) {
 function createMobileNoGamesMessageSection() {
   return (
     <div className='show-for-small-only no-bookings more-space'>
-      <span>{homePageTranslations.NO_OPEN_GAMES}</span>
+      <span>{Translations.HOME_PAGE.NO_OPEN_GAMES}</span>
       <i className='fa fa-bus' aria-hidden='true' />
     </div>
   );
@@ -75,12 +74,12 @@ function createGamesLists(openGames, closedGamesArr, onBooking, onCancelBooking)
   return (
     <div>
       <div className='events-list open-events'>
-        <h6 className='hide-for-small-only'>{homePageTranslations.OPEN_GAMES}</h6>
+        <h6 className='hide-for-small-only'>{Translations.HOME_PAGE.OPEN_GAMES}</h6>
         { _.map(openGames, (game, gameId) => <EventItem key={'open-game-' + gameId} eventId={gameId} onBooking={bindOnGameItemClick(onBooking, gameId)} onCancelBooking={bindOnGameItemClick(onCancelBooking, gameId)} />) }
       </div>
 
       <div className='events-list closed-events hide-for-small-only'>
-        <h6>{homePageTranslations.CLOSED_GAMES}</h6>
+        <h6>{Translations.HOME_PAGE.CLOSED_GAMES}</h6>
         { _.map(closedGamesArr, gameData => <EventItem key={'closed-game-' + gameData.gameId} eventId={gameData.gameId} />) }
       </div>
     </div>
