@@ -2,8 +2,9 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux = require('react-redux');
 
+const Translations = require('../utils/translations');
+
 const gamesConstants = require('../utils/gameConstants');
-const bookingsConstants = require('../utils/bookingsConstants');
 const teamsData = require('../utils/teamsData');
 
 require('../styles/eventItem.scss');
@@ -97,14 +98,14 @@ function createFullyBookedLabel() {
 function createBookingButton(isBookingAllowed, isBooked, onBooking) {
     const bookButton = (
         <span key="book-btn">
-            <span>{bookingsConstants.TRANSLATIONS.book}</span>
+            <span>{Translations.GAME_ITEM.BOOK}</span>
             <i className="fa fa-bus" aria-hidden="true"/>
         </span>
     );
 
     const editBookingButton = (
         <span key="edit-btn">
-            <span>{bookingsConstants.TRANSLATIONS.editBooking}</span>
+            <span>{Translations.GAME_ITEM.EDIT_BOOKING}</span>
             <i className="fa fa-bus" aria-hidden="true"/>
         </span>
     );
@@ -119,7 +120,7 @@ function createBookingButton(isBookingAllowed, isBooked, onBooking) {
 function createBookingCancellationButton(onCancelBooking) {
     return (
         <a className="button small alert" key="remove-btn" onClick={onCancelBooking}>
-            <span>{bookingsConstants.TRANSLATIONS.cancelBooking}</span>
+            <span>{Translations.GAME_ITEM.CANCEL_BOOKING}</span>
             <i className="fa fa-times" aria-hidden="true"/>
         </a>
     );

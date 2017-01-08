@@ -10,6 +10,23 @@ module.exports = {
       [Constants.ROUTING.PAGES.DISTRIBUTION]: 'רשימת תפוצה',
     }
   },
+  STATIONS: {
+    [Constants.STATIONS.TEL_AVIV]: 'תל אביב',
+    [Constants.STATIONS.MODIIN]: 'צומת שילת'
+  },
+  GAME_ITEM: {
+    BOOK: 'הרשם',
+    EDIT_BOOKING: 'ערוך',
+    CANCEL_BOOKING: 'בטל הרשמה'
+  },
+  UPDATE_BOOKING_PAGE: {
+    TITLE: 'עריכת הרשמה',
+    PAID_SEATS: 'כמות מנויים',
+    EXTRA_SEATS: 'נוסעים בתשלום',
+    PICKUP_TOGGLE: 'הלוך',
+    DROPOFF_TOGGLE: 'חזור',
+    PICKUP_STATION_DROPDOWN_DEFAULT: 'בחר'
+  },
   ERROR_MESSAGES: {
     GENERAL: 'שגיאת מערכת',
     AUTH: {

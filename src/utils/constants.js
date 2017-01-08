@@ -11,5 +11,9 @@ module.exports = {
       UPDATE_BOOKING: 'updateBooking',
       UPDATE_GAME: 'updateGame'
     }
+  },
+  STATIONS: {
+    TEL_AVIV: 'tlv',
+    MODIIN: 'modiin'
   }
 };

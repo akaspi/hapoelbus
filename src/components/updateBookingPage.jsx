@@ -2,11 +2,11 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux = require('react-redux');
 
+const Constants = require('../utils/constants');
+const Translations  = require('../utils/translations');
+
 const routingActions  = require('../redux/actions/routingActions');
 const bookingActions  = require('../redux/actions/bookingActions');
-const bookingFormTranslations  = require('../utils/translations/bookingFormTranslations');
-const bookingsTranslations  = require('../utils/translations/bookingsTranslations');
-const bookingsConstants  = require('../utils/bookingsConstants');
 
 const FormFrame = require('./formFrame');
 
@@ -47,7 +47,7 @@ function createPassengersSection(seasonTickets, paidSeats, extraSeats, onPaidSea
 
         return (
             <div className='small-6 columns'>
-                <label>{bookingFormTranslations.PAID_SEATS}
+                <label>{Translations.UPDATE_BOOKING_PAGE.PAID_SEATS}
                     <select value={paidSeats} onChange={onPaidSeatChange} name='paidSeats'>
                         { items }
                     </select>
@@ -61,7 +61,7 @@ function createPassengersSection(seasonTickets, paidSeats, extraSeats, onPaidSea
 
         return (
             <div className='small-6 columns end'>
-                <label>{bookingFormTranslations.EXTRA_SEATS}
+                <label>{Translations.UPDATE_BOOKING_PAGE.EXTRA_SEATS}
                     <select value={extraSeats} onChange={onExtraSeatChange} name='extraSeats'>
                         { items }
                     </select>
@@ -82,7 +82,7 @@ function createPickupSection(pickUpEnabled, pickUpStation, togglePickUp, onPicku
     return (
         <div className='row'>
             <div className='small-3 large-2 columns'>
-                <label htmlFor='pickUpToggle'>{bookingFormTranslations.PICKUP_TOGGLE}</label>
+                <label htmlFor='pickUpToggle'>{Translations.UPDATE_BOOKING_PAGE.PICKUP_TOGGLE}</label>
                 <div className='switch'>
                     <input type='checkbox' className='switch-input' id='pickUpToggle' checked={pickUpEnabled} onChange={togglePickUp} />
                     <label className='switch-paddle' htmlFor='pickUpToggle' />
@@ -90,9 +90,9 @@ function createPickupSection(pickUpEnabled, pickUpStation, togglePickUp, onPicku
             </div>
             <div className='small-9 large-10 columns end more-space'>
                 <select value={pickUpStation} onChange={onPickupStationChange} name='pickUp' disabled={!pickUpEnabled}>
-                    <option value='' style={{display: 'none'}}>{bookingFormTranslations.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
-                    <option value={bookingsConstants.STATIONS.TEL_AVIV}>{bookingsTranslations.STATIONS.TEL_AVIV}</option>
-                    <option value={bookingsConstants.STATIONS.MODIIN}>{bookingsTranslations.STATIONS.MODDIN}</option>
+                    <option value='' style={{display: 'none'}}>{Translations.UPDATE_BOOKING_PAGE.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
+                    <option value={Constants.STATIONS.TEL_AVIV}>{Translations.STATIONS[Constants.STATIONS.TEL_AVIV]}</option>
+                    <option value={Constants.STATIONS.MODIIN}>{Translations.STATIONS[Constants.STATIONS.MODIIN]}</option>
                 </select>
             </div>
         </div>
@@ -103,7 +103,7 @@ function createDropoffSection(dropOffEnabled, dropOffStation, toggleDropOff, onD
     return (
         <div className='row'>
             <div className='small-3 large-2 columns'>
-                <label htmlFor="dropOffToggle">{bookingFormTranslations.DROPOFF_TOGGLE}</label>
+                <label htmlFor="dropOffToggle">{Translations.UPDATE_BOOKING_PAGE.DROPOFF_TOGGLE}</label>
                 <div className='switch'>
                     <input type='checkbox' className='switch-input' id='dropOffToggle' checked={dropOffEnabled} onChange={toggleDropOff} />
                     <label className="switch-paddle" htmlFor="dropOffToggle" />
@@ -111,9 +111,9 @@ function createDropoffSection(dropOffEnabled, dropOffStation, toggleDropOff, onD
             </div>
             <div className='small-9 large-10 columns end more-space'>
                 <select value={dropOffStation} onChange={onDropOffStationChange} name='dropOff' disabled={!dropOffEnabled}>
-                    <option value='' style={{display: 'none'}}>{bookingFormTranslations.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
-                    <option value={bookingsConstants.STATIONS.TEL_AVIV}>{bookingsTranslations.STATIONS.TEL_AVIV}</option>
-                    <option value={bookingsConstants.STATIONS.MODIIN}>{bookingsTranslations.STATIONS.MODDIN}</option>
+                    <option value='' style={{display: 'none'}}>{Translations.UPDATE_BOOKING_PAGE.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
+                    <option value={Constants.STATIONS.TEL_AVIV}>{Translations.STATIONS[Constants.STATIONS.TEL_AVIV]}</option>
+                    <option value={Constants.STATIONS.MODIIN}>{Translations.STATIONS[Constants.STATIONS.MODIIN]}</option>
                 </select>
             </div>
         </div>
@@ -205,7 +205,7 @@ class UpdateBookingPage extends React.Component {
 
     render() {
         return(
-            <FormFrame title={bookingFormTranslations.TITLE} onSubmit={this.onSubmit} onClose={this.props.navigateBack} onRemove={this.props.isAdmin ? this.onRemove: null} disabled={!this.isFormValid()}>
+            <FormFrame title={Translations.UPDATE_BOOKING_PAGE.TITLE} onSubmit={this.onSubmit} onClose={this.props.navigateBack} onRemove={this.props.isAdmin ? this.onRemove: null} disabled={!this.isFormValid()}>
                 <div className='booking-form small-11 small-centered'>
                     { createPassengersSection(this.props.userInfo.seasonTickets, this.state.paidSeats, this.state.extraSeats, this.onPaidSeatChange, this.onExtraSeatChange) }
                     { createPickupSection(this.state.pickUpEnabled, this.state.pickUp, this.togglePickUp, this.onPickUpStationChange) }
