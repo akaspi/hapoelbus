@@ -3,7 +3,8 @@ const React = require('react');
 const ReactRedux = require('react-redux');
 const classNames = require('classnames');
 
-const usersPageTranslations = require('../utils/translations/usersPageTranslations');
+const Translations = require('../utils/translations');
+
 const Constants = require('../utils/constants');
 const routingActions = require('../redux/actions/routingActions');
 
@@ -102,25 +103,25 @@ function createFilter(searchQuery, filter, handleFilterChange, handleSearchQuery
                 <ul className='menu small-text'>
                     <li className={classNames({ active: filter === FILTERS.ALL})}>
                         <a onClick={handleFilterChange.bind(this, FILTERS.ALL)}>
-                            <span>{usersPageTranslations.FILTER.TABS.ALL}</span>
+                            <span>{Translations.USERS_PAGE.FILTER.TABS.ALL}</span>
                             <span>({ filterCounts[FILTERS.ALL] })</span>
                         </a>
                     </li>
                     <li className={classNames({ active: filter === FILTERS.MEMBERS})}>
                         <a onClick={handleFilterChange.bind(this, FILTERS.MEMBERS)}>
-                            <span>{usersPageTranslations.FILTER.TABS.MEMBERS}</span>
+                            <span>{Translations.USERS_PAGE.FILTER.TABS.MEMBERS}</span>
                             <span>({ filterCounts[FILTERS.MEMBERS] })</span>
                         </a>
                     </li>
                     <li className={classNames({ active: filter === FILTERS.REQUESTS})}>
                         <a onClick={handleFilterChange.bind(this, FILTERS.REQUESTS)}>
-                            <span>{usersPageTranslations.FILTER.TABS.REQUESTS}</span>
+                            <span>{Translations.USERS_PAGE.FILTER.TABS.REQUESTS}</span>
                             <span>({ filterCounts[FILTERS.REQUESTS] })</span>
                         </a>
                     </li>
                     <li className={classNames({ active: filter === FILTERS.NON_MEMBERS})}>
                         <a onClick={handleFilterChange.bind(this, FILTERS.NON_MEMBERS)}>
-                            <span>{usersPageTranslations.FILTER.TABS.NON_MEMBERS}</span>
+                            <span>{Translations.USERS_PAGE.FILTER.TABS.NON_MEMBERS}</span>
                             <span>({ filterCounts[FILTERS.NON_MEMBERS] })</span>
                         </a>
                     </li>
@@ -136,7 +137,7 @@ function createFilter(searchQuery, filter, handleFilterChange, handleSearchQuery
                     <input
                         type="search"
                         className='search-input'
-                        placeholder={usersPageTranslations.FILTER.SEARCH}
+                        placeholder={Translations.USERS_PAGE.FILTER.SEARCH}
                         value={searchQuery}
                         onChange={handleSearchQueryChange}
                     />
@@ -185,7 +186,7 @@ function createNoUsersMessage() {
     return (
         <label className='filter-status'>
             <i className='fa fa-frown-o' aria-hidden='true' />
-            <span>{usersPageTranslations.NO_USERS_FOUND}</span>
+            <span>{Translations.USERS_PAGE.NO_USERS_FOUND}</span>
         </label>
     );
 }
@@ -220,7 +221,7 @@ class UsersPage extends React.Component {
         return (
             <div className='small-centered dashboard-page'>
 
-                <PageTitle title={usersPageTranslations.TITLE} />
+                <PageTitle title={Translations.USERS_PAGE.TITLE} />
 
                 { createFilter(this.state.search, this.props.query.filter, this.handleFilterChange, this.handleSearchQueryChange, countAccordingToFilters(this.props.users)) }
 

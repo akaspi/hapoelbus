@@ -19,6 +19,19 @@ module.exports = {
     EDIT_BOOKING: 'ערוך',
     CANCEL_BOOKING: 'בטל הרשמה'
   },
+  USERS_PAGE: {
+    TITLE: 'משתמשים',
+    NO_USERS_FOUND: 'לא נמצאו רשומות',
+    FILTER: {
+      SEARCH: 'חיפוש',
+      TABS: {
+        ALL: 'כולם',
+        MEMBERS: 'מנויים',
+        REQUESTS: 'בקשה למנוי',
+        NON_MEMBERS: 'חד פעמיים'
+      }
+    }
+  },
   UPDATE_BOOKING_PAGE: {
     TITLE: 'עריכת הרשמה',
     PAID_SEATS: 'כמות מנויים',
