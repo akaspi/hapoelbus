@@ -7,7 +7,6 @@ const Translations = require('../utils/translations');
 
 const eventActions = require('../redux/actions/eventActions');
 const routingActions = require('../redux/actions/routingActions');
-const teamsData = require('../utils/teamsData');
 
 const DEFAULT_GAME_LOGO = 'http://image.flaticon.com/icons/svg/124/124150.svg';
 
@@ -55,7 +54,7 @@ function mapDispatchToProps(dispatch) {
 
 function createGameImage(typeId) {
     return (
-        <img className='game-img' src={_.get(teamsData, [typeId, 'logo'], DEFAULT_GAME_LOGO)} />
+        <img className='game-img' src={_.get(Constants.TEAMS, [typeId, 'logo'], DEFAULT_GAME_LOGO)} />
     );
 }
 
@@ -66,7 +65,7 @@ function createGameTitleSection(typeId, onTypeIdChange) {
                 <label>{Translations.UPDATE_GAME_PAGE.GAME_LABEL}
                     <select name='typeId' value={typeId} onChange={onTypeIdChange}>
                         <option value='' style={{display: 'none'}}>{Translations.UPDATE_GAME_PAGE.GAME_PLACEHOLDER}</option>
-                        { _.map(teamsData, (teamData, id) => <option key={'update-game-' + id} value={id}>{teamData.label}</option>) }
+                        { _.map(Constants.TEAMS, (teamData, id) => <option key={'update-game-' + id} value={id}>{teamData.label}</option>) }
                     </select>
                 </label>
             </div>

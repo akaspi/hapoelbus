@@ -6,7 +6,6 @@ const classNames = require('classnames');
 const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
-const teamsData = require('../utils/teamsData');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
@@ -132,9 +131,9 @@ class GamesPage extends React.Component {
                 {
                     _.map(visibleGames, (game, gameId) => (
                         <ListItem key={'game-' + gameId}
-                                  title={teamsData[game.typeId].label}
+                                  title={Constants.TEAMS[game.typeId].label}
                                   subtitles={getGameSubtitles(game)}
-                                  imageSrc={teamsData[game.typeId].logo || 'http://image.flaticon.com/icons/svg/138/138776.svg'}
+                                  imageSrc={Constants.TEAMS[game.typeId].logo || 'http://image.flaticon.com/icons/svg/138/138776.svg'}
                                   onClick={this.props.editGame.bind(this, gameId)}
                         />
                     ))

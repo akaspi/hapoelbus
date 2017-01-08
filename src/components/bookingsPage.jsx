@@ -6,7 +6,6 @@ const classNames = require('classnames');
 const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
-const teamsData = require('../utils/teamsData');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
@@ -194,7 +193,7 @@ function createFilterSection(filter, gameId, onFilterChange, onGameIdChange, vis
                         {
                             _.map(games, (game, gameId) =>
                                 <option key={'game-' + gameId} value={gameId}>
-                                    {game.day}/{game.month}/{game.year} - {teamsData[game.typeId].label}
+                                    {game.day}/{game.month}/{game.year} - {Constants.TEAMS[game.typeId].label}
                                 </option>)
                         }
                     </select>

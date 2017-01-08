@@ -6,7 +6,6 @@ const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
 
 const distributionActions = require('../redux/actions/distributionActions');
-const teamsData = require('../utils/teamsData');
 
 const PageTitle = require('./pageTitle');
 
@@ -72,7 +71,7 @@ function getEventSubstitutions(game) {
     return {
         '-DEPARTURE-': `${game.hour}:${game.minute}`,
         '-DATE-': `${game.day}/${game.month}/${game.year}`,
-        '-NAME-': teamsData[game.typeId].label
+        '-NAME-': Constants.TEAMS[game.typeId].label
     }
 }
 
@@ -146,7 +145,7 @@ function createTemplateSelection(templateId, onTemplateIdChange) {
 }
 
 function createGamesSelection(games, gameId, onGameChange) {
-    const options = _.map(games, (game, gameId) => <option key={'game-' + gameId} value={gameId}>{teamsData[game.typeId].label}</option>);
+    const options = _.map(games, (game, gameId) => <option key={'game-' + gameId} value={gameId}>{Constants.TEAMS[game.typeId].label}</option>);
 
     return (
         <div className='medium-8 small-12 columns small-centered' key="distribution-game-selection">

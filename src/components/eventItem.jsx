@@ -5,8 +5,6 @@ const ReactRedux = require('react-redux');
 const Translations = require('../utils/translations');
 const Constants = require('../utils/constants');
 
-const teamsData = require('../utils/teamsData');
-
 require('../styles/eventItem.scss');
 
 function isBookingEnabled(event, user) {
@@ -28,8 +26,8 @@ function mapStateToProps(state, ownProps) {
     const bookings = state.bookings;
 
     return {
-        homeTeam: teamsData.HAPOEL_JERUSALEM,
-        awayTeam: teamsData[event.typeId],
+        homeTeam: Constants.TEAMS.HAPOEL_JERUSALEM,
+        awayTeam: Constants.TEAMS[event.typeId],
         status: event.status,
         date: event.day + '/' + event.month + '/' + event.year,
         time: event.hour + ':' + event.minute,
