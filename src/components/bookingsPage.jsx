@@ -9,7 +9,7 @@ const teamsData = require('../utils/teamsData');
 const navigationConstants = require('../utils/navigationConstants');
 const gameConstants = require('../utils/gameConstants');
 
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
 const ListItem = require('./listItem');
@@ -31,7 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        editBooking: (gameId, uid) => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { gameId, uid }))
+        editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { gameId, uid }))
     };
 }
 

@@ -3,7 +3,7 @@ const React = require('react');
 const ReactRedux = require('react-redux');
 
 const bookingActions = require('../redux/actions/bookingActions');
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 
 const homePageTranslations = require('../utils/translations/homePageTranslations');
 const gameConstants = require('../utils/gameConstants');
@@ -22,7 +22,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    navigateToUpdateBooking: (uid, gameId) => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { uid, gameId })),
+    navigateToUpdateBooking: (uid, gameId) => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_BOOKING.val, { uid, gameId })),
     cancelBooking: (uid, gameId) => dispatch(bookingActions.bookingsCanceled(uid, gameId)),
   };
 }

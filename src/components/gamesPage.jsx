@@ -8,7 +8,7 @@ const gameConstants = require('../utils/gameConstants');
 const gamesPageTranslations = require('../utils/translations/gamesPageTranslations');
 const navigationConstants = require('../utils/navigationConstants');
 
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
 const ListItem = require('./listItem');
@@ -30,8 +30,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        editGame: gameId => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val, { gameId })),
-        createGame: () => dispatch(navigationActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val))
+        editGame: gameId => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val, { gameId })),
+        createGame: () => dispatch(routingActions.navigateTo(navigationConstants.PAGES.UPDATE_GAME.val))
     };
 }
 

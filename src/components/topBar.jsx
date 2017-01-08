@@ -5,7 +5,7 @@ const classNames = require('classnames');
 
 const navigationConstants = require('../utils/navigationConstants');
 
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 const authActions = require('../redux/actions/authActions');
 
 require('../styles/topBar.scss');
@@ -25,7 +25,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        navigateTo: (pageId, params) => dispatch(navigationActions.navigateTo(pageId, params)),
+        navigateTo: (pageId, params) => dispatch(routingActions.navigateTo(pageId, params)),
         signOut: () => dispatch(authActions.signOut())
     };
 }

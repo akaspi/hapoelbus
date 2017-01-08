@@ -3,7 +3,7 @@ const ReactRedux = require('react-redux');
 
 const UserForm = require('./userForm.jsx');
 
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 const navigationConstants = require('../utils/navigationConstants');
 
 function mapStateToProps(state) {
@@ -16,8 +16,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        navigateHome: () => dispatch(navigationActions.reset(navigationConstants.PAGES.HOME.val)),
-        navigateBack: () => dispatch(navigationActions.navigateBack())
+        navigateHome: () => dispatch(routingActions.reset(navigationConstants.PAGES.HOME.val)),
+        navigateBack: () => dispatch(routingActions.navigateBack())
     };
 }
 

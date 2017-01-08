@@ -5,7 +5,7 @@ const classNames = require('classnames');
 
 const usersPageTranslations = require('../utils/translations/usersPageTranslations');
 const navigationConstants = require('../utils/navigationConstants');
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 
 const ListItem = require('./listItem');
 const PageTitle = require('./pageTitle');
@@ -25,7 +25,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        navToEditUser: uid =>  dispatch(navigationActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.val, { uid }))
+        navToEditUser: uid =>  dispatch(routingActions.navigateTo(navigationConstants.PAGES.EDIT_USER_INFO.val, { uid }))
     };
 }
 

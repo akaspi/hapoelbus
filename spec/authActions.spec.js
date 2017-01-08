@@ -4,7 +4,7 @@ import * as Promise from 'bluebird';
 import * as authActions from '../src/redux/actions/authActions';
 import * as loadingActions from '../src/redux/actions/loadingActions';
 import * as errorActions from '../src/redux/actions/errorActions';
-import * as navigationActions from '../src/redux/actions/navigationActions';
+import * as routingActions from '../src/redux/actions/routingActions';
 
 import * as Constants from '../src/utils/constants';
 
@@ -21,7 +21,7 @@ describe('authActions spec', () => {
     const expectedActions = [
       loadingActions.startLoading(),
       authActions.userSignedOut(),
-      navigationActions.reset(Constants.PAGES.AUTH.val),
+      routingActions.reset(Constants.PAGES.AUTH.val),
       loadingActions.stopLoading()
     ];
 

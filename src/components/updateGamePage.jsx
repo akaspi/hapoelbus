@@ -3,7 +3,7 @@ const React = require('react');
 const ReactRedux = require('react-redux');
 
 const eventActions = require('../redux/actions/eventActions');
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 
 const teamsData = require('../utils/teamsData');
 const gameConstants = require('../utils/gameConstants');
@@ -51,7 +51,7 @@ function mapDispatchToProps(dispatch) {
         createGame: game => dispatch(eventActions.createEvent(game)),
         updateGame: (gameId, game) => dispatch(eventActions.updateEvent(gameId, game)),
         removeGame: gameId => dispatch(eventActions.removeEvent(gameId)),
-        navigateBack: () => dispatch(navigationActions.navigateBack())
+        navigateBack: () => dispatch(routingActions.navigateBack())
     };
 }
 

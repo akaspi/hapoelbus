@@ -13,7 +13,7 @@ import * as eventActions from './eventActions';
 import * as bookingActions from './bookingActions';
 import * as loadingActions from './loadingActions';
 import * as errorActions from './errorActions';
-import * as navigationActions from './navigationActions';
+import * as navigationActions from './routingActions';
 
 import updatePhotoUrlFixer from '../../dataFixers/updatePhotoUrlFixer';
 

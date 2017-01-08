@@ -1,13 +1,13 @@
 const React = require('react');
 const ReactRedux = require('react-redux');
 
-const navigationActions = require('../redux/actions/navigationActions');
+const routingActions = require('../redux/actions/routingActions');
 
 require('../styles/pageTitle.scss');
 
 function mapDispatchToProps(dispatch) {
   return {
-    navigateBack: () => dispatch(navigationActions.navigateBack())
+    navigateBack: () => dispatch(routingActions.navigateBack())
   };
 }
 

@@ -1,5 +1,5 @@
 const countingReducer = require('../src/redux/reducers/routingReducer');
-const navigationActions = require('../src/redux/actions/navigationActions');
+const routingActions = require('../src/redux/actions/routingActions');
 const navigationConstants = require('../src/utils/navigationConstants');
 
 describe('routingReducer', () => {
@@ -25,7 +25,7 @@ describe('routingReducer', () => {
          ]
        };
 
-       const nextState = countingReducer(currentState, navigationActions.navigateTo('somePage'));
+       const nextState = countingReducer(currentState, routingActions.navigateTo('somePage'));
 
        expect(nextState).toEqual({
          current: { pageId: 'somePage', params: {} },
@@ -44,7 +44,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.navigateTo('somePage', { p1: 1 }));
+      const nextState = countingReducer(currentState, routingActions.navigateTo('somePage', { p1: 1 }));
 
       expect(nextState).toEqual({
         current: { pageId: 'somePage', params: { p1: 1 } },
@@ -69,7 +69,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.navigateBack());
+      const nextState = countingReducer(currentState, routingActions.navigateBack());
 
       expect(nextState).toEqual({
         current: { pageId: 'somePage', params: { p1: 1 } },
@@ -88,7 +88,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.navigateBack());
+      const nextState = countingReducer(currentState, routingActions.navigateBack());
 
       expect(nextState).toEqual({
         current: { pageId: 'somePage', params: {} },
@@ -112,7 +112,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.replace('replacedPage', { r1: 1 }));
+      const nextState = countingReducer(currentState, routingActions.replace('replacedPage', { r1: 1 }));
 
       expect(nextState).toEqual({
         current: { pageId: 'replacedPage', params: { r1: 1 } },
@@ -135,7 +135,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.replace(null, { r1: 1 }));
+      const nextState = countingReducer(currentState, routingActions.replace(null, { r1: 1 }));
 
       expect(nextState).toEqual({
         current: { pageId: 'somePage2', params: { r1: 1 } },
@@ -158,7 +158,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.replace('somePage3'));
+      const nextState = countingReducer(currentState, routingActions.replace('somePage3'));
 
       expect(nextState).toEqual({
         current: { pageId: 'somePage3', params: { r1: 1 } },
@@ -185,7 +185,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.reset('resetPage'));
+      const nextState = countingReducer(currentState, routingActions.reset('resetPage'));
 
       expect(nextState).toEqual({
         current: { pageId: 'resetPage', params: {} },
@@ -205,7 +205,7 @@ describe('routingReducer', () => {
         ]
       };
 
-      const nextState = countingReducer(currentState, navigationActions.reset('resetPage', { p2: 2 }));
+      const nextState = countingReducer(currentState, routingActions.reset('resetPage', { p2: 2 }));
 
       expect(nextState).toEqual({
         current: { pageId: 'resetPage', params: { p2: 2 } },

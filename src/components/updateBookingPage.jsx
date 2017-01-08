@@ -2,7 +2,7 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux = require('react-redux');
 
-const navigationActions  = require('../redux/actions/navigationActions');
+const routingActions  = require('../redux/actions/routingActions');
 const bookingActions  = require('../redux/actions/bookingActions');
 const bookingFormTranslations  = require('../utils/translations/bookingFormTranslations');
 const bookingsTranslations  = require('../utils/translations/bookingsTranslations');
@@ -36,7 +36,7 @@ function mapDispatchToProps(dispatch) {
     return {
         updateBooking: (uid, gameId, booking) => dispatch(bookingActions.updateBooking(uid, gameId, booking)),
         cancelBooking: (uid, gameId) => dispatch(bookingActions.cancelBooking(uid, gameId)),
-        navigateBack: () => dispatch(navigationActions.navigateBack())
+        navigateBack: () => dispatch(routingActions.navigateBack())
     };
 }
 
