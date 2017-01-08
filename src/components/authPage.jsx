@@ -2,9 +2,10 @@ const _ = require('lodash');
 const React = require('react');
 const ReactRedux = require('react-redux');
 
+const Translations = require('../utils/translations');
+
 const authActions = require('../redux/actions/authActions');
 const errorActions = require('../redux/actions/errorActions');
-const authPageTranslations = require('../utils/translations/authPageTranslations');
 
 const Logo = require('./logo');
 
@@ -90,11 +91,11 @@ function createInput(type, value, onChange, name, placeholder) {
 function getButtonLabel(authMode) {
     switch (authMode) {
         case 'login':
-            return authPageTranslations.SUBMIT_BTN.LOGIN;
+            return Translations.AUTH_PAGE.SUBMIT_BTN.LOGIN;
         case 'register':
-            return authPageTranslations.SUBMIT_BTN.REGISTER;
+            return Translations.AUTH_PAGE.SUBMIT_BTN.REGISTER;
         case 'forgotPassword':
-            return authPageTranslations.SUBMIT_BTN.FORGOT_PASSWORD;
+            return Translations.AUTH_PAGE.SUBMIT_BTN.FORGOT_PASSWORD;
     }
 }
 
@@ -112,10 +113,10 @@ function createLinksSection(authMode, navToLogin, navToRegister, navToForgotPass
         return (
             <div className='row'>
                 <div className='column small-6 red-link'>
-                    <a onClick={navToRegister}>{authPageTranslations.LINKS.GO_TO_REGISTER}</a>
+                    <a onClick={navToRegister}>{Translations.AUTH_PAGE.LINKS.GO_TO_REGISTER}</a>
                 </div>
                 <div className='column small-6 red-link'>
-                    <a onClick={navToForgotPassword}>{authPageTranslations.LINKS.GO_TO_FORGOT_PASSWORD}</a>
+                    <a onClick={navToForgotPassword}>{Translations.AUTH_PAGE.LINKS.GO_TO_FORGOT_PASSWORD}</a>
                 </div>
             </div>
         );
@@ -124,7 +125,7 @@ function createLinksSection(authMode, navToLogin, navToRegister, navToForgotPass
     function createNONLoginScreenLinks() {
         return (
             <div>
-                <a className='red-link' onClick={navToLogin}>{authPageTranslations.LINKS.GO_TO_LOGIN}</a>
+                <a className='red-link' onClick={navToLogin}>{Translations.AUTH_PAGE.LINKS.GO_TO_LOGIN}</a>
             </div>
         );
     }
@@ -167,7 +168,7 @@ class AuthPage extends React.Component {
                 if (_.isEqual(this.state.password, this.state.passwordAgain)) {
                     this.props.signUpWithUserAndPassword(this.state.email, this.state.password);
                 } else {
-                    this.props.reportError(authPageTranslations.ERRORS.NOT_SAME_PASSWORD);
+                    this.props.reportError(Translations.ERROR_MESSAGES.AUTH.NOT_SAME_PASSWORD);
                 }
                 break;
             case 'forgotPassword':
@@ -194,11 +195,11 @@ class AuthPage extends React.Component {
 
                 <div onKeyDown={this.handleKeyDown} className='auth-form'>
 
-                    { createInput('email', this.state.email, this.onChange, 'email',authPageTranslations.FIELDS.EMAIL) }
+                    { createInput('email', this.state.email, this.onChange, 'email',Translations.AUTH_PAGE.FIELDS.EMAIL) }
 
-                    { isLoginMode(this.state.authMode) || isRegisterMode(this.state.authMode) ? createInput('password', this.state.password, this.onChange, 'password',authPageTranslations.FIELDS.PASSWORD) : null }
+                    { isLoginMode(this.state.authMode) || isRegisterMode(this.state.authMode) ? createInput('password', this.state.password, this.onChange, 'password',Translations.AUTH_PAGE.FIELDS.PASSWORD) : null }
 
-                    { isRegisterMode(this.state.authMode) ? createInput('password', this.state.passwordAgain, this.onChange, 'passwordAgain', authPageTranslations.FIELDS.PASSWORD_AGAIN) : null }
+                    { isRegisterMode(this.state.authMode) ? createInput('password', this.state.passwordAgain, this.onChange, 'passwordAgain', Translations.AUTH_PAGE.FIELDS.PASSWORD_AGAIN) : null }
 
                     { createSubmitButton(this.onSubmit, !isFormValid(this.state, this.state.authMode), this.state.authMode) }
 
