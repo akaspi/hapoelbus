@@ -203,7 +203,7 @@ function createFilterSection(filter, gameId, onFilterChange, onGameIdChange, vis
     );
 }
 
-function createBookingTableForPrint(user, visibleBookings, tlvBookings, modiinBookings, isPickUp) {
+function createBookingTableForPrint(users, visibleBookings, tlvBookings, modiinBookings, isPickUp) {
     function createTitleRow() {
         return (
             <tr key='title-label'>
@@ -229,8 +229,8 @@ function createBookingTableForPrint(user, visibleBookings, tlvBookings, modiinBo
         return (
             _.map(tlvBookings, (booking, uid) => (
                 <tr key={'tlv-booking-row-' + uid}>
-                    <td>{getBookingTitle(user)}</td>
-                    <td>{getBookingPhone(user)}</td>
+                    <td>{getBookingTitle(users[uid])}</td>
+                    <td>{getBookingPhone(users[uid])}</td>
                     <td>{booking.paidSeats}</td>
                     <td>{booking.extraSeats}</td>
                     <td>{Translations.STATIONS[booking.pickUp]}</td>
@@ -254,8 +254,8 @@ function createBookingTableForPrint(user, visibleBookings, tlvBookings, modiinBo
         return (
             _.map(modiinBookings, (booking, uid) => (
                 <tr key={'modiin-booking-row-' + uid}>
-                    <td>{getBookingTitle(user)}</td>
-                    <td>{getBookingPhone(user)}</td>
+                    <td>{getBookingTitle(users[uid])}</td>
+                    <td>{getBookingPhone(users[uid])}</td>
                     <td>{booking.paidSeats}</td>
                     <td>{booking.extraSeats}</td>
                     <td>{Translations.STATIONS[booking.pickUp]}</td>
