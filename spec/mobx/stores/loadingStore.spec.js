@@ -1,6 +1,6 @@
 import LoadingStore from '../../../mobx/stores/loadingStore';
 
-fdescribe('LoadingStore', () => {
+describe('LoadingStore', () => {
 
   it('should not be busy on creation', () => {
     const loadingStore = new LoadingStore();
