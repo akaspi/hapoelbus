@@ -1,4 +1,4 @@
-import LoadingStore from '../../../api/stores/loadingStore';
+import LoadingStore from '../../../mobx/stores/loadingStore';
 
 fdescribe('LoadingStore', () => {
 
