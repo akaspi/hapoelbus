@@ -8,8 +8,8 @@ export const setIn = (path, data) => {
   firebase.database().ref(path).set(data);
 };
 
-export const read = (path, cb) => {
-  firebase.database().ref(path).once('value')
+export const read = path => {
+  return firebase.database().ref(path).once('value')
     .then(snapshot => cb(snapshot.val()));
 };
 
