@@ -1,7 +1,7 @@
-import * as authDataAPI from '../../apis/authDataAPI';
-import { onAuthStateChanged, read } from '../../apis/utils/db';
+import * as authDataAPI from '../../database/dbAuthDataAPI';
+import { onAuthStateChanged, read } from '../../database/utils/db';
 
-describe('authDataAPI', () => {
+describe('dbAuthDataAPI', () => {
 
   describe('onAuthDataChange', () => {
 

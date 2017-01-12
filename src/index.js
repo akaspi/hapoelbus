@@ -4,7 +4,7 @@ import Root from './components/root';
 
 import * as config from 'config';
 import * as clientDB from './utils/clientDB';
-import * as db from '../apis/utils/db';
+import * as db from '../database/utils/db';
 
 clientDB.initialize(config.firebase);
 db.initialize(config.firebase);
