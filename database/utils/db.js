@@ -20,11 +20,11 @@ export const push = (path, data, cb) => {
 };
 
 export const update = (path, data) => {
-  firebase.database().ref(path).update(data);
+  return firebase.database().ref(path).update(data);
 };
 
 export const remove = path => {
-  firebase.database().ref(path).remove();
+  return firebase.database().ref(path).remove();
 };
 
 export const loginWithGoogle = () => {
@@ -55,4 +55,16 @@ export const signOut = () => {
 
 export const onAuthStateChanged = cb => {
   firebase.auth().onAuthStateChanged(cb);
+};
+
+export const listenToChildAdded = (path, onChildAdded) => {
+  firebase.database().ref(path).orderByPriority().startAt(Date.now()).on('child_added', snapshot => onChildAdded(snapshot.val(), snapshot.key));
+};
+
+export const listenToChildRemoved = (path, onChildRemoved) => {
+  firebase.database().ref(path).orderByPriority().startAt(Date.now()).on('child_removed', snapshot => onChildRemoved(snapshot.val(), snapshot.key));
+};
+
+export const listenToChildChanged = (path, onChildChanged) => {
+  firebase.database().ref(path).orderByPriority().startAt(Date.now()).on('child_changed', snapshot => onChildChanged(snapshot.val(), snapshot.key));
 };
