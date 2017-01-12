@@ -9,7 +9,7 @@ describe('dbAuthDataAPI', () => {
 
       it('should return null', done => {
         onAuthStateChanged.and.callFake(cb => cb(null));
-        read.and.callFake((path, cb) => cb(true));
+        read.and.returnValue(Promise.resolve(true));
 
         authDataAPI.onAuthDataChange(authData => {
           expect(authData).toBeNull();
@@ -22,69 +22,64 @@ describe('dbAuthDataAPI', () => {
 
     describe('user is logged in', () => {
 
-      it('should return non-admin authData', done => {
+      it('should return authData', done => {
         onAuthStateChanged.and.callFake(cb => cb({
           uid: 1234,
           email: 'spider@pig.com',
           photoURL: 'http://photoURL'
         }));
-        read.and.callFake((path, cb) => cb(false));
 
         authDataAPI.onAuthDataChange(authData => {
-          expect(read).toHaveBeenCalledWith('admins/1234', jasmine.any(Function));
           expect(authData).toEqual({
             uid: 1234,
             email: 'spider@pig.com',
-            photoURL: 'http://photoURL',
-            isAdmin: false
+            photoURL: 'http://photoURL'
           });
           done();
         })
 
       });
 
-      it('should return admin authData', done => {
-        onAuthStateChanged.and.callFake(cb => cb({
-          uid: 1234,
-          email: 'spider@pig.com',
-          photoURL: 'http://photoURL'
-        }));
-        read.and.callFake((path, cb) => cb(true));
+    });
 
-        authDataAPI.onAuthDataChange(authData => {
-          expect(read).toHaveBeenCalledWith('admins/1234', jasmine.any(Function));
-          expect(authData).toEqual({
-            uid: 1234,
-            email: 'spider@pig.com',
-            photoURL: 'http://photoURL',
-            isAdmin: true
-          });
-          done();
-        })
+  });
 
-      });
+  describe('isAdmin', () => {
 
-      it('should return non-admin authData if admin is null', done => {
-        onAuthStateChanged.and.callFake(cb => cb({
-          uid: 1234,
-          email: 'spider@pig.com',
-          photoURL: 'http://photoURL'
-        }));
-        read.and.callFake((path, cb) => cb(null));
+    it('should return false', done => {
+      read.and.returnValue(Promise.resolve(false));
 
-        authDataAPI.onAuthDataChange(authData => {
-          expect(read).toHaveBeenCalledWith('admins/1234', jasmine.any(Function));
-          expect(authData).toEqual({
-            uid: 1234,
-            email: 'spider@pig.com',
-            photoURL: 'http://photoURL',
-            isAdmin: false
-          });
-          done();
-        })
+      authDataAPI.isAdmin('uid').then(idAdmin => {
+        expect(idAdmin).toBe(false);
+        done();
+      })
+    });
 
-      });
+    it('should return false if value is null', done => {
+      read.and.returnValue(Promise.resolve(null));
 
+      authDataAPI.isAdmin('uid').then(idAdmin => {
+        expect(idAdmin).toBe(false);
+        done();
+      })
+    });
+
+    it('should return true', done => {
+      read.and.returnValue(Promise.resolve(true));
+
+      authDataAPI.isAdmin('uid').then(idAdmin => {
+        expect(idAdmin).toBe(true);
+        done();
+      })
+    });
+
+    it('should read from admins/uid', done => {
+      read.and.returnValue(Promise.resolve(null));
+
+      authDataAPI.isAdmin('uid').then(() => {
+        expect(read).toHaveBeenCalledWith('admins/uid');
+        done();
+      })
     });
 
   });
