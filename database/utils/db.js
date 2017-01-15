@@ -34,23 +34,23 @@ export const loginWithGoogle = () => {
 
 export const loginWithFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
-  firebase.auth().signInWithRedirect(provider);
+  return firebase.auth().signInWithRedirect(provider);
 };
 
 export const loginWithEmailAndPassword = (email, password) => {
-  firebase.auth().signInWithEmailAndPassword(email, password);
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
 export const sendPasswordResetEmail = email => {
-  firebase.auth().sendPasswordResetEmail(email);
+  return firebase.auth().sendPasswordResetEmail(email);
 };
 
 export const createUserWithEmailAndPassword = (email, password) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password);
+  return firebase.auth().createUserWithEmailAndPassword(email, password);
 };
 
 export const signOut = () => {
-  firebase.auth().signOut();
+  return firebase.auth().signOut();
 };
 
 export const onAuthStateChanged = cb => {

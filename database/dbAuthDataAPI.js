@@ -1,9 +1,9 @@
-import { onAuthStateChanged, read } from './utils/db';
+import * as db from './utils/db';
 
 const ADMINS_PATH = 'admins';
 
 export function onAuthDataChange(cb) {
-  onAuthStateChanged(user => {
+  db.onAuthStateChanged(user => {
     if (!user) {
       cb(null);
     } else {
@@ -17,5 +17,29 @@ export function onAuthDataChange(cb) {
 }
 
 export function isAdmin(uid) {
-  return read(`${ADMINS_PATH}/${uid}`).then(isAdmin => !!isAdmin);
+  return db.read(`${ADMINS_PATH}/${uid}`).then(isAdmin => !!isAdmin);
+}
+
+export function loginWithGoogle() {
+  return db.loginWithGoogle();
+}
+
+export function loginWithFacebook() {
+  return db.loginWithFacebook();
+}
+
+export function loginWithEmailAndPassword(email, password) {
+  return db.loginWithEmailAndPassword(email, password);
+}
+
+export function signUpWithEmailAndPassword(email, password) {
+  return db.createUserWithEmailAndPassword(email, password);
+}
+
+export function sendPasswordResetEmail(email) {
+  return db.sendPasswordResetEmail(email);
+}
+
+export function logOut() {
+  return db.signOut();
 }
