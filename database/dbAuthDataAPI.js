@@ -17,5 +17,5 @@ export function onAuthDataChange(cb) {
 }
 
 export function isAdmin(uid) {
-  return read(ADMINS_PATH + '/' + uid).then(isAdmin => !!isAdmin);
+  return read(`${ADMINS_PATH}/${uid}`).then(isAdmin => !!isAdmin);
 }
