@@ -13,10 +13,10 @@ export const read = path => {
     .then(snapshot => cb(snapshot.val()));
 };
 
-export const push = (path, data, cb) => {
+export const push = (path, data) => {
   const uniqueKey = firebase.database().ref(path).push().key;
-  setIn(path + '/' + uniqueKey, data)
-    .then(() => cb(uniqueKey))
+  return setIn(path + '/' + uniqueKey, data)
+    .then(() => uniqueKey)
 };
 
 export const update = (path, data) => {
