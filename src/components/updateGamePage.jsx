@@ -132,7 +132,7 @@ function createGameStatusSection(status, onGameStatusChange) {
         <div className='small-12 columns'>
             <label>{Translations.UPDATE_GAME_PAGE.GAME_STATUS}
                 <select value={status} onChange={onGameStatusChange}>
-                    { _.map(gameConstants.STATUS, val => <option value={val}>{gameConstants.TRANSLATIONS[val]}</option>) }
+                    { _.map(Constants.GAME.STATUS, val => <option value={val}>{Translations.GAME.STATUS[val]}</option>) }
                 </select>
             </label>
         </div>
