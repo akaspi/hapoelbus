@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "make-docs": "webpack --config ./webpack.prod.docs.config.js && git commit -am \"make-docs\"",
     "update-version": "npm version $1 -m \"Update version to %s\"",
-    "serve-docs": "serve docs/"
+    "serve-docs": "serve -p 3000 docs/"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
