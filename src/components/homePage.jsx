@@ -70,17 +70,29 @@ function createGamesLists(openGames, closedGamesArr, onBooking, onCancelBooking)
     }
   }
 
+  function createOpenGamesList() {
+    return (
+        <div className='events-list open-events'>
+          <h6 className='hide-for-small-only'>{Translations.HOME_PAGE.OPEN_GAMES}</h6>
+            { _.map(openGames, (game, gameId) => <EventItem key={'open-game-' + gameId} eventId={gameId} onBooking={bindOnGameItemClick(onBooking, gameId)} onCancelBooking={bindOnGameItemClick(onCancelBooking, gameId)} />) }
+        </div>
+    );
+  }
+
+  function createClosedGamesList() {
+    return (
+        <div className='events-list closed-events hide-for-small-only'>
+          <h6>{Translations.HOME_PAGE.CLOSED_GAMES}</h6>
+            { _.map(closedGamesArr, gameData => <EventItem key={'closed-game-' + gameData.gameId} eventId={gameData.gameId} />) }
+        </div>
+    );
+  }
+
+
   return (
     <div>
-      <div className='events-list open-events'>
-        <h6 className='hide-for-small-only'>{Translations.HOME_PAGE.OPEN_GAMES}</h6>
-        { _.map(openGames, (game, gameId) => <EventItem key={'open-game-' + gameId} eventId={gameId} onBooking={bindOnGameItemClick(onBooking, gameId)} onCancelBooking={bindOnGameItemClick(onCancelBooking, gameId)} />) }
-      </div>
-
-      <div className='events-list closed-events hide-for-small-only'>
-        <h6>{Translations.HOME_PAGE.CLOSED_GAMES}</h6>
-        { _.map(closedGamesArr, gameData => <EventItem key={'closed-game-' + gameData.gameId} eventId={gameData.gameId} />) }
-      </div>
+        { _.isEmpty(openGames) ? null : createOpenGamesList() }
+        { createClosedGamesList() }
     </div>
   );
 }
@@ -103,7 +115,8 @@ class HomePage extends React.Component {
         <div className='home-page small-centered'>
           <div className='events-container' key='events-container'>
             <div className='events' key='events'>
-              { _.isEmpty(openGames) ? createMobileNoGamesMessageSection() : createGamesLists(openGames, closedGamesArr, this.onBooking, this.onCancelBooking) }
+              { _.isEmpty(openGames) ? createMobileNoGamesMessageSection() : null }
+              { createGamesLists(openGames, closedGamesArr, this.onBooking, this.onCancelBooking) }
             </div>
           </div>
         </div>
