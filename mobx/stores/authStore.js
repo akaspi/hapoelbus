@@ -13,7 +13,7 @@ class AuthStore {
   }
 
   @computed get isAdmin() {
-    return !!(_.get(this.authData, 'isAdmin'))
+    return !!(_.get(this.authData, 'isAdmin'));
   }
 
 }

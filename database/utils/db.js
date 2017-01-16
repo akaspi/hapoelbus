@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 export const initialize = config => {
-  firebase.initializeApp(config);
+  firebase.initializeApp(config, 'db');
 };
 
 export const setIn = (path, data) => {
@@ -10,13 +10,13 @@ export const setIn = (path, data) => {
 
 export const read = path => {
   return firebase.database().ref(path).once('value')
-    .then(snapshot => cb(snapshot.val()));
+    .then(snapshot => snapshot.val());
 };
 
 export const push = (path, data) => {
   const uniqueKey = firebase.database().ref(path).push().key;
   return setIn(path + '/' + uniqueKey, data)
-    .then(() => uniqueKey)
+    .then(() => uniqueKey);
 };
 
 export const update = (path, data) => {
