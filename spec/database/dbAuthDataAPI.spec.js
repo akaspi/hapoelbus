@@ -137,7 +137,7 @@ describe('dbAuthDataAPI', () => {
 
   });
 
-  it('should log out', () => {
+  it('should log out', done => {
     db.signOut.and.returnValue(Promise.resolve());
 
     authDataAPI.logOut().then(() => {
