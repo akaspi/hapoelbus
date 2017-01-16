@@ -1,6 +1,7 @@
+import mapValues from 'lodash/mapValues';
 import { observable, extendObservable, action } from 'mobx';
 
-class Games {
+class Game {
   constructor(game) {
     extendObservable(this, {
       typeId: game.typeId,
@@ -22,11 +23,11 @@ class GamesStore {
   @observable games = observable.map({});
 
   @action setGames = games => {
-    this.games.replace(games);
+    this.games.replace(mapValues(games, game => new Game(game)));
   };
 
   @action addGame = (gameId, game) => {
-    this.games.set(gameId, new Games(game));
+    this.games.set(gameId, new Game(game));
   };
 
   @action updateGame = (gameId, partialGame) => {

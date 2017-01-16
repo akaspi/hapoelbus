@@ -1,4 +1,5 @@
-import { observable, extendObservable, asMap, action } from 'mobx';
+import mapValues from 'lodash/mapValues';
+import { observable, extendObservable, action } from 'mobx';
 
 class UserInfo {
   constructor(userInfo) {
@@ -23,10 +24,10 @@ class UserInfo {
 }
 
 class UsersInfoStore {
-  @observable usersInfo = asMap({});
+  @observable usersInfo = observable.map({});
 
   @action setUsersInfo = usersInfo => {
-    this.usersInfo.replace(usersInfo);
+    this.usersInfo.replace(mapValues(usersInfo, userInfo => new UserInfo(userInfo)));
   };
 
   @action addUserInfo = (uid, userInfo) => {
