@@ -1,4 +1,6 @@
-import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from './utils/db';
+import isFunction from 'lodash/isFunction';
+
+import { read, update, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from './utils/db';
 
 const BOOKINGS_PATH = 'bookings';
 
@@ -18,15 +20,22 @@ function fetchAllBookings() {
 }
 
 export function trackBookings(uid, cb) {
-  const createReportChange = type => (booking, uid, gameId) => {
-    cb({ type, booking, uid, gameId });
+  if (isFunction(uid)) {
+    cb = uid;
+    uid = null;
+  }
+
+  const createReportChange = type => (bookings, uid) => {
+    cb({ type, bookings, uid });
   };
 
-  const pathToListen = uid ? `${BOOKINGS_PATH}/${uid}` : BOOKINGS_PATH;
-
-  listenToChildAdded(pathToListen, createReportChange('added'));
-  listenToChildRemoved(pathToListen, createReportChange('removed'));
-  listenToChildChanged(pathToListen, createReportChange('changed'));
+  if (uid) {
+    listenToValueChange(`${BOOKINGS_PATH}/${uid}`, createReportChange('changed'));
+  } else {
+    listenToChildAdded(BOOKINGS_PATH, createReportChange('added'));
+    listenToChildRemoved(BOOKINGS_PATH, createReportChange('removed'));
+    listenToChildChanged(BOOKINGS_PATH, createReportChange('changed'));
+  }
 }
 
 export function fetchBookings(uid) {
