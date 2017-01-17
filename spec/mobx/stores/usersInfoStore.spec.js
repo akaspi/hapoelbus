@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import { toJS } from 'mobx';
-import UsersInfoStore from '../../../mobx/stores/usersInfoStore';
+import { UsersInfoStore } from '../../../mobx/stores/usersInfoStore';
 
 describe('UsersInfoStore', () => {
 
@@ -26,7 +26,7 @@ describe('UsersInfoStore', () => {
   });
 
   describe('set users info', () => {
-    
+
     it('should set the current users info', () => {
       const usersInfoStore = new UsersInfoStore();
 
@@ -36,8 +36,8 @@ describe('UsersInfoStore', () => {
       });
 
       expect(usersInfoStore.usersInfo.size).toEqual(2);
-      expect(usersInfoStore.usersInfo.get('uid1')).toEqual(defaultUserInfo);
-      expect(usersInfoStore.usersInfo.get('uid2')).toEqual(defaultUserInfo);
+      expect(toJS(usersInfoStore.usersInfo.get('uid1'))).toEqual(defaultUserInfo);
+      expect(toJS(usersInfoStore.usersInfo.get('uid2'))).toEqual(defaultUserInfo);
     });
 
     it('should replace the current users info', () => {
@@ -53,8 +53,8 @@ describe('UsersInfoStore', () => {
       });
 
       expect(usersInfoStore.usersInfo.size).toEqual(2);
-      expect(usersInfoStore.usersInfo.get('uid2')).toEqual(defaultUserInfo);
-      expect(usersInfoStore.usersInfo.get('uid3')).toEqual(defaultUserInfo);
+      expect(toJS(usersInfoStore.usersInfo.get('uid2'))).toEqual(defaultUserInfo);
+      expect(toJS(usersInfoStore.usersInfo.get('uid3'))).toEqual(defaultUserInfo);
     });
 
   });

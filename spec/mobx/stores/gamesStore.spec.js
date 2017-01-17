@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 import { toJS } from 'mobx';
-import GamesStore from '../../../mobx/stores/gamesStore';
+import { GamesStore } from '../../../mobx/stores/gamesStore';
 
 describe('GamesStore', () => {
 
@@ -31,8 +31,8 @@ describe('GamesStore', () => {
       });
 
       expect(gamesStore.games.size).toEqual(2);
-      expect(gamesStore.games.get('gameId1')).toEqual(defaultGame);
-      expect(gamesStore.games.get('gameId2')).toEqual(defaultGame);
+      expect(toJS(gamesStore.games.get('gameId1'))).toEqual(defaultGame);
+      expect(toJS(gamesStore.games.get('gameId2'))).toEqual(defaultGame);
     });
 
     it('should replace the current games', () => {
@@ -48,8 +48,8 @@ describe('GamesStore', () => {
       });
 
       expect(gamesStore.games.size).toEqual(2);
-      expect(gamesStore.games.get('gameId2')).toEqual(defaultGame);
-      expect(gamesStore.games.get('gameId3')).toEqual(defaultGame);
+      expect(toJS(gamesStore.games.get('gameId2'))).toEqual(defaultGame);
+      expect(toJS(gamesStore.games.get('gameId3'))).toEqual(defaultGame);
     });
 
   });

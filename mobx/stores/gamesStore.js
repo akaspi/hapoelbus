@@ -41,4 +41,7 @@ class GamesStore {
 
 }
 
-export default GamesStore;
+const gameStore = new GamesStore();
+
+export default gameStore;
+export { GamesStore }

@@ -45,4 +45,7 @@ class UsersInfoStore {
 
 }
 
-export default UsersInfoStore;
+const usersInfoStore = new UsersInfoStore();
+
+export default usersInfoStore;
+export { UsersInfoStore }

@@ -12,4 +12,7 @@ class LoadingStore {
   @action endPendingRequest = () => this.pendingRequestsCounter--;
 }
 
-export default LoadingStore;
+const loadingStore = new LoadingStore();
+
+export default loadingStore;
+export { LoadingStore };
