@@ -1,13 +1,13 @@
 import * as _ from 'lodash';
-import * as dbBookingsAPI from '../../database/dbBookingsAPI';
+import * as dbBookings from '../../database/dbBookings';
 import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
 
-describe('dbBookingsAPI', () => {
+describe('dbBookings', () => {
 
   describe('trackBookings', () => {
 
     it('should track specific user booking', () => {
-      dbBookingsAPI.trackBookings('someUID', _.noop());
+      dbBookings.trackBookings('someUID', _.noop());
 
       expect(listenToChildAdded).toHaveBeenCalledWith('bookings/someUID', jasmine.any(Function));
       expect(listenToChildRemoved).toHaveBeenCalledWith('bookings/someUID', jasmine.any(Function));
@@ -15,7 +15,7 @@ describe('dbBookingsAPI', () => {
     });
 
     it('should track all bookings', () => {
-      dbBookingsAPI.trackBookings(null, _.noop());
+      dbBookings.trackBookings(null, _.noop());
 
       expect(listenToChildAdded).toHaveBeenCalledWith('bookings', jasmine.any(Function));
       expect(listenToChildRemoved).toHaveBeenCalledWith('bookings', jasmine.any(Function));
@@ -29,7 +29,7 @@ describe('dbBookingsAPI', () => {
 
       listenToChildAdded.and.callFake((path, cb) => cb(booking, 'someUID', 'someGameId'));
 
-      dbBookingsAPI.trackBookings(null, addedBooking => {
+      dbBookings.trackBookings(null, addedBooking => {
         expect(addedBooking).toEqual({
           type: 'added',
           booking: booking,
@@ -47,7 +47,7 @@ describe('dbBookingsAPI', () => {
 
       listenToChildChanged.and.callFake((path, cb) => cb(booking, 'someUID', 'someGameId'));
 
-      dbBookingsAPI.trackBookings(null, changedBooking => {
+      dbBookings.trackBookings(null, changedBooking => {
         expect(changedBooking).toEqual({
           type: 'changed',
           booking: booking,
@@ -65,7 +65,7 @@ describe('dbBookingsAPI', () => {
 
       listenToChildRemoved.and.callFake((path, cb) => cb(booking, 'someUID', 'someGameId'));
 
-      dbBookingsAPI.trackBookings(null, removedBooking => {
+      dbBookings.trackBookings(null, removedBooking => {
         expect(removedBooking).toEqual({
           type: 'removed',
           booking: booking,
@@ -85,7 +85,7 @@ describe('dbBookingsAPI', () => {
       it('should fetch from bookings/someUID', done => {
         read.and.returnValue(Promise.resolve({}));
 
-        dbBookingsAPI.fetchBookings('someUID').then(() => {
+        dbBookings.fetchBookings('someUID').then(() => {
           expect(read).toHaveBeenCalledWith('bookings/someUID');
           done();
         })
@@ -94,7 +94,7 @@ describe('dbBookingsAPI', () => {
       it('should return a single user bookings', done => {
         read.and.returnValue(Promise.resolve({ firstName: 'spider', lastName: 'pig' }));
 
-        dbBookingsAPI.fetchBookings('someUID').then(usersInfo => {
+        dbBookings.fetchBookings('someUID').then(usersInfo => {
           expect(usersInfo).toEqual({
             someUID: { firstName: 'spider', lastName: 'pig' }
           });
@@ -105,7 +105,7 @@ describe('dbBookingsAPI', () => {
       it('should return empty object if no user bookings', done => {
         read.and.returnValue(Promise.resolve(null));
 
-        dbBookingsAPI.fetchBookings('someUID').then(userBookings => {
+        dbBookings.fetchBookings('someUID').then(userBookings => {
           expect(userBookings).toEqual({});
           done();
         })
@@ -118,7 +118,7 @@ describe('dbBookingsAPI', () => {
       it('should fetch from bookings', done => {
         read.and.returnValue(Promise.resolve({}));
 
-        dbBookingsAPI.fetchBookings().then(() => {
+        dbBookings.fetchBookings().then(() => {
           expect(read).toHaveBeenCalledWith('bookings');
           done();
         })
@@ -130,7 +130,7 @@ describe('dbBookingsAPI', () => {
           uid2: { firstName: 'can', lastName: 'he swing?' }
         }));
 
-        dbBookingsAPI.fetchBookings().then(userBookings => {
+        dbBookings.fetchBookings().then(userBookings => {
           expect(userBookings).toEqual({
             uid1: { firstName: 'spider', lastName: 'pig' },
             uid2: { firstName: 'can', lastName: 'he swing?' }
@@ -142,7 +142,7 @@ describe('dbBookingsAPI', () => {
       it('should return empty object if no users info', done => {
         read.and.returnValue(Promise.resolve(null));
 
-        dbBookingsAPI.fetchBookings().then(userBookings => {
+        dbBookings.fetchBookings().then(userBookings => {
           expect(userBookings).toEqual({});
           done();
         })
@@ -157,7 +157,7 @@ describe('dbBookingsAPI', () => {
     it('call update with bookings/uid/gameId and partial booking', done => {
       update.and.returnValue(Promise.resolve());
 
-      dbBookingsAPI.updateBooking('someUID', 'someGameId', { pickUp: 'Springfield' })
+      dbBookings.updateBooking('someUID', 'someGameId', { pickUp: 'Springfield' })
         .then(() => {
           expect(update).toHaveBeenCalledWith('bookings/someUID/someGameId', { pickUp: 'Springfield' });
           done();
@@ -171,7 +171,7 @@ describe('dbBookingsAPI', () => {
     it('call remove with bookings/someUID/someGameId', done => {
       remove.and.returnValue(Promise.resolve());
 
-      dbBookingsAPI.removeBooking('someUID', 'someGameId')
+      dbBookings.removeBooking('someUID', 'someGameId')
         .then(() => {
           expect(remove).toHaveBeenCalledWith('bookings/someUID/someGameId');
           done();

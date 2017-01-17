@@ -1,7 +1,7 @@
-import * as authDataAPI from '../../database/dbAuthDataAPI';
+import * as dbAuthData from '../../database/dbAuthData';
 import * as db from '../../database/utils/db';
 
-describe('dbAuthDataAPI', () => {
+describe('dbAuthData', () => {
 
   describe('onAuthDataChange', () => {
 
@@ -11,7 +11,7 @@ describe('dbAuthDataAPI', () => {
         db.onAuthStateChanged.and.callFake(cb => cb(null));
         db.read.and.returnValue(Promise.resolve(true));
 
-        authDataAPI.onAuthDataChange(authData => {
+        dbAuthData.onAuthDataChange(authData => {
           expect(authData).toBeNull();
           expect(db.read).not.toHaveBeenCalled();
           done();
@@ -29,7 +29,7 @@ describe('dbAuthDataAPI', () => {
           photoURL: 'http://photoURL'
         }));
 
-        authDataAPI.onAuthDataChange(authData => {
+        dbAuthData.onAuthDataChange(authData => {
           expect(authData).toEqual({
             uid: 1234,
             email: 'spider@pig.com',
@@ -49,7 +49,7 @@ describe('dbAuthDataAPI', () => {
     it('should return false', done => {
       db.read.and.returnValue(Promise.resolve(false));
 
-      authDataAPI.isAdmin('uid').then(idAdmin => {
+      dbAuthData.isAdmin('uid').then(idAdmin => {
         expect(idAdmin).toBe(false);
         done();
       })
@@ -58,7 +58,7 @@ describe('dbAuthDataAPI', () => {
     it('should return false if value is null', done => {
       db.read.and.returnValue(Promise.resolve(null));
 
-      authDataAPI.isAdmin('uid').then(idAdmin => {
+      dbAuthData.isAdmin('uid').then(idAdmin => {
         expect(idAdmin).toBe(false);
         done();
       })
@@ -67,7 +67,7 @@ describe('dbAuthDataAPI', () => {
     it('should return true', done => {
       db.read.and.returnValue(Promise.resolve(true));
 
-      authDataAPI.isAdmin('uid').then(idAdmin => {
+      dbAuthData.isAdmin('uid').then(idAdmin => {
         expect(idAdmin).toBe(true);
         done();
       })
@@ -76,7 +76,7 @@ describe('dbAuthDataAPI', () => {
     it('should read from admins/uid', done => {
       db.read.and.returnValue(Promise.resolve(null));
 
-      authDataAPI.isAdmin('uid').then(() => {
+      dbAuthData.isAdmin('uid').then(() => {
         expect(db.read).toHaveBeenCalledWith('admins/uid');
         done();
       })
@@ -89,7 +89,7 @@ describe('dbAuthDataAPI', () => {
     it('should login with google', done => {
       db.loginWithGoogle.and.returnValue(Promise.resolve());
 
-      authDataAPI.loginWithGoogle().then(() => {
+      dbAuthData.loginWithGoogle().then(() => {
         expect(db.loginWithGoogle).toHaveBeenCalled();
         done();
       });
@@ -98,7 +98,7 @@ describe('dbAuthDataAPI', () => {
     it('should login with facebook', done => {
       db.loginWithFacebook.and.returnValue(Promise.resolve());
 
-      authDataAPI.loginWithFacebook().then(() => {
+      dbAuthData.loginWithFacebook().then(() => {
         expect(db.loginWithFacebook).toHaveBeenCalled();
         done();
       });
@@ -111,7 +111,7 @@ describe('dbAuthDataAPI', () => {
     it('should login with email and password', done => {
       db.loginWithEmailAndPassword.and.returnValue(Promise.resolve());
 
-      authDataAPI.loginWithEmailAndPassword('spider@pig.com', '123456').then(() => {
+      dbAuthData.loginWithEmailAndPassword('spider@pig.com', '123456').then(() => {
         expect(db.loginWithEmailAndPassword).toHaveBeenCalledWith('spider@pig.com', '123456');
         done();
       });
@@ -120,7 +120,7 @@ describe('dbAuthDataAPI', () => {
     it('should sign up with email and password', done => {
       db.createUserWithEmailAndPassword.and.returnValue(Promise.resolve());
 
-      authDataAPI.signUpWithEmailAndPassword('spider@pig.com', '123456').then(() => {
+      dbAuthData.signUpWithEmailAndPassword('spider@pig.com', '123456').then(() => {
         expect(db.createUserWithEmailAndPassword).toHaveBeenCalledWith('spider@pig.com', '123456');
         done();
       });
@@ -129,7 +129,7 @@ describe('dbAuthDataAPI', () => {
     it('should request reset password email', done => {
       db.sendPasswordResetEmail.and.returnValue(Promise.resolve());
 
-      authDataAPI.sendPasswordResetEmail('spider@pig').then(() => {
+      dbAuthData.sendPasswordResetEmail('spider@pig').then(() => {
         expect(db.sendPasswordResetEmail).toHaveBeenCalledWith('spider@pig');
         done();
       });
@@ -140,7 +140,7 @@ describe('dbAuthDataAPI', () => {
   it('should log out', done => {
     db.signOut.and.returnValue(Promise.resolve());
 
-    authDataAPI.logOut().then(() => {
+    dbAuthData.logOut().then(() => {
       expect(db.signOut).toHaveBeenCalled();
       done();
     });

@@ -1,15 +1,15 @@
 import * as _ from 'lodash';
-import * as dbUsersInfoAPI from '../../database/dbUsersInfoAPI';
+import * as dbUsersInfo from '../../database/dbUsersInfo';
 import { read, update, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
 
-describe('usersInfoAPI', () => {
+describe('dbUsersInfo', () => {
 
   describe('trackUsersInfo', () => {
 
     describe('admin user', () => {
 
       it('should track child add / remove / change', () => {
-        dbUsersInfoAPI.trackUsersInfo(_.noop());
+        dbUsersInfo.trackUsersInfo(_.noop());
 
         expect(listenToChildAdded).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
         expect(listenToChildRemoved).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
@@ -26,7 +26,7 @@ describe('usersInfoAPI', () => {
 
         listenToChildAdded.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfoAPI.trackUsersInfo(addUserInfoData => {
+        dbUsersInfo.trackUsersInfo(addUserInfoData => {
           expect(addUserInfoData).toEqual({
             type: 'added',
             userInfo: userInfo,
@@ -44,7 +44,7 @@ describe('usersInfoAPI', () => {
 
         listenToChildChanged.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfoAPI.trackUsersInfo(changedUserInfoData => {
+        dbUsersInfo.trackUsersInfo(changedUserInfoData => {
           expect(changedUserInfoData).toEqual({
             type: 'changed',
             userInfo: userInfo,
@@ -62,7 +62,7 @@ describe('usersInfoAPI', () => {
 
         listenToChildRemoved.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfoAPI.trackUsersInfo(removedUserInfoData => {
+        dbUsersInfo.trackUsersInfo(removedUserInfoData => {
           expect(removedUserInfoData).toEqual({
             type: 'removed',
             userInfo: userInfo,
@@ -77,7 +77,7 @@ describe('usersInfoAPI', () => {
     describe('non-admin user', () => {
 
       it('should track value changed', () => {
-        dbUsersInfoAPI.trackUsersInfo('someUID', _.noop());
+        dbUsersInfo.trackUsersInfo('someUID', _.noop());
 
         expect(listenToValueChange).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
 
@@ -94,7 +94,7 @@ describe('usersInfoAPI', () => {
 
         listenToValueChange.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfoAPI.trackUsersInfo('someUID', changedUserInfoData => {
+        dbUsersInfo.trackUsersInfo('someUID', changedUserInfoData => {
           expect(changedUserInfoData).toEqual({
             type: 'changed',
             userInfo: userInfo,
@@ -120,7 +120,7 @@ describe('usersInfoAPI', () => {
           return null;
         });
 
-        dbUsersInfoAPI.fetchUsersInfo('someUID').then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo('someUID').then(usersInfo => {
           expect(usersInfo).toEqual({
             someUID: { firstName: 'spider', lastName: 'pig' }
           });
@@ -131,7 +131,7 @@ describe('usersInfoAPI', () => {
       it('should return empty object if no user info', done => {
         read.and.returnValue(null);
 
-        dbUsersInfoAPI.fetchUsersInfo('someUID').then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo('someUID').then(usersInfo => {
           expect(usersInfo).toEqual({});
           done();
         })
@@ -152,7 +152,7 @@ describe('usersInfoAPI', () => {
           return null;
         });
 
-        dbUsersInfoAPI.fetchUsersInfo().then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo().then(usersInfo => {
           expect(usersInfo).toEqual({
             uid1: { firstName: 'spider', lastName: 'pig' },
             uid2: { firstName: 'can', lastName: 'he swing?' }
@@ -164,7 +164,7 @@ describe('usersInfoAPI', () => {
       it('should return empty object if no users info', done => {
         read.and.returnValue(null);
 
-        dbUsersInfoAPI.fetchUsersInfo().then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo().then(usersInfo => {
           expect(usersInfo).toEqual({});
           done();
         })
@@ -179,7 +179,7 @@ describe('usersInfoAPI', () => {
     it('call update with usersInfo/uid and partial user info', done => {
       update.and.returnValue(Promise.resolve());
 
-      dbUsersInfoAPI.updateUserInfo('uid', { firstName: 'can he swing?' })
+      dbUsersInfo.updateUserInfo('uid', { firstName: 'can he swing?' })
         .then(() => {
           expect(update).toHaveBeenCalledWith('usersInfo/uid', { firstName: 'can he swing?' });
           done();
@@ -193,7 +193,7 @@ describe('usersInfoAPI', () => {
     it('call remove with usersInfo/uid', done => {
       remove.and.returnValue(Promise.resolve());
 
-      dbUsersInfoAPI.removeUserInfo('uid', { firstName: 'can he swing?' })
+      dbUsersInfo.removeUserInfo('uid', { firstName: 'can he swing?' })
         .then(() => {
           expect(remove).toHaveBeenCalledWith('usersInfo/uid');
           done();

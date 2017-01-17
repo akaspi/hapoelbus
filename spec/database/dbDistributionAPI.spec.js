@@ -1,7 +1,7 @@
-import * as dbDistributionAPI from '../../database/dbDistributionAPI';
+import * as dbDistribution from '../../database/dbDistribution';
 import { push } from '../../database/utils/db';
 
-describe('dbDistributionAPI', () => {
+describe('dbDistribution', () => {
 
   describe('sendTemplateEmail', () => {
 
@@ -12,7 +12,7 @@ describe('dbDistributionAPI', () => {
 
       push.and.returnValue(Promise.resolve('someMailId'));
 
-      dbDistributionAPI.sendTemplateEmail(recipients, templateId, substitutions).then(emailId => {
+      dbDistribution.sendTemplateEmail(recipients, templateId, substitutions).then(emailId => {
         expect(push).toHaveBeenCalledWith('pendingEmails/templates', { recipients, templateId, substitutions });
         expect(emailId).toEqual('someMailId');
         done();
@@ -29,7 +29,7 @@ describe('dbDistributionAPI', () => {
 
       push.and.returnValue(Promise.resolve('someMailId'));
 
-      dbDistributionAPI.sendCustomEmail(recipients, subject, content).then(emailId => {
+      dbDistribution.sendCustomEmail(recipients, subject, content).then(emailId => {
         expect(push).toHaveBeenCalledWith('pendingEmails/custom', { recipients, subject, content });
         expect(emailId).toEqual('someMailId');
         done();
@@ -46,7 +46,7 @@ describe('dbDistributionAPI', () => {
 
       push.and.returnValue(Promise.resolve('someSmsId'));
 
-      dbDistributionAPI.sendSMS(to, message).then(smsId => {
+      dbDistribution.sendSMS(to, message).then(smsId => {
         expect(push).toHaveBeenCalledWith('pendingSMS', { to, message });
         expect(smsId).toEqual('someSmsId');
         done();
