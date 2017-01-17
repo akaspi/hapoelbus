@@ -48,4 +48,4 @@ class UsersInfoStore {
 const usersInfoStore = new UsersInfoStore();
 
 export default usersInfoStore;
-export { UsersInfoStore }
+export { UsersInfoStore };

@@ -44,4 +44,4 @@ class GamesStore {
 const gameStore = new GamesStore();
 
 export default gameStore;
-export { GamesStore }
+export { GamesStore };
