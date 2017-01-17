@@ -1,125 +1,83 @@
 import noop from 'lodash/noop';
 import * as dbBookings from '../../database/dbBookings';
-import { read, update, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
+import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
 
 describe('dbBookings', () => {
 
   describe('trackBookings', () => {
 
-    describe('admin user', () => {
+    it('should track child add / remove / change', () => {
+      dbBookings.trackBookings(noop());
 
-      it('should track child add / remove / change', () => {
-        dbBookings.trackBookings(noop());
-
-        expect(listenToChildAdded).toHaveBeenCalledWith('bookings', jasmine.any(Function));
-        expect(listenToChildRemoved).toHaveBeenCalledWith('bookings', jasmine.any(Function));
-        expect(listenToChildChanged).toHaveBeenCalledWith('bookings', jasmine.any(Function));
-
-        expect(listenToValueChange).not.toHaveBeenCalled();
-      });
-
-      it('should call childAdd with booking, uid, gameId and type:added', done => {
-        const bookings = {
-          gameId1: {
-            pickUp: 'Jerusalem'
-          },
-          gameId2: {
-            pickUp: 'TelAviv'
-          }
-        };
-
-        listenToChildAdded.and.callFake((path, cb) => cb(bookings, 'someUID'));
-
-        dbBookings.trackBookings(addedBooking => {
-          expect(addedBooking).toEqual({
-            type: 'added',
-            bookings,
-            uid: 'someUID'
-          });
-          done();
-        });
-      });
-
-      it('should call childChanged with bookings, uid, gameId and type:changed', done => {
-        const bookings = {
-          gameId1: {
-            pickUp: 'Jerusalem'
-          },
-          gameId2: {
-            pickUp: 'TelAviv'
-          }
-        };
-
-        listenToChildChanged.and.callFake((path, cb) => cb(bookings, 'someUID'));
-
-        dbBookings.trackBookings(changedBooking => {
-          expect(changedBooking).toEqual({
-            type: 'changed',
-            bookings,
-            uid: 'someUID'
-          });
-          done();
-        });
-      });
-
-      it('should call childRemoved with booking, uid, gameId and type:removed', done => {
-        const bookings = {
-          gameId1: {
-            pickUp: 'Jerusalem'
-          },
-          gameId2: {
-            pickUp: 'TelAviv'
-          }
-        };
-
-        listenToChildRemoved.and.callFake((path, cb) => cb(bookings, 'someUID'));
-
-        dbBookings.trackBookings(removedBooking => {
-          expect(removedBooking).toEqual({
-            type: 'removed',
-            bookings,
-            uid: 'someUID'
-          });
-          done();
-        });
-      });
-
+      expect(listenToChildAdded).toHaveBeenCalledWith('bookings', jasmine.any(Function));
+      expect(listenToChildRemoved).toHaveBeenCalledWith('bookings', jasmine.any(Function));
+      expect(listenToChildChanged).toHaveBeenCalledWith('bookings', jasmine.any(Function));
     });
 
-    describe('non-admin user', () => {
+    it('should call childAdd with booking, uid, gameId and type:added', done => {
+      const bookings = {
+        gameId1: {
+          pickUp: 'Jerusalem'
+        },
+        gameId2: {
+          pickUp: 'TelAviv'
+        }
+      };
 
-      it('should track value changed', () => {
-        dbBookings.trackBookings('someUID', noop());
+      listenToChildAdded.and.callFake((path, cb) => cb(bookings, 'someUID'));
 
-        expect(listenToValueChange).toHaveBeenCalledWith('bookings/someUID', jasmine.any(Function));
-
-        expect(listenToChildAdded).not.toHaveBeenCalled();
-        expect(listenToChildRemoved).not.toHaveBeenCalled();
-        expect(listenToChildChanged).not.toHaveBeenCalled();
-      });
-
-      it('should call valueChanged with bookings, uid, and type:changed', done => {
-        const bookings = {
-          gameId1: {
-            pickUp: 'Jerusalem'
-          },
-          gameId2: {
-            pickUp: 'TelAviv'
-          }
-        };
-
-        listenToValueChange.and.callFake((path, cb) => cb(bookings, 'someUID'));
-
-        dbBookings.trackBookings('someUID', changedBooking => {
-          expect(changedBooking).toEqual({
-            type: 'changed',
-            bookings,
-            uid: 'someUID'
-          });
-          done();
+      dbBookings.trackBookings(addedBooking => {
+        expect(addedBooking).toEqual({
+          type: 'added',
+          bookings,
+          uid: 'someUID'
         });
+        done();
       });
+    });
 
+    it('should call childChanged with bookings, uid, gameId and type:changed', done => {
+      const bookings = {
+        gameId1: {
+          pickUp: 'Jerusalem'
+        },
+        gameId2: {
+          pickUp: 'TelAviv'
+        }
+      };
+
+      listenToChildChanged.and.callFake((path, cb) => cb(bookings, 'someUID'));
+
+      dbBookings.trackBookings(changedBooking => {
+        expect(changedBooking).toEqual({
+          type: 'changed',
+          bookings,
+          uid: 'someUID'
+        });
+        done();
+      });
+    });
+
+    it('should call childRemoved with booking, uid, gameId and type:removed', done => {
+      const bookings = {
+        gameId1: {
+          pickUp: 'Jerusalem'
+        },
+        gameId2: {
+          pickUp: 'TelAviv'
+        }
+      };
+
+      listenToChildRemoved.and.callFake((path, cb) => cb(bookings, 'someUID'));
+
+      dbBookings.trackBookings(removedBooking => {
+        expect(removedBooking).toEqual({
+          type: 'removed',
+          bookings,
+          uid: 'someUID'
+        });
+        done();
+      });
     });
 
   });
