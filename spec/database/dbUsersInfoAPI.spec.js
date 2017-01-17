@@ -1,79 +1,109 @@
 import * as _ from 'lodash';
 import * as dbUsersInfoAPI from '../../database/dbUsersInfoAPI';
-import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
+import { read, update, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
 
 describe('usersInfoAPI', () => {
 
   describe('trackUsersInfo', () => {
 
-    it('should track specific uid', () => {
-      dbUsersInfoAPI.trackUsersInfo('someUID', _.noop());
+    describe('admin user', () => {
 
-      expect(listenToChildAdded).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
-      expect(listenToChildRemoved).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
-      expect(listenToChildChanged).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
-    });
+      it('should track child add / remove / change', () => {
+        dbUsersInfoAPI.trackUsersInfo(_.noop());
 
-    it('should track all users info', () => {
-      dbUsersInfoAPI.trackUsersInfo(null, _.noop());
+        expect(listenToChildAdded).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
+        expect(listenToChildRemoved).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
+        expect(listenToChildChanged).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
 
-      expect(listenToChildAdded).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
-      expect(listenToChildRemoved).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
-      expect(listenToChildChanged).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
-    });
-
-    it('should call childAdd with userInfo, uid and type:added', done => {
-      const userInfo = {
-        firstName: 'spider',
-        lastName: 'pig'
-      };
-
-      listenToChildAdded.and.callFake((path, cb) => cb(userInfo, 'someUID'));
-
-      dbUsersInfoAPI.trackUsersInfo(null, addUserInfoData => {
-        expect(addUserInfoData).toEqual({
-          type: 'added',
-          userInfo: userInfo,
-          uid: 'someUID'
-        });
-        done();
+        expect(listenToValueChange).not.toHaveBeenCalled();
       });
+
+      it('should call childAdd with userInfo, uid and type:added', done => {
+        const userInfo = {
+          firstName: 'spider',
+          lastName: 'pig'
+        };
+
+        listenToChildAdded.and.callFake((path, cb) => cb(userInfo, 'someUID'));
+
+        dbUsersInfoAPI.trackUsersInfo(addUserInfoData => {
+          expect(addUserInfoData).toEqual({
+            type: 'added',
+            userInfo: userInfo,
+            uid: 'someUID'
+          });
+          done();
+        });
+      });
+
+      it('should call childChanged with userInfo, uid and type:changed', done => {
+        const userInfo = {
+          firstName: 'spider',
+          lastName: 'pig'
+        };
+
+        listenToChildChanged.and.callFake((path, cb) => cb(userInfo, 'someUID'));
+
+        dbUsersInfoAPI.trackUsersInfo(changedUserInfoData => {
+          expect(changedUserInfoData).toEqual({
+            type: 'changed',
+            userInfo: userInfo,
+            uid: 'someUID'
+          });
+          done();
+        });
+      });
+
+      it('should call childRemoved with userInfo, uid and type:removed', done => {
+        const userInfo = {
+          firstName: 'spider',
+          lastName: 'pig'
+        };
+
+        listenToChildRemoved.and.callFake((path, cb) => cb(userInfo, 'someUID'));
+
+        dbUsersInfoAPI.trackUsersInfo(removedUserInfoData => {
+          expect(removedUserInfoData).toEqual({
+            type: 'removed',
+            userInfo: userInfo,
+            uid: 'someUID'
+          });
+          done();
+        });
+      });
+
     });
 
-    it('should call childChanged with userInfo, uid and type:changed', done => {
-      const userInfo = {
-        firstName: 'spider',
-        lastName: 'pig'
-      };
+    describe('non-admin user', () => {
 
-      listenToChildChanged.and.callFake((path, cb) => cb(userInfo, 'someUID'));
+      it('should track value changed', () => {
+        dbUsersInfoAPI.trackUsersInfo('someUID', _.noop());
 
-      dbUsersInfoAPI.trackUsersInfo(null, changedUserInfoData => {
-        expect(changedUserInfoData).toEqual({
-          type: 'changed',
-          userInfo: userInfo,
-          uid: 'someUID'
-        });
-        done();
+        expect(listenToValueChange).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
+
+        expect(listenToChildAdded).not.toHaveBeenCalled();
+        expect(listenToChildRemoved).not.toHaveBeenCalled();
+        expect(listenToChildChanged).not.toHaveBeenCalled();
       });
-    });
 
-    it('should call childRemoved with userInfo, uid and type:removed', done => {
-      const userInfo = {
-        firstName: 'spider',
-        lastName: 'pig'
-      };
+      it('should call valueChanged with userInfo, uid and type:changed', done => {
+        const userInfo = {
+          firstName: 'spider',
+          lastName: 'pig'
+        };
 
-      listenToChildRemoved.and.callFake((path, cb) => cb(userInfo, 'someUID'));
+        listenToValueChange.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-      dbUsersInfoAPI.trackUsersInfo(null, removedUserInfoData => {
-        expect(removedUserInfoData).toEqual({
-          type: 'removed',
-          userInfo: userInfo,
-          uid: 'someUID'
+        dbUsersInfoAPI.trackUsersInfo('someUID', changedUserInfoData => {
+          expect(changedUserInfoData).toEqual({
+            type: 'changed',
+            userInfo: userInfo,
+            uid: 'someUID'
+          });
+          done();
         });
-        done();
       });
+
     });
 
   });

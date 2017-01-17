@@ -1,5 +1,7 @@
 import * as _ from 'lodash';
-import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from './utils/db';
+import isFunction from 'lodash/isFunction';
+
+import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged, listenToValueChange } from './utils/db';
 
 const USERS_INFO = 'usersInfo';
 const SEASON_TICKETS = 'seasonTickets';
@@ -42,15 +44,22 @@ function fetchAllUsers() {
 }
 
 export function trackUsersInfo(uid, cb) {
+  if (isFunction(uid)) {
+    cb = uid;
+    uid = null;
+  }
+
   const createReportChange = type => (userInfo, uid) => {
     cb({ type, userInfo, uid });
   };
 
-  const pathToListen = uid ? USERS_INFO + '/' + uid : USERS_INFO;
-
-  listenToChildAdded(pathToListen, createReportChange('added'));
-  listenToChildRemoved(pathToListen, createReportChange('removed'));
-  listenToChildChanged(pathToListen, createReportChange('changed'));
+  if (uid) {
+    listenToValueChange(`${USERS_INFO}/${uid}`, createReportChange('changed'));
+  } else {
+    listenToChildAdded(USERS_INFO, createReportChange('added'));
+    listenToChildRemoved(USERS_INFO, createReportChange('removed'));
+    listenToChildChanged(USERS_INFO, createReportChange('changed'));
+  }
 }
 
 export function fetchUsersInfo(uid) {
