@@ -1,23 +1,24 @@
 import * as db from './utils/db';
 
-const ADMINS_PATH = 'admins';
-
 export function onAuthDataChange(cb) {
   db.onAuthStateChanged(user => {
     if (!user) {
       cb(null);
     } else {
-      cb({
-        uid: user.uid,
-        email: user.email,
-        photoURL: user.photoURL
+      isAdmin(user.uid).then(isAdmin => {
+        cb({
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
+          isAdmin
+        });
       });
     }
   });
 }
 
 export function isAdmin(uid) {
-  return db.read(`${ADMINS_PATH}/${uid}`).then(isAdmin => !!isAdmin);
+  return db.read(`admins/${uid}`).then(isAdmin => !!isAdmin);
 }
 
 export function loginWithGoogle() {

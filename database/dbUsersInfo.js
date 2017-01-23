@@ -56,9 +56,9 @@ export function trackUsersInfo(uid, cb) {
   if (uid) {
     listenToValueChange(`${USERS_INFO}/${uid}`, createReportChange('changed'));
   } else {
+    listenToChildChanged(USERS_INFO, createReportChange('changed'));
     listenToChildAdded(USERS_INFO, createReportChange('added'));
     listenToChildRemoved(USERS_INFO, createReportChange('removed'));
-    listenToChildChanged(USERS_INFO, createReportChange('changed'));
   }
 }
 

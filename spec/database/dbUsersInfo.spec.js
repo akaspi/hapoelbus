@@ -9,7 +9,7 @@ describe('dbUsersInfo', () => {
     describe('admin user', () => {
 
       it('should track child add / remove / change', () => {
-        dbUsersInfo.trackUsersInfo(_.noop());
+        dbUsersInfo.trackUsersInfo(_.noop);
 
         expect(listenToChildAdded).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
         expect(listenToChildRemoved).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
@@ -77,7 +77,7 @@ describe('dbUsersInfo', () => {
     describe('non-admin user', () => {
 
       it('should track value changed', () => {
-        dbUsersInfo.trackUsersInfo('someUID', _.noop());
+        dbUsersInfo.trackUsersInfo('someUID', _.noop);
 
         expect(listenToValueChange).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
 

@@ -7,7 +7,7 @@ describe('dbBookings', () => {
   describe('trackBookings', () => {
 
     it('should track child add / remove / change', () => {
-      dbBookings.trackBookings(noop());
+      dbBookings.trackBookings(noop);
 
       expect(listenToChildAdded).toHaveBeenCalledWith('bookings', jasmine.any(Function));
       expect(listenToChildRemoved).toHaveBeenCalledWith('bookings', jasmine.any(Function));

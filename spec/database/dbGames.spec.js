@@ -15,7 +15,7 @@ describe('dbGames', () => {
   describe('trackGames', () => {
 
     it('should track all games', () => {
-      dbGames.trackGames(null, _.noop());
+      dbGames.trackGames(null, _.noop);
 
       expect(listenToChildAdded).toHaveBeenCalledWith('events', jasmine.any(Function));
       expect(listenToChildRemoved).toHaveBeenCalledWith('events', jasmine.any(Function));

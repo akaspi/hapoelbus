@@ -3,47 +3,6 @@ import * as db from '../../database/utils/db';
 
 describe('dbAuthData', () => {
 
-  describe('onAuthDataChange', () => {
-
-    describe('user is logged out', () => {
-
-      it('should return null', done => {
-        db.onAuthStateChanged.and.callFake(cb => cb(null));
-        db.read.and.returnValue(Promise.resolve(true));
-
-        dbAuthData.onAuthDataChange(authData => {
-          expect(authData).toBeNull();
-          expect(db.read).not.toHaveBeenCalled();
-          done();
-        })
-      });
-
-    });
-
-    describe('user is logged in', () => {
-
-      it('should return authData', done => {
-        db.onAuthStateChanged.and.callFake(cb => cb({
-          uid: 1234,
-          email: 'spider@pig.com',
-          photoURL: 'http://photoURL'
-        }));
-
-        dbAuthData.onAuthDataChange(authData => {
-          expect(authData).toEqual({
-            uid: 1234,
-            email: 'spider@pig.com',
-            photoURL: 'http://photoURL'
-          });
-          done();
-        })
-
-      });
-
-    });
-
-  });
-
   describe('isAdmin', () => {
 
     it('should return false', done => {
