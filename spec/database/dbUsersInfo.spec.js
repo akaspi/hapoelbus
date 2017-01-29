@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import noop from 'lodash/noop';
 import * as dbUsersInfo from '../../database/dbUsersInfo';
 import { read, update, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
 
@@ -9,7 +9,9 @@ describe('dbUsersInfo', () => {
     describe('admin user', () => {
 
       it('should track child add / remove / change', () => {
-        dbUsersInfo.trackUsersInfo(_.noop);
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
+
+        dbUsersInfo.trackUsersInfo(authData, noop);
 
         expect(listenToChildAdded).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
         expect(listenToChildRemoved).toHaveBeenCalledWith('usersInfo', jasmine.any(Function));
@@ -19,6 +21,7 @@ describe('dbUsersInfo', () => {
       });
 
       it('should call childAdd with userInfo, uid and type:added', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
         const userInfo = {
           firstName: 'spider',
           lastName: 'pig'
@@ -26,7 +29,7 @@ describe('dbUsersInfo', () => {
 
         listenToChildAdded.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfo.trackUsersInfo(addUserInfoData => {
+        dbUsersInfo.trackUsersInfo(authData, addUserInfoData => {
           expect(addUserInfoData).toEqual({
             type: 'added',
             userInfo: userInfo,
@@ -37,6 +40,7 @@ describe('dbUsersInfo', () => {
       });
 
       it('should call childChanged with userInfo, uid and type:changed', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
         const userInfo = {
           firstName: 'spider',
           lastName: 'pig'
@@ -44,7 +48,7 @@ describe('dbUsersInfo', () => {
 
         listenToChildChanged.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfo.trackUsersInfo(changedUserInfoData => {
+        dbUsersInfo.trackUsersInfo(authData, changedUserInfoData => {
           expect(changedUserInfoData).toEqual({
             type: 'changed',
             userInfo: userInfo,
@@ -55,6 +59,7 @@ describe('dbUsersInfo', () => {
       });
 
       it('should call childRemoved with userInfo, uid and type:removed', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
         const userInfo = {
           firstName: 'spider',
           lastName: 'pig'
@@ -62,7 +67,7 @@ describe('dbUsersInfo', () => {
 
         listenToChildRemoved.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfo.trackUsersInfo(removedUserInfoData => {
+        dbUsersInfo.trackUsersInfo(authData, removedUserInfoData => {
           expect(removedUserInfoData).toEqual({
             type: 'removed',
             userInfo: userInfo,
@@ -77,7 +82,8 @@ describe('dbUsersInfo', () => {
     describe('non-admin user', () => {
 
       it('should track value changed', () => {
-        dbUsersInfo.trackUsersInfo('someUID', _.noop);
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: false };
+        dbUsersInfo.trackUsersInfo(authData, noop);
 
         expect(listenToValueChange).toHaveBeenCalledWith('usersInfo/someUID', jasmine.any(Function));
 
@@ -87,6 +93,7 @@ describe('dbUsersInfo', () => {
       });
 
       it('should call valueChanged with userInfo, uid and type:changed', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: false };
         const userInfo = {
           firstName: 'spider',
           lastName: 'pig'
@@ -94,7 +101,7 @@ describe('dbUsersInfo', () => {
 
         listenToValueChange.and.callFake((path, cb) => cb(userInfo, 'someUID'));
 
-        dbUsersInfo.trackUsersInfo('someUID', changedUserInfoData => {
+        dbUsersInfo.trackUsersInfo(authData, changedUserInfoData => {
           expect(changedUserInfoData).toEqual({
             type: 'changed',
             userInfo: userInfo,
@@ -113,14 +120,15 @@ describe('dbUsersInfo', () => {
     describe('single user info', () => {
 
       it('should return a single user info', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: false };
         read.and.callFake(path => {
           if (path === 'usersInfo/someUID') {
-            return Promise.resolve({ firstName: 'spider', lastName: 'pig' })
+            return Promise.resolve({ firstName: 'spider', lastName: 'pig' });
           }
           return null;
         });
 
-        dbUsersInfo.fetchUsersInfo('someUID').then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo(authData).then(usersInfo => {
           expect(usersInfo).toEqual({
             someUID: { firstName: 'spider', lastName: 'pig' }
           });
@@ -129,9 +137,10 @@ describe('dbUsersInfo', () => {
       });
 
       it('should return empty object if no user info', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: false };
         read.and.returnValue(null);
 
-        dbUsersInfo.fetchUsersInfo('someUID').then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo(authData).then(usersInfo => {
           expect(usersInfo).toEqual({});
           done();
         })
@@ -142,17 +151,18 @@ describe('dbUsersInfo', () => {
     describe('all users info', () => {
 
       it('should return a all users info', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
         read.and.callFake(path => {
           if (path === 'usersInfo') {
             return Promise.resolve({
               uid1: { firstName: 'spider', lastName: 'pig' },
               uid2: { firstName: 'can', lastName: 'he swing?' }
-            })
+            });
           }
           return null;
         });
 
-        dbUsersInfo.fetchUsersInfo().then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo(authData).then(usersInfo => {
           expect(usersInfo).toEqual({
             uid1: { firstName: 'spider', lastName: 'pig' },
             uid2: { firstName: 'can', lastName: 'he swing?' }
@@ -162,9 +172,10 @@ describe('dbUsersInfo', () => {
       });
 
       it('should return empty object if no users info', done => {
+        const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
         read.and.returnValue(null);
 
-        dbUsersInfo.fetchUsersInfo().then(usersInfo => {
+        dbUsersInfo.fetchUsersInfo(authData).then(usersInfo => {
           expect(usersInfo).toEqual({});
           done();
         })

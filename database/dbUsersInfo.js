@@ -43,30 +43,25 @@ function fetchAllUsers() {
     );
 }
 
-export function trackUsersInfo(uid, cb) {
-  if (isFunction(uid)) {
-    cb = uid;
-    uid = null;
-  }
-
+export function trackUsersInfo(authData, cb) {
   const createReportChange = type => (userInfo, uid) => {
     cb({ type, userInfo, uid });
   };
 
-  if (uid) {
-    listenToValueChange(`${USERS_INFO}/${uid}`, createReportChange('changed'));
-  } else {
+  if (authData.isAdmin) {
     listenToChildChanged(USERS_INFO, createReportChange('changed'));
     listenToChildAdded(USERS_INFO, createReportChange('added'));
     listenToChildRemoved(USERS_INFO, createReportChange('removed'));
+  } else {
+    listenToValueChange(`${USERS_INFO}/${authData.uid}`, createReportChange('changed'));
   }
 }
 
-export function fetchUsersInfo(uid) {
-  if (uid) {
-    return fetchSingleUserInfo(uid);
+export function fetchUsersInfo(authData) {
+  if (authData.isAdmin) {
+    return fetchAllUsers();
   }
-  return fetchAllUsers();
+  return fetchSingleUserInfo(authData.uid);
 }
 
 export function updateUserInfo(uid, userInfo) {
