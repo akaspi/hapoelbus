@@ -2,12 +2,6 @@ import mapValues from 'lodash/mapValues';
 import forOwn from 'lodash/forOwn';
 import { observable, extendObservable, action } from 'mobx';
 
-function toUsersBookingsMap(userBookings) {
-  const userBookingsMap = observable.map({});
-  forOwn(userBookings, (booking, gameId) => userBookingsMap.set(gameId, new Booking(booking)));
-  return userBookingsMap;
-}
-
 class Booking {
   constructor(booking) {
     extendObservable(this, {
@@ -27,36 +21,33 @@ class BookingsStore {
   @observable bookings = observable.map({});
 
   @action setBookings = bookings => {
-    const bookingsToReplace = mapValues(bookings, toUsersBookingsMap);
-    this.bookings.replace(bookingsToReplace);
+    forOwn(bookings, (userBookings, uid) => this.addUserBookings(uid, userBookings));
   };
 
-  @action updateBookings = (uid, userBookings) => {
-    this.bookings.merge({ [uid]: toUsersBookingsMap(userBookings) });
+  @action addUserBookings = (uid, userBookings) => {
+    this.bookings.set(uid, observable.map(mapValues(userBookings, bookingData => new Booking(bookingData))));
   };
 
-  // @action updateBooking = (uid, gameId, booking) => {
-  //   if (!this.bookings.has(uid)) {
-  //     this.bookings.set(uid, observable.map({}));
-  //   }
-  //   const userBookingsMap = this.bookings.get(uid);
-  //
-  //   if (userBookingsMap.has(gameId)) {
-  //     const currentBooking = userBookingsMap.get(gameId);
-  //     currentBooking.update(booking);
-  //   } else {
-  //     userBookingsMap.set(gameId, new Booking(booking));
-  //   }
-  // };
+  @action removeUserBookings = uid => {
+    this.bookings.delete(uid);
+  };
 
-  @action removeBooking = (uid, gameId) => {
+  @action addBookingItem = (uid, gameId, bookingItem) => {
+    const userBookings = this.bookings.get(uid);
+    userBookings.set(gameId, new Booking(bookingItem));
+  };
+
+  @action updateBookingItem = (uid, gameId, bookingItem) => {
+    const userBookings = this.bookings.get(uid);
+    const currentBookingItem = userBookings.get(gameId);
+    if (currentBookingItem) {
+      currentBookingItem.update(bookingItem);
+    }
+  };
+
+  @action removeBookingItem = (uid, gameId) => {
     if (this.bookings.has(uid)) {
-      const userBookings = this.bookings.get(uid);
-      userBookings.delete(gameId);
-
-      if (userBookings.size === 0) {
-        this.bookings.delete(uid);
-      }
+      this.bookings.get(uid).delete(gameId);
     }
   }
 

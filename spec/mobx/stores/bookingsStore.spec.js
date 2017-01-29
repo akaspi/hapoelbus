@@ -1,4 +1,3 @@
-import merge from 'lodash/merge';
 import { toJS } from 'mobx';
 import { BookingsStore } from '../../../mobx/stores/bookingsStore';
 
@@ -46,36 +45,7 @@ describe('BookingsStore', () => {
 
   });
 
-  describe('updateBooking', () => {
-
-    it('should update an existing booking', () => {
-      const bookingsStore = new BookingsStore();
-
-      bookingsStore.setBookings({
-        uid1: {
-          gameId1: defaultBooking,
-          gameId2: defaultBooking
-        },
-        uid2: {
-          gameId2: defaultBooking
-        }
-      });
-
-      bookingsStore.updateBookings('uid1', {
-        gameId1: defaultBooking,
-        gameId2: merge({}, defaultBooking, { extraSeats: 3 })
-      });
-
-      expect(toJS(bookingsStore.bookings)).toEqual({
-        uid1: {
-          gameId1: defaultBooking,
-          gameId2: merge({}, defaultBooking, { extraSeats: 3 })
-        },
-        uid2: {
-          gameId2: defaultBooking
-        }
-      });
-    });
+  describe('addUserBookings', () => {
 
     it('should create first user booking', () => {
       const bookingsStore = new BookingsStore();
@@ -87,7 +57,7 @@ describe('BookingsStore', () => {
         }
       });
 
-      bookingsStore.updateBookings('uid2', {
+      bookingsStore.addUserBookings('uid2', {
         gameId2: defaultBooking
       });
 
@@ -102,53 +72,9 @@ describe('BookingsStore', () => {
       });
     });
 
-    it('should create new booking', () => {
-      const bookingsStore = new BookingsStore();
-
-      bookingsStore.setBookings({
-        uid1: {
-          gameId1: defaultBooking,
-          gameId2: defaultBooking
-        }
-      });
-
-      bookingsStore.updateBookings('uid1', {
-        gameId1: defaultBooking,
-        gameId2: defaultBooking,
-        gameId3: defaultBooking
-      });
-
-      expect(toJS(bookingsStore.bookings)).toEqual({
-        uid1: {
-          gameId1: defaultBooking,
-          gameId2: defaultBooking,
-          gameId3: defaultBooking
-        }
-      });
-    });
-
   });
 
-  describe('removeBooking', () => {
-
-    it('should remove booking', () => {
-      const bookingsStore = new BookingsStore();
-
-      bookingsStore.setBookings({
-        uid1: {
-          gameId1: defaultBooking,
-          gameId2: defaultBooking
-        }
-      });
-
-      bookingsStore.removeBooking('uid1', 'gameId1');
-
-      expect(toJS(bookingsStore.bookings)).toEqual({
-        uid1: {
-          gameId2: defaultBooking
-        }
-      });
-    });
+  describe('removeUserBookings', () => {
 
     it('should remove all user bookings', () => {
       const bookingsStore = new BookingsStore();
@@ -163,11 +89,10 @@ describe('BookingsStore', () => {
         }
       });
 
-      bookingsStore.removeBooking('uid2', 'gameId2');
+      bookingsStore.removeUserBookings('uid1');
 
       expect(toJS(bookingsStore.bookings)).toEqual({
-        uid1: {
-          gameId1: defaultBooking,
+        uid2: {
           gameId2: defaultBooking
         }
       });
@@ -175,80 +100,81 @@ describe('BookingsStore', () => {
 
   });
 
-  // describe('updateBookingOld', () => {
-  //
-  //   it('should update an existing booking', () => {
-  //     const bookingsStore = new BookingsStore();
-  //
-  //     bookingsStore.setBookings({
-  //       uid1: {
-  //         gameId1: defaultBooking,
-  //         gameId2: defaultBooking
-  //       },
-  //       uid2: {
-  //         gameId2: defaultBooking
-  //       }
-  //     });
-  //
-  //     bookingsStore.updateBooking('uid1', 'gameId2', { extraSeats: 3 });
-  //
-  //     expect(toJS(bookingsStore.bookings)).toEqual({
-  //       uid1: {
-  //         gameId1: defaultBooking,
-  //         gameId2: merge({}, defaultBooking, { extraSeats: 3 })
-  //       },
-  //       uid2: {
-  //         gameId2: defaultBooking
-  //       }
-  //     });
-  //   });
-  //
-  //   it('should create first user booking', () => {
-  //     const bookingsStore = new BookingsStore();
-  //
-  //     bookingsStore.setBookings({
-  //       uid1: {
-  //         gameId1: defaultBooking,
-  //         gameId2: defaultBooking
-  //       }
-  //     });
-  //
-  //     bookingsStore.updateBooking('uid2', 'gameId2', defaultBooking);
-  //
-  //     expect(toJS(bookingsStore.bookings)).toEqual({
-  //       uid1: {
-  //         gameId1: defaultBooking,
-  //         gameId2: defaultBooking
-  //       },
-  //       uid2: {
-  //         gameId2: defaultBooking
-  //       }
-  //     });
-  //   });
-  //
-  //   it('should create new booking', () => {
-  //     const bookingsStore = new BookingsStore();
-  //
-  //     bookingsStore.setBookings({
-  //       uid1: {
-  //         gameId1: defaultBooking,
-  //         gameId2: defaultBooking
-  //       }
-  //     });
-  //
-  //     bookingsStore.updateBooking('uid2', 'gameId3', defaultBooking);
-  //
-  //     expect(toJS(bookingsStore.bookings)).toEqual({
-  //       uid1: {
-  //         gameId1: defaultBooking,
-  //         gameId2: defaultBooking
-  //       },
-  //       uid2: {
-  //         gameId3: defaultBooking
-  //       }
-  //     });
-  //   });
-  //
-  // });
+  describe('addBookingItem', () => {
+
+    it('should add booking item', () => {
+      const bookingsStore = new BookingsStore();
+
+      bookingsStore.setBookings({
+        uid1: {
+          gameId1: defaultBooking,
+          gameId2: defaultBooking
+        }
+      });
+
+      bookingsStore.addBookingItem('uid1', 'gameId3', defaultBooking);
+
+      expect(toJS(bookingsStore.bookings)).toEqual({
+        uid1: {
+          gameId1: defaultBooking,
+          gameId2: defaultBooking,
+          gameId3: defaultBooking
+        }
+      });
+    });
+
+  });
+
+  describe('updateBookingItem', () => {
+
+    it('should update booking item', function() {
+      const bookingsStore = new BookingsStore();
+
+      bookingsStore.setBookings({
+        uid1: {
+          gameId1: defaultBooking,
+          gameId2: defaultBooking
+        }
+      });
+
+      bookingsStore.updateBookingItem('uid1', 'gameId1', { extraSeats: 5 });
+
+      expect(toJS(bookingsStore.bookings)).toEqual({
+        uid1: {
+          gameId1: {
+            paidSeats: defaultBooking.paidSeats,
+            extraSeats: 5,
+            pickUp: defaultBooking.pickUp,
+            dropOff: defaultBooking.dropOff
+          },
+          gameId2: defaultBooking
+        }
+      });
+    });
+
+  });
+
+  describe('removeBookingItem', () => {
+
+    it('should remove booking item', () => {
+      const bookingsStore = new BookingsStore();
+
+      bookingsStore.setBookings({
+        uid1: {
+          gameId1: defaultBooking,
+          gameId2: defaultBooking
+        }
+      });
+
+      bookingsStore.removeBookingItem('uid1', 'gameId2');
+
+      expect(toJS(bookingsStore.bookings)).toEqual({
+        uid1: {
+          gameId1: defaultBooking
+        }
+      });
+    });
+
+  });
 
 });
