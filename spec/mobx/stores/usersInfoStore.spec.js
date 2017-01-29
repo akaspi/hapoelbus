@@ -59,32 +59,15 @@ describe('UsersInfoStore', () => {
 
   });
 
-  describe('add user info', () => {
-
-    it('should add user info', () => {
-      const usersInfoStore = new UsersInfoStore();
-
-      usersInfoStore.addUserInfo('someUID', defaultUserInfo);
-
-      expect(toJS(usersInfoStore.usersInfo.get('someUID'))).toEqual(defaultUserInfo);
-    });
-
-    it('should have 0 seasonTickets by default', () => {
-      const usersInfoStore = new UsersInfoStore();
-
-      usersInfoStore.addUserInfo('someUID', omit(defaultUserInfo, ['seasonTickets']));
-
-      expect(usersInfoStore.usersInfo.get('someUID').seasonTickets).toEqual(0);
-    });
-
-  });
-
   describe('remove user info', () => {
 
     it('should remove user info', () => {
       const usersInfoStore = new UsersInfoStore();
 
-      usersInfoStore.addUserInfo('someUID', defaultUserInfo);
+      usersInfoStore.setUsersInfo({
+        someUID: defaultUserInfo
+      });
+
       usersInfoStore.removeUserInfo('someUID');
 
       expect(usersInfoStore.usersInfo.size).toEqual(0);
@@ -97,7 +80,10 @@ describe('UsersInfoStore', () => {
     it('should update user info', () => {
       const usersInfoStore = new UsersInfoStore();
 
-      usersInfoStore.addUserInfo('someUID', defaultUserInfo);
+      usersInfoStore.setUsersInfo({
+        someUID: defaultUserInfo
+      });
+
       usersInfoStore.updateUserInfo('someUID', { firstName: 'spider', lastName: 'pig', seasonTickets: 5 });
 
       expect(toJS(usersInfoStore.usersInfo)).toEqual({
@@ -105,6 +91,24 @@ describe('UsersInfoStore', () => {
       });
     });
 
+    it('should create new user info', () => {
+      const usersInfoStore = new UsersInfoStore();
+
+      usersInfoStore.updateUserInfo('someUID', defaultUserInfo);
+
+      expect(toJS(usersInfoStore.usersInfo.get('someUID'))).toEqual(defaultUserInfo);
+    });
+
+  });
+
+  it('should have 0 seasonTickets by default', () => {
+    const usersInfoStore = new UsersInfoStore();
+
+    usersInfoStore.setUsersInfo({
+      someUID: omit(defaultUserInfo, ['seasonTickets'])
+    });
+
+    expect(usersInfoStore.usersInfo.get('someUID').seasonTickets).toEqual(0);
   });
 
 });
