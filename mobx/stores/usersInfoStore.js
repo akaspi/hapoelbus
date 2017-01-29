@@ -30,13 +30,13 @@ class UsersInfoStore {
     this.usersInfo.replace(mapValues(usersInfo, userInfo => new UserInfo(userInfo)));
   };
 
-  @action addUserInfo = (uid, userInfo) => {
-    this.usersInfo.set(uid, new UserInfo(userInfo));
-  };
-
-  @action updateUserInfo = (uid, partialUserInfo) => {
-    const userInfo = this.usersInfo.get(uid);
-    userInfo.update(partialUserInfo);
+  @action updateUserInfo = (uid, userInfo) => {
+    const currentUserInfo = this.usersInfo.get(uid);
+    if (currentUserInfo) {
+      currentUserInfo.update(userInfo);
+    } else {
+      this.usersInfo.set(uid, new UserInfo(userInfo));
+    }
   };
 
   @action removeUserInfo = uid => {

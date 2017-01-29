@@ -1,6 +1,6 @@
 import noop from 'lodash/noop';
 import * as dbUsersInfo from '../../database/dbUsersInfo';
-import { read, update, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
+import { read, remove, listenToValueChange, listenToChildAdded, listenToChildRemoved, listenToChildChanged } from '../../database/utils/db';
 
 describe('dbUsersInfo', () => {
 
@@ -181,20 +181,6 @@ describe('dbUsersInfo', () => {
         })
       });
 
-    });
-
-  });
-
-  describe('updateUsersInfo', () => {
-
-    it('call update with usersInfo/uid and partial user info', done => {
-      update.and.returnValue(Promise.resolve());
-
-      dbUsersInfo.updateUserInfo('uid', { firstName: 'can he swing?' })
-        .then(() => {
-          expect(update).toHaveBeenCalledWith('usersInfo/uid', { firstName: 'can he swing?' });
-          done();
-        });
     });
 
   });
