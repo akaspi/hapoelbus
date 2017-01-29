@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import isFunction from 'lodash/isFunction';
 
 import { read, update, remove, listenToChildAdded, listenToChildRemoved, listenToChildChanged, listenToValueChange } from './utils/db';
 
