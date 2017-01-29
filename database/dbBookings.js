@@ -18,20 +18,29 @@ function fetchAllBookings() {
 }
 
 export function trackBookings(cb) {
-  const createReportChange = type => (bookings, uid) => {
-    cb({ type, bookings, uid });
+  const createReportChange = type => (userBookings, uid) => {
+    cb({ type, userBookings, uid });
   };
 
   listenToChildAdded(BOOKINGS_PATH, createReportChange('added'));
   listenToChildRemoved(BOOKINGS_PATH, createReportChange('removed'));
-  listenToChildChanged(BOOKINGS_PATH, createReportChange('changed'));
 }
 
-export function fetchBookings(uid) {
-  if (uid) {
-    return fetchBookingsForUser(uid);
+export function trackUserBookings(uid, cb) {
+  const createReportChange = type => (bookingItem, gameId) => {
+    cb({ type, bookingItem, gameId });
+  };
+
+  listenToChildAdded(`${BOOKINGS_PATH}/${uid}`, createReportChange('added'));
+  listenToChildRemoved(`${BOOKINGS_PATH}/${uid}`, createReportChange('removed'));
+  listenToChildChanged(`${BOOKINGS_PATH}/${uid}`, createReportChange('changed'));
+}
+
+export function fetchBookings(authData) {
+  if (authData.isAdmin) {
+    return fetchAllBookings();
   }
-  return fetchAllBookings();
+  return fetchBookingsForUser(authData.uid);
 }
 
 export function updateBooking(uid, gameId, booking) {

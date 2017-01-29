@@ -6,16 +6,15 @@ describe('dbBookings', () => {
 
   describe('trackBookings', () => {
 
-    it('should track child add / remove / change', () => {
+    it('should track child add / remove', () => {
       dbBookings.trackBookings(noop);
 
       expect(listenToChildAdded).toHaveBeenCalledWith('bookings', jasmine.any(Function));
       expect(listenToChildRemoved).toHaveBeenCalledWith('bookings', jasmine.any(Function));
-      expect(listenToChildChanged).toHaveBeenCalledWith('bookings', jasmine.any(Function));
     });
 
-    it('should call childAdd with booking, uid, gameId and type:added', done => {
-      const bookings = {
+    it('should call childAdd with userBookings, uid, gameId and type:added', done => {
+      const userBookings = {
         gameId1: {
           pickUp: 'Jerusalem'
         },
@@ -24,20 +23,20 @@ describe('dbBookings', () => {
         }
       };
 
-      listenToChildAdded.and.callFake((path, cb) => cb(bookings, 'someUID'));
+      listenToChildAdded.and.callFake((path, cb) => cb(userBookings, 'someUID'));
 
       dbBookings.trackBookings(addedBooking => {
         expect(addedBooking).toEqual({
           type: 'added',
-          bookings,
+          userBookings,
           uid: 'someUID'
         });
         done();
       });
     });
 
-    it('should call childChanged with bookings, uid, gameId and type:changed', done => {
-      const bookings = {
+    it('should call childRemoved with userBookings, uid, gameId and type:removed', done => {
+      const userBookings = {
         gameId1: {
           pickUp: 'Jerusalem'
         },
@@ -46,35 +45,73 @@ describe('dbBookings', () => {
         }
       };
 
-      listenToChildChanged.and.callFake((path, cb) => cb(bookings, 'someUID'));
-
-      dbBookings.trackBookings(changedBooking => {
-        expect(changedBooking).toEqual({
-          type: 'changed',
-          bookings,
-          uid: 'someUID'
-        });
-        done();
-      });
-    });
-
-    it('should call childRemoved with booking, uid, gameId and type:removed', done => {
-      const bookings = {
-        gameId1: {
-          pickUp: 'Jerusalem'
-        },
-        gameId2: {
-          pickUp: 'TelAviv'
-        }
-      };
-
-      listenToChildRemoved.and.callFake((path, cb) => cb(bookings, 'someUID'));
+      listenToChildRemoved.and.callFake((path, cb) => cb(userBookings, 'someUID'));
 
       dbBookings.trackBookings(removedBooking => {
         expect(removedBooking).toEqual({
           type: 'removed',
-          bookings,
+          userBookings,
           uid: 'someUID'
+        });
+        done();
+      });
+    });
+
+  });
+
+  describe('trackUserBookings', () => {
+
+    it('should track child add / remove', () => {
+      dbBookings.trackUserBookings('someUID', noop);
+
+      expect(listenToChildAdded).toHaveBeenCalledWith('bookings/someUID', jasmine.any(Function));
+      expect(listenToChildAdded).toHaveBeenCalledWith('bookings/someUID', jasmine.any(Function));
+      expect(listenToChildRemoved).toHaveBeenCalledWith('bookings/someUID', jasmine.any(Function));
+    });
+
+    it('should call childAdd with bookingItem, gameId and type:added', done => {
+      const bookingItem = { paidSeats: 1, extraSeats: 2, pickUp: 'tlv', dropOff: 'modiin' };
+      const gameId = 'gameId';
+
+      listenToChildAdded.and.callFake((path, cb) => cb(bookingItem, gameId));
+
+      dbBookings.trackUserBookings('someUID', addedBooking => {
+        expect(addedBooking).toEqual({
+          type: 'added',
+          bookingItem,
+          gameId
+        });
+        done();
+      });
+    });
+
+    it('should call childChanged with bookingItem, gameId and type:changed', done => {
+      const bookingItem = { paidSeats: 1, extraSeats: 2, pickUp: 'tlv', dropOff: 'modiin' };
+      const gameId = 'gameId';
+
+      listenToChildChanged.and.callFake((path, cb) => cb(bookingItem, gameId));
+
+      dbBookings.trackUserBookings('someUID', addedBooking => {
+        expect(addedBooking).toEqual({
+          type: 'changed',
+          bookingItem,
+          gameId
+        });
+        done();
+      });
+    });
+
+    it('should call childRemoved with bookingItem, gameId and type:removed', done => {
+      const bookingItem = { paidSeats: 1, extraSeats: 2, pickUp: 'tlv', dropOff: 'modiin' };
+      const gameId = 'gameId';
+
+      listenToChildRemoved.and.callFake((path, cb) => cb(bookingItem, gameId));
+
+      dbBookings.trackUserBookings('someUID', addedBooking => {
+        expect(addedBooking).toEqual({
+          type: 'removed',
+          bookingItem,
+          gameId
         });
         done();
       });
@@ -84,45 +121,14 @@ describe('dbBookings', () => {
 
   describe('fetchBookings', () => {
 
-    describe('single user bookings', () => {
+    describe('admin user', () => {
 
-      it('should fetch from bookings/someUID', done => {
-        read.and.returnValue(Promise.resolve({}));
-
-        dbBookings.fetchBookings('someUID').then(() => {
-          expect(read).toHaveBeenCalledWith('bookings/someUID');
-          done();
-        })
-      });
-
-      it('should return a single user bookings', done => {
-        read.and.returnValue(Promise.resolve({ firstName: 'spider', lastName: 'pig' }));
-
-        dbBookings.fetchBookings('someUID').then(usersInfo => {
-          expect(usersInfo).toEqual({
-            someUID: { firstName: 'spider', lastName: 'pig' }
-          });
-          done();
-        })
-      });
-
-      it('should return empty object if no user bookings', done => {
-        read.and.returnValue(Promise.resolve(null));
-
-        dbBookings.fetchBookings('someUID').then(userBookings => {
-          expect(userBookings).toEqual({});
-          done();
-        })
-      });
-
-    });
-
-    describe('all bookings', () => {
+      const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: true };
 
       it('should fetch from bookings', done => {
         read.and.returnValue(Promise.resolve({}));
 
-        dbBookings.fetchBookings().then(() => {
+        dbBookings.fetchBookings(authData).then(() => {
           expect(read).toHaveBeenCalledWith('bookings');
           done();
         })
@@ -134,7 +140,7 @@ describe('dbBookings', () => {
           uid2: { firstName: 'can', lastName: 'he swing?' }
         }));
 
-        dbBookings.fetchBookings().then(userBookings => {
+        dbBookings.fetchBookings(authData).then(userBookings => {
           expect(userBookings).toEqual({
             uid1: { firstName: 'spider', lastName: 'pig' },
             uid2: { firstName: 'can', lastName: 'he swing?' }
@@ -146,7 +152,43 @@ describe('dbBookings', () => {
       it('should return empty object if no users info', done => {
         read.and.returnValue(Promise.resolve(null));
 
-        dbBookings.fetchBookings().then(userBookings => {
+        dbBookings.fetchBookings(authData).then(userBookings => {
+          expect(userBookings).toEqual({});
+          done();
+        })
+      });
+
+    });
+
+    describe('NON admin user', () => {
+
+      const authData = { uid: 'someUID', email: 'spider@pig.com', photoURL: 'http://photo', isAdmin: false };
+
+      it('should fetch from bookings/someUID', done => {
+
+        read.and.returnValue(Promise.resolve({}));
+
+        dbBookings.fetchBookings(authData).then(() => {
+          expect(read).toHaveBeenCalledWith('bookings/someUID');
+          done();
+        })
+      });
+
+      it('should return a single user bookings', done => {
+        read.and.returnValue(Promise.resolve({ firstName: 'spider', lastName: 'pig' }));
+
+        dbBookings.fetchBookings(authData).then(usersInfo => {
+          expect(usersInfo).toEqual({
+            someUID: { firstName: 'spider', lastName: 'pig' }
+          });
+          done();
+        })
+      });
+
+      it('should return empty object if no user bookings', done => {
+        read.and.returnValue(Promise.resolve(null));
+
+        dbBookings.fetchBookings(authData).then(userBookings => {
           expect(userBookings).toEqual({});
           done();
         })
