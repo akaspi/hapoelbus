@@ -109,7 +109,7 @@ function createBookingButton(isBookingAllowed, isBooked, onBooking) {
     );
 
     return (
-        <a className="button success small" key="register-btn" onClick={onBooking} disabled={!isBookingAllowed}>
+        <a className="button success small" key="register-btn" onClick={isBookingAllowed ? onBooking : _.noop} disabled={!isBookingAllowed}>
             { isBooked ? editBookingButton : bookButton }
         </a>
     );
