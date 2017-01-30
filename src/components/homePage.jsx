@@ -90,7 +90,7 @@ function createGamesLists(openGames, closedGamesArr, onBooking, onCancelBooking)
   return (
     <div>
         { _.isEmpty(openGames) ? null : createOpenGamesList() }
-        { createClosedGamesList() }
+        { _.isEmpty(closedGamesArr) ? null : createClosedGamesList() }
     </div>
   );
 }
