@@ -26,9 +26,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function parseEventDate(game) {
-  const eventDate = new Date(game.year, game.month, game.day);
-  eventDate.setMonth(eventDate.getMonth() - 1);
-  return eventDate;
+  return new Date(parseInt(game.year, 10), parseInt(game.month, 10) - 1, parseInt(game.day), 10);
 }
 
 function isFutureEvent(game) {
@@ -49,20 +47,29 @@ function getClosedGamesArr(games) {
     .value();
 }
 
-function getOpenGames(games) {
-  return _.omitBy(games, game => game.status === Constants.GAME.STATUS.CLOSED);
+function getOpenGamesArr(games) {
+    return _.chain(games)
+        .omitBy(game => {
+            return game.status === Constants.GAME.STATUS.CLOSED;
+        })
+        .map((game, gameId) => ({
+            game,
+            gameId
+        }))
+        .sortBy(gameData => parseEventDate(gameData.game))
+        .value();
 }
 
-function createMobileNoGamesMessageSection() {
+function createNoOpenGamesMessageSection() {
   return (
-    <div className='show-for-small-only no-bookings more-space'>
+    <div className='no-bookings more-space'>
       <span>{Translations.HOME_PAGE.NO_OPEN_GAMES}</span>
       <i className='fa fa-bus' aria-hidden='true' />
     </div>
   );
 }
 
-function createGamesLists(openGames, closedGamesArr, onBooking, onCancelBooking) {
+function createGamesLists(openGamesArr, closedGamesArr, onBooking, onCancelBooking) {
 
   function bindOnGameItemClick(fn, gameId) {
     return function() {
@@ -74,7 +81,7 @@ function createGamesLists(openGames, closedGamesArr, onBooking, onCancelBooking)
     return (
         <div className='events-list open-events'>
           <h6 className='hide-for-small-only'>{Translations.HOME_PAGE.OPEN_GAMES}</h6>
-            { _.map(openGames, (game, gameId) => <EventItem key={'open-game-' + gameId} eventId={gameId} onBooking={bindOnGameItemClick(onBooking, gameId)} onCancelBooking={bindOnGameItemClick(onCancelBooking, gameId)} />) }
+            { _.map(openGamesArr, gameData => <EventItem key={'open-game-' + gameData.gameId} eventId={gameData.gameId} onBooking={bindOnGameItemClick(onBooking, gameData.gameId)} onCancelBooking={bindOnGameItemClick(onCancelBooking, gameData.gameId)} />) }
         </div>
     );
   }
@@ -91,8 +98,8 @@ function createGamesLists(openGames, closedGamesArr, onBooking, onCancelBooking)
 
   return (
     <div>
-        { _.isEmpty(openGames) ? null : createOpenGamesList() }
-        { createClosedGamesList() }
+        { _.isEmpty(openGamesArr) ? null : createOpenGamesList() }
+        { _.isEmpty(closedGamesArr) ? null : createClosedGamesList() }
     </div>
   );
 }
@@ -108,15 +115,15 @@ class HomePage extends React.Component {
   };
 
   render() {
-    const openGames = getOpenGames(this.props.games);
+    const openGamesArr = getOpenGamesArr(this.props.games);
     const closedGamesArr = getClosedGamesArr(this.props.games);
     return (
       <div className='site'>
         <div className='home-page small-centered'>
           <div className='events-container' key='events-container'>
             <div className='events' key='events'>
-              { _.isEmpty(openGames) ? createMobileNoGamesMessageSection() : null }
-              { createGamesLists(openGames, closedGamesArr, this.onBooking, this.onCancelBooking) }
+              { _.isEmpty(openGamesArr) ? createNoOpenGamesMessageSection() : null }
+              { createGamesLists(openGamesArr, closedGamesArr, this.onBooking, this.onCancelBooking) }
             </div>
           </div>
         </div>

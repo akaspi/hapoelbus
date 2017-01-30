@@ -7,7 +7,7 @@ const routingActions = require('../redux/actions/routingActions');
 const Constants = require('../utils/constants');
 
 function mapStateToProps(state) {
-    const uidToEdit = state.routing.current.uid || state.authData.uid;
+    const uidToEdit = state.routing.current.params.uid || state.authData.uid;
     return {
         uid: uidToEdit,
         goHomeAfterEditing: state.routing.history.length === 1
