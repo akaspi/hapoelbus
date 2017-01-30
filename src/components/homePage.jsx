@@ -26,9 +26,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function parseEventDate(game) {
-  const eventDate = new Date(game.year, game.month, game.day);
-  eventDate.setMonth(eventDate.getMonth() - 1);
-  return eventDate;
+  return new Date(parseInt(game.year, 10), parseInt(game.month, 10) - 1, parseInt(game.day), 10);
 }
 
 function isFutureEvent(game) {
