@@ -34,7 +34,7 @@
     "jasmine-spec-reporter": "^2.7.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.17.3",
-    "mobx": "^3.0.0",
+    "mobx": "^3.1.0",
     "node-sass": "^3.8.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
