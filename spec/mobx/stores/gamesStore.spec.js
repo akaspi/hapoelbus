@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 import { toJS } from 'mobx';
-import { GamesStore } from '../../../mobx/stores/gamesStore';
+import GamesStore from '../../../mobx/stores/gamesStore';
 
 describe('GamesStore', () => {
 
