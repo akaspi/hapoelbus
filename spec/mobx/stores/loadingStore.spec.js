@@ -1,4 +1,4 @@
-import { LoadingStore } from '../../../mobx/stores/loadingStore';
+import LoadingStore from '../../../mobx/stores/loadingStore';
 
 describe('LoadingStore', () => {
 
