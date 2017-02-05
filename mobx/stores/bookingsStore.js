@@ -17,7 +17,7 @@ class Booking {
   }
 }
 
-class BookingsStore {
+export default class BookingsStore {
   @observable bookings = observable.map({});
 
   @action setBookings = bookings => {
@@ -50,10 +50,4 @@ class BookingsStore {
       this.bookings.get(uid).delete(gameId);
     }
   }
-
 }
-
-const bookingsStore = new BookingsStore();
-
-export default bookingsStore;
-export { BookingsStore };
