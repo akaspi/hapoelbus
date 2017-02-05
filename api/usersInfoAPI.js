@@ -1,34 +1,30 @@
-import authStore from '../mobx/stores/authStore';
-import usersInfoStore from '../mobx/stores/usersInfoStore';
+import _ from 'lodash';
+import { computed } from 'mobx';
+
 import * as dbUsersInfo from '../database/dbUsersInfo';
 
-function onUserInfoChange(changeEvent) {
-  switch (changeEvent.type) {
-    case 'added':
-    case 'changed':
-      usersInfoStore.updateUserInfo(changeEvent.uid, changeEvent.userInfo);
-      break;
-    case 'removed':
-      usersInfoStore.removeUserInfo(changeEvent.uid);
-      break;
-  }
-}
-
-export function trackUsersInfo() {
-  if (!authStore.authData) {
-    return;
+export default class UsersInfoAPI {
+  constructor(stores) {
+    this.stores = stores;
   }
 
-  const fetchPromise = authStore.authData.isAdmin ? dbUsersInfo.fetchUsersInfo() : dbUsersInfo.fetchUsersInfo(authStore.authData.uid);
+  @computed get usersInfo() {
+    return this.stores.usersInfoStore.usersInfo.toJS();
+  }
 
-  fetchPromise.then((usersInfo) => {
-    usersInfoStore.setUsersInfo(usersInfo);
-    dbUsersInfo.trackUsersInfo(uid, onUserInfoChange);
-  });
+  @computed get currentUserInfo() {
+    const uid = _.get(this.stores.authStore, ['authData', 'uid']);
+    return this.stores.usersInfoStore.usersInfo.get(uid) || {};
+  }
+
+  @computed.struct get sortedUsersInfo() {
+    return _(this.usersInfo)
+      .map((userInfo, uid) => ({ uid, userInfo }))
+      .sortBy('userInfo.firstName')
+      .value()
+  }
+
+  updateUserInfo = dbUsersInfo.updateUserInfo;
+
+  removeUserInfo = dbUsersInfo.removeUserInfo;
 }
-
-export function update(uid, userInfo) {
-  return dbUsersInfo.updateUserInfo(uid, userInfo);
-}
-
-window.usersInfoStore = usersInfoStore;
