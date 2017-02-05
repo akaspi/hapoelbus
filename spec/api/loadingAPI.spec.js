@@ -1,23 +1,27 @@
-import LoadingStore from '../../../mobx/stores/loadingStore';
+import LoadingAPI from '../../api/loadingAPI';
+import LoadingStore from '../../mobx/stores/loadingStore';
 
-describe('LoadingStore', () => {
+describe('LoadingAPI', () => {
 
   it('should not be busy on creation', () => {
     const loadingStore = new LoadingStore();
+    const loadingAPI = new LoadingAPI({ loadingStore });
 
-    expect(loadingStore.isBusy).toBe(false);
+    expect(loadingAPI.isBusy).toBe(false);
   });
 
   it('should be busy when starting pending request', () => {
     const loadingStore = new LoadingStore();
+    const loadingAPI = new LoadingAPI({ loadingStore });
 
     loadingStore.startPendingRequest();
 
-    expect(loadingStore.isBusy).toBe(true);
+    expect(loadingAPI.isBusy).toBe(true);
   });
 
   it('should not be busy when all pending requests ends', () => {
     const loadingStore = new LoadingStore();
+    const loadingAPI = new LoadingAPI({ loadingStore });
 
     loadingStore.startPendingRequest();
     loadingStore.startPendingRequest();
@@ -26,7 +30,7 @@ describe('LoadingStore', () => {
     loadingStore.endPendingRequest();
     loadingStore.endPendingRequest();
 
-    expect(loadingStore.isBusy).toBe(false);
+    expect(loadingAPI.isBusy).toBe(false);
   });
 
 });
