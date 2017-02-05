@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress --colors --hot --config ./webpack.dev.config.js",
     "test": "jasmine",
-    "lint": "eslint mobx/** database/**",
+    "lint": "eslint mobx/** database/** api/**",
     "make-docs": "webpack --config ./webpack.prod.docs.config.js && git commit -am \"make-docs\"",
     "update-version": "npm version $1 -m \"Update version to %s\"",
     "serve-docs": "serve -p 3000 docs/"
