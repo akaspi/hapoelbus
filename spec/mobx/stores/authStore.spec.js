@@ -2,21 +2,7 @@ import { AuthStore } from '../../../mobx/stores/authStore';
 
 describe('AuthStore', () => {
 
-  describe('initialization', function() {
 
-    it('should be logged out', function() {
-      const authStore = new AuthStore();
-
-      expect(authStore.isLoggedIn).toBe(false);
-    });
-
-    it('should not be admin', function() {
-      const authStore = new AuthStore();
-
-      expect(authStore.isAdmin).toBe(false);
-    });
-
-  });
 
   describe('setting auth data', function() {
 
