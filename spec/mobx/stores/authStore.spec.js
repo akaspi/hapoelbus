@@ -1,8 +1,6 @@
-import { AuthStore } from '../../../mobx/stores/authStore';
+import AuthStore from '../../../mobx/stores/authStore';
 
 describe('AuthStore', () => {
-
-
 
   describe('setting auth data', function() {
 
