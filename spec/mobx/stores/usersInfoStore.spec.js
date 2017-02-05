@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import { toJS } from 'mobx';
-import { UsersInfoStore } from '../../../mobx/stores/usersInfoStore';
+import UsersInfoStore from '../../../mobx/stores/usersInfoStore';
 
 describe('UsersInfoStore', () => {
 
