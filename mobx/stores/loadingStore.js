@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 
-class LoadingStore {
+export default class LoadingStore {
   @observable pendingRequestsCounter = 0;
 
   @computed get isBusy() {
@@ -11,8 +11,3 @@ class LoadingStore {
 
   @action endPendingRequest = () => this.pendingRequestsCounter--;
 }
-
-const loadingStore = new LoadingStore();
-
-export default loadingStore;
-export { LoadingStore };

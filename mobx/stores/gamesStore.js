@@ -19,7 +19,7 @@ class Game {
   }
 }
 
-class GamesStore {
+export default class GamesStore {
   @observable games = observable.map({});
 
   @action setGames = games => {
@@ -40,8 +40,3 @@ class GamesStore {
   }
 
 }
-
-const gameStore = new GamesStore();
-
-export default gameStore;
-export { GamesStore };

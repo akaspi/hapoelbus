@@ -23,7 +23,7 @@ class UserInfo {
   }
 }
 
-class UsersInfoStore {
+export default class UsersInfoStore {
   @observable usersInfo = observable.map({});
 
   @action setUsersInfo = usersInfo => {
@@ -44,8 +44,3 @@ class UsersInfoStore {
   }
 
 }
-
-const usersInfoStore = new UsersInfoStore();
-
-export default usersInfoStore;
-export { UsersInfoStore };
