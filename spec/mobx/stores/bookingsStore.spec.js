@@ -1,5 +1,5 @@
 import { toJS } from 'mobx';
-import { BookingsStore } from '../../../mobx/stores/bookingsStore';
+import BookingsStore from '../../../mobx/stores/bookingsStore';
 
 describe('BookingsStore', () => {
 
