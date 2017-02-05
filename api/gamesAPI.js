@@ -30,7 +30,7 @@ export default class GamesAPI {
       .map((game, gameId) => ({ gameId, game }))
       .reject(gameData => isClosed(gameData.game))
       .sortBy(gameData => parseEventDate(gameData.game))
-      .value()
+      .value();
   }
 
   @computed.struct get closedGames() {
@@ -38,7 +38,7 @@ export default class GamesAPI {
       .map((game, gameId) => ({ gameId, game }))
       .filter(gameData => isClosed(gameData.game))
       .sortBy(gameData => parseEventDate(gameData.game))
-      .value()
+      .value();
   }
 
   @computed.struct get futureGames() {
@@ -46,7 +46,7 @@ export default class GamesAPI {
       .map((game, gameId) => ({ gameId, game }))
       .filter(gameData => isClosed(gameData.game) && isFutureEvent(gameData.game))
       .sortBy(gameData => parseEventDate(gameData.game))
-      .value()
+      .value();
   }
 
   updateGame = dbGames.updateGame;

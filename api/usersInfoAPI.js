@@ -21,7 +21,7 @@ export default class UsersInfoAPI {
     return _(this.usersInfo)
       .map((userInfo, uid) => ({ uid, userInfo }))
       .sortBy('userInfo.firstName')
-      .value()
+      .value();
   }
 
   updateUserInfo = dbUsersInfo.updateUserInfo;
