@@ -2,50 +2,22 @@ import AuthStore from '../../../mobx/stores/authStore';
 
 describe('AuthStore', () => {
 
-  describe('setting auth data', function() {
+  describe('setAuthData', function() {
 
-    it('should be logged in', function() {
+    it('should be auth data', function() {
       const authStore = new AuthStore();
 
       authStore.setAuthData({ uid: 1234 });
 
-      expect(authStore.isLoggedIn).toBe(true);
+      expect(authStore.authData).toEqual({ uid: 1234 });
     });
 
-    it('should should be admin', function() {
-      const authStore = new AuthStore();
-
-      authStore.setAuthData({ isAdmin: true });
-
-      expect(authStore.isAdmin).toBe(true);
-    });
-
-    it('should not be admin', function() {
-      const authStore = new AuthStore();
-
-      authStore.setAuthData({ isAdmin: false });
-
-      expect(authStore.isAdmin).toBe(false);
-    });
-
-  });
-
-  describe('setting auth data as null', function() {
-
-    it('should be logged out', function() {
+    it('should be null', function() {
       const authStore = new AuthStore();
 
       authStore.setAuthData(null);
 
-      expect(authStore.isLoggedIn).toBe(false);
-    });
-
-    it('should not be admin', function() {
-      const authStore = new AuthStore();
-
-      authStore.setAuthData(null);
-
-      expect(authStore.isAdmin).toBe(false);
+      expect(authStore.authData).toBeNull();
     });
 
   });
