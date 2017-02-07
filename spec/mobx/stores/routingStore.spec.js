@@ -1,4 +1,4 @@
-import { RoutingStore } from '../../../mobx/stores/routingStore';
+import RoutingStore from '../../../mobx/stores/routingStore';
 
 describe('RoutingStore', () => {
 

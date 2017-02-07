@@ -3,6 +3,7 @@ import UsersInfoStore from '../mobx/stores/usersInfoStore';
 import GamesStore from '../mobx/stores/gamesStore';
 import BookingsStore from '../mobx/stores/bookingsStore';
 import LoadingStore from '../mobx/stores/loadingStore';
+import RoutingStore from '../mobx/stores/routingStore';
 
 import sync from '../api/utils/sync';
 
@@ -15,6 +16,7 @@ import BookingsAPI from '../api/bookingsAPI';
 import DistributionAPI from '../api/distributionAPI';
 
 const createStores = () => ({
+  routingStore: new RoutingStore(),
   loadingStore: new LoadingStore(),
   authStore: new AuthStore(),
   usersInfoStore: new UsersInfoStore(),
@@ -36,4 +38,4 @@ export default function createAPI() {
     bookingsAPI: new BookingsAPI(stores),
     distributionAPI: new DistributionAPI(stores)
   };
-};
+}

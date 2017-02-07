@@ -4,6 +4,7 @@ const ReactRedux = require('react-redux');
 const classNames = require('classnames');
 
 import LoggedInUserInfo from './LoggedInUserInfo.jsx';
+import MobileMenu from './MobileMenu.jsx';
 
 const Constants = require('../utils/constants');
 const Translations = require('../utils/translations');
@@ -41,17 +42,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-function createSmallMenuForMobile(toggleMenuVisibility) {
-    return (
-        <div className="show-for-small-only float-left" key="admin-menu-icon">
-            <a className="small-menu button" onClick={toggleMenuVisibility}>
-                <i className="fa fa-bars" aria-hidden="true"/>
-            </a>
-        </div>
-    );
-}
-
-function createMenu(currentPageId, navigateTo, isAdmin, isMenuVisible, toggleMenuVisibility) {
+function createDesktopMenu(currentPageId, navigateTo) {
 
     function createDesktopMenuItem(pageId) {
         const itemClasses = classNames({
@@ -67,73 +58,22 @@ function createMenu(currentPageId, navigateTo, isAdmin, isMenuVisible, toggleMen
         );
     }
 
-    function createMobileMenuItem(pageId) {
-        const itemClasses = classNames({
-            active: currentPageId === pageId,
-            button: true
-        });
-
-        const onMobileMenuClicked = () => {
-            navigateTo(pageId);
-            toggleMenuVisibility();
-        };
-
-        return (
-            <a className={itemClasses} onClick={onMobileMenuClicked} key={'page-' + pageId}>
-                { Translations.ROUTING.PAGES[pageId] }
-            </a>
-        );
-    }
-
-    function createDesktopMenu() {
-        return (
+    return (
+        <div className="medium-7 small-12 column vertical collapsed">
             <div className="menu button-group hide-for-small-only" key="admin-menu">
                 { _.map(menuPagesIds, createDesktopMenuItem) }
             </div>
-        );
-    }
-
-    function createMobileMenu() {
-        return (
-            <div className="menu button-group stacked-for-small show-for-small-only" key="admin-menu-mobile">
-                { _.map(menuPagesIds, createMobileMenuItem) }
-            </div>
-        );
-    }
-
-    return (
-        <div className="medium-7 small-12 column vertical collapsed">
-            { isAdmin ? createDesktopMenu() : null }
-            { isAdmin && isMenuVisible ? createMobileMenu() : null }
         </div>
     );
 }
 
-class TopBar extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isMenuVisible: false
-        }
-    }
-
-    toggleMenuVisibility() {
-        this.setState({
-            isMenuVisible: !this.state.isMenuVisible
-        });
-    }
-
-    render() { //TODO: Blocked By Redux - remove this.props.uid
-        return (
-            <div className="top-bar row small-collapse hide-for-print">
-                { this.props.uid ? <LoggedInUserInfo /> : null }
-                { this.props.isAdmin ? createSmallMenuForMobile(this.toggleMenuVisibility.bind(this)) : null }
-                { createMenu(this.props.currentPageId, this.props.navigateTo, this.props.isAdmin, this.state.isMenuVisible, this.toggleMenuVisibility.bind(this)) }
-            </div>
-        );
-    }
-}
+const TopBar = ({ uid, currentPageId, navigateTo, isAdmin }) => ( //TODO: Blocked By Redux - remove this.props.uid
+    <div className="top-bar row small-collapse hide-for-print">
+        { uid ? <LoggedInUserInfo /> : null }
+        { isAdmin ? <MobileMenu /> : null }
+        { isAdmin ? createDesktopMenu(currentPageId, navigateTo) : null}
+    </div>
+);
 
 TopBar.propTypes = {
     uid: React.PropTypes.string.isRequired,

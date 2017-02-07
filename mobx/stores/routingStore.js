@@ -1,7 +1,7 @@
 import last from 'lodash/last';
 import { observable, action, computed } from 'mobx';
 
-class RoutingStore {
+export default class RoutingStore {
   @observable history = [{ pageId: 'auth', params: {} }];
 
   @computed get current() {
@@ -27,8 +27,3 @@ class RoutingStore {
     this.history.replace([{ pageId, params }]);
   };
 }
-
-const routingStore = new RoutingStore();
-
-export default routingStore;
-export { RoutingStore };

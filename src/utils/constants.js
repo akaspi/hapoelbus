@@ -1,17 +1,26 @@
+const pages = {
+  HOME: 'home',
+  AUTH: 'auth',
+  USERS: 'users',
+  GAMES: 'games',
+  BOOKINGS: 'bookings',
+  DISTRIBUTION: 'distribution',
+  EDIT_USER_INFO: 'editUserInfo',
+  UPDATE_BOOKING: 'updateBooking',
+  UPDATE_GAME: 'updateGame'
+};
+
 module.exports = {
   ROUTING: {
-    PAGES: {
-      HOME: 'home',
-      AUTH: 'auth',
-      USERS: 'users',
-      GAMES: 'games',
-      BOOKINGS: 'bookings',
-      DISTRIBUTION: 'distribution',
-      EDIT_USER_INFO: 'editUserInfo',
-      UPDATE_BOOKING: 'updateBooking',
-      UPDATE_GAME: 'updateGame'
-    }
+    PAGES: pages
   },
+  MENU_PAGES_IDS: [
+    pages.HOME,
+    pages.USERS,
+    pages.GAMES,
+    pages.BOOKINGS,
+    pages.DISTRIBUTION
+  ],
   GAME: {
     STATUS: {
       CLOSED: 'closed',

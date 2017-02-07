@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+import * as Constants from '../../src/utils/constants';
+
 import * as dbAuthData from '../../database/dbAuthData';
 import * as dbUsersInfo from '../../database/dbUsersInfo';
 import * as dbGames from '../../database/dbGames';
@@ -74,6 +76,7 @@ export default function sync(stores) {
 
       Promise.all(fetchPromises).then(() => {
         stores.loadingStore.endPendingRequest();
+        stores.routingStore.navigateTo(Constants.ROUTING.PAGES.HOME);
         dbUsersInfo.trackUsersInfo(authData, onUserInfoTrack.bind(this, stores.usersInfoStore));
         dbGames.trackGames(onGameTrack, this, stores.gamesStore);
         dbBookings.trackBookings(onBookingTrack, this, stores.bookingsStore);
