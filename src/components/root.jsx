@@ -1,18 +1,19 @@
-const React = require('react');
-const ReactRedux = require('react-redux');
+import React from 'react';
+import { Provider } from 'mobx-react';
+import createAPI from '../../api/createAPI';
+import App from './app.jsx';
 
+const ReactRedux = require('react-redux');
 const makeStore = require('../redux/makeStore');
 
-const App = require('./app');
-
-class Root extends React.Component {
+export default class Root extends React.Component {
     render() {
         return (
             <ReactRedux.Provider store={makeStore()}>
-                <App />
+                <Provider { ... createAPI() }>
+                    <App />
+                </Provider>
             </ReactRedux.Provider>
         );
     }
 }
-
-module.exports = Root;
