@@ -14,7 +14,10 @@ export default class UsersInfoAPI {
 
   @computed get currentUserInfo() {
     const uid = _.get(this.stores.authStore, ['authData', 'uid']);
-    return this.stores.usersInfoStore.usersInfo.get(uid) || {};
+    if (this.stores.usersInfoStore.usersInfo.has(uid)) {
+      return this.stores.usersInfoStore.usersInfo.get(uid);
+    }
+    return {};
   }
 
   @computed.struct get sortedUsersInfo() {

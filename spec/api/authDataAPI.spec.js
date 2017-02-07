@@ -36,6 +36,28 @@ describe('authDataAPI', () => {
 
   });
 
+  describe('authData', () => {
+
+    it('should be the uid from the authData', function() {
+      const authStore = new AuthStore();
+      const authDataAPI = new AuthDataAPI({ authStore });
+
+      authStore.setAuthData({ uid: '1234'});
+
+      expect(authDataAPI.authData).toBe({ uid: '1234'});
+    });
+
+    it('should be null', function() {
+      const authStore = new AuthStore();
+      const authDataAPI = new AuthDataAPI({ authStore });
+
+      authStore.setAuthData(null);
+
+      expect(authDataAPI.authData).toBeNull();
+    });
+
+  });
+
   describe('isLoggedIn', () => {
 
     it('should be logged in', function() {

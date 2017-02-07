@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import _ from 'lodash';
 import { computed } from 'mobx';
 
 import * as dbAuthData from '../database/dbAuthData';
@@ -8,12 +8,16 @@ export default class AuthDataAPI {
     this.stores = stores;
   }
 
+  @computed get authData() {
+    return _.get(this.stores.authStore, ['authData'], {});
+  }
+
   @computed get isLoggedIn() {
-    return !!(get(this.stores.authStore, ['authData']));
+    return !!(_.get(this.stores.authStore, ['authData']));
   }
 
   @computed get isAdmin() {
-    return !!(get(this.stores.authStore, ['authData', 'isAdmin']));
+    return !!(_.get(this.stores.authStore, ['authData', 'isAdmin']));
   }
 
   loginWithFacebook = dbAuthData.loginWithFacebook;

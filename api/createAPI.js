@@ -7,6 +7,7 @@ import LoadingStore from '../mobx/stores/loadingStore';
 import sync from '../api/utils/sync';
 
 import LoadingAPI from '../api/loadingAPI';
+import RoutingAPI from '../api/routingAPI';
 import AuthDataAPI from '../api/authDataAPI';
 import UsersInfoAPI from '../api/usersInfoAPI';
 import GamesAPI from '../api/gamesAPI';
@@ -21,17 +22,18 @@ const createStores = () => ({
   bookingsStore: new BookingsStore()
 });
 
-export default class API {
-  constructor() {
-    const stores = createStores();
+export default function createAPI() {
+  const stores = createStores();
 
-    sync(stores);
+  sync(stores);
 
-    this.loadingAPI = new LoadingAPI(stores);
-    this.authDataAPI = new AuthDataAPI(stores);
-    this.usersInfoAPI = new UsersInfoAPI(stores);
-    this.gamesAPI = new GamesAPI(stores);
-    this.bookingsAPI = new BookingsAPI(stores);
-    this.distributionAPI = new DistributionAPI(stores);
-  }
-}
+  return {
+    loadingAPI: new LoadingAPI(stores),
+    routingAPI: new RoutingAPI(stores),
+    authDataAPI: new AuthDataAPI(stores),
+    usersInfoAPI: new UsersInfoAPI(stores),
+    gamesAPI: new GamesAPI(stores),
+    bookingsAPI: new BookingsAPI(stores),
+    distributionAPI: new DistributionAPI(stores)
+  };
+};
