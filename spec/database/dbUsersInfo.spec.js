@@ -4,7 +4,7 @@ import { read, remove, listenToValueChange, listenToChildAdded, listenToChildRem
 
 describe('dbUsersInfo', () => {
 
-  describe('trackUsersInfo', () => {
+  xdescribe('trackUsersInfo', () => {
 
     describe('admin user', () => {
 
