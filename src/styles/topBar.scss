@@ -6,10 +6,6 @@
     cursor: default;
   }
 
-  .user-info {
-    font-size: 0.85rem;
-  }
-
   .small-menu {
     background: #D50000;
     margin-top: 0.5em;
@@ -39,22 +35,6 @@
           color: #FFFFFF;
         }
       }
-    }
-  }
-
-  .avatar {
-    width: 2.5rem;
-    background: #fff;
-    border-radius: 50%;
-    margin: 10px;
-    cursor: pointer;
-  }
-
-  .disconnect {
-    color: #F44336;
-
-    &:hover {
-      text-decoration: underline;
     }
   }
 

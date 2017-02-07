@@ -3,6 +3,8 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import APIPropTypes from '../utils/APIPropTypes';
 
+import '../styles/loggedInUserInfo.scss';
+
 function getUserTitle(currentUser) {
     if (!currentUser) {
         return 'משתמש';
@@ -20,15 +22,15 @@ const LoggedInUserInfo = ({ authDataAPI, usersInfoAPI }) => {
     }
 
     return (
-        <div className="medium-5 small-10 column user-info">
-            <img className="avatar"
+        <div className='logged-in-user-info medium-5 small-10 column'>
+            <img className='avatar'
                  src={noProtocol(authDataAPI.authData.photoURL)}
                  onClick={_.noop}
             />
             <span>שלום </span>
-            <span className="user-name">{getUserTitle(usersInfoAPI.currentUserInfo)}</span>
+            <span className='user-name'>{getUserTitle(usersInfoAPI.currentUserInfo)}</span>
             <span> | </span>
-            <a className="disconnect" onClick={authDataAPI.logOut}>התנתק</a>
+            <a className='disconnect' onClick={authDataAPI.logOut}>התנתק</a>
         </div>
     );
 };
