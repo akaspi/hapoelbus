@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import APIPropTypes from '../utils/APIPropTypes';
 import Logo from './logo.jsx';
 
-require('../styles/spinner.scss');
+import '../styles/spinner.scss';
 
 const Spinner = ({ loadingAPI }) => {
     const overlayClass = classNames({
