@@ -3,10 +3,6 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import APIPropTypes from '../utils/APIPropTypes';
 
-// const Constants = require('../utils/constants');
-
-require('../styles/spinner.scss');
-
 function getUserTitle(currentUser) {
     if (!currentUser) {
         return 'משתמש';
