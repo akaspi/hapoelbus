@@ -1,4 +1,4 @@
-import { isComputed } from 'mobx';
+import { isComputed, toJS } from 'mobx';
 import AuthDataAPI from '../../api/authDataAPI';
 import AuthStore from '../../mobx/stores/authStore';
 
@@ -44,7 +44,7 @@ describe('authDataAPI', () => {
 
       authStore.setAuthData({ uid: '1234'});
 
-      expect(authDataAPI.authData).toBe({ uid: '1234'});
+      expect(toJS(authDataAPI.authData)).toEqual({ uid: '1234'});
     });
 
     it('should be null', function() {
