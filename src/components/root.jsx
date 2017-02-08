@@ -8,8 +8,11 @@ const makeStore = require('../redux/makeStore');
 
 export default class Root extends React.Component {
     render() {
+        const rStore = makeStore();
+        window.rStore = rStore; //TODO: Blocked By Redux
+
         return (
-            <ReactRedux.Provider store={makeStore()}>
+            <ReactRedux.Provider store={rStore}>
                 <Provider { ... createAPI() }>
                     <App />
                 </Provider>

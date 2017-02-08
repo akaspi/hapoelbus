@@ -11,6 +11,9 @@ export default class RoutingAPI {
     return currentRouting.pageId;
   }
 
-  navigateTo = (pageId, params) => this.stores.routingStore.navigateTo(pageId, params)
+  navigateTo = (pageId, params) => {
+    window.rStore.dispatch({ type: 'NAVIGATE_TO', pageId, params }); //TODO: Blocked By Redux
+    this.stores.routingStore.navigateTo(pageId, params);
+  }
   
 }
