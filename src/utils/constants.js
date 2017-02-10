@@ -144,6 +144,10 @@ module.exports = {
     'zenit': {
       logo: 'http://upload.wikimedia.org/wikipedia/commons/thumb/2/25/FC_Zenit_1_star_2015_logo.png/220px-FC_Zenit_1_star_2015_logo.png',
       label: 'זניט'
+    },
+    'gran-canaria': {
+      logo: 'https://upload.wikimedia.org/wikipedia/en/2/2a/CB_Gran_Canaria_2014.png',
+      label: 'גראן קנריה'
     }
   }
 };
