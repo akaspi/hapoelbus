@@ -12,7 +12,10 @@ export default class RoutingAPI {
   }
 
   navigateTo = (pageId, params) => {
-    window.rStore.dispatch({ type: 'NAVIGATE_TO', pageId, params }); //TODO: Blocked By Redux
+    if (typeof window !== 'undefined') {
+      window.rStore.dispatch({ type: 'NAVIGATE_TO', pageId, params }); //TODO: Blocked By Redux
+    }
+
     this.stores.routingStore.navigateTo(pageId, params);
   }
   
