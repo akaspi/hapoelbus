@@ -5,7 +5,7 @@ const authActions = require('../redux/actions/authActions');
 const Constants = require('../utils/constants');
 
 import Spinner from './Spinner';
-import TopBar from './topBar2';
+import TopBar from './TopBar';
 const AuthPage = require('./authPage');
 const HomePage = require('./homePage');
 const UsersPage = require('./usersPage');

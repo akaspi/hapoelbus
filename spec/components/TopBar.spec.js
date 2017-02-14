@@ -2,7 +2,7 @@ import React from 'react';
 import createComponent from 'react-unit';
 import AuthStore from '../../mobx/stores/authStore';
 import AuthDataAPI from '../../api/authDataAPI';
-import TopBar from '../../src/components/topBar2';
+import TopBar from '../../src/components/TopBar';
 import LoggedInUserInfo from '../../src/components/LoggedInUserInfo';
 import MobileMenu from '../../src/components/MobileMenu';
 import DesktopMenu from '../../src/components/DesktopMenu';
