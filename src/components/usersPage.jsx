@@ -8,7 +8,7 @@ const Translations = require('../utils/translations');
 const Constants = require('../utils/constants');
 const routingActions = require('../redux/actions/routingActions');
 
-const ListItem = require('./listItem2');
+const ListItem = require('./ListItem');
 const PageTitle = require('./pageTitle');
 
 const FILTERS = {

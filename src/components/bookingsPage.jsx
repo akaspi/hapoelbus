@@ -9,7 +9,7 @@ const Translations = require('../utils/translations');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
-const ListItem = require('./listItem2');
+const ListItem = require('./ListItem');
 
 const TABS = {
     PICKUP: 'pickUp',
