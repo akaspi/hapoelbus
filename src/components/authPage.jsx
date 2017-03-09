@@ -7,7 +7,7 @@ const Translations = require('../utils/translations');
 const authActions = require('../redux/actions/authActions');
 const errorActions = require('../redux/actions/errorActions');
 
-const Logo = require('./logo2');
+import Logo from './Logo';
 
 require('../styles/authPage.scss');
 
