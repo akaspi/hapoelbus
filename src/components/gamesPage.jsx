@@ -9,7 +9,7 @@ const Translations = require('../utils/translations');
 const routingActions = require('../redux/actions/routingActions');
 
 const PageTitle = require('./pageTitle');
-const ListItem = require('./ListItem');
+import ListItem from './ListItem';
 
 require('../styles/gamesPage.scss');
 
