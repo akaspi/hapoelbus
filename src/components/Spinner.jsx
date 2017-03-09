@@ -2,7 +2,7 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import classNames from 'classnames';
 import APIPropTypes from '../utils/APIPropTypes';
-import Logo from './logo.jsx';
+import Logo from './logo2.jsx';
 
 import '../styles/spinner.scss';
 
