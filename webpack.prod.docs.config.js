@@ -1,7 +1,7 @@
 module.exports = {
   cache: true,
 
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval-source-map',
 
   entry: './src/index.js',
 
