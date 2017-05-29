@@ -11,7 +11,7 @@ const routingReducer = require('./reducers/routingReducer');
 
 import thunk from 'redux-thunk';
 
-module.exports = () => {
+export default function() {
   const reducers = combineReducers({
     routing: routingReducer,
     authData: authDataReducer,

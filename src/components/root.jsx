@@ -1,18 +1,14 @@
-const React = require('react');
-const ReactRedux = require('react-redux');
+import React from 'react';
+import { Provider } from 'react-redux';
+import makeStore from '../redux/makeStore';
+import App from './app';
 
-const makeStore = require('../redux/makeStore');
-
-const App = require('./app');
-
-class Root extends React.Component {
+export default class Root extends React.Component {
     render() {
         return (
-            <ReactRedux.Provider store={makeStore()}>
+            <Provider store={makeStore()}>
                 <App />
-            </ReactRedux.Provider>
+            </Provider>
         );
     }
 }
-
-module.exports = Root;

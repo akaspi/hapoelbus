@@ -1,7 +1,7 @@
 module.exports = {
   cache: true,
 
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
 
   entry: './src/index.js',
 
@@ -12,12 +12,31 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel'] },
-      { test: /\.jsx$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel'] },
-      { test: /\.json$/, exclude: /node_modules/, loaders: ['json'] },
-      { test: /\.scss/, exclude: /node_modules/, loaders: ['style', 'css', 'sass'] },
-      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$/, exclude: /node_modules/, loaders: ['file'] }
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: "style-loader" }, // creates style nodes from JS strings
+          { loader: "css-loader" }, // translates CSS into CommonJS
+          { loader: "sass-loader" } // compiles Sass to CSS
+        ]
+      },
+      {
+        test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$/,
+        exclude: /node_modules/,
+        loader: 'file-loader'
+      }
     ]
   },
 
@@ -37,7 +56,7 @@ module.exports = {
     alias: {
       config: '../config/config.prod.json'
     },
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   }
 
 };
