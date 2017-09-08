@@ -12,7 +12,8 @@ module.exports = {
   },
   STATIONS: {
     [Constants.STATIONS.TEL_AVIV]: 'תל אביב',
-    [Constants.STATIONS.MODIIN]: 'צומת שילת'
+    [Constants.STATIONS.MODIIN]: 'צומת שילת',
+    [Constants.STATIONS.FAST_LANE]: 'הנתיב המהיר'
   },
   GAME: {
     STATUS: {

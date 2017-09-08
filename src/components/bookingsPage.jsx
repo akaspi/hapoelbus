@@ -78,7 +78,7 @@ function getPickUpMap(bookings) {
         .omitBy(booking => !(booking.pickUp))
         .transform((acc, booking, uid) => {
             acc[booking.pickUp][uid] = booking; // eslint-disable-line no-param-reassign
-        }, { tlv: {}, modiin: {} })
+        }, { tlv: {}, modiin: {}, fastlane: {} })
         .value();
 }
 
@@ -87,7 +87,7 @@ function getDropOffMap(bookings) {
         .omitBy(booking => !(booking.dropOff))
         .transform((acc, booking, uid) => {
             acc[booking.dropOff][uid] = booking; // eslint-disable-line no-param-reassign
-        }, { tlv: {}, modiin: {} })
+        }, { tlv: {}, modiin: {}, fastlane: {} })
         .value();
 }
 
@@ -203,7 +203,7 @@ function createFilterSection(filter, gameId, onFilterChange, onGameIdChange, vis
     );
 }
 
-function createBookingTableForPrint(users, visibleBookings, tlvBookings, modiinBookings, isPickUp) {
+function createBookingTableForPrint(users, visibleBookings, tlvBookings, modiinBookings, fastlaneBookings, isPickUp) {
     function createTitleRow() {
         return (
             <tr key='title-label'>
@@ -265,6 +265,31 @@ function createBookingTableForPrint(users, visibleBookings, tlvBookings, modiinB
         );
     }
 
+    function createFastlaneBookingsTitle() {
+        return (
+            <tr key='fastlanePickUp'>
+                <td colspan="6" className='table-sub'>
+                    <span>הנתיב המהיר</span>
+                </td>
+            </tr>
+        );
+    }
+
+    function createFastlaneBookingsRows() {
+        return (
+            _.map(fastlaneBookings, (booking, uid) => (
+                <tr key={'fastlane-booking-row-' + uid}>
+                    <td>{getBookingTitle(users[uid])}</td>
+                    <td>{getBookingPhone(users[uid])}</td>
+                    <td>{booking.paidSeats}</td>
+                    <td>{booking.extraSeats}</td>
+                    <td>{Translations.STATIONS[booking.pickUp]}</td>
+                    <td>{Translations.STATIONS[booking.dropOff]}</td>
+                </tr>
+            ))
+        );
+    }
+
     return (
         <table>
             <thead>
@@ -281,6 +306,8 @@ function createBookingTableForPrint(users, visibleBookings, tlvBookings, modiinB
             <tbody>
                 { _.size(tlvBookings) > 0 ? createTLVBookingsTitle() : null }
                 { _.size(tlvBookings) > 0 ? createTLVBookingsRows() : null }
+                { _.size(fastlaneBookings) > 0 ? createFastlaneBookingsTitle() : null }
+                { _.size(fastlaneBookings) > 0 ? createFastlaneBookingsRows() : null }
                 { _.size(modiinBookings) > 0 ? createModiinBookingsTitle() : null }
                 { _.size(modiinBookings) > 0 ? createModiinBookingsRows() : null }
             </tbody>
@@ -291,6 +318,7 @@ function createBookingTableForPrint(users, visibleBookings, tlvBookings, modiinB
 function createPickUpsList(visibleBookings, onBookingClick, users) {
     const tlvPickUp = visibleBookings.pickUp.tlv;
     const modiinPickUp = visibleBookings.pickUp.modiin;
+    const fastLanePickUp = visibleBookings.pickUp.fastlane;
 
     function onItemClick(uid) {
         onBookingClick(uid);
@@ -316,6 +344,16 @@ function createPickUpsList(visibleBookings, onBookingClick, users) {
         />
     ));
 
+    const fastlanePickUpsItems = _.map(fastLanePickUp, (booking, uid) => (
+        <ListItem
+            key={'pickup-fastlane-' + uid}
+            title={getBookingTitle(users[uid])}
+            subtitles={getBookingSubtitles(booking, users[uid])}
+            imageSrc={getBookingImage(users[uid])}
+            onClick={onItemClick.bind(this, uid)}
+        />
+    ));
+
     function createTlvPickupsList() {
         return (
             <div>
@@ -334,16 +372,26 @@ function createPickUpsList(visibleBookings, onBookingClick, users) {
         )
     }
 
+    function createFastlanePickupsList() {
+        return (
+            <div>
+                <h6>הנתיב המהיר</h6>
+                { fastlanePickUpsItems }
+            </div>
+        )
+    }
+
     return (
         <div>
             <div className='pick-up-container row hide-for-print' key='pick-up-container'>
                 { _.size(tlvPickUp) !== 0 || _.size(modiinPickUp) !== 0 ? <h5>הלוך</h5> : null }
                 { _.size(tlvPickUp) > 0 ? createTlvPickupsList() : null }
+                { _.size(fastLanePickUp) > 0 ? createFastlanePickupsList() : null }
                 { _.size(modiinPickUp) > 0 ? createModiinPickupsList() : null }
             </div>
 
             <div className='pickUp-table show-for-print' key='pickUp-table'>
-                { createBookingTableForPrint(users, visibleBookings, tlvPickUp, modiinPickUp, true) }
+                { createBookingTableForPrint(users, visibleBookings, tlvPickUp, modiinPickUp, fastLanePickUp, true) }
             </div>
         </div>
     );
@@ -352,6 +400,7 @@ function createPickUpsList(visibleBookings, onBookingClick, users) {
 function createDropOffList(visibleBookings, onBookingClick, users) {
     const tlvDropOff = visibleBookings.dropOff.tlv;
     const modiinDropOff = visibleBookings.dropOff.modiin;
+    const fastlaneDropOff = visibleBookings.dropOff.fastlane;
 
     function onItemClick(uid) {
         onBookingClick(uid);
@@ -359,7 +408,7 @@ function createDropOffList(visibleBookings, onBookingClick, users) {
 
     const tlvDropOffItems = _.map(tlvDropOff, (booking, uid) => (
         <ListItem
-            key={'pickup-tlv-' + uid}
+            key={'dropoff-tlv-' + uid}
             title={getBookingTitle(users[uid])}
             subtitles={getBookingSubtitles(booking, users[uid])}
             imageSrc={getBookingImage(users[uid])}
@@ -369,7 +418,17 @@ function createDropOffList(visibleBookings, onBookingClick, users) {
 
     const midiinDropOffItems = _.map(modiinDropOff, (booking, uid) => (
         <ListItem
-            key={'pickup-midiin-' + uid}
+            key={'dropoff-midiin-' + uid}
+            title={getBookingTitle(users[uid])}
+            subtitles={getBookingSubtitles(booking, users[uid])}
+            imageSrc={getBookingImage(users[uid])}
+            onClick={onItemClick.bind(this, uid)}
+        />
+    ));
+
+    const fastlaneDropOffItems = _.map(fastlaneDropOff, (booking, uid) => (
+        <ListItem
+            key={'dropoff-fastlane-' + uid}
             title={getBookingTitle(users[uid])}
             subtitles={getBookingSubtitles(booking, users[uid])}
             imageSrc={getBookingImage(users[uid])}
@@ -395,15 +454,25 @@ function createDropOffList(visibleBookings, onBookingClick, users) {
         )
     }
 
+    function createFastlaneDropOffList() {
+        return (
+            <div>
+                <h6>הנתיב המהיר</h6>
+                { fastlaneDropOffItems }
+            </div>
+        )
+    }
+
     return (
         <div>
             <div className='drop-off-container row hide-for-print' key='drop-off-container'>
                 { _.size(tlvDropOff) !== 0 || _.size(modiinDropOff) !== 0 ? <h5>חזור</h5> : null }
                 { _.size(tlvDropOff) > 0 ? createTlvDropOffList() : null }
+                { _.size(fastlaneDropOff) > 0 ? createFastlaneDropOffList() : null }
                 { _.size(modiinDropOff) > 0 ? createModiinDropOffList() : null }
             </div>
             <div className='dropOff-table show-for-print' key='dropOff-table'>
-                { createBookingTableForPrint(users, visibleBookings, tlvDropOff, modiinDropOff, false) }
+                { createBookingTableForPrint(users, visibleBookings, tlvDropOff, modiinDropOff, fastlaneDropOff, false) }
             </div>
         </div>
     );

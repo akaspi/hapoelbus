@@ -78,7 +78,7 @@ function createPassengersSection(seasonTickets, paidSeats, extraSeats, onPaidSea
     );
 }
 
-function createPickupSection(pickUpEnabled, pickUpStation, togglePickUp, onPickupStationChange) {
+function createPickupSection(pickUpEnabled, pickUpStation, togglePickUp, onPickupStationChange, seasonTickets) {
     return (
         <div className='row'>
             <div className='small-3 large-2 columns'>
@@ -92,6 +92,7 @@ function createPickupSection(pickUpEnabled, pickUpStation, togglePickUp, onPicku
                 <select value={pickUpStation} onChange={onPickupStationChange} name='pickUp' disabled={!pickUpEnabled}>
                     <option value='' style={{display: 'none'}}>{Translations.UPDATE_BOOKING_PAGE.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
                     <option value={Constants.STATIONS.TEL_AVIV}>{Translations.STATIONS[Constants.STATIONS.TEL_AVIV]}</option>
+                    { seasonTickets > 0 ? <option value={Constants.STATIONS.FAST_LANE}>{Translations.STATIONS[Constants.STATIONS.FAST_LANE]}</option> : null }
                     <option value={Constants.STATIONS.MODIIN}>{Translations.STATIONS[Constants.STATIONS.MODIIN]}</option>
                 </select>
             </div>
@@ -99,7 +100,7 @@ function createPickupSection(pickUpEnabled, pickUpStation, togglePickUp, onPicku
     );
 }
 
-function createDropoffSection(dropOffEnabled, dropOffStation, toggleDropOff, onDropOffStationChange) {
+function createDropoffSection(dropOffEnabled, dropOffStation, toggleDropOff, onDropOffStationChange, seasonTickets) {
     return (
         <div className='row'>
             <div className='small-3 large-2 columns'>
@@ -113,6 +114,7 @@ function createDropoffSection(dropOffEnabled, dropOffStation, toggleDropOff, onD
                 <select value={dropOffStation} onChange={onDropOffStationChange} name='dropOff' disabled={!dropOffEnabled}>
                     <option value='' style={{display: 'none'}}>{Translations.UPDATE_BOOKING_PAGE.PICKUP_STATION_DROPDOWN_DEFAULT}</option>
                     <option value={Constants.STATIONS.TEL_AVIV}>{Translations.STATIONS[Constants.STATIONS.TEL_AVIV]}</option>
+                    { seasonTickets > 0 ? <option value={Constants.STATIONS.FAST_LANE}>{Translations.STATIONS[Constants.STATIONS.FAST_LANE]}</option> : null }
                     <option value={Constants.STATIONS.MODIIN}>{Translations.STATIONS[Constants.STATIONS.MODIIN]}</option>
                 </select>
             </div>
@@ -208,8 +210,8 @@ class UpdateBookingPage extends React.Component {
             <FormFrame title={Translations.UPDATE_BOOKING_PAGE.TITLE} onSubmit={this.onSubmit} onClose={this.props.navigateBack} onRemove={this.props.isAdmin ? this.onRemove: null} disabled={!this.isFormValid()}>
                 <div className='booking-form small-11 small-centered'>
                     { createPassengersSection(this.props.userInfo.seasonTickets, this.state.paidSeats, this.state.extraSeats, this.onPaidSeatChange, this.onExtraSeatChange) }
-                    { createPickupSection(this.state.pickUpEnabled, this.state.pickUp, this.togglePickUp, this.onPickUpStationChange) }
-                    { createDropoffSection(this.state.dropOffEnabled, this.state.dropOff, this.toggleDropOff, this.onDropOffStationChange) }
+                    { createPickupSection(this.state.pickUpEnabled, this.state.pickUp, this.togglePickUp, this.onPickUpStationChange, this.props.userInfo.seasonTickets) }
+                    { createDropoffSection(this.state.dropOffEnabled, this.state.dropOff, this.toggleDropOff, this.onDropOffStationChange, this.props.userInfo.seasonTickets) }
                 </div>
             </FormFrame>
         );
