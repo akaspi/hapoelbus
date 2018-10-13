@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.UPDATE_BOOKING, { gameId, uid })),
-        changeFilter: filter => dispatch(routingActions.replace(null, { gameId, filter })),
+        changeFilter: (gameId, filter) => dispatch(routingActions.replace(null, { gameId, filter })),
         changeGameId: gameId => dispatch(routingActions.replace(null, { gameId }))
     };
 }
@@ -480,7 +480,7 @@ function createDropOffList(visibleBookings, onBookingClick, users) {
 
 class BookingsPage extends React.Component {
     onFilterChange = filter => {
-        this.props.changeFilter(filter);
+        this.props.changeFilter(this.props.query.gameId, filter);
     };
 
     onGameIdChange = gameId => {
