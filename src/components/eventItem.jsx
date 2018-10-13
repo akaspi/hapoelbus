@@ -12,7 +12,7 @@ function isBookingEnabled(event, user) {
         case Constants.GAME.STATUS.OPEN_FOR_ALL:
             return true;
         case Constants.GAME.STATUS.OPEN_FOR_MEMBERS: {
-            return user.seasonTickets > 0
+            return user.seasonTickets && user.seasonTickets > 0
         }
         default:
             return false
