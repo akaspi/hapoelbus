@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         editBooking: (gameId, uid) => dispatch(routingActions.navigateTo(Constants.ROUTING.PAGES.UPDATE_BOOKING, { gameId, uid })),
-        changeFilter: filter => dispatch(routingActions.replace(null, { filter })),
+        changeFilter: filter => dispatch(routingActions.replace(null, { gameId, filter })),
         changeGameId: gameId => dispatch(routingActions.replace(null, { gameId }))
     };
 }
