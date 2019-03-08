@@ -139,7 +139,7 @@ module.exports = {
       label: ' אנטוורפ'
     },
     'neptunas': {
-      logo: 'https://en.wikipedia.org/wiki/File:Neptunas-Akvaservis.png#/media/File:Neptunas-Akvaservis.png',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/f/f9/Neptunas-Akvaservis.png',
       label: 'נפטונאס'
     }
   }
