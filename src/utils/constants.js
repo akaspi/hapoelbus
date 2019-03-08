@@ -137,6 +137,10 @@ module.exports = {
     'entwerp': {
       logo: 'https://upload.wikimedia.org/wikipedia/en/4/49/Telenet_Giants_logo.png',
       label: ' אנטוורפ'
+    },
+    'neptunas': {
+      logo: 'https://en.wikipedia.org/wiki/File:Neptunas-Akvaservis.png#/media/File:Neptunas-Akvaservis.png',
+      label: 'נפטונאס'
     }
   }
 };
