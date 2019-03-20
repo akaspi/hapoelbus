@@ -141,6 +141,10 @@ module.exports = {
     'neptunas': {
       logo: 'https://upload.wikimedia.org/wikipedia/en/f/f9/Neptunas-Akvaservis.png',
       label: 'נפטונאס'
+    },
+    'tenerife': {
+      logo: 'http://www.hapoel.co.il/sites/default/files/tenerife.png',
+      label: 'טנריף'
     }
   }
 };
