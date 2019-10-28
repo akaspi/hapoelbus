@@ -110,41 +110,21 @@ module.exports = {
       label: 'הפועל אילת'
     },
 
-    'nymburk': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/5/51/%C4%8CEZ_Basketball_Nymburk.png',
-      label: 'נימברוק'
-    },
     'AEK': {
       logo: 'https://upload.wikimedia.org/wikipedia/en/0/0d/AEK_Basketball_Club_Official_Logo.png',
       label: 'אאק אתונה'
     },
-    'bamberg': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/6/62/Brose_Bamberg_logo.png',
-      label: 'באמברג'
+    'rasta': {
+      logo: 'http://www.hapoel.co.il/sites/default/files/sc_rasta_vechta_logo.jpg',
+      label: 'ראסטה וכטה'
     },
-    'fuenlabrada': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/5/54/Logo_of_Baloncesto_Fuenlabrada.png',
-      label: 'פואנלברדה'
+    'vlvtslbq': {
+      logo: 'http://hapoel.co.il/sites/default/files/vlvtslbq.png',
+      label: 'ולוצלאבק'
     },
-    'lietkabelis': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/BC_Lietkabelis_logo.svg/240px-BC_Lietkabelis_logo.svg.png',
-      label: 'ליטקבליס'
-    },
-    'dijon': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/f/fd/JDA_Dijon_Basket_logo.gif',
-      label: 'דיז׳ון'
-    },
-    'entwerp': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/4/49/Telenet_Giants_logo.png',
-      label: ' אנטוורפ'
-    },
-    'neptunas': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/f/f9/Neptunas-Akvaservis.png',
-      label: 'נפטונאס'
-    },
-    'tenerife': {
-      logo: 'http://www.hapoel.co.il/sites/default/files/tenerife.png',
-      label: 'טנריף'
+    'pv_vrtz': {
+      logo: 'http://hapoel.co.il/sites/default/files/pv_vrtz.jpg',
+      label: 'פו אורטז'
     }
   }
 };
