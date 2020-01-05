@@ -4,6 +4,7 @@ node_modules/
 npm-debug.*
 Gemfile
 Gemfile.lock
+package-lock.json
 
 # Generated:
 *.rt.js
