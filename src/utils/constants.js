@@ -109,6 +109,10 @@ module.exports = {
       logo: 'http://www.basket.co.il/pics/2007/logos/logo_eilat.png',
       label: 'הפועל אילת'
     },
+    'haifa': {
+      logo: 'https://upload.wikimedia.org/wikipedia/he/thumb/f/fd/HaifaBc.svg/245px-HaifaBc.png',
+      label: 'מכבי חיפה'
+    },
     'nymburk': {
       logo: 'https://upload.wikimedia.org/wikipedia/en/5/51/%C4%8CEZ_Basketball_Nymburk.png',
       label: 'נימברוק'
