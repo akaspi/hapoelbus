@@ -160,6 +160,14 @@ module.exports = {
     'pv_vrtz': {
       logo: 'http://hapoel.co.il/sites/default/files/pv_vrtz.jpg',
       label: 'פו אורטז'
+    },
+    'burgos': {
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=909',
+      label: 'בורגוס'
+    },
+    'bendirma': {
+      logo: 'https://upload.wikimedia.org/wikipedia/en/d/d9/Band%C4%B1rma_B.I.K._logo.png',
+      label: 'בנדירמה'
     }
   }
 };
