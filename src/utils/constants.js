@@ -59,7 +59,7 @@ module.exports = {
   TEAMS: {
     HAPOEL_JERUSALEM: {
       label: 'הפועל ירושלים',
-      logo: 'http://hapoel.co.il/sites/default/files/logo120x120.png'
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=605&width=300'
     },
     'hapoel-tlv': {
       logo: 'http://www.basket.co.il/pics/2007/logos/logo_hapoelta.png',
@@ -154,11 +154,11 @@ module.exports = {
       label: 'ראסטה וכטה'
     },
     'vlvtslbq': {
-      logo: 'http://hapoel.co.il/sites/default/files/vlvtslbq.png',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=588',
       label: 'ולוצלאבק'
     },
     'pv_vrtz': {
-      logo: 'http://hapoel.co.il/sites/default/files/pv_vrtz.jpg',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=2',
       label: 'פו אורטז'
     },
     'burgos': {
