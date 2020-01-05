@@ -114,11 +114,11 @@ module.exports = {
       label: 'מכבי חיפה'
     },
     'nymburk': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/5/51/%C4%8CEZ_Basketball_Nymburk.png',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=967&width=160',
       label: 'נימברוק'
     },
     'AEK': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/0/0d/AEK_Basketball_Club_Official_Logo.png',
+      logo: 'https://banner2.cleanpng.com/20181120/qyl/kisspng-aek-athens-f-c-aek-b-c-greece-national-football-5bf49c2ca70343.4958042115427574206841.jpg',
       label: 'אאק אתונה'
     },
     'bamberg': {
@@ -126,31 +126,31 @@ module.exports = {
       label: 'באמברג'
     },
     'fuenlabrada': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/5/54/Logo_of_Baloncesto_Fuenlabrada.png',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDGkUwbKVtTiOJKICV5TxBH2la-sMKLnlxfc3Ojtn0V_e2raIG&s',
       label: 'פואנלברדה'
     },
     'lietkabelis': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/BC_Lietkabelis_logo.svg/240px-BC_Lietkabelis_logo.svg.png',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=647',
       label: 'ליטקבליס'
     },
     'dijon': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/f/fd/JDA_Dijon_Basket_logo.gif',
+      logo: 'https://www.basketeurope.com/wp-content/uploads/2018/03/JDA.png',
       label: 'דיז׳ון'
     },
     'entwerp': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/4/49/Telenet_Giants_logo.png',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=427',
       label: ' אנטוורפ'
     },
     'neptunas': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/f/f9/Neptunas-Akvaservis.png',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=653',
       label: 'נפטונאס'
     },
     'tenerife': {
-      logo: 'http://www.hapoel.co.il/sites/default/files/tenerife.png',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=917',
       label: 'טנריף'
     },
     'rasta': {
-      logo: 'http://www.hapoel.co.il/sites/default/files/sc_rasta_vechta_logo.jpg',
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=2025',
       label: 'ראסטה וכטה'
     },
     'vlvtslbq': {
@@ -166,7 +166,7 @@ module.exports = {
       label: 'בורגוס'
     },
     'bendirma': {
-      logo: 'https://upload.wikimedia.org/wikipedia/en/d/d9/Band%C4%B1rma_B.I.K._logo.png',
+      logo: 'https://www.34volt.com/images/haber-baslik/teksut-bandirma-bk-nin-yeni-isim-sponsoru-oldu-1996479.jpg',
       label: 'בנדירמה'
     }
   }
