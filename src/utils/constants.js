@@ -168,6 +168,10 @@ module.exports = {
     'bendirma': {
       logo: 'https://www.34volt.com/images/haber-baslik/teksut-bandirma-bk-nin-yeni-isim-sponsoru-oldu-1996479.jpg',
       label: 'בנדירמה'
+    },
+    'peristeri': {
+      logo: 'https://www.proballers.com/api/getTeamLogo?id=186',
+      label: 'פריסטרי'
     }
   }
 };
